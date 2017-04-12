@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx covar &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx current" href="gmx-current.html" />
+    <link rel="prev" title="gmx convert-tpr" href="gmx-convert-tpr.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-current.html" title="gmx current"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-convert-tpr.html" title="gmx convert-tpr"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-covar">
+<span id="id1"></span><h1>gmx covar<a class="headerlink" href="#gmx-covar" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx covar [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+          [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-v</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>]
+          [<strong>-av</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-l</strong> <em>[&lt;.log&gt;]</em>] [<strong>-ascii</strong> <em>[&lt;.dat&gt;]</em>]
+          [<strong>-xpm</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-xpma</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+          [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]fit</strong>]
+          [<strong>-[no]ref</strong>] [<strong>-[no]mwa</strong>] [<strong>-last</strong> <em>&lt;int&gt;</em>] [<strong>-[no]pbc</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">covar</span></code> calculates and diagonalizes the (mass-weighted)
+covariance matrix.
+All structures are fitted to the structure in the structure file.
+When this is not a run input file periodicity will not be taken into
+account. When the fit and analysis groups are identical and the analysis
+is non mass-weighted, the fit will also be non mass-weighted.</p>
+<p>The eigenvectors are written to a trajectory file (<code class="docutils literal"><span class="pre">-v</span></code>).
+When the same atoms are used for the fit and the covariance analysis,
+the reference structure for the fit is written first with t=-1.
+The average (or reference when <code class="docutils literal"><span class="pre">-ref</span></code> is used) structure is
+written with t=0, the eigenvectors
+are written as frames with the eigenvector number and eigenvalue
+as step number and timestamp, respectively.</p>
+<p>The eigenvectors can be analyzed with <a class="reference internal" href="gmx-anaeig.html"><span class="doc">gmx anaeig</span></a>.</p>
+<p>Option <code class="docutils literal"><span class="pre">-ascii</span></code> writes the whole covariance matrix to
+an ASCII file. The order of the elements is: x1x1, x1y1, x1z1, x1x2, ...</p>
+<p>Option <code class="docutils literal"><span class="pre">-xpm</span></code> writes the whole covariance matrix to an <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> file.</p>
+<p>Option <code class="docutils literal"><span class="pre">-xpma</span></code> writes the atomic covariance matrix to an <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> file,
+i.e. for each atom pair the sum of the xx, yy and zz covariances is
+written.</p>
+<p>Note that the diagonalization of a matrix requires memory and time
+that will increase at least as fast as than the square of the number
+of atoms involved. It is easy to run out of memory, in which
+case this tool will probably exit with a &#8216;Segmentation fault&#8217;. You
+should consider carefully whether a reduced set of atoms will meet
+your needs for lower costs.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/...&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/...&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (eigenval.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-v</span></code> [&lt;.trr/.cpt/...&gt;] (eigenvec.trr)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-av</span></code> [&lt;.gro/.g96/...&gt;] (average.pdb)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+<dt><code class="docutils literal"><span class="pre">-l</span></code> [&lt;.log&gt;] (covar.log)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-ascii</span></code> [&lt;.dat&gt;] (covar.dat) (Optional)</dt>
+<dd>Generic data file</dd>
+<dt><code class="docutils literal"><span class="pre">-xpm</span></code> [&lt;.xpm&gt;] (covar.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-xpma</span></code> [&lt;.xpm&gt;] (covara.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]fit</span></code>  (yes)</dt>
+<dd>Fit to a reference structure</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ref</span></code>  (no)</dt>
+<dd>Use the deviation from the conformation in the structure file instead of from the average</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]mwa</span></code>  (no)</dt>
+<dd>Mass-weighted covariance analysis</dd>
+<dt><code class="docutils literal"><span class="pre">-last</span></code> &lt;int&gt; (-1)</dt>
+<dd>Last eigenvector to write away (-1 is till the last)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Apply corrections for periodic boundary conditions</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx covar</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-convert-tpr.html"
+                        title="previous chapter">gmx convert-tpr</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-current.html"
+                        title="next chapter">gmx current</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-covar.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-current.html" title="gmx current"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-convert-tpr.html" title="gmx convert-tpr"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

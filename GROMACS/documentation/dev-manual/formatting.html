@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guidelines for code formatting &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Style guidelines" href="style.html" />
+    <link rel="next" title="Guidelines for #include directives" href="includestyle.html" />
+    <link rel="prev" title="Style guidelines" href="style.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="includestyle.html" title="Guidelines for #include directives"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="style.html" title="Style guidelines"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" accesskey="U">Style guidelines</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="guidelines-for-code-formatting">
+<h1>Guidelines for code formatting<a class="headerlink" href="#guidelines-for-code-formatting" title="Permalink to this headline">¶</a></h1>
+<p>The following list provides the general formatting/indentation rules for
+GROMACS code (C/C++):</p>
+<ul class="simple">
+<li>Basic indentation is four spaces.</li>
+<li>Keep lines at a reasonable length.  There is no hard limit, but use 80
+characters as a guideline.  If you end up indenting very deeply,
+consider splitting the code into functions.</li>
+<li>Do not use tabs, only spaces.  Most editors can be configured to generate
+spaces even when pressing tab.  Tabs (in particular when mixed with spaces)
+easily break indentation in contexts where settings are not exactly equal
+(e.g., in <code class="docutils literal"><span class="pre">git</span> <span class="pre">diff</span></code> output).</li>
+<li>No trailing whitespace.</li>
+<li>Use braces always for delimiting blocks, even when there is only a single
+statement in an <code class="docutils literal"><span class="pre">if</span></code> block or similar.</li>
+<li>Put braces on their own lines.  The only exception is short one-line inline
+functions in C++ classes, which can be put on a single line.</li>
+<li>Use spaces liberally.</li>
+<li><code class="docutils literal"><span class="pre">extern</span> <span class="pre">&quot;C&quot;</span></code> and <code class="docutils literal"><span class="pre">namespace</span></code> blocks are not indented, but all others
+(including <code class="docutils literal"><span class="pre">class</span></code> and <code class="docutils literal"><span class="pre">switch</span></code> bodies) are.</li>
+</ul>
+<p>Additionally:</p>
+<ul class="simple">
+<li>All source files and other non-trivial scripts should contain a copyright
+header with a predetermined format and license information (check existing
+files).  Copyright holder should be &#8220;the GROMACS development team&#8221; for the
+years where the code has been in the GROMACS source repository, but earlier
+years can hold other copyrights.</li>
+<li>Whenever you update a file, you should check that the current year is listed
+as a copyright year.</li>
+</ul>
+<p>Most of the above guidelines are enforced using uncrustify, an automatic source
+code formatting tool.  The copyright guidelines are enforced by a separate
+Python script.  See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.  Note that due to the
+nature of uncrustify (it only does all-or-nothing formatting), it enforces
+several additional formatting rules in addition to those above.</p>
+<p>Enforcing a consistent formatting has a few advantages:</p>
+<ul class="simple">
+<li>No one needs to manually review code for most of these formatting issues,
+and people can focus on content.</li>
+<li>A separate automatic script (see below) can be applied to re-establish the
+formatting after refactoring like renaming symbols or changing some
+parameters, without needing to manually do it all.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="style.html"
+                        title="previous chapter">Style guidelines</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="includestyle.html"
+                        title="next chapter">Guidelines for #include directives</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/formatting.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="includestyle.html" title="Guidelines for #include directives"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="style.html" title="Style guidelines"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" >Style guidelines</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

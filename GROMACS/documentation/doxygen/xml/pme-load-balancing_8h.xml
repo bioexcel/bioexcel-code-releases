@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="pme-load-balancing_8h" kind="file">
+    <compoundname>pme-load-balancing.h</compoundname>
+    <includes refid="mdtypes_2forcerec_8h" local="yes">gromacs/mdtypes/forcerec.h</includes>
+    <includes refid="interaction__const_8h" local="yes">gromacs/mdtypes/interaction_const.h</includes>
+    <includes refid="state_8h" local="yes">gromacs/mdtypes/state.h</includes>
+    <includes refid="wallcycle_8h" local="yes">gromacs/timing/wallcycle.h</includes>
+    <includedby refid="pme-load-balancing_8cpp" local="yes">src/gromacs/ewald/pme-load-balancing.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <invincdepgraph>
+      <node id="3244">
+        <label>src/gromacs/ewald/pme-load-balancing.cpp</label>
+        <link refid="pme-load-balancing_8cpp"/>
+      </node>
+      <node id="3243">
+        <label>src/gromacs/ewald/pme-load-balancing.h</label>
+        <link refid="pme-load-balancing.h"/>
+        <childnode refid="3244" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="pme-load-balancing_8h_1afd02504f87f1d1089c1da16b5bbc5bbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool pme_loadbal_is_active</definition>
+        <argsstring>(const pme_load_balancing_t *pme_lb)</argsstring>
+        <name>pme_loadbal_is_active</name>
+        <param>
+          <type>const <ref refid="structpme__load__balancing__t" kindref="compound">pme_load_balancing_t</ref> *</type>
+          <declname>pme_lb</declname>
+        </param>
+        <briefdescription>
+<para>Return whether PME load balancing is active. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.h" line="61" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.cpp" bodystart="151" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-load-balancing_8h_1ad4b2857204f46b7715552306e9f24a12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_loadbal_init</definition>
+        <argsstring>(pme_load_balancing_t **pme_lb_p, struct t_commrec *cr, FILE *fp_log, const t_inputrec *ir, matrix box, const interaction_const_t *ic, struct gmx_pme_t *pmedata, gmx_bool bUseGPU, gmx_bool *bPrinting)</argsstring>
+        <name>pme_loadbal_init</name>
+        <param>
+          <type><ref refid="structpme__load__balancing__t" kindref="compound">pme_load_balancing_t</ref> **</type>
+          <declname>pme_lb_p</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp_log</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>struct gmx_pme_t *</type>
+          <declname>pmedata</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bUseGPU</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bPrinting</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the PP-PME load balacing data and infrastructure. </para>        </briefdescription>
+        <detaileddescription>
+<para>Initialize the PP-PME load balacing data and infrastructure. The actual load balancing might start right away, later or never. Returns in bPrinting whether the load balancing is printing to fp_err. The PME grid in pmedata is reused for smaller grids to lower the memory usage. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.h" line="71" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.cpp" bodystart="156" bodyend="284"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-load-balancing_8h_1a19a82b5602b029d488644c8bfe6c563d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_loadbal_do</definition>
+        <argsstring>(pme_load_balancing_t *pme_lb, struct t_commrec *cr, FILE *fp_err, FILE *fp_log, const t_inputrec *ir, t_forcerec *fr, t_state *state, gmx_wallcycle_t wcycle, gmx_int64_t step, gmx_int64_t step_rel, gmx_bool *bPrinting)</argsstring>
+        <name>pme_loadbal_do</name>
+        <param>
+          <type><ref refid="structpme__load__balancing__t" kindref="compound">pme_load_balancing_t</ref> *</type>
+          <declname>pme_lb</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp_err</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp_log</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step_rel</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bPrinting</declname>
+        </param>
+        <briefdescription>
+<para>Process cycles and PME load balance when necessary. </para>        </briefdescription>
+        <detaileddescription>
+<para>Process the cycles measured over the last nstlist steps and then either continue balancing or check if we need to trigger balancing. Should be called after the ewcSTEP cycle counter has been stopped. Returns if the load balancing is printing to fp_err. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.h" line="88" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.cpp" bodystart="869" bodyend="1022"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-load-balancing_8h_1a5da46e1465b950ab4c3934f37bc066c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_loadbal_done</definition>
+        <argsstring>(pme_load_balancing_t *pme_lb, struct t_commrec *cr, FILE *fplog, gmx_bool bNonBondedOnGPU)</argsstring>
+        <name>pme_loadbal_done</name>
+        <param>
+          <type><ref refid="structpme__load__balancing__t" kindref="compound">pme_load_balancing_t</ref> *</type>
+          <declname>pme_lb</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNonBondedOnGPU</declname>
+        </param>
+        <briefdescription>
+<para>Finish the PME load balancing and print the settings when fplog!=NULL. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.h" line="101" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.cpp" bodystart="1095" bodyend="1109"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains function declarations necessary for managing automatic load balance of PME calculations (Coulomb and LJ). </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Berk Hess <ulink url="mailto:hess@kth.se">hess@kth.se</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/pme-load-balancing.h"/>
+  </compounddef>
+</doxygen>

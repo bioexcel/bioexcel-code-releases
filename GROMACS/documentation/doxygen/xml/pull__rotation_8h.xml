@@ -1,0 +1,403 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="pull__rotation_8h" kind="file">
+    <compoundname>pull_rotation.h</compoundname>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="wallcycle_8h" local="yes">gromacs/timing/wallcycle.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="pull__rotation_8cpp" local="yes">src/gromacs/pulling/pull_rotation.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <invincdepgraph>
+      <node id="15165">
+        <label>src/gromacs/pulling/pull_rotation.h</label>
+        <link refid="pull_rotation.h"/>
+        <childnode refid="15166" relation="include">
+        </childnode>
+      </node>
+      <node id="15166">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="pull__rotation_8h_1adb5d6cca3978288f513d8d6e40e6f656" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_rot</definition>
+        <argsstring>(FILE *fplog, t_inputrec *ir, int nfile, const t_filenm fnm[], struct t_commrec *cr, rvec *x, matrix box, gmx_mtop_t *mtop, const gmx_output_env_t *oenv, gmx_bool bVerbose, unsigned long Flags)</argsstring>
+        <name>init_rot</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfile</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__filenm" kindref="compound">t_filenm</ref></type>
+          <declname>fnm</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>Flags</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the enforced rotation groups. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine does the memory allocation for various helper arrays, opens the output files etc.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>General output file, normally md.log. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Struct containing MD input parameters, among those also the enforced rotation parameters. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nfile</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of entries in the fnm structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fnm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The filenames struct containing also the names of the rotation output files. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to MPI communication data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The positions of all MD particles. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Molecular topology. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>oenv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Needed to open the rotation output xvgr file. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bVerbose</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to print extra status information. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags passed over from main, used to determine whether or not we are doing a rerun. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.h" line="87" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.cpp" bodystart="3669" bodyend="3813"/>
+      </memberdef>
+      <memberdef kind="function" id="pull__rotation_8h_1aa9eb625849a770e1725919553e499eaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_make_local_rotation_groups</definition>
+        <argsstring>(struct gmx_domdec_t *dd, t_rot *rot)</argsstring>
+        <name>dd_make_local_rotation_groups</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__rot" kindref="compound">t_rot</ref> *</type>
+          <declname>rot</declname>
+        </param>
+        <briefdescription>
+<para>Make a selection of the home atoms for all enforced rotation groups. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine is similar to <ref refid="pull_8h_1a3c0994758d27eec2e24551de9c7b6808" kindref="member">dd_make_local_pull_groups</ref>, but works only with domain decomposition. It should be called at every domain decomposition.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure containing domain decomposition data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to all the enforced rotation data. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.h" line="100" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.cpp" bodystart="3610" bodyend="3628"/>
+      </memberdef>
+      <memberdef kind="function" id="pull__rotation_8h_1a17b407b3ed94da752b83b03534cd1b63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_rotation</definition>
+        <argsstring>(struct t_commrec *cr, t_inputrec *ir, matrix box, rvec x[], real t, gmx_int64_t step, gmx_wallcycle_t wcycle, gmx_bool bNS)</argsstring>
+        <name>do_rotation</name>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNS</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the enforced rotation potential(s). </para>        </briefdescription>
+        <detaileddescription>
+<para>This is the main enforced rotation module which is called during every time step. Here the rotation potential as well as the resulting forces are calculated.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to MPI communication data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Struct containing MD input parameters, among those </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Simulation box, needed to make group whole. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The positions of all the local particles. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>During the potential calculation the wallcycles are counted. Later they enter the dynamic load balancing. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bNS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>After domain decomposition / neighbor searching several local arrays have to be updated (masses, shifts) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.h" line="120" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.cpp" bodystart="3895" bodyend="4084"/>
+      </memberdef>
+      <memberdef kind="function" id="pull__rotation_8h_1a81d31df416f4acc03e22c05deedc9b57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real add_rot_forces</definition>
+        <argsstring>(t_rot *rot, rvec f[], struct t_commrec *cr, gmx_int64_t step, real t)</argsstring>
+        <name>add_rot_forces</name>
+        <param>
+          <type><ref refid="structt__rot" kindref="compound">t_rot</ref> *</type>
+          <declname>rot</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Add the enforced rotation forces to the official force array. </para>        </briefdescription>
+        <detaileddescription>
+<para>Adds the forces from enforced rotation potential to the local forces and sums up the contributions to the rotation potential from all the nodes. Since this needs communication, this routine should be called after the short range forces have been evaluated (in order not to spoil cycle counts). This routine also outputs data to the rotation output files (e.g. the potential, the angle of the group(s), and torques).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to all the enforced rotation data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The local forces to which the rotational forces have to be added. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to MPI communication data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step, used for output. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time, used for output. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The potential energy of the rotation potentials. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.h" line="141" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.cpp" bodystart="491" bodyend="532"/>
+      </memberdef>
+      <memberdef kind="function" id="pull__rotation_8h_1a81648ac40d11af9c978d10dce4f074f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void finish_rot</definition>
+        <argsstring>(t_rot *rot)</argsstring>
+        <name>finish_rot</name>
+        <param>
+          <type><ref refid="structt__rot" kindref="compound">t_rot</ref> *</type>
+          <declname>rot</declname>
+        </param>
+        <briefdescription>
+<para>Close the enforced rotation output files. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to all the enforced rotation data. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.h" line="148" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.cpp" bodystart="3816" bodyend="3838"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares functions to enforce rotational motion upon a group of particles. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Carsten Kutzner <ulink url="mailto:ckutzne@gwdg.de">ckutzne@gwdg.de</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pulling/pull_rotation.h"/>
+  </compounddef>
+</doxygen>

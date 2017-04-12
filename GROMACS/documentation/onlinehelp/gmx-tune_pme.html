@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx tune_pme &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx vanhove" href="gmx-vanhove.html" />
+    <link rel="prev" title="gmx trjorder" href="gmx-trjorder.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-vanhove.html" title="gmx vanhove"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-trjorder.html" title="gmx trjorder"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-tune-pme">
+<span id="id1"></span><h1>gmx tune_pme<a class="headerlink" href="#gmx-tune-pme" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx tune_pme [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-cpi</strong> <em>[&lt;.cpt&gt;]</em>] [<strong>-table</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-tablep</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-tableb</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-rerun</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-ei</strong> <em>[&lt;.edi&gt;]</em>] [<strong>-p</strong> <em>[&lt;.out&gt;]</em>]
+             [<strong>-err</strong> <em>[&lt;.log&gt;]</em>] [<strong>-so</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-o</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>]
+             [<strong>-x</strong> <em>[&lt;.xtc/.tng&gt;]</em>] [<strong>-cpo</strong> <em>[&lt;.cpt&gt;]</em>]
+             [<strong>-c</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-e</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-g</strong> <em>[&lt;.log&gt;]</em>]
+             [<strong>-dhdl</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-field</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-tpi</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-tpid</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-eo</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-devout</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-runav</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-px</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-pf</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-ro</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ra</strong> <em>[&lt;.log&gt;]</em>] [<strong>-rs</strong> <em>[&lt;.log&gt;]</em>]
+             [<strong>-rt</strong> <em>[&lt;.log&gt;]</em>] [<strong>-mtx</strong> <em>[&lt;.mtx&gt;]</em>] [<strong>-swap</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-bo</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>] [<strong>-bx</strong> <em>[&lt;.xtc&gt;]</em>] [<strong>-bcpo</strong> <em>[&lt;.cpt&gt;]</em>]
+             [<strong>-bc</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-be</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-bg</strong> <em>[&lt;.log&gt;]</em>]
+             [<strong>-beo</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-bdhdl</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-bfield</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-btpi</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-btpid</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-bdevout</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-brunav</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-bpx</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-bpf</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-bro</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-bra</strong> <em>[&lt;.log&gt;]</em>] [<strong>-brs</strong> <em>[&lt;.log&gt;]</em>]
+             [<strong>-brt</strong> <em>[&lt;.log&gt;]</em>] [<strong>-bmtx</strong> <em>[&lt;.mtx&gt;]</em>] [<strong>-bdn</strong> <em>[&lt;.ndx&gt;]</em>]
+             [<strong>-bswap</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-mdrun</strong> <em>&lt;string&gt;</em>]
+             [<strong>-np</strong> <em>&lt;int&gt;</em>] [<strong>-npstring</strong> <em>&lt;enum&gt;</em>] [<strong>-ntmpi</strong> <em>&lt;int&gt;</em>] [<strong>-r</strong> <em>&lt;int&gt;</em>]
+             [<strong>-max</strong> <em>&lt;real&gt;</em>] [<strong>-min</strong> <em>&lt;real&gt;</em>] [<strong>-npme</strong> <em>&lt;enum&gt;</em>] [<strong>-fix</strong> <em>&lt;int&gt;</em>]
+             [<strong>-rmax</strong> <em>&lt;real&gt;</em>] [<strong>-rmin</strong> <em>&lt;real&gt;</em>] [<strong>-[no]scalevdw</strong>]
+             [<strong>-ntpr</strong> <em>&lt;int&gt;</em>] [<strong>-steps</strong> <em>&lt;int&gt;</em>] [<strong>-resetstep</strong> <em>&lt;int&gt;</em>]
+             [<strong>-nsteps</strong> <em>&lt;int&gt;</em>] [<strong>-[no]launch</strong>] [<strong>-[no]bench</strong>] [<strong>-[no]check</strong>]
+             [<strong>-gpu_id</strong> <em>&lt;string&gt;</em>] [<strong>-[no]append</strong>] [<strong>-[no]cpnum</strong>]
+             [<strong>-deffnm</strong> <em>&lt;string&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>For a given number <code class="docutils literal"><span class="pre">-np</span></code> or <code class="docutils literal"><span class="pre">-ntmpi</span></code> of ranks, <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span></code> systematically
+times <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> with various numbers of PME-only ranks and determines
+which setting is fastest. It will also test whether performance can
+be enhanced by shifting load from the reciprocal to the real space
+part of the Ewald sum.
+Simply pass your <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file to <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span></code> together with other options
+for <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> as needed.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span></code> needs to call <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> and so requires that you
+specify how to call mdrun with the argument to the <code class="docutils literal"><span class="pre">-mdrun</span></code>
+parameter. Depending how you have built GROMACS, values such as
+&#8216;gmx mdrun&#8217;, &#8216;gmx_d mdrun&#8217;, or &#8216;mdrun_mpi&#8217; might be needed.</p>
+<p>The program that runs MPI programs can be set in the environment variable
+MPIRUN (defaults to &#8216;mpirun&#8217;). Note that for certain MPI frameworks,
+you need to provide a machine- or hostfile. This can also be passed
+via the MPIRUN variable, e.g.</p>
+<p><code class="docutils literal"><span class="pre">export</span> <span class="pre">MPIRUN=&quot;/usr/local/mpirun</span> <span class="pre">-machinefile</span> <span class="pre">hosts&quot;</span></code>
+Note that in such cases it is normally necessary to compile
+and/or run <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span></code> without MPI support, so that it can call
+the MPIRUN program.</p>
+<p>Before doing the actual benchmark runs, <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span></code> will do a quick
+check whether <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> works as expected with the provided parallel settings
+if the <code class="docutils literal"><span class="pre">-check</span></code> option is activated (the default).
+Please call <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span></code> with the normal options you would pass to
+<a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> and add <code class="docutils literal"><span class="pre">-np</span></code> for the number of ranks to perform the
+tests on, or <code class="docutils literal"><span class="pre">-ntmpi</span></code> for the number of threads. You can also add <code class="docutils literal"><span class="pre">-r</span></code>
+to repeat each test several times to get better statistics.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span></code> can test various real space / reciprocal space workloads
+for you. With <code class="docutils literal"><span class="pre">-ntpr</span></code> you control how many extra <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> files will be
+written with enlarged cutoffs and smaller Fourier grids respectively.
+Typically, the first test (number 0) will be with the settings from the input
+<a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file; the last test (number <code class="docutils literal"><span class="pre">ntpr</span></code>) will have the Coulomb cutoff
+specified by <code class="docutils literal"><span class="pre">-rmax</span></code> with a somewhat smaller PME grid at the same time.
+In this last test, the Fourier spacing is multiplied with <code class="docutils literal"><span class="pre">rmax</span></code>/rcoulomb.
+The remaining <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> files will have equally-spaced Coulomb radii (and Fourier spacings) between these extremes. <strong>Note</strong> that you can set <code class="docutils literal"><span class="pre">-ntpr</span></code> to 1
+if you just seek the optimal number of PME-only ranks; in that case
+your input <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file will remain unchanged.</p>
+<p>For the benchmark runs, the default of 1000 time steps should suffice for most
+MD systems. The dynamic load balancing needs about 100 time steps
+to adapt to local load imbalances, therefore the time step counters
+are by default reset after 100 steps. For large systems (&gt;1M atoms), as well as
+for a higher accuracy of the measurements, you should set <code class="docutils literal"><span class="pre">-resetstep</span></code> to a higher value.
+From the &#8216;DD&#8217; load imbalance entries in the md.log output file you
+can tell after how many steps the load is sufficiently balanced. Example call:</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">tune_pme</span> <span class="pre">-np</span> <span class="pre">64</span> <span class="pre">-s</span> <span class="pre">protein.tpr</span> <span class="pre">-launch</span></code></p>
+<p>After calling <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> several times, detailed performance information
+is available in the output file <code class="docutils literal"><span class="pre">perf.out</span></code>.
+<strong>Note</strong> that during the benchmarks, a couple of temporary files are written
+(options <code class="docutils literal"><span class="pre">-b*</span></code>), these will be automatically deleted after each test.</p>
+<p>If you want the simulation to be started automatically with the
+optimized parameters, use the command line option <code class="docutils literal"><span class="pre">-launch</span></code>.</p>
+<p>Basic support for GPU-enabled <code class="docutils literal"><span class="pre">mdrun</span></code> exists. Give a string containing the IDs
+of the GPUs that you wish to use in the optimization in the <code class="docutils literal"><span class="pre">-gpu_id</span></code>
+command-line argument. Unlike <code class="docutils literal"><span class="pre">mdrun</span> <span class="pre">-gpu_id</span></code>, this does not imply a mapping
+but merely the eligible set. <code class="docutils literal"><span class="pre">g_tune_pme</span></code> will construct calls to
+mdrun that use this set appropriately, assuming that PP ranks with low indices
+should map to GPUs with low indices, and increasing both monotonically
+over the respective sets.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-cpi</span></code> [&lt;.cpt&gt;] (state.cpt) (Optional)</dt>
+<dd>Checkpoint file</dd>
+<dt><code class="docutils literal"><span class="pre">-table</span></code> [&lt;.xvg&gt;] (table.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-tablep</span></code> [&lt;.xvg&gt;] (tablep.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-tableb</span></code> [&lt;.xvg&gt;] (table.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-rerun</span></code> [&lt;.xtc/.trr/...&gt;] (rerun.xtc) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-ei</span></code> [&lt;.edi&gt;] (sam.edi) (Optional)</dt>
+<dd>ED sampling input</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-p</span></code> [&lt;.out&gt;] (perf.out)</dt>
+<dd>Generic output file</dd>
+<dt><code class="docutils literal"><span class="pre">-err</span></code> [&lt;.log&gt;] (bencherr.log)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-so</span></code> [&lt;.tpr&gt;] (tuned.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.trr/.cpt/...&gt;] (traj.trr)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-x</span></code> [&lt;.xtc/.tng&gt;] (traj_comp.xtc) (Optional)</dt>
+<dd>Compressed trajectory (tng format or portable xdr format)</dd>
+<dt><code class="docutils literal"><span class="pre">-cpo</span></code> [&lt;.cpt&gt;] (state.cpt) (Optional)</dt>
+<dd>Checkpoint file</dd>
+<dt><code class="docutils literal"><span class="pre">-c</span></code> [&lt;.gro/.g96/...&gt;] (confout.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> [&lt;.edr&gt;] (ener.edr)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.log&gt;] (md.log)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-dhdl</span></code> [&lt;.xvg&gt;] (dhdl.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-field</span></code> [&lt;.xvg&gt;] (field.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-tpi</span></code> [&lt;.xvg&gt;] (tpi.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-tpid</span></code> [&lt;.xvg&gt;] (tpidist.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-eo</span></code> [&lt;.xvg&gt;] (edsam.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-devout</span></code> [&lt;.xvg&gt;] (deviatie.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-runav</span></code> [&lt;.xvg&gt;] (runaver.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-px</span></code> [&lt;.xvg&gt;] (pullx.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-pf</span></code> [&lt;.xvg&gt;] (pullf.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ro</span></code> [&lt;.xvg&gt;] (rotation.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ra</span></code> [&lt;.log&gt;] (rotangles.log) (Optional)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-rs</span></code> [&lt;.log&gt;] (rotslabs.log) (Optional)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-rt</span></code> [&lt;.log&gt;] (rottorque.log) (Optional)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-mtx</span></code> [&lt;.mtx&gt;] (nm.mtx) (Optional)</dt>
+<dd>Hessian matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-swap</span></code> [&lt;.xvg&gt;] (swapions.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bo</span></code> [&lt;.trr/.cpt/...&gt;] (bench.trr)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-bx</span></code> [&lt;.xtc&gt;] (bench.xtc)</dt>
+<dd>Compressed trajectory (portable xdr format): xtc</dd>
+<dt><code class="docutils literal"><span class="pre">-bcpo</span></code> [&lt;.cpt&gt;] (bench.cpt)</dt>
+<dd>Checkpoint file</dd>
+<dt><code class="docutils literal"><span class="pre">-bc</span></code> [&lt;.gro/.g96/...&gt;] (bench.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+<dt><code class="docutils literal"><span class="pre">-be</span></code> [&lt;.edr&gt;] (bench.edr)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-bg</span></code> [&lt;.log&gt;] (bench.log)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-beo</span></code> [&lt;.xvg&gt;] (benchedo.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bdhdl</span></code> [&lt;.xvg&gt;] (benchdhdl.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bfield</span></code> [&lt;.xvg&gt;] (benchfld.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-btpi</span></code> [&lt;.xvg&gt;] (benchtpi.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-btpid</span></code> [&lt;.xvg&gt;] (benchtpid.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bdevout</span></code> [&lt;.xvg&gt;] (benchdev.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-brunav</span></code> [&lt;.xvg&gt;] (benchrnav.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bpx</span></code> [&lt;.xvg&gt;] (benchpx.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bpf</span></code> [&lt;.xvg&gt;] (benchpf.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bro</span></code> [&lt;.xvg&gt;] (benchrot.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bra</span></code> [&lt;.log&gt;] (benchrota.log) (Optional)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-brs</span></code> [&lt;.log&gt;] (benchrots.log) (Optional)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-brt</span></code> [&lt;.log&gt;] (benchrott.log) (Optional)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-bmtx</span></code> [&lt;.mtx&gt;] (benchn.mtx) (Optional)</dt>
+<dd>Hessian matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-bdn</span></code> [&lt;.ndx&gt;] (bench.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-bswap</span></code> [&lt;.xvg&gt;] (benchswp.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-mdrun</span></code> &lt;string&gt;</dt>
+<dd>Command line to run a simulation, e.g. &#8216;gmx mdrun&#8217; or &#8216;mdrun_mpi&#8217;</dd>
+<dt><code class="docutils literal"><span class="pre">-np</span></code> &lt;int&gt; (1)</dt>
+<dd>Number of ranks to run the tests on (must be &gt; 2 for separate PME ranks)</dd>
+<dt><code class="docutils literal"><span class="pre">-npstring</span></code> &lt;enum&gt; (np)</dt>
+<dd>Name of the <code class="docutils literal"><span class="pre">$MPIRUN</span></code> option that specifies the number of ranks to use (&#8216;np&#8217;, or &#8216;n&#8217;; use &#8216;none&#8217; if there is no such option): np, n, none</dd>
+<dt><code class="docutils literal"><span class="pre">-ntmpi</span></code> &lt;int&gt; (1)</dt>
+<dd>Number of MPI-threads to run the tests on (turns MPI &amp; mpirun off)</dd>
+<dt><code class="docutils literal"><span class="pre">-r</span></code> &lt;int&gt; (2)</dt>
+<dd>Repeat each test this often</dd>
+<dt><code class="docutils literal"><span class="pre">-max</span></code> &lt;real&gt; (0.5)</dt>
+<dd>Max fraction of PME ranks to test with</dd>
+<dt><code class="docutils literal"><span class="pre">-min</span></code> &lt;real&gt; (0.25)</dt>
+<dd>Min fraction of PME ranks to test with</dd>
+<dt><code class="docutils literal"><span class="pre">-npme</span></code> &lt;enum&gt; (auto)</dt>
+<dd>Within -min and -max, benchmark all possible values for <code class="docutils literal"><span class="pre">-npme</span></code>, or just a reasonable subset. Auto neglects -min and -max and chooses reasonable values around a guess for npme derived from the .tpr: auto, all, subset</dd>
+<dt><code class="docutils literal"><span class="pre">-fix</span></code> &lt;int&gt; (-2)</dt>
+<dd>If &gt;= -1, do not vary the number of PME-only ranks, instead use this fixed value and only vary rcoulomb and the PME grid spacing.</dd>
+<dt><code class="docutils literal"><span class="pre">-rmax</span></code> &lt;real&gt; (0)</dt>
+<dd>If &gt;0, maximal rcoulomb for -ntpr&gt;1 (rcoulomb upscaling results in fourier grid downscaling)</dd>
+<dt><code class="docutils literal"><span class="pre">-rmin</span></code> &lt;real&gt; (0)</dt>
+<dd>If &gt;0, minimal rcoulomb for -ntpr&gt;1</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]scalevdw</span></code>  (yes)</dt>
+<dd>Scale rvdw along with rcoulomb</dd>
+<dt><code class="docutils literal"><span class="pre">-ntpr</span></code> &lt;int&gt; (0)</dt>
+<dd>Number of <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> files to benchmark. Create this many files with different rcoulomb scaling factors depending on -rmin and -rmax. If &lt; 1, automatically choose the number of <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> files to test</dd>
+<dt><code class="docutils literal"><span class="pre">-steps</span></code> &lt;int&gt; (1000)</dt>
+<dd>Take timings for this many steps in the benchmark runs</dd>
+<dt><code class="docutils literal"><span class="pre">-resetstep</span></code> &lt;int&gt; (1500)</dt>
+<dd>Let dlb equilibrate this many steps before timings are taken (reset cycle counters after this many steps)</dd>
+<dt><code class="docutils literal"><span class="pre">-nsteps</span></code> &lt;int&gt; (-1)</dt>
+<dd>If non-negative, perform this many steps in the real run (overwrites nsteps from <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a>, add <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">.cpt</span></a> steps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]launch</span></code>  (no)</dt>
+<dd>Launch the real simulation after optimization</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]bench</span></code>  (yes)</dt>
+<dd>Run the benchmarks or just create the input <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> files?</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]check</span></code>  (yes)</dt>
+<dd>Before the benchmark runs, check whether mdrun works in parallel</dd>
+<dt><code class="docutils literal"><span class="pre">-gpu_id</span></code> &lt;string&gt;</dt>
+<dd>List of GPU device id-s that are eligible for use (unlike mdrun, does not imply any mapping)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]append</span></code>  (yes)</dt>
+<dd>Append to previous output files when continuing from checkpoint instead of adding the simulation part number to all file names (for launch only)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]cpnum</span></code>  (no)</dt>
+<dd>Keep and number checkpoint files (launch only)</dd>
+<dt><code class="docutils literal"><span class="pre">-deffnm</span></code> &lt;string&gt;</dt>
+<dd>Set the default filenames (launch only)</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx tune_pme</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-trjorder.html"
+                        title="previous chapter">gmx trjorder</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-vanhove.html"
+                        title="next chapter">gmx vanhove</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-tune_pme.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-vanhove.html" title="gmx vanhove"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-trjorder.html" title="gmx trjorder"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

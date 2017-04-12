@@ -1,0 +1,21 @@
+These kernel directories contain Gromacs input files that have manipulated to only
+call one type of interaction kernel per directory. Each directory will call both
+the potential-and-force kernel (at steps 0 and 2) as well as the force-only 
+kernel (at step 1). 
+
+There is one caveat: When you run in parallel or with >1 thread, the domain 
+decomposition interferes a bit with the manipulation above, which results in more
+kernels being called. This is not a problem in normal executions when the kernels
+pass the test, since the vast majority of interactions will have been computed
+by the specific kernel the directory is named after.
+
+If a kernel fails, start your debugging by executing the gmxtest.pl script using 
+only a single thread (-nt 1). This will make sure each kernel only causes a failure
+in a single directory. If you have an error you your potentials, the error must
+be in the potential-and-force kernel. Similar, if you get errors in your forces
+already at step 0, this too indicates the error is in the combined kernel.
+If all properties match the reference values at step 0, but give incorrect results
+for step 1 (this will only be the forces), the error is in the force-only kernel.
+
+
+ 

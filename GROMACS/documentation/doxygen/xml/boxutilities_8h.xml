@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="boxutilities_8h" kind="file">
+    <compoundname>boxutilities.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="tpxio_8cpp" local="yes">src/gromacs/fileio/tpxio.cpp</includedby>
+    <includedby refid="gromacs_2gmxpreprocess_2grompp_8cpp" local="yes">src/gromacs/gmxpreprocess/grompp.cpp</includedby>
+    <includedby refid="coupling_8cpp" local="yes">src/gromacs/mdlib/coupling.cpp</includedby>
+    <includedby refid="update_8cpp" local="yes">src/gromacs/mdlib/update.cpp</includedby>
+    <includedby refid="boxutilities_8cpp" local="yes">src/gromacs/pbcutil/boxutilities.cpp</includedby>
+    <incdepgraph>
+      <node id="14826">
+        <label>stdint.h</label>
+      </node>
+      <node id="14828">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="14825">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="14826" relation="include">
+        </childnode>
+        <childnode refid="14827" relation="include">
+        </childnode>
+      </node>
+      <node id="14823">
+        <label>src/gromacs/pbcutil/boxutilities.h</label>
+        <link refid="boxutilities.h"/>
+        <childnode refid="14824" relation="include">
+        </childnode>
+        <childnode refid="14825" relation="include">
+        </childnode>
+        <childnode refid="14828" relation="include">
+        </childnode>
+      </node>
+      <node id="14824">
+        <label>stdio.h</label>
+      </node>
+      <node id="14827">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="14830">
+        <label>src/gromacs/pbcutil/boxutilities.cpp</label>
+        <link refid="boxutilities_8cpp"/>
+      </node>
+      <node id="14829">
+        <label>src/gromacs/pbcutil/boxutilities.h</label>
+        <link refid="boxutilities.h"/>
+        <childnode refid="14830" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="boxutilities_8h_1a2a3910b5bdb7763ad40901ed4cb36f27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void preserve_box_shape</definition>
+        <argsstring>(t_inputrec *ir, matrix box_rel, matrix b)</argsstring>
+        <name>preserve_box_shape</name>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box_rel</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Make sure the relative box shape remains the same. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function ensures that the relative box dimensions are preserved, which otherwise might diffuse away due to rounding errors in pressure coupling or the deform option.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box_rel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Relative box </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The corrected box </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/boxutilities.h" line="57" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/boxutilities.cpp" bodystart="91" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="boxutilities_8h_1a7550b29428ffa2b400a838c0bec06e64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_box_rel</definition>
+        <argsstring>(struct t_inputrec *ir, t_state *state)</argsstring>
+        <name>set_box_rel</name>
+        <param>
+          <type>struct <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Determine the relative box components. </para>        </briefdescription>
+        <detaileddescription>
+<para>Set state-&gt;box_rel used in mdrun to preserve the box shape <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure containing the box </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/boxutilities.h" line="65" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/boxutilities.cpp" bodystart="99" bodyend="110"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/boxutilities.h"/>
+  </compounddef>
+</doxygen>

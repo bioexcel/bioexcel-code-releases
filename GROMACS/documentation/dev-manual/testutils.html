@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Unit testing &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Development-time tools" href="tools.html" />
+    <link rel="prev" title="Automatic source code formatting" href="uncrustify.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="uncrustify.html" title="Automatic source code formatting"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" accesskey="U">Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="unit-testing">
+<h1>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h1>
+<p>The main goal of unit tests in GROMACS is to help developers while developing
+the code.  They focus on testing functionality of a certain module or a group
+of closely related modules.  They are designed for quick execution, such that
+they are easy to run after every change to check that nothing has been broken.</p>
+<div class="section" id="finding-building-and-running">
+<h2>Finding, building and running<a class="headerlink" href="#finding-building-and-running" title="Permalink to this headline">¶</a></h2>
+<p>As described in <a class="reference internal" href="overview.html#dev-source-layout"><span class="std std-ref">Source code organization</span></a>, <code class="docutils literal"><span class="pre">src/gromacs/</span></code> is divided into modules,
+each corresponding to a subdirectory.  If available, unit tests for that module
+can be found in a <code class="docutils literal"><span class="pre">tests/</span></code> subdirectory under the top-level module directory.
+Typically, tests for code in <code class="file docutils literal"><em><span class="pre">file</span></em><span class="pre">.h</span></code> in the module is in a corresponding
+<code class="file docutils literal"><span class="pre">tests/</span><em><span class="pre">file</span></em><span class="pre">.cpp</span></code>.  Not all files have corresponding tests, as it may not
+make sense to test that individual file in isolation.  Focus of the tests is on
+functionality exposed outside the module.  Some of the tests, in particular for
+higher-level modules, are more like integration tests, and test the
+functionality of multiple modules.
+Shared code used to implement the tests is in <code class="docutils literal"><span class="pre">src/external/gmock-1.7.0/</span></code> and
+<code class="docutils literal"><span class="pre">src/testutils/</span></code> (see below).</p>
+<p>The tests are built if <code class="docutils literal"><span class="pre">BUILD_TESTING=ON</span></code> (the default) and
+<code class="docutils literal"><span class="pre">GMX_BUILD_UNITTESTS=ON</span></code> (the default) in CMake.
+Each module produces a separate unit test binary (<code class="file docutils literal"><em><span class="pre">module</span></em><span class="pre">-test</span></code>) under
+<code class="docutils literal"><span class="pre">bin/</span></code>, which can execute all the tests for that module.</p>
+<p>The tests can be executed in a few different ways:</p>
+<ul class="simple">
+<li>Build the <code class="docutils literal"><span class="pre">test</span></code> target (e.g., <code class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></code>):
+This runs all the tests using CTest.  This includes also the regression
+tests if CMake has been told where to find them (regression tests are not
+discussed further on this page).
+If some of the tests fail, this only prints basic summary information (only
+a pass/fail status for each test binary or regression test class).
+You can execute the failing test binaries individually to get more
+information on the failure.
+Note that <code class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></code> does not rebuild the test binaries if you have changed
+the source code, so you need to separately run <code class="docutils literal"><span class="pre">make</span></code> or <code class="docutils literal"><span class="pre">make</span> <span class="pre">tests</span></code>.
+The latter only builds the test binaries and their dependencies.</li>
+<li>Build the <code class="docutils literal"><span class="pre">check</span></code> target (e.g., <code class="docutils literal"><span class="pre">make</span> <span class="pre">check</span></code>):
+This behaves the same as the <code class="docutils literal"><span class="pre">test</span></code> target, with a few extensions:<ol class="arabic">
+<li>Test binaries are rebuilt if they are outdated before the tests are run.</li>
+<li>If a test fails, the output of the test binary is shown.</li>
+<li>If unit tests and/or regression tests are not available, a message is
+printed.</li>
+</ol>
+</li>
+<li>Directly executing a test binary.  This provides the most useful output for
+diagnosing failures, and allows debugging test failures.  The output
+identifies the individual test(s) that fail, and shows the results of all
+failing assertions.  Some tests also add extra information to failing
+assertions to make it easier to identify the reason.  It is possible to
+control which tests are run using command line options.  Execute the binary
+with <code class="docutils literal"><span class="pre">-h</span></code> to get additional information.</li>
+</ul>
+<p>When executed using CTest, the tests produce XML output in
+<code class="docutils literal"><span class="pre">Testing/Temporary/</span></code>, containing the result of each test as well as failure
+messages.  This XML is used by Jenkins for reporting the test status for
+individual tests.  Note that if a test crashes or fails because of an assert or
+a gmx_fatal() call, no XML is produced for the binary, and Jenkins does not
+report anything for the test binary.  The actual error is only visible in the
+console output.</p>
+</div>
+<div class="section" id="unit-testing-framework">
+<h2>Unit testing framework<a class="headerlink" href="#unit-testing-framework" title="Permalink to this headline">¶</a></h2>
+<p>The tests are written using <a class="reference external" href="http://code.google.com/p/googletest/">Google Test</a>, which provides a framework for
+writing unit tests and compiling them into a test binary.  Most of the command
+line options provided by the test binaries are implemented by Google Test.  See
+the <a class="reference external" href="http://code.google.com/p/googletest/wiki/V1_7_Primer">Google Test Primer</a> for an introduction.
+Some tests also use <a class="reference external" href="http://code.google.com/p/googlemock/">Google Mock</a>, which provides a framework for creating
+mock implementations of C++ classes.  Both components are included in the
+source tree under <code class="docutils literal"><span class="pre">src/external/gmock-1.7.0/</span></code>, and are compiled as part of the
+unit test build.</p>
+<p><code class="docutils literal"><span class="pre">src/testutils/</span></code> contains GROMACS-specific shared test code.  This includes
+a few parts:</p>
+<ul class="simple">
+<li>CMake macros for declaring test binaries.  These take care of providing the
+<code class="docutils literal"><span class="pre">main()</span></code> method for the test executables and initializing the other parts of
+the framework, so that the test code in modules can focus on the actual
+tests.  This is the only part of the framework that you need to know to be
+able to write simple tests: you can use <code class="docutils literal"><span class="pre">gmx_add_unit_test()</span></code> in CMake to
+create your test binary and start writing the actual tests right away.
+See <code class="docutils literal"><span class="pre">src/testutils/TestMacros.cmake</span></code> and existing CMake code for examples
+how to use them.</li>
+<li>Generic test fixtures and helper classes.  The C++ API is documented on
+<a class="reference external" href="../doxygen/html-lib/group__module__testutils.xhtml">Doxygen page for testutils</a>.  Functionality here includes
+locating test input files from the source directory and constructing
+temporary files, adding custom command line
+options to the test binary, some custom test assertions
+for better exception and floating-point handling, utilities
+for constructing command line argument arrays, and
+test fixtures for tests that need to test long strings for correctness
+and for tests that execute legacy code where
+<cite>stdin</cite> reading etc. cannot be easily mocked.</li>
+<li>Some classes and functions to support the above.  This code is for internal
+use of the CMake machinery to build and set up the test binaries, and to
+customize Google Test to suit our environment.</li>
+<li>Simple framework for building tests that check the results against reference
+data that is generated by the same test code.  This can be used if it is not
+easy to verify the results of the code with C/C++ code alone, but manual
+inspection of the results is manageable.  The general approach is
+documented on the <a class="reference external" href="../doxygen/html-lib/page_refdata.xhtml">Doxygen page on using the reference data</a>.</li>
+</ul>
+<p>In addition to <code class="docutils literal"><span class="pre">src/testutils/</span></code>, some of the module test directories may
+provide reusable test code that is used in higher-level tests.  For example,
+the <code class="docutils literal"><span class="pre">src/gromacs/analysisdata/tests/</span></code> provides test fixtures, a mock
+implementation for gmx::IAnalysisDataModule, and some helper classes
+that are also used in <code class="docutils literal"><span class="pre">src/gromacs/trajectoryanalysis/tests/</span></code>.
+These cases are handled using CMake object libraries that are linked to all the
+test binaries that need them.</p>
+</div>
+<div class="section" id="getting-started-with-new-tests">
+<h2>Getting started with new tests<a class="headerlink" href="#getting-started-with-new-tests" title="Permalink to this headline">¶</a></h2>
+<p>To start working with new tests, you should first read the <a class="reference external" href="http://code.google.com/p/googletest/">Google Test</a>
+documentation to get a basic understanding of the testing framework, and read
+the above description to understand how the tests are organized in GROMACS.
+It is not necessary to understand all the details, but an overall understanding
+helps to get started.</p>
+<p>Writing a basic test is straightforward, and you can look at existing tests for
+examples.  The existing tests have a varying level of complexity, so here are
+some pointers to find tests that use certain functionality:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">src/gromacs/utility/tests/stringutil.cpp</span></code> contains very simple tests for
+functions.  These do
+not use any fancy functionality, only plain Google Test assertions.
+The only thing required for these tests is the <code class="docutils literal"><span class="pre">TEST()</span></code> macro and the block
+following it, plus headers required to make them compile.</li>
+<li>The same file contains also simple tests using the reference framework to
+check line wrapping (the tests for <code class="docutils literal"><span class="pre">gmx::TextLineWrapper</span></code>).  The test fixture
+for these tests is in <code class="docutils literal"><span class="pre">src/testutils/stringtest.h</span></code>/<code class="docutils literal"><span class="pre">.cpp</span></code>.  The string test
+fixture also demonstrates how to add a custom command line option to the
+test binary to influence the test execution.</li>
+<li><code class="docutils literal"><span class="pre">src/gromacs/selection/tests/</span></code> contains more complex use of the
+reference framework.  This is the code the reference framework was
+originally written for.
+<code class="docutils literal"><span class="pre">src/gromacs/selection/tests/selectioncollection.cpp</span></code> is the main file to
+look at.</li>
+<li>For more complex tests that do not use the reference framework, but instead
+do more complex verification in code, you can look at
+<code class="docutils literal"><span class="pre">src/gromacs/selection/tests/nbsearch.cpp</span></code>.</li>
+<li>For complex tests with mock-up classes and the reference framework, you can
+look at <code class="docutils literal"><span class="pre">src/gromacs/analysisdata/tests/</span></code>.</li>
+</ul>
+<p>Here are some things to keep in mind when working with the unit tests:</p>
+<ul class="simple">
+<li>Try to keep the execution time for the tests as short as possible, while
+covering the most important paths in the code under test.  Generally, tests
+should take seconds instead of minutes to run, so that no one needs to
+hesitate before running the tests after they have done some changes.
+Long-running tests should go somewhere else than in the unit test set.
+Note that Jenkins runs many of the tests under Valgrind, so heavy tests are
+going to slow down also that part of the verification.</li>
+<li>Try to produce useful messages when a test assertion fails.  The assertion
+message should tell what went wrong, with no need to run the <em>test itself</em>
+under a debugger (e.g., if the assertion is within a loop, and the loop
+index is relevant for understanding why the assertion fails, it should be
+included in the message).  Even better if even a user can understand what
+goes wrong, but the main audience for the messages is the developer who
+caused the test to fail.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Unit testing</a><ul>
+<li><a class="reference internal" href="#finding-building-and-running">Finding, building and running</a></li>
+<li><a class="reference internal" href="#unit-testing-framework">Unit testing framework</a></li>
+<li><a class="reference internal" href="#getting-started-with-new-tests">Getting started with new tests</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="uncrustify.html"
+                        title="previous chapter">Automatic source code formatting</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/testutils.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="uncrustify.html" title="Automatic source code formatting"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

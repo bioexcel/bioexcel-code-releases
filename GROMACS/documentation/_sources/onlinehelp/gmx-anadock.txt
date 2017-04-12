@@ -1,0 +1,61 @@
+.. _gmx anadock:
+
+gmx anadock
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx anadock [:strong:`-f` :emphasis:`[<.pdb>]`] [:strong:`-od` :emphasis:`[<.xvg>]`] [:strong:`-of` :emphasis:`[<.xvg>]`] [:strong:`-g` :emphasis:`[<.log>]`]
+                [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]free`] [:strong:`-[no]rms`] [:strong:`-cutoff` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx anadock`` analyses the results of an Autodock run and clusters the
+structures together, based on distance or RMSD. The docked energy
+and free energy estimates are analysed, and for each cluster the
+energy statistics are printed.
+
+An alternative approach to this is to cluster the structures first
+using :doc:`gmx cluster <gmx-cluster>` and then sort the clusters on either lowest
+energy or average energy.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.pdb>] (eiwit.pdb)
+    Protein data bank file
+
+Options to specify output files:
+
+``-od`` [<.xvg>] (edocked.xvg)
+    xvgr/xmgr file
+``-of`` [<.xvg>] (efree.xvg)
+    xvgr/xmgr file
+``-g`` [<.log>] (anadock.log)
+    Log file
+
+Other options:
+
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]free``  (no)
+    Use Free energy estimate from autodock for sorting the classes
+``-[no]rms``  (yes)
+    Cluster on RMS or distance
+``-cutoff`` <real> (0.2)
+    Maximum RMSD/distance for belonging to the same cluster
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

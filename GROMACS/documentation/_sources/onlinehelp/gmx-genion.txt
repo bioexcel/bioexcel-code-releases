@@ -1,0 +1,91 @@
+.. _gmx genion:
+
+gmx genion
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx genion [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-p` :emphasis:`[<.top>]`]
+               [:strong:`-o` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-np` :emphasis:`<int>`] [:strong:`-pname` :emphasis:`<string>`]
+               [:strong:`-pq` :emphasis:`<int>`] [:strong:`-nn` :emphasis:`<int>`] [:strong:`-nname` :emphasis:`<string>`] [:strong:`-nq` :emphasis:`<int>`]
+               [:strong:`-rmin` :emphasis:`<real>`] [:strong:`-seed` :emphasis:`<int>`] [:strong:`-conc` :emphasis:`<real>`] [:strong:`-[no]neutral`]
+
+Description
+-----------
+
+``gmx genion`` randomly replaces solvent molecules with monoatomic ions.
+The group of solvent molecules should be continuous and all molecules
+should have the same number of atoms.
+The user should add the ion molecules to the topology file or use
+the ``-p`` option to automatically modify the topology.
+
+The ion molecule type, residue and atom names in all force fields
+are the capitalized element names without sign. This molecule name
+should be given with ``-pname`` or ``-nname``, and the
+``[molecules]`` section of your topology updated accordingly,
+either by hand or with ``-p``. Do not use an atom name instead!
+
+Ions which can have multiple charge states get the multiplicity
+added, without sign, for the uncommon states only.
+
+For larger ions, e.g. sulfate we recommended using :doc:`gmx insert-molecules <gmx-insert-molecules>`.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify input/output files:
+
+``-p`` [<.top>] (topol.top) (Optional)
+    Topology file
+
+Options to specify output files:
+
+``-o`` [<.gro/.g96/...>] (out.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+
+Other options:
+
+``-np`` <int> (0)
+    Number of positive ions
+``-pname`` <string> (NA)
+    Name of the positive ion
+``-pq`` <int> (1)
+    Charge of the positive ion
+``-nn`` <int> (0)
+    Number of negative ions
+``-nname`` <string> (CL)
+    Name of the negative ion
+``-nq`` <int> (-1)
+    Charge of the negative ion
+``-rmin`` <real> (0.6)
+    Minimum distance between ions
+``-seed`` <int> (0)
+    Seed for random number generator (0 means generate)
+``-conc`` <real> (0)
+    Specify salt concentration (mol/liter). This will add sufficient ions to reach up to the specified concentration as computed from the volume of the cell in the input :ref:`.tpr <tpr>` file. Overrides the ``-np`` and ``-nn`` options.
+``-[no]neutral``  (no)
+    This option will add enough ions to neutralize the system. These ions are added on top of those specified with ``-np``/``-nn`` or ``-conc``.
+
+Known Issues
+------------
+
+* If you specify a salt concentration existing ions are not taken into account. In effect you therefore specify the amount of salt to be added.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

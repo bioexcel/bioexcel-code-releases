@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx energy &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx filter" href="gmx-filter.html" />
+    <link rel="prev" title="gmx enemat" href="gmx-enemat.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-filter.html" title="gmx filter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-enemat.html" title="gmx enemat"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-energy">
+<span id="id1"></span><h1>gmx energy<a class="headerlink" href="#gmx-energy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx energy [<strong>-f</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-f2</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-viol</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-pairs</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ora</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-ort</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oda</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-odr</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-odt</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oten</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-corr</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-vis</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ravg</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-odh</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]fee</strong>]
+           [<strong>-fetemp</strong> <em>&lt;real&gt;</em>] [<strong>-zero</strong> <em>&lt;real&gt;</em>] [<strong>-[no]sum</strong>] [<strong>-[no]dp</strong>]
+           [<strong>-nbmin</strong> <em>&lt;int&gt;</em>] [<strong>-nbmax</strong> <em>&lt;int&gt;</em>] [<strong>-[no]mutot</strong>] [<strong>-skip</strong> <em>&lt;int&gt;</em>]
+           [<strong>-[no]aver</strong>] [<strong>-nmol</strong> <em>&lt;int&gt;</em>] [<strong>-[no]fluct_props</strong>]
+           [<strong>-[no]driftcorr</strong>] [<strong>-[no]fluc</strong>] [<strong>-[no]orinst</strong>] [<strong>-[no]ovec</strong>]
+           [<strong>-acflen</strong> <em>&lt;int&gt;</em>] [<strong>-[no]normalize</strong>] [<strong>-P</strong> <em>&lt;enum&gt;</em>]
+           [<strong>-fitfn</strong> <em>&lt;enum&gt;</em>] [<strong>-beginfit</strong> <em>&lt;real&gt;</em>] [<strong>-endfit</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">energy</span></code> extracts energy components or distance restraint
+data from an energy file. The user is prompted to interactively
+select the desired energy terms.</p>
+<p>Average, RMSD, and drift are calculated with full precision from the
+simulation (see printed manual). Drift is calculated by performing
+a least-squares fit of the data to a straight line. The reported total drift
+is the difference of the fit at the first and last point.
+An error estimate of the average is given based on a block averages
+over 5 blocks using the full-precision averages. The error estimate
+can be performed over multiple block lengths with the options
+<code class="docutils literal"><span class="pre">-nbmin</span></code> and <code class="docutils literal"><span class="pre">-nbmax</span></code>.
+<strong>Note</strong> that in most cases the energy files contains averages over all
+MD steps, or over many more points than the number of frames in
+energy file. This makes the <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">energy</span></code> statistics output more accurate
+than the <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> output. When exact averages are not present in the energy
+file, the statistics mentioned above are simply over the single, per-frame
+energy values.</p>
+<p>The term fluctuation gives the RMSD around the least-squares fit.</p>
+<p>Some fluctuation-dependent properties can be calculated provided
+the correct energy terms are selected, and that the command line option
+<code class="docutils literal"><span class="pre">-fluct_props</span></code> is given. The following properties
+will be computed:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Property</th>
+<th class="head">Energy terms needed</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Heat capacity C_p (NPT sims):</td>
+<td>Enthalpy, Temp</td>
+</tr>
+<tr class="row-odd"><td>Heat capacity C_v (NVT sims):</td>
+<td>Etot, Temp</td>
+</tr>
+<tr class="row-even"><td>Thermal expansion coeff. (NPT):</td>
+<td>Enthalpy, Vol, Temp</td>
+</tr>
+<tr class="row-odd"><td>Isothermal compressibility:</td>
+<td>Vol, Temp</td>
+</tr>
+<tr class="row-even"><td>Adiabatic bulk modulus:</td>
+<td>Vol, Temp</td>
+</tr>
+</tbody>
+</table>
+<p>You always need to set the number of molecules <code class="docutils literal"><span class="pre">-nmol</span></code>.
+The C_p/C_v computations do <strong>not</strong> include any corrections
+for quantum effects. Use the <a class="reference internal" href="gmx-dos.html"><span class="doc">gmx dos</span></a> program if you need that (and you do).</p>
+<p>When the <code class="docutils literal"><span class="pre">-viol</span></code> option is set, the time averaged
+violations are plotted and the running time-averaged and
+instantaneous sum of violations are recalculated. Additionally
+running time-averaged and instantaneous distances between
+selected pairs can be plotted with the <code class="docutils literal"><span class="pre">-pairs</span></code> option.</p>
+<p>Options <code class="docutils literal"><span class="pre">-ora</span></code>, <code class="docutils literal"><span class="pre">-ort</span></code>, <code class="docutils literal"><span class="pre">-oda</span></code>, <code class="docutils literal"><span class="pre">-odr</span></code> and
+<code class="docutils literal"><span class="pre">-odt</span></code> are used for analyzing orientation restraint data.
+The first two options plot the orientation, the last three the
+deviations of the orientations from the experimental values.
+The options that end on an &#8216;a&#8217; plot the average over time
+as a function of restraint. The options that end on a &#8216;t&#8217;
+prompt the user for restraint label numbers and plot the data
+as a function of time. Option <code class="docutils literal"><span class="pre">-odr</span></code> plots the RMS
+deviation as a function of restraint.
+When the run used time or ensemble averaged orientation restraints,
+option <code class="docutils literal"><span class="pre">-orinst</span></code> can be used to analyse the instantaneous,
+not ensemble-averaged orientations and deviations instead of
+the time and ensemble averages.</p>
+<p>Option <code class="docutils literal"><span class="pre">-oten</span></code> plots the eigenvalues of the molecular order
+tensor for each orientation restraint experiment. With option
+<code class="docutils literal"><span class="pre">-ovec</span></code> also the eigenvectors are plotted.</p>
+<p>Option <code class="docutils literal"><span class="pre">-odh</span></code> extracts and plots the free energy data
+(Hamiltoian differences and/or the Hamiltonian derivative dhdl)
+from the <code class="docutils literal"><span class="pre">ener.edr</span></code> file.</p>
+<p>With <code class="docutils literal"><span class="pre">-fee</span></code> an estimate is calculated for the free-energy
+difference with an ideal gas state:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">A_idealgas</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="n">kT</span> <span class="n">ln</span><span class="p">(</span><span class="o">&lt;</span><span class="n">exp</span><span class="p">(</span><span class="n">U_pot</span><span class="o">/</span><span class="n">kT</span><span class="p">)</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">Delta</span> <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">G_idealgas</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="n">kT</span> <span class="n">ln</span><span class="p">(</span><span class="o">&lt;</span><span class="n">exp</span><span class="p">(</span><span class="n">U_pot</span><span class="o">/</span><span class="n">kT</span><span class="p">)</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where k is Boltzmann&#8217;s constant, T is set by <code class="docutils literal"><span class="pre">-fetemp</span></code> and
+the average is over the ensemble (or time in a trajectory).
+Note that this is in principle
+only correct when averaging over the whole (Boltzmann) ensemble
+and using the potential energy. This also allows for an entropy
+estimate using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Delta</span> <span class="n">S</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">S_idealgas</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">U_pot</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">Delta</span> <span class="n">A</span><span class="p">)</span><span class="o">/</span><span class="n">T</span>
+<span class="n">Delta</span> <span class="n">S</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">S_idealgas</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">U_pot</span><span class="o">&gt;</span> <span class="o">+</span> <span class="n">pV</span> <span class="o">-</span> <span class="n">Delta</span> <span class="n">G</span><span class="p">)</span><span class="o">/</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>When a second energy file is specified (<code class="docutils literal"><span class="pre">-f2</span></code>), a free energy
+difference is calculated:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dF</span> <span class="o">=</span> <span class="o">-</span><span class="n">kT</span> <span class="n">ln</span><span class="p">(</span><span class="o">&lt;</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">E_B</span><span class="o">-</span><span class="n">E_A</span><span class="p">)</span><span class="o">/</span><span class="n">kT</span><span class="p">)</span><span class="o">&gt;</span><span class="n">_A</span><span class="p">)</span> <span class="p">,</span>
+</pre></div>
+</div>
+<p>where E_A and E_B are the energies from the first and second energy
+files, and the average is over the ensemble A. The running average
+of the free energy difference is printed to a file specified by <code class="docutils literal"><span class="pre">-ravg</span></code>.
+<strong>Note</strong> that the energies must both be calculated from the same trajectory.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.edr&gt;] (ener.edr)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-f2</span></code> [&lt;.edr&gt;] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr) (Optional)</dt>
+<dd>Portable xdr run input file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (energy.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-viol</span></code> [&lt;.xvg&gt;] (violaver.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-pairs</span></code> [&lt;.xvg&gt;] (pairs.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ora</span></code> [&lt;.xvg&gt;] (orienta.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ort</span></code> [&lt;.xvg&gt;] (orientt.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oda</span></code> [&lt;.xvg&gt;] (orideva.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-odr</span></code> [&lt;.xvg&gt;] (oridevr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-odt</span></code> [&lt;.xvg&gt;] (oridevt.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oten</span></code> [&lt;.xvg&gt;] (oriten.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-corr</span></code> [&lt;.xvg&gt;] (enecorr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-vis</span></code> [&lt;.xvg&gt;] (visco.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ravg</span></code> [&lt;.xvg&gt;] (runavgdf.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-odh</span></code> [&lt;.xvg&gt;] (dhdl.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]fee</span></code>  (no)</dt>
+<dd>Do a free energy estimate</dd>
+<dt><code class="docutils literal"><span class="pre">-fetemp</span></code> &lt;real&gt; (300)</dt>
+<dd>Reference temperature for free energy calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-zero</span></code> &lt;real&gt; (0)</dt>
+<dd>Subtract a zero-point energy</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]sum</span></code>  (no)</dt>
+<dd>Sum the energy terms selected rather than display them all</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]dp</span></code>  (no)</dt>
+<dd>Print energies in high precision</dd>
+<dt><code class="docutils literal"><span class="pre">-nbmin</span></code> &lt;int&gt; (5)</dt>
+<dd>Minimum number of blocks for error estimate</dd>
+<dt><code class="docutils literal"><span class="pre">-nbmax</span></code> &lt;int&gt; (5)</dt>
+<dd>Maximum number of blocks for error estimate</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]mutot</span></code>  (no)</dt>
+<dd>Compute the total dipole moment from the components</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (0)</dt>
+<dd>Skip number of frames between data points</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]aver</span></code>  (no)</dt>
+<dd>Also print the exact average and rmsd stored in the energy frames (only when 1 term is requested)</dd>
+<dt><code class="docutils literal"><span class="pre">-nmol</span></code> &lt;int&gt; (1)</dt>
+<dd>Number of molecules in your sample: the energies are divided by this number</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]fluct_props</span></code>  (no)</dt>
+<dd>Compute properties based on energy fluctuations, like heat capacity</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]driftcorr</span></code>  (no)</dt>
+<dd>Useful only for calculations of fluctuation properties. The drift in the observables will be subtracted before computing the fluctuation properties.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]fluc</span></code>  (no)</dt>
+<dd>Calculate autocorrelation of energy fluctuations rather than energy itself</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]orinst</span></code>  (no)</dt>
+<dd>Analyse instantaneous orientation data</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ovec</span></code>  (no)</dt>
+<dd>Also plot the eigenvectors with <code class="docutils literal"><span class="pre">-oten</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">-acflen</span></code> &lt;int&gt; (-1)</dt>
+<dd>Length of the ACF, default is half the number of frames</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]normalize</span></code>  (yes)</dt>
+<dd>Normalize ACF</dd>
+<dt><code class="docutils literal"><span class="pre">-P</span></code> &lt;enum&gt; (0)</dt>
+<dd>Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3</dd>
+<dt><code class="docutils literal"><span class="pre">-fitfn</span></code> &lt;enum&gt; (none)</dt>
+<dd>Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9</dd>
+<dt><code class="docutils literal"><span class="pre">-beginfit</span></code> &lt;real&gt; (0)</dt>
+<dd>Time where to begin the exponential fit of the correlation function</dd>
+<dt><code class="docutils literal"><span class="pre">-endfit</span></code> &lt;real&gt; (-1)</dt>
+<dd>Time where to end the exponential fit of the correlation function, -1 is until the end</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx energy</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-enemat.html"
+                        title="previous chapter">gmx enemat</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-filter.html"
+                        title="next chapter">gmx filter</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-energy.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-filter.html" title="gmx filter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-enemat.html" title="gmx enemat"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

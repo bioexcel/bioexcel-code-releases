@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx spatial &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx spol" href="gmx-spol.html" />
+    <link rel="prev" title="gmx sorient" href="gmx-sorient.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-spol.html" title="gmx spol"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-sorient.html" title="gmx sorient"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-spatial">
+<span id="id1"></span><h1>gmx spatial<a class="headerlink" href="#gmx-spatial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx spatial [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+            [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-[no]pbc</strong>]
+            [<strong>-[no]div</strong>] [<strong>-ign</strong> <em>&lt;int&gt;</em>] [<strong>-bin</strong> <em>&lt;real&gt;</em>] [<strong>-nab</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">spatial</span></code> calculates the spatial distribution function and
+outputs it in a form that can be read by VMD as Gaussian98 cube format.
+For a system of 32,000 atoms and a 50 ns trajectory, the SDF can be generated
+in about 30 minutes, with most of the time dedicated to the two runs through
+<code class="docutils literal"><span class="pre">trjconv</span></code> that are required to center everything properly.
+This also takes a whole bunch of space (3 copies of the trajectory file).
+Still, the pictures are pretty and very informative when the fitted selection is properly made.
+3-4 atoms in a widely mobile group (like a free amino acid in solution) works
+well, or select the protein backbone in a stable folded structure to get the SDF
+of solvent and look at the time-averaged solvation shell.
+It is also possible using this program to generate the SDF based on some arbitrary
+Cartesian coordinate. To do that, simply omit the preliminary <a class="reference internal" href="gmx-trjconv.html"><span class="doc">gmx trjconv</span></a> steps.</p>
+<p>Usage:</p>
+<ol class="arabic simple">
+<li>Use <a class="reference internal" href="gmx-make_ndx.html"><span class="doc">gmx make_ndx</span></a> to create a group containing the atoms around which you want the SDF</li>
+<li><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span> <span class="pre">-s</span> <span class="pre">a.tpr</span> <span class="pre">-f</span> <span class="pre">a.tng</span> <span class="pre">-o</span> <span class="pre">b.tng</span> <span class="pre">-boxcenter</span> <span class="pre">tric</span> <span class="pre">-ur</span> <span class="pre">compact</span> <span class="pre">-pbc</span> <span class="pre">none</span></code></li>
+<li><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span> <span class="pre">-s</span> <span class="pre">a.tpr</span> <span class="pre">-f</span> <span class="pre">b.tng</span> <span class="pre">-o</span> <span class="pre">c.tng</span> <span class="pre">-fit</span> <span class="pre">rot+trans</span></code></li>
+<li>run <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">spatial</span></code> on the <code class="docutils literal"><span class="pre">c.tng</span></code> output of step #3.</li>
+<li>Load <code class="docutils literal"><span class="pre">grid.cube</span></code> into VMD and view as an isosurface.</li>
+</ol>
+<p><strong>Note</strong> that systems such as micelles will require <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span> <span class="pre">-pbc</span> <span class="pre">cluster</span></code> between steps 1 and 2.</p>
+<div class="section" id="warnings">
+<h3>Warnings<a class="headerlink" href="#warnings" title="Permalink to this headline">¶</a></h3>
+<p>The SDF will be generated for a cube that contains all bins that have some non-zero occupancy.
+However, the preparatory <code class="docutils literal"><span class="pre">-fit</span> <span class="pre">rot+trans</span></code> option to <a class="reference internal" href="gmx-trjconv.html"><span class="doc">gmx trjconv</span></a> implies that your system will be rotating
+and translating in space (in order that the selected group does not). Therefore the values that are
+returned will only be valid for some region around your central group/coordinate that has full overlap
+with system volume throughout the entire translated/rotated system over the course of the trajectory.
+It is up to the user to ensure that this is the case.</p>
+</div>
+<div class="section" id="risky-options">
+<h3>Risky options<a class="headerlink" href="#risky-options" title="Permalink to this headline">¶</a></h3>
+<p>To reduce the amount of space and time required, you can output only the coords
+that are going to be used in the first and subsequent run through <a class="reference internal" href="gmx-trjconv.html"><span class="doc">gmx trjconv</span></a>.
+However, be sure to set the <code class="docutils literal"><span class="pre">-nab</span></code> option to a sufficiently high value since
+memory is allocated for cube bins based on the initial coordinates and the <code class="docutils literal"><span class="pre">-nab</span></code>
+option value.</p>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/...&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/...&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (no)</dt>
+<dd>Use periodic boundary conditions for computing distances</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]div</span></code>  (yes)</dt>
+<dd>Calculate and apply the divisor for bin occupancies based on atoms/minimal cube size. Set as TRUE for visualization and as FALSE (<code class="docutils literal"><span class="pre">-nodiv</span></code>) to get accurate counts per frame</dd>
+<dt><code class="docutils literal"><span class="pre">-ign</span></code> &lt;int&gt; (-1)</dt>
+<dd>Do not display this number of outer cubes (positive values may reduce boundary speckles; -1 ensures outer surface is visible)</dd>
+<dt><code class="docutils literal"><span class="pre">-bin</span></code> &lt;real&gt; (0.05)</dt>
+<dd>Width of the bins (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-nab</span></code> &lt;int&gt; (4)</dt>
+<dd>Number of additional bins to ensure proper memory allocation</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>When the allocated memory is not large enough, a segmentation fault may occur. This is usually detected and the program is halted prior to the fault while displaying a warning message suggesting the use of the <code class="docutils literal"><span class="pre">-nab</span></code> (Number of Additional Bins) option. However, the program does not detect all such events. If you encounter a segmentation fault, run it again with an increased <code class="docutils literal"><span class="pre">-nab</span></code> value.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx spatial</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a><ul>
+<li><a class="reference internal" href="#warnings">Warnings</a></li>
+<li><a class="reference internal" href="#risky-options">Risky options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-sorient.html"
+                        title="previous chapter">gmx sorient</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-spol.html"
+                        title="next chapter">gmx spol</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-spatial.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-spol.html" title="gmx spol"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-sorient.html" title="gmx sorient"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

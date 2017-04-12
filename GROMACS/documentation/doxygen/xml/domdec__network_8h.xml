@@ -1,0 +1,446 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="domdec__network_8h" kind="file">
+    <compoundname>domdec_network.h</compoundname>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="domdec__box_8cpp" local="yes">src/gromacs/domdec/domdec_box.cpp</includedby>
+    <includedby refid="domdec__network_8cpp" local="yes">src/gromacs/domdec/domdec_network.cpp</includedby>
+    <includedby refid="domdec__specatomcomm_8cpp" local="yes">src/gromacs/domdec/domdec_specatomcomm.cpp</includedby>
+    <includedby refid="domdec__topology_8cpp" local="yes">src/gromacs/domdec/domdec_topology.cpp</includedby>
+    <includedby refid="pme-load-balancing_8cpp" local="yes">src/gromacs/ewald/pme-load-balancing.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <invincdepgraph>
+      <node id="2849">
+        <label>src/gromacs/domdec/domdec_box.cpp</label>
+        <link refid="domdec__box_8cpp"/>
+      </node>
+      <node id="2853">
+        <label>src/gromacs/ewald/pme-load-balancing.cpp</label>
+        <link refid="pme-load-balancing_8cpp"/>
+      </node>
+      <node id="2850">
+        <label>src/gromacs/domdec/domdec_network.cpp</label>
+        <link refid="domdec__network_8cpp"/>
+      </node>
+      <node id="2848">
+        <label>src/gromacs/domdec/domdec_network.h</label>
+        <link refid="domdec_network.h"/>
+        <childnode refid="2849" relation="include">
+        </childnode>
+        <childnode refid="2850" relation="include">
+        </childnode>
+        <childnode refid="2851" relation="include">
+        </childnode>
+        <childnode refid="2852" relation="include">
+        </childnode>
+        <childnode refid="2853" relation="include">
+        </childnode>
+      </node>
+      <node id="2852">
+        <label>src/gromacs/domdec/domdec_topology.cpp</label>
+        <link refid="domdec__topology_8cpp"/>
+      </node>
+      <node id="2851">
+        <label>src/gromacs/domdec/domdec_specatomcomm.cpp</label>
+        <link refid="domdec__specatomcomm_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="domdec__network_8h_1a726ca809ffd3d67ab4b8476646f26635" prot="public" static="no">
+        <name>@6</name>
+        <enumvalue id="domdec__network_8h_1a726ca809ffd3d67ab4b8476646f26635a795584439ac8c77336616350dd522fb7" prot="public">
+          <name>dddirForward</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="domdec__network_8h_1a726ca809ffd3d67ab4b8476646f26635ac8686f4a029eebdfceb35ff845a4c3fa" prot="public">
+          <name>dddirBackward</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="56" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" bodystart="56" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="domdec__network_8h_1a89691f175f80fb5ca8a00310a107f1e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_sendrecv_int</definition>
+        <argsstring>(const struct gmx_domdec_t *dd, int ddimind, int direction, int *buf_s, int n_s, int *buf_r, int n_r)</argsstring>
+        <name>dd_sendrecv_int</name>
+        <param>
+          <type>const struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ddimind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>buf_s</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_s</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>buf_r</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_r</declname>
+        </param>
+        <briefdescription>
+<para>Move integers in the communication region one cell along the domain decomposition. </para>        </briefdescription>
+        <detaileddescription>
+<para>Moves in the dimension indexed by ddimind, either forward (direction=dddirFoward) or backward (direction=dddirBackward). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="67" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="61" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1ab9a804356592167793887745ad3b694a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_sendrecv_real</definition>
+        <argsstring>(const struct gmx_domdec_t *dd, int ddimind, int direction, real *buf_s, int n_s, real *buf_r, int n_r)</argsstring>
+        <name>dd_sendrecv_real</name>
+        <param>
+          <type>const struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ddimind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>buf_s</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_s</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>buf_r</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_r</declname>
+        </param>
+        <briefdescription>
+<para>Move reals in the comm. region one cell along the domain decomposition. </para>        </briefdescription>
+        <detaileddescription>
+<para>Moves in the dimension indexed by ddimind, either forward (direction=dddirFoward) or backward (direction=dddirBackward). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="78" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="93" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1a70cdf666f338db206602e46906e976c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_sendrecv_rvec</definition>
+        <argsstring>(const struct gmx_domdec_t *dd, int ddimind, int direction, rvec *buf_s, int n_s, rvec *buf_r, int n_r)</argsstring>
+        <name>dd_sendrecv_rvec</name>
+        <param>
+          <type>const struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ddimind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>buf_s</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_s</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>buf_r</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_r</declname>
+        </param>
+        <briefdescription>
+<para>Move revc&apos;s in the comm. region one cell along the domain decomposition. </para>        </briefdescription>
+        <detaileddescription>
+<para>Moves in dimension indexed by ddimind, either forward (direction=dddirFoward) or backward (direction=dddirBackward). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="125" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1a040bc11e6fdf2f3b35087da1f003d97b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_sendrecv2_rvec</definition>
+        <argsstring>(const struct gmx_domdec_t *dd, int ddimind, rvec *buf_s_fw, int n_s_fw, rvec *buf_r_fw, int n_r_fw, rvec *buf_s_bw, int n_s_bw, rvec *buf_r_bw, int n_r_bw)</argsstring>
+        <name>dd_sendrecv2_rvec</name>
+        <param>
+          <type>const struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ddimind</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>buf_s_fw</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_s_fw</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>buf_r_fw</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_r_fw</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>buf_s_bw</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_s_bw</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>buf_r_bw</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_r_bw</declname>
+        </param>
+        <briefdescription>
+<para>Move revc&apos;s in the comm. region one cell along the domain decomposition. </para>        </briefdescription>
+        <detaileddescription>
+<para>Moves in dimension indexed by ddimind, simultaneously in the forward and backward directions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="101" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="157" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1ac4ea5f61d02379847b020be9f85cd1e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_bcast</definition>
+        <argsstring>(struct gmx_domdec_t *dd, int nbytes, void *data)</argsstring>
+        <name>dd_bcast</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbytes</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Broadcasts <computeroutput>nbytes</computeroutput> from <computeroutput>data</computeroutput> on <computeroutput>DDMASTERRANK</computeroutput> to all PP ranks. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="117" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="232" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1a15226f182ff9aaef3c9bde6e89743e34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_bcastc</definition>
+        <argsstring>(struct gmx_domdec_t *dd, int nbytes, void *src, void *dest)</argsstring>
+        <name>dd_bcastc</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbytes</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+<para>Copies <computeroutput>nbytes</computeroutput> from <computeroutput>src</computeroutput> to <computeroutput>dest</computeroutput> on <computeroutput>DDMASTERRANK</computeroutput> and then broadcasts to <computeroutput>dest</computeroutput> on all PP ranks. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="122" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="250" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1a90f1abb877dacb3dcab6d7bdce796371" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_scatter</definition>
+        <argsstring>(struct gmx_domdec_t *dd, int nbytes, void *src, void *dest)</argsstring>
+        <name>dd_scatter</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbytes</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+<para>Scatters <computeroutput>nbytes</computeroutput> from <computeroutput>src</computeroutput> on <computeroutput>DDMASTERRANK</computeroutput> to all PP ranks, received in <computeroutput>dest</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="126" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="272" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1a68816959348da2bdee38e8c2b02c9a3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_gather</definition>
+        <argsstring>(struct gmx_domdec_t *dd, int nbytes, void *src, void *dest)</argsstring>
+        <name>dd_gather</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbytes</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+<para>Gathers <computeroutput>nbytes</computeroutput> from <computeroutput>src</computeroutput> on all PP ranks, received in <computeroutput>dest</computeroutput> on <computeroutput>DDMASTERRANK</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="130" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="292" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1a5042f8bbf8323aaf32f14bf7a258bdd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_scatterv</definition>
+        <argsstring>(struct gmx_domdec_t *dd, int *scounts, int *disps, void *sbuf, int rcount, void *rbuf)</argsstring>
+        <name>dd_scatterv</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>scounts</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>disps</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>sbuf</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rcount</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>rbuf</declname>
+        </param>
+        <briefdescription>
+<para>Scatters <computeroutput>scounts</computeroutput> bytes from <computeroutput>src</computeroutput> on <computeroutput>DDMASTERRANK</computeroutput> to all PP ranks, receiving <computeroutput>rcount</computeroutput> bytes in <computeroutput>dest</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>See man MPI_Scatterv for details of how to construct scounts and disps. If rcount==0, rbuf is allowed to be NULL </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="137" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="301" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="domdec__network_8h_1af9dd91ed2f09f211177b96b46538ec26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_gatherv</definition>
+        <argsstring>(struct gmx_domdec_t *dd, int scount, void *sbuf, int *rcounts, int *disps, void *rbuf)</argsstring>
+        <name>dd_gatherv</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scount</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>sbuf</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>rcounts</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>disps</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>rbuf</declname>
+        </param>
+        <briefdescription>
+<para>Gathers <computeroutput>rcount</computeroutput> bytes from <computeroutput>src</computeroutput> on all PP ranks, received in <computeroutput>scounts</computeroutput> bytes in <computeroutput>dest</computeroutput> on <computeroutput>DDMASTERRANK</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>See man MPI_Gatherv for details of how to construct scounts and disps.</para><para>If scount==0, sbuf is allowed to be NULL </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h" line="147" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.cpp" bodystart="330" bodyend="346"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file declares functions for (mostly) the domdec module to use MPI functionality. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><xrefsect id="todo_1_todo000014"><xreftitle>Todo</xreftitle><xrefdescription><para>Wrap the raw dd_bcast in md.cpp into a higher-level function in the domdec module, then this file can be module-internal.</para></xrefdescription></xrefsect></para><para><simplesect kind="author"><para>Berk Hess <ulink url="mailto:hess@kth.se">hess@kth.se</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/domdec/domdec_network.h"/>
+  </compounddef>
+</doxygen>

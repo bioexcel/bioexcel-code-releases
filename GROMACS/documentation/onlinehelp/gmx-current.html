@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx current &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx density" href="gmx-density.html" />
+    <link rel="prev" title="gmx covar" href="gmx-covar.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-density.html" title="gmx density"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-covar.html" title="gmx covar"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-current">
+<span id="id1"></span><h1>gmx current<a class="headerlink" href="#gmx-current" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx current [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>]
+            [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-caf</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-dsp</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-md</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-mj</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-mc</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>]
+            [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+            [<strong>-sh</strong> <em>&lt;int&gt;</em>] [<strong>-[no]nojump</strong>] [<strong>-eps</strong> <em>&lt;real&gt;</em>] [<strong>-bfit</strong> <em>&lt;real&gt;</em>]
+            [<strong>-efit</strong> <em>&lt;real&gt;</em>] [<strong>-bvit</strong> <em>&lt;real&gt;</em>] [<strong>-evit</strong> <em>&lt;real&gt;</em>]
+            [<strong>-temp</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">current</span></code> is a tool for calculating the current autocorrelation function, the correlation
+of the rotational and translational dipole moment of the system, and the resulting static
+dielectric constant. To obtain a reasonable result, the index group has to be neutral.
+Furthermore, the routine is capable of extracting the static conductivity from the current
+autocorrelation function, if velocities are given. Additionally, an Einstein-Helfand fit
+can be used to obtain the static conductivity.</p>
+<p>The flag <code class="docutils literal"><span class="pre">-caf</span></code> is for the output of the current autocorrelation function and <code class="docutils literal"><span class="pre">-mc</span></code> writes the
+correlation of the rotational and translational part of the dipole moment in the corresponding
+file. However, this option is only available for trajectories containing velocities.
+Options <code class="docutils literal"><span class="pre">-sh</span></code> and <code class="docutils literal"><span class="pre">-tr</span></code> are responsible for the averaging and integration of the
+autocorrelation functions. Since averaging proceeds by shifting the starting point
+through the trajectory, the shift can be modified with <code class="docutils literal"><span class="pre">-sh</span></code> to enable the choice of uncorrelated
+starting points. Towards the end, statistical inaccuracy grows and integrating the
+correlation function only yields reliable values until a certain point, depending on
+the number of frames. The option <code class="docutils literal"><span class="pre">-tr</span></code> controls the region of the integral taken into account
+for calculating the static dielectric constant.</p>
+<p>Option <code class="docutils literal"><span class="pre">-temp</span></code> sets the temperature required for the computation of the static dielectric constant.</p>
+<p>Option <code class="docutils literal"><span class="pre">-eps</span></code> controls the dielectric constant of the surrounding medium for simulations using
+a Reaction Field or dipole corrections of the Ewald summation (<code class="docutils literal"><span class="pre">-eps</span></code>=0 corresponds to
+tin-foil boundary conditions).</p>
+<p><code class="docutils literal"><span class="pre">-[no]nojump</span></code> unfolds the coordinates to allow free diffusion. This is required to get a continuous
+translational dipole moment, required for the Einstein-Helfand fit. The results from the fit allow
+the determination of the dielectric constant for system of charged molecules. However, it is also possible to extract
+the dielectric constant from the fluctuations of the total dipole moment in folded coordinates. But this
+option has to be used with care, since only very short time spans fulfill the approximation that the density
+of the molecules is approximately constant and the averages are already converged. To be on the safe side,
+the dielectric constant should be calculated with the help of the Einstein-Helfand method for
+the translational part of the dielectric constant.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/...&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/...&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (current.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-caf</span></code> [&lt;.xvg&gt;] (caf.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-dsp</span></code> [&lt;.xvg&gt;] (dsp.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-md</span></code> [&lt;.xvg&gt;] (md.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-mj</span></code> [&lt;.xvg&gt;] (mj.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-mc</span></code> [&lt;.xvg&gt;] (mc.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-sh</span></code> &lt;int&gt; (1000)</dt>
+<dd>Shift of the frames for averaging the correlation functions and the mean-square displacement.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]nojump</span></code>  (yes)</dt>
+<dd>Removes jumps of atoms across the box.</dd>
+<dt><code class="docutils literal"><span class="pre">-eps</span></code> &lt;real&gt; (0)</dt>
+<dd>Dielectric constant of the surrounding medium. The value zero corresponds to infinity (tin-foil boundary conditions).</dd>
+<dt><code class="docutils literal"><span class="pre">-bfit</span></code> &lt;real&gt; (100)</dt>
+<dd>Begin of the fit of the straight line to the MSD of the translational fraction of the dipole moment.</dd>
+<dt><code class="docutils literal"><span class="pre">-efit</span></code> &lt;real&gt; (400)</dt>
+<dd>End of the fit of the straight line to the MSD of the translational fraction of the dipole moment.</dd>
+<dt><code class="docutils literal"><span class="pre">-bvit</span></code> &lt;real&gt; (0.5)</dt>
+<dd>Begin of the fit of the current autocorrelation function to a*t^b.</dd>
+<dt><code class="docutils literal"><span class="pre">-evit</span></code> &lt;real&gt; (5)</dt>
+<dd>End of the fit of the current autocorrelation function to a*t^b.</dd>
+<dt><code class="docutils literal"><span class="pre">-temp</span></code> &lt;real&gt; (300)</dt>
+<dd>Temperature for calculating epsilon.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx current</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-covar.html"
+                        title="previous chapter">gmx covar</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-density.html"
+                        title="next chapter">gmx density</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-current.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-density.html" title="gmx density"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-covar.html" title="gmx covar"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

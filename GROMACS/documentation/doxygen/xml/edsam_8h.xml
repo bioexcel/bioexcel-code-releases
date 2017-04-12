@@ -1,0 +1,514 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="edsam_8h" kind="file">
+    <compoundname>edsam.h</compoundname>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="constr_8h" local="yes">src/gromacs/mdlib/constr.h</includedby>
+    <includedby refid="edsam_8cpp" local="yes">src/gromacs/essentialdynamics/edsam.cpp</includedby>
+    <includedby refid="constr_8cpp" local="yes">src/gromacs/mdlib/constr.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="membed_8cpp" local="yes">src/programs/mdrun/membed.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <incdepgraph>
+      <node id="3054">
+        <label>src/gromacs/essentialdynamics/edsam.h</label>
+        <link refid="edsam.h"/>
+        <childnode refid="3055" relation="include">
+        </childnode>
+      </node>
+      <node id="3056">
+        <label>stdint.h</label>
+      </node>
+      <node id="3055">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="3056" relation="include">
+        </childnode>
+        <childnode refid="3057" relation="include">
+        </childnode>
+      </node>
+      <node id="3057">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3058">
+        <label>src/gromacs/essentialdynamics/edsam.h</label>
+        <link refid="edsam.h"/>
+        <childnode refid="3059" relation="include">
+        </childnode>
+      </node>
+      <node id="3059">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" prot="public" static="no">
+        <type>struct <ref refid="structgmx__edsam" kindref="compound">gmx_edsam</ref> *</type>
+        <definition>typedef struct gmx_edsam* gmx_edsam_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_edsam_t</name>
+        <briefdescription>
+<para>Abstract type for essential dynamics. </para>        </briefdescription>
+        <detaileddescription>
+<para>The main type is defined only in edsam.c </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" line="61" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="edsam_8h_1ad08e2d9a5190bce1506f8c4e530cd52b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_edsam</definition>
+        <argsstring>(const t_inputrec *ir, gmx_int64_t step, t_commrec *cr, rvec xs[], rvec v[], matrix box, gmx_edsam_t ed)</argsstring>
+        <name>do_edsam</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xs</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>v</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <briefdescription>
+<para>Applies essential dynamics constrains as defined in the .edi input file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MD input parameter record. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of the time step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data needed for MPI communication. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>xs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The local positions on this processor. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The local velocities. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The essential dynamics data. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" line="79" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.cpp" bodystart="3003" bodyend="3183"/>
+      </memberdef>
+      <memberdef kind="function" id="edsam_8h_1a4ad0d53972eec0be3a51c32e8608c221" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+        <definition>gmx_edsam_t ed_open</definition>
+        <argsstring>(int natoms, edsamstate_t *EDstate, int nfile, const t_filenm fnm[], unsigned long Flags, const gmx_output_env_t *oenv, t_commrec *cr)</argsstring>
+        <name>ed_open</name>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structedsamstate__t" kindref="compound">edsamstate_t</ref> *</type>
+          <declname>EDstate</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfile</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__filenm" kindref="compound">t_filenm</ref></type>
+          <declname>fnm</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>Flags</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+<para>Reads in the .edi file containing the essential dynamics and flooding data. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function opens the ED input and output files, reads in all datasets it finds in the input file, and cross-checks whether the .edi file information is consistent with the essential dynamics data found in the checkpoint file (if present). gmx make_edi can be used to create an .edi input file.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>natoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms of the whole MD system. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EDstate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Essential dynamics and flooding data stored in the checkpoint file. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nfile</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of entries (files) in the fnm structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fnm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The filenames struct; it contains also the names of the essential dynamics and flooding in + output files. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags passed over from main, used to determine whether we are appending. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>oenv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Needed to open the output xvgr file. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data needed for MPI communication. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the initialized essential dynamics / flooding data. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" line="101" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.cpp" bodystart="1187" bodyend="1236"/>
+      </memberdef>
+      <memberdef kind="function" id="edsam_8h_1a936cc04872ccdb6f3fd1b3701bf66e16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_edsam</definition>
+        <argsstring>(const gmx_mtop_t *mtop, const t_inputrec *ir, t_commrec *cr, gmx_edsam_t ed, rvec x[], matrix box, edsamstate_t *EDstate)</argsstring>
+        <name>init_edsam</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structedsamstate__t" kindref="compound">edsamstate_t</ref> *</type>
+          <declname>EDstate</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the essential dynamics and flooding module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Molecular topology. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MD input parameter record. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data needed for MPI communication. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The essential dynamics data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Positions of the whole MD system. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>EDstate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ED data stored in the checkpoint file. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" line="114" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.cpp" bodystart="2653" bodyend="3000"/>
+      </memberdef>
+      <memberdef kind="function" id="edsam_8h_1a3d1ca11c16f6a6dc7d851e00cdd20972" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_make_local_ed_indices</definition>
+        <argsstring>(gmx_domdec_t *dd, gmx_edsam_t ed)</argsstring>
+        <name>dd_make_local_ed_indices</name>
+        <param>
+          <type><ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <briefdescription>
+<para>Make a selection of the home atoms for the ED groups. </para>        </briefdescription>
+        <detaileddescription>
+<para>Should be called at every domain decomposition.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Domain decomposition data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Essential dynamics and flooding data. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" line="125" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="edsam_8h_1abd1735cacdb23dbf6ee4aae33cd070cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_flood</definition>
+        <argsstring>(t_commrec *cr, const t_inputrec *ir, rvec x[], rvec force[], gmx_edsam_t ed, matrix box, gmx_int64_t step, gmx_bool bNS)</argsstring>
+        <name>do_flood</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>force</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNS</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the flooding potential(s) and forces as requested in the .edi input file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data needed for MPI communication. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MD input parameter record. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Positions on the local processor. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>force</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forcefield forces to which the flooding forces are added. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The essential dynamics data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of the time step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bNS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Are we in a neighbor searching step? </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" line="139" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.cpp" bodystart="1069" bodyend="1104"/>
+      </memberdef>
+      <memberdef kind="function" id="edsam_8h_1aa2b758e98d5e2d6837515ed847836ec8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void done_ed</definition>
+        <argsstring>(gmx_edsam_t *ed)</argsstring>
+        <name>done_ed</name>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref> *</type>
+          <declname>ed</declname>
+        </param>
+        <briefdescription>
+<para>Clean up. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The essential dynamics data </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h" line="146" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.cpp" bodystart="3185" bodyend="3196"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares functions to calculate both essential dynamics constraints as well as flooding potentials and forces. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="authors"><para>Bert de Groot <ulink url="mailto:bgroot@gwdg.de">bgroot@gwdg.de</ulink>, Oliver Lange <ulink url="mailto:oliver.lange@tum.de">oliver.lange@tum.de</ulink>, Carsten Kutzner <ulink url="mailto:ckutzne@gwdg.de">ckutzne@gwdg.de</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/essentialdynamics/edsam.h"/>
+  </compounddef>
+</doxygen>

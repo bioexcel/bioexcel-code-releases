@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx make_edi &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx make_ndx" href="gmx-make_ndx.html" />
+    <link rel="prev" title="gmx lie" href="gmx-lie.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-make_ndx.html" title="gmx make_ndx"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-lie.html" title="gmx lie"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-make-edi">
+<span id="id1"></span><h1>gmx make_edi<a class="headerlink" href="#gmx-make-edi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx make_edi [<strong>-f</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>] [<strong>-eig</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+             [<strong>-tar</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-ori</strong> <em>[&lt;.gro/.g96/...&gt;]</em>]
+             [<strong>-o</strong> <em>[&lt;.edi&gt;]</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-mon</strong> <em>&lt;string&gt;</em>]
+             [<strong>-linfix</strong> <em>&lt;string&gt;</em>] [<strong>-linacc</strong> <em>&lt;string&gt;</em>] [<strong>-radfix</strong> <em>&lt;string&gt;</em>]
+             [<strong>-radacc</strong> <em>&lt;string&gt;</em>] [<strong>-radcon</strong> <em>&lt;string&gt;</em>] [<strong>-flood</strong> <em>&lt;string&gt;</em>]
+             [<strong>-outfrq</strong> <em>&lt;int&gt;</em>] [<strong>-slope</strong> <em>&lt;real&gt;</em>] [<strong>-linstep</strong> <em>&lt;string&gt;</em>]
+             [<strong>-accdir</strong> <em>&lt;string&gt;</em>] [<strong>-radstep</strong> <em>&lt;real&gt;</em>] [<strong>-maxedsteps</strong> <em>&lt;int&gt;</em>]
+             [<strong>-eqsteps</strong> <em>&lt;int&gt;</em>] [<strong>-deltaF0</strong> <em>&lt;real&gt;</em>] [<strong>-deltaF</strong> <em>&lt;real&gt;</em>]
+             [<strong>-tau</strong> <em>&lt;real&gt;</em>] [<strong>-Eflnull</strong> <em>&lt;real&gt;</em>] [<strong>-T</strong> <em>&lt;real&gt;</em>]
+             [<strong>-alpha</strong> <em>&lt;real&gt;</em>] [<strong>-[no]restrain</strong>] [<strong>-[no]hessian</strong>]
+             [<strong>-[no]harmonic</strong>] [<strong>-constF</strong> <em>&lt;string&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">make_edi</span></code> generates an essential dynamics (ED) sampling input file to be used with <code class="docutils literal"><span class="pre">mdrun</span></code>
+based on eigenvectors of a covariance matrix (<a class="reference internal" href="gmx-covar.html"><span class="doc">gmx covar</span></a>) or from a
+normal modes analysis (<a class="reference internal" href="gmx-nmeig.html"><span class="doc">gmx nmeig</span></a>).
+ED sampling can be used to manipulate the position along collective coordinates
+(eigenvectors) of (biological) macromolecules during a simulation. Particularly,
+it may be used to enhance the sampling efficiency of MD simulations by stimulating
+the system to explore new regions along these collective coordinates. A number
+of different algorithms are implemented to drive the system along the eigenvectors
+(<code class="docutils literal"><span class="pre">-linfix</span></code>, <code class="docutils literal"><span class="pre">-linacc</span></code>, <code class="docutils literal"><span class="pre">-radfix</span></code>, <code class="docutils literal"><span class="pre">-radacc</span></code>, <code class="docutils literal"><span class="pre">-radcon</span></code>),
+to keep the position along a certain (set of) coordinate(s) fixed (<code class="docutils literal"><span class="pre">-linfix</span></code>),
+or to only monitor the projections of the positions onto
+these coordinates (<code class="docutils literal"><span class="pre">-mon</span></code>).</p>
+<p>References:</p>
+<p>A. Amadei, A.B.M. Linssen, B.L. de Groot, D.M.F. van Aalten and
+H.J.C. Berendsen; An efficient method for sampling the essential subspace
+of proteins., J. Biomol. Struct. Dyn. 13:615-626 (1996)</p>
+<p>B.L. de Groot, A. Amadei, D.M.F. van Aalten and H.J.C. Berendsen;
+Towards an exhaustive sampling of the configurational spaces of the
+two forms of the peptide hormone guanylin,
+J. Biomol. Struct. Dyn. 13 : 741-751 (1996)</p>
+<p>B.L. de Groot, A.Amadei, R.M. Scheek, N.A.J. van Nuland and H.J.C. Berendsen;
+An extended sampling of the configurational space of HPr from E. coli
+Proteins: Struct. Funct. Gen. 26: 314-322 (1996)</p>
+<p>You will be prompted for one or more index groups that correspond to the eigenvectors,
+reference structure, target positions, etc.</p>
+<p><code class="docutils literal"><span class="pre">-mon</span></code>: monitor projections of the coordinates onto selected eigenvectors.</p>
+<p><code class="docutils literal"><span class="pre">-linfix</span></code>: perform fixed-step linear expansion along selected eigenvectors.</p>
+<p><code class="docutils literal"><span class="pre">-linacc</span></code>: perform acceptance linear expansion along selected eigenvectors.
+(steps in the desired directions will be accepted, others will be rejected).</p>
+<p><code class="docutils literal"><span class="pre">-radfix</span></code>: perform fixed-step radius expansion along selected eigenvectors.</p>
+<p><code class="docutils literal"><span class="pre">-radacc</span></code>: perform acceptance radius expansion along selected eigenvectors.
+(steps in the desired direction will be accepted, others will be rejected).
+<strong>Note:</strong> by default the starting MD structure will be taken as origin of the first
+expansion cycle for radius expansion. If <code class="docutils literal"><span class="pre">-ori</span></code> is specified, you will be able
+to read in a structure file that defines an external origin.</p>
+<p><code class="docutils literal"><span class="pre">-radcon</span></code>: perform acceptance radius contraction along selected eigenvectors
+towards a target structure specified with <code class="docutils literal"><span class="pre">-tar</span></code>.</p>
+<p>NOTE: each eigenvector can be selected only once.</p>
+<p><code class="docutils literal"><span class="pre">-outfrq</span></code>: frequency (in steps) of writing out projections etc. to <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> file</p>
+<p><code class="docutils literal"><span class="pre">-slope</span></code>: minimal slope in acceptance radius expansion. A new expansion
+cycle will be started if the spontaneous increase of the radius (in nm/step)
+is less than the value specified.</p>
+<p><code class="docutils literal"><span class="pre">-maxedsteps</span></code>: maximum number of steps per cycle in radius expansion
+before a new cycle is started.</p>
+<p>Note on the parallel implementation: since ED sampling is a &#8216;global&#8217; thing
+(collective coordinates etc.), at least on the &#8216;protein&#8217; side, ED sampling
+is not very parallel-friendly from an implementation point of view. Because
+parallel ED requires some extra communication, expect the performance to be
+lower as in a free MD simulation, especially on a large number of ranks and/or
+when the ED group contains a lot of atoms.</p>
+<p>Please also note that if your ED group contains more than a single protein,
+then the <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file must contain the correct PBC representation of the ED group.
+Take a look on the initial RMSD from the reference structure, which is printed
+out at the start of the simulation; if this is much higher than expected, one
+of the ED molecules might be shifted by a box vector.</p>
+<p>All ED-related output of <code class="docutils literal"><span class="pre">mdrun</span></code> (specify with <code class="docutils literal"><span class="pre">-eo</span></code>) is written to a <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> file
+as a function of time in intervals of OUTFRQ steps.</p>
+<p><strong>Note</strong> that you can impose multiple ED constraints and flooding potentials in
+a single simulation (on different molecules) if several <a class="reference internal" href="../user-guide/file-formats.html#edi"><span class="std std-ref">.edi</span></a> files were concatenated
+first. The constraints are applied in the order they appear in the <a class="reference internal" href="../user-guide/file-formats.html#edi"><span class="std std-ref">.edi</span></a> file.
+Depending on what was specified in the <a class="reference internal" href="../user-guide/file-formats.html#edi"><span class="std std-ref">.edi</span></a> input file, the output file contains for each ED dataset</p>
+<blockquote>
+<div><ul class="simple">
+<li>the RMSD of the fitted molecule to the reference structure (for atoms involved in fitting prior to calculating the ED constraints)</li>
+<li>projections of the positions onto selected eigenvectors</li>
+</ul>
+</div></blockquote>
+<p>FLOODING:</p>
+<p>with <code class="docutils literal"><span class="pre">-flood</span></code>, you can specify which eigenvectors are used to compute a flooding potential,
+which will lead to extra forces expelling the structure out of the region described
+by the covariance matrix. If you switch -restrain the potential is inverted and the structure
+is kept in that region.</p>
+<p>The origin is normally the average structure stored in the <code class="docutils literal"><span class="pre">eigvec.trr</span></code> file.
+It can be changed with <code class="docutils literal"><span class="pre">-ori</span></code> to an arbitrary position in configuration space.
+With <code class="docutils literal"><span class="pre">-tau</span></code>, <code class="docutils literal"><span class="pre">-deltaF0</span></code>, and <code class="docutils literal"><span class="pre">-Eflnull</span></code> you control the flooding behaviour.
+Efl is the flooding strength, it is updated according to the rule of adaptive flooding.
+Tau is the time constant of adaptive flooding, high tau means slow adaption (i.e. growth).
+DeltaF0 is the flooding strength you want to reach after tau ps of simulation.
+To use constant Efl set <code class="docutils literal"><span class="pre">-tau</span></code> to zero.</p>
+<p><code class="docutils literal"><span class="pre">-alpha</span></code> is a fudge parameter to control the width of the flooding potential. A value of 2 has been found
+to give good results for most standard cases in flooding of proteins.
+alpha basically accounts for incomplete sampling, if you sampled further the width of the ensemble would
+increase, this is mimicked by alpha &gt; 1.
+For restraining, alpha &lt; 1 can give you smaller width in the restraining potential.</p>
+<p>RESTART and FLOODING:
+If you want to restart a crashed flooding simulation please find the values deltaF and Efl in
+the output file and manually put them into the <a class="reference internal" href="../user-guide/file-formats.html#edi"><span class="std std-ref">.edi</span></a> file under DELTA_F0 and EFL_NULL.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.trr/.cpt/...&gt;] (eigenvec.trr)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-eig</span></code> [&lt;.xvg&gt;] (eigenval.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/...&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-tar</span></code> [&lt;.gro/.g96/...&gt;] (target.gro) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-ori</span></code> [&lt;.gro/.g96/...&gt;] (origin.gro) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.edi&gt;] (sam.edi)</dt>
+<dd>ED sampling input</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-mon</span></code> &lt;string&gt;</dt>
+<dd>Indices of eigenvectors for projections of x (e.g. 1,2-5,9) or 1-100:10 means 1 11 21 31 ... 91</dd>
+<dt><code class="docutils literal"><span class="pre">-linfix</span></code> &lt;string&gt;</dt>
+<dd>Indices of eigenvectors for fixed increment linear sampling</dd>
+<dt><code class="docutils literal"><span class="pre">-linacc</span></code> &lt;string&gt;</dt>
+<dd>Indices of eigenvectors for acceptance linear sampling</dd>
+<dt><code class="docutils literal"><span class="pre">-radfix</span></code> &lt;string&gt;</dt>
+<dd>Indices of eigenvectors for fixed increment radius expansion</dd>
+<dt><code class="docutils literal"><span class="pre">-radacc</span></code> &lt;string&gt;</dt>
+<dd>Indices of eigenvectors for acceptance radius expansion</dd>
+<dt><code class="docutils literal"><span class="pre">-radcon</span></code> &lt;string&gt;</dt>
+<dd>Indices of eigenvectors for acceptance radius contraction</dd>
+<dt><code class="docutils literal"><span class="pre">-flood</span></code> &lt;string&gt;</dt>
+<dd>Indices of eigenvectors for flooding</dd>
+<dt><code class="docutils literal"><span class="pre">-outfrq</span></code> &lt;int&gt; (100)</dt>
+<dd>Frequency (in steps) of writing output in <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> file</dd>
+<dt><code class="docutils literal"><span class="pre">-slope</span></code> &lt;real&gt; (0)</dt>
+<dd>Minimal slope in acceptance radius expansion</dd>
+<dt><code class="docutils literal"><span class="pre">-linstep</span></code> &lt;string&gt;</dt>
+<dd>Stepsizes (nm/step) for fixed increment linear sampling (put in quotes! &#8220;1.0 2.3 5.1 -3.1&#8221;)</dd>
+<dt><code class="docutils literal"><span class="pre">-accdir</span></code> &lt;string&gt;</dt>
+<dd>Directions for acceptance linear sampling - only sign counts! (put in quotes! &#8220;-1 +1 -1.1&#8221;)</dd>
+<dt><code class="docutils literal"><span class="pre">-radstep</span></code> &lt;real&gt; (0)</dt>
+<dd>Stepsize (nm/step) for fixed increment radius expansion</dd>
+<dt><code class="docutils literal"><span class="pre">-maxedsteps</span></code> &lt;int&gt; (0)</dt>
+<dd>Maximum number of steps per cycle</dd>
+<dt><code class="docutils literal"><span class="pre">-eqsteps</span></code> &lt;int&gt; (0)</dt>
+<dd>Number of steps to run without any perturbations</dd>
+<dt><code class="docutils literal"><span class="pre">-deltaF0</span></code> &lt;real&gt; (150)</dt>
+<dd>Target destabilization energy for flooding</dd>
+<dt><code class="docutils literal"><span class="pre">-deltaF</span></code> &lt;real&gt; (0)</dt>
+<dd>Start deltaF with this parameter - default 0, nonzero values only needed for restart</dd>
+<dt><code class="docutils literal"><span class="pre">-tau</span></code> &lt;real&gt; (0.1)</dt>
+<dd>Coupling constant for adaption of flooding strength according to deltaF0, 0 = infinity i.e. constant flooding strength</dd>
+<dt><code class="docutils literal"><span class="pre">-Eflnull</span></code> &lt;real&gt; (0)</dt>
+<dd>The starting value of the flooding strength. The flooding strength is updated according to the adaptive flooding scheme. For a constant flooding strength use <code class="docutils literal"><span class="pre">-tau</span></code> 0.</dd>
+<dt><code class="docutils literal"><span class="pre">-T</span></code> &lt;real&gt; (300)</dt>
+<dd>T is temperature, the value is needed if you want to do flooding</dd>
+<dt><code class="docutils literal"><span class="pre">-alpha</span></code> &lt;real&gt; (1)</dt>
+<dd>Scale width of gaussian flooding potential with alpha^2</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]restrain</span></code>  (no)</dt>
+<dd>Use the flooding potential with inverted sign -&gt; effects as quasiharmonic restraining potential</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]hessian</span></code>  (no)</dt>
+<dd>The eigenvectors and eigenvalues are from a Hessian matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]harmonic</span></code>  (no)</dt>
+<dd>The eigenvalues are interpreted as spring constant</dd>
+<dt><code class="docutils literal"><span class="pre">-constF</span></code> &lt;string&gt;</dt>
+<dd>Constant force flooding: manually set the forces for the eigenvectors selected with -flood (put in quotes! &#8220;1.0 2.3 5.1 -3.1&#8221;). No other flooding parameters are needed when specifying the forces directly.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx make_edi</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-lie.html"
+                        title="previous chapter">gmx lie</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-make_ndx.html"
+                        title="next chapter">gmx make_ndx</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-make_edi.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-make_ndx.html" title="gmx make_ndx"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-lie.html" title="gmx lie"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

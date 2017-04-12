@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx sham &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx sigeps" href="gmx-sigeps.html" />
+    <link rel="prev" title="gmx select" href="gmx-select.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-sigeps.html" title="gmx sigeps"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-select.html" title="gmx select"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-sham">
+<span id="id1"></span><h1>gmx sham<a class="headerlink" href="#gmx-sham" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx sham [<strong>-f</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ge</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ene</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-dist</strong> <em>[&lt;.xvg&gt;]</em>]
+         [<strong>-histo</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-bin</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-lp</strong> <em>[&lt;.xpm&gt;]</em>]
+         [<strong>-ls</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-lsh</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-lss</strong> <em>[&lt;.xpm&gt;]</em>]
+         [<strong>-ls3</strong> <em>[&lt;.pdb&gt;]</em>] [<strong>-g</strong> <em>[&lt;.log&gt;]</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+         [<strong>-[no]time</strong>] [<strong>-b</strong> <em>&lt;real&gt;</em>] [<strong>-e</strong> <em>&lt;real&gt;</em>] [<strong>-ttol</strong> <em>&lt;real&gt;</em>]
+         [<strong>-n</strong> <em>&lt;int&gt;</em>] [<strong>-[no]d</strong>] [<strong>-[no]sham</strong>] [<strong>-tsham</strong> <em>&lt;real&gt;</em>]
+         [<strong>-pmin</strong> <em>&lt;real&gt;</em>] [<strong>-dim</strong> <em>&lt;vector&gt;</em>] [<strong>-ngrid</strong> <em>&lt;vector&gt;</em>]
+         [<strong>-xmin</strong> <em>&lt;vector&gt;</em>] [<strong>-xmax</strong> <em>&lt;vector&gt;</em>] [<strong>-pmax</strong> <em>&lt;real&gt;</em>]
+         [<strong>-gmax</strong> <em>&lt;real&gt;</em>] [<strong>-emin</strong> <em>&lt;real&gt;</em>] [<strong>-emax</strong> <em>&lt;real&gt;</em>]
+         [<strong>-nlevels</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sham</span></code> makes multi-dimensional free-energy, enthalpy and entropy plots.
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sham</span></code> reads one or more <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> files and analyzes data sets.
+The basic purpose of <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sham</span></code> is to plot Gibbs free energy landscapes
+(option <code class="docutils literal"><span class="pre">-ls</span></code>)
+by Bolzmann inverting multi-dimensional histograms (option <code class="docutils literal"><span class="pre">-lp</span></code>),
+but it can also
+make enthalpy (option <code class="docutils literal"><span class="pre">-lsh</span></code>) and entropy (option <code class="docutils literal"><span class="pre">-lss</span></code>)
+plots. The histograms can be made for any quantities the user supplies.
+A line in the input file may start with a time
+(see option <code class="docutils literal"><span class="pre">-time</span></code>) and any number of <em>y</em>-values may follow.
+Multiple sets can also be
+read when they are separated by &amp; (option <code class="docutils literal"><span class="pre">-n</span></code>),
+in this case only one <em>y</em>-value is read from each line.
+All lines starting with # and &#64; are skipped.</p>
+<p>Option <code class="docutils literal"><span class="pre">-ge</span></code> can be used to supply a file with free energies
+when the ensemble is not a Boltzmann ensemble, but needs to be biased
+by this free energy. One free energy value is required for each
+(multi-dimensional) data point in the <code class="docutils literal"><span class="pre">-f</span></code> input.</p>
+<p>Option <code class="docutils literal"><span class="pre">-ene</span></code> can be used to supply a file with energies.
+These energies are used as a weighting function in the single
+histogram analysis method by Kumar et al. When temperatures
+are supplied (as a second column in the file), an experimental
+weighting scheme is applied. In addition the vales
+are used for making enthalpy and entropy plots.</p>
+<p>With option <code class="docutils literal"><span class="pre">-dim</span></code>, dimensions can be gives for distances.
+When a distance is 2- or 3-dimensional, the circumference or surface
+sampled by two particles increases with increasing distance.
+Depending on what one would like to show, one can choose to correct
+the histogram and free-energy for this volume effect.
+The probability is normalized by r and r^2 for dimensions of 2 and 3,
+respectively.
+A value of -1 is used to indicate an angle in degrees between two
+vectors: a sin(angle) normalization will be applied.
+<strong>Note</strong> that for angles between vectors the inner-product or cosine
+is the natural quantity to use, as it will produce bins of the same
+volume.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xvg&gt;] (graph.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ge</span></code> [&lt;.xvg&gt;] (gibbs.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ene</span></code> [&lt;.xvg&gt;] (esham.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-dist</span></code> [&lt;.xvg&gt;] (ener.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-histo</span></code> [&lt;.xvg&gt;] (edist.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-bin</span></code> [&lt;.ndx&gt;] (bindex.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-lp</span></code> [&lt;.xpm&gt;] (prob.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-ls</span></code> [&lt;.xpm&gt;] (gibbs.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-lsh</span></code> [&lt;.xpm&gt;] (enthalpy.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-lss</span></code> [&lt;.xpm&gt;] (entropy.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-ls3</span></code> [&lt;.pdb&gt;] (gibbs3.pdb) (Optional)</dt>
+<dd>Protein data bank file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.log&gt;] (shamlog.log) (Optional)</dt>
+<dd>Log file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]time</span></code>  (yes)</dt>
+<dd>Expect a time in the input</dd>
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;real&gt; (-1)</dt>
+<dd>First time to read from set</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;real&gt; (-1)</dt>
+<dd>Last time to read from set</dd>
+<dt><code class="docutils literal"><span class="pre">-ttol</span></code> &lt;real&gt; (0)</dt>
+<dd>Tolerance on time in appropriate units (usually ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> &lt;int&gt; (1)</dt>
+<dd>Read this number of sets separated by lines containing only an ampersand</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]d</span></code>  (no)</dt>
+<dd>Use the derivative</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]sham</span></code>  (yes)</dt>
+<dd>Turn off energy weighting even if energies are given</dd>
+<dt><code class="docutils literal"><span class="pre">-tsham</span></code> &lt;real&gt; (298.15)</dt>
+<dd>Temperature for single histogram analysis</dd>
+<dt><code class="docutils literal"><span class="pre">-pmin</span></code> &lt;real&gt; (0)</dt>
+<dd>Minimum probability. Anything lower than this will be set to zero</dd>
+<dt><code class="docutils literal"><span class="pre">-dim</span></code> &lt;vector&gt; (1 1 1)</dt>
+<dd>Dimensions for distances, used for volume correction (max 3 values, dimensions &gt; 3 will get the same value as the last)</dd>
+<dt><code class="docutils literal"><span class="pre">-ngrid</span></code> &lt;vector&gt; (32 32 32)</dt>
+<dd>Number of bins for energy landscapes (max 3 values, dimensions &gt; 3 will get the same value as the last)</dd>
+<dt><code class="docutils literal"><span class="pre">-xmin</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Minimum for the axes in energy landscape (see above for &gt; 3 dimensions)</dd>
+<dt><code class="docutils literal"><span class="pre">-xmax</span></code> &lt;vector&gt; (1 1 1)</dt>
+<dd>Maximum for the axes in energy landscape (see above for &gt; 3 dimensions)</dd>
+<dt><code class="docutils literal"><span class="pre">-pmax</span></code> &lt;real&gt; (0)</dt>
+<dd>Maximum probability in output, default is calculate</dd>
+<dt><code class="docutils literal"><span class="pre">-gmax</span></code> &lt;real&gt; (0)</dt>
+<dd>Maximum free energy in output, default is calculate</dd>
+<dt><code class="docutils literal"><span class="pre">-emin</span></code> &lt;real&gt; (0)</dt>
+<dd>Minimum enthalpy in output, default is calculate</dd>
+<dt><code class="docutils literal"><span class="pre">-emax</span></code> &lt;real&gt; (0)</dt>
+<dd>Maximum enthalpy in output, default is calculate</dd>
+<dt><code class="docutils literal"><span class="pre">-nlevels</span></code> &lt;int&gt; (25)</dt>
+<dd>Number of levels for energy landscape</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx sham</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-select.html"
+                        title="previous chapter">gmx select</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-sigeps.html"
+                        title="next chapter">gmx sigeps</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-sham.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-sigeps.html" title="gmx sigeps"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-select.html" title="gmx select"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx anaeig &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx analyze" href="gmx-analyze.html" />
+    <link rel="prev" title="gmx anadock" href="gmx-anadock.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-analyze.html" title="gmx analyze"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-anadock.html" title="gmx anadock"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-anaeig">
+<span id="id1"></span><h1>gmx anaeig<a class="headerlink" href="#gmx-anaeig" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx anaeig [<strong>-v</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>] [<strong>-v2</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>]
+           [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>]
+           [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-eig</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-eig2</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-comp</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-rmsf</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-proj</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-2d</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-3d</strong> <em>[&lt;.gro/.g96/...&gt;]</em>]
+           [<strong>-filt</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-extr</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>]
+           [<strong>-over</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-inpr</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+           [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+           [<strong>-first</strong> <em>&lt;int&gt;</em>] [<strong>-last</strong> <em>&lt;int&gt;</em>] [<strong>-skip</strong> <em>&lt;int&gt;</em>] [<strong>-max</strong> <em>&lt;real&gt;</em>]
+           [<strong>-nframes</strong> <em>&lt;int&gt;</em>] [<strong>-[no]split</strong>] [<strong>-[no]entropy</strong>]
+           [<strong>-temp</strong> <em>&lt;real&gt;</em>] [<strong>-nevskip</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">anaeig</span></code> analyzes eigenvectors. The eigenvectors can be of a
+covariance matrix (<a class="reference internal" href="gmx-covar.html"><span class="doc">gmx covar</span></a>) or of a Normal Modes analysis
+(<a class="reference internal" href="gmx-nmeig.html"><span class="doc">gmx nmeig</span></a>).</p>
+<p>When a trajectory is projected on eigenvectors, all structures are
+fitted to the structure in the eigenvector file, if present, otherwise
+to the structure in the structure file. When no run input file is
+supplied, periodicity will not be taken into account. Most analyses
+are performed on eigenvectors <code class="docutils literal"><span class="pre">-first</span></code> to <code class="docutils literal"><span class="pre">-last</span></code>, but when
+<code class="docutils literal"><span class="pre">-first</span></code> is set to -1 you will be prompted for a selection.</p>
+<p><code class="docutils literal"><span class="pre">-comp</span></code>: plot the vector components per atom of eigenvectors
+<code class="docutils literal"><span class="pre">-first</span></code> to <code class="docutils literal"><span class="pre">-last</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">-rmsf</span></code>: plot the RMS fluctuation per atom of eigenvectors
+<code class="docutils literal"><span class="pre">-first</span></code> to <code class="docutils literal"><span class="pre">-last</span></code> (requires <code class="docutils literal"><span class="pre">-eig</span></code>).</p>
+<p><code class="docutils literal"><span class="pre">-proj</span></code>: calculate projections of a trajectory on eigenvectors
+<code class="docutils literal"><span class="pre">-first</span></code> to <code class="docutils literal"><span class="pre">-last</span></code>.
+The projections of a trajectory on the eigenvectors of its
+covariance matrix are called principal components (pc&#8217;s).
+It is often useful to check the cosine content of the pc&#8217;s,
+since the pc&#8217;s of random diffusion are cosines with the number
+of periods equal to half the pc index.
+The cosine content of the pc&#8217;s can be calculated with the program
+<a class="reference internal" href="gmx-analyze.html"><span class="doc">gmx analyze</span></a>.</p>
+<p><code class="docutils literal"><span class="pre">-2d</span></code>: calculate a 2d projection of a trajectory on eigenvectors
+<code class="docutils literal"><span class="pre">-first</span></code> and <code class="docutils literal"><span class="pre">-last</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">-3d</span></code>: calculate a 3d projection of a trajectory on the first
+three selected eigenvectors.</p>
+<p><code class="docutils literal"><span class="pre">-filt</span></code>: filter the trajectory to show only the motion along
+eigenvectors <code class="docutils literal"><span class="pre">-first</span></code> to <code class="docutils literal"><span class="pre">-last</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">-extr</span></code>: calculate the two extreme projections along a trajectory
+on the average structure and interpolate <code class="docutils literal"><span class="pre">-nframes</span></code> frames
+between them, or set your own extremes with <code class="docutils literal"><span class="pre">-max</span></code>. The
+eigenvector <code class="docutils literal"><span class="pre">-first</span></code> will be written unless <code class="docutils literal"><span class="pre">-first</span></code> and
+<code class="docutils literal"><span class="pre">-last</span></code> have been set explicitly, in which case all eigenvectors
+will be written to separate files. Chain identifiers will be added
+when writing a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file with two or three structures (you
+can use <code class="docutils literal"><span class="pre">rasmol</span> <span class="pre">-nmrpdb</span></code> to view such a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file).</p>
+<div class="section" id="overlap-calculations-between-covariance-analysis">
+<h3>Overlap calculations between covariance analysis<a class="headerlink" href="#overlap-calculations-between-covariance-analysis" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> the analysis should use the same fitting structure</p>
+<p><code class="docutils literal"><span class="pre">-over</span></code>: calculate the subspace overlap of the eigenvectors in
+file <code class="docutils literal"><span class="pre">-v2</span></code> with eigenvectors <code class="docutils literal"><span class="pre">-first</span></code> to <code class="docutils literal"><span class="pre">-last</span></code>
+in file <code class="docutils literal"><span class="pre">-v</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">-inpr</span></code>: calculate a matrix of inner-products between
+eigenvectors in files <code class="docutils literal"><span class="pre">-v</span></code> and <code class="docutils literal"><span class="pre">-v2</span></code>. All eigenvectors
+of both files will be used unless <code class="docutils literal"><span class="pre">-first</span></code> and <code class="docutils literal"><span class="pre">-last</span></code>
+have been set explicitly.</p>
+<p>When <code class="docutils literal"><span class="pre">-v</span></code> and <code class="docutils literal"><span class="pre">-v2</span></code> are given, a single number for the
+overlap between the covariance matrices is generated. Note that the
+eigenvalues are by default read from the timestamp field in the
+eigenvector input files, but when <code class="docutils literal"><span class="pre">-eig</span></code>, or <code class="docutils literal"><span class="pre">-eig2</span></code> are
+given, the corresponding eigenvalues are used instead. The formulas are:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>        <span class="n">difference</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">tr</span><span class="p">((</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">M2</span><span class="p">))</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">normalized</span> <span class="n">overlap</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">difference</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tr</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span> <span class="o">+</span> <span class="n">tr</span><span class="p">(</span><span class="n">M2</span><span class="p">))</span>
+     <span class="n">shape</span> <span class="n">overlap</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">tr</span><span class="p">((</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M1</span><span class="o">/</span><span class="n">tr</span><span class="p">(</span><span class="n">M1</span><span class="p">))</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">M2</span><span class="o">/</span><span class="n">tr</span><span class="p">(</span><span class="n">M2</span><span class="p">)))</span><span class="o">^</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>where M1 and M2 are the two covariance matrices and tr is the trace
+of a matrix. The numbers are proportional to the overlap of the square
+root of the fluctuations. The normalized overlap is the most useful
+number, it is 1 for identical matrices and 0 when the sampled
+subspaces are orthogonal.</p>
+<p>When the <code class="docutils literal"><span class="pre">-entropy</span></code> flag is given an entropy estimate will be
+computed based on the Quasiharmonic approach and based on
+Schlitter&#8217;s formula.</p>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-v</span></code> [&lt;.trr/.cpt/...&gt;] (eigenvec.trr)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-v2</span></code> [&lt;.trr/.cpt/...&gt;] (eigenvec2.trr) (Optional)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/...&gt;] (traj.xtc) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/...&gt;] (topol.tpr) (Optional)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-eig</span></code> [&lt;.xvg&gt;] (eigenval.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-eig2</span></code> [&lt;.xvg&gt;] (eigenval2.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-comp</span></code> [&lt;.xvg&gt;] (eigcomp.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-rmsf</span></code> [&lt;.xvg&gt;] (eigrmsf.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-proj</span></code> [&lt;.xvg&gt;] (proj.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-2d</span></code> [&lt;.xvg&gt;] (2dproj.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-3d</span></code> [&lt;.gro/.g96/...&gt;] (3dproj.pdb) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+<dt><code class="docutils literal"><span class="pre">-filt</span></code> [&lt;.xtc/.trr/...&gt;] (filtered.xtc) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-extr</span></code> [&lt;.xtc/.trr/...&gt;] (extreme.pdb) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-over</span></code> [&lt;.xvg&gt;] (overlap.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-inpr</span></code> [&lt;.xpm&gt;] (inprod.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-first</span></code> &lt;int&gt; (1)</dt>
+<dd>First eigenvector for analysis (-1 is select)</dd>
+<dt><code class="docutils literal"><span class="pre">-last</span></code> &lt;int&gt; (-1)</dt>
+<dd>Last eigenvector for analysis (-1 is till the last)</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (1)</dt>
+<dd>Only analyse every nr-th frame</dd>
+<dt><code class="docutils literal"><span class="pre">-max</span></code> &lt;real&gt; (0)</dt>
+<dd>Maximum for projection of the eigenvector on the average structure, max=0 gives the extremes</dd>
+<dt><code class="docutils literal"><span class="pre">-nframes</span></code> &lt;int&gt; (2)</dt>
+<dd>Number of frames for the extremes output</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]split</span></code>  (no)</dt>
+<dd>Split eigenvector projections where time is zero</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]entropy</span></code>  (no)</dt>
+<dd>Compute entropy according to the Quasiharmonic formula or Schlitter&#8217;s method.</dd>
+<dt><code class="docutils literal"><span class="pre">-temp</span></code> &lt;real&gt; (298.15)</dt>
+<dd>Temperature for entropy calculations</dd>
+<dt><code class="docutils literal"><span class="pre">-nevskip</span></code> &lt;int&gt; (6)</dt>
+<dd>Number of eigenvalues to skip when computing the entropy due to the quasi harmonic approximation. When you do a rotational and/or translational fit prior to the covariance analysis, you get 3 or 6 eigenvalues that are very close to zero, and which should not be taken into account when computing the entropy.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx anaeig</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a><ul>
+<li><a class="reference internal" href="#overlap-calculations-between-covariance-analysis">Overlap calculations between covariance analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-anadock.html"
+                        title="previous chapter">gmx anadock</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-analyze.html"
+                        title="next chapter">gmx analyze</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-anaeig.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-analyze.html" title="gmx analyze"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-anadock.html" title="gmx anadock"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

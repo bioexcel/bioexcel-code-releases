@@ -1,0 +1,95 @@
+.. _gmx helixorient:
+
+gmx helixorient
+===============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx helixorient [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                 [:strong:`-oaxis` :emphasis:`[<.dat>]`] [:strong:`-ocenter` :emphasis:`[<.dat>]`] [:strong:`-orise` :emphasis:`[<.xvg>]`]
+                 [:strong:`-oradius` :emphasis:`[<.xvg>]`] [:strong:`-otwist` :emphasis:`[<.xvg>]`]
+                 [:strong:`-obending` :emphasis:`[<.xvg>]`] [:strong:`-otilt` :emphasis:`[<.xvg>]`] [:strong:`-orot` :emphasis:`[<.xvg>]`]
+                 [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-xvg` :emphasis:`<enum>`]
+                 [:strong:`-[no]sidechain`] [:strong:`-[no]incremental`]
+
+Description
+-----------
+
+``gmx helixorient`` calculates the coordinates and direction of the average
+axis inside an alpha helix, and the direction/vectors of both the
+Calpha and (optionally) a sidechain atom relative to the axis.
+
+As input, you need to specify an index group with Calpha atoms
+corresponding to an alpha-helix of continuous residues. Sidechain
+directions require a second index group of the same size, containing
+the heavy atom in each residue that should represent the sidechain.
+
+**Note** that this program does not do any fitting of structures.
+
+We need four Calpha coordinates to define the local direction of the helix
+axis.
+
+The tilt/rotation is calculated from Euler rotations, where we define
+the helix axis as the local *x*-axis, the residues/Calpha vector as *y*, and the
+*z*-axis from their cross product. We use the Euler Y-Z-X rotation, meaning
+we first tilt the helix axis (1) around and (2) orthogonal to the residues
+vector, and finally apply the (3) rotation around it. For debugging or other
+purposes, we also write out the actual Euler rotation angles as ``theta[1-3].xvg``
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-oaxis`` [<.dat>] (helixaxis.dat)
+    Generic data file
+``-ocenter`` [<.dat>] (center.dat)
+    Generic data file
+``-orise`` [<.xvg>] (rise.xvg)
+    xvgr/xmgr file
+``-oradius`` [<.xvg>] (radius.xvg)
+    xvgr/xmgr file
+``-otwist`` [<.xvg>] (twist.xvg)
+    xvgr/xmgr file
+``-obending`` [<.xvg>] (bending.xvg)
+    xvgr/xmgr file
+``-otilt`` [<.xvg>] (tilt.xvg)
+    xvgr/xmgr file
+``-orot`` [<.xvg>] (rotation.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]sidechain``  (no)
+    Calculate sidechain directions relative to helix axis too.
+``-[no]incremental``  (no)
+    Calculate incremental rather than total rotation/tilt.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nsgrid_8h" kind="file">
+    <compoundname>nsgrid.h</compoundname>
+    <includes local="no">cstdio</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="domdec__box_8cpp" local="yes">src/gromacs/domdec/domdec_box.cpp</includedby>
+    <includedby refid="ns_8cpp" local="yes">src/gromacs/mdlib/ns.cpp</includedby>
+    <includedby refid="nsgrid_8cpp" local="yes">src/gromacs/mdlib/nsgrid.cpp</includedby>
+    <incdepgraph>
+      <node id="12389">
+        <label>src/gromacs/mdlib/nsgrid.h</label>
+        <link refid="nsgrid.h"/>
+        <childnode refid="12390" relation="include">
+        </childnode>
+        <childnode refid="12391" relation="include">
+        </childnode>
+      </node>
+      <node id="12391">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="12390">
+        <label>cstdio</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="12393">
+        <label>src/gromacs/domdec/domdec_box.cpp</label>
+        <link refid="domdec__box_8cpp"/>
+      </node>
+      <node id="12392">
+        <label>src/gromacs/mdlib/nsgrid.h</label>
+        <link refid="nsgrid.h"/>
+        <childnode refid="12393" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structt__grid" prot="public">t_grid</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nsgrid_8h_1a1d5ae6996091176398438fcd5d0d15d8" prot="public" static="no">
+        <name>NSGRID_SIGNAL_MOVED_FAC</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="96" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nsgrid_8h_1a484ea26353022017674edd230eaff4fb" prot="public" static="no">
+        <name>xyz2ci</name>
+        <param><defname>nry</defname></param>
+        <param><defname>nrz</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>y</defname></param>
+        <param><defname>z</defname></param>
+        <initializer>((nry)*(nrz)*(x)+(nrz)*(y)+(z))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="141" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="nsgrid_8h_1a3889d2c50cb939668af167b614aa98d7" prot="public" static="no">
+        <type>struct <ref refid="structt__grid" kindref="compound">t_grid</ref></type>
+        <definition>typedef struct t_grid  t_grid</definition>
+        <argsstring></argsstring>
+        <name>t_grid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="77" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nsgrid_8h_1ac1a9f63a0acf0ee73ceafa3ce2cabc83" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>const real GRID_STDDEV_FAC</definition>
+        <argsstring></argsstring>
+        <name>GRID_STDDEV_FAC</name>
+        <initializer>= 1.73205080757</initializer>
+        <briefdescription>
+<para>Used when estimating the interaction density. </para>        </briefdescription>
+        <detaileddescription>
+<para>GRID_STDDEV_FAC * stddev estimates the interaction density. The value sqrt(3) == 1.73205080757 gives a uniform load for a rectangular 3D block of charge groups. For a sphere, it is not a bad approximation for 4x1x1 up to 4x2x2.</para><para><xrefsect id="todo_1_todo000026"><xreftitle>Todo</xreftitle><xrefdescription><para>It would be nicer to use sqrt(3) here, when all code that includes this file is in C++, which will let us cope with the std::sqrt&lt;T&gt; on Windows. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nsgrid_8h_1ac00ac457f56a24dba27419eeaee7873b" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>const real NSGRID_STDDEV_FAC</definition>
+        <argsstring></argsstring>
+        <name>NSGRID_STDDEV_FAC</name>
+        <initializer>= 2.0</initializer>
+        <briefdescription>
+<para>The extent of the neighborsearch grid is a bit larger than sqrt(3) to account for less dense regions at the edges of the system. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="94" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nsgrid_8h_1a667890281c84bcc82a70eb0fe82d28bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+        <definition>t_grid* init_grid</definition>
+        <argsstring>(FILE *fplog, t_forcerec *fr)</argsstring>
+        <name>init_grid</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="101" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="362" bodyend="407"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a37bd4d91bd747832e0c73e32cc1ab8a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void done_grid</definition>
+        <argsstring>(t_grid *grid)</argsstring>
+        <name>done_grid</name>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="103" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="409" bodyend="428"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a97e942f80649995bc5b3378e08eb1fa5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void get_nsgrid_boundaries</definition>
+        <argsstring>(int nboundeddim, matrix box, struct gmx_domdec_t *dd, gmx_ddbox_t *ddbox, rvec *gr0, rvec *gr1, int ncg, rvec *cgcm, rvec grid_x0, rvec grid_x1, real *grid_density)</argsstring>
+        <name>get_nsgrid_boundaries</name>
+        <param>
+          <type>int</type>
+          <declname>nboundeddim</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ddbox__t" kindref="compound">gmx_ddbox_t</ref> *</type>
+          <declname>ddbox</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>gr0</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>gr1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncg</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>cgcm</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>grid_x0</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>grid_x1</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>grid_density</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="105" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="130" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a8e96f324fad5c840ca705b3fa79c217a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void grid_first</definition>
+        <argsstring>(FILE *log, t_grid *grid, struct gmx_domdec_t *dd, const gmx_ddbox_t *ddbox, matrix box, rvec izones_x0, rvec izones_x1, real rlong, real grid_density)</argsstring>
+        <name>grid_first</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__ddbox__t" kindref="compound">gmx_ddbox_t</ref> *</type>
+          <declname>ddbox</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>izones_x0</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>izones_x1</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rlong</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>grid_density</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="122" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="475" bodyend="515"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a018b75c80856ae14f4ce289c139187ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fill_grid</definition>
+        <argsstring>(struct gmx_domdec_zones_t *dd_zones, t_grid *grid, int ncg_tot, int cg0, int cg1, rvec cg_cm[])</argsstring>
+        <name>fill_grid</name>
+        <param>
+          <type>struct <ref refid="structgmx__domdec__zones__t" kindref="compound">gmx_domdec_zones_t</ref> *</type>
+          <declname>dd_zones</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncg_tot</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cg0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cg1</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>cg_cm</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="126" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="642" bodyend="812"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a37ac3d3a903e435adebb0ab0586e1e46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calc_elemnr</definition>
+        <argsstring>(t_grid *grid, int cg0, int cg1, int ncg)</argsstring>
+        <name>calc_elemnr</name>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cg0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cg1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="134" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="546" bodyend="575"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1adfa396fa6c95dc80d0f9717fd3cbaac3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calc_ptrs</definition>
+        <argsstring>(t_grid *grid)</argsstring>
+        <name>calc_ptrs</name>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="136" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="577" bodyend="605"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a3e8f760ee5accd809e5e220bb080a363" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void grid_last</definition>
+        <argsstring>(t_grid *grid, int cg0, int cg1, int ncg)</argsstring>
+        <name>grid_last</name>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cg0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cg1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="138" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="607" bodyend="640"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a1196393c38c82b16b3d05255bdca8a4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int xyz2ci_</definition>
+        <argsstring>(int nry, int nrz, int x, int y, int z)</argsstring>
+        <name>xyz2ci_</name>
+        <param>
+          <type>int</type>
+          <declname>nry</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrz</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="140" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="430" bodyend="434"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a12660e620d48c947c793a9df816bf143" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ci2xyz</definition>
+        <argsstring>(t_grid *grid, int i, int *x, int *y, int *z)</argsstring>
+        <name>ci2xyz</name>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="144" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="436" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1a1ca48ba946b296bad4b19f70a4db9317" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void check_grid</definition>
+        <argsstring>(t_grid *grid)</argsstring>
+        <name>check_grid</name>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="146" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="814" bodyend="850"/>
+      </memberdef>
+      <memberdef kind="function" id="nsgrid_8h_1ae4429dfdd43f0befbecc35eb2e98929e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_grid</definition>
+        <argsstring>(FILE *log, t_grid *grid)</argsstring>
+        <name>print_grid</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__grid" kindref="compound">t_grid</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h" line="148" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.cpp" bodystart="852" bodyend="888"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nsgrid.h"/>
+  </compounddef>
+</doxygen>

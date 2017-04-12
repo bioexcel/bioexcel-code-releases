@@ -1,0 +1,1411 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__kernel__simd__2xnn_8h" kind="file">
+    <compoundname>nbnxn_kernel_simd_2xnn.h</compoundname>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="nbnxn__pairlist_8h" local="yes">gromacs/mdlib/nbnxn_pairlist.h</includes>
+    <includes refid="interaction__const_8h" local="yes">gromacs/mdtypes/interaction_const.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJ__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJ_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJ__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJ_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJ__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJ_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombLB__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJCombLB_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombLB__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJCombLB_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombLB__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJCombLB_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJEwCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJEwCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJEwCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJEwCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJFSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJFSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJFSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJFSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJFSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJFSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJPSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJPSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJPSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJPSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJPSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEw_VdwLJPSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJ__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJ_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJ__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJ_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJ__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJ_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombLB__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombLB__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombLB__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJEwCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJEwCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJEwCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJFSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJFSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJFSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJPSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJPSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJPSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJ__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJ_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJ__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJ_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJ__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJ_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombLB__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJCombLB_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombLB__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJCombLB_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombLB__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJCombLB_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJEwCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJEwCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJEwCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJFSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJFSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJFSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJFSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJFSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJFSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJPSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJPSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJPSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJPSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJPSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTab_VdwLJPSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJ__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJ__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJ__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombLB__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombLB__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombLB__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJEwCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJEwCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJEwCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJFSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJFSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJFSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJPSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJPSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJPSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJ__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJ_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJ__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJ_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJ__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJ_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombLB__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJCombLB_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombLB__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJCombLB_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombLB__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJCombLB_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJEwCombGeom__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJEwCombGeom_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJEwCombGeom__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJEwCombGeom__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJFSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJFSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJFSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJFSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJFSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJFSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJPSw__F__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJPSw_F_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJPSw__VF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJPSw_VF_2xnn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJPSw__VgrpF__2xnn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_ElecRF_VdwLJPSw_VgrpF_2xnn.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <incdepgraph>
+      <node id="11696">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="11695">
+        <label>src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h</label>
+        <link refid="nbnxn_kernel_simd_2xnn.h"/>
+        <childnode refid="11696" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__kernel__simd__2xnn_8h_1a9b7d6358cb78ac840dea0625ec2b54f9" prot="public" static="no">
+        <name>_nbnxn_kernel_simd_include_h</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="61" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="nbnxn__kernel__simd__2xnn_8h_1a589cc102f03146fb6d1abd414af59112" prot="public" static="no">
+        <type>void(</type>
+        <definition>typedef void( nbk_func_ener)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift, real *Vvdw, real *Vc)</definition>
+        <argsstring>)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift, real *Vvdw, real *Vc)</argsstring>
+        <name>nbk_func_ener</name>
+        <briefdescription>
+<para>Typedefs for declaring kernel functions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="63" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__kernel__simd__2xnn_8h_1adb5792bd24871a27d6361bd2a1409507" prot="public" static="no">
+        <type>nbk_func_ener *</type>
+        <definition>typedef nbk_func_ener* p_nbk_func_ener</definition>
+        <argsstring></argsstring>
+        <name>p_nbk_func_ener</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="71" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__kernel__simd__2xnn_8h_1a28fe9a072227e987118a6b7551c603d9" prot="public" static="no">
+        <type>void(</type>
+        <definition>typedef void( nbk_func_noener)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift)</definition>
+        <argsstring>)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift)</argsstring>
+        <name>nbk_func_noener</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="73" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__kernel__simd__2xnn_8h_1a408e81659b24b52ec636300c8d5d6b3c" prot="public" static="no">
+        <type>nbk_func_noener *</type>
+        <definition>typedef nbk_func_noener* p_nbk_func_noener</definition>
+        <argsstring></argsstring>
+        <name>p_nbk_func_noener</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="79" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a073df5464b99c72547f3cb94f37a3cea" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="82" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a7e36e8185b1d1e50521ed8b535506b93" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJCombLB_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJCombLB_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="83" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a0af2fb8492a73ea563716cbb9fa1d85b" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJ_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJ_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="84" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1acfbd7098bb7531b0d99e913e481c005e" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJFSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJFSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="85" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1add6e6b19f34aae97153f956049add3d4" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJPSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJPSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="86" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a0fa90ec9aa02e4844834151a432d8810" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="87" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a8222f6d9d635098ec55c3bcd3981db4f" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="88" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a8403d268ec84bea167b4a191007d8988" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJCombLB_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJCombLB_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a911eb4601f1b9401fda59e19f1d61a6d" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJ_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJ_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="90" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab9f1300f2d53e5b483b808deccd45252" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJFSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJFSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="91" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a87c0c6e13670b778fd7c6e96f54970e9" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJPSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJPSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="92" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ac57112e0fe1aad8cbd74e6b95564f9df" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="93" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ac3c773bfc8be82d0086eb9e133da1955" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="94" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a8446c26ce2562e98ad4eb77dc0bc913d" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="95" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a07fdd902ff5838a508a37c12bfcbbb2a" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="96" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aac2a312c70e226f2e957c3220247d658" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="97" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a09f419b939273ac09a0e4014cbb29701" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="98" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aecfa538e5ffd3651852de4f52918661c" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="99" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1acab3ce7ac542bba6a1f9e584628b3e97" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="100" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab4f69ace9dafa4491b1440b8f28b8d74" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJCombLB_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJCombLB_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="101" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a72f5559dca26f2910840d3a1d8b78d5d" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJ_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJ_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="102" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a829bac3f968ad074920e3a60f56c5c49" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJFSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJFSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="103" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a731117d90aec453904d3876707873a7f" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJPSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJPSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="104" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ae0a16ce89d2b34d253308072d11ec112" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="105" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a64e30bb9357557733e73acd229be7c61" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="106" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1afc9accae1f0533caea33fc504029b225" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="107" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a1eb9bff2d96fe334979fa11742c5ef2e" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJ_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJ_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="108" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a1f14d7647588acefee0e29f08f4dffda" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="109" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ae947949db88b7601a3b0009e440addba" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="110" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a5444813c80575dd9a3f90053f71502dc" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VgrpF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VgrpF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="111" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aea3220caf59d1c7afea6998cbe8c19f1" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="113" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1af435bb1dd3220ea84391c5f58a162259" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJCombLB_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJCombLB_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="114" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a27c1b41eebc63690bbb3f9f2ee6c0c25" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJ_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJ_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="115" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a8f585c2b2ed91b857a287d3769840c61" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJFSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJFSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="116" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a2f399a14cc27199ef6164ee06dda8b25" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJPSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJPSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="117" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aa33581c60d5cb41b2d491c890b2b7c19" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="118" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a5b09c0568996073825923b21981dc561" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="119" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a741e7723ccd825cbe886fde78ccefede" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJCombLB_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJCombLB_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="120" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a5796caaaa8194a0e2d66f94dbce8fb3a" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJ_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJ_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="121" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a72b4748eccc36d2597d9b8a8fc1fd1fb" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJFSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJFSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="122" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aae5469524cf302aefc68aab1badf42d2" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJPSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJPSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="123" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ad0ab7f428e2e2cccfe0bff1e91dde3d2" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="124" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a429d2ee0045934efdc6656fb20acf582" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="125" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a838b9f4628f72dc8e360e26cbdca4ce2" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="126" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a02bb67c0ef4b4a5fb4f28a4d375167c5" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="127" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a46b01123c7e12ca21ad002fbadba4411" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="128" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1af8a1bd25b0c46eb85a207b5cf3317c63" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="129" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a22e97f52ddddb42054e920aaf857fd34" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="130" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ac8e86278cc687b5357f4eae577eda0b4" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="131" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ad42f195dfa49f0a4f77650cd3df83b8e" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJCombLB_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJCombLB_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="132" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a89114ce993cfac73a75c1119f3437cdf" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJ_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJ_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="133" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a68f5c7a025fb416369d544ce580753b4" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJFSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJFSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="134" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a98cfe06ede42ea5c8128596485616b29" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJPSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJPSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="135" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a2fa59f755fc27845a6d846058bd5e118" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="136" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab6c93aae5f6cc197080d656f0d0fbb7e" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="137" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a27244e972eae1214c759d9f2dc8c9c5b" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="138" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a490c75c3b84eb87de4daa248232097eb" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJ_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJ_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="139" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a8c25a7fb3665edf37ee9c3b5536adb3e" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="140" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aac13df59aae52bedc1922ba46dd93323" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="141" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1af4992050e704a839fcc1558d6e80582f" prot="public" static="no" mutable="no">
+        <type>nbk_func_ener</type>
+        <definition>nbk_func_ener nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VF_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VF_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="142" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a337a28c89260c39a724424d61b4923e0" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecRF_VdwLJCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="144" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a041990b2c39af3d71fd00876990a6b25" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecRF_VdwLJCombLB_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJCombLB_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="145" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab738b800859765b08b08772c340ae175" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecRF_VdwLJ_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJ_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="146" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ace1cfa9e13cc893cb56ae18847b256d0" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecRF_VdwLJFSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJFSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="147" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aced6f359a9ab7682c80767f79591550d" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecRF_VdwLJPSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJPSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="148" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab3fc85d9a020fbcc73294df7b057491c" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecRF_VdwLJEwCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecRF_VdwLJEwCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="149" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a633bc75e7b7351d652b2ca2e85600a05" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTab_VdwLJCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="150" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aa5d444a3110ba471f5a5c6660681b550" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTab_VdwLJCombLB_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJCombLB_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="151" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a3da250ad56c8c2255a3328c290681bbd" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTab_VdwLJ_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJ_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="152" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a6b5f46968a7c9ebdee445a9cd0855bcb" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTab_VdwLJFSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJFSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="153" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a78ebfb9c33b8abf2b3fc5d6c06c6bb07" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTab_VdwLJPSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJPSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="154" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a5587b6f850c0f78c8420dd5c4d41cbe6" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="155" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab16d721c8a13109aad62697ea642652f" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="156" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a9b512b3711e3e669926974e646117640" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="157" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a76abd93833b1e3fcffd89cc36f98527b" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="158" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1af6e1e4e37c360b7954ce079bb5c2d8d2" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="159" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a997d9bf6fdb126531e3baf94eb90861b" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="160" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a84ef53c4e83ecbf6ae828d60e780a67a" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="161" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a9ab0981cc0a66fda18fc2897ab4490fe" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEw_VdwLJCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="162" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab73acc7daf4e1ce8ce18bc78c99e0548" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEw_VdwLJCombLB_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJCombLB_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="163" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a01d65d7f6b2f902bb82488ae7731c752" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEw_VdwLJ_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJ_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="164" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a67af8f3dedabe69c1db5c2b3126db045" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEw_VdwLJFSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJFSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="165" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a8a7749098f983186f661d24a29502073" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEw_VdwLJPSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJPSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="166" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a82f50052f1b4ac2288dcc3ca2ec304fe" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEw_VdwLJEwCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEw_VdwLJEwCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="167" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1aab448a785a43d474f52b43c521a5b406" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="168" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ab57ff0b1691c4e8df9726bca8fb90a0c" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="169" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a8cbfcdb08767861530b50aadf79635d5" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEwTwinCut_VdwLJ_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJ_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="170" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1a0290fde07495131f277253729b659630" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="171" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1ad433ebad71423df5b49a750fcfe435e9" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="172" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__simd__2xnn_8h_1adb5104b67acf7a197d5b879b3892a06b" prot="public" static="no" mutable="no">
+        <type>nbk_func_noener</type>
+        <definition>nbk_func_noener nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_F_2xnn</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_F_2xnn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="173" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__kernel__simd__2xnn_8h_1ada7418a74d6db81484e57e341248a9c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_kernel_simd_2xnn</definition>
+        <argsstring>(nbnxn_pairlist_set_t *nbl_list, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, int ewald_excl, rvec *shift_vec, int force_flags, int clearF, real *fshift, real *Vc, real *Vvdw)</argsstring>
+        <name>nbnxn_kernel_simd_2xnn</name>
+        <param>
+          <type><ref refid="structnbnxn__pairlist__set__t" kindref="compound">nbnxn_pairlist_set_t</ref> *</type>
+          <declname>nbl_list</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ewald_excl</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>shift_vec</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>force_flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>clearF</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fshift</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>Vc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>Vvdw</declname>
+        </param>
+        <briefdescription>
+<para>Run-time dispatcher for nbnxn kernel functions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h" line="47" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.cpp" bodystart="265" bodyend="442"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h"/>
+  </compounddef>
+</doxygen>

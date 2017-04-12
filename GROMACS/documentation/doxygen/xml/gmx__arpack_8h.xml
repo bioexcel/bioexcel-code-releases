@@ -1,0 +1,942 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="gmx__arpack_8h" kind="file">
+    <compoundname>gmx_arpack.h</compoundname>
+    <includes local="yes">config.h</includes>
+    <includedby refid="eigensolver_8cpp" local="yes">src/gromacs/linearalgebra/eigensolver.cpp</includedby>
+    <includedby refid="gmx__arpack_8cpp" local="yes">src/gromacs/linearalgebra/gmx_arpack.cpp</includedby>
+    <incdepgraph>
+      <node id="9423">
+        <label>src/gromacs/linearalgebra/gmx_arpack.h</label>
+        <link refid="gmx_arpack.h"/>
+        <childnode refid="9424" relation="include">
+        </childnode>
+      </node>
+      <node id="9424">
+        <label>config.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dsaupd</definition>
+        <argsstring>(int *ido, const char *bmat, int *n, const char *which, int *nev, double *tol, double *resid, int *ncv, double *v, int *ldv, int *iparam, int *ipntr, double *workd, int *iwork, double *workl, int *lworkl, int *info)</argsstring>
+        <name>dsaupd</name>
+        <param>
+          <type>int *</type>
+          <declname>ido</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>bmat</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>which</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nev</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>tol</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>resid</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ncv</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ldv</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>iparam</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipntr</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>workd</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>iwork</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>workl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>lworkl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>Implicitly Restarted Arnoldi Iteration, double precision. </para>        </briefdescription>
+        <detaileddescription>
+<para>Reverse communication interface for the Implicitly Restarted Arnoldi Iteration. For symmetric problems this reduces to a variant of the Lanczos method. See the ARPACK site for details.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ido</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reverse communication flag. Set to 0 first time. Upon return with ido=-1 or ido=1 you should calculate Y=A*X and recall the routine. Return with ido=2 means Y=B*X should be calculated. ipntr[0] is the pointer in workd for X, ipntr[1] is the index for Y. Return with ido=99 means it finished. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bmat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>&apos;I&apos; for standard eigenproblem, &apos;G&apos; for generalized. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Order of eigenproblem. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>which</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Which eigenvalues to calculate. &apos;LA&apos; for largest algebraic, &apos;SA&apos; for smallest algebraic, &apos;LM&apos; for largest magnitude, &apos;SM&apos; for smallest magnitude, and finally &apos;BE&apos; (both ends) to calculate half from each end of the spectrum. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of eigenvalues to calculate. 0&lt;nev&lt;n. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance. Machine precision of it is 0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional starting residual vector at input if info=1, otherwise a random one is used. Final residual vector on return. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ncv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of columns in matrix v. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>N*NCV matrix. V contain the Lanczos basis vectors. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ldv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Leading dimension of v. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iparam</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer array, size 11. Same contents as arpack. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ipntr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer array, size 11. Points to starting locations in the workd/workl arrays. Same contents as arpack. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double precision work array, length 3*n+4. Provide the same array for all calls, and don&apos;t touch it. IMPORTANT: This is 4 units larger than standard ARPACK! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iwork</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer work array, size 80. Provide the same array for all calls, and don&apos;t touch it. IMPORTANT: New argument compared to standard ARPACK! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double precision work array, length lwork. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lworkl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the work array workl. Must be at least ncv*(ncv+8) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set info to 0 to use random initial residual vector, or to 1 if you provide a one. On output, info=0 means normal exit, 1 that max number of iterations was reached, and 3 that no shifts could be applied. Negative numbers correspond to errors in the arguments provided. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.h" line="103" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.cpp" bodystart="2205" bodyend="2375"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__arpack_8h_1aab6c14c639569f6bf80e7226979cb514" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dseupd</definition>
+        <argsstring>(int *rvec, const char *howmny, int *select, double *d, double *z, int *ldz, double *sigma, const char *bmat, int *n, const char *which, int *nev, double *tol, double *resid, int *ncv, double *v, int *ldv, int *iparam, int *ipntr, double *workd, double *workl, int *lworkl, int *info)</argsstring>
+        <name>dseupd</name>
+        <param>
+          <type>int *</type>
+          <declname>rvec</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>howmny</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>select</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ldz</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>sigma</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>bmat</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>which</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nev</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>tol</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>resid</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ncv</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ldv</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>iparam</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipntr</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>workd</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>workl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>lworkl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>Get eigenvalues/vectors after Arnoldi iteration, double prec. </para>        </briefdescription>
+        <detaileddescription>
+<para>See the ARPACK site for details. You must have finished the interative part with <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> before calling this function.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rvec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1 if you want eigenvectors, 0 if not. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>howmny</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>&apos;A&apos; if you want all nvec vectors, &apos;S&apos; if you provide a subset selection in select[]. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer array, dimension nev. Indices of the eigenvectors to calculate. Fortran code means we start counting on 1. This array must be given even in howmny is &apos;A&apos;. (Arpack documentation is wrong on this). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double precision array, length nev. Eigenvalues. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double precision array, n*nev. Eigenvectors. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ldz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Leading dimension of z. Normally n. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sigma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shift if iparam[6] is 3,4, or 5. Ignored otherwise. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bmat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>which</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ncv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ldv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iparam</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ipntr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Double precision work array, length lwork. The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lworkl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1aede26434dc7f4a1ae472eca9d5b7bf65" kindref="member">dsaupd()</ref> </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.h" line="162" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.cpp" bodystart="2380" bodyend="2903"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ssaupd</definition>
+        <argsstring>(int *ido, const char *bmat, int *n, const char *which, int *nev, float *tol, float *resid, int *ncv, float *v, int *ldv, int *iparam, int *ipntr, float *workd, int *iwork, float *workl, int *lworkl, int *info)</argsstring>
+        <name>ssaupd</name>
+        <param>
+          <type>int *</type>
+          <declname>ido</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>bmat</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>which</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nev</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>tol</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>resid</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ncv</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ldv</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>iparam</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipntr</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>workd</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>iwork</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>workl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>lworkl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>Implicitly Restarted Arnoldi Iteration, single precision. </para>        </briefdescription>
+        <detaileddescription>
+<para>Reverse communication interface for the Implicitly Restarted Arnoldi Iteration. For symmetric problems this reduces to a variant of the Lanczos method. See the ARPACK site for details.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ido</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reverse communication flag. Set to 0 first time. Upon return with ido=-1 or ido=1 you should calculate Y=A*X and recall the routine. Return with ido=2 means Y=B*X should be calculated. ipntr[0] is the pointer in workd for X, ipntr[1] is the index for Y. Return with ido=99 means it finished. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bmat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>&apos;I&apos; for standard eigenproblem, &apos;G&apos; for generalized. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Order of eigenproblem. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>which</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Which eigenvalues to calculate. &apos;LA&apos; for largest algebraic, &apos;SA&apos; for smallest algebraic, &apos;LM&apos; for largest magnitude, &apos;SM&apos; for smallest magnitude, and finally &apos;BE&apos; (both ends) to calculate half from each end of the spectrum. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of eigenvalues to calculate. 0&lt;nev&lt;n. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance. Machine precision of it is 0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional starting residual vector at input if info=1, otherwise a random one is used. Final residual vector on return. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ncv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of columns in matrix v. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>N*NCV matrix. V contain the Lanczos basis vectors. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ldv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Leading dimension of v. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iparam</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer array, size 11. Same contents as arpack. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ipntr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer array, size 11. Points to starting locations in the workd/workl arrays. Same contents as arpack. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Single precision work array, length 3*n+4. Provide the same array for all calls, and don&apos;t touch it. IMPORTANT: This is 4 units larger than standard ARPACK! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iwork</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer work array, size 80. Provide the same array for all calls, and don&apos;t touch it. IMPORTANT: New argument compared to standard ARPACK! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Single precision work array, length lwork. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lworkl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the work array workl. Must be at least ncv*(ncv+8) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Set info to 0 to use random initial residual vector, or to 1 if you provide a one. On output, info=0 means normal exit, 1 that max number of iterations was reached, and 3 that no shifts could be applied. Negative numbers correspond to errors in the arguments provided. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.h" line="234" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.cpp" bodystart="5069" bodyend="5239"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__arpack_8h_1a1668396ba652a4be77f878975e99fa41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void sseupd</definition>
+        <argsstring>(int *rvec, const char *howmny, int *select, float *d, float *z, int *ldz, float *sigma, const char *bmat, int *n, const char *which, int *nev, float *tol, float *resid, int *ncv, float *v, int *ldv, int *iparam, int *ipntr, float *workd, float *workl, int *lworkl, int *info)</argsstring>
+        <name>sseupd</name>
+        <param>
+          <type>int *</type>
+          <declname>rvec</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>howmny</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>select</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ldz</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>sigma</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>bmat</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>which</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nev</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>tol</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>resid</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ncv</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ldv</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>iparam</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ipntr</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>workd</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>workl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>lworkl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>Get eigenvalues/vectors after Arnoldi iteration, single prec. </para>        </briefdescription>
+        <detaileddescription>
+<para>See the ARPACK site for details. You must have finished the interative part with <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> before calling this function.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rvec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1 if you want eigenvectors, 0 if not. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>howmny</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>&apos;A&apos; if you want all nvec vectors, &apos;S&apos; if you provide a subset selection in select[]. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>select</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer array, dimension nev. Indices of the eigenvectors to calculate. Fortran code means we start counting on 1. This array must be given even in howmny is &apos;A&apos;. (Arpack documentation is wrong on this). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Single precision array, length nev. Eigenvalues. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>z</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Single precision array, n*nev. Eigenvectors. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ldz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Leading dimension of z. Normally n. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sigma</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shift if iparam[6] is 3,4, or 5. Ignored otherwise. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bmat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>which</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ncv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ldv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iparam</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ipntr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>workl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Single precision work array, length lwork. The array must not be touched between the two function calls! </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lworkl</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Provide the same argument as you did to <ref refid="gmx__arpack_8h_1adcff1a34c0aa4423d0e2922192724cd1" kindref="member">ssaupd()</ref> </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.h" line="295" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.cpp" bodystart="5244" bodyend="5767"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Selected routines from ARPACK. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para>This file contains a subset of ARPACK functions to perform diagonalization and SVD for sparse matrices in Gromacs.</para><para>Consult the main ARPACK site for detailed documentation: <ulink url="http://www.caam.rice.edu/software/ARPACK/">http://www.caam.rice.edu/software/ARPACK/</ulink></para><para>Below, we just list the options and any specific differences from ARPACK. The code is essentially the same, but the routines have been made thread-safe by using extra workspace arrays. </para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/gmx_arpack.h"/>
+  </compounddef>
+</doxygen>

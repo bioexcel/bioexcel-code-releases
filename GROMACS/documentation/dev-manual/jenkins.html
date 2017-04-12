@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Understanding Jenkins builds &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Development-time tools" href="tools.html" />
+    <link rel="next" title="releng repository" href="releng/index.html" />
+    <link rel="prev" title="Using Doxygen" href="doxygen.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="releng/index.html" title="releng repository"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="doxygen.html" title="Using Doxygen"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" accesskey="U">Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="understanding-jenkins-builds">
+<h1>Understanding Jenkins builds<a class="headerlink" href="#understanding-jenkins-builds" title="Permalink to this headline">¶</a></h1>
+<p>This page documents what different Jenkins builds actually run from the
+GROMACS source tree.  The purpose is two-fold:</p>
+<ul class="simple">
+<li>Provide information on how to interpret Jenkins failures and how to run the
+same tasks locally to diagnose issues (in most cases, referring to the
+special targets described in <a class="reference internal" href="build-system.html"><span class="doc">Build system overview</span></a>).</li>
+<li>Provide information on what changes in the build system (or other parts of
+the repository) need special care to not break Jenkins builds.</li>
+</ul>
+<p>Separate page documents how to interact with the Jenkins UI for these builds:
+<a class="reference internal" href="releng/jenkins-ui.html"><span class="doc">Interacting with builds in Jenkins</span></a>.
+<a class="reference internal" href="releng/jenkins-howto.html"><span class="doc">How to do common things with Jenkins builds</span></a> has information on how to do common things with
+Jenkins builds.</p>
+<div class="section" id="pre-submit-verification">
+<h2>Pre-submit verification<a class="headerlink" href="#pre-submit-verification" title="Permalink to this headline">¶</a></h2>
+<p>The following builds are triggered for each patch set uploaded to Gerrit.</p>
+<div class="section" id="compilation-and-tests">
+<h3>Compilation and tests<a class="headerlink" href="#compilation-and-tests" title="Permalink to this headline">¶</a></h3>
+<p>The main build compiles GROMACS with different configurations and runs the
+tests.  The configurations used for Jenkins verification are specified in
+<code class="file docutils literal"><span class="pre">admin/builds/pre-submit-matrix.txt</span></code>.</p>
+<p>The exact build sequence can be found in <code class="file docutils literal"><span class="pre">admin/builds/gromacs.py</span></code>,
+including the logic that translates the build options in the matrix file to
+CMake options.</p>
+</div>
+<div class="section" id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
+<p>This build builds various types of documentation:</p>
+<ul class="simple">
+<li>PDF reference manual using LaTeX</li>
+<li>Doxygen documentation extracted from the source code</li>
+<li>Set of HTML pages containing an installation guide, a user guide, and a
+developer guide, as well as links to the above.  This set of HTML pages can
+be browsed from Jenkins.</li>
+<li>Man pages</li>
+<li>INSTALL text file</li>
+</ul>
+<p>The last three require building the <code class="file docutils literal"><span class="pre">gmx</span></code> binary and running it, so
+compilation failures will also show in this build.
+All log files that contain warnings are archived as artifacts in the build, and
+presence of any warnings marks the build unstable.  Brief description of which
+part failed is reported back to Gerrit.</p>
+<p>Additionally, the build runs some source code checks that rely on the Doxygen
+documentation.  See the description of the <code class="docutils literal"><span class="pre">check-source</span></code> target in
+<a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a>.</p>
+<p><a class="reference internal" href="doxygen.html"><span class="doc">Using Doxygen</span></a> provides general guidelines for Doxygen usage, which can be
+helpful in understanding and solving Doxygen warnings and some of the
+<code class="docutils literal"><span class="pre">check-source</span></code> issues.
+<a class="reference internal" href="includestyle.html"><span class="doc">Guidelines for #include directives</span></a> provides guidelines for #include order and style, which is
+another part of <code class="docutils literal"><span class="pre">check-source</span></code> checks.</p>
+<p>The exact build sequence is in <code class="file docutils literal"><span class="pre">admin/builds/documentation.py</span></code>.
+See that file for details of what it exactly builds and how.  Most changes in the
+documentation build system will require changes in this script, but Jenkins
+configuration should be more static.</p>
+</div>
+<div class="section" id="clang-static-analysis">
+<h3>clang static analysis<a class="headerlink" href="#clang-static-analysis" title="Permalink to this headline">¶</a></h3>
+<p>The file <code class="file docutils literal"><span class="pre">admin/builds/clang-analyzer.py</span></code> specifies the exact build
+sequence and the CMake cache variables used for clang static analysis.  This
+file also specifies the clang version used for the analysis, as well as the C++
+compiler used (<code class="docutils literal"><span class="pre">clang-static-analyzer-&lt;version&gt;</span></code>).</p>
+<p>To run the analysis outside Jenkins, you should run both <code class="docutils literal"><span class="pre">cmake</span></code> and <code class="docutils literal"><span class="pre">make</span></code>
+under <code class="docutils literal"><span class="pre">scan-build</span></code> command using the same CMake cache variables as in the
+build script. When you do the initial CMake configuration with <code class="docutils literal"><span class="pre">scan-build</span></code>,
+it sets the C++ compiler to the analyzer. Note that using <code class="docutils literal"><span class="pre">scan-build</span></code> like
+this will also analyze C code, but Jenkins ignores C code for analysis. This
+can result in extra warnings, which can be suppressed by manually setting
+CMAKE_C_COMPILER to a value other than Clang static analyzer.</p>
+</div>
+<div class="section" id="cppcheck">
+<h3>cppcheck<a class="headerlink" href="#cppcheck" title="Permalink to this headline">¶</a></h3>
+<p>This build runs the <strong class="command">cppcheck</strong> static analysis tool.  Any issues found
+mark the build unstable, and can be browsed in Jenkins.</p>
+<p>It runs <strong class="command">cmake</strong> to generate the build system, and then builds the
+<code class="docutils literal"><span class="pre">cppcheck</span></code> target.  Nothing is compiled by this target, it only runs
+<strong class="command">cppcheck</strong> for the designated source files.  The CMake configuration
+options do not affect the set of files checked, but they do affect the checked
+code through <code class="file docutils literal"><span class="pre">config.h</span></code> and such.</p>
+<p>The exact build sequence and the CMake configuration used is in
+<code class="file docutils literal"><span class="pre">admin/builds/cppcheck.py</span></code>.</p>
+</div>
+<div class="section" id="uncrustify">
+<h3>uncrustify<a class="headerlink" href="#uncrustify" title="Permalink to this headline">¶</a></h3>
+<p>This build checks the source code for formatting such as consistent indentation
+and use of braces, as well as for copyright headers.  See <a class="reference internal" href="formatting.html"><span class="doc">Guidelines for code formatting</span></a> for
+the guidelines that are enforced.</p>
+<p>The exact build sequence is in <code class="file docutils literal"><span class="pre">admin/builds/uncrustify.py</span></code>, which
+essentially just runs</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">admin</span><span class="o">/</span><span class="n">uncrustify</span><span class="o">.</span><span class="n">sh</span> <span class="n">check</span> <span class="o">--</span><span class="n">rev</span><span class="o">=</span><span class="n">HEAD</span><span class="o">^</span>
+</pre></div>
+</div>
+<p>If the any changes are required, the build is marked unstable.
+If the script completely fails (should be rare), the build fails.
+A file with issues found by the script is archived as an artifact in the build,
+and a summary is reported back to Gerrit (or the actual issues if there are
+only a few).
+See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for more details on uncrustify and on scripts to run it.</p>
+</div>
+</div>
+<div class="section" id="on-demand-builds">
+<h2>On-demand builds<a class="headerlink" href="#on-demand-builds" title="Permalink to this headline">¶</a></h2>
+<p>These builds can be triggered on request for certain changes in Gerrit, or
+manually from Jenkins.  See <a class="reference internal" href="releng/jenkins-ui.html#releng-triggering-builds"><span class="std std-ref">Triggering builds</span></a> for details on
+how to trigger these.</p>
+<div class="section" id="coverage">
+<h3>Coverage<a class="headerlink" href="#coverage" title="Permalink to this headline">¶</a></h3>
+<p>This build compiles one configuration of GROMACS with instrumentation for
+coverage, runs the tests, and produces a coverage report using gcovr.
+The report can be browsed on Jenkins.</p>
+<p>The exact build sequence is in <code class="file docutils literal"><span class="pre">admin/builds/coverage.py</span></code>, including
+specification of the configuration tested.</p>
+</div>
+<div class="section" id="source-tarball">
+<h3>Source tarball<a class="headerlink" href="#source-tarball" title="Permalink to this headline">¶</a></h3>
+<p>This build creates the source tarball for distribution.  Some of the content
+that is put into the tarball is generated by executing the <strong class="command">gmx</strong>
+binary, so this build also compiles the source code (with a minimal set of
+options).</p>
+<p>The build compiles the code and those targets that generate content necessary
+for the tarball, followed by building the <code class="docutils literal"><span class="pre">package_source</span></code> target.
+After that, it just generates a file that is used by other builds.</p>
+<p>The exact build sequence is in <code class="file docutils literal"><span class="pre">admin/builds/source-package.py</span></code>.</p>
+</div>
+<div class="section" id="release-workflow">
+<h3>Release workflow<a class="headerlink" href="#release-workflow" title="Permalink to this headline">¶</a></h3>
+<p>This build creates source and regressiontest tarballs, builds, installs, and
+tests a few configuration using those, and builds documentation to be placed on
+the documentation web site for a new release.  The set of configurations tested
+is specified in <code class="file docutils literal"><span class="pre">admin/builds/release-matrix.txt</span></code>.</p>
+<p>The exact build sequence is desribed in <a class="reference internal" href="releng/workflow.html#releng-workflow-release"><span class="std std-ref">Build &amp; test release tarballs</span></a>.
+The build uses the source tarball build as a subbuild, and parts of the build
+are executed using <code class="file docutils literal"><span class="pre">admin/builds/gromacs.py</span></code> and
+<code class="file docutils literal"><span class="pre">admin/builds/documentation.py</span></code>.</p>
+<p><code class="file docutils literal"><span class="pre">admin/builds/get-version-info.py</span></code> is used for getting the version
+information from the source tree as part of this workflow.</p>
+<p><code class="file docutils literal"><span class="pre">admin/builds/update-regtest-hash.py</span></code> has logic to update the
+regressiontests tarball MD5 sum for the released tarball automatically.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Understanding Jenkins builds</a><ul>
+<li><a class="reference internal" href="#pre-submit-verification">Pre-submit verification</a><ul>
+<li><a class="reference internal" href="#compilation-and-tests">Compilation and tests</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#clang-static-analysis">clang static analysis</a></li>
+<li><a class="reference internal" href="#cppcheck">cppcheck</a></li>
+<li><a class="reference internal" href="#uncrustify">uncrustify</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#on-demand-builds">On-demand builds</a><ul>
+<li><a class="reference internal" href="#coverage">Coverage</a></li>
+<li><a class="reference internal" href="#source-tarball">Source tarball</a></li>
+<li><a class="reference internal" href="#release-workflow">Release workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="doxygen.html"
+                        title="previous chapter">Using Doxygen</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="releng/index.html"
+                        title="next chapter">releng repository</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/jenkins.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="releng/index.html" title="releng repository"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="doxygen.html" title="Using Doxygen"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

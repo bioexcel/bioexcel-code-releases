@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structgmx_1_1internal_1_1highBitCounter" kind="struct" prot="public">
+    <compoundname>gmx::internal::highBitCounter</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structgmx_1_1internal_1_1highBitCounter_1aa92dbb586dab873a2da64a9bd7f32d6f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class UIntType</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>words</declname>
+            <defname>words</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>highBits</declname>
+            <defname>highBits</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static bool gmx::internal::highBitCounter::checkAndClear</definition>
+        <argsstring>(std::array&lt; UIntType, words &gt; *ctr)</argsstring>
+        <name>checkAndClear</name>
+        <param>
+          <type>std::array&lt; UIntType, words &gt; *</type>
+          <declname>ctr</declname>
+        </param>
+        <briefdescription>
+<para>Clear highBits higest bits of ctr, return false if they were non-zero. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function clears the space required for the internal counters, and returns true if they were correctly zero when calling, false otherwise.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>UIntType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer type to use for each word in counter </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>words</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of UIntType words in counter </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>highBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bits to check. The template parameter makes it possible to optimize this extensively at compile time. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to counter to check and clear. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="116" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="116" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="structgmx_1_1internal_1_1highBitCounter_1a3ab528a4ef17d801a541680224920a64" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class UIntType</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>words</declname>
+            <defname>words</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>highBits</declname>
+            <defname>highBits</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void gmx::internal::highBitCounter::increment</definition>
+        <argsstring>(std::array&lt; UIntType, words &gt; *ctr)</argsstring>
+        <name>increment</name>
+        <param>
+          <type>std::array&lt; UIntType, words &gt; *</type>
+          <declname>ctr</declname>
+        </param>
+        <briefdescription>
+<para>Increment the internal counter in highBits by one. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>UIntType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer type to use for each word in counter </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>words</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of UIntType words in counter </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>highBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bits reserved for the internal counter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the counter value to increment.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if internal counter space is exhausted.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This routine will work across the word boundaries for any number of internal counter bits that fits in the total counter. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="160" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="160" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="structgmx_1_1internal_1_1highBitCounter_1a45bbbca6727482625ceae7117d3334d9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class UIntType</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>words</declname>
+            <defname>words</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>highBits</declname>
+            <defname>highBits</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void gmx::internal::highBitCounter::increment</definition>
+        <argsstring>(std::array&lt; UIntType, words &gt; *ctr, UIntType addend)</argsstring>
+        <name>increment</name>
+        <param>
+          <type>std::array&lt; UIntType, words &gt; *</type>
+          <declname>ctr</declname>
+        </param>
+        <param>
+          <type>UIntType</type>
+          <declname>addend</declname>
+        </param>
+        <briefdescription>
+<para>Increment the internal counter in highBits by a value. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>UIntType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Integer type to use for each word in counter </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>words</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of UIntType words in counter </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>highBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bits reserved for the internal counter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the counter to increment. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>addend</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value to add to internal.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if internal counter space is exhausted.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This routine will work across the word boundaries for any number of internal counter bits that fits in the total counter. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="241" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="241" bodyend="281"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="102" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="100" bodyend="282"/>
+    <listofallmembers>
+      <member refid="structgmx_1_1internal_1_1highBitCounter_1aa92dbb586dab873a2da64a9bd7f32d6f" prot="public" virt="non-virtual"><scope>gmx::internal::highBitCounter</scope><name>checkAndClear</name></member>
+      <member refid="structgmx_1_1internal_1_1highBitCounter_1a3ab528a4ef17d801a541680224920a64" prot="public" virt="non-virtual"><scope>gmx::internal::highBitCounter</scope><name>increment</name></member>
+      <member refid="structgmx_1_1internal_1_1highBitCounter_1a45bbbca6727482625ceae7117d3334d9" prot="public" virt="non-virtual"><scope>gmx::internal::highBitCounter</scope><name>increment</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

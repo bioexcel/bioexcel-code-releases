@@ -1,0 +1,1420 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__grid_8cpp" kind="file">
+    <compoundname>nbnxn_grid.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="nbnxn__grid_8h" local="yes">nbnxn_grid.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="domdec__struct_8h" local="yes">gromacs/domdec/domdec_struct.h</includes>
+    <includes refid="utilities_8h" local="yes">gromacs/math/utilities.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__atomdata_8h" local="yes">gromacs/mdlib/nbnxn_atomdata.h</includes>
+    <includes refid="nbnxn__consts_8h" local="yes">gromacs/mdlib/nbnxn_consts.h</includes>
+    <includes refid="nbnxn__internal_8h" local="yes">gromacs/mdlib/nbnxn_internal.h</includes>
+    <includes refid="nbnxn__search_8h" local="yes">gromacs/mdlib/nbnxn_search.h</includes>
+    <includes refid="nbnxn__util_8h" local="yes">gromacs/mdlib/nbnxn_util.h</includes>
+    <includes refid="simd_8h" local="yes">gromacs/simd/simd.h</includes>
+    <includes refid="vector__operations_8h" local="yes">gromacs/simd/vector_operations.h</includes>
+    <includes refid="exceptions_8h" local="yes">gromacs/utility/exceptions.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <incdepgraph>
+      <node id="11300">
+        <label>stdarg.h</label>
+      </node>
+      <node id="11318">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="11276">
+        <label>assert.h</label>
+      </node>
+      <node id="11297">
+        <label>impl_reference_simd4_float.h</label>
+        <link refid="impl__reference__simd4__float_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11295" relation="include">
+        </childnode>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+        <childnode refid="11296" relation="include">
+        </childnode>
+        <childnode refid="11292" relation="include">
+        </childnode>
+      </node>
+      <node id="11287">
+        <label>gromacs/simd/simd.h</label>
+        <link refid="simd_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11289" relation="include">
+        </childnode>
+        <childnode refid="11286" relation="include">
+        </childnode>
+        <childnode refid="11291" relation="include">
+        </childnode>
+        <childnode refid="11305" relation="include">
+        </childnode>
+        <childnode refid="11307" relation="include">
+        </childnode>
+        <childnode refid="11309" relation="include">
+        </childnode>
+      </node>
+      <node id="11308">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11286" relation="include">
+        </childnode>
+      </node>
+      <node id="11288">
+        <label>cstdint</label>
+      </node>
+      <node id="11320">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="11321" relation="include">
+        </childnode>
+        <childnode refid="11282" relation="include">
+        </childnode>
+      </node>
+      <node id="11299">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="11300" relation="include">
+        </childnode>
+        <childnode refid="11301" relation="include">
+        </childnode>
+        <childnode refid="11282" relation="include">
+        </childnode>
+      </node>
+      <node id="11293">
+        <label>impl_reference_general.h</label>
+        <link refid="impl__reference__general_8h"/>
+        <childnode refid="11282" relation="include">
+        </childnode>
+      </node>
+      <node id="11283">
+        <label>stdint.h</label>
+      </node>
+      <node id="11274">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="11278">
+        <label>cmath</label>
+      </node>
+      <node id="11295">
+        <label>cassert</label>
+      </node>
+      <node id="11314">
+        <label>string</label>
+      </node>
+      <node id="11292">
+        <label>impl_reference_definitions.h</label>
+        <link refid="impl__reference__definitions_8h"/>
+      </node>
+      <node id="11280">
+        <label>gromacs/domdec/domdec_struct.h</label>
+        <link refid="domdec__struct_8h"/>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11282" relation="include">
+        </childnode>
+        <childnode refid="11285" relation="include">
+        </childnode>
+        <childnode refid="11286" relation="include">
+        </childnode>
+      </node>
+      <node id="11303">
+        <label>impl_reference_util_double.h</label>
+        <link refid="impl__reference__util__double_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11295" relation="include">
+        </childnode>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+        <childnode refid="11292" relation="include">
+        </childnode>
+        <childnode refid="11298" relation="include">
+        </childnode>
+      </node>
+      <node id="11313">
+        <label>exception</label>
+      </node>
+      <node id="11321">
+        <label>stddef.h</label>
+      </node>
+      <node id="11298">
+        <label>impl_reference_simd_double.h</label>
+        <link refid="impl__reference__simd__double_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11295" relation="include">
+        </childnode>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+        <childnode refid="11296" relation="include">
+        </childnode>
+        <childnode refid="11299" relation="include">
+        </childnode>
+        <childnode refid="11292" relation="include">
+        </childnode>
+        <childnode refid="11302" relation="include">
+        </childnode>
+      </node>
+      <node id="11311">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="11312" relation="include">
+        </childnode>
+        <childnode refid="11306" relation="include">
+        </childnode>
+        <childnode refid="11313" relation="include">
+        </childnode>
+        <childnode refid="11290" relation="include">
+        </childnode>
+        <childnode refid="11314" relation="include">
+        </childnode>
+        <childnode refid="11315" relation="include">
+        </childnode>
+        <childnode refid="11316" relation="include">
+        </childnode>
+        <childnode refid="11317" relation="include">
+        </childnode>
+        <childnode refid="11282" relation="include">
+        </childnode>
+        <childnode refid="11289" relation="include">
+        </childnode>
+        <childnode refid="11318" relation="include">
+        </childnode>
+        <childnode refid="11319" relation="include">
+        </childnode>
+      </node>
+      <node id="11273">
+        <label>src/gromacs/mdlib/nbnxn_grid.cpp</label>
+        <link refid="nbnxn_grid.cpp"/>
+        <childnode refid="11274" relation="include">
+        </childnode>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11276" relation="include">
+        </childnode>
+        <childnode refid="11277" relation="include">
+        </childnode>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+        <childnode refid="11280" relation="include">
+        </childnode>
+        <childnode refid="11287" relation="include">
+        </childnode>
+        <childnode refid="11310" relation="include">
+        </childnode>
+        <childnode refid="11311" relation="include">
+        </childnode>
+        <childnode refid="11320" relation="include">
+        </childnode>
+      </node>
+      <node id="11286">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="11277">
+        <label>string.h</label>
+      </node>
+      <node id="11312">
+        <label>cstdio</label>
+      </node>
+      <node id="11319">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="11282" relation="include">
+        </childnode>
+        <childnode refid="11318" relation="include">
+        </childnode>
+      </node>
+      <node id="11317">
+        <label>vector</label>
+      </node>
+      <node id="11304">
+        <label>impl_reference_util_float.h</label>
+        <link refid="impl__reference__util__float_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11295" relation="include">
+        </childnode>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+        <childnode refid="11292" relation="include">
+        </childnode>
+        <childnode refid="11302" relation="include">
+        </childnode>
+      </node>
+      <node id="11296">
+        <label>array</label>
+      </node>
+      <node id="11305">
+        <label>gromacs/simd/scalar/scalar.h</label>
+        <link refid="scalar_8h"/>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11306" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+      </node>
+      <node id="11289">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="11290" relation="include">
+        </childnode>
+      </node>
+      <node id="11302">
+        <label>impl_reference_simd_float.h</label>
+        <link refid="impl__reference__simd__float_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11295" relation="include">
+        </childnode>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+        <childnode refid="11296" relation="include">
+        </childnode>
+        <childnode refid="11292" relation="include">
+        </childnode>
+      </node>
+      <node id="11291">
+        <label>impl_reference/impl_reference.h</label>
+        <link refid="impl__reference_8h"/>
+        <childnode refid="11292" relation="include">
+        </childnode>
+        <childnode refid="11293" relation="include">
+        </childnode>
+        <childnode refid="11294" relation="include">
+        </childnode>
+        <childnode refid="11297" relation="include">
+        </childnode>
+        <childnode refid="11298" relation="include">
+        </childnode>
+        <childnode refid="11302" relation="include">
+        </childnode>
+        <childnode refid="11303" relation="include">
+        </childnode>
+        <childnode refid="11304" relation="include">
+        </childnode>
+      </node>
+      <node id="11306">
+        <label>cstdlib</label>
+      </node>
+      <node id="11281">
+        <label>cstddef</label>
+      </node>
+      <node id="11294">
+        <label>impl_reference_simd4_double.h</label>
+        <link refid="impl__reference__simd4__double_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11295" relation="include">
+        </childnode>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11281" relation="include">
+        </childnode>
+        <childnode refid="11288" relation="include">
+        </childnode>
+        <childnode refid="11279" relation="include">
+        </childnode>
+        <childnode refid="11296" relation="include">
+        </childnode>
+        <childnode refid="11292" relation="include">
+        </childnode>
+      </node>
+      <node id="11282">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="11283" relation="include">
+        </childnode>
+        <childnode refid="11284" relation="include">
+        </childnode>
+      </node>
+      <node id="11307">
+        <label>gromacs/simd/scalar/scalar_math.h</label>
+        <link refid="scalar__math_8h"/>
+        <childnode refid="11278" relation="include">
+        </childnode>
+        <childnode refid="11308" relation="include">
+        </childnode>
+        <childnode refid="11305" relation="include">
+        </childnode>
+      </node>
+      <node id="11309">
+        <label>gromacs/simd/scalar/scalar_util.h</label>
+        <link refid="scalar__util_8h"/>
+        <childnode refid="11278" relation="include">
+        </childnode>
+      </node>
+      <node id="11315">
+        <label>type_traits</label>
+      </node>
+      <node id="11275">
+        <label>config.h</label>
+      </node>
+      <node id="11279">
+        <label>algorithm</label>
+      </node>
+      <node id="11285">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+      </node>
+      <node id="11310">
+        <label>gromacs/simd/vector_operations.h</label>
+        <link refid="vector__operations_8h"/>
+        <childnode refid="11275" relation="include">
+        </childnode>
+        <childnode refid="11287" relation="include">
+        </childnode>
+      </node>
+      <node id="11301">
+        <label>stdio.h</label>
+      </node>
+      <node id="11290">
+        <label>memory</label>
+      </node>
+      <node id="11284">
+        <label>inttypes.h</label>
+      </node>
+      <node id="11316">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__grid_8cpp_1af13e2775977421d5c3cfed9a3c92e76d" prot="public" static="no">
+        <name>SORT_GRID_OVERSIZE</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="263" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__grid_8cpp_1a0d5b0f1643aa8d993de112f2c3809df2" prot="public" static="no">
+        <name>SGSF</name>
+        <initializer>(SORT_GRID_OVERSIZE + 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="264" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__grid_8cpp_1a513a996c822d396b251e1ae55c651190" prot="public" static="no">
+        <name>R2F_D</name>
+        <param><defname>x</defname></param>
+        <initializer>(x)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="412" column="10" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="412" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__grid_8cpp_1ac30d85f536832474a80c24071bbbce4b" prot="public" static="no">
+        <name>R2F_U</name>
+        <param><defname>x</defname></param>
+        <initializer>(x)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="413" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="413" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1acc9baee0eb5ee7a74a5b41e8c4c07211" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void nbnxn_grid_init</definition>
+        <argsstring>(nbnxn_grid_t *grid)</argsstring>
+        <name>nbnxn_grid_init</name>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="66" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="66" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a75cc5fdf57d49b187f6b801d0f269d5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_grids_init</definition>
+        <argsstring>(nbnxn_search_t nbs, int ngrid)</argsstring>
+        <name>nbnxn_grids_init</name>
+        <param>
+          <type><ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ngrid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="76" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="76" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a0e6ddf2bcd0e5ecb414bf2ee2cd3ab71" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real grid_atom_density</definition>
+        <argsstring>(int n, rvec corner0, rvec corner1)</argsstring>
+        <name>grid_atom_density</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>corner0</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>corner1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="89" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1ae83204d2c14fd407474e352208a8d042" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int set_grid_size_xy</definition>
+        <argsstring>(const nbnxn_search_t nbs, nbnxn_grid_t *grid, int dd_zone, int n, rvec corner0, rvec corner1, real atom_density)</argsstring>
+        <name>set_grid_size_xy</name>
+        <param>
+          <type>const <ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dd_zone</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>corner0</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>corner1</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>atom_density</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="104" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="104" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a23ec780d15bf35a364a9bd1109684352" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sort_atoms</definition>
+        <argsstring>(int dim, gmx_bool Backwards, int dd_zone, int *a, int n, rvec *x, real h0, real invh, int n_per_h, int *sort)</argsstring>
+        <name>sort_atoms</name>
+        <param>
+          <type>int</type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>Backwards</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dd_zone</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>h0</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invh</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n_per_h</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>sort</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="275" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="275" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1ac95f6a7f872bce97aad7438336af326e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_bounding_box</definition>
+        <argsstring>(int na, int stride, const real *x, nbnxn_bb_t *bb)</argsstring>
+        <name>calc_bounding_box</name>
+        <param>
+          <type>int</type>
+          <declname>na</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="417" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="417" bodyend="447"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a10b0397cb2d29e3756da818cd5dc3e4b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_bounding_box_x_x4</definition>
+        <argsstring>(int na, const real *x, nbnxn_bb_t *bb)</argsstring>
+        <name>calc_bounding_box_x_x4</name>
+        <param>
+          <type>int</type>
+          <declname>na</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="450" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="450" bodyend="476"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a39a340ae44e789cf24ab4ec6a881bfd9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_bounding_box_x_x8</definition>
+        <argsstring>(int na, const real *x, nbnxn_bb_t *bb)</argsstring>
+        <name>calc_bounding_box_x_x8</name>
+        <param>
+          <type>int</type>
+          <declname>na</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="479" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="479" bodyend="505"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1af9cddaa05a0426ab73e2ec1dc5102395" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_bounding_box_x_x4_halves</definition>
+        <argsstring>(int na, const real *x, nbnxn_bb_t *bb, nbnxn_bb_t *bbj)</argsstring>
+        <name>calc_bounding_box_x_x4_halves</name>
+        <param>
+          <type>int</type>
+          <declname>na</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bbj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="508" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="508" bodyend="547"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a30c4e34289d2b52819436a04d1a7159b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_bounding_box_xxxx</definition>
+        <argsstring>(int na, int stride, const real *x, float *bb)</argsstring>
+        <name>calc_bounding_box_xxxx</name>
+        <param>
+          <type>int</type>
+          <declname>na</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>stride</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>bb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="552" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="552" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a7a84d47f852fd82f56fa072836ec9e51" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_bounding_box_simd4</definition>
+        <argsstring>(int na, const float *x, nbnxn_bb_t *bb)</argsstring>
+        <name>calc_bounding_box_simd4</name>
+        <param>
+          <type>int</type>
+          <declname>na</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="589" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="589" bodyend="609"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1aa7271b3304a6b14bf7d45586779bf002" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_bounding_box_xxxx_simd4</definition>
+        <argsstring>(int na, const float *x, nbnxn_bb_t *bb_work_aligned, real *bb)</argsstring>
+        <name>calc_bounding_box_xxxx_simd4</name>
+        <param>
+          <type>int</type>
+          <declname>na</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb_work_aligned</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>bb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="612" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="612" bodyend="624"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a2a07854daf64fc7d93e2c3d14ae10723" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void combine_bounding_box_pairs</definition>
+        <argsstring>(nbnxn_grid_t *grid, const nbnxn_bb_t *bb)</argsstring>
+        <name>combine_bounding_box_pairs</name>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="630" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="630" bodyend="673"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1aa51e684eee8b3dd5bf4c3f76f07fe5ec" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void print_bbsizes_simple</definition>
+        <argsstring>(FILE *fp, const nbnxn_grid_t *grid)</argsstring>
+        <name>print_bbsizes_simple</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="677" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="677" bodyend="702"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a2bb764315bf5f7f49324d7f9a2610889" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void print_bbsizes_supersub</definition>
+        <argsstring>(FILE *fp, const nbnxn_grid_t *grid)</argsstring>
+        <name>print_bbsizes_supersub</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="705" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="705" bodyend="753"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a8f2074e942fade8abcef29af33f3d886" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sort_cluster_on_flag</definition>
+        <argsstring>(int natoms_cluster, int a0, int a1, const int *atinfo, int *order, int *flags)</argsstring>
+        <name>sort_cluster_on_flag</name>
+        <param>
+          <type>int</type>
+          <declname>natoms_cluster</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>atinfo</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>order</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="758" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="758" bodyend="826"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a4077164b5eaf7dda05044b3c45258fec" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void fill_cell</definition>
+        <argsstring>(const nbnxn_search_t nbs, nbnxn_grid_t *grid, nbnxn_atomdata_t *nbat, int a0, int a1, const int *atinfo, const rvec *x, nbnxn_bb_t *bb_work_aligned)</argsstring>
+        <name>fill_cell</name>
+        <param>
+          <type>const <ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>atinfo</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__bb__t" kindref="compound">nbnxn_bb_t</ref> *</type>
+          <declname>bb_work_aligned</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="831" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="831" bodyend="965"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1affa8ab33425c2e7675b9fdeaad86fcd4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sort_columns_simple</definition>
+        <argsstring>(const nbnxn_search_t nbs, int dd_zone, nbnxn_grid_t *grid, int a0, int a1, const int *atinfo, rvec *x, nbnxn_atomdata_t *nbat, int cxy_start, int cxy_end, int *sort_work)</argsstring>
+        <name>sort_columns_simple</name>
+        <param>
+          <type>const <ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dd_zone</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>atinfo</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cxy_start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cxy_end</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>sort_work</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="968" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="968" bodyend="1031"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a1d9b6b772a27063929f2f7028248662c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sort_columns_supersub</definition>
+        <argsstring>(const nbnxn_search_t nbs, int dd_zone, nbnxn_grid_t *grid, int a0, int a1, const int *atinfo, rvec *x, nbnxn_atomdata_t *nbat, int cxy_start, int cxy_end, int *sort_work)</argsstring>
+        <name>sort_columns_supersub</name>
+        <param>
+          <type>const <ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dd_zone</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>atinfo</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cxy_start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cxy_end</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>sort_work</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1034" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1034" bodyend="1141"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a888369731c4fe7c384caf8cf7d4ad2d2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_column_indices</definition>
+        <argsstring>(nbnxn_grid_t *grid, int a0, int a1, rvec *x, int dd_zone, const int *move, int thread, int nthread, int *cell, int *cxy_na)</argsstring>
+        <name>calc_column_indices</name>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dd_zone</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>move</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nthread</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>cell</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>cxy_na</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1144" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1144" bodyend="1233"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1af77875878b91f18983901eeda746d00b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_cell_indices</definition>
+        <argsstring>(const nbnxn_search_t nbs, int dd_zone, nbnxn_grid_t *grid, int a0, int a1, const int *atinfo, rvec *x, const int *move, nbnxn_atomdata_t *nbat)</argsstring>
+        <name>calc_cell_indices</name>
+        <param>
+          <type>const <ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dd_zone</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__grid__t" kindref="compound">nbnxn_grid_t</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>atinfo</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>move</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1236" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1236" bodyend="1410"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1ae81c745695c22690cd61e93a633cfa50" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void init_buffer_flags</definition>
+        <argsstring>(nbnxn_buffer_flags_t *flags, int natoms)</argsstring>
+        <name>init_buffer_flags</name>
+        <param>
+          <type><ref refid="structnbnxn__buffer__flags__t" kindref="compound">nbnxn_buffer_flags_t</ref> *</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1412" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1412" bodyend="1425"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1acfa5ff2cb35195fa80f864a54282cae9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_put_on_grid</definition>
+        <argsstring>(nbnxn_search_t nbs, int ePBC, matrix box, int dd_zone, rvec corner0, rvec corner1, int a0, int a1, real atom_density, const int *atinfo, rvec *x, int nmoved, int *move, int nb_kernel_type, nbnxn_atomdata_t *nbat)</argsstring>
+        <name>nbnxn_put_on_grid</name>
+        <param>
+          <type><ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dd_zone</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>corner0</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>corner1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>atom_density</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>atinfo</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nmoved</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>move</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nb_kernel_type</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1431" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1431" bodyend="1545"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1addd3ae510ca8bd638cafc9c81a1daca8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_put_on_grid_nonlocal</definition>
+        <argsstring>(nbnxn_search_t nbs, const struct gmx_domdec_zones_t *zones, const int *atinfo, rvec *x, int nb_kernel_type, nbnxn_atomdata_t *nbat)</argsstring>
+        <name>nbnxn_put_on_grid_nonlocal</name>
+        <param>
+          <type><ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structgmx__domdec__zones__t" kindref="compound">gmx_domdec_zones_t</ref> *</type>
+          <declname>zones</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>atinfo</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nb_kernel_type</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1548" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1548" bodyend="1576"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a6a398b6e9f0487bf53550d1112f82c84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_grid_add_simple</definition>
+        <argsstring>(nbnxn_search_t nbs, nbnxn_atomdata_t *nbat)</argsstring>
+        <name>nbnxn_grid_add_simple</name>
+        <param>
+          <type><ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1579" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1579" bodyend="1671"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1aa277352c264a8bd3271e9cc1258b76fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_get_ncells</definition>
+        <argsstring>(nbnxn_search_t nbs, int *ncx, int *ncy)</argsstring>
+        <name>nbnxn_get_ncells</name>
+        <param>
+          <type><ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ncx</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ncy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1673" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1673" bodyend="1677"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a11b335939ca10a6291d643df6823ace8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_get_atomorder</definition>
+        <argsstring>(const nbnxn_search_t nbs, const int **a, int *n)</argsstring>
+        <name>nbnxn_get_atomorder</name>
+        <param>
+          <type>const <ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <param>
+          <type>const int **</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1679" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1679" bodyend="1689"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__grid_8cpp_1a7f73f7cced5e2cc1f2ccbf67fedab08d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_set_atomorder</definition>
+        <argsstring>(nbnxn_search_t nbs)</argsstring>
+        <name>nbnxn_set_atomorder</name>
+        <param>
+          <type><ref refid="structnbnxn__search" kindref="compound">nbnxn_search_t</ref></type>
+          <declname>nbs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" line="1691" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp" bodystart="1691" bodyend="1712"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_grid.cpp"/>
+  </compounddef>
+</doxygen>

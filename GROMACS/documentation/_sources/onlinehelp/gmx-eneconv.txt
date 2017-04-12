@@ -1,0 +1,84 @@
+.. _gmx eneconv:
+
+gmx eneconv
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx eneconv [:strong:`-f` :emphasis:`[<.edr> [...]]`] [:strong:`-o` :emphasis:`[<.edr>]`] [:strong:`-b` :emphasis:`<real>`] [:strong:`-e` :emphasis:`<real>`]
+                [:strong:`-dt` :emphasis:`<real>`] [:strong:`-offset` :emphasis:`<real>`] [:strong:`-[no]settime`] [:strong:`-[no]sort`]
+                [:strong:`-[no]rmdh`] [:strong:`-scalefac` :emphasis:`<real>`] [:strong:`-[no]error`]
+
+Description
+-----------
+
+With *multiple files* specified for the ``-f`` option:
+
+Concatenates several energy files in sorted order.
+In the case of double time frames, the one
+in the later file is used. By specifying ``-settime`` you will be
+asked for the start time of each file. The input files are taken
+from the command line,
+such that the command ``gmx eneconv -f *.edr -o fixed.edr`` should do
+the trick.
+
+With *one file* specified for ``-f``:
+
+Reads one energy file and writes another, applying the ``-dt``,
+``-offset``, ``-t0`` and ``-settime`` options and
+converting to a different format if necessary (indicated by file
+extentions).
+
+``-settime`` is applied first, then ``-dt``/``-offset``
+followed by ``-b`` and ``-e`` to select which frames to write.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.edr> [...]] (ener.edr)
+    Energy file
+
+Options to specify output files:
+
+``-o`` [<.edr>] (fixed.edr)
+    Energy file
+
+Other options:
+
+``-b`` <real> (-1)
+    First time to use
+``-e`` <real> (-1)
+    Last time to use
+``-dt`` <real> (0)
+    Only write out frame when t MOD dt = offset
+``-offset`` <real> (0)
+    Time offset for ``-dt`` option
+``-[no]settime``  (no)
+    Change starting time interactively
+``-[no]sort``  (yes)
+    Sort energy files (not frames)
+``-[no]rmdh``  (no)
+    Remove free energy block data
+``-scalefac`` <real> (1)
+    Multiply energy component by this factor
+``-[no]error``  (yes)
+    Stop on errors in the file
+
+Known Issues
+------------
+
+* When combining trajectories the sigma and E^2 (necessary for statistics) are not updated correctly. Only the actual energy is correct. One thus has to compute statistics in another way.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

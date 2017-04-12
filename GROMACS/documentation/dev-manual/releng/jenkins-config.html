@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Jenkins configuration &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../../index.html" />
+    <link rel="up" title="releng repository" href="index.html" />
+    <link rel="next" title="Interacting with builds in Jenkins" href="jenkins-ui.html" />
+    <link rel="prev" title="releng Python API" href="releng-api.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jenkins-ui.html" title="Interacting with builds in Jenkins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="releng-api.html" title="releng Python API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">releng repository</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jenkins-configuration">
+<h1>Jenkins configuration<a class="headerlink" href="#jenkins-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="job-configuration">
+<h2>Job configuration<a class="headerlink" href="#job-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Configuration for Jenkins projects that use the releng scripts are described here.</p>
+<div class="section" id="general-configuration">
+<h3>General configuration<a class="headerlink" href="#general-configuration" title="Permalink to this headline">¶</a></h3>
+<p>SCM checkout configuration:</p>
+<ul class="simple">
+<li>Jenkins SCM configuration should be used to check out the repository from where the
+build is triggered as a subdirectory of the workspace, with the same name as
+the repository.  This is necessary for the Git Plugin to show reasonable
+change lists for the builds etc., although the build in reality always starts
+from the releng repository.  In a workflow build, this checkout can be done
+in the workflow script.</li>
+<li>The build script always needs to check out the <code class="file docutils literal"><span class="pre">releng</span></code> repository if it did
+not trigger the build, and start the build from there.</li>
+<li>The releng script will check out remaining repositories if necessary.</li>
+<li>Various <code class="docutils literal"><span class="pre">*_REFSPEC</span></code> environment variables (see
+<a class="reference internal" href="releng.html#releng-input-env-vars"><span class="std std-ref">Input environment variables</span></a>) need to be set in one way or another (see below
+for the suggested approach with build parameters).</li>
+</ul>
+<p>In SCM poll jobs it is possible to simply set the various environment variables
+to static values using a properties file in &#8220;Prepare environment for the run&#8221;
+(<code class="docutils literal"><span class="pre">CHECKOUT_PROJECT</span></code> and the various <code class="docutils literal"><span class="pre">*_REFSPEC</span></code> variables).  Note that the
+SCM checkout behavior cannot use <code class="docutils literal"><span class="pre">CHECKOUT_PROJECT</span></code> in the git address,
+because the injected variables are not available for SCM polling.</p>
+</div>
+<div class="section" id="build-parameters">
+<h3>Build parameters<a class="headerlink" href="#build-parameters" title="Permalink to this headline">¶</a></h3>
+<p>To create a build that allows both intuitive parameterized builds with given
+refspecs and Gerrit Trigger builds, the following configuration is recommended:</p>
+<ul>
+<li><p class="first">Use <code class="docutils literal"><span class="pre">GROMACS_REFSPEC</span></code>, <code class="docutils literal"><span class="pre">RELENG_REFSPEC</span></code>, and <code class="docutils literal"><span class="pre">REGRESSIONTESTS_REFSPEC</span></code>
+as build parameters, with <code class="docutils literal"><span class="pre">refs/heads/master</span></code> (or another branch ref) as
+the default.</p>
+</li>
+<li><p class="first">Use &#8220;Prepare environment for the run&#8221; and the following Groovy script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>if (!binding.variables.containsKey(&#39;GERRIT_PROJECT&#39;)) {
+  return [CHECKOUT_PROJECT: &#39;gromacs&#39;, CHECKOUT_REFSPEC: GROMACS_REFSPEC]
+} else {
+  return [CHECKOUT_PROJECT: GERRIT_PROJECT, CHECKOUT_REFSPEC: GERRIT_REFSPEC]
+}
+</pre></div>
+</div>
+</li>
+<li><p class="first">Configure all SCM checkout behaviors to use <code class="docutils literal"><span class="pre">CHECKOUT_PROJECT</span></code> and
+<code class="docutils literal"><span class="pre">CHECKOUT_REFSPEC</span></code>.</p>
+</li>
+</ul>
+<p>To create a build that works as expected in all corner cases when triggered
+from a workflow job, the following configuration is recommended:</p>
+<ul>
+<li><p class="first">Create additional string parameters <code class="docutils literal"><span class="pre">GROMACS_HASH</span></code>, <code class="docutils literal"><span class="pre">RELENG_HASH</span></code>, and
+<code class="docutils literal"><span class="pre">REGRESSIONTESTS_HASH</span></code> with empty default values.</p>
+</li>
+<li><p class="first">Create a string parameter <code class="docutils literal"><span class="pre">CHECKOUT_PROJECT</span></code>, with the default value
+<code class="docutils literal"><span class="pre">gromacs</span></code> (or another repository that you want to see in Changes section
+for manually triggered builds).</p>
+</li>
+<li><p class="first">Use the following Groovy script for injecting environment variables:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="p">[</span><span class="n">CHECKOUT_REFSPEC</span><span class="p">:</span> <span class="n">binding</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="s2">&quot;${CHECKOUT_PROJECT.toUpperCase()}_REFSPEC&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If you also need to support directly triggering the build with Gerrit
+Trigger, you need a slightly more complicated script, but in most cases, it
+should be the workflow job that is triggered with Gerrit Trigger.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="normal-matrix-builds">
+<h3>Normal/matrix builds<a class="headerlink" href="#normal-matrix-builds" title="Permalink to this headline">¶</a></h3>
+<p>Builds that call run_build() should use the following post-build steps:</p>
+<ul class="simple">
+<li>The job should check the console output for the string &#8220;FAILED&#8221; and mark the
+build unstable if this is found.</li>
+<li>The job should use <code class="file docutils literal"><span class="pre">logs/unsuccessful-reason.log</span></code> as the &#8220;Unsuccessful
+Message File&#8221; for the Gerrit Trigger plugin.
+TODO: How to best handle this for matrix builds (or other types of
+multi-configuration builds)</li>
+<li>The job should archive all <code class="file docutils literal"><span class="pre">.log</span></code> files from <code class="file docutils literal"><span class="pre">logs/</span></code>.  Note that
+the build should be configured not to fail if there is nothing to archive if
+all the logs are conditionally produced.</li>
+<li>The job can check various log files under <code class="file docutils literal"><span class="pre">logs/</span><em><span class="pre">category</span></em><span class="pre">/</span></code> for
+warnings; the general design is that all logs from a certain category are
+checked using the same warning parser.</li>
+</ul>
+<p>The build script in Jenkins will look something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shlex</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># For builds not triggered by Gerrit Trigger, the conditional is not</span>
+<span class="c1"># necessary.</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;CHECKOUT_PROJECT&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;releng&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="s1">&#39;releng&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;releng&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;releng&#39;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;init&#39;</span><span class="p">])</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="s1">&#39;ssh://jenkins@gerrit.gromacs.org/releng.git&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;RELENG_REFSPEC&#39;</span><span class="p">]])</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;checkout&#39;</span><span class="p">,</span> <span class="s1">&#39;-qf&#39;</span><span class="p">,</span> <span class="s1">&#39;FETCH_HEAD&#39;</span><span class="p">])</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;clean&#39;</span><span class="p">,</span> <span class="s1">&#39;-ffdxq&#39;</span><span class="p">])</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;gc&#39;</span><span class="p">])</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;releng&#39;</span><span class="p">))</span>
+<span class="kn">import</span> <span class="nn">releng</span>
+
+<span class="c1"># For non-matrix builds, opts can be a hard-coded list (or possibly None).</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OPTIONS&#39;</span><span class="p">])</span>
+<span class="n">releng</span><span class="o">.</span><span class="n">run_build</span><span class="p">(</span><span class="s1">&#39;gromacs&#39;</span><span class="p">,</span> <span class="n">releng</span><span class="o">.</span><span class="n">JobType</span><span class="o">.</span><span class="n">GERRIT</span><span class="p">,</span> <span class="n">opts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The script checks out the <code class="file docutils literal"><span class="pre">releng</span></code> repository to a <code class="file docutils literal"><span class="pre">releng/</span></code>
+subdirectory of the workspace if not already checked out, imports the
+<code class="file docutils literal"><span class="pre">releng</span></code> package and runs run_build() with arguments identifying which
+build script to run, and options that affect how the build is done.
+<code class="docutils literal"><span class="pre">shlex.split()</span></code> is necessary to be able to pass quoted arguments with spaces
+to options such as <code class="docutils literal"><span class="pre">gmxtest+</span></code>.</p>
+<p>For matrix builds not triggered with a dynamic matrix (see below), the build
+host can be selected with a <code class="docutils literal"><span class="pre">host=</span></code> or a <code class="docutils literal"><span class="pre">label=</span></code> option that is
+automatically ignored by run_build().</p>
+<p>run_build() will first check out the <code class="file docutils literal"><span class="pre">gromacs</span></code> repository to a
+<code class="file docutils literal"><span class="pre">gromacs/</span></code> subdirectory of the workspace, and then execute a script from
+<code class="file docutils literal"><span class="pre">gromacs/admin/builds/</span></code>, selected based on the first argument.
+If necessary, it will also check out the regression tests.
+If the script exits with a non-zero exit code, the build fails.</p>
+<p>The folder structure in the build workspace looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$WORKSPACE/
+  releng/
+  gromacs/
+  [regressiontests/]
+  logs/
+    [unsuccessful-reason.log]
+    [&lt;category&gt;/]*
+</pre></div>
+</div>
+</div>
+<div class="section" id="workflow-builds">
+<h3>Workflow builds<a class="headerlink" href="#workflow-builds" title="Permalink to this headline">¶</a></h3>
+<p>Workflow builds should use a bootstrapping script like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">script</span>
+<span class="n">node</span><span class="p">(</span><span class="s1">&#39;pipeline-general&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">def</span> <span class="nf">checkout_refspec</span> <span class="o">=</span> <span class="n">RELENG_REFSPEC</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">binding</span><span class="o">.</span><span class="n">variables</span><span class="o">.</span><span class="n">containsKey</span><span class="p">(</span><span class="s1">&#39;GERRIT_PROJECT&#39;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">GERRIT_PROJECT</span> <span class="o">==</span> <span class="s1">&#39;releng&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">checkout_refspec</span> <span class="o">=</span> <span class="n">GERRIT_REFSPEC</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">sh</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">        set -e</span>
+<span class="s2">        mkdir -p releng</span>
+<span class="s2">        cd releng</span>
+<span class="s2">        git init</span>
+<span class="s2">        git fetch ssh://jenkins@gerrit.gromacs.org/releng.git $</span><span class="si">{checkout_refspec}</span><span class="s2"></span>
+<span class="s2">        git checkout -qf FETCH_HEAD</span>
+<span class="s2">        git clean -ffdxq</span>
+<span class="s2">        git gc</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">stripIndent</span><span class="p">()</span>
+    <span class="n">script</span> <span class="o">=</span> <span class="n">load</span> <span class="s1">&#39;releng/workflow/&lt;workflow-name&gt;.groovy&#39;</span>
+    <span class="o">&lt;</span><span class="n">possible</span> <span class="n">additional</span> <span class="n">calls</span> <span class="k">as</span> <span class="n">needed</span> <span class="n">by</span> <span class="n">the</span> <span class="n">workflow</span><span class="o">&gt;</span>
+<span class="p">}</span>
+<span class="n">script</span><span class="o">.</span><span class="n">doBuild</span><span class="p">(</span><span class="o">&lt;</span><span class="n">possible</span> <span class="n">additional</span> <span class="n">parameters</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where expressions in angle brackets depend on the workflow.
+The workflow script will take care of most other tasks; the Jenkins
+configuration may only need to specify some build parameters (typically,
+<code class="docutils literal"><span class="pre">GROMACS_REFSPEC</span></code> etc., as for normal builds) and the possible build triggers.</p>
+</div>
+</div>
+<div class="section" id="jenkins-plugins">
+<h2>Jenkins plugins<a class="headerlink" href="#jenkins-plugins" title="Permalink to this headline">¶</a></h2>
+<p>The following Jenkins plugins are used in GROMACS builds:</p>
+<p>TODO</p>
+</div>
+<div class="section" id="build-slave-labels">
+<h2>Build slave labels<a class="headerlink" href="#build-slave-labels" title="Permalink to this headline">¶</a></h2>
+<p>The following labels on the Jenkins build slaves are currently used to allocate
+builds to slaves:</p>
+<dl class="docutils">
+<dt>pipeline-master</dt>
+<dd>Used to run general steps in workflow jobs that do not do any lengthy
+processing (except for source code checkouts).  These could in principle run
+anywhere, but limiting them to a subset of the nodes reduces the number of
+workspaces used.  This reduces disk space use, and each time a new workspace
+is created, the initial checkout takes quite a bit of time.</dd>
+<dt>clang-static-analyzer-X.Y</dt>
+<dd>Used to run clang static analysis builds.  The build is dynamically allocated
+using a version-specific label, based on what is specified in the
+<code class="file docutils literal"><span class="pre">clang-analyzer.py</span></code> build script in the source repository.</dd>
+<dt>cppcheck</dt>
+<dd>Used to run cppcheck builds.  For now, there is no version specification: all
+used versions of cppcheck must be installed on each node.</dd>
+<dt>doxygen</dt>
+<dd>Used to run documentation builds.  In addition to Doxygen, also other tools
+needed by the documentation build (Sphinx, Latex) need to be installed here.
+Also the source packaging builds use this label, since they need Sphinx.</dd>
+<dt>linux</dt>
+<dd>Used for regression test packaging builds to get a uniform enough environment.</dd>
+<dt>windows</dt>
+<dd>Should not be currently used, but has been used to restrict Unix-specific
+things in workflows to not run on Windows slaves.</dd>
+</dl>
+<p>In other cases, slaves are explicitly assigned to a node.  Multi-configuration
+builds are currently assigned to nodes based on information in
+<code class="file docutils literal"><span class="pre">slaves.py</span></code>, not on labels configured in Jenkins.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Jenkins configuration</a><ul>
+<li><a class="reference internal" href="#job-configuration">Job configuration</a><ul>
+<li><a class="reference internal" href="#general-configuration">General configuration</a></li>
+<li><a class="reference internal" href="#build-parameters">Build parameters</a></li>
+<li><a class="reference internal" href="#normal-matrix-builds">Normal/matrix builds</a></li>
+<li><a class="reference internal" href="#workflow-builds">Workflow builds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#jenkins-plugins">Jenkins plugins</a></li>
+<li><a class="reference internal" href="#build-slave-labels">Build slave labels</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="releng-api.html"
+                        title="previous chapter">releng Python API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jenkins-ui.html"
+                        title="next chapter">Interacting with builds in Jenkins</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/dev-manual/releng/jenkins-config.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="jenkins-ui.html" title="Interacting with builds in Jenkins"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="releng-api.html" title="releng Python API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >releng repository</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

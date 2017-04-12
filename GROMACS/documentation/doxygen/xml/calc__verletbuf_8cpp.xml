@@ -1,0 +1,556 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="calc__verletbuf_8cpp" kind="file">
+    <compoundname>calc_verletbuf.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="calc__verletbuf_8h" local="yes">calc_verletbuf.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="calculate-ewald-splitting-coefficient_8h" local="yes">gromacs/math/calculate-ewald-splitting-coefficient.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__simd_8h" local="yes">gromacs/mdlib/nbnxn_simd.h</includes>
+    <includes refid="nbnxn__util_8h" local="yes">gromacs/mdlib/nbnxn_util.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="ifunc_8h" local="yes">gromacs/topology/ifunc.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <incdepgraph>
+      <node id="10343">
+        <label>stdarg.h</label>
+      </node>
+      <node id="10330">
+        <label>assert.h</label>
+      </node>
+      <node id="10336">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="10332" relation="include">
+        </childnode>
+        <childnode refid="10337" relation="include">
+        </childnode>
+        <childnode refid="10335" relation="include">
+        </childnode>
+      </node>
+      <node id="10337">
+        <label>cstdint</label>
+      </node>
+      <node id="10345">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="10346" relation="include">
+        </childnode>
+        <childnode refid="10339" relation="include">
+        </childnode>
+      </node>
+      <node id="10342">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="10343" relation="include">
+        </childnode>
+        <childnode refid="10344" relation="include">
+        </childnode>
+        <childnode refid="10339" relation="include">
+        </childnode>
+      </node>
+      <node id="10340">
+        <label>stdint.h</label>
+      </node>
+      <node id="10331">
+        <label>stdlib.h</label>
+      </node>
+      <node id="10328">
+        <label>src/gromacs/mdlib/calc_verletbuf.cpp</label>
+        <link refid="calc_verletbuf.cpp"/>
+        <childnode refid="10329" relation="include">
+        </childnode>
+        <childnode refid="10330" relation="include">
+        </childnode>
+        <childnode refid="10331" relation="include">
+        </childnode>
+        <childnode refid="10332" relation="include">
+        </childnode>
+        <childnode refid="10333" relation="include">
+        </childnode>
+        <childnode refid="10334" relation="include">
+        </childnode>
+        <childnode refid="10336" relation="include">
+        </childnode>
+        <childnode refid="10338" relation="include">
+        </childnode>
+        <childnode refid="10342" relation="include">
+        </childnode>
+        <childnode refid="10345" relation="include">
+        </childnode>
+      </node>
+      <node id="10329">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="10332">
+        <label>cmath</label>
+      </node>
+      <node id="10346">
+        <label>stddef.h</label>
+      </node>
+      <node id="10335">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="10338">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="10339" relation="include">
+        </childnode>
+      </node>
+      <node id="10339">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="10340" relation="include">
+        </childnode>
+        <childnode refid="10341" relation="include">
+        </childnode>
+      </node>
+      <node id="10333">
+        <label>algorithm</label>
+      </node>
+      <node id="10344">
+        <label>stdio.h</label>
+      </node>
+      <node id="10334">
+        <label>gromacs/math/calculate-ewald-splitting-coefficient.h</label>
+        <link refid="calculate-ewald-splitting-coefficient_8h"/>
+        <childnode refid="10335" relation="include">
+        </childnode>
+      </node>
+      <node id="10341">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structatom__nonbonded__kinetic__prop__t" prot="public">atom_nonbonded_kinetic_prop_t</innerclass>
+    <innerclass refid="structverletbuf__atomtype__t" prot="public">verletbuf_atomtype_t</innerclass>
+    <innerclass refid="structpot__derivatives__t" prot="public">pot_derivatives_t</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a0730129eb57f845b6e4dc2405e4eda8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void verletbuf_get_list_setup</definition>
+        <argsstring>(gmx_bool bSIMD, gmx_bool bGPU, verletbuf_list_setup_t *list_setup)</argsstring>
+        <name>verletbuf_get_list_setup</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bSIMD</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bGPU</declname>
+        </param>
+        <param>
+          <type><ref refid="structverletbuf__list__setup__t" kindref="compound">verletbuf_list_setup_t</ref> *</type>
+          <declname>list_setup</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="124" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="124" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1ae750008fa628a60b71158bea5cb8ad8c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>static gmx_bool atom_nonbonded_kinetic_prop_equal</definition>
+        <argsstring>(const atom_nonbonded_kinetic_prop_t *prop1, const atom_nonbonded_kinetic_prop_t *prop2)</argsstring>
+        <name>atom_nonbonded_kinetic_prop_equal</name>
+        <param>
+          <type>const <ref refid="structatom__nonbonded__kinetic__prop__t" kindref="compound">atom_nonbonded_kinetic_prop_t</ref> *</type>
+          <declname>prop1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structatom__nonbonded__kinetic__prop__t" kindref="compound">atom_nonbonded_kinetic_prop_t</ref> *</type>
+          <declname>prop2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="166" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="166" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a792402132c8a2799dc9bee490a7edf49" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void add_at</definition>
+        <argsstring>(verletbuf_atomtype_t **att_p, int *natt_p, const atom_nonbonded_kinetic_prop_t *prop, int nmol)</argsstring>
+        <name>add_at</name>
+        <param>
+          <type><ref refid="structverletbuf__atomtype__t" kindref="compound">verletbuf_atomtype_t</ref> **</type>
+          <declname>att_p</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>natt_p</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structatom__nonbonded__kinetic__prop__t" kindref="compound">atom_nonbonded_kinetic_prop_t</ref> *</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nmol</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="177" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="177" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a774335e219800e3da77359c06bf2723a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void get_vsite_masses</definition>
+        <argsstring>(const gmx_moltype_t *moltype, const gmx_ffparams_t *ffparams, real *vsite_m, int *n_nonlin_vsite)</argsstring>
+        <name>get_vsite_masses</name>
+        <param>
+          <type>const <ref refid="structgmx__moltype__t" kindref="compound">gmx_moltype_t</ref> *</type>
+          <declname>moltype</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__ffparams__t" kindref="compound">gmx_ffparams_t</ref> *</type>
+          <declname>ffparams</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>vsite_m</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n_nonlin_vsite</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="212" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="212" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a621c060597b67b01e43948516ba266e2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void get_verlet_buffer_atomtypes</definition>
+        <argsstring>(const gmx_mtop_t *mtop, verletbuf_atomtype_t **att_p, int *natt_p, int *n_nonlin_vsite)</argsstring>
+        <name>get_verlet_buffer_atomtypes</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structverletbuf__atomtype__t" kindref="compound">verletbuf_atomtype_t</ref> **</type>
+          <declname>att_p</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>natt_p</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n_nonlin_vsite</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="339" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="339" bodyend="469"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a3ad8b6096e3faa4700714c29fa85d18b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void constrained_atom_sigma2</definition>
+        <argsstring>(real kT_fac, const atom_nonbonded_kinetic_prop_t *prop, real *sigma2_2d, real *sigma2_3d)</argsstring>
+        <name>constrained_atom_sigma2</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>kT_fac</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structatom__nonbonded__kinetic__prop__t" kindref="compound">atom_nonbonded_kinetic_prop_t</ref> *</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigma2_2d</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigma2_3d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="482" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="482" bodyend="545"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a68f0dbba235ab09761ca2a1a14939fac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void get_atom_sigma2</definition>
+        <argsstring>(real kT_fac, const atom_nonbonded_kinetic_prop_t *prop, real *sigma2_2d, real *sigma2_3d)</argsstring>
+        <name>get_atom_sigma2</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>kT_fac</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structatom__nonbonded__kinetic__prop__t" kindref="compound">atom_nonbonded_kinetic_prop_t</ref> *</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigma2_2d</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigma2_3d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="547" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="547" bodyend="563"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a82dd40cdde1d2abdefa7b3eed5927659" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void approx_2dof</definition>
+        <argsstring>(real s2, real x, real *shift, real *scale)</argsstring>
+        <name>approx_2dof</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>s2</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>shift</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="565" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="565" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a09e4f1891ba0fc5c9bcec64e7f349eb8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real energyDriftAtomPair</definition>
+        <argsstring>(const atom_nonbonded_kinetic_prop_t *prop_i, const atom_nonbonded_kinetic_prop_t *prop_j, real s2, real s2i_2d, real s2j_2d, real r_buffer, const pot_derivatives_t *der)</argsstring>
+        <name>energyDriftAtomPair</name>
+        <param>
+          <type>const <ref refid="structatom__nonbonded__kinetic__prop__t" kindref="compound">atom_nonbonded_kinetic_prop_t</ref> *</type>
+          <declname>prop_i</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structatom__nonbonded__kinetic__prop__t" kindref="compound">atom_nonbonded_kinetic_prop_t</ref> *</type>
+          <declname>prop_j</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>s2</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>s2i_2d</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>s2j_2d</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>r_buffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structpot__derivatives__t" kindref="compound">pot_derivatives_t</ref> *</type>
+          <declname>der</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="586" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="586" bodyend="663"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a723cf826a46de3917ea2a0669edbe8bd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real energyDrift</definition>
+        <argsstring>(const verletbuf_atomtype_t *att, int natt, const gmx_ffparams_t *ffp, real kT_fac, const pot_derivatives_t *ljDisp, const pot_derivatives_t *ljRep, const pot_derivatives_t *elec, real rlj, real rcoulomb, real rlist, real boxvol)</argsstring>
+        <name>energyDrift</name>
+        <param>
+          <type>const <ref refid="structverletbuf__atomtype__t" kindref="compound">verletbuf_atomtype_t</ref> *</type>
+          <declname>att</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natt</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__ffparams__t" kindref="compound">gmx_ffparams_t</ref> *</type>
+          <declname>ffp</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>kT_fac</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structpot__derivatives__t" kindref="compound">pot_derivatives_t</ref> *</type>
+          <declname>ljDisp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structpot__derivatives__t" kindref="compound">pot_derivatives_t</ref> *</type>
+          <declname>ljRep</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structpot__derivatives__t" kindref="compound">pot_derivatives_t</ref> *</type>
+          <declname>elec</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rlj</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rcoulomb</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rlist</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>boxvol</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="665" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="665" bodyend="749"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1a9ac48fa8c251b73fc69bde82d0d9a81f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real surface_frac</definition>
+        <argsstring>(int cluster_size, real particle_distance, real rlist)</argsstring>
+        <name>surface_frac</name>
+        <param>
+          <type>int</type>
+          <declname>cluster_size</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>particle_distance</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rlist</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="751" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="751" bodyend="800"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1ab0ecf002e55ccbe0049c0602ca230d0c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real md3_force_switch</definition>
+        <argsstring>(real p, real rswitch, real rc)</argsstring>
+        <name>md3_force_switch</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rswitch</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="805" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="805" bodyend="820"/>
+      </memberdef>
+      <memberdef kind="function" id="calc__verletbuf_8cpp_1ae319742aec29207ab8dc56df5389be61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calc_verlet_buffer_size</definition>
+        <argsstring>(const gmx_mtop_t *mtop, real boxvol, const t_inputrec *ir, real reference_temperature, const verletbuf_list_setup_t *list_setup, int *n_nonlin_vsite, real *rlist)</argsstring>
+        <name>calc_verlet_buffer_size</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>boxvol</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>reference_temperature</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structverletbuf__list__setup__t" kindref="compound">verletbuf_list_setup_t</ref> *</type>
+          <declname>list_setup</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n_nonlin_vsite</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>rlist</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" line="822" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp" bodystart="822" bodyend="1143"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/calc_verletbuf.cpp"/>
+  </compounddef>
+</doxygen>

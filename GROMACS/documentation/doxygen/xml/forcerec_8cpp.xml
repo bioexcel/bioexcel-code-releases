@@ -1,0 +1,1921 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="forcerec_8cpp" kind="file">
+    <compoundname>forcerec.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="mdlib_2forcerec_8h" local="yes">forcerec.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="filenm_8h" local="yes">gromacs/commandline/filenm.h</includes>
+    <includes refid="domdec_8h" local="yes">gromacs/domdec/domdec.h</includes>
+    <includes refid="domdec__struct_8h" local="yes">gromacs/domdec/domdec_struct.h</includes>
+    <includes refid="ewald_8h" local="yes">gromacs/ewald/ewald.h</includes>
+    <includes refid="filetypes_8h" local="yes">gromacs/fileio/filetypes.h</includes>
+    <includes refid="md__logging_8h" local="yes">gromacs/gmxlib/md_logging.h</includes>
+    <includes refid="network_8h" local="yes">gromacs/gmxlib/network.h</includes>
+    <includes refid="nonbonded_8h" local="yes">gromacs/gmxlib/nonbonded/nonbonded.h</includes>
+    <includes refid="gpu__utils_8h" local="yes">gromacs/gpu_utils/gpu_utils.h</includes>
+    <includes refid="detecthardware_8h" local="yes">gromacs/hardware/detecthardware.h</includes>
+    <includes refid="manage-threading_8h" local="yes">gromacs/listed-forces/manage-threading.h</includes>
+    <includes refid="pairs_8h" local="yes">gromacs/listed-forces/pairs.h</includes>
+    <includes refid="calculate-ewald-splitting-coefficient_8h" local="yes">gromacs/math/calculate-ewald-splitting-coefficient.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="utilities_8h" local="yes">gromacs/math/utilities.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="force_8h" local="yes">gromacs/mdlib/force.h</includes>
+    <includes refid="forcerec-threading_8h" local="yes">gromacs/mdlib/forcerec-threading.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="md__support_8h" local="yes">gromacs/mdlib/md_support.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__atomdata_8h" local="yes">gromacs/mdlib/nbnxn_atomdata.h</includes>
+    <includes refid="nbnxn__gpu__data__mgmt_8h" local="yes">gromacs/mdlib/nbnxn_gpu_data_mgmt.h</includes>
+    <includes refid="nbnxn__search_8h" local="yes">gromacs/mdlib/nbnxn_search.h</includes>
+    <includes refid="nbnxn__simd_8h" local="yes">gromacs/mdlib/nbnxn_simd.h</includes>
+    <includes refid="nbnxn__util_8h" local="yes">gromacs/mdlib/nbnxn_util.h</includes>
+    <includes refid="ns_8h" local="yes">gromacs/mdlib/ns.h</includes>
+    <includes refid="qmmm_8h" local="yes">gromacs/mdlib/qmmm.h</includes>
+    <includes refid="sim__util_8h" local="yes">gromacs/mdlib/sim_util.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="fcdata_8h" local="yes">gromacs/mdtypes/fcdata.h</includes>
+    <includes refid="group_8h" local="yes">gromacs/mdtypes/group.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="ishift_8h" local="yes">gromacs/pbcutil/ishift.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="simd_8h" local="yes">gromacs/simd/simd.h</includes>
+    <includes refid="forcetable_8h" local="yes">gromacs/tables/forcetable.h</includes>
+    <includes refid="mtop__util_8h" local="yes">gromacs/topology/mtop_util.h</includes>
+    <includes refid="trajectoryframe_8h" local="yes">gromacs/trajectory/trajectoryframe.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="exceptions_8h" local="yes">gromacs/utility/exceptions.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="pleasecite_8h" local="yes">gromacs/utility/pleasecite.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="stringutil_8h" local="yes">gromacs/utility/stringutil.h</includes>
+    <includes refid="nbnxn__gpu__jit__support_8h" local="yes">nbnxn_gpu_jit_support.h</includes>
+    <incdepgraph>
+      <node id="10710">
+        <label>src/gromacs/mdlib/forcerec.cpp</label>
+        <link refid="forcerec.cpp"/>
+        <childnode refid="10711" relation="include">
+        </childnode>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10713" relation="include">
+        </childnode>
+        <childnode refid="10714" relation="include">
+        </childnode>
+        <childnode refid="10715" relation="include">
+        </childnode>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+        <childnode refid="10718" relation="include">
+        </childnode>
+        <childnode refid="10722" relation="include">
+        </childnode>
+        <childnode refid="10725" relation="include">
+        </childnode>
+        <childnode refid="10728" relation="include">
+        </childnode>
+        <childnode refid="10729" relation="include">
+        </childnode>
+        <childnode refid="10731" relation="include">
+        </childnode>
+        <childnode refid="10732" relation="include">
+        </childnode>
+        <childnode refid="10733" relation="include">
+        </childnode>
+        <childnode refid="10734" relation="include">
+        </childnode>
+        <childnode refid="10736" relation="include">
+        </childnode>
+        <childnode refid="10737" relation="include">
+        </childnode>
+        <childnode refid="10738" relation="include">
+        </childnode>
+        <childnode refid="10758" relation="include">
+        </childnode>
+        <childnode refid="10759" relation="include">
+        </childnode>
+        <childnode refid="10749" relation="include">
+        </childnode>
+        <childnode refid="10766" relation="include">
+        </childnode>
+        <childnode refid="10767" relation="include">
+        </childnode>
+        <childnode refid="10768" relation="include">
+        </childnode>
+        <childnode refid="10770" relation="include">
+        </childnode>
+        <childnode refid="10772" relation="include">
+        </childnode>
+      </node>
+      <node id="10770">
+        <label>gromacs/utility/stringutil.h</label>
+        <link refid="stringutil_8h"/>
+        <childnode refid="10771" relation="include">
+        </childnode>
+        <childnode refid="10761" relation="include">
+        </childnode>
+        <childnode refid="10764" relation="include">
+        </childnode>
+      </node>
+      <node id="10750">
+        <label>stdarg.h</label>
+      </node>
+      <node id="10765">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="10718">
+        <label>gromacs/commandline/filenm.h</label>
+        <link refid="filenm_8h"/>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10713">
+        <label>assert.h</label>
+      </node>
+      <node id="10747">
+        <label>impl_reference_simd4_float.h</label>
+        <link refid="impl__reference__simd4__float_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10745" relation="include">
+        </childnode>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+        <childnode refid="10746" relation="include">
+        </childnode>
+        <childnode refid="10742" relation="include">
+        </childnode>
+      </node>
+      <node id="10738">
+        <label>gromacs/simd/simd.h</label>
+        <link refid="simd_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10739" relation="include">
+        </childnode>
+        <childnode refid="10724" relation="include">
+        </childnode>
+        <childnode refid="10741" relation="include">
+        </childnode>
+        <childnode refid="10754" relation="include">
+        </childnode>
+        <childnode refid="10756" relation="include">
+        </childnode>
+        <childnode refid="10757" relation="include">
+        </childnode>
+      </node>
+      <node id="10734">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10724" relation="include">
+        </childnode>
+      </node>
+      <node id="10735">
+        <label>cstdint</label>
+      </node>
+      <node id="10768">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="10769" relation="include">
+        </childnode>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10749">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="10750" relation="include">
+        </childnode>
+        <childnode refid="10723" relation="include">
+        </childnode>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10736">
+        <label>gromacs/mdlib/nbnxn_gpu_data_mgmt.h</label>
+        <link refid="nbnxn__gpu__data__mgmt_8h"/>
+      </node>
+      <node id="10722">
+        <label>gromacs/domdec/domdec.h</label>
+        <link refid="domdec_8h"/>
+        <childnode refid="10723" relation="include">
+        </childnode>
+        <childnode refid="10719" relation="include">
+        </childnode>
+        <childnode refid="10724" relation="include">
+        </childnode>
+      </node>
+      <node id="10743">
+        <label>impl_reference_general.h</label>
+        <link refid="impl__reference__general_8h"/>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10720">
+        <label>stdint.h</label>
+      </node>
+      <node id="10728">
+        <label>gromacs/ewald/ewald.h</label>
+        <link refid="ewald_8h"/>
+        <childnode refid="10723" relation="include">
+        </childnode>
+        <childnode refid="10724" relation="include">
+        </childnode>
+      </node>
+      <node id="10714">
+        <label>stdlib.h</label>
+      </node>
+      <node id="10711">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="10758">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="10723" relation="include">
+        </childnode>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10716">
+        <label>cmath</label>
+      </node>
+      <node id="10745">
+        <label>cassert</label>
+      </node>
+      <node id="10761">
+        <label>string</label>
+      </node>
+      <node id="10742">
+        <label>impl_reference_definitions.h</label>
+        <link refid="impl__reference__definitions_8h"/>
+      </node>
+      <node id="10725">
+        <label>gromacs/domdec/domdec_struct.h</label>
+        <link refid="domdec__struct_8h"/>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10719" relation="include">
+        </childnode>
+        <childnode refid="10727" relation="include">
+        </childnode>
+        <childnode refid="10724" relation="include">
+        </childnode>
+      </node>
+      <node id="10752">
+        <label>impl_reference_util_double.h</label>
+        <link refid="impl__reference__util__double_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10745" relation="include">
+        </childnode>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+        <childnode refid="10742" relation="include">
+        </childnode>
+        <childnode refid="10748" relation="include">
+        </childnode>
+      </node>
+      <node id="10760">
+        <label>exception</label>
+      </node>
+      <node id="10769">
+        <label>stddef.h</label>
+      </node>
+      <node id="10748">
+        <label>impl_reference_simd_double.h</label>
+        <link refid="impl__reference__simd__double_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10745" relation="include">
+        </childnode>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+        <childnode refid="10746" relation="include">
+        </childnode>
+        <childnode refid="10749" relation="include">
+        </childnode>
+        <childnode refid="10742" relation="include">
+        </childnode>
+        <childnode refid="10751" relation="include">
+        </childnode>
+      </node>
+      <node id="10732">
+        <label>gromacs/listed-forces/pairs.h</label>
+        <link refid="pairs_8h"/>
+        <childnode refid="10719" relation="include">
+        </childnode>
+        <childnode refid="10724" relation="include">
+        </childnode>
+      </node>
+      <node id="10759">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="10730" relation="include">
+        </childnode>
+        <childnode refid="10755" relation="include">
+        </childnode>
+        <childnode refid="10760" relation="include">
+        </childnode>
+        <childnode refid="10740" relation="include">
+        </childnode>
+        <childnode refid="10761" relation="include">
+        </childnode>
+        <childnode refid="10762" relation="include">
+        </childnode>
+        <childnode refid="10763" relation="include">
+        </childnode>
+        <childnode refid="10764" relation="include">
+        </childnode>
+        <childnode refid="10719" relation="include">
+        </childnode>
+        <childnode refid="10739" relation="include">
+        </childnode>
+        <childnode refid="10765" relation="include">
+        </childnode>
+        <childnode refid="10766" relation="include">
+        </childnode>
+      </node>
+      <node id="10724">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="10715">
+        <label>string.h</label>
+      </node>
+      <node id="10730">
+        <label>cstdio</label>
+      </node>
+      <node id="10766">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="10719" relation="include">
+        </childnode>
+        <childnode refid="10765" relation="include">
+        </childnode>
+      </node>
+      <node id="10729">
+        <label>gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="10730" relation="include">
+        </childnode>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10764">
+        <label>vector</label>
+      </node>
+      <node id="10753">
+        <label>impl_reference_util_float.h</label>
+        <link refid="impl__reference__util__float_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10745" relation="include">
+        </childnode>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+        <childnode refid="10742" relation="include">
+        </childnode>
+        <childnode refid="10751" relation="include">
+        </childnode>
+      </node>
+      <node id="10746">
+        <label>array</label>
+      </node>
+      <node id="10731">
+        <label>gromacs/listed-forces/manage-threading.h</label>
+        <link refid="manage-threading_8h"/>
+        <childnode refid="10730" relation="include">
+        </childnode>
+      </node>
+      <node id="10754">
+        <label>gromacs/simd/scalar/scalar.h</label>
+        <link refid="scalar_8h"/>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10755" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+      </node>
+      <node id="10739">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="10740" relation="include">
+        </childnode>
+      </node>
+      <node id="10751">
+        <label>impl_reference_simd_float.h</label>
+        <link refid="impl__reference__simd__float_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10745" relation="include">
+        </childnode>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+        <childnode refid="10746" relation="include">
+        </childnode>
+        <childnode refid="10742" relation="include">
+        </childnode>
+      </node>
+      <node id="10741">
+        <label>impl_reference/impl_reference.h</label>
+        <link refid="impl__reference_8h"/>
+        <childnode refid="10742" relation="include">
+        </childnode>
+        <childnode refid="10743" relation="include">
+        </childnode>
+        <childnode refid="10744" relation="include">
+        </childnode>
+        <childnode refid="10747" relation="include">
+        </childnode>
+        <childnode refid="10748" relation="include">
+        </childnode>
+        <childnode refid="10751" relation="include">
+        </childnode>
+        <childnode refid="10752" relation="include">
+        </childnode>
+        <childnode refid="10753" relation="include">
+        </childnode>
+      </node>
+      <node id="10755">
+        <label>cstdlib</label>
+      </node>
+      <node id="10726">
+        <label>cstddef</label>
+      </node>
+      <node id="10737">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10744">
+        <label>impl_reference_simd4_double.h</label>
+        <link refid="impl__reference__simd4__double_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+        <childnode refid="10745" relation="include">
+        </childnode>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10726" relation="include">
+        </childnode>
+        <childnode refid="10735" relation="include">
+        </childnode>
+        <childnode refid="10717" relation="include">
+        </childnode>
+        <childnode refid="10746" relation="include">
+        </childnode>
+        <childnode refid="10742" relation="include">
+        </childnode>
+      </node>
+      <node id="10719">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="10720" relation="include">
+        </childnode>
+        <childnode refid="10721" relation="include">
+        </childnode>
+      </node>
+      <node id="10756">
+        <label>gromacs/simd/scalar/scalar_math.h</label>
+        <link refid="scalar__math_8h"/>
+        <childnode refid="10716" relation="include">
+        </childnode>
+        <childnode refid="10734" relation="include">
+        </childnode>
+        <childnode refid="10754" relation="include">
+        </childnode>
+      </node>
+      <node id="10757">
+        <label>gromacs/simd/scalar/scalar_util.h</label>
+        <link refid="scalar__util_8h"/>
+        <childnode refid="10716" relation="include">
+        </childnode>
+      </node>
+      <node id="10762">
+        <label>type_traits</label>
+      </node>
+      <node id="10712">
+        <label>config.h</label>
+      </node>
+      <node id="10767">
+        <label>gromacs/utility/pleasecite.h</label>
+        <link refid="pleasecite_8h"/>
+        <childnode refid="10730" relation="include">
+        </childnode>
+      </node>
+      <node id="10717">
+        <label>algorithm</label>
+      </node>
+      <node id="10772">
+        <label>nbnxn_gpu_jit_support.h</label>
+        <link refid="nbnxn__gpu__jit__support_8h"/>
+        <childnode refid="10719" relation="include">
+        </childnode>
+      </node>
+      <node id="10727">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="10712" relation="include">
+        </childnode>
+      </node>
+      <node id="10723">
+        <label>stdio.h</label>
+      </node>
+      <node id="10771">
+        <label>cstring</label>
+      </node>
+      <node id="10733">
+        <label>gromacs/math/calculate-ewald-splitting-coefficient.h</label>
+        <link refid="calculate-ewald-splitting-coefficient_8h"/>
+        <childnode refid="10724" relation="include">
+        </childnode>
+      </node>
+      <node id="10740">
+        <label>memory</label>
+      </node>
+      <node id="10721">
+        <label>inttypes.h</label>
+      </node>
+      <node id="10763">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structsolvent__parameters__t" prot="public">solvent_parameters_t</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="forcerec_8cpp_1a4c8c0f53cf8ab0c8ab692cc73744b944" prot="public" static="no">
+        <name>pr_real</name>
+        <param><defname>fp</defname></param>
+        <param><defname>r</defname></param>
+        <initializer>fprintf(fp, &quot;%s: %e\n&quot;,#r, r)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="3216" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="3216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="forcerec_8cpp_1a4891955e794d0eb20a5eccea314caf8c" prot="public" static="no">
+        <name>pr_int</name>
+        <param><defname>fp</defname></param>
+        <param><defname>i</defname></param>
+        <initializer>fprintf((fp), &quot;%s: %d\n&quot;,#i, i)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="3217" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="3217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="forcerec_8cpp_1ae6ca3c424231789b5ade47aa9c026a5d" prot="public" static="no">
+        <name>pr_bool</name>
+        <param><defname>fp</defname></param>
+        <param><defname>b</defname></param>
+        <initializer>fprintf((fp), &quot;%s: %s\n&quot;,#b, <ref refid="group__module__utility_1ga3862c8128924c3311429a4dadf075ecc" kindref="member">gmx::boolToString</ref>(b))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="3218" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="3218" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="forcerec_8cpp_1a531c35e38ede3ea4e5ba5afb24b29493" prot="public" static="no">
+        <name>@63</name>
+        <enumvalue id="forcerec_8cpp_1a531c35e38ede3ea4e5ba5afb24b29493a1053ced8213a828ac7ced4365ebb307e" prot="public">
+          <name>acNONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="forcerec_8cpp_1a531c35e38ede3ea4e5ba5afb24b29493a3df5cda692ebdde1dc54f578fb091729" prot="public">
+          <name>acCONSTRAINT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="forcerec_8cpp_1a531c35e38ede3ea4e5ba5afb24b29493a76c1e82ad69de1a436cfff3e231cb912" prot="public">
+          <name>acSETTLE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="636" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="636" bodyend="638"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="forcerec_8cpp_1ab29ff29c2fe9ec3d52dfa77440b19af5" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* egrp_nm[egNR+1]</definition>
+        <argsstring>[egNR+1]</argsstring>
+        <name>egrp_nm</name>
+        <initializer>= {
+    &quot;Coul-SR&quot;, &quot;LJ-SR&quot;, &quot;Buck-SR&quot;,
+    &quot;Coul-14&quot;, &quot;LJ-14&quot;, NULL
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="102" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="forcerec_8cpp_1ad438ca0e4c451cfa1731c6c1dbb48599" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+        <definition>t_forcerec* mk_forcerec</definition>
+        <argsstring>(void)</argsstring>
+        <name>mk_forcerec</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Create a new forcerec structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="107" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="107" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ab1c86b8eab4d9401b36fec24c3d13058" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+        <definition>static real* mk_nbfp</definition>
+        <argsstring>(const gmx_ffparams_t *idef, gmx_bool bBHAM)</argsstring>
+        <name>mk_nbfp</name>
+        <param>
+          <type>const <ref refid="structgmx__ffparams__t" kindref="compound">gmx_ffparams_t</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bBHAM</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="141" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="141" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ad84582b034696ab272f85eec822f38dd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+        <definition>static real* make_ljpme_c6grid</definition>
+        <argsstring>(const gmx_ffparams_t *idef, t_forcerec *fr)</argsstring>
+        <name>make_ljpme_c6grid</name>
+        <param>
+          <type>const <ref refid="structgmx__ffparams__t" kindref="compound">gmx_ffparams_t</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="178" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="178" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ab3b51f20e2b28138b1a54bb140641e81" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+        <definition>static real* mk_nbfp_combination_rule</definition>
+        <argsstring>(const gmx_ffparams_t *idef, int comb_rule)</argsstring>
+        <name>mk_nbfp_combination_rule</name>
+        <param>
+          <type>const <ref refid="structgmx__ffparams__t" kindref="compound">gmx_ffparams_t</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>comb_rule</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="218" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="218" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ae702d276b8a1981e54aa1d1e538567e6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_solvent_cg</definition>
+        <argsstring>(const gmx_moltype_t *molt, int cg0, int nmol, const unsigned char *qm_grpnr, const t_grps *qm_grps, t_forcerec *fr, int *n_solvent_parameters, solvent_parameters_t **solvent_parameters_p, int cginfo, int *cg_sp)</argsstring>
+        <name>check_solvent_cg</name>
+        <param>
+          <type>const <ref refid="structgmx__moltype__t" kindref="compound">gmx_moltype_t</ref> *</type>
+          <declname>molt</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cg0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nmol</declname>
+        </param>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>qm_grpnr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__grps" kindref="compound">t_grps</ref> *</type>
+          <declname>qm_grps</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>n_solvent_parameters</declname>
+        </param>
+        <param>
+          <type><ref refid="structsolvent__parameters__t" kindref="compound">solvent_parameters_t</ref> **</type>
+          <declname>solvent_parameters_p</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cginfo</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>cg_sp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="278" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="278" bodyend="524"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a2466d8937f13ab7caeff493fc9d6dce6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_solvent</definition>
+        <argsstring>(FILE *fp, const gmx_mtop_t *mtop, t_forcerec *fr, cginfo_mb_t *cginfo_mb)</argsstring>
+        <name>check_solvent</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structcginfo__mb__t" kindref="compound">cginfo_mb_t</ref> *</type>
+          <declname>cginfo_mb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="527" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="527" bodyend="634"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a1d2b9368ba84f516a133f463650166f2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structcginfo__mb__t" kindref="compound">cginfo_mb_t</ref> *</type>
+        <definition>static cginfo_mb_t* init_cginfo_mb</definition>
+        <argsstring>(FILE *fplog, const gmx_mtop_t *mtop, t_forcerec *fr, gmx_bool bNoSolvOpt, gmx_bool *bFEP_NonBonded, gmx_bool *bExcl_IntraCGAll_InterCGNone)</argsstring>
+        <name>init_cginfo_mb</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNoSolvOpt</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bFEP_NonBonded</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bExcl_IntraCGAll_InterCGNone</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="640" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="640" bodyend="898"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1acd16a0fced009f7217cd29eaf4f803d3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int *</type>
+        <definition>static int* cginfo_expand</definition>
+        <argsstring>(int nmb, cginfo_mb_t *cgi_mb)</argsstring>
+        <name>cginfo_expand</name>
+        <param>
+          <type>int</type>
+          <declname>nmb</declname>
+        </param>
+        <param>
+          <type><ref refid="structcginfo__mb__t" kindref="compound">cginfo_mb_t</ref> *</type>
+          <declname>cgi_mb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="900" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="900" bodyend="919"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ad42e007c636e12ea14a0b78b6c96a6aa" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void set_chargesum</definition>
+        <argsstring>(FILE *log, t_forcerec *fr, const gmx_mtop_t *mtop)</argsstring>
+        <name>set_chargesum</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="921" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="921" bodyend="988"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a76776937aaac7b4c3670f67f6413c934" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void update_forcerec</definition>
+        <argsstring>(t_forcerec *fr, matrix box)</argsstring>
+        <name>update_forcerec</name>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Update parameters dependent on box. </para>        </briefdescription>
+        <detaileddescription>
+<para>Updates parameters in the forcerec that are time dependent <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">fr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The force record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="990" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="990" bodyend="998"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a8c657a5b4d0db76918e806622a8dba71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_avcsixtwelve</definition>
+        <argsstring>(FILE *fplog, t_forcerec *fr, const gmx_mtop_t *mtop)</argsstring>
+        <name>set_avcsixtwelve</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1000" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1000" bodyend="1230"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a056fba53761b5f08531640f7f1ee65e7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void set_bham_b_max</definition>
+        <argsstring>(FILE *fplog, t_forcerec *fr, const gmx_mtop_t *mtop)</argsstring>
+        <name>set_bham_b_max</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1233" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1233" bodyend="1289"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a1e037ee77ae5078ed05a2fa2a32e94a6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void make_nbf_tables</definition>
+        <argsstring>(FILE *fp, t_forcerec *fr, real rtab, const char *tabfn, char *eg1, char *eg2, t_nblists *nbl)</argsstring>
+        <name>make_nbf_tables</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rtab</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tabfn</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>eg1</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>eg2</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nblists" kindref="compound">t_nblists</ref> *</type>
+          <declname>nbl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1291" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1291" bodyend="1356"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ac7ceadba72d0c0c0ea8e1cadb590fb34" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void count_tables</definition>
+        <argsstring>(int ftype1, int ftype2, const gmx_mtop_t *mtop, int *ncount, int **count)</argsstring>
+        <name>count_tables</name>
+        <param>
+          <type>int</type>
+          <declname>ftype1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ftype2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ncount</declname>
+        </param>
+        <param>
+          <type>int **</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>If there&apos;s bonded interactions of type <computeroutput>ftype1</computeroutput> or <computeroutput>ftype2</computeroutput> present in the topology, build an array of the number of interactions present for each bonded interaction index found in the topology. </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput>ftype1</computeroutput> or <computeroutput>ftype2</computeroutput> may be set to -1 to disable seeking for a valid type with that parameter.</para><para><computeroutput>count</computeroutput> will be reallocated as necessary to fit the largest bonded interaction index found, and its current size will be returned in <computeroutput>ncount</computeroutput>. It will contain zero for every bonded interaction index for which no interactions are present in the topology. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1371" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1371" bodyend="1415"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ab2d5144feaef1f09cd46d3dd83819994" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structbondedtable__t" kindref="compound">bondedtable_t</ref> *</type>
+        <definition>static bondedtable_t* make_bonded_tables</definition>
+        <argsstring>(FILE *fplog, int ftype1, int ftype2, const gmx_mtop_t *mtop, const t_filenm *tabbfnm, const char *tabext)</argsstring>
+        <name>make_bonded_tables</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ftype1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ftype2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__filenm" kindref="compound">t_filenm</ref> *</type>
+          <declname>tabbfnm</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tabext</declname>
+        </param>
+        <briefdescription>
+<para>If there&apos;s bonded interactions of flavour <computeroutput>tabext</computeroutput> and type <computeroutput>ftype1</computeroutput> or <computeroutput>ftype2</computeroutput> present in the topology, seek them in the list of filenames passed to mdrun, and make bonded tables from those files. </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput>ftype1</computeroutput> or <computeroutput>ftype2</computeroutput> may be set to -1 to disable seeking for a valid type with that parameter.</para><para>A fatal error occurs if no matching filename is found. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1427" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1427" bodyend="1483"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1abed4cd76d5c1927ee02821713cc0a873" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void forcerec_set_ranges</definition>
+        <argsstring>(t_forcerec *fr, int ncg_home, int ncg_force, int natoms_force, int natoms_force_constr, int natoms_f_novirsum)</argsstring>
+        <name>forcerec_set_ranges</name>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncg_home</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncg_force</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms_force</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms_force_constr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms_f_novirsum</declname>
+        </param>
+        <briefdescription>
+<para>Set the number of charge groups and atoms. </para>        </briefdescription>
+        <detaileddescription>
+<para>The force calculation needs information on which atoms it should do work. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">fr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The forcerec </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ncg_home</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of charge groups on this processor </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ncg_force</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of charge groups to compute force on </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">natoms_force</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms to compute force on </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">natoms_force_constr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms involved in constraints </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">natoms_f_novirsum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms for which force is to be compute but no virial </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1485" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1485" bodyend="1518"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a07256b1234c0daea7b63c6c2aa0a9f82" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real cutoff_inf</definition>
+        <argsstring>(real cutoff)</argsstring>
+        <name>cutoff_inf</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>cutoff</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1520" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1520" bodyend="1528"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1ab1ed134062f147aecd1a54e11cda470f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool can_use_allvsall</definition>
+        <argsstring>(const t_inputrec *ir, gmx_bool bPrintNote, t_commrec *cr, FILE *fp)</argsstring>
+        <name>can_use_allvsall</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bPrintNote</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1530" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1530" bodyend="1574"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a2da5fa0f6d764e9c356bb1523ed2d2be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool nbnxn_gpu_acceleration_supported</definition>
+        <argsstring>(FILE *fplog, const t_commrec *cr, const t_inputrec *ir, gmx_bool bRerunMD)</argsstring>
+        <name>nbnxn_gpu_acceleration_supported</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bRerunMD</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1577" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1577" bodyend="1597"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1aa6a03c5e6e2d6c9cf49088c6197cf924" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool nbnxn_simd_supported</definition>
+        <argsstring>(FILE *fplog, const t_commrec *cr, const t_inputrec *ir)</argsstring>
+        <name>nbnxn_simd_supported</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1599" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1599" bodyend="1613"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1aacf1740e68f7275eb9e1820ee8f79573" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pick_nbnxn_kernel_cpu</definition>
+        <argsstring>(const t_inputrec *ir, int *kernel_type, int *ewald_excl)</argsstring>
+        <name>pick_nbnxn_kernel_cpu</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>kernel_type</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ewald_excl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1616" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1616" bodyend="1704"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1aae7c3cb1114aee5cbcb613cfa00c55aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* lookup_nbnxn_kernel_name</definition>
+        <argsstring>(int kernel_type)</argsstring>
+        <name>lookup_nbnxn_kernel_name</name>
+        <param>
+          <type>int</type>
+          <declname>kernel_type</declname>
+        </param>
+        <briefdescription>
+<para>Return a string indentifying the kernel type. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1707" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1707" bodyend="1736"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a69d7172b85cedfacb80dcfcf803e9aa4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pick_nbnxn_kernel</definition>
+        <argsstring>(FILE *fp, const t_commrec *cr, gmx_bool use_simd_kernels, gmx_bool bUseGPU, gmx_bool bEmulateGPU, const t_inputrec *ir, int *kernel_type, int *ewald_excl, gmx_bool bDoNonbonded)</argsstring>
+        <name>pick_nbnxn_kernel</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>use_simd_kernels</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bUseGPU</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bEmulateGPU</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>kernel_type</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ewald_excl</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDoNonbonded</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1738" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1738" bodyend="1796"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a5450e71c88e3d2f93cf1a3460e228604" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pick_nbnxn_resources</definition>
+        <argsstring>(FILE *fp, const t_commrec *cr, const gmx_hw_info_t *hwinfo, gmx_bool bDoNonbonded, gmx_bool *bUseGPU, gmx_bool *bEmulateGPU, const gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>pick_nbnxn_resources</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__hw__info__t" kindref="compound">gmx_hw_info_t</ref> *</type>
+          <declname>hwinfo</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDoNonbonded</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bUseGPU</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bEmulateGPU</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1798" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1798" bodyend="1851"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1af61bc42b2a9f99979a33e84a65d0878e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool uses_simple_tables</definition>
+        <argsstring>(int cutoff_scheme, nonbonded_verlet_t *nbv, int group)</argsstring>
+        <name>uses_simple_tables</name>
+        <param>
+          <type>int</type>
+          <declname>cutoff_scheme</declname>
+        </param>
+        <param>
+          <type><ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>group</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1853" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1853" bodyend="1874"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1aed4bc9d4af17cd3e9db2b8323326d045" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void init_ewald_f_table</definition>
+        <argsstring>(interaction_const_t *ic, real rtab)</argsstring>
+        <name>init_ewald_f_table</name>
+        <param>
+          <type><ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rtab</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1876" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1876" bodyend="1922"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a1c5fdd5893e06e90a2b0692a6dd59af2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_interaction_const_tables</definition>
+        <argsstring>(FILE *fp, interaction_const_t *ic, real rtab)</argsstring>
+        <name>init_interaction_const_tables</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rtab</declname>
+        </param>
+        <briefdescription>
+<para>Initiate table constants. </para>        </briefdescription>
+        <detaileddescription>
+<para>Initializes the tables in the interaction constant data structure. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File for debugging output </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure holding the table constant </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rtab</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The additional distance to add to tables </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1924" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1924" bodyend="1938"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1add8594e12436ca7b1bdf705faf715f69" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void clear_force_switch_constants</definition>
+        <argsstring>(shift_consts_t *sc)</argsstring>
+        <name>clear_force_switch_constants</name>
+        <param>
+          <type><ref refid="structshift__consts__t" kindref="compound">shift_consts_t</ref> *</type>
+          <declname>sc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1940" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1940" bodyend="1945"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a30b7fd161acfd44478aae3b41f05276d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void force_switch_constants</definition>
+        <argsstring>(real p, real rsw, real rc, shift_consts_t *sc)</argsstring>
+        <name>force_switch_constants</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rsw</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rc</declname>
+        </param>
+        <param>
+          <type><ref refid="structshift__consts__t" kindref="compound">shift_consts_t</ref> *</type>
+          <declname>sc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1947" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1947" bodyend="1962"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1adcad0a908533a90952f6e3763086798a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void potential_switch_constants</definition>
+        <argsstring>(real rsw, real rc, switch_consts_t *sc)</argsstring>
+        <name>potential_switch_constants</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rsw</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rc</declname>
+        </param>
+        <param>
+          <type><ref refid="structswitch__consts__t" kindref="compound">switch_consts_t</ref> *</type>
+          <declname>sc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1964" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1964" bodyend="1978"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1adfa438105192189b21decc07da4f4d2c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void init_interaction_const</definition>
+        <argsstring>(FILE *fp, interaction_const_t **interaction_const, const t_forcerec *fr)</argsstring>
+        <name>init_interaction_const</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> **</type>
+          <declname>interaction_const</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <briefdescription>
+<para>Construct interaction constants. </para>        </briefdescription>
+        <detaileddescription>
+<para>This data is used (particularly) by search and force code for short-range interactions. Many of these are constant for the whole simulation; some are constant only after PME tuning completes. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="1987" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="1987" bodyend="2114"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a02a3948a0db592e073f945bb7d40fb96" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void init_nb_verlet</definition>
+        <argsstring>(FILE *fp, nonbonded_verlet_t **nb_verlet, gmx_bool bFEP_NonBonded, const t_inputrec *ir, const t_forcerec *fr, const t_commrec *cr, const char *nbpu_opt)</argsstring>
+        <name>init_nb_verlet</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> **</type>
+          <declname>nb_verlet</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bFEP_NonBonded</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nbpu_opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="2116" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="2116" bodyend="2309"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1aec42688f8e1a71f705c7caab5accef9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool usingGpu</definition>
+        <argsstring>(nonbonded_verlet_t *nbv)</argsstring>
+        <name>usingGpu</name>
+        <param>
+          <type><ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <briefdescription>
+<para>Getter for bUseGPU. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="2311" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="2311" bodyend="2314"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a61d886cfae784c2dbd43455d093815dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_forcerec</definition>
+        <argsstring>(FILE *fp, t_forcerec *fr, t_fcdata *fcd, const t_inputrec *ir, const gmx_mtop_t *mtop, const t_commrec *cr, matrix box, const char *tabfn, const char *tabpfn, const t_filenm *tabbfnm, const char *nbpu_opt, gmx_bool bNoSolvOpt, real print_force)</argsstring>
+        <name>init_forcerec</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+          <defname>fp</defname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tabfn</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tabpfn</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__filenm" kindref="compound">t_filenm</ref> *</type>
+          <declname>tabbfnm</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>nbpu_opt</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNoSolvOpt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>print_force</declname>
+        </param>
+        <briefdescription>
+<para>Initialize forcerec structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>The Force rec struct must be created with mk_forcerec. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>File for printing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The forcerec </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fcd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force constant data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inputrec structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Molecular topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Communication structures </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Simulation box </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tabfn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Table potential file for non-bonded interactions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tabpfn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Table potential file for pair interactions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tabbfnm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Table potential files for bonded interactions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nbpu_opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nonbonded Processing Unit (GPU/CPU etc.) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bNoSolvOpt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Do not use solvent optimization </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">print_force</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Print forces for atoms with force &gt;= print_force </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="2316" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="2316" bodyend="3214"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a21ba8a92ee1c6e27ee221d21599d9ac3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pr_forcerec</definition>
+        <argsstring>(FILE *fp, t_forcerec *fr)</argsstring>
+        <name>pr_forcerec</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+          <defname>fp</defname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <briefdescription>
+<para>Print the contents of the forcerec to a file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The log file to print to </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The forcerec structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="3220" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="3220" bodyend="3238"/>
+      </memberdef>
+      <memberdef kind="function" id="forcerec_8cpp_1a0d2fb47f6d3edf9307b0bb60f11888d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void free_gpu_resources</definition>
+        <argsstring>(const t_forcerec *fr, const t_commrec *cr, const gmx_gpu_info_t *gpu_info, const gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>free_gpu_resources</name>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" line="3246" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp" bodystart="3246" bodyend="3287"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/forcerec.cpp"/>
+  </compounddef>
+</doxygen>

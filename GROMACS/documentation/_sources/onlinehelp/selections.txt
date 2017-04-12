@@ -1,0 +1,600 @@
+Selection syntax and usage
+==========================
+
+Selections are used to select atoms/molecules/residues for analysis.
+In contrast to traditional index files, selections can be dynamic, i.e.,
+select different atoms for different trajectory frames. The GROMACS
+manual contains a short introductory section to selections in the
+Analysis chapter, including suggestions on how to get familiar with
+selections if you are new to the concept. The subtopics listed below
+provide more details on the technical and syntactic aspects of
+selections.
+
+Each analysis tool requires a different number of selections and the
+selections are interpreted differently. The general idea is still the
+same: each selection evaluates to a set of positions, where a position
+can be an atom position or center-of-mass or center-of-geometry of
+a set of atoms. The tool then uses these positions for its analysis to
+allow very flexible processing. Some analysis tools may have limitations
+on the types of selections allowed.
+
+Specifying selections from command line
+---------------------------------------
+
+If no selections are provided on the command line, you are prompted to
+type the selections interactively (a pipe can also be used to provide
+the selections in this case for most tools). While this works well for
+testing, it is easier to provide the selections from the command line
+if they are complex or for scripting.
+
+Each tool has different command-line arguments for specifying selections
+(see the help for the individual tools).
+You can either pass a single string containing all selections (separated
+by semicolons), or multiple strings, each containing one selection.
+Note that you need to quote the selections to protect them from the
+shell.
+
+If you set a selection command-line argument, but do not provide any
+selections, you are prompted to type the selections for that argument
+interactively. This is useful if that selection argument is optional,
+in which case it is not normally prompted for.
+
+To provide selections from a file, use ``-sf file.dat`` in the place
+of the selection for a selection argument (e.g.,
+``-select -sf file.dat``). In general, the ``-sf`` argument reads
+selections from the provided file and assigns them to selection arguments
+that have been specified up to that point, but for which no selections
+have been provided.
+As a special case, ``-sf`` provided on its own, without preceding
+selection arguments, assigns the selections to all (yet unset) required
+selections (i.e., those that would be promted interactively if no
+selections are provided on the command line).
+
+To use groups from a traditional index file, use argument ``-n``
+to provide a file. See the "syntax" subtopic for how to use them.
+If this option is not provided, default groups are generated.
+The default groups are generated with the same logic as for
+non-selection tools.
+
+Depending on the tool, two additional command-line arguments may be
+available to control the behavior:
+
+* ``-seltype`` can be used to specify the default type of
+  positions to calculate for each selection.
+* ``-selrpos`` can be used to specify the default type of
+  positions used in selecting atoms by coordinates.
+
+See the "positions" subtopic for more information on these options.
+
+Tools that take selections apply them to a structure/topology and/or
+a trajectory file. If the tool takes both (typically as ``-s``
+for structure/topology and ``-f`` for trajectory), then the
+trajectory file is only used for coordinate information, and all other
+information, such as atom names and residue information, is read from
+the structure/topology file. If the tool only takes a structure file,
+or if only that input parameter is provided, then also the coordinates
+are taken from that file.
+For example, to select atoms from a ``.pdb``/``.gro`` file in
+a tool that provides both options, pass it as ``-s`` (only).
+There is no warning if the trajectory file specifies, e.g., different
+atom names than the structure file. Only the number of atoms is checked.
+Many selection-enabled tools also provide an ``-fgroup`` option
+to specify the atom indices that are present in the trajectory for cases
+where the trajectory only has a subset of atoms from the
+topology/structure file.
+
+Selection syntax
+----------------
+
+A set of selections consists of one or more selections, separated by
+semicolons. Each selection defines a set of positions for the analysis.
+Each selection can also be preceded by a string that gives a name for
+the selection for use in, e.g., graph legends.
+If no name is provided, the string used for the selection is used
+automatically as the name.
+
+For interactive input, the syntax is slightly altered: line breaks can
+also be used to separate selections. \ followed by a line break can
+be used to continue a line if necessary.
+Notice that the above only applies to real interactive input,
+not if you provide the selections, e.g., from a pipe.
+
+It is possible to use variables to store selection expressions.
+A variable is defined with the following syntax::
+
+  VARNAME = EXPR ;
+
+where ``EXPR`` is any valid selection expression.
+After this, ``VARNAME`` can be used anywhere where ``EXPR``
+would be valid.
+
+Selections are composed of three main types of expressions, those that
+define atoms (``ATOM_EXPR``), those that define positions
+(``POS_EXPR``), and those that evaluate to numeric values
+(``NUM_EXPR``). Each selection should be a ``POS_EXPR``
+or a ``ATOM_EXPR`` (the latter is automatically converted to
+positions). The basic rules are as follows:
+
+* An expression like ``NUM_EXPR1 < NUM_EXPR2`` evaluates to an
+  ``ATOM_EXPR`` that selects all the atoms for which the comparison
+  is true.
+* Atom expressions can be combined with boolean operations such as
+  ``not ATOM_EXPR``, ``ATOM_EXPR and ATOM_EXPR``, or
+  ``ATOM_EXPR or ATOM_EXPR``. Parentheses can be used to alter the
+  evaluation order.
+* ``ATOM_EXPR`` expressions can be converted into ``POS_EXPR``
+  expressions in various ways, see the "positions" subtopic for more
+  details.
+* ``POS_EXPR`` can be converted into ``NUM_EXPR`` using syntax
+  like "``x of POS_EXPR``". Currently, this is only supported for single
+  positions like in expression "``x of cog of ATOM_EXPR``".
+
+Some keywords select atoms based on string values such as the atom name.
+For these keywords, it is possible to use wildcards (``name "C*"``)
+or regular expressions (e.g., ``resname "R[AB]"``).
+The match type is automatically guessed from the string: if it contains
+other characters than letters, numbers, '*', or '?', it is interpreted
+as a regular expression.
+To force the matching to use literal string matching, use
+``name = "C*"`` to match a literal C*.
+To force other type of matching, use '?' or '~' in place of '=' to force
+wildcard or regular expression matching, respectively.
+
+Strings that contain non-alphanumeric characters should be enclosed in
+double quotes as in the examples. For other strings, the quotes are
+optional, but if the value conflicts with a reserved keyword, a syntax
+error will occur. If your strings contain uppercase letters, this should
+not happen.
+
+Index groups provided with the ``-n`` command-line option or
+generated by default can be accessed with ``group NR`` or
+``group NAME``, where ``NR`` is a zero-based index of the group
+and ``NAME`` is part of the name of the desired group.
+The keyword ``group`` is optional if the whole selection is
+provided from an index group.
+To see a list of available groups in the interactive mode, press enter
+in the beginning of a line.
+
+Specifying positions in selections
+----------------------------------
+
+Possible ways of specifying positions in selections are:
+
+1. A constant position can be defined as ``[XX, YY, ZZ]``, where
+   ``XX``, ``YY`` and ``ZZ`` are real numbers.
+
+2. ``com of ATOM_EXPR [pbc]`` or ``cog of ATOM_EXPR [pbc]``
+   calculate the center of mass/geometry of ``ATOM_EXPR``. If
+   ``pbc`` is specified, the center is calculated iteratively to try
+   to deal with cases where ``ATOM_EXPR`` wraps around periodic
+   boundary conditions.
+
+3. ``POSTYPE of ATOM_EXPR`` calculates the specified positions for
+   the atoms in ``ATOM_EXPR``.
+   ``POSTYPE`` can be ``atom``, ``res_com``, ``res_cog``,
+   ``mol_com`` or ``mol_cog``, with an optional prefix ``whole_``
+   ``part_`` or ``dyn_``.
+   ``whole_`` calculates the centers for the whole residue/molecule,
+   even if only part of it is selected.
+   ``part_`` prefix calculates the centers for the selected atoms, but
+   uses always the same atoms for the same residue/molecule. The used atoms
+   are determined from the the largest group allowed by the selection.
+   ``dyn_`` calculates the centers strictly only for the selected atoms.
+   If no prefix is specified, whole selections default to ``part_`` and
+   other places default to ``whole_``.
+   The latter is often desirable to select the same molecules in different
+   tools, while the first is a compromise between speed (``dyn_``
+   positions can be slower to evaluate than ``part_``) and intuitive
+   behavior.
+
+4. ``ATOM_EXPR``, when given for whole selections, is handled as 3.
+   above, using the position type from the command-line argument
+   ``-seltype``.
+
+Selection keywords that select atoms based on their positions, such as
+``dist from``, use by default the positions defined by the
+``-selrpos`` command-line option.
+This can be overridden by prepending a ``POSTYPE`` specifier to the
+keyword. For example, ``res_com dist from POS`` evaluates the
+residue center of mass distances. In the example, all atoms of a residue
+are either selected or not, based on the single distance calculated.
+
+Arithmetic expressions in selections
+------------------------------------
+
+Basic arithmetic evaluation is supported for numeric expressions.
+Supported operations are addition, subtraction, negation, multiplication,
+division, and exponentiation (using ^).
+Result of a division by zero or other illegal operations is undefined.
+
+Selection keywords
+------------------
+
+The following selection keywords are currently available.
+For keywords marked with a plus, additional help is available through
+a subtopic KEYWORD, where KEYWORD is the name of the keyword.
+
+* Keywords that select atoms by an integer property:
+
+  ::
+
+     atomnr
+     mol (synonym for molindex)
+     molecule (synonym for molindex)
+     molindex
+     resid (synonym for resnr)
+     residue (synonym for resindex)
+     resindex
+     resnr
+
+  (use in expressions or like "atomnr 1 to 5 7 9")
+
+* Keywords that select atoms by a numeric property:
+
+  ::
+
+     beta (synonym for betafactor)
+     betafactor
+     charge
+     distance from POS [cutoff REAL]
+     distance from POS [cutoff REAL]
+     mass
+     mindistance from POS_EXPR [cutoff REAL]
+     mindistance from POS_EXPR [cutoff REAL]
+     occupancy
+     x
+     y
+     z
+
+  (use in expressions or like "occupancy 0.5 to 1")
+
+* Keywords that select atoms by a string property:
+
+  ::
+
+     altloc
+     atomname
+     atomtype
+     chain
+     insertcode
+     name (synonym for atomname)
+     pdbatomname
+     pdbname (synonym for pdbatomname)
+     resname
+     type (synonym for atomtype)
+
+  (use like "name PATTERN [PATTERN] ...")
+
+* Additional keywords that directly select atoms:
+
+  ::
+
+     all
+     insolidangle center POS span POS_EXPR [cutoff REAL]
+     none
+     same KEYWORD as ATOM_EXPR
+     within REAL of POS_EXPR
+
+* Keywords that directly evaluate to positions:
+
+  ::
+
+     cog of ATOM_EXPR [pbc]
+     com of ATOM_EXPR [pbc]
+
+  (see also "positions" subtopic)
+
+* Additional keywords:
+
+  ::
+
+     merge POSEXPR
+     POSEXPR permute P1 ... PN
+     plus POSEXPR
+
+Selecting atoms by name - atomname, name, pdbatomname, pdbname
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  name
+  pdbname
+  atomname
+  pdbatomname
+
+These keywords select atoms by name. ``name`` selects atoms using
+the GROMACS atom naming convention.
+For input formats other than PDB, the atom names are matched exactly
+as they appear in the input file. For PDB files, 4 character atom names
+that start with a digit are matched after moving the digit to the end
+(e.g., to match 3HG2 from a PDB file, use ``name HG23``).
+``pdbname`` can only be used with a PDB input file, and selects
+atoms based on the exact name given in the input file, without the
+transformation described above.
+
+``atomname`` and ``pdbatomname`` are synonyms for the above two
+keywords.
+
+Selecting based on distance - dist, distance, mindist, mindistance, within
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  distance from POS [cutoff REAL]
+  mindistance from POS_EXPR [cutoff REAL]
+  within REAL of POS_EXPR
+
+``distance`` and ``mindistance`` calculate the distance from the
+given position(s), the only difference being in that ``distance``
+only accepts a single position, while any number of positions can be
+given for ``mindistance``, which then calculates the distance to the
+closest position.
+``within`` directly selects atoms that are within ``REAL`` of
+``POS_EXPR``.
+
+For the first two keywords, it is possible to specify a cutoff to speed
+up the evaluation: all distances above the specified cutoff are
+returned as equal to the cutoff.
+
+Selecting atoms in a solid angle - insolidangle
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  insolidangle center POS span POS_EXPR [cutoff REAL]
+
+This keyword selects atoms that are within ``REAL`` degrees
+(default=5) of any position in ``POS_EXPR`` as seen from ``POS``
+a position expression that evaluates to a single position), i.e., atoms
+in the solid angle spanned by the positions in ``POS_EXPR`` and
+centered at ``POS``.
+
+Technically, the solid angle is constructed as a union of small cones
+whose tip is at ``POS`` and the axis goes through a point in
+``POS_EXPR``. There is such a cone for each position in
+``POS_EXPR``, and point is in the solid angle if it lies within any
+of these cones. The cutoff determines the width of the cones.
+
+Merging selections - merge, plus
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  POSEXPR merge POSEXPR [stride INT]
+  POSEXPR merge POSEXPR [merge POSEXPR ...]
+  POSEXPR plus POSEXPR [plus POSEXPR ...]
+
+Basic selection keywords can only create selections where each atom
+occurs at most once. The ``merge`` and ``plus`` selection
+keywords can be used to work around this limitation. Both create
+a selection that contains the positions from all the given position
+expressions, even if they contain duplicates.
+The difference between the two is that ``merge`` expects two or more
+selections with the same number of positions, and the output contains
+the input positions selected from each expression in turn, i.e.,
+the output is like A1 B1 A2 B2 and so on. It is also possible to merge
+selections of unequal size as long as the size of the first is a
+multiple of the second one. The ``stride`` parameter can be used
+to explicitly provide this multiplicity.
+``plus`` simply concatenates the positions after each other, and
+can work also with selections of different sizes.
+These keywords are valid only at the selection level, not in any
+subexpressions.
+
+Permuting selections - permute
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  permute P1 ... PN
+
+By default, all selections are evaluated such that the atom indices are
+returned in ascending order. This can be changed by appending
+``permute P1 P2 ... PN`` to an expression.
+The ``Pi`` should form a permutation of the numbers 1 to N.
+This keyword permutes each N-position block in the selection such that
+the i'th position in the block becomes Pi'th.
+Note that it is the positions that are permuted, not individual atoms.
+A fatal error occurs if the size of the selection is not a multiple of n.
+It is only possible to permute the whole selection expression, not any
+subexpressions, i.e., the ``permute`` keyword should appear last in
+a selection.
+
+Selecting atoms by residue number - resid, residue, resindex, resnr
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  resnr
+  resid
+  resindex
+  residue
+
+``resnr`` selects atoms using the residue numbering in the input
+file. ``resid`` is synonym for this keyword for VMD compatibility.
+
+``resindex N`` selects the ``N``th residue starting from the
+beginning of the input file. This is useful for uniquely identifying
+residues if there are duplicate numbers in the input file (e.g., in
+multiple chains).
+``residue`` is a synonym for ``resindex``. This allows
+``same residue as`` to work as expected.
+
+Extending selections - same
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  same KEYWORD as ATOM_EXPR
+
+The keyword ``same`` can be used to select all atoms for which
+the given ``KEYWORD`` matches any of the atoms in ``ATOM_EXPR``.
+Keywords that evaluate to integer or string values are supported.
+
+Selection evaluation and optimization
+-------------------------------------
+
+Boolean evaluation proceeds from left to right and is short-circuiting
+i.e., as soon as it is known whether an atom will be selected, the
+remaining expressions are not evaluated at all.
+This can be used to optimize the selections: you should write the
+most restrictive and/or the most inexpensive expressions first in
+boolean expressions.
+The relative ordering between dynamic and static expressions does not
+matter: all static expressions are evaluated only once, before the first
+frame, and the result becomes the leftmost expression.
+
+Another point for optimization is in common subexpressions: they are not
+automatically recognized, but can be manually optimized by the use of
+variables. This can have a big impact on the performance of complex
+selections, in particular if you define several index groups like this::
+
+  rdist = distance from com of resnr 1 to 5;
+  resname RES and rdist < 2;
+  resname RES and rdist < 4;
+  resname RES and rdist < 6;
+
+Without the variable assignment, the distances would be evaluated three
+times, although they are exactly the same within each selection.
+Anything assigned into a variable becomes a common subexpression that
+is evaluated only once during a frame.
+Currently, in some cases the use of variables can actually lead to a small
+performance loss because of the checks necessary to determine for which
+atoms the expression has already been evaluated, but this should not be
+a major problem.
+
+Selection limitations
+---------------------
+
+* Some analysis programs may require a special structure for the input
+  selections (e.g., some options of ``gmx gangle`` require the index
+  group to be made of groups of three or four atoms).
+  For such programs, it is up to the user to provide a proper selection
+  expression that always returns such positions.
+
+* All selection keywords select atoms in increasing order, i.e., you can
+  consider them as set operations that in the end return the atoms in
+  sorted numerical order.  For example, the following selections select
+  the same atoms in the same order::
+
+    resname RA RB RC
+    resname RB RC RA
+
+  ::
+
+    atomnr 10 11 12 13
+    atomnr 12 13 10 11
+    atomnr 10 to 13
+    atomnr 13 to 10
+
+  If you need atoms/positions in a different order, you can:
+
+  * use external index groups (for some static selections),
+  * use the ``permute`` keyword to change the final order, or
+  * use the ``merge`` or ``plus`` keywords to compose the
+    final selection from multiple distinct selections.
+
+* Due to technical reasons, having a negative value as the first value in
+  expressions like ::
+
+    charge -1 to -0.7
+
+  result in a syntax error. A workaround is to write ::
+
+    charge {-1 to -0.7}
+
+  instead.
+
+* When ``name`` selection keyword is used together with PDB input
+  files, the behavior may be unintuitive. When GROMACS reads in a PDB
+  file, 4 character atom names that start with a digit are transformed
+  such that, e.g., 1HG2 becomes HG21, and the latter is what is matched
+  by the ``name`` keyword. Use ``pdbname`` to match the atom name
+  as it appears in the input PDB file.
+
+Selection examples
+------------------
+
+Below, examples of different types of selections are given.
+
+* Selection of all water oxygens::
+
+    resname SOL and name OW
+
+* Centers of mass of residues 1 to 5 and 10::
+
+    res_com of resnr 1 to 5 10
+
+* All atoms farther than 1 nm of a fixed position::
+
+    not within 1 of [1.2, 3.1, 2.4]
+
+* All atoms of a residue LIG within 0.5 nm of a protein (with a custom name)::
+
+    "Close to protein" resname LIG and within 0.5 of group "Protein"
+
+* All protein residues that have at least one atom within 0.5 nm of a residue LIG::
+
+    group "Protein" and same residue as within 0.5 of resname LIG
+
+* All RES residues whose COM is between 2 and 4 nm from the COM of all of them::
+
+    rdist = res_com distance from com of resname RES
+    resname RES and rdist >= 2 and rdist <= 4
+
+* Selection like with duplicate atoms like C1 C2 C2 C3 C3 C4 ... C8 C9::
+
+    name "C[1-8]" merge name "C[2-9]"
+
+  This can be used with ``gmx distance`` to compute C1-C2, C2-C3 etc.
+  distances.
+
+* Selection with atoms in order C2 C1::
+
+    name C1 C2 permute 2 1
+
+  This can be used with ``gmx gangle`` to get C2->C1 vectors instead of
+  C1->C2.
+
+* Selection with COMs of two index groups::
+
+    com of group 1 plus com of group 2
+
+  This can be used with ``gmx distance`` to compute the distance between
+  these two COMs.
+
+* Fixed vector along x (can be used as a reference with ``gmx gangle``)::
+
+    [0, 0, 0] plus [1, 0, 0]
+
+* The following examples explain the difference between the various
+  position types.  This selection selects a position for each residue
+  where any of the three atoms C[123] has ``x < 2``.  The positions
+  are computed as the COM of all three atoms.
+  This is the default behavior if you just write ``res_com of``. ::
+
+    part_res_com of name C1 C2 C3 and x < 2
+
+  This selection does the same, but the positions are computed as COM
+  positions of whole residues::
+
+    whole_res_com of name C1 C2 C3 and x < 2
+
+  Finally, this selection selects the same residues, but the positions
+  are computed as COM of exactly those atoms atoms that match the
+  ``x < 2`` criterion::
+
+    dyn_res_com of name C1 C2 C3 and x < 2
+
+* Without the ``of`` keyword, the default behavior is different from
+  above, but otherwise the rules are the same::
+
+    name C1 C2 C3 and res_com x < 2
+
+  works as if ``whole_res_com`` was specified, and selects the three
+  atoms from residues whose COM satisfiex ``x < 2``.
+  Using ::
+
+    name C1 C2 C3 and part_res_com x < 2
+
+  instead selects residues based on the COM computed from the C[123] atoms.

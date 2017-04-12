@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guidelines for #include directives &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Style guidelines" href="style.html" />
+    <link rel="next" title="Naming conventions" href="naming.html" />
+    <link rel="prev" title="Guidelines for code formatting" href="formatting.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="naming.html" title="Naming conventions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="formatting.html" title="Guidelines for code formatting"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" accesskey="U">Style guidelines</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="guidelines-for-include-directives">
+<h1>Guidelines for #include directives<a class="headerlink" href="#guidelines-for-include-directives" title="Permalink to this headline">¶</a></h1>
+<p>The following include order is used in GROMACS. An empty line should appear
+between each group, and headers within each group sorted alphabetically.</p>
+<ol class="arabic">
+<li><p class="first">Each <em>source</em> file should include <code class="docutils literal"><span class="pre">gmxpre.h</span></code> first.</p>
+</li>
+<li><p class="first">If a <em>source</em> file has a corresponding header, it should be included next.
+If the header is in the same directory as the source, then it is included
+without any path (i.e., relative to the source), otherwise relative to
+<code class="docutils literal"><span class="pre">src/</span></code> (the latter case should be rare).</p>
+</li>
+<li><p class="first">If the file depends on defines from <code class="docutils literal"><span class="pre">config.h</span></code>, that comes next.</p>
+</li>
+<li><p class="first">This is followed by standard C/C++ headers, grouped as follows:</p>
+<ol class="arabic simple">
+<li>Standard C headers (e.g., <code class="docutils literal"><span class="pre">&lt;stdio.h&gt;</span></code>)</li>
+<li>C++ versions of the above (e.g., <code class="docutils literal"><span class="pre">&lt;cstdio&gt;</span></code>)</li>
+<li>Standard C++ headers (e.g., <code class="docutils literal"><span class="pre">&lt;vector&gt;</span></code>)</li>
+</ol>
+<p>Preferably, only one of the first two groups is present, but this is not
+enforced.</p>
+</li>
+<li><p class="first">This is followed by other system headers: platform-specific headers such as
+<code class="docutils literal"><span class="pre">&lt;unistd.h&gt;</span></code>, as well as external libraries such as
+<code class="docutils literal"><span class="pre">&lt;gtest/gtest.h&gt;</span></code>.</p>
+</li>
+<li><p class="first">GROMACS-specific libraries from <code class="docutils literal"><span class="pre">src/external/</span></code>, such as
+<code class="docutils literal"><span class="pre">&quot;thread_mpi/threads.h&quot;</span></code>.</p>
+</li>
+<li><p class="first">GROMACS-specific headers that are not internal to the including module,
+included with a path relative to <code class="docutils literal"><span class="pre">src/</span></code>.</p>
+</li>
+<li><p class="first">In <em>test</em> files, headers not internal to the module, but specific to
+testing code, are in a separate block at this point, paths relative to
+<code class="docutils literal"><span class="pre">src/</span></code>.</p>
+</li>
+<li><p class="first">Finally, GROMACS headers that are internal to the including module are
+included using a relative path (but never with a path starting with <code class="docutils literal"><span class="pre">../</span></code>;
+such headers go into group 7 instead).  For test files, this group contains
+headers that are internal to tests for that module.</p>
+</li>
+</ol>
+<p>All GROMACS headers are included with quotes (<code class="docutils literal"><span class="pre">&quot;gromacs/utility/path.h&quot;</span></code>),
+other headers with angle brackets (<code class="docutils literal"><span class="pre">&lt;stdio.h&gt;</span></code>).  Headers under <code class="docutils literal"><span class="pre">src/external/</span></code>
+are generally included with quotes (whenever the include path is relative to
+<code class="docutils literal"><span class="pre">src/</span></code>, as well as for thread-MPI and TNG), but larger third-party entities are
+included as if they were provided by the system.  The latter group currently
+includes gtest/gmock.</p>
+<p>If there are any conditionally included headers (typically, only when some
+#defines from <code class="docutils literal"><span class="pre">config.h</span></code> are set), these should be included at the end of
+their respective group.  Note that the automatic checker/sorter script does not
+act on such headers, nor on comments that are between #include statements; it
+is up to the author of the code to put the headers in proper order in such
+cases.  Trailing comments on the same line as #include statements are
+preserved and do not affect the checker/sorter.</p>
+<p>The guidelines are enforced by an automatic checker script that can also
+sort/reformat include statements to follow the guidelines.
+See <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a> for details.</p>
+<p>Enforcing a consistent order and style has a few advantages:</p>
+<ul class="simple">
+<li>It makes it easy at a quick glance to find the dependencies of a file,
+without scanning through a long list of unorganized #includes.</li>
+<li>Including the header corresponding to the source file first makes most
+headers included first in some source file, revealing potential problems
+where headers would not compile unless some other header would be included
+first.  With this order, the person working on the header is most likely to
+see these problems instead of someone else seeing them later when
+refactoring unrelated code.</li>
+<li>Consistent usage of paths in #include directives makes it easy to use
+<code class="docutils literal"><span class="pre">grep</span></code> to find all uses of a header, as well as all include dependencies
+between two modules.</li>
+<li>An automatic script can be used to re-establish clean code after
+semi-automatic refactoring like renaming an include file with <code class="docutils literal"><span class="pre">sed</span></code>, without
+causing other unnecessary changes.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="formatting.html"
+                        title="previous chapter">Guidelines for code formatting</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="naming.html"
+                        title="next chapter">Naming conventions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/includestyle.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="naming.html" title="Naming conventions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="formatting.html" title="Guidelines for code formatting"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" >Style guidelines</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

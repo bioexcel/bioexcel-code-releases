@@ -1,0 +1,107 @@
+.. _gmx x2top:
+
+gmx x2top
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx x2top [:strong:`-f` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-o` :emphasis:`[<.top>]`] [:strong:`-r` :emphasis:`[<.rtp>]`]
+              [:strong:`-ff` :emphasis:`<string>`] [:strong:`-[no]v`] [:strong:`-nexcl` :emphasis:`<int>`] [:strong:`-[no]H14`]
+              [:strong:`-[no]alldih`] [:strong:`-[no]remdih`] [:strong:`-[no]pairs`] [:strong:`-name` :emphasis:`<string>`]
+              [:strong:`-[no]pbc`] [:strong:`-[no]pdbq`] [:strong:`-[no]param`] [:strong:`-[no]round`]
+              [:strong:`-kb` :emphasis:`<real>`] [:strong:`-kt` :emphasis:`<real>`] [:strong:`-kp` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx x2top`` generates a primitive topology from a coordinate file.
+The program assumes all hydrogens are present when defining
+the hybridization from the atom name and the number of bonds.
+The program can also make an :ref:`.rtp <rtp>` entry, which you can then add
+to the :ref:`.rtp <rtp>` database.
+
+When ``-param`` is set, equilibrium distances and angles
+and force constants will be printed in the topology for all
+interactions. The equilibrium distances and angles are taken
+from the input coordinates, the force constant are set with
+command line options.
+The force fields somewhat supported currently are:
+
+G53a5  GROMOS96 53a5 Forcefield (official distribution)
+
+oplsaa OPLS-AA/L all-atom force field (2001 aminoacid dihedrals)
+
+The corresponding data files can be found in the library directory
+with name ``atomname2type.n2t``. Check Chapter 5 of the manual for more
+information about file formats. By default, the force field selection
+is interactive, but you can use the ``-ff`` option to specify
+one of the short names above on the command line instead. In that
+case ``gmx x2top`` just looks for the corresponding file.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.gro/.g96/...>] (conf.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp :ref:`tpr`
+
+Options to specify output files:
+
+``-o`` [<.top>] (out.top) (Optional)
+    Topology file
+``-r`` [<.rtp>] (out.rtp) (Optional)
+    Residue Type file used by pdb2gmx
+
+Other options:
+
+``-ff`` <string> (oplsaa)
+    Force field for your simulation. Type "select" for interactive selection.
+``-[no]v``  (no)
+    Generate verbose output in the top file.
+``-nexcl`` <int> (3)
+    Number of exclusions
+``-[no]H14``  (yes)
+    Use 3rd neighbour interactions for hydrogen atoms
+``-[no]alldih``  (no)
+    Generate all proper dihedrals
+``-[no]remdih``  (no)
+    Remove dihedrals on the same bond as an improper
+``-[no]pairs``  (yes)
+    Output 1-4 interactions (pairs) in topology file
+``-name`` <string> (ICE)
+    Name of your molecule
+``-[no]pbc``  (yes)
+    Use periodic boundary conditions.
+``-[no]pdbq``  (no)
+    Use the B-factor supplied in a :ref:`.pdb <pdb>` file for the atomic charges
+``-[no]param``  (yes)
+    Print parameters in the output
+``-[no]round``  (yes)
+    Round off measured values
+``-kb`` <real> (400000)
+    Bonded force constant (kJ/mol/nm^2)
+``-kt`` <real> (400)
+    Angle force constant (kJ/mol/rad^2)
+``-kp`` <real> (5)
+    Dihedral angle force constant (kJ/mol/rad^2)
+
+Known Issues
+------------
+
+* The atom type selection is primitive. Virtually no chemical knowledge is used
+* Periodic boundary conditions screw up the bonding
+* No improper dihedrals are generated
+* The atoms to atomtype translation table is incomplete (``atomname2type.n2t`` file in the data directory). Please extend it and send the results back to the GROMACS crew.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

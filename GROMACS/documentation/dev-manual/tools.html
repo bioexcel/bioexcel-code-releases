@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development-time tools &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Using Doxygen" href="doxygen.html" />
+    <link rel="prev" title="Allowed language features" href="language-features.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="doxygen.html" title="Using Doxygen"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="language-features.html" title="Allowed language features"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="development-time-tools">
+<h1>Development-time tools<a class="headerlink" href="#development-time-tools" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doxygen.html">Using Doxygen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#documentation-flavors">Documentation flavors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#building-the-documentation">Building the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#general-guidelines-for-doxygen-markup">General guidelines for Doxygen markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#gromacs-specifics">GROMACS specifics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#documenting-specific-code-constructs">Documenting specific code constructs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jenkins.html">Understanding Jenkins builds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jenkins.html#pre-submit-verification">Pre-submit verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jenkins.html#on-demand-builds">On-demand builds</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="releng/index.html">releng repository</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="releng/releng.html">Jenkins scripts (releng Python module)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/workflow.html">Workflow build overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/releng-api.html">releng Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/jenkins-config.html">Jenkins configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/jenkins-ui.html">Interacting with builds in Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/jenkins-howto.html">How to do common things with Jenkins builds</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gmxtree.html">Source tree checker scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gmxtree.html#checker-details">Checker details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmxtree.html#include-order-sorting">Include order sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmxtree.html#include-dependency-graphs">Include dependency graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uncrustify.html">Automatic source code formatting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#setting-up-uncrustify">Setting up uncrustify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#what-is-automatically-formatted">What is automatically formatted?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#scripts">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#using-git-filters">Using git filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testutils.html">Unit testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testutils.html#finding-building-and-running">Finding, building and running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testutils.html#unit-testing-framework">Unit testing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testutils.html#getting-started-with-new-tests">Getting started with new tests</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="change-management">
+<h2>Change management<a class="headerlink" href="#change-management" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>git</dt>
+<dd><p class="first">GROMACS uses git as the version control system.
+Instructions for setting up git for GROMACS, as well as tips and tricks for
+its use, can be found on the wiki: <a class="reference external" href="http://www.gromacs.org/index.php?title=Developer_Zone/Git/Git_Tips_%26_Tricks">Git Tips &amp; Tricks</a></p>
+<p class="last">Other basic tutorial material for <code class="docutils literal"><span class="pre">git</span></code> can be found on the web.</p>
+</dd>
+<dt>Gerrit</dt>
+<dd>All code changes go through a code review system at
+<a class="reference external" href="http://gerrit.gromacs.org">http://gerrit.gromacs.org</a>.</dd>
+<dt>Jenkins</dt>
+<dd>All changes pushed to Gerrit are automatically compiled and otherwise
+checked on various platforms using a continuous integration system at
+<a class="reference external" href="http://jenkins.gromacs.org">http://jenkins.gromacs.org</a>.
+<a class="reference internal" href="jenkins.html"><span class="doc">Understanding Jenkins builds</span></a> documents how Jenkins interacts with the build system,
+providing information on how to replicate the builds Jenkins does (e.g., to
+diagnose issues).
+<a class="reference internal" href="releng/index.html"><span class="doc">releng repository</span></a> provides more information on the technical implementation
+of the builds.</dd>
+<dt>Redmine</dt>
+<dd>Bugs and issues, as well as some random features and discussions,
+are tracked at <a class="reference external" href="http://redmine.gromacs.org">http://redmine.gromacs.org</a>.</dd>
+</dl>
+</div>
+<div class="section" id="build-system">
+<h2>Build system<a class="headerlink" href="#build-system" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>CMake</dt>
+<dd>Main tool used in the build system.</dd>
+</dl>
+<p>packaging for distribution (CPack)</p>
+<dl class="docutils">
+<dt>unit testing (CTest)</dt>
+<dd>GROMACS uses a unit testing framework based on Google C++ Testing
+Framework (gtest) and CTest.  All unit tests are automatically run on Jenkins
+for each commit.
+Details can be found on a separate page on <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a>.</dd>
+</dl>
+<p>regression tests</p>
+<dl class="docutils">
+<dt>cppcheck</dt>
+<dd><a class="reference external" href="http://cppcheck.sourceforge.net">cppcheck</a> is used for static code
+analysis, and is run automatically on Jenkins for each commit.  Different rules
+are used for C and C++ code (with stricter checking for C++ code, as that is
+newer).  The build system provides a <code class="docutils literal"><span class="pre">cppcheck</span></code> target (produced from
+<code class="docutils literal"><span class="pre">tests/CppCheck.cmake</span></code>) to run the tool.  This target is used also by Jenkins.</dd>
+</dl>
+<p>clang static analyzer</p>
+<p>coverage</p>
+</div>
+<div class="section" id="code-formatting-and-style">
+<span id="dev-formatting-tools"></span><h2>Code formatting and style<a class="headerlink" href="#code-formatting-and-style" title="Permalink to this headline">¶</a></h2>
+<p>The tools and scripts listed below are used to automatically check/apply
+formatting that follows GROMACS style guidelines described on a separate page:
+<a class="reference internal" href="style.html"><span class="doc">Style guidelines</span></a>.</p>
+<dl class="docutils">
+<dt>uncrustify</dt>
+<dd><a class="reference external" href="http://uncrustify.sourceforge.net">uncrustify</a> is used for automatic
+indentation and other formatting of the source code to follow
+<a class="reference internal" href="formatting.html"><span class="doc">Guidelines for code formatting</span></a>.  All code must remain invariant under uncrustify
+with the config at <code class="docutils literal"><span class="pre">admin/uncrustify.cfg</span></code>.  A patched version of uncrustify is
+used.  See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/copyright.py</span></code></dt>
+<dd>This Python script adds and formats copyright headers in source files.
+<code class="docutils literal"><span class="pre">uncrustify.sh</span></code> (see below) uses the script to check/update copyright years on
+changed files automatically.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/uncrustify.sh</span></code></dt>
+<dd>This <code class="docutils literal"><span class="pre">bash</span></code> script runs uncrustify and <code class="docutils literal"><span class="pre">copyright.py</span></code> for all
+files that have local changes and checks that they conform to the prescribed
+style.  Optionally, the script can also apply changes to make the files
+conform.
+This script is automatically run by Jenkins to ensure that all commits adhere
+to <a class="reference internal" href="formatting.html"><span class="doc">Guidelines for code formatting</span></a>.  If the uncrustify job does not succeed, it
+means that this script has something to complain.
+See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/git-pre-commit</span></code></dt>
+<dd>This sample git pre-commit hook can be used if one wants to apply
+<code class="docutils literal"><span class="pre">uncrustify.sh</span></code> automatically before every commit to check for formatting
+issues.  See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt><code class="docutils literal"><span class="pre">docs/doxygen/includesorter.py</span></code></dt>
+<dd>This Python script sorts and reformats #include directives according to
+the guidelines at <a class="reference internal" href="includestyle.html"><span class="doc">Guidelines for #include directives</span></a>.  Details are documented on a
+separate page (with the whole suite of Python scripts used for source code
+checks): <a class="reference internal" href="gmxtree.html#dev-include-sorter"><span class="std std-ref">Include order sorting</span></a>.</dd>
+<dt>include directive checker</dt>
+<dd>In its present form, the above include sorter script cannot be conveniently
+applied in <code class="docutils literal"><span class="pre">uncrustify.sh</span></code>.  To check for issues, it is instead integrated into
+a <code class="docutils literal"><span class="pre">check-source</span></code> build target.  When this target is built, it also checks for
+include formatting issues.  Internally, it uses the sorter script.  This check
+is run in Jenkins as part of the Documentation job.
+Details for the checking mechanism are on a separate page (common for several
+checkers): <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/reformat_all.sh</span></code></dt>
+<dd>This <code class="docutils literal"><span class="pre">bash</span></code> script runs uncrustify/<code class="docutils literal"><span class="pre">copyright.py</span></code>/include sorter
+on all relevant files in the source tree (or in a particular directory).
+The script can also produce the list of files where these scripts are applied,
+for use with other scripts.  See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt>git attributes</dt>
+<dd>git attributes (specified in <code class="docutils literal"><span class="pre">.gitattributes</span></code> files) are used to annotate
+which files are subject to automatic formatting checks (and for automatic
+reformatting by the above scripts).  See <code class="docutils literal"><span class="pre">man</span> <span class="pre">gitattributes</span></code> for an overview of
+the mechanism.  We use the <code class="docutils literal"><span class="pre">filter</span></code> attribute to specify the type of automatic
+checking/formatting to apply.  Custom attributes are used for specifying some
+build system dependencies for easier processing in CMake.</dd>
+</dl>
+<p>include-what-you-use</p>
+</div>
+<div class="section" id="documentation-generation">
+<h2>Documentation generation<a class="headerlink" href="#documentation-generation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="building-the-gromacs-documentation">
+<h3>Building the GROMACS documentation<a class="headerlink" href="#building-the-gromacs-documentation" title="Permalink to this headline">¶</a></h3>
+<p>For now, there are multiple components, formats and tools for the
+GROMACS documentation, which is aimed primarily at version-specific
+deployment of the complete documentation on the website.</p>
+<p>This is quite complex, because the dependencies for building the
+documentation must not get in the way of building the code
+(particularly when cross-compiling), and yet the code must build and
+run in order for some documentation to be generated. Also, man page
+documentation (and command-line completions) must be built from the
+wrapper binary, in order to be bundled into the tarball.</p>
+<p>The outputs of interest to most developers are generally produced in the
+<code class="docutils literal"><span class="pre">docs/html/</span></code> subdirectory of the build tree.</p>
+<p>You need to enable at least some of the following CMake options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GMX_BUILD_MANUAL</span></code></dt>
+<dd>Option needed for trying to build the PDF reference manual
+(requires LaTeX and ImageMagick)</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_BUILD_HELP</span></code></dt>
+<dd>Option that controls 1) whether shell completions are built automatically,
+and 2) whether built man pages are installed if available (the user still needs
+to build the <code class="docutils literal"><span class="pre">man</span></code> target manually before installing)</dd>
+</dl>
+<p>Some documentation cannot be built if the CMake option
+<code class="docutils literal"><span class="pre">GMX_BUILD_MDRUN_ONLY</span></code> is enabled, or when cross-compiling, as it
+requires executing the <code class="docutils literal"><span class="pre">gmx</span></code> binary.</p>
+<p>The following make targets are the most useful:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">manual</span></code></dt>
+<dd>Builds the PDF reference manual</dd>
+<dt><code class="docutils literal"><span class="pre">man</span></code></dt>
+<dd>Makes man pages from the wrapper binary with Sphinx</dd>
+<dt><code class="docutils literal"><span class="pre">doxygen-all</span></code></dt>
+<dd>Makes the code documentation with Doxygen</dd>
+<dt><code class="docutils literal"><span class="pre">install-guide</span></code></dt>
+<dd>Makes the INSTALL file for the tarball with Sphinx</dd>
+<dt><code class="docutils literal"><span class="pre">webpage-sphinx</span></code></dt>
+<dd>Makes all the components of the GROMACS webpage that require Sphinx,
+including install guide and user guide.</dd>
+<dt><code class="docutils literal"><span class="pre">webpage</span></code></dt>
+<dd><p class="first">Makes the complete GROMACS webpage, requires everything. When complete,
+you can browse <code class="docutils literal"><span class="pre">docs/html/index.html</span></code> to find everything.</p>
+<p class="last">If built from a release tarball, the <code class="docutils literal"><span class="pre">SOURCE_MD5SUM</span></code>,
+<code class="docutils literal"><span class="pre">SOURCE_TARBALL</span></code>, <code class="docutils literal"><span class="pre">REGRESSIONTESTS_MD5SUM</span></code>, and
+<code class="docutils literal"><span class="pre">REGRESSIONTESTS_TARBALL</span></code> CMake variables can be set to pass in
+the md5sum values and names of those tarballs, for embedding into the
+final deployment to the GROMACS website.</p>
+</dd>
+</dl>
+<p>The following tools are used in building parts of the documentation.</p>
+<dl class="docutils">
+<dt>Doxygen</dt>
+<dd><a class="reference external" href="http://www.doxygen.org">Doxygen</a> is used to extract documentation from
+source code comments.  Also some other overview
+content is laid out by Doxygen from Markdown source files.  Currently, version
+1.8.5 is required for a warning-free build.  Thorough
+explanation of the Doxygen setup and instructions for documenting the source
+code can be found on a separate page: <a class="reference internal" href="doxygen.html"><span class="doc">Using Doxygen</span></a>.</dd>
+<dt>graphviz (dot)</dt>
+<dd>The Doxygen documentation uses <code class="docutils literal"><span class="pre">dot</span></code> from <a class="reference external" href="http://www.graphviz.org">graphviz</a> for building some graphs.  The tool is not
+mandatory, but the Doxygen build will produce warnings if it is not
+available, and the graphs are omitted from the documentation.</dd>
+<dt>mscgen</dt>
+<dd>The Doxygen documentation uses <a class="reference external" href="http://www.mcternan.me.uk/mscgen/">mscgen</a> for building some graphs.  As with <code class="docutils literal"><span class="pre">dot</span></code>,
+the tool is not mandatory, but not having it available will result in warnings
+and missing graphs.</dd>
+<dt>Doxygen issue checker</dt>
+<dd>Doxygen produces warnings about some incorrect uses and wrong
+documentation, but there are many common mistakes that it does not detect.
+GROMACS uses an additional, custom Python script to check for such issues.
+This is most easily invoked through a <code class="docutils literal"><span class="pre">check-source</span></code> target in the build system.
+The script also checks that documentation for a header matches its use in the
+source code (e.g., that a header documented as internal to a module is not
+actually used from outside the module).  These checks are run in Jenkins as
+part of the Documentation job.  Details for the custom checker are on a
+separate page (common for several checkers): <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a>.</dd>
+<dt>module dependency graphs</dt>
+<dd>GROMACS uses a custom Python script to generate an annotated dependency
+graph for the code, showing #include dependencies between modules.
+The generated graph is embedded into the Doxygen documentation:
+<a class="reference external" href="../doxygen/html-lib/page_modulegraph.xhtml">Module dependency graph</a>
+This script shares most of its implementation with the custom checkers, and is
+documented on the same page: <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a>.</dd>
+</dl>
+<dl class="docutils">
+<dt>Sphinx</dt>
+<dd><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>; at least version 1.2.3) is used
+for building some parts of the documentation from reStructuredText
+source files.</dd>
+<dt>LaTeX</dt>
+<dd>Also requires ImageMagick for converting graphics file formats.</dd>
+</dl>
+<p>linkchecker</p>
+<dl class="docutils">
+<dt>documentation exported from source files</dt>
+<dd>For man pages, HTML documentation of command-line options for executables,
+and for shell completions, the <code class="docutils literal"><span class="pre">gmx</span></code> binary has explicit C++ code to export
+the information required.  The build system provides targets that then invoke
+the built <code class="docutils literal"><span class="pre">gmx</span></code> binary to produce these documentation items.  The generated
+items are packaged into source tarballs so that this is not necessary when
+building from a source distribution (since in general, it will not work in
+cross-compilation scenarios).  To build and install these from a git
+distribution, explicit action is required.
+See <a class="reference external" href="../doxygen/html-lib/page_wrapperbinary.xhtml">Doxygen documentation on the wrapper binary</a>
+for some additional details.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development-time tools</a><ul>
+<li><a class="reference internal" href="#change-management">Change management</a></li>
+<li><a class="reference internal" href="#build-system">Build system</a></li>
+<li><a class="reference internal" href="#code-formatting-and-style">Code formatting and style</a></li>
+<li><a class="reference internal" href="#documentation-generation">Documentation generation</a><ul>
+<li><a class="reference internal" href="#building-the-gromacs-documentation">Building the GROMACS documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="language-features.html"
+                        title="previous chapter">Allowed language features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="doxygen.html"
+                        title="next chapter">Using Doxygen</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/tools.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="doxygen.html" title="Using Doxygen"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="language-features.html" title="Allowed language features"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

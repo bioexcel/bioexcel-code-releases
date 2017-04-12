@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="sparsematrix_8cpp" kind="file">
+    <compoundname>sparsematrix.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="sparsematrix_8h" local="yes">sparsematrix.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">cassert</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <incdepgraph>
+      <node id="9466">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="9467" relation="include">
+        </childnode>
+        <childnode refid="9468" relation="include">
+        </childnode>
+      </node>
+      <node id="9469">
+        <label>stdint.h</label>
+      </node>
+      <node id="9464">
+        <label>stdlib.h</label>
+      </node>
+      <node id="9462">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="9465">
+        <label>cassert</label>
+      </node>
+      <node id="9467">
+        <label>stddef.h</label>
+      </node>
+      <node id="9468">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="9469" relation="include">
+        </childnode>
+        <childnode refid="9470" relation="include">
+        </childnode>
+      </node>
+      <node id="9461">
+        <label>src/gromacs/linearalgebra/sparsematrix.cpp</label>
+        <link refid="sparsematrix.cpp"/>
+        <childnode refid="9462" relation="include">
+        </childnode>
+        <childnode refid="9463" relation="include">
+        </childnode>
+        <childnode refid="9464" relation="include">
+        </childnode>
+        <childnode refid="9465" relation="include">
+        </childnode>
+        <childnode refid="9466" relation="include">
+        </childnode>
+      </node>
+      <node id="9463">
+        <label>stdio.h</label>
+      </node>
+      <node id="9470">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="sparsematrix_8cpp_1ab4a490b4c350dbbad29fa9c1e9303e3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+        <definition>gmx_sparsematrix_t* gmx_sparsematrix_init</definition>
+        <argsstring>(int nrow)</argsstring>
+        <name>gmx_sparsematrix_init</name>
+        <param>
+          <type>int</type>
+          <declname>nrow</declname>
+        </param>
+        <briefdescription>
+<para>Allocate a new sparse matrix structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>The number of rows is used to allocate the index array entry. Obviously you can reallocate these later yourself if necessary - this is a convenience routine.</para><para>By default, the compressed_symmetric flag in the structure will be FALSE. Set it to TRUE manually if you are only storing either the upper or lower half of the matrix. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="49" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="49" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="sparsematrix_8cpp_1ae1265238816409b751cd8b7b27068e48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_sparsematrix_destroy</definition>
+        <argsstring>(gmx_sparsematrix_t *A)</argsstring>
+        <name>gmx_sparsematrix_destroy</name>
+        <param>
+          <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+<para>Release all resources used by a sparse matrix structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>All arrays in the structure will be freed, and the structure itself. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="73" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="73" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="sparsematrix_8cpp_1ab5fd625fd699ce3c53d8fbc259d21316" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_sparsematrix_print</definition>
+        <argsstring>(FILE *stream, gmx_sparsematrix_t *A)</argsstring>
+        <name>gmx_sparsematrix_print</name>
+        <param>
+          <type>FILE *</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+<para>Print sparse matrix to a stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>Mainly used for debugging. Be warned that the real sparse matrices used in Gromacs runs can be HUGE (think 100,000 rows). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="96" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="96" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="sparsematrix_8cpp_1ae2eadd66cbe6d28c7458dda42744161d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real gmx_sparsematrix_value</definition>
+        <argsstring>(gmx_sparsematrix_t *A, int row, int col)</argsstring>
+        <name>gmx_sparsematrix_value</name>
+        <param>
+          <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="133" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="133" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="sparsematrix_8cpp_1a443eb04e01bb112388aba20923fe5005" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_sparsematrix_increment_value</definition>
+        <argsstring>(gmx_sparsematrix_t *A, int row, int col, real difference)</argsstring>
+        <name>gmx_sparsematrix_increment_value</name>
+        <param>
+          <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>col</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>difference</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="162" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="162" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="sparsematrix_8cpp_1ae00bf4b167df615c90fe26cd1a243453" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int compare_columns</definition>
+        <argsstring>(const void *v1, const void *v2)</argsstring>
+        <name>compare_columns</name>
+        <param>
+          <type>const void *</type>
+          <declname>v1</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>v2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="212" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="212" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="sparsematrix_8cpp_1ac3c58041a48f0f821ef71da0d6fbe0fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_sparsematrix_compress</definition>
+        <argsstring>(gmx_sparsematrix_t *A)</argsstring>
+        <name>gmx_sparsematrix_compress</name>
+        <param>
+          <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+<para>Sort elements in each column and remove zeros. </para>        </briefdescription>
+        <detaileddescription>
+<para>Sparse matrix access is faster when the elements are stored in increasing column order in each row. In some cases previously non-zero elements will be zero after adding more data, and this routine also removes those entries to reduce the storage requirements.</para><para>It never hurts to run this routine if you have been updating the matrix... </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="233" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="233" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="sparsematrix_8cpp_1ae3d30c00f680e4e669708d249ce9376f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_sparsematrix_vector_multiply</definition>
+        <argsstring>(gmx_sparsematrix_t *A, real *x, real *y)</argsstring>
+        <name>gmx_sparsematrix_vector_multiply</name>
+        <param>
+          <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>Sparse matrix vector multiplication. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calculate y = A * x for a sparse matrix A. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" line="268" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp" bodystart="268" bodyend="319"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/linearalgebra/sparsematrix.cpp"/>
+  </compounddef>
+</doxygen>

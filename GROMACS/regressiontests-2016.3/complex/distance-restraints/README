@@ -1,0 +1,11 @@
+NMR distance restraints with multiple pairs
+
+NMR distance restraints are more complex than other bonded interactions
+as they can have (and do have in this test) multiple pairs per restraint.
+This requires a two step calculation process with communication.
+This test checks the computation of the violation energy and sum of
+violations and should be run with both MPI and OpenMP parallelization.
+Note that it does not use time averaging, since it is not supported
+with MPI (and probably obsolete anyhow, as ensemble averaging is preferred).
+Note that it does not write distance restraint pair output, as that
+is not supported with MPI.

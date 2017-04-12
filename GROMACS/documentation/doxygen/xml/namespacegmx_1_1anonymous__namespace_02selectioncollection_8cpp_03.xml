@@ -1,0 +1,403 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03" kind="namespace">
+    <compoundname>gmx::anonymous_namespace{selectioncollection.cpp}</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03_1a4725dbb58fb88906d3e3f60fabad6903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::anonymous_namespace{selectioncollection.cpp}::promptLine</definition>
+        <argsstring>(TextInputStream *inputStream, TextWriter *statusWriter, std::string *line)</argsstring>
+        <name>promptLine</name>
+        <param>
+          <type><ref refid="classgmx_1_1TextInputStream" kindref="compound">TextInputStream</ref> *</type>
+          <declname>inputStream</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1TextWriter" kindref="compound">TextWriter</ref> *</type>
+          <declname>statusWriter</declname>
+        </param>
+        <param>
+          <type>std::string *</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Reads a single selection line from stdin. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">inputStream</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stream to read from (typically the <ref refid="classgmx_1_1StandardInputStream" kindref="compound">StandardInputStream</ref>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">statusWriter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stream to print prompts to (if NULL, no output is done). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The read line in stored here. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if something was read, false if at end of input.</para></simplesect>
+Handles line continuation, reading also the continuing line(s) in one call. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="140" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" bodystart="140" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03_1a19941d3c23f9ccc9a00c280cf2a4e058" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::anonymous_namespace{selectioncollection.cpp}::runParserLoop</definition>
+        <argsstring>(yyscan_t scanner, _gmx_sel_yypstate *parserState, bool bInteractive)</argsstring>
+        <name>runParserLoop</name>
+        <param>
+          <type>yyscan_t</type>
+          <declname>scanner</declname>
+        </param>
+        <param>
+          <type>_gmx_sel_yypstate *</type>
+          <declname>parserState</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bInteractive</declname>
+        </param>
+        <briefdescription>
+<para>Helper function for tokenizing the input and pushing them to the parser. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>scanner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tokenizer data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>parserState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parser data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bInteractive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to operate in interactive mode.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Repeatedly reads tokens using <computeroutput>scanner</computeroutput> and pushes them to the parser with <computeroutput>parserState</computeroutput> until there is no more input, or until enough input is given (only in interactive mode). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="186" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" bodystart="186" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03_1ab287e09e32b67a7d8eb6c426cbea825e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::anonymous_namespace{selectioncollection.cpp}::printCurrentStatus</definition>
+        <argsstring>(TextWriter *writer, gmx_ana_selcollection_t *sc, gmx_ana_indexgrps_t *grps, size_t firstSelection, int maxCount, const std::string &amp;context, bool bFirst)</argsstring>
+        <name>printCurrentStatus</name>
+        <param>
+          <type><ref refid="classgmx_1_1TextWriter" kindref="compound">TextWriter</ref> *</type>
+          <declname>writer</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__selcollection__t" kindref="compound">gmx_ana_selcollection_t</ref> *</type>
+          <declname>sc</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__indexgrps__t" kindref="compound">gmx_ana_indexgrps_t</ref> *</type>
+          <declname>grps</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>firstSelection</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxCount</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bFirst</declname>
+        </param>
+        <briefdescription>
+<para>Print current status in response to empty line in interactive input. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">writer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Writer to use for the output. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> collection data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">grps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Available index groups. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">firstSelection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of first selection from this interactive session. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">maxCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of selections. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context to print for what the selections are for. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bFirst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether this is the header that is printed before any user input.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Prints the available index groups and currently provided selections. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="221" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" bodystart="221" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03_1abe93236807caafdef3d12bf607712457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::anonymous_namespace{selectioncollection.cpp}::printHelp</definition>
+        <argsstring>(TextWriter *writer, gmx_ana_selcollection_t *sc, const std::string &amp;line)</argsstring>
+        <name>printHelp</name>
+        <param>
+          <type><ref refid="classgmx_1_1TextWriter" kindref="compound">TextWriter</ref> *</type>
+          <declname>writer</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__selcollection__t" kindref="compound">gmx_ana_selcollection_t</ref> *</type>
+          <declname>sc</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Prints selection help in interactive selection input. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">writer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Writer to use for the output. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> collection data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Line of user input requesting help (starting with <computeroutput>help</computeroutput>).</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Initializes the selection help if not yet initialized, and finds the help topic based on words on the input line. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="283" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" bodystart="283" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03_1ad8946156530ea3a73921de6735da8202" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespacegmx_1ac852a0801cf49723903e23bc77a32163" kindref="member">SelectionList</ref></type>
+        <definition>SelectionList gmx::anonymous_namespace{selectioncollection.cpp}::runParser</definition>
+        <argsstring>(yyscan_t scanner, TextInputStream *inputStream, bool bInteractive, int maxnr, const std::string &amp;context)</argsstring>
+        <name>runParser</name>
+        <param>
+          <type>yyscan_t</type>
+          <declname>scanner</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1TextInputStream" kindref="compound">TextInputStream</ref> *</type>
+          <declname>inputStream</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bInteractive</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxnr</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+<para>Helper function that runs the parser once the tokenizer has been initialized. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">scanner</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scanner data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inputStream</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stream to use for input (currently only with <computeroutput>bInteractive==true</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bInteractive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to use a line-based reading algorithm designed for interactive input. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">maxnr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of selections to parse (if -1, parse as many as provided by the user). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Context to print for what the selections are for. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Vector of parsed selections. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if there is a parsing error.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Used internally to implement parseInteractive(), parseFromFile() and parseFromString(). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="329" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" bodystart="329" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03_1a48b801436e4436783f4215cee575efe0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::anonymous_namespace{selectioncollection.cpp}::checkExternalGroups</definition>
+        <argsstring>(const SelectionTreeElementPointer &amp;root, int natoms, ExceptionInitializer *errors)</argsstring>
+        <name>checkExternalGroups</name>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ExceptionInitializer" kindref="compound">ExceptionInitializer</ref> *</type>
+          <declname>errors</declname>
+        </param>
+        <briefdescription>
+<para>Checks that index groups have valid atom indices. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Root of selection tree to process. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">natoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of atoms that the selections are set to evaluate. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>errors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Object for reporting any error messages. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Recursively checks the selection tree for index groups. Each found group is checked that it only contains atom indices that match the topology/maximum number of atoms set for the selection collection. Any issues are reported to <computeroutput>errors</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="428" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" bodystart="428" bodyend="450"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02selectioncollection_8cpp_03_1a5a0058bd9d5bbd93d3de11316f49b44e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classgmx_1_1TextWriter" kindref="compound">TextWriter</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;TextWriter&gt; gmx::anonymous_namespace{selectioncollection.cpp}::initStatusWriter</definition>
+        <argsstring>(TextOutputStream *statusStream)</argsstring>
+        <name>initStatusWriter</name>
+        <param>
+          <type><ref refid="classgmx_1_1TextOutputStream" kindref="compound">TextOutputStream</ref> *</type>
+          <declname>statusStream</declname>
+        </param>
+        <briefdescription>
+<para>Helper function to initialize status writer for interactive selection parsing. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="689" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" bodystart="689" bodyend="698"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection.cpp" line="128" column="1"/>
+  </compounddef>
+</doxygen>

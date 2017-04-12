@@ -1,0 +1,732 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1OptionStorageTemplate" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::OptionStorageTemplate</compoundname>
+    <basecompoundref refid="classgmx_1_1AbstractOptionStorage" prot="public" virt="non-virtual">gmx::AbstractOptionStorage</basecompoundref>
+    <includes local="no">gromacs/options/optionstoragetemplate.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>T</declname>
+        <defname>T</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgmx_1_1OptionStorageTemplate_1a331a2ea6e35627d2aef4ff1409492167" prot="public" static="no">
+        <type><ref refid="classgmx_1_1OptionStorageTemplate" kindref="compound">OptionStorageTemplate</ref>&lt; T &gt;</type>
+        <definition>typedef OptionStorageTemplate&lt;T&gt; gmx::OptionStorageTemplate&lt; T &gt;::MyBase</definition>
+        <argsstring></argsstring>
+        <name>MyBase</name>
+        <briefdescription>
+<para>Alias for the template class for use in base classes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="90" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" prot="public" static="no">
+        <type>std::vector&lt; T &gt;</type>
+        <definition>typedef std::vector&lt;T&gt; gmx::OptionStorageTemplate&lt; T &gt;::ValueList</definition>
+        <argsstring></argsstring>
+        <name>ValueList</name>
+        <briefdescription>
+<para>Type of the container that contains the current values. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="92" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1OptionStorageTemplate_1a99c93dde2ed0c96140d7cf988468b2cf" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" kindref="member">ValueList</ref></type>
+        <definition>ValueList gmx::OptionStorageTemplate&lt; T &gt;::setValues_</definition>
+        <argsstring></argsstring>
+        <name>setValues_</name>
+        <briefdescription>
+<para>Vector for temporary storage of values before commitSet() is called. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="284" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1OptionStorageTemplate_1aeab35f907cd422b9652fa3a30045cb70" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" kindref="member">ValueList</ref> *</type>
+        <definition>ValueList* gmx::OptionStorageTemplate&lt; T &gt;::values_</definition>
+        <argsstring></argsstring>
+        <name>values_</name>
+        <briefdescription>
+<para>Vector for primary storage of option values. </para>        </briefdescription>
+        <detaileddescription>
+<para>Is never NULL; points either to externally provided vector, or an internally allocated one. The allocation is performed by the constructor.</para><para>Primarily, modifications to values are done only to this storage, and other storage locations are updated only when <ref refid="classgmx_1_1OptionStorageTemplate_1a5ee640e7f9dfcda26f44882bac46e5da" kindref="member">refreshValues()</ref> is called. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="296" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1OptionStorageTemplate_1a9240ba99ebeabe9f4a5d1d26c3f20673" prot="private" static="no" mutable="no">
+        <type>T *</type>
+        <definition>T* gmx::OptionStorageTemplate&lt; T &gt;::store_</definition>
+        <argsstring></argsstring>
+        <name>store_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="297" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="297" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1OptionStorageTemplate_1a0d8a444b7b345f122ca6a9746d01f7f9" prot="private" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* gmx::OptionStorageTemplate&lt; T &gt;::countptr_</definition>
+        <argsstring></argsstring>
+        <name>countptr_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="298" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="298" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1OptionStorageTemplate_1a59b74cb80fbd92ff00e76ccf5657ff0c" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" kindref="member">ValueList</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;ValueList&gt; gmx::OptionStorageTemplate&lt; T &gt;::ownedValues_</definition>
+        <argsstring></argsstring>
+        <name>ownedValues_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="300" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="300" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1OptionStorageTemplate_1acfd633fdcd0feee4c0ac88e43aa9e20f" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; T &gt;</type>
+        <definition>std::unique_ptr&lt;T&gt; gmx::OptionStorageTemplate&lt; T &gt;::defaultValueIfSet_</definition>
+        <argsstring></argsstring>
+        <name>defaultValueIfSet_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="301" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="301" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a500a96ea592652010380b0393c05bb9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::OptionStorageTemplate&lt; T &gt;::~OptionStorageTemplate</definition>
+        <argsstring>()</argsstring>
+        <name>~OptionStorageTemplate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="94" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="375" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a9d0a3cd45d156c6dbfff5f2018a36fe6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string gmx::OptionStorageTemplate&lt; T &gt;::typeString</definition>
+        <argsstring>() const =0</argsstring>
+        <name>typeString</name>
+        <reimplements refid="classgmx_1_1AbstractOptionStorage_1a0f076e5cb7cfdd79128e3d821ea61b6f">typeString</reimplements>
+        <reimplementedby refid="classgmx_1_1FileNameOptionStorage_1aca2a338570f0d40d00fb2689e4f7f12a">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1BooleanOptionStorage_1af49d317a01a8962f38fd53298d45f7e2">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1SelectionOptionStorage_1acb9557af9c8df2f313fc9b9ca46b1113">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1IntegerOptionStorage_1a3beffc86149c08d6c91623c85f08003e">typeString</reimplementedby>
+        <reimplementedby refid="classanonymous__namespace_02abstractoptionstorage_8cpp_03_1_1MockOptionStorage_1aa063801d4356733b0c68fa40ff2f6085">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1Int64OptionStorage_1afc29aa316ec429cd701869850aae7795">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1DoubleOptionStorage_1a4bc5b58811974e90a074bd51aba27af9">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1FloatOptionStorage_1a82f3c35b703236ae82973fd8f74b6d66">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1StringOptionStorage_1a3f4a690bc08e732a5bd2ce23d5b68f6d">typeString</reimplementedby>
+        <reimplementedby refid="classgmx_1_1EnumOptionStorage_1ae2c0169fba2e7829f2c89e5e4cb785f3">typeString</reimplementedby>
+        <briefdescription>
+<para>Returns a short string describing the type of the option. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="100" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ae63cf6e91d4d1cb3e8cbe4de35058604" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>int</type>
+        <definition>virtual int gmx::OptionStorageTemplate&lt; T &gt;::valueCount</definition>
+        <argsstring>() const </argsstring>
+        <name>valueCount</name>
+        <reimplements refid="classgmx_1_1AbstractOptionStorage_1adebb6238d8d5faf3b2470809337eb155">valueCount</reimplements>
+        <briefdescription>
+<para>Returns the number of option values added so far. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="102" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ac65e90fe546f98837fa52cf92f8c1e20" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string gmx::OptionStorageTemplate&lt; T &gt;::formatValue</definition>
+        <argsstring>(int i) const </argsstring>
+        <name>formatValue</name>
+        <reimplements refid="classgmx_1_1AbstractOptionStorage_1aa0fea60c4d07701f3ed32004b34d8cc1">formatValue</reimplements>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+<para>Returns the i&apos;th value formatted as a string. </para>        </briefdescription>
+        <detaileddescription>
+<para>If <computeroutput>i</computeroutput> is DefaultValueIfSetIndex, should format the default value if set (see <ref refid="classgmx_1_1OptionTemplate_1a400e5589c2dcb2d4758e21c5feffab69" kindref="member">OptionTemplate::defaultValueIfSet()</ref>).</para><para><ref refid="classgmx_1_1OptionStorageTemplate" kindref="compound">OptionStorageTemplate</ref> implements handling of DefaultValueIfSetIndex in this method, as well as checking that <computeroutput>i</computeroutput> is a valid index. Derived classes must implement <ref refid="classgmx_1_1OptionStorageTemplate_1aba54f7d43ae5ec873428ba0d56b39b06" kindref="member">formatSingleValue()</ref> to provide the actual formatting for a value of type <computeroutput>T</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="110" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="381" bodyend="394"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a979a7a8f2176df65f7ba26e52e67da6e" prot="protected" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class U</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>gmx::OptionStorageTemplate&lt; T &gt;::OptionStorageTemplate</definition>
+        <argsstring>(const OptionTemplate&lt; T, U &gt; &amp;settings, OptionFlags staticFlags=OptionFlags())</argsstring>
+        <name>OptionStorageTemplate</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1OptionTemplate" kindref="compound">OptionTemplate</ref>&lt; T, U &gt; &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a0b60cc84dcdf372e00a5084712630993" kindref="member">OptionFlags</ref></type>
+          <declname>staticFlags</declname>
+          <defval><ref refid="namespacegmx_1a0b60cc84dcdf372e00a5084712630993" kindref="member">OptionFlags</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Initializes the storage from option settings. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Option settings. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">staticFlags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Option flags that are always set and specify generic behavior of the option. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if invalid settings have been provided. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="122" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="309" bodyend="360"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ab8f80c3cf8e3c6c45d3e11b5f6795c07" prot="protected" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::OptionStorageTemplate&lt; T &gt;::OptionStorageTemplate</definition>
+        <argsstring>(const AbstractOption &amp;settings)</argsstring>
+        <name>OptionStorageTemplate</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1AbstractOption" kindref="compound">AbstractOption</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the storage from base option settings. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Option settings. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if invalid settings have been provided.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This constructor works for cases where there is no matching <ref refid="classgmx_1_1OptionTemplate" kindref="compound">OptionTemplate</ref> (e.g., <ref refid="classgmx_1_1EnumOption" kindref="compound">EnumOption</ref>). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="133" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="365" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a96507a21540785ce55c5dc0777a9c7e7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::clearSet</definition>
+        <argsstring>()</argsstring>
+        <name>clearSet</name>
+        <reimplements refid="classgmx_1_1AbstractOptionStorage_1a3777ada9336d3fd52068a9929b6fb3b8">clearSet</reimplements>
+        <briefdescription>
+<para>Removes all values from temporary storage for a set. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function is always called before starting to add values to a set, allowing the storage to clear its internal buffers.</para><para>Should not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="136" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="398" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::OptionStorageTemplate&lt; T &gt;::convertValue</definition>
+        <argsstring>(const std::string &amp;value)=0</argsstring>
+        <name>convertValue</name>
+        <reimplements refid="classgmx_1_1AbstractOptionStorage_1a4bc47d7fabf904201f16f1772ae4d12a">convertValue</reimplements>
+        <reimplementedby refid="classgmx_1_1BooleanOptionStorage_1aa6ffd3c21091a7f8015a762cf912e6a9">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1FileNameOptionStorage_1a69d299895e973125b318f65cd42399cf">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1IntegerOptionStorage_1a6cd8a031f3ed848de1de09fa84145100">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1SelectionOptionStorage_1a3980a4911774126d995b8d430f0b0ed2">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1Int64OptionStorage_1a24103d2812ca1675568d85639b4d4bfe">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1DoubleOptionStorage_1a0e51615f6af592d7cbdb01158a6ad7fe">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1FloatOptionStorage_1a56c9a3c56e4f26af494da999f5a5dbd4">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1StringOptionStorage_1a51aa3dd969686974bc24b4ee4fff02d2">convertValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1EnumOptionStorage_1a66944e1b72db7e428fe28cc51f7e1749">convertValue</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Adds a new value, converting it from a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String value to convert. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <computeroutput>value</computeroutput> is not valid for this option or if there have been too many values in the set.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method may be called multiple times if the underlying option is defined to accept multiple values.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" kindref="member">OptionStorageTemplate::convertValue()</ref></para></simplesect>
+Derived classes should call <ref refid="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" kindref="member">addValue()</ref> after they have converted <computeroutput>value</computeroutput> to the storage type. It is allowed to call <ref refid="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" kindref="member">addValue()</ref> more than once, or not at all. <ref refid="classgmx_1_1OptionsAssigner_1a30cba2db5cbd7b4a61e7453c72face3d" kindref="member">OptionsAssigner::appendValue()</ref> provides the same exception safety guarantee as this method, so it should be considered whether the implementation can be made strongly exception safe. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="146" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void gmx::OptionStorageTemplate&lt; T &gt;::processSetValues</definition>
+        <argsstring>(ValueList *values)</argsstring>
+        <name>processSetValues</name>
+        <reimplementedby refid="classgmx_1_1IntegerOptionStorage_1a18eaa6f12b20b0e6032f29d116c01324">processSetValues</reimplementedby>
+        <reimplementedby refid="classgmx_1_1SelectionOptionStorage_1a92b0deac6821c7afe0146f5db584b6b7">processSetValues</reimplementedby>
+        <reimplementedby refid="classgmx_1_1DoubleOptionStorage_1aacc1082b91abaa9770f7afc2f8240221">processSetValues</reimplementedby>
+        <reimplementedby refid="classgmx_1_1FloatOptionStorage_1afc3934539ede80ee5de07e2edd5d606e">processSetValues</reimplementedby>
+        <reimplementedby refid="classgmx_1_1EnumOptionStorage_1a5975818be29a7421e140c02cac3d06ee">processSetValues</reimplementedby>
+        <param>
+          <type><ref refid="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" kindref="member">ValueList</ref> *</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>Processes values for a set after all have been converted. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid values in the set. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the values do not form a valid set.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method is called after all <ref refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" kindref="member">convertValue()</ref> calls for a set. <computeroutput>values</computeroutput> contains all values that were validly converted by <ref refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" kindref="member">convertValue()</ref>. The derived class may alter the values, but should in such a case ensure that a correct number of values is produced. If the derived class throws, all values in <computeroutput>values</computeroutput> are discarded. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="159" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="159" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a72cf6c7884e6e23e6f71b8dc2dbede40" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::processSet</definition>
+        <argsstring>()</argsstring>
+        <name>processSet</name>
+        <reimplements refid="classgmx_1_1AbstractOptionStorage_1a9aa8495e558f50edd35b80754a508052">processSet</reimplements>
+        <briefdescription>
+<para>Performs validation and/or actions once a set of values has been added. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the values in the set are not valid as a whole.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method may be called multiple times if the underlying option can be specified multiple times. This method is not currently called if one of the <ref refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" kindref="member">convertValue()</ref> calls throwed.</para><para><xrefsect id="todo_1_todo000037"><xreftitle>Todo</xreftitle><xrefdescription><para>Improve the call semantics.</para></xrefdescription></xrefsect></para><para><simplesect kind="see"><para><ref refid="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" kindref="member">OptionStorageTemplate::processSetValues()</ref></para></simplesect>
+<ref refid="classgmx_1_1OptionStorageTemplate" kindref="compound">OptionStorageTemplate</ref> implements transaction support for a set of values in this method (see the class description), and provides a more detailed <ref refid="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" kindref="member">processSetValues()</ref> method that can be overridden in subclasses to process the actual values. Derived classes should override that method instead of this one if set value processing is necessary. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="172" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="405" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a51614d345954174fcd417bf76de828e8" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void gmx::OptionStorageTemplate&lt; T &gt;::processAll</definition>
+        <argsstring>()</argsstring>
+        <name>processAll</name>
+        <reimplements refid="classgmx_1_1AbstractOptionStorage_1a1ed3015bac2e5a4af9631fb8fef8cd39">processAll</reimplements>
+        <reimplementedby refid="classgmx_1_1FileNameOptionStorage_1a0e4a2a8d10d326a1e1a1980731ead171">processAll</reimplementedby>
+        <reimplementedby refid="classgmx_1_1SelectionOptionStorage_1af5d2fc50bc180a1ff28a2762ba6f3b90">processAll</reimplementedby>
+        <briefdescription>
+<para>Performs validation and/or actions once all values have been added. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if all provided values are not valid as a set.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method is always called once.</para><para>If the method throws, implementation should take care to leave the option in a consistent, meaningful state. However, currently none of the implementations actually throw in any situation where the option may be left in an inconsistent state.</para><para>The implementation in <ref refid="classgmx_1_1OptionStorageTemplate" kindref="compound">OptionStorageTemplate</ref> does nothing. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="177" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="177" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1aba54f7d43ae5ec873428ba0d56b39b06" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string gmx::OptionStorageTemplate&lt; T &gt;::formatSingleValue</definition>
+        <argsstring>(const T &amp;value) const =0</argsstring>
+        <name>formatSingleValue</name>
+        <reimplementedby refid="classgmx_1_1FileNameOptionStorage_1a2dcd27a36e12943fa8661baa19756d58">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1BooleanOptionStorage_1ae875e8ccdfbc46982f1a69aed9734bdb">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1SelectionOptionStorage_1a983950eaeb30d129dab36a37ed5cd6f0">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1IntegerOptionStorage_1a877f86810aa8aa8595e6a831458c0cf0">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classanonymous__namespace_02abstractoptionstorage_8cpp_03_1_1MockOptionStorage_1a17ed4b17ce83553134cec5e81f652581">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1Int64OptionStorage_1ac6ed77d5526c49f0e17538d9811fa48e">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1DoubleOptionStorage_1a1a89e86123de0c20ea741cb878462823">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1FloatOptionStorage_1a5382d9af18df2defd750719af34381dc">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1StringOptionStorage_1a1aec9403d30e72bc017ba2b4adc28a1e">formatSingleValue</reimplementedby>
+        <reimplementedby refid="classgmx_1_1EnumOptionStorage_1a99b911aa5dcebc95b6f3daeaf0ed427e">formatSingleValue</reimplementedby>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Formats a single value as a string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value to format. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>value</computeroutput> formatted as a string.</para></simplesect>
+The derived class must provide this method to format values a strings. Called by <ref refid="classgmx_1_1OptionStorageTemplate_1ac65e90fe546f98837fa52cf92f8c1e20" kindref="member">formatValue()</ref> to do the actual formatting. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="189" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ab1d19939ff083d98f546ca96d5a3c34b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <briefdescription>
+<para>Removes all values from the storage. </para>        </briefdescription>
+        <detaileddescription>
+<para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="196" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::addValue</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>addValue</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Adds a value to a temporary storage. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value to add. A copy is made. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the maximum value count has been reached.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Derived classes should call this function from the <ref refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" kindref="member">convertValue()</ref> implementation to add converted values to the storage. If the maximum value count has been reached, the value is discarded and an exception is thrown.</para><para>If adding values outside <ref refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" kindref="member">convertValue()</ref> (e.g., to set a custom default value), derived classes should call <ref refid="classgmx_1_1OptionStorageTemplate_1a96507a21540785ce55c5dc0777a9c7e7" kindref="member">clearSet()</ref> before adding values (unless in the constructor) and <ref refid="classgmx_1_1OptionStorageTemplate_1a5cc8b970a7922f99e2a24eef2433a00c" kindref="member">commitValues()</ref> once all values are added. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="214" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="427" bodyend="435"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a5cc8b970a7922f99e2a24eef2433a00c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::commitValues</definition>
+        <argsstring>()</argsstring>
+        <name>commitValues</name>
+        <briefdescription>
+<para>Commits values added with <ref refid="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" kindref="member">addValue()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If this function succeeds, values added with <ref refid="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" kindref="member">addValue()</ref> since the previous <ref refid="classgmx_1_1OptionStorageTemplate_1a96507a21540785ce55c5dc0777a9c7e7" kindref="member">clearSet()</ref> are added to the storage for the option. Only throws in out-of-memory conditions, and provides the strong exception safety guarantee as long as the copy constructor of <computeroutput>T</computeroutput> does not throw.</para><para>See <ref refid="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" kindref="member">addValue()</ref> for cases where this method should be used in derived classes.</para><para>Calls <ref refid="classgmx_1_1OptionStorageTemplate_1a5ee640e7f9dfcda26f44882bac46e5da" kindref="member">refreshValues()</ref> and <ref refid="classgmx_1_1OptionStorageTemplate_1a96507a21540785ce55c5dc0777a9c7e7" kindref="member">clearSet()</ref> if it is successful. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="231" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="439" bodyend="452"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a5ee640e7f9dfcda26f44882bac46e5da" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::refreshValues</definition>
+        <argsstring>()</argsstring>
+        <name>refreshValues</name>
+        <reimplementedby refid="classgmx_1_1EnumOptionStorage_1a0e27dabf63c12de659aa187178c1953d">refreshValues</reimplementedby>
+        <briefdescription>
+<para>Updates alternative store locations. </para>        </briefdescription>
+        <detaileddescription>
+<para>Derived classes should override this method if they implement alternative store locations, and copy/translate values from the <ref refid="classgmx_1_1OptionStorageTemplate_1ad19c6d984aadb90102fa2e7e070d47d0" kindref="member">values()</ref> vector to these alternative storages. They should also call the base class implementation as part of their implementation.</para><para>Should be called in derived classes if values are modified directly through the <ref refid="classgmx_1_1OptionStorageTemplate_1ad19c6d984aadb90102fa2e7e070d47d0" kindref="member">values()</ref> method, e.g., in <ref refid="classgmx_1_1OptionStorageTemplate_1a51614d345954174fcd417bf76de828e8" kindref="member">processAll()</ref>. Does not need to be called if <ref refid="classgmx_1_1OptionStorageTemplate_1a5cc8b970a7922f99e2a24eef2433a00c" kindref="member">commitValues()</ref> is used.</para><para>Does not throw, and derived classes should not change that. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="246" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="456" bodyend="469"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a28ff31e0d6b783b725ad306bc370b73b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::setDefaultValue</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>setDefaultValue</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the default value for the option. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Default value to set. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method can be used from the derived class constructor to programmatically set a default value. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="257" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="473" bodyend="489"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1a36bc6c3a3061abef502856d64799d1dc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::OptionStorageTemplate&lt; T &gt;::setDefaultValueIfSet</definition>
+        <argsstring>(const T &amp;value)</argsstring>
+        <name>setDefaultValueIfSet</name>
+        <param>
+          <type>const T &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Sets the default value if set for the option. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Default value to set. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method can be used from the derived class constructor to programmatically set a default value. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="267" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="493" bodyend="505"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ad19c6d984aadb90102fa2e7e070d47d0" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" kindref="member">ValueList</ref> &amp;</type>
+        <definition>ValueList&amp; gmx::OptionStorageTemplate&lt; T &gt;::values</definition>
+        <argsstring>()</argsstring>
+        <name>values</name>
+        <briefdescription>
+<para>Provides derived classes access to the current list of values. </para>        </briefdescription>
+        <detaileddescription>
+<para>The non-const variant should only be used from <ref refid="classgmx_1_1OptionStorageTemplate_1a51614d345954174fcd417bf76de828e8" kindref="member">processAll()</ref> in derived classes if necessary, and <ref refid="classgmx_1_1OptionStorageTemplate_1a5ee640e7f9dfcda26f44882bac46e5da" kindref="member">refreshValues()</ref> should be called if any changes are made. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="276" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="276" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionStorageTemplate_1ae51cea8bf9daa3bc29fd95483e4df285" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" kindref="member">ValueList</ref> &amp;</type>
+        <definition>const ValueList&amp; gmx::OptionStorageTemplate&lt; T &gt;::values</definition>
+        <argsstring>() const </argsstring>
+        <name>values</name>
+        <briefdescription>
+<para>Provides derived classes access to the current list of values. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" line="278" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/optionstoragetemplate.h" bodystart="278" bodyend="278"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Templated base class for constructing option value storage classes. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Assignable type that stores a single option value.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Provides an implementation of the <ref refid="classgmx_1_1OptionStorageTemplate_1a96507a21540785ce55c5dc0777a9c7e7" kindref="member">clearSet()</ref>, <ref refid="classgmx_1_1OptionStorageTemplate_1ae63cf6e91d4d1cb3e8cbe4de35058604" kindref="member">valueCount()</ref>, and <ref refid="classgmx_1_1OptionStorageTemplate_1a72cf6c7884e6e23e6f71b8dc2dbede40" kindref="member">processSet()</ref> methods of <ref refid="classgmx_1_1AbstractOptionStorage" kindref="compound">AbstractOptionStorage</ref>, as well as a basic no-action implementation of <ref refid="classgmx_1_1OptionStorageTemplate_1a51614d345954174fcd417bf76de828e8" kindref="member">processAll()</ref>. Two new virtual methods are added: <ref refid="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" kindref="member">processSetValues()</ref> and <ref refid="classgmx_1_1OptionStorageTemplate_1a5ee640e7f9dfcda26f44882bac46e5da" kindref="member">refreshValues()</ref>. The default implementation of <ref refid="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" kindref="member">processSetValues()</ref> does nothing, and <ref refid="classgmx_1_1OptionStorageTemplate_1a5ee640e7f9dfcda26f44882bac46e5da" kindref="member">refreshValues()</ref> is used to update secondary storage after values have been added/changed. This leaves <ref refid="classgmx_1_1OptionStorageTemplate_1a9d0a3cd45d156c6dbfff5f2018a36fe6" kindref="member">typeString()</ref>, <ref refid="classgmx_1_1OptionStorageTemplate_1ac65e90fe546f98837fa52cf92f8c1e20" kindref="member">formatValue()</ref>, and <ref refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" kindref="member">convertValue()</ref> to be implemented in derived classes. <ref refid="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" kindref="member">processSetValues()</ref> and <ref refid="classgmx_1_1OptionStorageTemplate_1a51614d345954174fcd417bf76de828e8" kindref="member">processAll()</ref> can also be implemented if necessary.</para><para>Implements transaction support for adding values within a set: all calls to <ref refid="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" kindref="member">addValue()</ref> add the value to a temporary storage, <ref refid="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" kindref="member">processSetValues()</ref> operates on this temporary storage, and <ref refid="classgmx_1_1OptionStorageTemplate_1a5cc8b970a7922f99e2a24eef2433a00c" kindref="member">commitValues()</ref> then copies these values to the real storage. <ref refid="classgmx_1_1OptionStorageTemplate_1a5cc8b970a7922f99e2a24eef2433a00c" kindref="member">commitValues()</ref> provides a strong exception safety guarantee for the process (and it only throws if it runs out of memory). </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1782">
+        <label>gmx::AbstractOptionStorage</label>
+        <link refid="classgmx_1_1AbstractOptionStorage"/>
+      </node>
+      <node id="1781">
+        <label>gmx::OptionStorageTemplate&lt; T &gt;</label>
+        <link refid="classgmx_1_1OptionStorageTemplate"/>
+        <childnode refid="1782" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1784">
+        <label>gmx::AbstractOptionStorage</label>
+        <link refid="classgmx_1_1AbstractOptionStorage"/>
+      </node>
+      <node id="1783">
+        <label>gmx::OptionStorageTemplate&lt; T &gt;</label>
+        <link refid="classgmx_1_1OptionStorageTemplate"/>
+        <childnode refid="1784" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/abstractoption.h" line="67" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/options/abstractoption.h" bodystart="67" bodyend="-1"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1AbstractOptionStorage_1ae18c52f54905be1e947047e514f1ca2b" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>AbstractOptionStorage</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ad7a265c0033a0c97e2dbead4f19a1735" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>addValue</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a4a52974de7c31160eddbbe7bece745b6" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>appendValue</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ab1d19939ff083d98f546ca96d5a3c34b" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>clear</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a4d6e0188ddb4972078e16beffb0f697a" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>clearFlag</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a96507a21540785ce55c5dc0777a9c7e7" prot="protected" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>clearSet</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a5cc8b970a7922f99e2a24eef2433a00c" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>commitValues</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a16bc81c18398085c38e2a89de7b99b72" prot="protected" virt="pure-virtual"><scope>gmx::OptionStorageTemplate</scope><name>convertValue</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a0d8a444b7b345f122ca6a9746d01f7f9" prot="private" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>countptr_</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1acfd633fdcd0feee4c0ac88e43aa9e20f" prot="private" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>defaultValueIfSet_</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a7bbdfb210f9e7c61225fa6495732370f" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>defaultValueIfSetExists</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1ac7a3e55e341f618132674d12d79d2620" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>DefaultValueIfSetIndex</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a3c502d185cd3b3e862fda1465478e0e0" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>description</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1ac0ddac0898462d8aae5d55d5c2919963" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>finish</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a2ea3148553e7b8da30b9b50f17f89a94" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>finishSet</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a471240a802f212999c63919b3fbbd846" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>formatDefaultValueIfSet</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1adaa5310b634232d6c73f97d8d5ec4a57" prot="public" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>formatExtraDescription</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1aba54f7d43ae5ec873428ba0d56b39b06" prot="protected" virt="pure-virtual"><scope>gmx::OptionStorageTemplate</scope><name>formatSingleValue</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ac65e90fe546f98837fa52cf92f8c1e20" prot="public" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>formatValue</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a432d25fcf4ff2079b3fee2acba70cb9a" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>hasFlag</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a29d58d7ea9051fed055bbfb1ba307439" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>isBoolean</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a88331502f27fa03f609650322045adaf" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>isHidden</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a01bfa2e153b5733b9930de8344057583" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>isRequired</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1ad2097f0f1c88c6e5549193559287fd45" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>isSet</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1af4f2db7255ecdd4633a7a9fafb508081" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>isVector</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1af02f972186bba8ff52f0e789e7d6fedc" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>markAsSet</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a49d1050263094d215b032f2cc45d4bf2" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>maxValueCount</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a4b83a1075a05cf7724929d9a327c19d9" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>minValueCount</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a331a2ea6e35627d2aef4ff1409492167" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>MyBase</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1ab5f49905072b9517a755e2c6ee136365" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>name</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a43e2b0b2040bba6ffb81ad242bcf0bf8" prot="public" virt="pure-virtual"><scope>gmx::OptionStorageTemplate</scope><name>optionInfo</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a979a7a8f2176df65f7ba26e52e67da6e" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>OptionStorageTemplate</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ab8f80c3cf8e3c6c45d3e11b5f6795c07" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>OptionStorageTemplate</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a59b74cb80fbd92ff00e76ccf5657ff0c" prot="private" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>ownedValues_</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a51614d345954174fcd417bf76de828e8" prot="protected" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>processAll</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a72cf6c7884e6e23e6f71b8dc2dbede40" prot="protected" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>processSet</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ac2087a4d9de673881807396fe394319c" prot="protected" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>processSetValues</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a5ee640e7f9dfcda26f44882bac46e5da" prot="protected" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>refreshValues</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a28ff31e0d6b783b725ad306bc370b73b" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>setDefaultValue</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a36bc6c3a3061abef502856d64799d1dc" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>setDefaultValueIfSet</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1afc92ddb8a068df8a4964377fc3aad290" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>setFlag</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1ab2f4d5f2d169e80a0edcb51cfe180eb4" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>setMaxValueCount</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a294172ec6d7594bec65903874d0b828a" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>setMinValueCount</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a99c93dde2ed0c96140d7cf988468b2cf" prot="private" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>setValues_</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a18f2d143bce5bfabfee3f4ccc8c7a9d2" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>startSet</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1ade91fa23f548325aa893ad4d179439fd" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>startSource</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a9240ba99ebeabe9f4a5d1d26c3f20673" prot="private" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>store_</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a9d0a3cd45d156c6dbfff5f2018a36fe6" prot="public" virt="pure-virtual"><scope>gmx::OptionStorageTemplate</scope><name>typeString</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ae63cf6e91d4d1cb3e8cbe4de35058604" prot="public" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>valueCount</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a58cbf66d644a4d22384f1dab5e6eaa5f" prot="public" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>ValueList</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ad19c6d984aadb90102fa2e7e070d47d0" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>values</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1ae51cea8bf9daa3bc29fd95483e4df285" prot="protected" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>values</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1aeab35f907cd422b9652fa3a30045cb70" prot="private" virt="non-virtual"><scope>gmx::OptionStorageTemplate</scope><name>values_</name></member>
+      <member refid="classgmx_1_1AbstractOptionStorage_1a8f862e78ff3e20ae51922db42f5f110b" prot="public" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>~AbstractOptionStorage</name></member>
+      <member refid="classgmx_1_1OptionStorageTemplate_1a500a96ea592652010380b0393c05bb9c" prot="public" virt="virtual"><scope>gmx::OptionStorageTemplate</scope><name>~OptionStorageTemplate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

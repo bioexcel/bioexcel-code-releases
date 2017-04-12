@@ -1,0 +1,111 @@
+.. _gmx sans:
+
+gmx sans
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx sans [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+             [:strong:`-d` :emphasis:`[<.dat>]`] [:strong:`-pr` :emphasis:`[<.xvg>]`] [:strong:`-sq` :emphasis:`[<.xvg>]`]
+             [:strong:`-prframe` :emphasis:`[<.xvg>]`] [:strong:`-sqframe` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`]
+             [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-xvg` :emphasis:`<enum>`]
+             [:strong:`-bin` :emphasis:`<real>`] [:strong:`-mode` :emphasis:`<enum>`] [:strong:`-mcover` :emphasis:`<real>`]
+             [:strong:`-method` :emphasis:`<enum>`] [:strong:`-[no]pbc`] [:strong:`-grid` :emphasis:`<real>`] [:strong:`-startq` :emphasis:`<real>`]
+             [:strong:`-endq` :emphasis:`<real>`] [:strong:`-qstep` :emphasis:`<real>`] [:strong:`-seed` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx sans`` computes SANS spectra using Debye formula.
+It currently uses topology file (since it need to assigne element for each atom).
+
+Parameters:
+
+``-pr`` Computes normalized g(r) function averaged over trajectory
+
+``-prframe`` Computes normalized g(r) function for each frame
+
+``-sq`` Computes SANS intensity curve averaged over trajectory
+
+``-sqframe`` Computes SANS intensity curve for each frame
+
+``-startq`` Starting q value in nm
+
+``-endq`` Ending q value in nm
+
+``-qstep`` Stepping in q space
+
+Note: When using Debye direct method computational cost increases as
+1/2 * N * (N - 1) where N is atom number in group of interest.
+
+WARNING: If sq or pr specified this tool can produce large number of files! Up to two times larger than number of frames!
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-d`` [<.dat>] (nsfactor.dat) (Optional)
+    Generic data file
+
+Options to specify output files:
+
+``-pr`` [<.xvg>] (pr.xvg)
+    xvgr/xmgr file
+``-sq`` [<.xvg>] (sq.xvg)
+    xvgr/xmgr file
+``-prframe`` [<.xvg>] (prframe.xvg) (Optional)
+    xvgr/xmgr file
+``-sqframe`` [<.xvg>] (sqframe.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-bin`` <real> (0.2)
+    [HIDDEN]Binwidth (nm)
+``-mode`` <enum> (direct)
+    Mode for sans spectra calculation: direct, mc
+``-mcover`` <real> (-1)
+    Monte-Carlo coverage should be -1(default) or (0,1]
+``-method`` <enum> (debye)
+    [HIDDEN]Method for sans spectra calculation: debye, fft
+``-[no]pbc``  (yes)
+    Use periodic boundary conditions for computing distances
+``-grid`` <real> (0.05)
+    [HIDDEN]Grid spacing (in nm) for FFTs
+``-startq`` <real> (0)
+    Starting q (1/nm)
+``-endq`` <real> (2)
+    Ending q (1/nm)
+``-qstep`` <real> (0.01)
+    Stepping in q (1/nm)
+``-seed`` <int> (0)
+    Random seed for Monte-Carlo
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

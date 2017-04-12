@@ -1,0 +1,101 @@
+.. _gmx disre:
+
+gmx disre
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx disre [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+              [:strong:`-c` :emphasis:`[<.ndx>]`] [:strong:`-ds` :emphasis:`[<.xvg>]`] [:strong:`-da` :emphasis:`[<.xvg>]`] [:strong:`-dn` :emphasis:`[<.xvg>]`]
+              [:strong:`-dm` :emphasis:`[<.xvg>]`] [:strong:`-dr` :emphasis:`[<.xvg>]`] [:strong:`-l` :emphasis:`[<.log>]`] [:strong:`-q` :emphasis:`[<.pdb>]`]
+              [:strong:`-x` :emphasis:`[<.xpm>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`]
+              [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-ntop` :emphasis:`<int>`] [:strong:`-maxdr` :emphasis:`<real>`]
+              [:strong:`-nlevels` :emphasis:`<int>`] [:strong:`-[no]third`]
+
+Description
+-----------
+
+``gmx disre`` computes violations of distance restraints.
+The program always
+computes the instantaneous violations rather than time-averaged,
+because this analysis is done from a trajectory file afterwards
+it does not make sense to use time averaging. However,
+the time averaged values per restraint are given in the log file.
+
+An index file may be used to select specific restraints for
+printing.
+
+When the optional ``-q`` flag is given a :ref:`.pdb <pdb>` file coloured by the
+amount of average violations.
+
+When the ``-c`` option is given, an index file will be read
+containing the frames in your trajectory corresponding to the clusters
+(defined in another manner) that you want to analyze. For these clusters
+the program will compute average violations using the third power
+averaging algorithm and print them in the log file.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (viol.ndx) (Optional)
+    Index file
+``-c`` [<.ndx>] (clust.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-ds`` [<.xvg>] (drsum.xvg)
+    xvgr/xmgr file
+``-da`` [<.xvg>] (draver.xvg)
+    xvgr/xmgr file
+``-dn`` [<.xvg>] (drnum.xvg)
+    xvgr/xmgr file
+``-dm`` [<.xvg>] (drmax.xvg)
+    xvgr/xmgr file
+``-dr`` [<.xvg>] (restr.xvg)
+    xvgr/xmgr file
+``-l`` [<.log>] (disres.log)
+    Log file
+``-q`` [<.pdb>] (viol.pdb) (Optional)
+    Protein data bank file
+``-x`` [<.xpm>] (matrix.xpm) (Optional)
+    X PixMap compatible matrix file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-ntop`` <int> (0)
+    Number of large violations that are stored in the log file every step
+``-maxdr`` <real> (0)
+    Maximum distance violation in matrix output. If less than or equal to 0 the maximum will be determined by the data.
+``-nlevels`` <int> (20)
+    Number of levels in the matrix output
+``-[no]third``  (yes)
+    Use inverse third power averaging or linear for matrix output
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

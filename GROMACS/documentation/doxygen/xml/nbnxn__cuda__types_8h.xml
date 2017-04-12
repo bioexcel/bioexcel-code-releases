@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__cuda__types_8h" kind="file">
+    <compoundname>nbnxn_cuda_types.h</compoundname>
+    <includes local="yes">gromacs/gpu_utils/cudautils.cuh</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="yes">/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/fatalerror.h</includes>
+    <includes refid="nbnxn__consts_8h" local="yes">gromacs/mdlib/nbnxn_consts.h</includes>
+    <includes refid="nbnxn__pairlist_8h" local="yes">gromacs/mdlib/nbnxn_pairlist.h</includes>
+    <includes refid="interaction__const_8h" local="yes">gromacs/mdtypes/interaction_const.h</includes>
+    <includes refid="gpu__timing_8h" local="yes">gromacs/timing/gpu_timing.h</includes>
+    <incdepgraph>
+      <node id="11235">
+        <label>src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h</label>
+        <link refid="nbnxn_cuda_types.h"/>
+        <childnode refid="11236" relation="include">
+        </childnode>
+        <childnode refid="11237" relation="include">
+        </childnode>
+        <childnode refid="11238" relation="include">
+        </childnode>
+        <childnode refid="11239" relation="include">
+        </childnode>
+        <childnode refid="11240" relation="include">
+        </childnode>
+      </node>
+      <node id="11239">
+        <label>/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/fatalerror.h</label>
+      </node>
+      <node id="11236">
+        <label>gromacs/gpu_utils/cudautils.cuh</label>
+      </node>
+      <node id="11240">
+        <label>gromacs/timing/gpu_timing.h</label>
+        <link refid="gpu__timing_8h"/>
+      </node>
+      <node id="11237">
+        <label>config.h</label>
+      </node>
+      <node id="11238">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structnb__staging" prot="public">nb_staging</innerclass>
+    <innerclass refid="structcu__atomdata" prot="public">cu_atomdata</innerclass>
+    <innerclass refid="structcu__nbparam" prot="public">cu_nbparam</innerclass>
+    <innerclass refid="structcu__plist" prot="public">cu_plist</innerclass>
+    <innerclass refid="structcu__timers" prot="public">cu_timers</innerclass>
+    <innerclass refid="structgmx__nbnxn__cuda__t" prot="public">gmx_nbnxn_cuda_t</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473d" prot="public" static="no">
+        <name>eelCu</name>
+        <enumvalue id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473da61151f062778b7ed7ca669faa55298d8" prot="public">
+          <name>eelCuCUT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473dafbc2e1f369ba4a048a238a06250be825" prot="public">
+          <name>eelCuRF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473dacab0c83ae43ec4d44a1a7ed85f975f34" prot="public">
+          <name>eelCuEWALD_TAB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473daf530fe255801aff01d8fad4c5bc6cccd" prot="public">
+          <name>eelCuEWALD_TAB_TWIN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473da5d4dc786d7074b4690b2e435c56d4b5b" prot="public">
+          <name>eelCuEWALD_ANA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473da3f2b726567928796add0126da2deb8af" prot="public">
+          <name>eelCuEWALD_ANA_TWIN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1aae96c16d19513e55f63977581983473da5c9a96020c2bc3540c6bd8dc9829b0d6" prot="public">
+          <name>eelCuNR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Electrostatic CUDA kernel flavors. </para>        </briefdescription>
+        <detaileddescription>
+<para>Types of electrostatics implementations available in the CUDA non-bonded force kernels. These represent both the electrostatics types implemented by the kernels (cut-off, RF, and Ewald - a subset of what&apos;s defined in enums.h) as well as encode implementation details analytical/tabulated and single or twin cut-off (for Ewald kernels). Note that the cut-off and RF kernels have only analytical flavor and unlike in the CPU kernels, the tabulated kernels are ATM Ewald-only.</para><para>The row-order of pointers to different electrostatic kernels defined in nbnxn_cuda.cu by the nb_*_kfunc_ptr function pointer table should match the order of enumerated types below. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" line="81" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" bodystart="81" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="enum" id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8" prot="public" static="no">
+        <name>evdwCu</name>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a764f02d5d0b196bdb5aa1251edc101a1" prot="public">
+          <name>evdwCuCUT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a5473131ca9ca76b2b9a5113dfd889a29" prot="public">
+          <name>evdwCuCUTCOMBGEOM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a4d32f2b2fffa49f2e66c63116b98ca27" prot="public">
+          <name>evdwCuCUTCOMBLB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a3e245e6b9afa68e14abec98b8ae27ce4" prot="public">
+          <name>evdwCuFSWITCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a88cb38b3c4083f753387cfc4ea7b4c4a" prot="public">
+          <name>evdwCuPSWITCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a97eb0b1b6282068e040b9976af7b5787" prot="public">
+          <name>evdwCuEWALDGEOM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a1d0a2176aa3060e4f858bd139e107149" prot="public">
+          <name>evdwCuEWALDLB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__cuda__types_8h_1a24f4c51afaf640094221576f909d5db8a56ba23fd73ecfe922447ebf4b39eb8dc" prot="public">
+          <name>evdwCuNR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>VdW CUDA kernel flavors. </para>        </briefdescription>
+        <detaileddescription>
+<para>The enumerates values correspond to the LJ implementations in the CUDA non-bonded kernels.</para><para>The column-order of pointers to different electrostatic kernels defined in nbnxn_cuda.cu by the nb_*_kfunc_ptr function pointer table should match the order of enumerated types below. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" line="94" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" bodystart="94" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nbnxn__cuda__types_8h_1af82c1fe9145625d0e61a3eb21b4ba30d" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_numClPerSupercl</definition>
+        <argsstring></argsstring>
+        <name>c_numClPerSupercl</name>
+        <initializer>= c_nbnxnGpuNumClusterPerSupercluster</initializer>
+        <briefdescription>
+<para>number of clusters per supercluster. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" line="59" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__cuda__types_8h_1ab62974946d29c968946d8d3782d6d445" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_clSize</definition>
+        <argsstring></argsstring>
+        <name>c_clSize</name>
+        <initializer>= c_nbnxnGpuClusterSize</initializer>
+        <briefdescription>
+<para>cluster size = number of atoms per cluster. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" line="61" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Data types used internally in the nbnxn_cuda module. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Szilárd Páll <ulink url="mailto:pall.szilard@gmail.com">pall.szilard@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h"/>
+  </compounddef>
+</doxygen>

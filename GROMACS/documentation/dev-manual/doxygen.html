@@ -1,0 +1,913 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using Doxygen &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Development-time tools" href="tools.html" />
+    <link rel="next" title="Understanding Jenkins builds" href="jenkins.html" />
+    <link rel="prev" title="Development-time tools" href="tools.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jenkins.html" title="Understanding Jenkins builds"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.html" title="Development-time tools"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" accesskey="U">Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-doxygen">
+<h1>Using Doxygen<a class="headerlink" href="#using-doxygen" title="Permalink to this headline">¶</a></h1>
+<p>This page documents how Doxygen is set up in the GROMACS source tree,
+as well as guidelines for adding new Doxygen comments.  Examples are included,
+as well as tips and tricks for avoiding Doxygen warnings.  The guidelines focus
+on C++ code and other new code that follows the new module layout.
+Parts of the guidelines are still applicable to documenting older code (e.g.,
+within <code class="docutils literal"><span class="pre">gmxlib/</span></code> or <code class="docutils literal"><span class="pre">mdlib/</span></code>), in particular the guidelines about formatting
+the Doxygen comments and the use of <code class="docutils literal"><span class="pre">\internal</span></code>.
+See <a class="reference internal" href="overview.html#dev-doc-layout"><span class="std std-ref">Documentation organization</span></a> for the overall structure of the documentation.</p>
+<p>To get started quickly, you only need to read the first two sections to
+understand the overall structure of the documentation, and take a look at the
+examples at the end.  The remaining sections provide the details for
+understanding why the examples are the way they are, and for more complex
+situations.  They are meant more as a reference to look up solutions for
+particular problems, rather than single-time reading.  To understand or find
+individual Doxygen commands, you should first look at Doxygen documentation
+(<a class="reference external" href="http://www.stack.nl/~dimitri/doxygen/manual/index.html">http://www.stack.nl/~dimitri/doxygen/manual/index.html</a>).</p>
+<div class="section" id="documentation-flavors">
+<h2>Documentation flavors<a class="headerlink" href="#documentation-flavors" title="Permalink to this headline">¶</a></h2>
+<p>The GROMACS source tree is set up to produce three different levels of Doxygen
+documentation:</p>
+<ol class="arabic simple">
+<li>Public API documentation (suffix <code class="docutils literal"><span class="pre">-user</span></code>), which documents functions and
+classes exported from the library and intended for use outside the GROMACS
+library.</li>
+<li>Library API documentation (suffix <code class="docutils literal"><span class="pre">-lib</span></code>), which additionally includes
+functions and classes that are designed to be used from other parts of
+GROMACS, as well as some guidelines that are mostly of interest to
+developers.</li>
+<li>Full documentation (suffix <code class="docutils literal"><span class="pre">-full</span></code>), which includes (nearly) all (documented)
+functions and classes in the source tree.</li>
+</ol>
+<p>Each subsequent level of documentation includes all the documentation from the
+levels above it.  The suffixes above refer to the suffixes of Doxygen input and
+output files, as well as the name of the output directory.  When all the
+flavors have been built, the front pages of the documentation contain links to
+the other flavors, and explain the differences in more detail.</p>
+<p>As a general guideline, the public API documentation should be kept free of
+anything that a user linking against an unmodified GROMACS does not see.
+In other words, the public API documentation should mainly document the
+contents of installed headers, and provide the necessary overview of using
+those.  Also, verbosity requirements for the public API documentation are
+higher: ideally, readers of the documentation could immediately start using the
+API based on the documentation, without any need to look at the implementation.</p>
+<p>Similarly, the library API documentation should not contain things that other
+modules in GROMACS can or should never call.  In particular, anything declared
+locally in source files should be only available in the full documentation.
+Also, if something is documented, and is not identified to be in the library
+API, then it should not be necessary to call that function from outside its
+module.</p>
+</div>
+<div class="section" id="building-the-documentation">
+<h2>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h2>
+<p>If you simply want to see up-to-date documentation, you can go to
+<a class="reference external" href="http://jenkins.gromacs.org/job/Documentation_Nightly_master/javadoc/html-lib/index.xhtml">http://jenkins.gromacs.org/job/Documentation_Nightly_master/javadoc/html-lib/index.xhtml</a>
+to see the documentation for the current development version.
+Jenkins also runs Doxygen for all changes pushed to Gerrit for
+release-5-0 and master branches, and the
+resulting documentation can be viewed from the link posted by Jenkins.  The
+Doxygen build is marked as unstable if it introduces any Doxygen warnings.</p>
+<p>You may need to build the documentation locally if you want to check the
+results after adding/modifying a significant amount of comments.  This is
+recommended in particular if you do not have much experience with Doxygen.
+It is a good idea to build with all the different settings to see that the
+result is what you want, and that you do not produce any warnings.
+For local work, it is generally a good idea to set <code class="docutils literal"><span class="pre">GMX_COMPACT_DOXYGEN=ON</span></code>
+CMake option, which removes some large generated graphs from the documentation
+and speeds up the process significantly.</p>
+<p>All files related to Doxygen reside in the <code class="docutils literal"><span class="pre">docs/doxygen/</span></code> subdirectory in the source
+and build trees.  In a freshly checked out source tree, this directory contains
+various <code class="docutils literal"><span class="pre">Doxyfile-*.cmakein</span></code> files.  When you run CMake, corresponding files
+<code class="docutils literal"><span class="pre">Doxyfile-user</span></code>, <code class="docutils literal"><span class="pre">Doxyfile-lib</span></code>, and <code class="docutils literal"><span class="pre">Doxyfile-full</span></code> are generated at the
+corresponding location in the build tree.  There is also a
+<code class="docutils literal"><span class="pre">Doxyfile-common.cmakein</span></code>, which is used to produce <code class="docutils literal"><span class="pre">Doxyfile-common</span></code>.
+This file contains settings that are shared between all the input files.
+<code class="docutils literal"><span class="pre">Doxyfile-compact</span></code> provides the extra settings for <code class="docutils literal"><span class="pre">GMX_COMPACT_DOXYGEN=ON</span></code>.</p>
+<p>You can run Doxygen directly with one of the generated files (all output will
+be produced under the current working directory), or build one of the
+<code class="docutils literal"><span class="pre">doxygen-user</span></code>, <code class="docutils literal"><span class="pre">doxygen-lib</span></code>, and <code class="docutils literal"><span class="pre">doxygen-full</span></code> targets.  The targets run
+Doxygen in a quieter mode and only show the warnings if there were any, and put
+the output under <code class="docutils literal"><span class="pre">docs/html/doxygen/</span></code> in the build tree, so that the Doxygen
+build cooperates with the broader <code class="docutils literal"><span class="pre">webpage</span></code> target.
+The <code class="docutils literal"><span class="pre">doxygen-all</span></code> target builds all three targets with less typing.</p>
+<p>The generated documentation is put under <code class="docutils literal"><span class="pre">html-user/</span></code>, <code class="docutils literal"><span class="pre">html-lib/</span></code>, and/or
+<code class="docutils literal"><span class="pre">html-full/</span></code>.  Open <code class="docutils literal"><span class="pre">index.xhtml</span></code> file from one of
+these subdirectories to start browsing (for GROMACS developers, the
+<code class="docutils literal"><span class="pre">html-lib/</span></code> is a reasonable starting point).  Log files with all Doxygen
+warnings are also produced as <code class="docutils literal"><span class="pre">docs/doxygen/doxygen-*.log</span></code>, so you can inspect them after
+the run.</p>
+<p>You will need Doxygen 1.8.5 to build the current
+documentation.  Other versions may work, but likely also produce warnings.
+Additionally, <a class="reference external" href="http://www.graphviz.org">graphviz</a> and
+<a class="reference external" href="http://www.mcternan.me.uk/mscgen/">mscgen</a> are required for some graphs in
+the documentation, and <code class="docutils literal"><span class="pre">latex</span></code> for formulas.  Working versions are likely
+available through most package managers.  It is possible to build the
+documentation without these tools, but you will see some errors and the related
+figures will be missing from the documentation.</p>
+</div>
+<div class="section" id="general-guidelines-for-doxygen-markup">
+<span id="dev-doxygen-guidelines"></span><h2>General guidelines for Doxygen markup<a class="headerlink" href="#general-guidelines-for-doxygen-markup" title="Permalink to this headline">¶</a></h2>
+<p>Doxygen provides quite a few different alternative styles for documenting the
+source code.  There are subtleties in how Doxygen treats the different types of
+comments, and this also depends somewhat on the Doxygen configuration.  It is
+possible to change the meaning of a comment by just changing the style of
+comment it is enclosed in.  To avoid such issues, and to avoid needing to
+manage all the alternatives, a single style throughout the source tree is
+preferable.  When it comes to treatment of styles, GROMACS uses the default
+Doxygen configuration with one exception: <code class="docutils literal"><span class="pre">JAVADOC_AUTOBRIEF</span></code> is set <code class="docutils literal"><span class="pre">ON</span></code> to
+allow more convenient one-line brief descriptions in C code.</p>
+<p>Majority of existing comments in GROMACS uses Qt-style comments (<code class="docutils literal"><span class="pre">/*!</span></code> and
+<code class="docutils literal"><span class="pre">//!</span></code> instead of <code class="docutils literal"><span class="pre">/**</span></code> and <code class="docutils literal"><span class="pre">///</span></code>, <code class="docutils literal"><span class="pre">\brief</span></code> instead of <code class="docutils literal"><span class="pre">&#64;brief</span></code> etc.),
+so these should be used also for new documentation.  There is a single
+exception for brief comments in C code; see below.</p>
+<p>Similarly, existing comments use <code class="docutils literal"><span class="pre">/*!</span></code> for multiline comments in both C and
+C++ code, instead of using multiple <code class="docutils literal"><span class="pre">//!</span></code> lines for C++.  The rationale is that
+since the code will be a mixture of both languages for a long time, it is more
+uniform to use similar style in both.  Also, since files will likely transition
+from C to C++ gradually, rewriting the comments because of different style
+issues should not generally be necessary.  Finally, multi-line <code class="docutils literal"><span class="pre">//!</span></code> comments
+can work differently depending on Doxygen configuration, so it is better to
+avoid that ambiguity.</p>
+<p>When adding comments, ensure that a short brief description is always produced.
+This is used in various listings, and should briefly explain the purpose of the
+method without unnecessarily expanding those lists.
+The basic guideline is to start all comment blocks with <code class="docutils literal"><span class="pre">\brief</span></code> (possibly
+after some other Doxygen commands).
+If you want to avoid the <code class="docutils literal"><span class="pre">\brief</span></code> for one-liners, you can use <code class="docutils literal"><span class="pre">//!</span></code>, but the
+description must fit on a single line; otherwise, it is not interpreted as a
+brief comment.  Note in particular that a simple <code class="docutils literal"><span class="pre">/*!</span></code> without a <code class="docutils literal"><span class="pre">\brief</span></code>
+does not produce a brief description.
+Also note that <code class="docutils literal"><span class="pre">\brief</span></code> marks the whole following paragraph as a brief
+description, so you should insert an empty line after the intended brief
+description.</p>
+<p>In C code, <code class="docutils literal"><span class="pre">//</span></code> comments must be avoided because some compilers do not like
+them.  If you want to avoid the <code class="docutils literal"><span class="pre">\brief</span></code> for one-liners in C code, use
+<code class="docutils literal"><span class="pre">/**</span></code> instead of <code class="docutils literal"><span class="pre">//!</span></code>.  If you do this, the brief description should not
+contain unescaped periods except at the end.  Because of this, you should
+prefer <code class="docutils literal"><span class="pre">//!</span></code> in C++ code.</p>
+<p>Put the documentation comments in the header file that contains the
+declaration, if such a header exists.
+Implementation-specific comments that do not influence how a method
+is used can go into the source file, just before the method definition, with an
+<code class="docutils literal"><span class="pre">\internal</span></code> tag in the beginning of the comment block.  Doxygen-style comments
+within functions are not generally usable.</p>
+<p>At times, you may need to exclude some part of a header or a source file such
+that Doxygen does not see it at all.  In general, you should try to avoid this,
+but it may be necessary to remove some functions that you do not want to appear
+in the public API documentation, and which would generate warnings if left
+undocumented, or to avoid Doxygen warnings from code it does not understand.
+Prefer <code class="docutils literal"><span class="pre">\cond</span></code> and <code class="docutils literal"><span class="pre">\endcond</span></code> to do this.  If <code class="docutils literal"><span class="pre">\cond</span></code> does not work for
+you, you can also use <code class="docutils literal"><span class="pre">#ifndef</span> <span class="pre">DOXYGEN</span></code>.  If you exclude a class method in
+a header, you also need to exclude it in the source code to avoid warnings.</p>
+</div>
+<div class="section" id="gromacs-specifics">
+<h2>GROMACS specifics<a class="headerlink" href="#gromacs-specifics" title="Permalink to this headline">¶</a></h2>
+<p>The general guidelines on the style of Doxygen comments were given above.
+This section introduces GROMACS specific constructs currently used in Doxygen
+documentation, as well as how GROMACS uses Doxygen groups to organize the
+documentation.</p>
+<p>Some consistency checks are done automatically using custom scripts.
+See <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a> for details.</p>
+<div class="section" id="controlling-documentation-visibility">
+<h3>Controlling documentation visibility<a class="headerlink" href="#controlling-documentation-visibility" title="Permalink to this headline">¶</a></h3>
+<p>To control in which level of documentation a certain function appears, three
+different mechanisms are used:</p>
+<ul class="simple">
+<li>Global Doxygen configuration.  This is mainly used to include
+declarations local to source files only in the full documentation.
+You can find the details from the <code class="docutils literal"><span class="pre">Doxyfile-*.cmakein</span></code> files, and some of
+them are also mentioned below on individual code constructs.</li>
+<li>The standard Doxygen command <code class="docutils literal"><span class="pre">\internal</span></code> marks the documentation to be only
+extracted into the full documentation (<code class="docutils literal"><span class="pre">INTERNAL_DOCS</span></code> is <code class="docutils literal"><span class="pre">ON</span></code> only for the
+full documentation).  This should be used as a first command in a comment
+block to exclude all the documentation.  It is possible to use <code class="docutils literal"><span class="pre">\internal</span></code>
+and <code class="docutils literal"><span class="pre">\endinternal</span></code> to exclude individual paragraphs, but <code class="docutils literal"><span class="pre">\if</span> <span class="pre">internal</span></code>
+is preferred (see below).
+In addition, GROMACS-specific custom Doxygen command <code class="docutils literal"><span class="pre">\libinternal</span></code> is
+provided, which should be used the same way to exclude the documentation from
+the public API documentation.  This command expands to either <code class="docutils literal"><span class="pre">\internal</span></code>
+or to a no-op, depending on the documentation level.</li>
+<li>Doxygen commands <code class="docutils literal"><span class="pre">\if</span></code> and <code class="docutils literal"><span class="pre">\cond</span></code> can be used with section names
+<code class="docutils literal"><span class="pre">libapi</span></code> and <code class="docutils literal"><span class="pre">internal</span></code> to only include the documentation in library API and
+the full documentation, respectively.  <code class="docutils literal"><span class="pre">libapi</span></code> is also defined in the full
+documentation.  These are declared using <code class="docutils literal"><span class="pre">ENABLED_SECTIONS</span></code> in the Doxygen
+configuration files.</li>
+</ul>
+<p>Examples of locations where it is necessary to use these explicit commands are
+given below in the sections on individual code constructs.</p>
+</div>
+<div class="section" id="modules-as-doxygen-groups">
+<h3>Modules as Doxygen groups<a class="headerlink" href="#modules-as-doxygen-groups" title="Permalink to this headline">¶</a></h3>
+<p>As described in <a class="reference internal" href="overview.html#dev-source-layout"><span class="std std-ref">Source code organization</span></a>, each subdirectory under <code class="docutils literal"><span class="pre">src/gromacs/</span></code>
+represents a <em>module</em>, i.e., a somewhat coherent collection of routines.
+Doxygen cannot automatically generate a list of routines in a module; it only
+extracts various alphabetical indexes that contain more or less all documented
+functions and classes.  To help reading the documentation, the routines for a
+module should be visible in one place.</p>
+<p>GROMACS uses Doxygen groups to achieve this: for each documented module, there
+is a <code class="docutils literal"><span class="pre">\defgroup</span></code> definition for the module, and all the relevant classes and
+functions need to be manually added to this group using <code class="docutils literal"><span class="pre">\ingroup</span></code> and
+<code class="docutils literal"><span class="pre">\addtogroup</span></code>.
+The group page also provides a natural place for overview documentation about
+the module, and can be navigated to directly from the &#8220;Modules&#8221; tab in the
+generated documentation.</p>
+<p>Some notes about using <code class="docutils literal"><span class="pre">\addtogroup</span></code> are in order:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">\addtogroup</span></code> only adds the elements that it directly contains into the
+group.  If it contains a namespace declaration, only the namespace is added
+to the group, but none of the namespace contents are.  For this reason,
+<code class="docutils literal"><span class="pre">\addtogroup</span></code> should go within the innermost scope, around the members that
+should actually be added.</li>
+<li>If the module should not appear in the public API documentation, its
+definition (<code class="docutils literal"><span class="pre">\defgroup</span></code>) should be prefixed with a <code class="docutils literal"><span class="pre">\libinternal</span></code>.
+In this case, also all <code class="docutils literal"><span class="pre">\addtogroup</span></code> commands for this module should be
+similarly prefixed.  Otherwise, they create the group in the public API
+documentation, but without any of the content from the <code class="docutils literal"><span class="pre">\defgroup</span></code>
+definition.  This may also cause the contents of the <code class="docutils literal"><span class="pre">\addtogroup</span></code> section
+to appear in the public API documentation, even if it otherwise would not.</li>
+</ul>
+</div>
+<div class="section" id="public-api-and-library-api-groups">
+<h3>Public API and library API groups<a class="headerlink" href="#public-api-and-library-api-groups" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the module groups, two fixed groups are provided:
+<code class="docutils literal"><span class="pre">group_publicapi</span></code> and <code class="docutils literal"><span class="pre">group_libraryapi</span></code>.  Classes and files can be added to
+these groups using GROMACS specific custom <code class="docutils literal"><span class="pre">\inpublicapi</span></code> and
+<code class="docutils literal"><span class="pre">\inlibraryapi</span></code> commands.  The generated group documentation pages are not
+very useful, but annotated classes and files show the API definition under the
+name, making this information more easily accessible.  These commands in
+file-level comments are also used for some automatic intermodule dependency
+validation (see below).</p>
+<p>Note that functions, enumerations, and other entities that do not have a
+separate page in the generated documentation can only belong to one group;
+in such a case, the module group is preferred over the API group.</p>
+</div>
+</div>
+<div class="section" id="documenting-specific-code-constructs">
+<h2>Documenting specific code constructs<a class="headerlink" href="#documenting-specific-code-constructs" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the techical details and some tips and tricks for
+documenting specific code constructs such that useful documentation is
+produced.  If you are wondering where to document a certain piece of
+information, see the documentation structure section in <a class="reference internal" href="overview.html#dev-doc-layout"><span class="std std-ref">Documentation organization</span></a>.
+The focus of the documentation should be on the overview content: Doxygen pages
+and the module documentation.  An experienced developer can relatively easily
+read and understand individual functions, but the documentation should help
+in getting the big picture.</p>
+<div class="section" id="doxygen-pages">
+<h3>Doxygen pages<a class="headerlink" href="#doxygen-pages" title="Permalink to this headline">¶</a></h3>
+<p>The pages that are accessible through navigation from the front page are
+written using Markdown and are located under <code class="docutils literal"><span class="pre">docs/doxygen/</span></code>.  Each page should be
+placed in the page hierarchy by making it a subpage of another page, i.e., it
+should be referenced once using <code class="docutils literal"><span class="pre">\subpage</span></code>.  <code class="docutils literal"><span class="pre">mainpage.md</span></code> is the root of the
+hierarchy.</p>
+<p>There are two subdirectories, <code class="docutils literal"><span class="pre">user/</span></code> and <code class="docutils literal"><span class="pre">lib/</span></code>, determining the highest
+documentation level where the page appears.  If you add pages to <code class="docutils literal"><span class="pre">lib/</span></code>, ensure
+that there are no references to the page from public API documentation.
+<code class="docutils literal"><span class="pre">\if</span> <span class="pre">libapi</span></code> can be used to add references in content that is otherwise
+public.
+Generally, the pages should be on a high enough level and provide overview
+content that is useful enough such that it is not necessary to exclude them
+from the library API documentation.</p>
+</div>
+<div class="section" id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
+<p>For each module, decide on a header file that is the most important one for
+that module (if there is no self-evident header, it may be better to designate,
+e.g., <code class="docutils literal"><span class="pre">module-doc.h</span></code> for this purpose, but this is currently not done for any
+module).  This header should contain the <code class="docutils literal"><span class="pre">\defgroup</span></code> definition for the
+module.  The name of the group should be <code class="file docutils literal"><span class="pre">module_</span><em><span class="pre">name</span></em></code>, where <em>name</em>
+is the name of the subdirectory that hosts the module.</p>
+<p>The module should be added to an appropriate group (see <code class="docutils literal"><span class="pre">docs/doxygen/misc.cpp</span></code> for
+definitions) using <code class="docutils literal"><span class="pre">\ingroup</span></code> to organize the &#8220;Modules&#8221; tab in the generated
+documentation.</p>
+<p>One or more contact persons who know about the contents of the module should be
+listed using <code class="docutils literal"><span class="pre">\author</span></code> commands.  This provides a point of contact if one
+has questions.</p>
+</div>
+<div class="section" id="classes-structs">
+<h3>Classes/structs<a class="headerlink" href="#classes-structs" title="Permalink to this headline">¶</a></h3>
+<p>Classes and structs in header files appear always in Doxygen documentation,
+even if their enclosing file is not documented.  So start the documentation
+blocks of classes that are not part of the public API with <code class="docutils literal"><span class="pre">\internal</span></code> or
+<code class="docutils literal"><span class="pre">\libinternal</span></code>.  Classes declared locally in source files or in unnamed
+namespaces only appear in the full documentation.</p>
+<p>If a whole class is not documented, this does not currently generate any
+warning.  The class is simply exluded from the documentation.  But if a member
+of a documented class is not documented, a warning is generated.  Guidelines for
+documenting free functions apply to methods of a class as well.</p>
+<p>For base classes, the API classification (<code class="docutils literal"><span class="pre">\inpublicapi</span></code> or
+<code class="docutils literal"><span class="pre">\inlibraryapi</span></code>) should be based on where the class is meant to be
+subclassed.  The visibility (<code class="docutils literal"><span class="pre">\internal</span></code> or <code class="docutils literal"><span class="pre">\libinternal</span></code>), in contrast,
+should reflect the API classification of derived classes such that the base
+class documentation is always generated together with the derived classes.</p>
+<p>For classes that are meant to be subclassed and have protected members, the
+protected members should only appear at the documentation level where the class
+is meant to be subclassed.  For example, if a class is meant to be subclassed
+only within a module, the protected members should only appear in the
+full documentation.  This can be accomplished using <code class="docutils literal"><span class="pre">\cond</span></code> (note that you
+will need to add the <code class="docutils literal"><span class="pre">\cond</span></code> command also to the source files to hide the
+same methods from Doxygen, otherwise you will get confusing warnings).</p>
+</div>
+<div class="section" id="methods-functions-enums-macros">
+<h3>Methods/functions/enums/macros<a class="headerlink" href="#methods-functions-enums-macros" title="Permalink to this headline">¶</a></h3>
+<p>These items do not appear in the documentation unless their enclosing scope is
+documented.  For class members, the scope is the class; otherwise, it is the
+namespace if one exists, or the file.  An <code class="docutils literal"><span class="pre">\addtogroup</span></code> can also define a
+scope if the group has higher visibility than the scope outside it.
+So if a function is not within a namespace (mostly applicable to C code) and
+has the same visibility as its enclosing file, it is not necessary to add a
+<code class="docutils literal"><span class="pre">\internal</span></code> or <code class="docutils literal"><span class="pre">\libinternal</span></code>.</p>
+<p>Static functions are currently extracted for all documentation flavors to allow
+headers to declare <code class="docutils literal"><span class="pre">static</span> <span class="pre">inline</span></code> functions (used in, for example, math code).
+Functions in anonymous namespaces are only extracted into the full
+documentation.  Together with the above rules, this means that you should avoid
+putting a <code class="docutils literal"><span class="pre">static</span></code> function within a documented namespace, even within source
+files, or it may inadvertently appear in the public API documentation.</p>
+<p>If you want to exclude an item from the documentation, you need to put in
+inside a <code class="docutils literal"><span class="pre">\cond</span></code> block such that Doxygen does not see it.
+Otherwise, a warning for an undocumented function is generated.  You need to
+enclose both the declaration and the definition with <code class="docutils literal"><span class="pre">\cond</span></code>.</p>
+</div>
+<div class="section" id="files">
+<h3>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
+<p>Each documented file should start with a documentation block (right after the
+copyright notice) that documents the file.  See the examples section for exact
+formatting.  Things to note:</p>
+<ul class="simple">
+<li>Please do not specify the file name explicitly after <code class="docutils literal"><span class="pre">\file</span></code>.  By default,
+a file comment applies to the file it is contained in, and an explicit file
+name only adds one more thing that can get out of date.</li>
+<li><code class="docutils literal"><span class="pre">\brief</span></code> cannot appear on the same line as the <code class="docutils literal"><span class="pre">\file</span></code>, but should be on
+the next line.</li>
+<li><code class="docutils literal"><span class="pre">\internal</span></code> or <code class="docutils literal"><span class="pre">\libinternal</span></code> should indicate where the header is visible.
+As a general guideline, all installed headers should appear in the public API
+documentation, i.e., not contain these commands.  If nothing else, then to
+document that it does not contain any public API functions.  Headers that
+declare anything in the library API should be marked with <code class="docutils literal"><span class="pre">\libinternal</span></code>,
+and the rest with <code class="docutils literal"><span class="pre">\internal</span></code>.</li>
+<li>All source files, as well as most test files, should be documented with
+<code class="docutils literal"><span class="pre">\internal</span></code>, since they do not provide anything to public or library API,
+and this avoids unintentionally extracting things from the file into those
+documentations.  Shared test files used in tests from other modules should be
+marked with <code class="docutils literal"><span class="pre">\libinternal</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">\inpublicapi</span></code> or <code class="docutils literal"><span class="pre">\inlibraryapi</span></code> should be used to indicate where the
+header is meant to be directly included.</li>
+<li>As with modules, one or more contact persons should be listed with <code class="docutils literal"><span class="pre">\author</span></code>.
+If you make significant modifications or additions to a file, consider adding
+an <code class="docutils literal"><span class="pre">\author</span></code> line for yourself.</li>
+</ul>
+</div>
+<div class="section" id="directories">
+<h3>Directories<a class="headerlink" href="#directories" title="Permalink to this headline">¶</a></h3>
+<p>Directory documentation does not typically contain useful information beyond a
+possible brief description, since they correspond very closely to modules, and
+the modules themselves are documented.  A brief description is still useful to
+provide a high-level overview of the source tree on the generated &#8220;Files&#8221; page.
+A reference to the module is typically sufficient as a brief description for a
+directory.  All directories are currently documented in
+<code class="docutils literal"><span class="pre">docs/doxygen/directories.cpp</span></code>.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="basic-c">
+<h3>Basic C++<a class="headerlink" href="#basic-c" title="Permalink to this headline">¶</a></h3>
+<p>Here is an example of documenting a C++ class and its containing header file.
+Comments in the code and the actual documentation explain the used Doxygen
+constructs.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/*! \libinternal \file</span>
+<span class="cm"> * \brief</span>
+<span class="cm"> * Declares gmx::MyClass.</span>
+<span class="cm"> *</span>
+<span class="cm"> * More details.  The documentation is still extracted for the class even if</span>
+<span class="cm"> * this whole comment block is missing.</span>
+<span class="cm"> *</span>
+<span class="cm"> * \author Example Author &lt;example@author.com&gt;</span>
+<span class="cm"> * \inlibraryapi</span>
+<span class="cm"> * \ingroup module_mymodule</span>
+<span class="cm"> */</span>
+
+<span class="k">namespace</span> <span class="n">gmx</span>
+<span class="p">{</span>
+
+<span class="cm">/*! \libinternal</span>
+<span class="cm"> * \brief</span>
+<span class="cm"> * Brief description for the class.</span>
+<span class="cm"> *</span>
+<span class="cm"> * More details.  The \libinternal tag is required for classes, since they are</span>
+<span class="cm"> * extracted into the documentation even in the absence of documentation for</span>
+<span class="cm"> * the enclosing scope.</span>
+<span class="cm"> * The \libinternal tag is on a separate line because of a bug in Doxygen</span>
+<span class="cm"> * 1.8.5 (only affects \internal, but for clarity it is also worked around</span>
+<span class="cm"> * here).</span>
+<span class="cm"> *</span>
+<span class="cm"> * \inlibraryapi</span>
+<span class="cm"> * \ingroup module_mymodule</span>
+<span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">MyClass</span>
+<span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="c1">// Trivial constructors or destructors do not require documentation.</span>
+        <span class="c1">// But if a constructor takes parameters, it should be documented like</span>
+        <span class="c1">// methods below.</span>
+        <span class="n">MyClass</span><span class="p">();</span>
+        <span class="o">~</span><span class="n">MyClass</span><span class="p">();</span>
+
+        <span class="cm">/*! \brief</span>
+<span class="cm">         * Brief description for the method.</span>
+<span class="cm">         *</span>
+<span class="cm">         * \param[in] param1  Description of the first parameter.</span>
+<span class="cm">         * \param[in] param2  Description of the second parameter.</span>
+<span class="cm">         * \returns   Description of the return value.</span>
+<span class="cm">         * \throws    std::bad_alloc if out of memory.</span>
+<span class="cm">         *</span>
+<span class="cm">         * More details describing the method.  It is not an error to put this</span>
+<span class="cm">         * above the parameter block, but most existing code has it here.</span>
+<span class="cm">         */</span>
+        <span class="kt">int</span> <span class="nf">myMethod</span><span class="p">(</span><span class="kt">int</span> <span class="n">param1</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">param2</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+        <span class="c1">//! Brief description for the accessor.</span>
+        <span class="kt">int</span> <span class="nf">simpleAccessor</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">var_</span><span class="p">;</span> <span class="p">}</span>
+        <span class="cm">/*! \brief</span>
+<span class="cm">         * Alternative, more verbose way of specifying a brief description.</span>
+<span class="cm">         */</span>
+        <span class="kt">int</span> <span class="nf">anotherAccessor</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+        <span class="cm">/*! \brief</span>
+<span class="cm">         * Brief description for another accessor that is so long that it does</span>
+<span class="cm">         * not conveniently fit on a single line cannot be specified with //!.</span>
+<span class="cm">         */</span>
+        <span class="kt">int</span> <span class="nf">secondAccessor</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="c1">// Private members (whether methods or variables) are currently ignored</span>
+        <span class="c1">// by Doxygen, so they don&#39;t need to be documented.  Documentation</span>
+        <span class="c1">// doesn&#39;t hurt, though.</span>
+        <span class="kt">int</span> <span class="n">var_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace gmx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Basic C<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Here is another example of documenting a C header file (so avoiding all
+C++-style comments), and including free functions.  It also demonstrates the use
+of <code class="docutils literal"><span class="pre">\addtogroup</span></code> to add multiple functions into a module group without repeated
+<code class="docutils literal"><span class="pre">\ingroup</span></code> tags.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/*! \file</span>
+<span class="cm"> * \brief</span>
+<span class="cm"> * Declares a collection of functions for performing a certain task.</span>
+<span class="cm"> *</span>
+<span class="cm"> * More details can go here.</span>
+<span class="cm"> *</span>
+<span class="cm"> * \author Example Author &lt;example@author.com&gt;</span>
+<span class="cm"> * \inpublicapi</span>
+<span class="cm"> * \ingroup module_mymodule</span>
+<span class="cm"> */</span>
+
+<span class="cm">/*! \addtogroup module_mymodule */</span>
+<span class="cm">/*! \{ */</span>
+
+<span class="cm">/*! \brief</span>
+<span class="cm"> * Brief description for the data structure.</span>
+<span class="cm"> *</span>
+<span class="cm"> * More details.</span>
+<span class="cm"> *</span>
+<span class="cm"> * \inpublicapi</span>
+<span class="cm"> */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="cm">/** Brief description for member. */</span>
+    <span class="kt">int</span>  <span class="n">member</span><span class="p">;</span>
+    <span class="kt">int</span>  <span class="n">second</span><span class="p">;</span> <span class="cm">/**&lt; Brief description for the second member. */</span>
+    <span class="cm">/*! \brief</span>
+<span class="cm">     * Brief description for the third member.</span>
+<span class="cm">     *</span>
+<span class="cm">     * Details.</span>
+<span class="cm">     */</span>
+    <span class="kt">int</span>  <span class="n">third</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">gmx_mystruct_t</span><span class="p">;</span>
+
+<span class="cm">/*! \brief</span>
+<span class="cm"> * Performs a simple operation.</span>
+<span class="cm"> *</span>
+<span class="cm"> * \param[in] value  Input value.</span>
+<span class="cm"> * \returns   Computed value.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Detailed description.</span>
+<span class="cm"> * \inpublicapi cannot be used here, because Doxygen only allows a single</span>
+<span class="cm"> * group for functions, and module_mymodule is the preferred group.</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">gmx_function</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
+
+<span class="cm">/* Any . in the brief description should be escaped as \. */</span>
+<span class="cm">/** Brief description for this function. */</span>
+<span class="kt">int</span> <span class="nf">gmx_simple_function</span><span class="p">();</span>
+
+<span class="cm">/*! \} */</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scoping-and-visibility-rules">
+<h3>Scoping and visibility rules<a class="headerlink" href="#scoping-and-visibility-rules" title="Permalink to this headline">¶</a></h3>
+<p>The rules where Doxygen expects something to be documented, and when are
+commands like <code class="docutils literal"><span class="pre">\internal</span></code> needed, can be complex.  The examples below
+describe some of the pitfalls.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/*! \libinternal \file</span>
+<span class="cm"> * \brief</span>
+<span class="cm"> * ...</span>
+<span class="cm"> *</span>
+<span class="cm"> * The examples below assume that the file is documented like this:</span>
+<span class="cm"> * with an \libinternal definition at the beginning, with an intent to not</span>
+<span class="cm"> * expose anything from the file in the public API.  Things work similarly for</span>
+<span class="cm"> * the full documentation if you replace \libinternal with \internal</span>
+<span class="cm"> * everywhere in the example.</span>
+<span class="cm"> *</span>
+<span class="cm"> * \ingroup module_example</span>
+<span class="cm"> */</span>
+
+
+<span class="cm">/*! \brief</span>
+<span class="cm"> * Brief description for a free function.</span>
+<span class="cm"> *</span>
+<span class="cm"> * A free function is not extracted into the documentation unless the enclosing</span>
+<span class="cm"> * scope (in this case, the file) is.  So a \libinternal is not necessary.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">gmx_function</span><span class="p">();</span>
+
+<span class="c1">// Assume that the module_example group is defined in the public API.</span>
+
+<span class="c1">//! \addtogroup module_example</span>
+<span class="c1">//! \{</span>
+
+<span class="c1">//! \cond libapi</span>
+<span class="cm">/*! \brief</span>
+<span class="cm"> * Brief description for a free function within \addtogroup.</span>
+<span class="cm"> *</span>
+<span class="cm"> * In this case, the enclosing scope is actually the module_example group,</span>
+<span class="cm"> * which is documented, so the function needs to be explicitly excluded.</span>
+<span class="cm"> * \\libinternal does not work, since it would produce warnings about an</span>
+<span class="cm"> * undocumented function, so the whole declaration is hidden from Doxygen.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">gmx_function</span><span class="p">();</span>
+<span class="c1">//! \endcond</span>
+
+<span class="c1">//! \}</span>
+
+<span class="c1">// For modules that are only declared in the library API, \addtogroup</span>
+<span class="c1">// cannot be used without an enclosing \cond.  Otherwise, it will create</span>
+<span class="c1">// a dummy module with the identifier as the name...</span>
+
+<span class="c1">//! \cond libapi</span>
+<span class="c1">//! \addtogroup module_libmodule</span>
+<span class="c1">//! \{</span>
+
+<span class="cm">/*! \brief</span>
+<span class="cm"> * Brief description.</span>
+<span class="cm"> *</span>
+<span class="cm"> * No \libinternal is necessary here because of the enclosing \cond.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">gmx_function</span><span class="p">();</span>
+
+<span class="c1">//! \}</span>
+<span class="c1">//! \endcond</span>
+
+<span class="c1">// An alternative to the above is use this, if the enclosing scope is only</span>
+<span class="c1">// documented in the library API:</span>
+
+<span class="c1">//! \libinternal \addtogroup module_libmodule</span>
+<span class="c1">//! \{</span>
+
+<span class="c1">//! Brief description.</span>
+<span class="kt">void</span> <span class="nf">gmx_function</span><span class="p">()</span>
+
+<span class="c1">//! \}</span>
+
+<span class="cm">/*! \libinternal \brief</span>
+<span class="cm"> * Brief description for a struct.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Documented structs and classes from headers are always extracted into the</span>
+<span class="cm"> * documentation, so \libinternal is necessary to exclude it.</span>
+<span class="cm"> * Currently, undocumented structs/classes do not produce warnings, so \cond</span>
+<span class="cm"> * is not necessary.</span>
+<span class="cm"> */</span>
+<span class="k">struct</span> <span class="n">t_example</span>
+<span class="p">{</span>
+    <span class="kt">int</span>  <span class="n">member1</span><span class="p">;</span> <span class="c1">//!&lt; Each non-private member should be documented.</span>
+    <span class="kt">bool</span> <span class="n">member2</span><span class="p">;</span> <span class="c1">//!&lt; Otherwise, Doxygen will produce warnings.</span>
+<span class="p">};</span>
+
+<span class="c1">// This namespace is documented in the public API.</span>
+<span class="k">namespace</span> <span class="n">gmx</span>
+<span class="p">{</span>
+
+<span class="c1">//! \cond libapi</span>
+<span class="cm">/*! \brief</span>
+<span class="cm"> * Brief description for a free function within a documented namespace.</span>
+<span class="cm"> *</span>
+<span class="cm"> * In this case, the enclosing scope is the documented namespace,</span>
+<span class="cm"> * so a \cond is necessary to avoid warnings.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="n">gmx_function</span><span class="p">();</span>
+<span class="c1">//! \endcond</span>
+
+<span class="cm">/*! \brief</span>
+<span class="cm"> * Class meant for subclassing only within the module, but the subclasses will</span>
+<span class="cm"> * be public.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This base class still provides public methods that are visible through the</span>
+<span class="cm"> * subclasses, so it should appear in the public documentation.</span>
+<span class="cm"> * But it is not marked with \inpublicapi.</span>
+<span class="cm"> */</span>
+<span class="k">class</span> <span class="nc">BaseClass</span>
+<span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="cm">/*! \brief</span>
+<span class="cm">         * A public method.</span>
+<span class="cm">         *</span>
+<span class="cm">         * This method also appears in the documentation of each subclass in</span>
+<span class="cm">         * the public and library API docs.</span>
+<span class="cm">         */</span>
+        <span class="kt">void</span> <span class="n">method</span><span class="p">();</span>
+
+    <span class="k">protected</span><span class="o">:</span>
+        <span class="c1">// The \cond is necessary to exlude this documentation from the public</span>
+        <span class="c1">// API, since the public API does not support subclassing.</span>
+        <span class="c1">//! \cond internal</span>
+        <span class="c1">//! A method that only subclasses inside the module see.</span>
+        <span class="kt">void</span> <span class="n">methodForSubclassToCall</span><span class="p">();</span>
+
+        <span class="c1">//! A method that needs to be implemented by subclasses.</span>
+        <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">virtualMethodToImplement</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="c1">//! \endcond</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace gmx</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-documentation">
+<h3>Module documentation<a class="headerlink" href="#module-documentation" title="Permalink to this headline">¶</a></h3>
+<p>Documenting a new module should place a comment like this in a central header
+for the module, such that the &#8220;Modules&#8221; tab in the generated documentation can
+be used to navigate to the module.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/*! \defgroup module_example &quot;Example module (example)&quot;</span>
+<span class="cm"> * \ingroup group_utilitymodules</span>
+<span class="cm"> * \brief</span>
+<span class="cm"> * Brief description for the module.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Detailed description of the module.  Can link to a separate Doxygen page for</span>
+<span class="cm"> * overview, and/or describe the most important headers and/or classes in the</span>
+<span class="cm"> * module as part of this documentation.</span>
+<span class="cm"> *</span>
+<span class="cm"> * For modules not exposed publicly, \libinternal can be added at the</span>
+<span class="cm"> * beginning (before \defgroup).</span>
+<span class="cm"> *</span>
+<span class="cm"> * \author Author Name &lt;author.name@email.com&gt;</span>
+<span class="cm"> */</span>
+
+<span class="c1">// In other code, use \addtogroup module_example and \ingroup module_example to</span>
+<span class="c1">// add content (classes, functions, etc.) onto the module page.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="common-mistakes">
+<h3>Common mistakes<a class="headerlink" href="#common-mistakes" title="Permalink to this headline">¶</a></h3>
+<p>The most common mistake, in particular in C code, is to forget to document the
+file.  This causes Doxygen to ignore most comments in the file, so it
+does not validate the contents of the comments either, nor is it possible to
+actually check how the generated documentation looks like.</p>
+<p>The following examples show some other common mistakes (and some less common)
+that do not produce correct documentation, as well as Doxygen &#8220;features&#8221;/bugs
+that can be confusing.</p>
+<ul>
+<li><p class="first">The struct itself is not documented; other comments within the declaration
+are ignored.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">t_struct</span> <span class="p">{</span>
+
+    <span class="c1">// The comment tries to document both members at once, but it only</span>
+    <span class="c1">// applies to the first.  The second produces warnings about missing</span>
+    <span class="c1">// documentation (if the enclosing struct was documented).</span>
+
+    <span class="c1">//! Angle parameters.</span>
+    <span class="kt">double</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">This does not produce any brief documentation.
+An explicit <code class="docutils literal"><span class="pre">\brief</span></code> is required, or <code class="docutils literal"><span class="pre">//!</span></code> (C++) or <code class="docutils literal"><span class="pre">/**</span> <span class="pre">*/</span></code> (C)
+should be used.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/*! Brief comment. */</span>
+<span class="kt">int</span> <span class="nf">gmx_function</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">This does not produce any documentation at all, since a <code class="docutils literal"><span class="pre">!</span></code> is missing at
+the beginning.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/* \brief</span>
+<span class="cm"> * Brief description.</span>
+<span class="cm"> *</span>
+<span class="cm"> * More details.</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">gmx_function</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">This puts the whole paragraph into the brief description.
+A short description is preferable, separated by an empty line from the rest
+of the text.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/*! \brief</span>
+<span class="cm"> * Brief description. The description continues with all kinds of details about</span>
+<span class="cm"> * what the function does and how it should be called.</span>
+<span class="cm"> */</span>
+<span class="kt">int</span> <span class="nf">gmx_function</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">This may be a Doxygen bug, but this does not produce any brief description.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="cm">/** \internal Brief description. */</span>
+<span class="kt">int</span> <span class="nf">gmx_function</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If the first declaration below appears in a header, and the second in a
+source file, then Doxygen does not associate them correctly and complains
+about missing documentation for the latter.  The solution is to explicitly
+add a namespace prefix also in the source file, even though the compiler
+does not require it.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="c1">// Header file</span>
+<span class="c1">//! Example function with a namespace-qualified parameter type.</span>
+<span class="kt">int</span> <span class="nf">gmx_function</span><span class="p">(</span><span class="k">const</span> <span class="n">gmx</span><span class="o">::</span><span class="n">SomeClass</span> <span class="o">&amp;</span><span class="n">param</span><span class="p">);</span>
+
+<span class="c1">// Source file</span>
+<span class="k">using</span> <span class="n">gmx</span><span class="o">::</span><span class="n">SomeClass</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">gmx_function</span><span class="p">(</span><span class="k">const</span> <span class="n">SomeClass</span> <span class="o">&amp;</span><span class="n">param</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">This puts the namespace into the mentioned module, instead of the contents
+of the namespace.  <code class="docutils literal"><span class="pre">\addtogroup</span></code> should go within the innermost scope.</p>
+<div class="highlight-c++"><div class="highlight"><pre><span></span><span class="c1">//! \addtogroup module_example</span>
+<span class="c1">//! \{</span>
+
+<span class="k">namespace</span> <span class="n">gmx</span>
+<span class="p">{</span>
+
+<span class="c1">//! Function intended to be part of module_example.</span>
+<span class="kt">int</span> <span class="n">gmx_function</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="existing-code">
+<h3>Existing code<a class="headerlink" href="#existing-code" title="Permalink to this headline">¶</a></h3>
+<p>More examples you can find by looking at existing code in the source tree.  In
+particular new C++ code such as that in the <code class="docutils literal"><span class="pre">src/gromacs/analysisdata/</span></code> and
+<code class="docutils literal"><span class="pre">src/gromacs/options/</span></code> subdirectories contains a large amount of code
+documented mostly along these guidelines.  Some comments in
+<code class="docutils literal"><span class="pre">src/gromacs/selection/</span></code> (in particular, any C-like code) predate the
+introduction of these guidelines, so those are not the best examples.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using Doxygen</a><ul>
+<li><a class="reference internal" href="#documentation-flavors">Documentation flavors</a></li>
+<li><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
+<li><a class="reference internal" href="#general-guidelines-for-doxygen-markup">General guidelines for Doxygen markup</a></li>
+<li><a class="reference internal" href="#gromacs-specifics">GROMACS specifics</a><ul>
+<li><a class="reference internal" href="#controlling-documentation-visibility">Controlling documentation visibility</a></li>
+<li><a class="reference internal" href="#modules-as-doxygen-groups">Modules as Doxygen groups</a></li>
+<li><a class="reference internal" href="#public-api-and-library-api-groups">Public API and library API groups</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documenting-specific-code-constructs">Documenting specific code constructs</a><ul>
+<li><a class="reference internal" href="#doxygen-pages">Doxygen pages</a></li>
+<li><a class="reference internal" href="#modules">Modules</a></li>
+<li><a class="reference internal" href="#classes-structs">Classes/structs</a></li>
+<li><a class="reference internal" href="#methods-functions-enums-macros">Methods/functions/enums/macros</a></li>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#directories">Directories</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#basic-c">Basic C++</a></li>
+<li><a class="reference internal" href="#id1">Basic C</a></li>
+<li><a class="reference internal" href="#scoping-and-visibility-rules">Scoping and visibility rules</a></li>
+<li><a class="reference internal" href="#module-documentation">Module documentation</a></li>
+<li><a class="reference internal" href="#common-mistakes">Common mistakes</a></li>
+<li><a class="reference internal" href="#existing-code">Existing code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.html"
+                        title="previous chapter">Development-time tools</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jenkins.html"
+                        title="next chapter">Understanding Jenkins builds</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/doxygen.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="jenkins.html" title="Understanding Jenkins builds"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.html" title="Development-time tools"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

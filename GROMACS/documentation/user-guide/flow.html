@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Flow Chart &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Getting started" href="getting-started.html" />
+    <link rel="next" title="System preparation" href="system-preparation.html" />
+    <link rel="prev" title="Getting started" href="getting-started.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="system-preparation.html" title="System preparation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting started"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="getting-started.html" accesskey="U">Getting started</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="flow-chart">
+<h1>Flow Chart<a class="headerlink" href="#flow-chart" title="Permalink to this headline">¶</a></h1>
+<p>This is a flow chart of a typical GROMACS MD run of a protein
+in a box of water.
+A more detailed example is available in <a class="reference internal" href="getting-started.html"><span class="doc">Getting started</span></a>.
+Several steps of energy minimization may be necessary,
+these consist of cycles: <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> -&gt; <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>.</p>
+<img src="../_images/graphviz-2eb4f0e3760621bd1b31e757f1cd7c099d737926.png" alt="digraph flowchart {
+node [ shape=box, width=1.5 ]
+
+input_pdb [
+  label=&quot;eiwit.pdb&quot;
+  tooltip=&quot;Protein Databank file&quot;
+  URL=&quot;file-formats.html#pdb&quot;
+  shape=none, width=0, height=0, margin=0
+  group=input
+]
+pdb2gmx [
+  label=&quot;Generate a GROMACS topology\ngmx pdb2gmx&quot;
+  tooltip=&quot;Convert PDB file to GROMACS coordinate file and topology&quot;
+  URL=&quot;../onlinehelp/gmx-pdb2gmx.html&quot;
+  width=3
+  group=main
+]
+
+input_pdb -&gt; pdb2gmx [ headport=e ]
+
+editconf [
+  label=&quot;Enlarge the box\ngmx editconf&quot;
+  tooltip=&quot;Adjust box size and placement of molecule&quot;
+  URL=&quot;../onlinehelp/gmx-editconf.html&quot;
+]
+
+pdb2gmx -&gt; editconf [
+  label=&quot;conf.gro&quot;
+  labeltooltip=&quot;GROMACS coordinate file containing molecules from PDB file&quot;
+  URL=&quot;file-formats.html#gro&quot;
+]
+
+solvate [
+  label=&quot;Solvate protein\ngmx solvate&quot;
+  tooltip=&quot;Fill box with water (solvate molecule)&quot;
+  URL=&quot;../onlinehelp/gmx-solvate.html&quot;
+  width=3
+  group=main
+]
+
+pdb2gmx -&gt; solvate [
+  label=&quot;topol.top&quot;
+  labeltooltip=&quot;GROMACS ascii topology file&quot;
+  URL=&quot;file-formats.html#top&quot;
+]
+editconf -&gt; solvate [
+  label=&quot;conf.gro&quot;
+  labeltooltip=&quot;GROMACS coordinate file with adjusted box etc.&quot;
+  URL=&quot;file-formats.html#gro&quot;
+]
+
+input_mdp [
+  label=&quot;grompp.mdp&quot;
+  tooltip=&quot;Parameter file from grompp (controls all MD parameters)&quot;
+  URL=&quot;file-formats.html#mdp&quot;
+  shape=none, width=0, height=0, margin=0
+  group=input
+]
+grompp [
+  label=&quot;Generate mdrun input file\ngmx grompp&quot;
+  tooltip=&quot;Process parameters, coordinates and topology and write binary topology&quot;
+  URL=&quot;../onlinehelp/gmx-grompp.html&quot;
+  width=3
+  group=main
+]
+
+input_pdb -&gt; input_mdp [ style=invis, minlen=3 ]
+
+input_mdp -&gt; grompp [ headport=e, weight=0 ]
+solvate -&gt; grompp [
+  label=&quot;conf.gro&quot;
+  labeltooltip=&quot;GROMACS coordinate file with water molecules added&quot;
+  URL=&quot;file-formats.html#gro&quot;
+]
+solvate -&gt; grompp [
+  label=&quot;topol.top&quot;
+  labeltooltip=&quot;GROMACS ascii topology file with water molecules added&quot;
+  URL=&quot;file-formats.html#top&quot;
+]
+
+mdrun [
+  label=&quot;Run the simulation (EM or MD)\ngmx mdrun&quot;
+  tooltip=&quot;The moment you have all been waiting for! START YOUR MD RUN&quot;
+  URL=&quot;../onlinehelp/gmx-mdrun.html&quot;
+  width=3
+  group=main
+]
+
+grompp -&gt; mdrun [
+  label=&quot;topol.tpr&quot;
+  labeltooltip=&quot;Portable GROMACS binary run input file (contains all information to start MD run)&quot;
+  URL=&quot;file-formats.html#tpr&quot;
+]
+mdrun -&gt; mdrun [
+  label=&quot;Continuation\nstate.cpt&quot;
+  labeltooltip=&quot;Checkpoint file&quot;
+  URL=&quot;file-formats.html#cpt&quot;
+]
+
+analysis [
+  label=&quot;Analysis\ngmx ...\ngmx view&quot;
+  tooltip=&quot;Your favourite GROMACS analysis tool&quot;
+  URL=&quot;../onlinehelp/bytopic.html&quot;
+]
+
+mdrun -&gt; analysis [
+  label=&quot;traj.xtc / traj.trr&quot;
+  labeltooltip=&quot;Portable compressed trajectory / full precision portable trajectory&quot;
+  URL=&quot;file-formats.html#xtc&quot;
+]
+
+energy [
+  label=&quot;Analysis\ngmx energy&quot;
+  tooltip=&quot;Energy plots, averages and fluctuations&quot;
+  URL=&quot;../onlinehelp/gmx-energy.html&quot;
+]
+
+mdrun -&gt; energy [
+  label=&quot;ener.edr&quot;
+  labeltooltip=&quot;Portable energy file&quot;
+  URL=&quot;file-formats.html#edr&quot;
+]
+}" usemap="#flowchart" />
+<map id="flowchart" name="flowchart">
+<area shape="rect" id="node1" href="file-formats.html#pdb" title="Protein Databank file" alt="" coords="379,5,448,25"/>
+<area shape="rect" id="node2" href="../onlinehelp/gmx-pdb2gmx.html" title="Convert PDB file to GROMACS coordinate file and topology" alt="" coords="53,75,341,125"/>
+<area shape="rect" id="node5" href="file-formats.html#mdp" title="Parameter file from grompp (controls all MD parameters)" alt="" coords="365,327,461,347"/>
+<area shape="rect" id="node3" href="../onlinehelp/gmx-editconf.html" title="Adjust box size and placement of molecule" alt="" coords="5,193,149,244"/>
+<area shape="poly" id="edge2" href="file-formats.html#gro" title="conf.gro" alt="" coords="150,128,119,151,96,183,92,180,115,147,147,123"/>
+<area shape="rect" id="edge2-label" href="file-formats.html#gro" title="GROMACS coordinate file containing molecules from PDB file" alt="" coords="117,149,179,169"/>
+<area shape="rect" id="node4" href="../onlinehelp/gmx-solvate.html" title="Fill box with water (solvate molecule)" alt="" coords="53,312,341,363"/>
+<area shape="poly" id="edge3" href="file-formats.html#top" title="topol.top" alt="" coords="200,126,200,298,195,298,195,126"/>
+<area shape="rect" id="edge3-label" href="file-formats.html#top" title="GROMACS ascii topology file" alt="" coords="197,209,263,229"/>
+<area shape="poly" id="edge4" href="file-formats.html#gro" title="conf.gro" alt="" coords="90,243,103,265,119,286,139,302,135,307,115,290,98,268,85,245"/>
+<area shape="rect" id="edge4-label" href="file-formats.html#gro" title="GROMACS coordinate file with adjusted box etc." alt="" coords="117,268,179,288"/>
+<area shape="rect" id="node6" href="../onlinehelp/gmx-grompp.html" title="Process parameters, coordinates and topology and write binary topology" alt="" coords="45,431,333,481"/>
+<area shape="poly" id="edge7" href="file-formats.html#gro" title="conf.gro" alt="" coords="171,365,156,388,154,403,160,418,155,420,149,403,151,386,166,362"/>
+<area shape="rect" id="edge7-label" href="file-formats.html#gro" title="GROMACS coordinate file with water molecules added" alt="" coords="153,387,215,407"/>
+<area shape="poly" id="edge8" href="file-formats.html#top" title="topol.top" alt="" coords="212,362,218,384,217,407,213,419,208,417,212,406,213,385,207,364"/>
+<area shape="rect" id="edge8-label" href="file-formats.html#top" title="GROMACS ascii topology file with water molecules added" alt="" coords="217,387,283,407"/>
+<area shape="rect" id="node7" href="../onlinehelp/gmx-mdrun.html" title="The moment you have all been waiting for! START YOUR MD RUN" alt="" coords="45,549,333,600"/>
+<area shape="poly" id="edge9" href="file-formats.html#tpr" title="topol.tpr" alt="" coords="192,481,192,536,187,536,187,481"/>
+<area shape="rect" id="edge9-label" href="file-formats.html#tpr" title="Portable GROMACS binary run input file (contains all information to start MD run)" alt="" coords="189,505,252,525"/>
+<area shape="poly" id="edge10" href="file-formats.html#cpt" title="Continuation\nstate.cpt" alt="" coords="334,563,352,567,360,575,349,583,346,579,355,574,350,572,333,568"/>
+<area shape="rect" id="edge10-label" href="file-formats.html#cpt" title="Checkpoint file" alt="" coords="357,555,452,595"/>
+<area shape="rect" id="node8" href="../onlinehelp/bytopic.html" title="Your favourite GROMACS analysis tool" alt="" coords="33,668,177,739"/>
+<area shape="poly" id="edge11" href="file-formats.html#xtc" title="traj.xtc / traj.trr" alt="" coords="155,602,133,626,118,656,113,654,128,622,151,598"/>
+<area shape="rect" id="edge11-label" href="file-formats.html#xtc" title="Portable compressed trajectory / full precision portable trajectory" alt="" coords="131,624,244,644"/>
+<area shape="rect" id="node9" href="../onlinehelp/gmx-energy.html" title="Energy plots, averages and fluctuations" alt="" coords="201,678,345,729"/>
+<area shape="poly" id="edge12" href="file-formats.html#edr" title="ener.edr" alt="" coords="224,598,246,623,266,664,261,666,242,625,220,602"/>
+<area shape="rect" id="edge12-label" href="file-formats.html#edr" title="Portable energy file" alt="" coords="256,624,316,644"/>
+</map>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="getting-started.html"
+                        title="previous chapter">Getting started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="system-preparation.html"
+                        title="next chapter">System preparation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/flow.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="system-preparation.html" title="System preparation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="getting-started.html" title="Getting started"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="getting-started.html" >Getting started</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

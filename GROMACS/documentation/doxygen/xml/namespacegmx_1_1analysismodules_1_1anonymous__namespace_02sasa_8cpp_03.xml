@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacegmx_1_1analysismodules_1_1anonymous__namespace_02sasa_8cpp_03" kind="namespace">
+    <compoundname>gmx::analysismodules::anonymous_namespace{sasa.cpp}</compoundname>
+    <innerclass refid="structgmx_1_1analysismodules_1_1anonymous__namespace_02sasa_8cpp_03_1_1t__conect" prot="public">gmx::analysismodules::anonymous_namespace{sasa.cpp}::t_conect</innerclass>
+    <innerclass refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02sasa_8cpp_03_1_1Sasa" prot="public">gmx::analysismodules::anonymous_namespace{sasa.cpp}::Sasa</innerclass>
+    <innerclass refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02sasa_8cpp_03_1_1SasaModuleData" prot="public">gmx::analysismodules::anonymous_namespace{sasa.cpp}::SasaModuleData</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__module__trajectoryanalysis_1gaaeebaa150a0076e82c2a8c53d52539d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::analysismodules::anonymous_namespace{sasa.cpp}::add_rec</definition>
+        <argsstring>(t_conect c[], int i, int j, real d2)</argsstring>
+        <name>add_rec</name>
+        <param>
+          <type><ref refid="structgmx_1_1analysismodules_1_1anonymous__namespace_02sasa_8cpp_03_1_1t__conect" kindref="compound">t_conect</ref></type>
+          <declname>c</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>j</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>d2</declname>
+        </param>
+        <briefdescription>
+<para>Updates nearest neighbor information for a surface dot. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nearest neighbor information array to update. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index in <computeroutput>c</computeroutput> to update. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">j</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of the other surface dot to add to the array. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">d2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Squared distance between <computeroutput>i</computeroutput> and <computeroutput>j</computeroutput>. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" line="113" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" bodystart="113" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="group__module__trajectoryanalysis_1ga8aa66160ab0c7c1eba818d954edbdd0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::analysismodules::anonymous_namespace{sasa.cpp}::do_conect</definition>
+        <argsstring>(const char *fn, int n, rvec x[])</argsstring>
+        <name>do_conect</name>
+        <param>
+          <type>const char *</type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Adds CONECT records for surface dots. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PDB file to append the CONECT records to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of dots in <computeroutput>x</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of surface dot positions.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Adds a CONECT record that connects each surface dot to its two nearest neighbors. The function is copied verbatim from the old gmx_sas.c implementation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" line="158" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" bodystart="158" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="group__module__trajectoryanalysis_1gac151233f8208bd55025d87e8d902ca3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::analysismodules::anonymous_namespace{sasa.cpp}::connolly_plot</definition>
+        <argsstring>(const char *fn, int ndots, real dots[], rvec x[], t_atoms *atoms, t_symtab *symtab, int ePBC, const matrix box, gmx_bool bIncludeSolute)</argsstring>
+        <name>connolly_plot</name>
+        <param>
+          <type>const char *</type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ndots</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>dots</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__symtab" kindref="compound">t_symtab</ref> *</type>
+          <declname>symtab</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIncludeSolute</declname>
+        </param>
+        <briefdescription>
+<para>Plots the surface into a PDB file, optionally including the original atoms. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" line="199" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" bodystart="199" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="group__module__trajectoryanalysis_1ga4530988451bc112680ff52960d0b7e63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::analysismodules::anonymous_namespace{sasa.cpp}::computeAreas</definition>
+        <argsstring>(const Selection &amp;surfaceSel, const Selection &amp;sel, const std::vector&lt; real &gt; &amp;atomAreas, const std::vector&lt; real &gt; &amp;dgsFactor, real *totalAreaOut, real *dgsolvOut, AnalysisDataHandle atomAreaHandle, AnalysisDataHandle resAreaHandle, std::vector&lt; real &gt; *resAreaWork)</argsstring>
+        <name>computeAreas</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> &amp;</type>
+          <declname>surfaceSel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &amp;</type>
+          <declname>atomAreas</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &amp;</type>
+          <declname>dgsFactor</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>totalAreaOut</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dgsolvOut</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1AnalysisDataHandle" kindref="compound">AnalysisDataHandle</ref></type>
+          <declname>atomAreaHandle</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1AnalysisDataHandle" kindref="compound">AnalysisDataHandle</ref></type>
+          <declname>resAreaHandle</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; *</type>
+          <declname>resAreaWork</declname>
+        </param>
+        <briefdescription>
+<para>Helper method to compute the areas for a single selection. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">surfaceSel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The calculation selection. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selection to compute the areas for (can be <computeroutput>surfaceSel</computeroutput> or one of the output selections). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">atomAreas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Atom areas for each position in <computeroutput>surfaceSel</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dgsFactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free energy coefficients for each position in <computeroutput>surfaceSel</computeroutput>. If empty, free energies are not calculated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">totalAreaOut</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Total area of <computeroutput>sel</computeroutput> (sum of atom areas it selects). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">dgsolvOut</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvation free energy. Will be zero of <computeroutput>dgsFactor</computeroutput> is empty. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>atomAreaHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data handle to use for storing atom areas for <computeroutput>sel</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resAreaHandle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data handle to use for storing residue areas for <computeroutput>sel</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resAreaWork</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Work array for accumulating the residue areas. If empty, atom and residue areas are not calculated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<computeroutput>atomAreaHandle</computeroutput> and <computeroutput>resAreaHandle</computeroutput> are not used if <computeroutput>resAreaWork</computeroutput> is empty. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" line="817" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" bodystart="817" bodyend="874"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/sasa.cpp" line="87" column="1"/>
+  </compounddef>
+</doxygen>

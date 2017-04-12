@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx dos &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx dump" href="gmx-dump.html" />
+    <link rel="prev" title="gmx do_dssp" href="gmx-do_dssp.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-dump.html" title="gmx dump"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-do_dssp.html" title="gmx do_dssp"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-dos">
+<span id="id1"></span><h1>gmx dos<a class="headerlink" href="#gmx-dos" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx dos [<strong>-f</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+        [<strong>-vacf</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-mvacf</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-dos</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-g</strong> <em>[&lt;.log&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>]
+        [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]v</strong>] [<strong>-[no]recip</strong>] [<strong>-[no]abs</strong>] [<strong>-[no]normdos</strong>]
+        [<strong>-T</strong> <em>&lt;real&gt;</em>] [<strong>-toler</strong> <em>&lt;real&gt;</em>] [<strong>-acflen</strong> <em>&lt;int&gt;</em>] [<strong>-[no]normalize</strong>]
+        [<strong>-P</strong> <em>&lt;enum&gt;</em>] [<strong>-fitfn</strong> <em>&lt;enum&gt;</em>] [<strong>-beginfit</strong> <em>&lt;real&gt;</em>]
+        [<strong>-endfit</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">dos</span></code> computes the Density of States from a simulations.
+In order for this to be meaningful the velocities must be saved
+in the trajecotry with sufficiently high frequency such as to cover
+all vibrations. For flexible systems that would be around a few fs
+between saving. Properties based on the DoS are printed on the
+standard output.Note that the density of states is calculated from the mass-weighted
+autocorrelation, and by default only from the square of the real
+component rather than absolute value. This means the shape can differ
+substantially from the plain vibrational power spectrum you can
+calculate with gmx velacc.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.trr/.cpt/...&gt;] (traj.trr)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-vacf</span></code> [&lt;.xvg&gt;] (vacf.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-mvacf</span></code> [&lt;.xvg&gt;] (mvacf.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-dos</span></code> [&lt;.xvg&gt;] (dos.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.log&gt;] (dos.log)</dt>
+<dd>Log file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]v</span></code>  (yes)</dt>
+<dd>Be loud and noisy.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]recip</span></code>  (no)</dt>
+<dd>Use cm^-1 on X-axis instead of 1/ps for DoS plots.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]abs</span></code>  (no)</dt>
+<dd>Use the absolute value of the Fourier transform of the VACF as the Density of States. Default is to use the real component only</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]normdos</span></code>  (no)</dt>
+<dd>Normalize the DoS such that it adds up to 3N. This should usually not be necessary.</dd>
+<dt><code class="docutils literal"><span class="pre">-T</span></code> &lt;real&gt; (298.15)</dt>
+<dd>Temperature in the simulation</dd>
+<dt><code class="docutils literal"><span class="pre">-toler</span></code> &lt;real&gt; (1e-06)</dt>
+<dd>[HIDDEN]Tolerance when computing the fluidicity using bisection algorithm</dd>
+<dt><code class="docutils literal"><span class="pre">-acflen</span></code> &lt;int&gt; (-1)</dt>
+<dd>Length of the ACF, default is half the number of frames</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]normalize</span></code>  (yes)</dt>
+<dd>Normalize ACF</dd>
+<dt><code class="docutils literal"><span class="pre">-P</span></code> &lt;enum&gt; (0)</dt>
+<dd>Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3</dd>
+<dt><code class="docutils literal"><span class="pre">-fitfn</span></code> &lt;enum&gt; (none)</dt>
+<dd>Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9</dd>
+<dt><code class="docutils literal"><span class="pre">-beginfit</span></code> &lt;real&gt; (0)</dt>
+<dd>Time where to begin the exponential fit of the correlation function</dd>
+<dt><code class="docutils literal"><span class="pre">-endfit</span></code> &lt;real&gt; (-1)</dt>
+<dd>Time where to end the exponential fit of the correlation function, -1 is until the end</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>This program needs a lot of memory: total usage equals the number of atoms times 3 times number of frames times 4 (or 8 when run in double precision).</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx dos</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-do_dssp.html"
+                        title="previous chapter">gmx do_dssp</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-dump.html"
+                        title="next chapter">gmx dump</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-dos.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-dump.html" title="gmx dump"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-do_dssp.html" title="gmx do_dssp"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

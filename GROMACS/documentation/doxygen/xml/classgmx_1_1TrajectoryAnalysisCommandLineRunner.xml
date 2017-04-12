@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1TrajectoryAnalysisCommandLineRunner" kind="class" prot="public">
+    <compoundname>gmx::TrajectoryAnalysisCommandLineRunner</compoundname>
+    <includes local="no">gromacs/trajectoryanalysis/cmdlinerunner.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a29b6cede161d6735c9b6c71d10141b3d" prot="public" static="no">
+        <type>std::function&lt; <ref refid="namespacegmx_1a832da3c093109c13cc2369de05e02f3b" kindref="member">TrajectoryAnalysisModulePointer</ref>()&gt;</type>
+        <definition>typedef std::function&lt;TrajectoryAnalysisModulePointer()&gt; gmx::TrajectoryAnalysisCommandLineRunner::ModuleFactoryMethod</definition>
+        <argsstring></argsstring>
+        <name>ModuleFactoryMethod</name>
+        <briefdescription>
+<para>Factory method type for creating a trajectory analysis module. </para>        </briefdescription>
+        <detaileddescription>
+<para>This method allows the module creation to be postponed to the point where the module is needed, reducing initialization costs in, e.g., the <computeroutput>gmx</computeroutput> binary, and simplifying exception handling. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="79" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a12cd1b40ed04cda667f315e2adee3337" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ModuleType</type>
+          </param>
+        </templateparamlist>
+        <type>int</type>
+        <definition>static int gmx::TrajectoryAnalysisCommandLineRunner::runAsMain</definition>
+        <argsstring>(int argc, char *argv[])</argsstring>
+        <name>runAsMain</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Implements a <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref> method that runs a given module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ModuleType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Trajectory analysis module. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argc</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argv</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method abstracts away all the logic required to implement a <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref> method in user tools, allowing that to be changed without requiring changes to the tools themselves.</para><para><computeroutput>ModuleType</computeroutput> should be default-constructible and derive from <ref refid="classgmx_1_1TrajectoryAnalysisModule" kindref="compound">TrajectoryAnalysisModule</ref>.</para><para>Does not throw. All exceptions are caught and handled internally. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="98" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" bodystart="98" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a2d678f11c9fd7a0b958dda6eb768a775" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::TrajectoryAnalysisCommandLineRunner::runAsMain</definition>
+        <argsstring>(int argc, char *argv[], ModuleFactoryMethod factory)</argsstring>
+        <name>runAsMain</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a29b6cede161d6735c9b6c71d10141b3d" kindref="member">ModuleFactoryMethod</ref></type>
+          <declname>factory</declname>
+        </param>
+        <briefdescription>
+<para>Implements a <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref> method that runs a given module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argc</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argv</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function that creates the module on demand.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Implements the template <ref refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a12cd1b40ed04cda667f315e2adee3337" kindref="member">runAsMain()</ref>, but can also be used independently.</para><para>Does not throw. All exceptions are caught and handled internally. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="114" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.cpp" bodystart="187" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1ae0549c25021f6f1780a24110cd2991ac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::TrajectoryAnalysisCommandLineRunner::registerModule</definition>
+        <argsstring>(CommandLineModuleManager *manager, const char *name, const char *description, ModuleFactoryMethod factory)</argsstring>
+        <name>registerModule</name>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">CommandLineModuleManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a29b6cede161d6735c9b6c71d10141b3d" kindref="member">ModuleFactoryMethod</ref></type>
+          <declname>factory</declname>
+        </param>
+        <briefdescription>
+<para>Registers a command-line module that runs a given module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Manager to register the module to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the module to register. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One-line description for the module to register. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function that creates the module on demand.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<computeroutput>name</computeroutput> and <computeroutput>descriptions</computeroutput> must be string constants or otherwise stay valid for the duration of the program execution. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="127" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.cpp" bodystart="199" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1ac32355069a35fc79ffeb0c8375a672e7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classgmx_1_1ICommandLineOptionsModule" kindref="compound">ICommandLineOptionsModule</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; ICommandLineOptionsModule &gt; gmx::TrajectoryAnalysisCommandLineRunner::createModule</definition>
+        <argsstring>(TrajectoryAnalysisModulePointer module)</argsstring>
+        <name>createModule</name>
+        <param>
+          <type><ref refid="namespacegmx_1a832da3c093109c13cc2369de05e02f3b" kindref="member">TrajectoryAnalysisModulePointer</ref></type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Create a command-line module that runs the provided analysis module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to run. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Command-line module that runs the provided analysis module. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This is mainly provided for testing purposes that want to bypass <ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">CommandLineModuleManager</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="142" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.cpp" bodystart="213" bodyend="217"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a6359b3433907898333cf172f4175b6cb" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::TrajectoryAnalysisCommandLineRunner::TrajectoryAnalysisCommandLineRunner</definition>
+        <argsstring>()</argsstring>
+        <name>TrajectoryAnalysisCommandLineRunner</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="146" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" bodystart="146" bodyend="146"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1adc1946ac93f66ef27887024372071d69" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ModuleType</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespacegmx_1a832da3c093109c13cc2369de05e02f3b" kindref="member">TrajectoryAnalysisModulePointer</ref></type>
+        <definition>static TrajectoryAnalysisModulePointer gmx::TrajectoryAnalysisCommandLineRunner::createModule</definition>
+        <argsstring>()</argsstring>
+        <name>createModule</name>
+        <briefdescription>
+<para>Creates a trajectory analysis module of a given type. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ModuleType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to create. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="154" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" bodystart="154" bodyend="157"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Runner for command-line trajectory analysis tools. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class provides static methods to implement a command-line analysis program, given a <ref refid="classgmx_1_1TrajectoryAnalysisModule" kindref="compound">TrajectoryAnalysisModule</ref> object (or a factory of such). It takes care of common command-line parameters, initializing and evaluating selections, and looping over trajectory frames. </para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" line="69" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/cmdlinerunner.h" bodystart="68" bodyend="158"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1ac32355069a35fc79ffeb0c8375a672e7" prot="public" virt="non-virtual"><scope>gmx::TrajectoryAnalysisCommandLineRunner</scope><name>createModule</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1adc1946ac93f66ef27887024372071d69" prot="private" virt="non-virtual"><scope>gmx::TrajectoryAnalysisCommandLineRunner</scope><name>createModule</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a29b6cede161d6735c9b6c71d10141b3d" prot="public" virt="non-virtual"><scope>gmx::TrajectoryAnalysisCommandLineRunner</scope><name>ModuleFactoryMethod</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1ae0549c25021f6f1780a24110cd2991ac" prot="public" virt="non-virtual"><scope>gmx::TrajectoryAnalysisCommandLineRunner</scope><name>registerModule</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a12cd1b40ed04cda667f315e2adee3337" prot="public" virt="non-virtual"><scope>gmx::TrajectoryAnalysisCommandLineRunner</scope><name>runAsMain</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a2d678f11c9fd7a0b958dda6eb768a775" prot="public" virt="non-virtual"><scope>gmx::TrajectoryAnalysisCommandLineRunner</scope><name>runAsMain</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a6359b3433907898333cf172f4175b6cb" prot="private" virt="non-virtual"><scope>gmx::TrajectoryAnalysisCommandLineRunner</scope><name>TrajectoryAnalysisCommandLineRunner</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

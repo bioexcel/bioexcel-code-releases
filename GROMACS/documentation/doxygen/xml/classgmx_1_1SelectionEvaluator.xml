@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1SelectionEvaluator" kind="class" prot="public">
+    <compoundname>gmx::SelectionEvaluator</compoundname>
+    <includes local="no">gromacs/selection/selectioncollection-impl.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1SelectionEvaluator_1a9de4b9e8bdc74fb02ce95b9e55139ce4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::SelectionEvaluator::SelectionEvaluator</definition>
+        <argsstring>()</argsstring>
+        <name>SelectionEvaluator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection-impl.h" line="194" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="416" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1SelectionEvaluator_1ad86f6b06a9c14294732430b01329e0af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::SelectionEvaluator::evaluate</definition>
+        <argsstring>(SelectionCollection *sc, t_trxframe *fr, t_pbc *pbc)</argsstring>
+        <name>evaluate</name>
+        <param>
+          <type><ref refid="classgmx_1_1SelectionCollection" kindref="compound">SelectionCollection</ref> *</type>
+          <declname>sc</declname>
+          <defname>coll</defname>
+        </param>
+        <param>
+          <type><ref refid="structt__trxframe" kindref="compound">t_trxframe</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates selections in a collection. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selection collection to evaluate. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame for which the evaluation should be carried out. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PBC data, or NULL if no PBC should be used. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on successful evaluation, a non-zero error code on error.</para></simplesect>
+This functions sets the global variables for topology, frame and PBC, clears some information in the selection to initialize the evaluation for a new frame, and evaluates <computeroutput>sel</computeroutput> and all the selections pointed by the <computeroutput>next</computeroutput> pointers of <computeroutput>sel</computeroutput>.</para><para>This is the only function that user code should call if they want to evaluate a selection for a new frame. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection-impl.h" line="199" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="435" bodyend="476"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1SelectionEvaluator_1a6d5202a595b0183631ba627d726f85c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::SelectionEvaluator::evaluateFinal</definition>
+        <argsstring>(SelectionCollection *sc, int nframes)</argsstring>
+        <name>evaluateFinal</name>
+        <param>
+          <type><ref refid="classgmx_1_1SelectionCollection" kindref="compound">SelectionCollection</ref> *</type>
+          <declname>sc</declname>
+          <defname>coll</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nframes</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates the final state for dynamic selections. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The selection collection to evaluate. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nframes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Total number of frames. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection-impl.h" line="203" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="483" bodyend="494"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements selection evaluation. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para>This class is used to implement <ref refid="classgmx_1_1SelectionCollection_1a3d981d35e2fbd35f64092063871fdef3" kindref="member">SelectionCollection::evaluate()</ref> and <ref refid="classgmx_1_1SelectionCollection_1aeb8069b1be3abd49bad0a1431f91ad7c" kindref="member">SelectionCollection::evaluateFinal()</ref>. </para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection-impl.h" line="192" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selectioncollection-impl.h" bodystart="191" bodyend="204"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1SelectionEvaluator_1ad86f6b06a9c14294732430b01329e0af" prot="public" virt="non-virtual"><scope>gmx::SelectionEvaluator</scope><name>evaluate</name></member>
+      <member refid="classgmx_1_1SelectionEvaluator_1a6d5202a595b0183631ba627d726f85c1" prot="public" virt="non-virtual"><scope>gmx::SelectionEvaluator</scope><name>evaluateFinal</name></member>
+      <member refid="classgmx_1_1SelectionEvaluator_1a9de4b9e8bdc74fb02ce95b9e55139ce4" prot="public" virt="non-virtual"><scope>gmx::SelectionEvaluator</scope><name>SelectionEvaluator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

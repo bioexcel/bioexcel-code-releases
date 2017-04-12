@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1test_1_1ITextBlockMatcher" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::test::ITextBlockMatcher</compoundname>
+    <derivedcompoundref refid="classgmx_1_1test_1_1anonymous__namespace_02conftest_8cpp_03_1_1ConfMatcher" prot="public" virt="non-virtual">gmx::test::anonymous_namespace{conftest.cpp}::ConfMatcher</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1anonymous__namespace_02textblockmatchers_8cpp_03_1_1ExactTextMatcher" prot="public" virt="non-virtual">gmx::test::anonymous_namespace{textblockmatchers.cpp}::ExactTextMatcher</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1anonymous__namespace_02textblockmatchers_8cpp_03_1_1NoTextMatcher" prot="public" virt="non-virtual">gmx::test::anonymous_namespace{textblockmatchers.cpp}::NoTextMatcher</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1anonymous__namespace_02xvgtest_8cpp_03_1_1XvgMatcher" prot="public" virt="non-virtual">gmx::test::anonymous_namespace{xvgtest.cpp}::XvgMatcher</derivedcompoundref>
+    <includes local="no">testutils/textblockmatchers.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1test_1_1ITextBlockMatcher_1a095cf29f631220ae7766416036a27bc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::test::ITextBlockMatcher::~ITextBlockMatcher</definition>
+        <argsstring>()</argsstring>
+        <name>~ITextBlockMatcher</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/testutils/textblockmatchers.h" line="80" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/testutils/textblockmatchers.cpp" bodystart="80" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1ITextBlockMatcher_1a0a9a8a968f0b9010ce9b66ec493b246c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::test::ITextBlockMatcher::checkStream</definition>
+        <argsstring>(TextInputStream *stream, TestReferenceChecker *checker)=0</argsstring>
+        <name>checkStream</name>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02textblockmatchers_8cpp_03_1_1ExactTextMatcher_1a965e49aa5be4febb8826349b0879f1d3">checkStream</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02textblockmatchers_8cpp_03_1_1NoTextMatcher_1acb67cd9e5b2afff06ead66ee60200485">checkStream</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02conftest_8cpp_03_1_1ConfMatcher_1a54b9b6f3722d65e5641d7df4c3d826ac">checkStream</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02xvgtest_8cpp_03_1_1XvgMatcher_1ae2a99b4c25eeb64441a9bafb883b547c">checkStream</reimplementedby>
+        <param>
+          <type><ref refid="classgmx_1_1TextInputStream" kindref="compound">TextInputStream</ref> *</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1test_1_1TestReferenceChecker" kindref="compound">TestReferenceChecker</ref> *</type>
+          <declname>checker</declname>
+        </param>
+        <briefdescription>
+<para>Matches contents of a stream against reference data. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stream</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Stream to match. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>checker</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Checker to use for matching.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The method can change the state of the provided checker (e.g., by changing the default tolerance). The caller is responsible of providing a checker where such state changes do not matter. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/testutils/textblockmatchers.h" line="93" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represents a text matcher, matching text stream contents against reference data. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> Typical pattern of declaring such matchers is to<itemizedlist>
+<listitem><para>Create a factory that implements <ref refid="classgmx_1_1test_1_1ITextBlockMatcherSettings" kindref="compound">ITextBlockMatcherSettings</ref>,</para></listitem><listitem><para>Make that factory provide any necessary parameters that the matcher needs, using a &quot;named parameter&quot; idiom (see <ref refid="classgmx_1_1test_1_1XvgMatch" kindref="compound">XvgMatch</ref> for an example), and</para></listitem><listitem><para>Make the factory create and return an instance of an internal implementation class that implements <ref refid="classgmx_1_1test_1_1ITextBlockMatcher" kindref="compound">ITextBlockMatcher</ref> and provides the actual matching logic.</para></listitem></itemizedlist>
+</para><para>Any method that then wants to accept a matcher can accept a <ref refid="classgmx_1_1test_1_1ITextBlockMatcherSettings" kindref="compound">ITextBlockMatcherSettings</ref>. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="2309">
+        <label>gmx::test::anonymous_namespace{conftest.cpp}::ConfMatcher</label>
+        <link refid="classgmx_1_1test_1_1anonymous__namespace_02conftest_8cpp_03_1_1ConfMatcher"/>
+        <childnode refid="2308" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2308">
+        <label>gmx::test::ITextBlockMatcher</label>
+        <link refid="classgmx_1_1test_1_1ITextBlockMatcher"/>
+      </node>
+      <node id="2311">
+        <label>gmx::test::anonymous_namespace{textblockmatchers.cpp}::NoTextMatcher</label>
+        <link refid="classgmx_1_1test_1_1anonymous__namespace_02textblockmatchers_8cpp_03_1_1NoTextMatcher"/>
+        <childnode refid="2308" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2312">
+        <label>gmx::test::anonymous_namespace{xvgtest.cpp}::XvgMatcher</label>
+        <link refid="classgmx_1_1test_1_1anonymous__namespace_02xvgtest_8cpp_03_1_1XvgMatcher"/>
+        <childnode refid="2308" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2310">
+        <label>gmx::test::anonymous_namespace{textblockmatchers.cpp}::ExactTextMatcher</label>
+        <link refid="classgmx_1_1test_1_1anonymous__namespace_02textblockmatchers_8cpp_03_1_1ExactTextMatcher"/>
+        <childnode refid="2308" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/testutils/textblockmatchers.h" line="78" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/testutils/textblockmatchers.h" bodystart="77" bodyend="95"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1test_1_1ITextBlockMatcher_1a0a9a8a968f0b9010ce9b66ec493b246c" prot="public" virt="pure-virtual"><scope>gmx::test::ITextBlockMatcher</scope><name>checkStream</name></member>
+      <member refid="classgmx_1_1test_1_1ITextBlockMatcher_1a095cf29f631220ae7766416036a27bc0" prot="public" virt="virtual"><scope>gmx::test::ITextBlockMatcher</scope><name>~ITextBlockMatcher</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

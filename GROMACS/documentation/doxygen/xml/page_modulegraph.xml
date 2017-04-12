@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="page_modulegraph" kind="page">
+    <compoundname>page_modulegraph</compoundname>
+    <title>Module dependency graph</title>
+    <detaileddescription>
+<para>The graph below shows the dependencies between the source code modules, computed from include statements in the code. For documented modules (those that do not have a gray background), clicking on the module takes you to the module documentation. Legend for the graph can be found below the graph.</para><para><heading level="1">Legend </heading>
+</para><para>The graph below annotates the colors and line styles used in the module dependency graph above. More detailed textual annotation is below the graph.</para><para><dot> 
+digraph legend {
+    node [fontname=&quot;FreeSans&quot;,fontsize=10,height=.2,shape=box]
+    edge [fontname=&quot;FreeSans&quot;,fontsize=10]
+    rankdir = &quot;LR&quot;
+    subgraph cluster_nodes {
+        label = &quot;Nodes&quot;
+        legacy    [label=&quot;undocumented&quot;, fillcolor=grey75, style=&quot;filled&quot;]
+        analysis  [label=&quot;analysis&quot;, fillcolor=&quot;0 .2 1&quot;, style=&quot;filled&quot;]
+        utility   [label=&quot;utility&quot;, fillcolor=&quot;.08 .2 1&quot;, style=&quot;filled&quot;]
+        mdrun     [label=&quot;mdrun&quot;, fillcolor=&quot;.75 .2 1&quot;, style=&quot;filled&quot;]
+        installed [label=&quot;installed&quot;, color=&quot;.66 .5 1&quot;, penwidth=3]
+    }
+    subgraph cluster_edges {
+        label = &quot;Edges&quot;
+        node [label=&quot;&lt;any&gt;&quot;]
+        invalid1 -&gt; invalid2 [label=&quot;invalid&quot;, color=red]
+        legacy1 -&gt; legacy2 [label=&quot;legacy&quot;, color=grey75]
+        legacy2 [label=&quot;undoc&quot;]
+        public1 -&gt; public2 [label=&quot;public&quot;, color=black]
+        public1 [label=&quot;public&quot;]
+        public2 [label=&quot;public&quot;]
+        library1 -&gt; library2 [label=&quot;library&quot;, color=&quot;.66 .8 .8&quot;]
+        library1 [label=&quot;library&quot;]
+        pubimpl1 -&gt; pubimpl2 [color=black, style=dashed]
+        pubimpl1 [label=&quot;internal&quot;]
+        pubimpl2 [label=&quot;public&quot;]
+        libimpl1 -&gt; libimpl2 [color=&quot;.66 .8 .8&quot;, style=dashed]
+        libimpl1 [label=&quot;internal&quot;]
+        libimpl2 [label=&quot;library&quot;]
+        test1 -&gt; test2 [label=&quot;test&quot;, color=&quot;.33 .8 .8&quot;, style=dashed]
+        test1 [label=&quot;test&quot;]
+    }
+    legacy -&gt; invalid1 [style=&quot;invis&quot;]
+}
+</dot></para><para>Node colors: <variablelist>
+<varlistentry><term>gray background </term></varlistentry>
+<listitem><para>undocumented module </para></listitem>
+<varlistentry><term>orange background </term></varlistentry>
+<listitem><para>documented utility modules </para></listitem>
+<varlistentry><term>red background </term></varlistentry>
+<listitem><para>documented analysis modules </para></listitem>
+<varlistentry><term>violet background </term></varlistentry>
+<listitem><para>documented MD execution modules </para></listitem>
+<varlistentry><term>light blue border </term></varlistentry>
+<listitem><para>module contains public API (installed) headers </para></listitem>
+</variablelist>
+</para><para>Edge colors (an edge with a certain color indicates that types above it in the list are not present): <variablelist>
+<varlistentry><term>red </term></varlistentry>
+<listitem><para>invalid dependency </para></listitem>
+<varlistentry><term>gray </term></varlistentry>
+<listitem><para>legacy dependency (dependency on undocumented file, or to undocumented directories) </para></listitem>
+<varlistentry><term>solid black </term></varlistentry>
+<listitem><para>public header depends on the other module </para></listitem>
+<varlistentry><term>solid blue </term></varlistentry>
+<listitem><para>library header depends on the other module </para></listitem>
+<varlistentry><term>dashed blue </term></varlistentry>
+<listitem><para>source file depends on library header in the other module </para></listitem>
+<varlistentry><term>dashed black </term></varlistentry>
+<listitem><para>source file depends on public header in the other module </para></listitem>
+<varlistentry><term>dashed green </term></varlistentry>
+<listitem><para>test file depends on the other module </para></listitem>
+</variablelist>
+</para>    </detaileddescription>
+  </compounddef>
+</doxygen>

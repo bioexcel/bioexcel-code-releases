@@ -1,0 +1,1082 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>releng Python API &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../../index.html" />
+    <link rel="up" title="releng repository" href="index.html" />
+    <link rel="next" title="Jenkins configuration" href="jenkins-config.html" />
+    <link rel="prev" title="Workflow build overview" href="workflow.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jenkins-config.html" title="Jenkins configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="workflow.html" title="Workflow build overview"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">releng repository</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="releng-python-api">
+<h1>releng Python API<a class="headerlink" href="#releng-python-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="build-script-definition">
+<h2>Build script definition<a class="headerlink" href="#build-script-definition" title="Permalink to this headline">¶</a></h2>
+<p>The build script is required to provide one function:</p>
+<dl class="function">
+<dt id="do_build">
+<code class="descname">do_build</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#do_build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called to run the actual build.  The context parameter is an instance of
+BuildContext, and can be used to access the build environment and to
+interact with Jenkins.  The function can signal fatal build errors by
+raising BuildError directly; typically, this is done by methods in
+BuildContext if they fail to execute the requested commands.</p>
+<p>When the function is called, the current working directory is set to the
+build directory (whether the build is in- or out-of-source).</p>
+</dd></dl>
+
+<p>The build script can also set a few global variables to influence the behavior
+of the build:</p>
+<dl class="data">
+<dt id="build_options">
+<code class="descname">build_options</code><a class="headerlink" href="#build_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this list value is set to a non-empty list, then these build options are
+used to initialize the build environment.  Useful for non-matrix builds that
+want to, e.g., specify the compiler to use.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="build_out_of_source">
+<code class="descname">build_out_of_source</code><a class="headerlink" href="#build_out_of_source" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this boolean value is set to <code class="docutils literal"><span class="pre">True</span></code>, the build will be executed
+out-of-source.  By default, the build will be in-source.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="extra_options">
+<code class="descname">extra_options</code><a class="headerlink" href="#extra_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this dictionary is set, it declares additional build options that the
+script understands.  This can be used to declare options that only influence
+the build script; releng declares only options that affect the build
+environment or the build host assignment.  Syntax is as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">extra_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;opt&#39;</span><span class="p">:</span> <span class="n">Option</span><span class="o">.</span><span class="n">simple</span><span class="p">,</span>
+    <span class="s1">&#39;opt-bool&#39;</span><span class="p">:</span> <span class="n">Option</span><span class="o">.</span><span class="n">bool</span><span class="p">,</span>
+    <span class="s1">&#39;opt-str&#39;</span><span class="p">:</span> <span class="n">Option</span><span class="o">.</span><span class="n">string</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The values of the build options can be read from <code class="docutils literal"><span class="pre">context.opts</span></code> in
+do_build().  See <code class="docutils literal"><span class="pre">OptionTypes</span></code> documentation for the available option
+types: in the build script, <code class="docutils literal"><span class="pre">Option</span></code> is bound to <code class="docutils literal"><span class="pre">OptionTypes</span></code>.</p>
+<p>Technically, the value in the dictionary is a callable that gets called
+with the name of the option to create an internal handler class for
+processing the option.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="extra_projects">
+<code class="descname">extra_projects</code><a class="headerlink" href="#extra_projects" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this list value is set to a non-empty list, then these repositories are
+also checked out before executing the build.  <code class="docutils literal"><span class="pre">releng</span></code> and <code class="docutils literal"><span class="pre">gromacs</span></code>
+repositories are always checked out.
+Currently, only <code class="docutils literal"><span class="pre">Project.REGRESSIONTESTS</span></code> makes sense to specify here.</p>
+</dd></dl>
+
+<p>When the build script is loaded, various enums from the releng package are
+injected into the global scope to make them easy to access.</p>
+</div>
+<div class="section" id="api-for-build-scripts">
+<h2>API for build scripts<a class="headerlink" href="#api-for-build-scripts" title="Permalink to this headline">¶</a></h2>
+<p>The build script gets input and perfoms most tasks by using data and methods in
+a BuildContext instance:</p>
+<dl class="class">
+<dt id="releng.context.BuildContext">
+<em class="property">class </em><code class="descclassname">releng.context.</code><code class="descname">BuildContext</code><span class="sig-paren">(</span><em>factory</em>, <em>job_type</em>, <em>opts</em>, <em>extra_options</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Top-level interface for build scripts to the releng package.</p>
+<dl class="attribute">
+<dt id="releng.context.BuildContext.job_type">
+<code class="descname">job_type</code><a class="headerlink" href="#releng.context.BuildContext.job_type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>JobType</em> &#8211; Type/scope of the build job (e.g., per-patchset,
+nightly).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.context.BuildContext.env">
+<code class="descname">env</code><a class="headerlink" href="#releng.context.BuildContext.env" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>BuildEnvironment</em> &#8211; Access to build environment details like
+paths to executables.  Many of the environment properties, such as
+selecting the compiler, are handled by the build context
+transparently, without the build script needing to access this.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.context.BuildContext.opts">
+<code class="descname">opts</code><a class="headerlink" href="#releng.context.BuildContext.opts" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>BuildOptions</em> &#8211; Access to all build options.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.context.BuildContext.params">
+<code class="descname">params</code><a class="headerlink" href="#releng.context.BuildContext.params" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>BuildParameters</em> &#8211; Access to Jenkins build parameters (through
+environment variables).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.context.BuildContext.workspace">
+<code class="descname">workspace</code><a class="headerlink" href="#releng.context.BuildContext.workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Workspace</em> &#8211; Access to the build workspace.
+Can be used to get paths to various parts in the workspace for
+changing directories and for producing log files.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.build_target">
+<code class="descname">build_target</code><span class="sig-paren">(</span><em>target=None</em>, <em>parallel=True</em>, <em>keep_going=False</em>, <em>target_descr=None</em>, <em>failure_string=None</em>, <em>continue_on_failure=False</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.build_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a given target.</p>
+<p>run_cmake() must have been called to generate the build system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>target</strong> (<em>Optional[str]</em>) &#8211; Name of the target to build.
+If <code class="docutils literal"><span class="pre">None</span></code>, the default (all) target is built.</li>
+<li><strong>parallel</strong> (<em>Optional[bool]</em>) &#8211; Whether parallel building is supported.</li>
+<li><strong>keep_going</strong> (<em>Optional[bool]</em>) &#8211; Whether to continue building after
+first error.</li>
+<li><strong>target_descr</strong> (<em>str or None</em>) &#8211; If given, customizes the error message
+when the target fails to build.  Should fit the initial part of
+the sentence &#8221;... failed to build&#8221;.
+Ignored if <code class="docutils literal"><span class="pre">failure_string</span></code> is specified.</li>
+<li><strong>failure_string</strong> (<em>str or None</em>) &#8211; If given, this message is used as the
+failure message if the target fails to build.</li>
+<li><strong>continue_on_failure</strong> (<em>Optional[bool]</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code> and the target
+fails to build, the failure is only reported and
+<code class="docutils literal"><span class="pre">self.failed</span></code> is set to <code class="docutils literal"><span class="pre">True</span></code>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">BuildError</span></code> &#8211; If the target fails to build, and
+<code class="docutils literal"><span class="pre">continue_on_failure</span></code> is not specified.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.chdir">
+<code class="descname">chdir</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.chdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the working directory for subsequent run_cmd() calls.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.compute_md5">
+<code class="descname">compute_md5</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.compute_md5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes MD5 hash of a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>str</em>) &#8211; Path to the file to compute the hash for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">String with the computed hash in hexadecimal.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.context.BuildContext.failed">
+<code class="descname">failed</code><a class="headerlink" href="#releng.context.BuildContext.failed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the build has already failed.</p>
+<p>This can be used in combination with build_target() argument
+continue_on_failure if the build script needs to test whether some
+previous target already has built.
+If the build script wants to stop the build in such a case, it can
+simply return; the build will always be marked failed if this
+property is <code class="docutils literal"><span class="pre">True</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.get_cuda_cmake_options">
+<code class="descname">get_cuda_cmake_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.get_cuda_cmake_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns non-GROMACS-specific CMake options to set for CUDA native and OpenCL builds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.get_doc_cmake_options">
+<code class="descname">get_doc_cmake_options</code><span class="sig-paren">(</span><em>doxygen_version</em>, <em>sphinx_version</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.get_doc_cmake_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns non-GROMACS-specific CMake options to set for documentation builds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.make_archive">
+<code class="descname">make_archive</code><span class="sig-paren">(</span><em>path</em>, <em>root_dir=None</em>, <em>use_git=False</em>, <em>prefix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.make_archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a tar.gz archive.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<em>str</em>) &#8211; Path to the archive to create without extension.</li>
+<li><strong>root_dir</strong> (<em>str</em>) &#8211; Root directory from which the archive should be
+created.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.mark_unstable">
+<code class="descname">mark_unstable</code><span class="sig-paren">(</span><em>reason</em>, <em>details=None</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.mark_unstable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Marks the build unstable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>reason</strong> (<em>str</em>) &#8211; Reason printed to the build console log for the failure.</li>
+<li><strong>details</strong> (<em>Optional[List[str]]</em>) &#8211; Reason(s) reported back to Gerrit.
+If not provided, reason is used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.process_clang_analyzer_results">
+<code class="descname">process_clang_analyzer_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.process_clang_analyzer_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes results from clang analyzer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.process_coverage_results">
+<code class="descname">process_coverage_results</code><span class="sig-paren">(</span><em>exclude=None</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.process_coverage_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes results from coverage runs.</p>
+<p>Uses gcovr to process all coverage files found in the workspace
+(from running a build compiled with &#8211;coverage).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>exclude</strong> (<em>List[str]</em>) &#8211; Exclusions to pass to gcovr -e (regexs).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.process_cppcheck_results">
+<code class="descname">process_cppcheck_results</code><span class="sig-paren">(</span><em>xml_pattern</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.process_cppcheck_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes results from cppcheck.</p>
+<p>This method massages the XML output into a form the Jenkins
+CppCheck plugin can handle. It could also contain logic that
+would report additional information about the issues back to
+Jenkins.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>xml_pattern</strong> (<em>str</em>) &#8211; Pattern that matches all XML files produced by</li>
+<li><strong>cppcheck.</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.publish_logs">
+<code class="descname">publish_logs</code><span class="sig-paren">(</span><em>logs</em>, <em>category=None</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.publish_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies provided log(s) to Jenkins.</p>
+<p>This should be used for any files that are produced during the build
+and that need to be parsed by Jenkins (except for special cases where a
+separate method is provided, such as process_cppcheck_results()).
+This allows Jenkins configuration stay the same even if the files are
+relocated because of build system or repository reorganization.
+Alternatively, the build script can use workspace.get_path_for_logfile()
+to directly produce the log files into an invariant location.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>logs</strong> (<em>List[str]</em>) &#8211; Paths to files that need to be copied.</li>
+<li><strong>category</strong> (<em>Optional[str]</em>) &#8211; Category for the log file.  Log files in
+the same category are put into a common subdirectory (with the
+name of the category), allowing Jenkins to glob them for, e.g.,
+parsing warnings.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.read_cmake_variable_file">
+<code class="descname">read_cmake_variable_file</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.read_cmake_variable_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a file with CMake variable declarations (set commands).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>str</em>) &#8211; Path to the file to read.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">variables found from the file, with their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.replace_in_file">
+<code class="descname">replace_in_file</code><span class="sig-paren">(</span><em>path</em>, <em>pattern</em>, <em>repl</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.replace_in_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs re.sub() on contents of a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<em>str</em>) &#8211; Path to the file to process.</li>
+<li><strong>pattern</strong> (<em>str</em>) &#8211; Pattern to replace.</li>
+<li><strong>repl</strong> &#8211; See re.sub()</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.run_cmake">
+<code class="descname">run_cmake</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.run_cmake" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs CMake with the provided options.</p>
+<p>Options from the environment, such as for selecting compilers, are
+added automatically.</p>
+<p>The working directory should be the build directory.
+Currently, does not support running CMake multiple times.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> (<em>Dict[str,str]</em>) &#8211; Dictionary of macro definitions to pass to
+CMake using <code class="docutils literal"><span class="pre">-D</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">BuildError</span></code> &#8211; If CMake fails to configure the build system.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.run_cmd">
+<code class="descname">run_cmd</code><span class="sig-paren">(</span><em>cmd</em>, <em>ignore_failure=False</em>, <em>use_return_code=False</em>, <em>use_output=False</em>, <em>failure_message=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.run_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a command via subprocess.</p>
+<p>This wraps subprocess.call() and check_call() with error-handling code
+and other generic handling such as ensuring proper output flushing and
+using bash as the shell on Unix.</p>
+<p>Any arguments accepted by subprocess.call() or check_call() can also
+be passed, e.g. cwd or env to make such calls in stateless ways.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cmd</strong> (<em>str/list</em>) &#8211; Command to execute (as for subprocess.call()).</li>
+<li><strong>ignore_failure</strong> (<em>Optional[bool]</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, failure to run the
+command is ignored.</li>
+<li><strong>use_return_code</strong> (<em>Optional[bool]</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, exit code from the
+command is returned.  Otherwise, non-zero return code fails the
+build unless ignore_failure is set.</li>
+<li><strong>use_output</strong> (<em>Optional[bool]</em>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, the output from the command
+is returned.  Mutually exclusive with use_return_code.</li>
+<li><strong>failure_message</strong> (<em>Optional[str]</em>) &#8211; If set, provides a friendly
+message about what in the build fails if this command fails.
+This will be reported back to Gerrit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Command return code (if <code class="docutils literal"><span class="pre">use_return_code=True</span></code>).</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.run_ctest">
+<code class="descname">run_ctest</code><span class="sig-paren">(</span><em>args</em>, <em>memcheck=False</em>, <em>failure_string=None</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.run_ctest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs tests using CTest.</p>
+<p>The build is marked unstable if any test fails.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>args</strong> (<em>List[str]</em>) &#8211; Additional arguments to pass to CTest.</li>
+<li><strong>memcheck</strong> (<em>Optional[bool]</em>) &#8211; If <code class="docutils literal"><span class="pre">true</span></code>, run CTest with a memory checker.</li>
+<li><strong>failure_string</strong> (<em>Optional[str]</em>) &#8211; If give, this message is used as
+the failure message reported to Gerrit if the tests fail.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.set_version_info">
+<code class="descname">set_version_info</code><span class="sig-paren">(</span><em>version</em>, <em>regtest_md5sum</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.set_version_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides source version information from a build script.</p>
+<p>This method supports the <cite>get-version-info.py</cite> build script and allows
+that script to pass out the version information without writing it into
+a file that would then be read back.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.write_package_info">
+<code class="descname">write_package_info</code><span class="sig-paren">(</span><em>project</em>, <em>file_name</em>, <em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.write_package_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes an information file for a tar package.</p>
+<p>The file has a specific format that allows reading the information in a
+downstream build, and using the package instead of a git checkout.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>project</strong> (<em>Project</em>) &#8211; Project for which the package is done.</li>
+<li><strong>file_name</strong> (<em>str</em>) &#8211; Name of the package file (with extension, without
+any path).  Currently the file needs to be in the current
+working directory.</li>
+<li><strong>version</strong> (<em>str</em>) &#8211; Version for the package.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.context.BuildContext.write_property_file">
+<code class="descname">write_property_file</code><span class="sig-paren">(</span><em>path</em>, <em>values</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.context.BuildContext.write_property_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a property file at given path.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<em>str</em>) &#8211; Path to the file to write.</li>
+<li><strong>values</strong> (<em>Dict</em>) &#8211; Dictionary of key/value pairs to write.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<p>The build context contains attributes of the following classes to access
+additional information:</p>
+<dl class="class">
+<dt id="releng.environment.BuildEnvironment">
+<em class="property">class </em><code class="descclassname">releng.environment.</code><code class="descname">BuildEnvironment</code><span class="sig-paren">(</span><em>factory</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.environment.BuildEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides access to the build environment.</p>
+<p>Most details of the build environment are handled transparently based on
+the provided build options, and the build script does not need to consider
+this.  For build scripts, the main interface this class provides is to find
+locations of some special executables (such as cppcheck) that may be needed
+for the build.  Compiler selection is handled without special action from
+build scripts.</p>
+<p>In rare cases, the build scripts may benefit from inspecting the attributes
+in this class to determine, e.g., the operating system running the build or
+the compiler being used.</p>
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.system">
+<code class="descname">system</code><a class="headerlink" href="#releng.environment.BuildEnvironment.system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>System</em> &#8211; Operating system of the build node.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.compiler">
+<code class="descname">compiler</code><a class="headerlink" href="#releng.environment.BuildEnvironment.compiler" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Compiler or None</em> &#8211; Selected compiler.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.compiler_version">
+<code class="descname">compiler_version</code><a class="headerlink" href="#releng.environment.BuildEnvironment.compiler_version" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>string</em> &#8211; Version number for the selected compiler.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.c_compiler">
+<code class="descname">c_compiler</code><a class="headerlink" href="#releng.environment.BuildEnvironment.c_compiler" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str or None</em> &#8211; Name of the C compiler executable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.cxx_compiler">
+<code class="descname">cxx_compiler</code><a class="headerlink" href="#releng.environment.BuildEnvironment.cxx_compiler" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str or None</em> &#8211; Name of the C++ compiler executable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.gcov_command">
+<code class="descname">gcov_command</code><a class="headerlink" href="#releng.environment.BuildEnvironment.gcov_command" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Name of the gcov executable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.cmake_command">
+<code class="descname">cmake_command</code><a class="headerlink" href="#releng.environment.BuildEnvironment.cmake_command" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Name of the CMake executable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.ctest_command">
+<code class="descname">ctest_command</code><a class="headerlink" href="#releng.environment.BuildEnvironment.ctest_command" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Name of the CTest executable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.cmake_version">
+<code class="descname">cmake_version</code><a class="headerlink" href="#releng.environment.BuildEnvironment.cmake_version" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Version of the CMake executable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.cmake_generator">
+<code class="descname">cmake_generator</code><a class="headerlink" href="#releng.environment.BuildEnvironment.cmake_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str or None</em> &#8211; CMake generator being used.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.cuda_root">
+<code class="descname">cuda_root</code><a class="headerlink" href="#releng.environment.BuildEnvironment.cuda_root" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str or None</em> &#8211; Root of the CUDA toolkit being used
+(for passing to CUDA_TOOLKIT_ROOT_DIR CMake option).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.cuda_host_compiler">
+<code class="descname">cuda_host_compiler</code><a class="headerlink" href="#releng.environment.BuildEnvironment.cuda_host_compiler" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str or None</em> &#8211; Full path to the host compiler used
+with CUDA (for passing to CUDA_HOST_COMPILER CMake option).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.amdappsdk_root">
+<code class="descname">amdappsdk_root</code><a class="headerlink" href="#releng.environment.BuildEnvironment.amdappsdk_root" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str or None</em> &#8211; Root of the AMD SDK being used
+(for using as AMDAPPSDKROOT environment variable).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.environment.BuildEnvironment.extra_cmake_options">
+<code class="descname">extra_cmake_options</code><a class="headerlink" href="#releng.environment.BuildEnvironment.extra_cmake_options" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Dict[str, str]</em> &#8211; Additional options to pass to
+CMake.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.environment.BuildEnvironment.append_path_env">
+<code class="descname">append_path_env</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.environment.BuildEnvironment.append_path_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends a path to the executable search path (PATH).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.environment.BuildEnvironment.get_cppcheck_command">
+<code class="descname">get_cppcheck_command</code><span class="sig-paren">(</span><em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.environment.BuildEnvironment.get_cppcheck_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to the cppcheck executable of given version.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>version</strong> (<em>str</em>) &#8211; cppcheck version to use.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.environment.BuildEnvironment.get_doxygen_command">
+<code class="descname">get_doxygen_command</code><span class="sig-paren">(</span><em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.environment.BuildEnvironment.get_doxygen_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to the Doxygen executable of given version.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>version</strong> (<em>str</em>) &#8211; Doxygen version to use.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.environment.BuildEnvironment.get_uncrustify_command">
+<code class="descname">get_uncrustify_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#releng.environment.BuildEnvironment.get_uncrustify_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path to the uncrustify executable.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.environment.BuildEnvironment.prepend_path_env">
+<code class="descname">prepend_path_env</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.environment.BuildEnvironment.prepend_path_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepends a path to the executable search path (PATH).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.environment.BuildEnvironment.set_env_var">
+<code class="descname">set_env_var</code><span class="sig-paren">(</span><em>variable</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.environment.BuildEnvironment.set_env_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets environment variable to be used for further commands.</p>
+<p>All subsequent commands run with BuildContext.run_cmd() etc. will use
+the environment variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>variable</strong> (<em>str</em>) &#8211; Name of environment variable to set.</li>
+<li><strong>value</strong> (<em>str</em>) &#8211; Value to set the variable to.  As a convenience, if
+the value is None, nothing is done.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="releng.options.BuildOptions">
+<em class="property">class </em><code class="descclassname">releng.options.</code><code class="descname">BuildOptions</code><span class="sig-paren">(</span><em>handlers</em>, <em>opts</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.options.BuildOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Values for all build options.</p>
+<p>This class provides read-only access to the values of all build options.
+A build option named <code class="docutils literal"><span class="pre">mdrun-only</span></code> is accessible as <code class="docutils literal"><span class="pre">opts.mdrun_only</span></code>
+and <code class="docutils literal"><span class="pre">opts['mdrun-only']</span></code>, whichever is more convenient.
+The keys for all build options are always available.  If an option is not
+specified, the corresponding value is <code class="docutils literal"><span class="pre">None</span></code>.</p>
+<p>For simple flag options that can only be set or unset, the stored value is
+<code class="docutils literal"><span class="pre">True</span></code> if the option is set.</p>
+<p>For boolean options, the stored value is <code class="docutils literal"><span class="pre">False</span></code> or <code class="docutils literal"><span class="pre">True</span></code>.  For
+example, <code class="docutils literal"><span class="pre">no-mpi</span></code> and <code class="docutils literal"><span class="pre">mpi=no</span></code> are both stored as <code class="docutils literal"><span class="pre">opts.mpi</span> <span class="pre">==</span> <span class="pre">True</span></code>.</p>
+<p>For options like <code class="docutils literal"><span class="pre">gcc-4.8</span></code>, the value is stored as <code class="docutils literal"><span class="pre">opts.gcc</span> <span class="pre">==</span> <span class="pre">'4.8'</span></code>.
+Similarly, <code class="docutils literal"><span class="pre">build-jobs=2</span></code> is stored as <code class="docutils literal"><span class="pre">opts.build_jobs</span> <span class="pre">==</span> <span class="pre">'2'</span></code>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="releng.integration.BuildParameters">
+<em class="property">class </em><code class="descclassname">releng.integration.</code><code class="descname">BuildParameters</code><span class="sig-paren">(</span><em>factory</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.integration.BuildParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Access to build parameters.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="releng.workspace.Workspace">
+<em class="property">class </em><code class="descclassname">releng.workspace.</code><code class="descname">Workspace</code><span class="sig-paren">(</span><em>factory</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.workspace.Workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides access to set up, query, and act within the build workspace,
+particularly involving operations on the git repositories associated
+with the projects.</p>
+<p>Methods are provided for accessing the build directory (whether in- or
+out-of-source), as well as the root directories of all checked-out
+projects.  Also, methods to access a common log directory (for logs that
+need to be post-processed in Jenkins) are provided. Implements
+functionality for updating commits with new files.</p>
+<p>Internally, this class is also responsible for checking out the projects
+and for tasks related to it.</p>
+<dl class="attribute">
+<dt id="releng.workspace.Workspace.root">
+<code class="descname">root</code><a class="headerlink" href="#releng.workspace.Workspace.root" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Root directory of the workspace.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.workspace.Workspace.install_dir">
+<code class="descname">install_dir</code><a class="headerlink" href="#releng.workspace.Workspace.install_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em> &#8211; Directory for test installation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="releng.workspace.Workspace.build_dir">
+<code class="descname">build_dir</code><a class="headerlink" href="#releng.workspace.Workspace.build_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build directory for building gromacs.</p>
+<p>Returns either the gromacs project directory or a separate build
+directory, depending on whether the build is in- or out-of-source.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.workspace.Workspace.clean_build_dir">
+<code class="descname">clean_build_dir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#releng.workspace.Workspace.clean_build_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensures that the current build dir is in the initial state (empty).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.workspace.Workspace.get_log_dir">
+<code class="descname">get_log_dir</code><span class="sig-paren">(</span><em>category=None</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.workspace.Workspace.get_log_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns directory for log files.</p>
+<p>The directory is created if necessary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>category</strong> (<em>Optional[str]</em>) &#8211; Category for the log directory.
+Log files in the same category are put into a common
+subdirectory (with the name of the category), allowing Jenkins
+to glob them for, e.g., parsing warnings.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Absolute path for the requested log directory.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.workspace.Workspace.get_path_for_logfile">
+<code class="descname">get_path_for_logfile</code><span class="sig-paren">(</span><em>name</em>, <em>category=None</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.workspace.Workspace.get_path_for_logfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns path for producing a log file in a common location.</p>
+<p>Directories are created as necessary, but the caller is responsible of
+creating the actual file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Name for the log file without directory components, but
+with extension.</li>
+<li><strong>category</strong> (<em>Optional[str]</em>) &#8211; Category for the log file.  Log files in
+the same category are put into a common subdirectory (with the
+name of the category), allowing Jenkins to glob them for, e.g.,
+parsing warnings.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Absolute path for the requested log.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.workspace.Workspace.get_project_dir">
+<code class="descname">get_project_dir</code><span class="sig-paren">(</span><em>project</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.workspace.Workspace.get_project_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns project directory of a given project.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>project</strong> (<em>Project</em>) &#8211; Project whose directory should be returned.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Absolute path to the project directory.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="releng.workspace.Workspace.upload_revision">
+<code class="descname">upload_revision</code><span class="sig-paren">(</span><em>project</em>, <em>file_glob='*'</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.workspace.Workspace.upload_revision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload a new version of the patch that triggered this build, but
+only if files in the glob changed and it came from the
+specified project.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>project</strong> (<em>Project</em>) &#8211; Enum value to choose which project might be updated</li>
+<li><strong>file_glob</strong> (<em>str</em>) &#8211; glob describing the files to add to the patch</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="api-for-jenkins">
+<h2>API for Jenkins<a class="headerlink" href="#api-for-jenkins" title="Permalink to this headline">¶</a></h2>
+<p>The following functions from the <code class="docutils literal"><span class="pre">releng</span></code> package are intended to be called
+from scripts in Jenkins build configuration or from workflow scripts
+(see <a class="reference internal" href="jenkins-config.html"><span class="doc">Jenkins configuration</span></a>).</p>
+<dl class="function">
+<dt id="releng.run_build">
+<code class="descclassname">releng.</code><code class="descname">run_build</code><span class="sig-paren">(</span><em>build</em>, <em>job_type</em>, <em>opts</em>, <em>project='gromacs'</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.run_build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main entry point for Jenkins builds.</p>
+<p>Runs the build with the given build script and build parameters.
+Before calling this script, the job should have checked out the releng
+repository to a <code class="file docutils literal"><span class="pre">releng/</span></code> subdirectory of the workspace, and
+the repository that triggered the build, similarly in a subdirectory of the
+workspace.</p>
+<p>See <a class="reference internal" href="releng.html"><span class="doc">Jenkins scripts (releng Python module)</span></a> for more details on the general build organization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>build</strong> (<em>str</em>) &#8211; Build type identifying the build script to use.
+Names without directory separators are interpreted as
+<code class="file docutils literal"><span class="pre">gromacs/admin/builds/</span><em><span class="pre">build</span></em><span class="pre">.py</span></code>, i.e., loaded from
+the main repository.</li>
+<li><strong>job_type</strong> (<em>JobType</em>) &#8211; Type/scope of the job that can, e.g.,
+influence the scope of testing.
+Not all build scripts use the value.</li>
+<li><strong>opts</strong> (<em>List[str]</em>) &#8211; This is mainly intended for multi-configuration builds.
+Build scripts not intended for such builds may simply ignore most
+of the parameters that can be influenced by these options.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="releng.read_build_script_config">
+<code class="descclassname">releng.</code><code class="descname">read_build_script_config</code><span class="sig-paren">(</span><em>script_name</em>, <em>outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.read_build_script_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads build options specified in a build script.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>script_name</strong> (<em>str</em>) &#8211; Name of the build script (see run_build()).</li>
+<li><strong>outputfile</strong> (<em>str</em>) &#8211; File to write the configurations to, under build/.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="releng.prepare_multi_configuration_build">
+<code class="descclassname">releng.</code><code class="descname">prepare_multi_configuration_build</code><span class="sig-paren">(</span><em>configfile</em>, <em>outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.prepare_multi_configuration_build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main entry point for preparing matrix builds.</p>
+<p>Reads a file with configurations to use (one configuration per line,
+with a list of space-separated build options on each line; comments
+starting with # and empty lines ignored).
+Writes out a file with the provided name to build/, in a format suitable
+for passing to Parameterized Trigger as a build parameter that can be used
+as a dynamic axis in a matrix build to build the provided configurations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>configfile</strong> (<em>str</em>) &#8211; File that contains the configurations to use.
+Names without directory separators are interpreted as
+<code class="file docutils literal"><span class="pre">gromacs/admin/builds/</span><em><span class="pre">configfile</span></em><span class="pre">.txt</span></code>.</li>
+<li><strong>outputfile</strong> (<em>str</em>) &#8211; File to write the configurations to, under build/.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="releng.get_actions_from_triggering_comment">
+<code class="descclassname">releng.</code><code class="descname">get_actions_from_triggering_comment</code><span class="sig-paren">(</span><em>outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.get_actions_from_triggering_comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes Gerrit comment that triggered the build.</p>
+<p>Parses the comment that triggered an on-demand build and writes out a JSON
+file that tells the workflow build what it needs to do.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outputfile</strong> (<em>str</em>) &#8211; File to write the information to, under builds/.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="releng.do_ondemand_post_build">
+<code class="descclassname">releng.</code><code class="descname">do_ondemand_post_build</code><span class="sig-paren">(</span><em>inputfile</em>, <em>outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.do_ondemand_post_build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does processing after on-demand builds have finished.</p>
+<p>Reads a JSON file that provides information about the builds (and things
+forwarded from the output of get_actions_from_triggering_comment()), and
+writes a JSON file that specifies what to post back to Gerrit.</p>
+<p>Can also perform other actions related to processing the build results,
+such as posting cross-verify messages.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>inputfile</strong> (<em>str</em>) &#8211; File to read the input from, relative to working dir.</li>
+<li><strong>outputfile</strong> (<em>str</em>) &#8211; File to write the Gerrit message and URL to, under
+builds/.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="releng.get_build_revisions">
+<code class="descclassname">releng.</code><code class="descname">get_build_revisions</code><span class="sig-paren">(</span><em>outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.get_build_revisions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides information about revisions used in the build.</p>
+<p>Information is written as a JSON file that can be read from a workflow
+script calling this (a temporary file is by far the simplest way to pass
+the information out).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outputfile</strong> (<em>str</em>) &#8211; File to write the information to, under logs/.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="releng.read_source_version_info">
+<code class="descclassname">releng.</code><code class="descname">read_source_version_info</code><span class="sig-paren">(</span><em>outputfile</em><span class="sig-paren">)</span><a class="headerlink" href="#releng.read_source_version_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads version info from the source repository.</p>
+<p>Information is written as a JSON file that can be read from a workflow
+script calling this (a temporary file is by far the simplest way to pass
+the information out).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>outputfile</strong> (<em>str</em>) &#8211; File to write the information to, under logs/.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">releng Python API</a><ul>
+<li><a class="reference internal" href="#build-script-definition">Build script definition</a></li>
+<li><a class="reference internal" href="#api-for-build-scripts">API for build scripts</a></li>
+<li><a class="reference internal" href="#api-for-jenkins">API for Jenkins</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="workflow.html"
+                        title="previous chapter">Workflow build overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jenkins-config.html"
+                        title="next chapter">Jenkins configuration</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/dev-manual/releng/releng-api.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="jenkins-config.html" title="Jenkins configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="workflow.html" title="Workflow build overview"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >releng repository</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

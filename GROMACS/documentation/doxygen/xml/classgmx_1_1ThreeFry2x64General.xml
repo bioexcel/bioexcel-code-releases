@@ -1,0 +1,623 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1ThreeFry2x64General" kind="class" prot="public">
+    <compoundname>gmx::ThreeFry2x64General</compoundname>
+    <includes local="no">gromacs/random/threefry.h</includes>
+    <templateparamlist>
+      <param>
+        <type>unsigned int</type>
+        <declname>rounds</declname>
+        <defname>rounds</defname>
+      </param>
+      <param>
+        <type>unsigned int</type>
+        <declname>internalCounterBits</declname>
+        <defname>internalCounterBits</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" prot="public" static="no">
+        <type>gmx_uint64_t</type>
+        <definition>typedef gmx_uint64_t gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::result_type</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <briefdescription>
+<para>Integer type for output. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="341" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="335" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" prot="public" static="no">
+        <type>std::array&lt; <ref refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" kindref="member">result_type</ref>, 2 &gt;</type>
+        <definition>typedef std::array&lt;result_type, 2&gt; gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::counter_type</definition>
+        <argsstring></argsstring>
+        <name>counter_type</name>
+        <briefdescription>
+<para>Use array for counter &amp; key states so it is allocated on the stack. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="343" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="343" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classgmx_1_1ThreeFry2x64General_1a12fb165663b44a30549fccf06b814013" prot="private" static="yes" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::c_resultsPerCounter_</definition>
+        <argsstring></argsstring>
+        <name>c_resultsPerCounter_</name>
+        <initializer>= static_cast&lt;unsigned int&gt;(sizeof(<ref refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" kindref="member">counter_type</ref>)/sizeof(<ref refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" kindref="member">result_type</ref>))</initializer>
+        <briefdescription>
+<para>Number of results returned for each invocation of the block generation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="639" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="639" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1ThreeFry2x64General_1aa507ee0b4bec3158c89c2652f959ec1a" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" kindref="member">counter_type</ref></type>
+        <definition>counter_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::key_</definition>
+        <argsstring></argsstring>
+        <name>key_</name>
+        <briefdescription>
+<para><ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref> key, i.e. the random seed for this stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>The highest few bits of the key are replaced to encode the value of internalCounterBits, in order to make all streams unique. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="646" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="646" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1ThreeFry2x64General_1a4cb1b6f69493af9aa44d3c3d611ffa4b" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" kindref="member">counter_type</ref></type>
+        <definition>counter_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::counter_</definition>
+        <argsstring></argsstring>
+        <name>counter_</name>
+        <briefdescription>
+<para><ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref> total counter. </para>        </briefdescription>
+        <detaileddescription>
+<para>The highest internalCounterBits are reserved for an internal counter so that the combination of a key and counter provides a stream that returns 2*2^internalCounterBits (<ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref>) random 64-bit values before the internal counter space is exhausted and an exception is thrown. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="655" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="655" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1ThreeFry2x64General_1a7b5038005b3e1449722bd41de3caf9ad" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" kindref="member">counter_type</ref></type>
+        <definition>counter_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::block_</definition>
+        <argsstring></argsstring>
+        <name>block_</name>
+        <briefdescription>
+<para>The present block encrypted from values of key and counter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="657" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="657" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1ThreeFry2x64General_1a4c939d367606dcc7e65a65324e9f1260" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::index_</definition>
+        <argsstring></argsstring>
+        <name>index_</name>
+        <briefdescription>
+<para>Index of the next value in block_ to return from random engine. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="659" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="659" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1ab7b052c93234a3153c3eba47714a7bae" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" kindref="member">result_type</ref></type>
+        <definition>result_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::rotLeft</definition>
+        <argsstring>(result_type i, unsigned int bits)</argsstring>
+        <name>rotLeft</name>
+        <param>
+          <type><ref refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" kindref="member">result_type</ref></type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>bits</declname>
+        </param>
+        <briefdescription>
+<para>Rotate value left by specified number of bits. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Value to rotate (result_type, which should be 64-bit). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bits to rotate i.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Input value rotated &apos;bits&apos; left. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="355" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="355" bodyend="358"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a9849fed368a7efa6ac9ebe5ca5d6c254" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" kindref="member">counter_type</ref></type>
+        <definition>counter_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::generateBlock</definition>
+        <argsstring>(const counter_type &amp;key, const counter_type &amp;ctr)</argsstring>
+        <name>generateBlock</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" kindref="member">counter_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" kindref="member">counter_type</ref> &amp;</type>
+          <declname>ctr</declname>
+        </param>
+        <briefdescription>
+<para>Perform encryption step for <ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref> algorithm. </para>        </briefdescription>
+        <detaileddescription>
+<para>It performs the encryption step of the standard ThreeFish symmetric-key tweakable block cipher, which is the core of the ThreeFry random engine. The number of encryption rounds is specified by the class template parameter &apos;rounds&apos;.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to key value </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Counter value to use</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Newly encrypted 2x64 block, according to the class template parameters. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="373" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="373" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a14f93cbbdfcb338bc5846de515612865" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ThreeFry2x64General" kindref="compound">ThreeFry2x64General</ref> &amp;</type>
+        <definition>ThreeFry2x64General&amp; gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::operator=</definition>
+        <argsstring>(const ThreeFry2x64General &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1ThreeFry2x64General" kindref="compound">ThreeFry2x64General</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="661" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a64c06c27af710837d2e6e35246d30625" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::ThreeFry2x64General</definition>
+        <argsstring>(const ThreeFry2x64General &amp;)=delete</argsstring>
+        <name>ThreeFry2x64General</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1ThreeFry2x64General" kindref="compound">ThreeFry2x64General</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="661" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a894276bb060524bbd3c43d2d86a96fa8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" kindref="member">result_type</ref></type>
+        <definition>static constexpr result_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::min</definition>
+        <argsstring>()</argsstring>
+        <name>min</name>
+        <briefdescription>
+<para>Smallest value that can be returned from random engine. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="430" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="430" bodyend="430"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a747866a072cff89a20b8f58621ae4bc5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr <ref refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" kindref="member">result_type</ref></type>
+        <definition>static constexpr result_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::max</definition>
+        <argsstring>()</argsstring>
+        <name>max</name>
+        <briefdescription>
+<para>Largest value that can be returned from random engine. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="434" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="434" bodyend="434"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1add051434c8d5ffa84d2161acbb6428e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::ThreeFry2x64General</definition>
+        <argsstring>(gmx_uint64_t key0=0, RandomDomain domain=RandomDomain::Other)</argsstring>
+        <name>ThreeFry2x64General</name>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>key0</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a73202d646d57bcc963d8afd5a16015f0" kindref="member">RandomDomain</ref></type>
+          <declname>domain</declname>
+          <defval><ref refid="namespacegmx_1a73202d646d57bcc963d8afd5a16015f0a6311ae17c1ee52b36e68aaf4ad066387" kindref="member">RandomDomain::Other</ref></defval>
+        </param>
+        <briefdescription>
+<para>Construct random engine with 2x64 key values. </para>        </briefdescription>
+        <detaileddescription>
+<para>This constructor takes two values, and should only be used with the 2x64 implementations.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random seed in the form of a 64-bit unsigned value. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random domain. This is used to guarantee that different applications of a random engine inside the code get different streams of random numbers, without requiring the user to provide lots of random seeds. Pick a value from the RandomDomain class, or <ref refid="namespacegmx_1a73202d646d57bcc963d8afd5a16015f0a6311ae17c1ee52b36e68aaf4ad066387" kindref="member">RandomDomain::Other</ref> if it is not important. In the latter case you might want to use <ref refid="namespacegmx_1a7ea21974bdd8acdfa1c344b0945cff1b" kindref="member">gmx::DefaultRandomEngine</ref> instead.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The random domain is really another 64-bit seed value.</para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the high bits needed to encode the number of counter bits are nonzero. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="455" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="455" bodyend="458"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a1cce6fbfd1d94ec9414f3469f0312a96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::ThreeFry2x64General</definition>
+        <argsstring>(gmx_uint64_t key0, gmx_uint64_t key1)</argsstring>
+        <name>ThreeFry2x64General</name>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>key0</declname>
+        </param>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>key1</declname>
+        </param>
+        <briefdescription>
+<para>Construct random engine from 2x64-bit unsigned integers. </para>        </briefdescription>
+        <detaileddescription>
+<para>This constructor assigns the raw 128 bit key data from unsigned integers. It is meant for the case when you want full control over the key, for instance to compare with reference values of the ThreeFry function during testing.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First word of key/random seed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second word of key/random seed.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the high bits needed to encode the number of counter bits are nonzero. To test arbitrary values, use 0 internal counter bits. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="473" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="473" bodyend="476"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1aceb299eb5489de02fb52bf8f8299cdd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::seed</definition>
+        <argsstring>(gmx_uint64_t key0=0, RandomDomain domain=RandomDomain::Other)</argsstring>
+        <name>seed</name>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>key0</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a73202d646d57bcc963d8afd5a16015f0" kindref="member">RandomDomain</ref></type>
+          <declname>domain</declname>
+          <defval><ref refid="namespacegmx_1a73202d646d57bcc963d8afd5a16015f0a6311ae17c1ee52b36e68aaf4ad066387" kindref="member">RandomDomain::Other</ref></defval>
+        </param>
+        <briefdescription>
+<para>Seed 2x64 random engine with two 64-bit key values. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First word of random seed, in the form of 64-bit unsigned values. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>domain</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Random domain. This is used to guarantee that different applications of a random engine inside the code get different streams of random numbers, without requiring the user to provide lots of random seeds. Pick a value from the RandomDomain class, or <ref refid="namespacegmx_1a73202d646d57bcc963d8afd5a16015f0a6311ae17c1ee52b36e68aaf4ad066387" kindref="member">RandomDomain::Other</ref> if it is not important. In the latter case you might want to use <ref refid="namespacegmx_1a7ea21974bdd8acdfa1c344b0945cff1b" kindref="member">gmx::DefaultRandomEngine</ref> instead.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The random domain is really another 64-bit seed value.</para></simplesect>
+Re-initialized the seed similar to the counter constructor. Same rules apply: The highest few bits of the last word are reserved to encode the number of internal counter bits, but to save the user the trouble of making sure these are zero when using e.g. a random device, we just ignore them. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="498" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="498" bodyend="501"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a33af09ff1bf20d9bb295b3605eab2488" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::seed</definition>
+        <argsstring>(gmx_uint64_t key0, gmx_uint64_t key1)</argsstring>
+        <name>seed</name>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>key0</declname>
+        </param>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>key1</declname>
+        </param>
+        <briefdescription>
+<para>Seed random engine from 2x64-bit unsigned integers. </para>        </briefdescription>
+        <detaileddescription>
+<para>This assigns the raw 128 bit key data from unsigned integers. It is meant for the case when you want full control over the key, for instance to compare with reference values of the ThreeFry function during testing.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First word of key/random seed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second word of key/random seed.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the high bits needed to encode the number of counter bits are nonzero. To test arbitrary values, use 0 internal counter bits. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="517" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="517" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a18868bae394e59bffb4c3bc5df9be9a2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::restart</definition>
+        <argsstring>(gmx_uint64_t ctr0=0, gmx_uint64_t ctr1=0)</argsstring>
+        <name>restart</name>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>ctr0</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>ctr1</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Restart 2x64 random engine counter from 2 64-bit values. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctr0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First word of new counter, in the form of 64-bit unsigned values. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctr1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second word of new counter</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Restarting the engine with a new counter is extremely fast with ThreeFry64, and basically just consists of storing the counter value, so you should use this liberally in your innermost loops to restart the engine with e.g. the current step and atom index as counter values.</para><para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if any of the highest bits that are reserved for the internal part of the counter are set. The number of reserved bits is to the last template parameter to the class. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="546" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="546" bodyend="556"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1ae7b48b4f84e65ba843c44d06f312059a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" kindref="member">result_type</ref></type>
+        <definition>result_type gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::operator()</definition>
+        <argsstring>()</argsstring>
+        <name>operator()</name>
+        <briefdescription>
+<para>Generate the next random number. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will return the next stored 64-bit value if one is available, and otherwise generate a new block, update the internal counters, and return the first value while storing the others.</para><para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the internal counter space is exhausted. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="567" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="567" bodyend="576"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a598e062131c3a72dac31a1232df5fbcd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::discard</definition>
+        <argsstring>(gmx_uint64_t n)</argsstring>
+        <name>discard</name>
+        <param>
+          <type>gmx_uint64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Skip next n random numbers. </para>        </briefdescription>
+        <detaileddescription>
+<para>Moves the internal random stream for the give key/counter value n positions forward. The count is based on the number of random values returned, such that skipping 5 values gives exactly the same result as drawing 5 values that are ignored.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of values to jump forward.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the internal counter space is exhausted. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="590" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="590" bodyend="610"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1a5b236f504817e05275f15abe70a5ff4b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::operator==</definition>
+        <argsstring>(const ThreeFry2x64General&lt; rounds, internalCounterBits &gt; &amp;x) const </argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1ThreeFry2x64General" kindref="compound">ThreeFry2x64General</ref>&lt; rounds, internalCounterBits &gt; &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Return true if two <ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref> engines are identical. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance to compare with.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This routine should return true if the two engines will generate identical random streams when drawing. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="620" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="620" bodyend="624"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ThreeFry2x64General_1ae3aad54540efb601c43bc653784345e0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::ThreeFry2x64General&lt; rounds, internalCounterBits &gt;::operator!=</definition>
+        <argsstring>(const ThreeFry2x64General&lt; rounds, internalCounterBits &gt; &amp;x) const </argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1ThreeFry2x64General" kindref="compound">ThreeFry2x64General</ref>&lt; rounds, internalCounterBits &gt; &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Return true of two <ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref> engines are not identical. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instance to compare with.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This routine should return true if the two engines will generate different random streams when drawing. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="634" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="634" bodyend="634"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>General implementation class for ThreeFry counter-based random engines. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class is used to implement several different <ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref> random engines differing in the number of rounds executed in and the number of bits reserved for the internal counter. It is compatible with C++11 random engines, and can be used e.g. with all random distributions from the standard library.</para><para>ThreeFry is a counter-based rather than state-based random engine. This means that we seed it with a &quot;key&quot;, after which we can get the N:th random number in a sequence (specified by a counter) directly. This means we are guaranteed the same sequence of numbers even when running in parallel if using e.g. step and atom index as counters.</para><para>However, it is also useful to be able to use it as a normal random engine, for instance if you need more than 2 64-bit random values for a specific counter value, not to mention where you just need good normal random numbers. To achieve this, this implementation uses John Salmon&apos;s idea of reserving a couple of the highest bits in the user-provided counter for an internal counter. For instance, if reserving 3 bits, this means you get a stream of 8 iterations (each with 2 random values) after every restart. If you call the engine after these bits have been exhausted, it will throw an exception to make sure you don&apos;t get overlapping streams by mistake. Reserving 3 bits also means you can only use 64-3=61 bits of the highest word when restarting (i.e., setting) the counters.</para><para>This version also supports using internalCounterBits=0. In this case the random engine will be able to return a single counter round, i.e. 2 64-bit values for <ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref>, after which an exception is thrown. In this case no high bits are reserved, which means the class implements the raw <ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">ThreeFry2x64</ref> random function.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>rounds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of encryption iterations used when generating. This can in principle be any value, but 20 rounds has been shown to pass all BigCrush random tests, and with 13 rounds only one fails. This is a very stringent test, and the standard Mersenne Twister engine fails two, so 13 rounds should be a perfectly fine balance in most cases. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>internalCounterBits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of high bits in the user-provided counter reserved for the internal counter. The number of values the engine can return after each restart will be words*2^internalCounterBits. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" line="330" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/random/threefry.h" bodystart="329" bodyend="662"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a7b5038005b3e1449722bd41de3caf9ad" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>block_</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a12fb165663b44a30549fccf06b814013" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>c_resultsPerCounter_</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a4cb1b6f69493af9aa44d3c3d611ffa4b" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>counter_</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1aaf9de9ccea5118f8957e8666e653d6e5" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>counter_type</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a598e062131c3a72dac31a1232df5fbcd" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>discard</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a9849fed368a7efa6ac9ebe5ca5d6c254" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>generateBlock</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a4c939d367606dcc7e65a65324e9f1260" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>index_</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1aa507ee0b4bec3158c89c2652f959ec1a" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>key_</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a747866a072cff89a20b8f58621ae4bc5" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>max</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a894276bb060524bbd3c43d2d86a96fa8" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>min</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1ae3aad54540efb601c43bc653784345e0" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>operator!=</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1ae7b48b4f84e65ba843c44d06f312059a" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>operator()</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a14f93cbbdfcb338bc5846de515612865" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>operator=</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a5b236f504817e05275f15abe70a5ff4b" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>operator==</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a18868bae394e59bffb4c3bc5df9be9a2" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>restart</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1ab487235f75988cbc3cd09783b59dd6dd" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>result_type</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1ab7b052c93234a3153c3eba47714a7bae" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>rotLeft</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1aceb299eb5489de02fb52bf8f8299cdd1" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>seed</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a33af09ff1bf20d9bb295b3605eab2488" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>seed</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1add051434c8d5ffa84d2161acbb6428e7" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>ThreeFry2x64General</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a1cce6fbfd1d94ec9414f3469f0312a96" prot="public" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>ThreeFry2x64General</name></member>
+      <member refid="classgmx_1_1ThreeFry2x64General_1a64c06c27af710837d2e6e35246d30625" prot="private" virt="non-virtual"><scope>gmx::ThreeFry2x64General</scope><name>ThreeFry2x64General</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

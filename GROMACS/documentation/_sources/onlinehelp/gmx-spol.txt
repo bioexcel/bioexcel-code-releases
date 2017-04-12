@@ -1,0 +1,87 @@
+.. _gmx spol:
+
+gmx spol
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx spol [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+             [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`]
+             [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]com`] [:strong:`-refat` :emphasis:`<int>`] [:strong:`-rmin` :emphasis:`<real>`]
+             [:strong:`-rmax` :emphasis:`<real>`] [:strong:`-dip` :emphasis:`<real>`] [:strong:`-bw` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx spol`` analyzes dipoles around a solute; it is especially useful
+for polarizable water. A group of reference atoms, or a center
+of mass reference (option ``-com``) and a group of solvent
+atoms is required. The program splits the group of solvent atoms
+into molecules. For each solvent molecule the distance to the
+closest atom in reference group or to the COM is determined.
+A cumulative distribution of these distances is plotted.
+For each distance between ``-rmin`` and ``-rmax``
+the inner product of the distance vector
+and the dipole of the solvent molecule is determined.
+For solvent molecules with net charge (ions), the net charge of the ion
+is subtracted evenly from all atoms in the selection of each ion.
+The average of these dipole components is printed.
+The same is done for the polarization, where the average dipole is
+subtracted from the instantaneous dipole. The magnitude of the average
+dipole is set with the option ``-dip``, the direction is defined
+by the vector from the first atom in the selected solvent group
+to the midpoint between the second and the third atom.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (scdist.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]com``  (no)
+    Use the center of mass as the reference position
+``-refat`` <int> (1)
+    The reference atom of the solvent molecule
+``-rmin`` <real> (0)
+    Maximum distance (nm)
+``-rmax`` <real> (0.32)
+    Maximum distance (nm)
+``-dip`` <real> (0)
+    The average dipole (D)
+``-bw`` <real> (0.01)
+    The bin width
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

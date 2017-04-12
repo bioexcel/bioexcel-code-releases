@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx dyndom &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx editconf" href="gmx-editconf.html" />
+    <link rel="prev" title="gmx dyecoupl" href="gmx-dyecoupl.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-editconf.html" title="gmx editconf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-dyecoupl.html" title="gmx dyecoupl"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-dyndom">
+<span id="id1"></span><h1>gmx dyndom<a class="headerlink" href="#gmx-dyndom" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx dyndom [<strong>-f</strong> <em>[&lt;.pdb&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>]
+           [<strong>-firstangle</strong> <em>&lt;real&gt;</em>] [<strong>-lastangle</strong> <em>&lt;real&gt;</em>] [<strong>-nframe</strong> <em>&lt;int&gt;</em>]
+           [<strong>-maxangle</strong> <em>&lt;real&gt;</em>] [<strong>-trans</strong> <em>&lt;real&gt;</em>] [<strong>-head</strong> <em>&lt;vector&gt;</em>]
+           [<strong>-tail</strong> <em>&lt;vector&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">dyndom</span></code> reads a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file output from DynDom
+(<a class="reference external" href="http://www.cmp.uea.ac.uk/dyndom/">http://www.cmp.uea.ac.uk/dyndom/</a>).
+It reads the coordinates, the coordinates of the rotation axis,
+and an index file containing the domains.
+Furthermore, it takes the first and last atom of the arrow file
+as command line arguments (head and tail) and
+finally it takes the translation vector (given in DynDom info file)
+and the angle of rotation (also as command line arguments). If the angle
+determined by DynDom is given, one should be able to recover the
+second structure used for generating the DynDom output.
+Because of limited numerical accuracy this should be verified by
+computing an all-atom RMSD (using <a class="reference internal" href="gmx-confrms.html"><span class="doc">gmx confrms</span></a>) rather than by file
+comparison (using diff).</p>
+<p>The purpose of this program is to interpolate and extrapolate the
+rotation as found by DynDom. As a result unphysical structures with
+long or short bonds, or overlapping atoms may be produced. Visual
+inspection, and energy minimization may be necessary to
+validate the structure.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.pdb&gt;] (dyndom.pdb)</dt>
+<dd>Protein data bank file</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (domains.ndx)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xtc/.trr/...&gt;] (rotated.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-firstangle</span></code> &lt;real&gt; (0)</dt>
+<dd>Angle of rotation about rotation vector</dd>
+<dt><code class="docutils literal"><span class="pre">-lastangle</span></code> &lt;real&gt; (0)</dt>
+<dd>Angle of rotation about rotation vector</dd>
+<dt><code class="docutils literal"><span class="pre">-nframe</span></code> &lt;int&gt; (11)</dt>
+<dd>Number of steps on the pathway</dd>
+<dt><code class="docutils literal"><span class="pre">-maxangle</span></code> &lt;real&gt; (0)</dt>
+<dd>DymDom dtermined angle of rotation about rotation vector</dd>
+<dt><code class="docutils literal"><span class="pre">-trans</span></code> &lt;real&gt; (0)</dt>
+<dd>Translation (Angstrom) along rotation vector (see DynDom info file)</dd>
+<dt><code class="docutils literal"><span class="pre">-head</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>First atom of the arrow vector</dd>
+<dt><code class="docutils literal"><span class="pre">-tail</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Last atom of the arrow vector</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx dyndom</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-dyecoupl.html"
+                        title="previous chapter">gmx dyecoupl</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-editconf.html"
+                        title="next chapter">gmx editconf</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-dyndom.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-editconf.html" title="gmx editconf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-dyecoupl.html" title="gmx dyecoupl"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

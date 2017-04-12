@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1SimulationSignal" kind="class" prot="public">
+    <compoundname>gmx::SimulationSignal</compoundname>
+    <includes local="no">gromacs/mdlib/simulationsignal.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classgmx_1_1SimulationSignal_1ac2b2a5f8c7a4c388bae77fc1288290c3" prot="public" static="no" mutable="no">
+        <type>signed char</type>
+        <definition>signed char gmx::SimulationSignal::sig</definition>
+        <argsstring></argsstring>
+        <name>sig</name>
+        <briefdescription>
+<para>The signal set by this rank in <ref refid="namespacegmx_1a19f6a93a5bf9ce1e585bebf205d6f6ea" kindref="member">do_md()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" line="95" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1SimulationSignal_1a2f60c4f184cf42ebd97c52c91d287f63" prot="public" static="no" mutable="no">
+        <type>signed char</type>
+        <definition>signed char gmx::SimulationSignal::set</definition>
+        <argsstring></argsstring>
+        <name>set</name>
+        <briefdescription>
+<para>The communicated signal that triggers action, which will be equal for all ranks, once communication has occured. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" line="97" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1SimulationSignal_1a2ec7de97e3f4a5e148f821c7701356a6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gmx::SimulationSignal::isLocal</definition>
+        <argsstring></argsstring>
+        <name>isLocal</name>
+        <briefdescription>
+<para>Is the signal in one simulation independent of other simulations? </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" line="99" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1SimulationSignal_1a36d4d0dbe3747f21c0f1762fb4a6b100" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::SimulationSignal::SimulationSignal</definition>
+        <argsstring>(bool isSignalLocal=true)</argsstring>
+        <name>SimulationSignal</name>
+        <param>
+          <type>bool</type>
+          <declname>isSignalLocal</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" line="93" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" bodystart="93" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>POD-style object used by mdrun ranks to set and receive signals within and between simulations. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para>Keep in mind that the values of signals are transmitted to other ranks through an MPI_Reduce after casting them to a real (so the signals can be sent together with other data). This means that the only meaningful values are positive, negative or zero.</para><para>Note that xlc on BG/Q requires sig to be of size char (see unit tests of <ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref> for details).</para><para>isLocal permits (for example) replica-exchange to require that any checkpointing is synchronized across all simulations, by setting isLocal to false, so that the trigger for action is set only when inter-simulation signalling happens. Replica-exchange can coordinate this at run time when a <ref refid="classgmx_1_1SimulationSignaller" kindref="compound">SimulationSignaller</ref> is made. </para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" line="90" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/simulationsignal.h" bodystart="89" bodyend="100"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1SimulationSignal_1a2ec7de97e3f4a5e148f821c7701356a6" prot="public" virt="non-virtual"><scope>gmx::SimulationSignal</scope><name>isLocal</name></member>
+      <member refid="classgmx_1_1SimulationSignal_1a2f60c4f184cf42ebd97c52c91d287f63" prot="public" virt="non-virtual"><scope>gmx::SimulationSignal</scope><name>set</name></member>
+      <member refid="classgmx_1_1SimulationSignal_1ac2b2a5f8c7a4c388bae77fc1288290c3" prot="public" virt="non-virtual"><scope>gmx::SimulationSignal</scope><name>sig</name></member>
+      <member refid="classgmx_1_1SimulationSignal_1a36d4d0dbe3747f21c0f1762fb4a6b100" prot="public" virt="non-virtual"><scope>gmx::SimulationSignal</scope><name>SimulationSignal</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

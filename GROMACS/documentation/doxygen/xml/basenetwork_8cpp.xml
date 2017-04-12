@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="basenetwork_8cpp" kind="file">
+    <compoundname>basenetwork.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="basenetwork_8h" local="yes">basenetwork.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">climits</includes>
+    <includes local="no">cstdio</includes>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">cstring</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxmpi_8h" local="yes">gromacs/utility/gmxmpi.h</includes>
+    <incdepgraph>
+      <node id="21720">
+        <label>stdarg.h</label>
+      </node>
+      <node id="21719">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="21720" relation="include">
+        </childnode>
+        <childnode refid="21715" relation="include">
+        </childnode>
+        <childnode refid="21716" relation="include">
+        </childnode>
+      </node>
+      <node id="21717">
+        <label>stdint.h</label>
+      </node>
+      <node id="21707">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="21714">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="21715" relation="include">
+        </childnode>
+        <childnode refid="21716" relation="include">
+        </childnode>
+      </node>
+      <node id="21711">
+        <label>cstdio</label>
+      </node>
+      <node id="21712">
+        <label>cstdlib</label>
+      </node>
+      <node id="21708">
+        <label>basenetwork.h</label>
+        <link refid="basenetwork_8h"/>
+      </node>
+      <node id="21710">
+        <label>climits</label>
+      </node>
+      <node id="21716">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="21717" relation="include">
+        </childnode>
+        <childnode refid="21718" relation="include">
+        </childnode>
+      </node>
+      <node id="21709">
+        <label>config.h</label>
+      </node>
+      <node id="21721">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="21709" relation="include">
+        </childnode>
+      </node>
+      <node id="21715">
+        <label>stdio.h</label>
+      </node>
+      <node id="21706">
+        <label>src/gromacs/utility/basenetwork.cpp</label>
+        <link refid="basenetwork.cpp"/>
+        <childnode refid="21707" relation="include">
+        </childnode>
+        <childnode refid="21708" relation="include">
+        </childnode>
+        <childnode refid="21709" relation="include">
+        </childnode>
+        <childnode refid="21710" relation="include">
+        </childnode>
+        <childnode refid="21711" relation="include">
+        </childnode>
+        <childnode refid="21712" relation="include">
+        </childnode>
+        <childnode refid="21713" relation="include">
+        </childnode>
+        <childnode refid="21714" relation="include">
+        </childnode>
+        <childnode refid="21719" relation="include">
+        </childnode>
+        <childnode refid="21721" relation="include">
+        </childnode>
+      </node>
+      <node id="21713">
+        <label>cstring</label>
+      </node>
+      <node id="21718">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="basenetwork_8cpp_1a0be63511ea9391dd2049b56d43a9e6a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx_mpi_initialized</definition>
+        <argsstring>()</argsstring>
+        <name>gmx_mpi_initialized</name>
+        <briefdescription>
+<para>Returns whether MPI has been initialized. </para>        </briefdescription>
+        <detaileddescription>
+<para>The return value is <computeroutput>FALSE</computeroutput> if MPI_Init() has not been called, or if GROMACS has been compiled without MPI support. For thread-MPI, returns <computeroutput>TRUE</computeroutput> when the threads have been started.</para><para>Note that there is a lot of code in between MPI_Init() and the thread-MPI thread start where the return value is different depending on compilation options. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" line="52" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" bodystart="52" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="basenetwork_8cpp_1a14a308edeb82077575a8920de4c89fc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_node_num</definition>
+        <argsstring>()</argsstring>
+        <name>gmx_node_num</name>
+        <briefdescription>
+<para>Returns the number of nodes. </para>        </briefdescription>
+        <detaileddescription>
+<para>For thread-MPI, returns one before the threads have been started. This allows code between the real MPI_Init() and the thread-MPI &quot;init&quot; to still use this function to check for serial/parallel status and work as expected: for thread-MPI, at that point they should behave as if the run was serial. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" line="64" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" bodystart="64" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="basenetwork_8cpp_1abefa99d1d11b37f71288e63d6c1516bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_node_rank</definition>
+        <argsstring>()</argsstring>
+        <name>gmx_node_rank</name>
+        <briefdescription>
+<para>Returns the rank of the node. </para>        </briefdescription>
+        <detaileddescription>
+<para>For thread-MPI, returns zero before the threads have been started. This allows code between the real MPI_Init() and the thread-MPI &quot;init&quot; to still use this function to check for master node work as expected: for thread-MPI, at that point the only thread of execution should behave as if it the master node. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" line="81" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" bodystart="81" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="basenetwork_8cpp_1a821df9a909537f7f19699ca28d34af55" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int mpi_hostname_hash</definition>
+        <argsstring>()</argsstring>
+        <name>mpi_hostname_hash</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" line="160" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" bodystart="160" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="basenetwork_8cpp_1ac797977b0debc0fe641d4b5e1e1eb91c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_physicalnode_id_hash</definition>
+        <argsstring>(void)</argsstring>
+        <name>gmx_physicalnode_id_hash</name>
+        <briefdescription>
+<para>Return a non-negative hash that is, hopefully, unique for each physical node. </para>        </briefdescription>
+        <detaileddescription>
+<para>This hash is useful for determining hardware locality. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" line="199" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" bodystart="199" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="basenetwork_8cpp_1a44039df180064a64db8c8f4b057e94ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_broadcast_world</definition>
+        <argsstring>(int size, void *buffer)</argsstring>
+        <name>gmx_broadcast_world</name>
+        <param>
+          <type>int</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+<para>Broadcasts given data from rank zero to all other ranks. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" line="217" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp" bodystart="217" bodyend="225"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/basenetwork.cpp"/>
+  </compounddef>
+</doxygen>

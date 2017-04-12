@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="manyautocorrelation_8h" kind="file">
+    <compoundname>manyautocorrelation.h</compoundname>
+    <includes refid="fft_8h" local="yes">gromacs/fft/fft.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="autocorr_8cpp" local="yes">src/gromacs/correlationfunctions/autocorr.cpp</includedby>
+    <includedby refid="manyautocorrelation_8cpp" local="yes">src/gromacs/correlationfunctions/manyautocorrelation.cpp</includedby>
+    <incdepgraph>
+      <node id="2639">
+        <label>src/gromacs/correlationfunctions/manyautocorrelation.h</label>
+        <link refid="manyautocorrelation.h"/>
+        <childnode refid="2640" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+      </node>
+      <node id="2640">
+        <label>gromacs/fft/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="2641" relation="include">
+        </childnode>
+        <childnode refid="2642" relation="include">
+        </childnode>
+      </node>
+      <node id="2642">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="2641">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2643">
+        <label>src/gromacs/correlationfunctions/manyautocorrelation.h</label>
+        <link refid="manyautocorrelation.h"/>
+        <childnode refid="2644" relation="include">
+        </childnode>
+        <childnode refid="2645" relation="include">
+        </childnode>
+      </node>
+      <node id="2645">
+        <label>src/gromacs/correlationfunctions/manyautocorrelation.cpp</label>
+        <link refid="manyautocorrelation_8cpp"/>
+      </node>
+      <node id="2644">
+        <label>src/gromacs/correlationfunctions/autocorr.cpp</label>
+        <link refid="autocorr_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="manyautocorrelation_8h_1a33e348d06fe829c17392141c372c0e51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int many_auto_correl</definition>
+        <argsstring>(int nfunc, int ndata, int nfft, real **c)</argsstring>
+        <name>many_auto_correl</name>
+        <param>
+          <type>int</type>
+          <declname>nfunc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ndata</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfft</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> **</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>Perform many autocorrelation calculations. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine performs many autocorrelation function calculations using FFTs. The GROMACS FFT library wrapper is employed. On return the c[] arrays contain a symmetric function that is useful for further FFT:ing, for instance in order to compute spectra.</para><para>The functions uses OpenMP parallellization.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nfunc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of data functions to autocorrelate </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ndata</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of valid data points in the data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nfft</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the data arrays, this should at least be 50% larger than ndata. The c arrays will filled with zero beyond ndata before computing the correlation. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data array of size nfunc x nfft, will also be used for output </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>fft error code, or zero if everything went fine (see <ref refid="fft_8h" kindref="compound">fft/fft.h</ref>) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/manyautocorrelation.h" line="70" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/manyautocorrelation.cpp" bodystart="58" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares routine for computing many correlation functions using OpenMP. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>David van der Spoel <ulink url="mailto:david.vanderspoel@icm.uu.se">david.vanderspoel@icm.uu.se</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/manyautocorrelation.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,68 @@
+.. _gmx saxs:
+
+gmx saxs
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx saxs [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+             [:strong:`-d` :emphasis:`[<.dat>]`] [:strong:`-sq` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+             [:strong:`-dt` :emphasis:`<time>`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-ng` :emphasis:`<int>`] [:strong:`-startq` :emphasis:`<real>`]
+             [:strong:`-endq` :emphasis:`<real>`] [:strong:`-energy` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx saxs`` calculates SAXS structure factors for given index
+groups based on Cromer's method.
+Both topology and trajectory files are required.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-d`` [<.dat>] (sfactor.dat) (Optional)
+    Generic data file
+
+Options to specify output files:
+
+``-sq`` [<.xvg>] (sq.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-ng`` <int> (1)
+    Number of groups to compute SAXS
+``-startq`` <real> (0)
+    Starting q (1/nm)
+``-endq`` <real> (60)
+    Ending q (1/nm)
+``-energy`` <real> (12)
+    Energy of the incoming X-ray (keV)
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

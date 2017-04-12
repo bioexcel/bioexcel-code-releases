@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__gpu_8h" kind="file">
+    <compoundname>nbnxn_gpu.h</compoundname>
+    <includes refid="gpu__macros_8h" local="yes">gromacs/gpu_utils/gpu_macros.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="nbnxn__gpu__types_8h" local="yes">gromacs/mdlib/nbnxn_gpu_types.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="nbnxn__ocl_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp</includedby>
+    <includedby refid="nbnxn__ocl__data__mgmt_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</includedby>
+    <includedby refid="nbnxn__ocl__jit__support_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_jit_support.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <incdepgraph>
+      <node id="11242">
+        <label>src/gromacs/mdlib/nbnxn_gpu.h</label>
+        <link refid="nbnxn_gpu.h"/>
+        <childnode refid="11243" relation="include">
+        </childnode>
+        <childnode refid="11246" relation="include">
+        </childnode>
+      </node>
+      <node id="11244">
+        <label>stdint.h</label>
+      </node>
+      <node id="11246">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="11243">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="11244" relation="include">
+        </childnode>
+        <childnode refid="11245" relation="include">
+        </childnode>
+      </node>
+      <node id="11245">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="11247">
+        <label>src/gromacs/mdlib/nbnxn_gpu.h</label>
+        <link refid="nbnxn_gpu.h"/>
+        <childnode refid="11248" relation="include">
+        </childnode>
+        <childnode refid="11249" relation="include">
+        </childnode>
+        <childnode refid="11250" relation="include">
+        </childnode>
+      </node>
+      <node id="11248">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp</label>
+        <link refid="nbnxn__ocl_8cpp"/>
+      </node>
+      <node id="11250">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_jit_support.cpp</label>
+        <link refid="nbnxn__ocl__jit__support_8cpp"/>
+      </node>
+      <node id="11249">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</label>
+        <link refid="nbnxn__ocl__data__mgmt_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__gpu_8h_1ace96d16a2d1f04355fb70b13711b86b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_launch_kernel</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb, const struct nbnxn_atomdata_t *nbdata, int flags, int iloc)</argsstring>
+        <name>nbnxn_gpu_launch_kernel</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbdata</declname>
+          <defname>nbatom</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iloc</declname>
+        </param>
+        <briefdescription>
+<para>Launch asynchronously the nonbonded force calculations. </para>        </briefdescription>
+        <detaileddescription>
+<para>This consists of the following (async) steps launched:<itemizedlist>
+<listitem><para>upload x and q;</para></listitem><listitem><para>upload shift vector;</para></listitem><listitem><para>launch kernel; The local and non-local interaction calculations are launched in two separate streams.</para></listitem></itemizedlist>
+</para><para>Launch asynchronously the nonbonded force calculations.</para><para>As we execute nonbonded workload in separate queues, before launching the kernel we need to make sure that he following operations have completed:<itemizedlist>
+<listitem><para>atomdata allocation and related H2D transfers (every nstlist step);</para></listitem><listitem><para>pair list H2D transfer (every nstlist step);</para></listitem><listitem><para>shift vector H2D transfer (every nstlist step);</para></listitem><listitem><para>force (+shift force and energy) output clearing (every step).</para></listitem></itemizedlist>
+</para><para>These operations are issued in the local queue at the beginning of the step and therefore always complete before the local kernel launch. The non-local kernel is launched after the local on the same device/context, so this is inherently scheduled after the operations in the local stream (including the above &quot;misc_ops&quot;). However, for the sake of having a future-proof implementation, we use the misc_ops_done event to record the point in time when the above operations are finished and synchronize with this event in the non-local stream. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_gpu.h" line="69" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="407" bodyend="656"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu_8h_1ac4d9546662f5954ae56e3af4d09e4c4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_launch_cpyback</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb, const struct nbnxn_atomdata_t *nbatom, int flags, int aloc)</argsstring>
+        <name>nbnxn_gpu_launch_cpyback</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbatom</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>aloc</declname>
+        </param>
+        <briefdescription>
+<para>Launch asynchronously the download of nonbonded forces from the GPU (and energies/shift forces if required). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_gpu.h" line="79" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="661" bodyend="776"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu_8h_1ab4e3f1446d5a8a899106512bfcf3d5e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_wait_for_gpu</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb, int flags, int aloc, real *e_lj, real *e_el, rvec *fshift)</argsstring>
+        <name>nbnxn_gpu_wait_for_gpu</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>aloc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>e_lj</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>e_el</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>fshift</declname>
+        </param>
+        <briefdescription>
+<para>Wait for the asynchronously launched nonbonded calculations and data transfers to finish. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_gpu.h" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="782" bodyend="897"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu_8h_1ae9a6120b6a1b95d61a49599c35952562" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int nbnxn_gpu_pick_ewald_kernel_type</definition>
+        <argsstring>(bool bTwinCut)</argsstring>
+        <name>nbnxn_gpu_pick_ewald_kernel_type</name>
+        <param>
+          <type>bool</type>
+          <declname>bTwinCut</declname>
+        </param>
+        <briefdescription>
+<para>Selects the Ewald kernel type, analytical or tabulated, single or twin cut-off. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_gpu.h" line="98" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="900" bodyend="954"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declare interface for GPU execution for NBNXN module. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Szilard Pall <ulink url="mailto:pall.szilard@gmail.com">pall.szilard@gmail.com</ulink> </para><simplesectsep/><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_gpu.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,69 @@
+.. _gmx nmens:
+
+gmx nmens
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx nmens [:strong:`-v` :emphasis:`[<.trr/.cpt/...>]`] [:strong:`-e` :emphasis:`[<.xvg>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`]
+              [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-o` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-xvg` :emphasis:`<enum>`]
+              [:strong:`-temp` :emphasis:`<real>`] [:strong:`-seed` :emphasis:`<int>`] [:strong:`-num` :emphasis:`<int>`] [:strong:`-first` :emphasis:`<int>`]
+              [:strong:`-last` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx nmens`` generates an ensemble around an average structure
+in a subspace that is defined by a set of normal modes (eigenvectors).
+The eigenvectors are assumed to be mass-weighted.
+The position along each eigenvector is randomly taken from a Gaussian
+distribution with variance kT/eigenvalue.
+
+By default the starting eigenvector is set to 7, since the first six
+normal modes are the translational and rotational degrees of freedom.
+
+Options
+-------
+
+Options to specify input files:
+
+``-v`` [<.trr/.cpt/...>] (eigenvec.trr)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+``-e`` [<.xvg>] (eigenval.xvg)
+    xvgr/xmgr file
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xtc/.trr/...>] (ensemble.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+
+Other options:
+
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-temp`` <real> (300)
+    Temperature in Kelvin
+``-seed`` <int> (0)
+    Random seed (0 means generate)
+``-num`` <int> (100)
+    Number of structures to generate
+``-first`` <int> (7)
+    First eigenvector to use (-1 is select)
+``-last`` <int> (-1)
+    Last eigenvector to use (-1 is till the last)
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

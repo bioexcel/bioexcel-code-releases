@@ -1,0 +1,79 @@
+.. _gmx confrms:
+
+gmx confrms
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx confrms [:strong:`-f1` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-f2` :emphasis:`[<.gro/.g96/...>]`]
+                [:strong:`-n1` :emphasis:`[<.ndx>]`] [:strong:`-n2` :emphasis:`[<.ndx>]`] [:strong:`-o` :emphasis:`[<.gro/.g96/...>]`]
+                [:strong:`-no` :emphasis:`[<.ndx>]`] [:strong:`-[no]w`] [:strong:`-[no]one`] [:strong:`-[no]mw`] [:strong:`-[no]pbc`]
+                [:strong:`-[no]fit`] [:strong:`-[no]name`] [:strong:`-[no]label`] [:strong:`-[no]bfac`]
+
+Description
+-----------
+
+``gmx confrms`` computes the root mean square deviation (RMSD) of two
+structures after least-squares fitting the second structure on the first one.
+The two structures do NOT need to have the same number of atoms,
+only the two index groups used for the fit need to be identical.
+With ``-name`` only matching atom names from the selected groups
+will be used for the fit and RMSD calculation. This can be useful
+when comparing mutants of a protein.
+
+The superimposed structures are written to file. In a :ref:`.pdb <pdb>` file
+the two structures will be written as separate models
+(use ``rasmol -nmrpdb``). Also in a :ref:`.pdb <pdb>` file, B-factors
+calculated from the atomic MSD values can be written with ``-bfac``.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f1`` [<.tpr/.gro/...>] (conf1.gro)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-f2`` [<.gro/.g96/...>] (conf2.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp :ref:`tpr`
+``-n1`` [<.ndx>] (fit1.ndx) (Optional)
+    Index file
+``-n2`` [<.ndx>] (fit2.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.gro/.g96/...>] (fit.pdb)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+``-no`` [<.ndx>] (match.ndx) (Optional)
+    Index file
+
+Other options:
+
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-[no]one``  (no)
+    Only write the fitted structure to file
+``-[no]mw``  (yes)
+    Mass-weighted fitting and RMSD
+``-[no]pbc``  (no)
+    Try to make molecules whole again
+``-[no]fit``  (yes)
+    Do least squares superposition of the target structure to the reference
+``-[no]name``  (no)
+    Only compare matching atom names
+``-[no]label``  (no)
+    Added chain labels A for first and B for second structure
+``-[no]bfac``  (no)
+    Output B-factors from atomic MSD values
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

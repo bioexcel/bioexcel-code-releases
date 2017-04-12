@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx convert-tpr &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx covar" href="gmx-covar.html" />
+    <link rel="prev" title="gmx confrms" href="gmx-confrms.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-covar.html" title="gmx covar"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-confrms.html" title="gmx confrms"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-convert-tpr">
+<span id="id1"></span><h1>gmx convert-tpr<a class="headerlink" href="#gmx-convert-tpr" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx convert-tpr [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-f</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>] [<strong>-e</strong> <em>[&lt;.edr&gt;]</em>]
+             [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-o</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-extend</strong> <em>&lt;real&gt;</em>]
+             [<strong>-until</strong> <em>&lt;real&gt;</em>] [<strong>-nsteps</strong> <em>&lt;int&gt;</em>] [<strong>-time</strong> <em>&lt;real&gt;</em>]
+             [<strong>-[no]zeroq</strong>] [<strong>-[no]vel</strong>] [<strong>-[no]cont</strong>]
+             [<strong>-init_fep_state</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">convert-tpr</span></code> can edit run input files in four ways.</p>
+<p><strong>1.</strong> by modifying the number of steps in a run input file
+with options <code class="docutils literal"><span class="pre">-extend</span></code>, <code class="docutils literal"><span class="pre">-until</span></code> or <code class="docutils literal"><span class="pre">-nsteps</span></code>
+(nsteps=-1 means unlimited number of steps)</p>
+<p><strong>2.</strong> (OBSOLETE) by creating a run input file
+for a continuation run when your simulation has crashed due to e.g.
+a full disk, or by making a continuation run input file.
+This option is obsolete, since mdrun now writes and reads
+checkpoint files.
+<strong>Note</strong> that a frame with coordinates and velocities is needed.
+When pressure and/or Nose-Hoover temperature coupling is used
+an energy file can be supplied to get an exact continuation
+of the original run.</p>
+<p><strong>3.</strong> by creating a .tpx file for a subset of your original
+tpx file, which is useful when you want to remove the solvent from
+your .tpx file, or when you want to make e.g. a pure Calpha .tpx file.
+Note that you may need to use <code class="docutils literal"><span class="pre">-nsteps</span> <span class="pre">-1</span></code> (or similar) to get
+this to work.
+<strong>WARNING: this .tpx file is not fully functional</strong>.</p>
+<p><strong>4.</strong> by setting the charges of a specified group
+to zero. This is useful when doing free energy estimates
+using the LIE (Linear Interaction Energy) method.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.trr/.cpt/...&gt;] (traj.trr) (Optional)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> [&lt;.edr&gt;] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.tpr&gt;] (tprout.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-extend</span></code> &lt;real&gt; (0)</dt>
+<dd>Extend runtime by this amount (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-until</span></code> &lt;real&gt; (0)</dt>
+<dd>Extend runtime until this ending time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-nsteps</span></code> &lt;int&gt; (0)</dt>
+<dd>Change the number of steps</dd>
+<dt><code class="docutils literal"><span class="pre">-time</span></code> &lt;real&gt; (-1)</dt>
+<dd>Continue from frame at this time (ps) instead of the last frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]zeroq</span></code>  (no)</dt>
+<dd>Set the charges of a group (from the index) to zero</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]vel</span></code>  (yes)</dt>
+<dd>Require velocities from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]cont</span></code>  (yes)</dt>
+<dd>For exact continuation, the constraints should not be applied before the first step</dd>
+<dt><code class="docutils literal"><span class="pre">-init_fep_state</span></code> &lt;int&gt; (0)</dt>
+<dd>fep state to initialize from</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx convert-tpr</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-confrms.html"
+                        title="previous chapter">gmx confrms</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-covar.html"
+                        title="next chapter">gmx covar</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-convert-tpr.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-covar.html" title="gmx covar"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-confrms.html" title="gmx confrms"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

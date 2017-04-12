@@ -1,0 +1,120 @@
+.. _gmx pairdist:
+
+gmx pairdist
+============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx pairdist [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                 [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`]
+                 [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-fgroup` :emphasis:`<selection>`] [:strong:`-xvg` :emphasis:`<enum>`]
+                 [:strong:`-[no]rmpbc`] [:strong:`-[no]pbc`] [:strong:`-sf` :emphasis:`<file>`] [:strong:`-selrpos` :emphasis:`<enum>`]
+                 [:strong:`-seltype` :emphasis:`<enum>`] [:strong:`-cutoff` :emphasis:`<real>`] [:strong:`-type` :emphasis:`<enum>`]
+                 [:strong:`-refgrouping` :emphasis:`<enum>`] [:strong:`-selgrouping` :emphasis:`<enum>`]
+                 [:strong:`-ref` :emphasis:`<selection>`] [:strong:`-sel` :emphasis:`<selection>`]
+
+Description
+-----------
+
+``gmx pairdist`` calculates pairwise distances between one reference
+selection (given with ``-ref``) and one or more other selections
+(given with ``-sel``).  It can calculate either the minimum
+distance (the default), or the maximum distance (with
+``-type max``).  Distances to each selection provided with
+``-sel`` are computed independently.
+
+By default, the global minimum/maximum distance is computed.
+To compute more distances (e.g., minimum distances to each residue
+in ``-ref``), use ``-refgrouping`` and/or ``-selgrouping``
+to specify how the positions within each selection should be
+grouped.
+
+Computed distances are written to the file specified with ``-o``.
+If there are N groups in ``-ref`` and M groups in the first
+selection in ``-sel``, then the output contains N*M columns
+for the first selection. The columns contain distances like this:
+r1-s1, r2-s1, ..., r1-s2, r2-s2, ..., where rn is the n'th group
+in ``-ref`` and sn is the n'th group in the other selection.
+The distances for the second selection comes as separate columns
+after the first selection, and so on.  If some selections are
+dynamic, only the selected positions are used in the computation
+but the same number of columns is always written out.  If there
+are no positions contributing to some group pair, then the cutoff
+value is written (see below).
+
+``-cutoff`` sets a cutoff for the computed distances.
+If the result would contain a distance over the cutoff, the cutoff
+value is written to the output file instead. By default, no cutoff
+is used, but if you are not interested in values beyond a cutoff,
+or if you know that the minimum distance is smaller than a cutoff,
+you should set this option to allow the tool to use grid-based
+searching and be significantly faster.
+
+If you want to compute distances between fixed pairs,
+:doc:`gmx distance <gmx-distance>` may be a more suitable tool.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Input trajectory or single configuration: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr) (Optional)
+    Input structure: :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Extra index groups
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (dist.xvg)
+    Distances as function of time
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame if t MOD dt == first time (ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-fgroup`` <selection>
+    Atoms stored in the trajectory file (if not set, assume first N atoms)
+``-xvg`` <enum> (xmgrace)
+    Plot formatting: none, xmgrace, xmgr
+``-[no]rmpbc``  (yes)
+    Make molecules whole for each frame
+``-[no]pbc``  (yes)
+    Use periodic boundary conditions for distance calculation
+``-sf`` <file>
+    Provide selections from files
+``-selrpos`` <enum> (atom)
+    Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog
+``-seltype`` <enum> (atom)
+    Default selection output positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog
+``-cutoff`` <real> (0)
+    Maximum distance to consider
+``-type`` <enum> (min)
+    Type of distances to calculate: min, max
+``-refgrouping`` <enum> (all)
+    Grouping of -ref positions to compute the min/max over: all, res, mol, none
+``-selgrouping`` <enum> (all)
+    Grouping of -sel positions to compute the min/max over: all, res, mol, none
+``-ref`` <selection>
+    Reference positions to calculate distances from
+``-sel`` <selection>
+    Positions to calculate distances for
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

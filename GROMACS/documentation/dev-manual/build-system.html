@@ -1,0 +1,729 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Build system overview &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Relocatable binaries" href="relocatable-binaries.html" />
+    <link rel="prev" title="Codebase overview" href="overview.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="relocatable-binaries.html" title="Relocatable binaries"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Codebase overview"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="build-system-overview">
+<h1>Build system overview<a class="headerlink" href="#build-system-overview" title="Permalink to this headline">¶</a></h1>
+<p>The GROMACS build system uses CMake (version
+2.8.8 or newer is required) to generate the
+actual build system for the build tool choosen by the user.  See CMake
+documentation for general introduction to CMake and how to use it.  This
+documentation focuses on how the GROMACS build system is organized and
+implemented, and what features it provides to developers (some of which may be
+of interest to advanced users).</p>
+<p>Most developers use <code class="docutils literal"><span class="pre">make</span></code> or <code class="docutils literal"><span class="pre">ninja</span></code> as the underlying build system, so
+there can be parts of the build system that are specifically designed for
+command-line consumption with these tools, and may not work ideally with other
+environments, but basic building should be possible with all the environments
+supported by CMake.</p>
+<p>Also, the build system and version control is designed for out-of-source
+builds.  In-source builds mostly work (there are a few custom targets that do
+not), but no particular effort has been put to, e.g., having <code class="file docutils literal"><span class="pre">.gitignore</span></code>
+files that exclude all the build outputs, or to have the <code class="docutils literal"><span class="pre">clean</span></code> target
+remove all possible build outputs.</p>
+<div class="section" id="build-types">
+<h2>Build types<a class="headerlink" href="#build-types" title="Permalink to this headline">¶</a></h2>
+<p>Build types is a CMake concept that provides overall control of how
+the build tools are used on the given platform to produce executable
+code. These can be set in CMake in various ways, including on a
+command line such as <code class="docutils literal"><span class="pre">cmake</span> <span class="pre">-DCMAKE_BUILD_TYPE=Debug</span></code>. GROMACS
+supports the following standard CMake build types:</p>
+<dl class="docutils">
+<dt><strong>Release</strong></dt>
+<dd>Fully optimized code intended for use in production simulation. This is the
+default.</dd>
+<dt><strong>Debug</strong></dt>
+<dd>Compiled code intended for use with debugging tools, with low optimization levels
+and debug information for symbols.</dd>
+<dt><strong>RelWithDebInfo</strong></dt>
+<dd>As Release, but with debug information for symbol names, which can help debugging
+issues that only emerge in optimized code.</dd>
+<dt><strong>MinSizeRel</strong></dt>
+<dd>As Release, but optimized to minimize the size of the resulting executable. This
+is never a concern for GROMACS installations, so should not be used, but
+probably works.</dd>
+</dl>
+<p>Additionally, GROMACS provides the following build types for development and
+testing. Their implementations can be found in <code class="docutils literal"><span class="pre">cmake/gmxBuildTypeXXX.cmake</span></code>.</p>
+<dl class="docutils">
+<dt><strong>Reference</strong></dt>
+<dd>This build type compiles a version of GROMACS aimed solely at correctness. All
+parallelization and optimization possibilities are disabled. This build type is
+compiled with gcc 4.7 to generate the regression test reference values, against
+which all other GROMACS builds are tested.</dd>
+<dt><strong>RelWithAssert</strong></dt>
+<dd>As Release, but removes <code class="docutils literal"><span class="pre">-DNDEBUG</span></code> from compiler command lines, which makes
+all assertion statements active (and can have other safety-related side effects
+in GROMACS and code upon which it depends)</dd>
+<dt><strong>Profile</strong></dt>
+<dd>As Release, but adds <code class="docutils literal"><span class="pre">-pg</span></code> for use with profiling tools. This is not
+likely to be effective for profiling the performance of <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>, but can
+be useful for the tools.</dd>
+<dt><strong>TSAN</strong></dt>
+<dd>Builds GROMACS for use with ThreadSanitzer in gcc &gt;= 4.8 and clang
+&gt;= 3.4 (<a class="reference external" href="http://clang.llvm.org/docs/ThreadSanitizer.html">http://clang.llvm.org/docs/ThreadSanitizer.html</a>) to detect
+data races. This disables the use of atomics in ThreadMPI,
+preferring the mutex-based implementation.</dd>
+<dt><strong>ASAN</strong></dt>
+<dd>Builds GROMACS for use with AddressSanitzer in gcc &gt;= 4.8 and
+clang &gt;= 3.4 (<a class="reference external" href="http://clang.llvm.org/docs/AddressSanitizer.html">http://clang.llvm.org/docs/AddressSanitizer.html</a>) to
+detect many kinds of memory mis-use. By default, AddressSanitizer
+includes LeakSanitizer.</dd>
+<dt><strong>MSAN</strong></dt>
+<dd>Builds GROMACS for use with AddressSanitzer in clang &gt;= 3.4
+(<a class="reference external" href="http://clang.llvm.org/docs/MemorySanitizer.html">http://clang.llvm.org/docs/MemorySanitizer.html</a>) to detect
+reads of unitialized memory. This functionality requires that
+dependencies of the GROMACS build have been built in a compatible
+way (roughly, static libraries with <code class="docutils literal"><span class="pre">-g</span> <span class="pre">-fsanitize=memory</span>
+<span class="pre">-fno-omit-frame-pointer</span></code>), which generally requires at least the C++
+standard library to have been built specially. The path where the
+includes and libraries for dependencies should be found for this
+build type is set in the CMake cache variable
+<code class="docutils literal"><span class="pre">GMX_MSAN_PATH</span></code>. Only internal XDR and internal fftpack are
+supported at this time.</dd>
+</dl>
+<p>For all of the sanitizer builds, to get readable stack traces, you may
+need to ensure that the <code class="docutils literal"><span class="pre">ASAN_SYMBOLIZER_PATH</span></code> environment variable
+(or your <code class="docutils literal"><span class="pre">PATH</span></code>) include that of the <code class="docutils literal"><span class="pre">llvm-symbolizer</span></code> binary.</p>
+<p>With some generators, CMake generates the build system for more than a
+single <code class="docutils literal"><span class="pre">CMAKE_BUILD_TYPE</span></code> from one pass over the <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code>
+files, so any code that uses <code class="docutils literal"><span class="pre">CMAKE_BUILD_TYPE</span></code> in
+<code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> directly will break. GROMACS does use such CMake
+code, so we do not fully support all these build types in such
+generators (which includes Visual Studio).</p>
+</div>
+<div class="section" id="cmake-cache-variables">
+<h2>CMake cache variables<a class="headerlink" href="#cmake-cache-variables" title="Permalink to this headline">¶</a></h2>
+<p>This section provides a (currently incomplete) list of cache variables that
+developers or advanced users can set to affect what CMake generates and/or what
+will get built.</p>
+<div class="section" id="compiler-flags">
+<h3>Compiler flags<a class="headerlink" href="#compiler-flags" title="Permalink to this headline">¶</a></h3>
+<p>Standard CMake mechanism for specifying the compiler flags is to use
+<code class="docutils literal"><span class="pre">CMAKE_C_FLAGS</span></code>/<code class="docutils literal"><span class="pre">CMAKE_CXX_FLAGS</span></code> for flags that affect all build types,
+and <code class="samp docutils literal"><span class="pre">CMAKE_C_FLAGS_</span><em><span class="pre">buildtype</span></em></code>/<code class="samp docutils literal"><span class="pre">CMAKE_CXX_FLAGS_</span><em><span class="pre">buildtype</span></em></code> for
+flags that only affect a specific build type.  CMake provides some default flags.</p>
+<p>GROMACS determines its own set of default flags, grouped into two categories:</p>
+<ul class="simple">
+<li>Generic flags that are appended to the above default CMake flag variables
+(possibly for multiple build types), generally specifying optimization flags
+to use and controlling compiler warnings.</li>
+<li>Specific flags for certain features that the build system determines to be
+necessary for successful compilation.  One example is flags that determine
+what SIMD instruction set the compiler is allowed to use/needs to support.</li>
+</ul>
+<p>All of the above flags are only added after testing that they work with the
+provided compiler.</p>
+<p>There is one cache variable to control the behavior of automatic compiler flags:</p>
+<dl class="cmake">
+<dt id="cmake-GMX_SKIP_DEFAULT_CFLAGS">
+<code class="descname">GMX_SKIP_DEFAULT_CFLAGS</code><a class="headerlink" href="#cmake-GMX_SKIP_DEFAULT_CFLAGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, the build system will not add any compiler flags
+automatically (neither generic nor specific as defined above), and will skip
+most linker flags as well.
+The default flags that would have been added are instead printed out when
+<strong class="command">cmake</strong> is run, and the user can set the flags themselves using the
+CMake variables.
+If <code class="docutils literal"><span class="pre">OFF</span></code> (the default), the flags are added as described above.</p>
+</dd></dl>
+
+<p>The code the determine the default generic flags is in
+<code class="file docutils literal"><span class="pre">cmake/gmxCFlags.cmake</span></code>.
+Code that sets the specific flags (e.g., SIMD flags) is in the main
+<code class="file docutils literal"><span class="pre">CMakeLists.txt</span></code>; search for <a class="reference internal" href="#cmake-GMX_SKIP_DEFAULT_CFLAGS"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_SKIP_DEFAULT_CFLAGS</span></code></a>.
+The variables used there can be traced back to the locations where the actual
+flags to use are determined.</p>
+</div>
+<div class="section" id="variables-affecting-compilation-linking">
+<h3>Variables affecting compilation/linking<a class="headerlink" href="#variables-affecting-compilation-linking" title="Permalink to this headline">¶</a></h3>
+<dl class="cmake">
+<dt id="cmake-GMX_BROKEN_CALLOC">
+<code class="descname">GMX_BROKEN_CALLOC</code><a class="headerlink" href="#cmake-GMX_BROKEN_CALLOC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_FOR_COVERAGE">
+<code class="descname">GMX_BUILD_FOR_COVERAGE</code><a class="headerlink" href="#cmake-GMX_BUILD_FOR_COVERAGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Special variable set <code class="docutils literal"><span class="pre">ON</span></code> by Jenkins when doing a build for the coverage
+job.  Allows the build system to set options to produce as useful coverage
+metrics as possible.  Currently, it disables all asserts to avoid them
+showing up as poor conditional coverage.
+Defaults to <code class="docutils literal"><span class="pre">OFF</span></code>, and there should not be any need to change this in a
+manual build.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_MDRUN_ONLY">
+<code class="descname">GMX_BUILD_MDRUN_ONLY</code><a class="headerlink" href="#cmake-GMX_BUILD_MDRUN_ONLY" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, the build system is configured to only build and install a
+single <code class="file docutils literal"><span class="pre">mdrun</span></code> executable.  To be fully functional, the installed
+<code class="file docutils literal"><span class="pre">mdrun</span></code> requires a standard GROMACS installation (with
+<code class="docutils literal"><span class="pre">GMX_BUILD_MDRUN_ONLY=OFF</span></code>) in the same installation prefix, as the
+mdrun-only build does not install any data files or scripts, only the
+binary.  This is intended for cases where one wants to/needs to compile one
+or more instances of <code class="file docutils literal"><span class="pre">mdrun</span></code> with different build options (e.g., MPI
+or SIMD) than the full installation with the other utilities.
+Defaults to <code class="docutils literal"><span class="pre">OFF</span></code>, in which case a single <code class="file docutils literal"><span class="pre">gmx</span></code> executable is built
+and installed, together with all the supporting files.  <strong class="command">mdrun</strong> can
+be executed as <strong class="command">gmx mdrun</strong>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_OWN_FFTW">
+<code class="descname">GMX_BUILD_OWN_FFTW</code><a class="headerlink" href="#cmake-GMX_BUILD_OWN_FFTW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_SHARED_EXE">
+<code class="descname">GMX_BUILD_SHARED_EXE</code><a class="headerlink" href="#cmake-GMX_BUILD_SHARED_EXE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_COMPILER_WARNINGS">
+<code class="descname">GMX_COMPILER_WARNINGS</code><a class="headerlink" href="#cmake-GMX_COMPILER_WARNINGS" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, various compiler warnings are enabled for compilers that
+Jenkins uses for verification.
+Defaults to <code class="docutils literal"><span class="pre">OFF</span></code> when building from a source tarball so that users
+compiling with versions not tested on Jenkins are not exposed to our rather
+aggressive warning flags that can trigger a lot of warnings with, e.g., new
+versions of the compilers we use.
+When building from a git repository, defaults to <code class="docutils literal"><span class="pre">ON</span></code>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_CYCLE_SUBCOUNTERS">
+<code class="descname">GMX_CYCLE_SUBCOUNTERS</code><a class="headerlink" href="#cmake-GMX_CYCLE_SUBCOUNTERS" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set to <code class="docutils literal"><span class="pre">ON</span></code>, enables performance subcounters that offer more
+fine-grained mdrun performance measurement and evaluation than the default
+counters. See <a class="reference internal" href="../user-guide/mdrun-performance.html"><span class="doc">Getting good performance from mdrun</span></a> for the description of
+subcounters which are available.
+Defaults to <code class="docutils literal"><span class="pre">OFF</span></code>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_DATA_INSTALL_DIR">
+<code class="descname">GMX_DATA_INSTALL_DIR</code><a class="headerlink" href="#cmake-GMX_DATA_INSTALL_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the directory under <code class="file docutils literal"><span class="pre">share/</span></code> where data files are installed.
+The default is <code class="docutils literal"><span class="pre">gromacs</span></code>, which puts the files under
+file:<cite>share/gromacs/</cite>.
+See <a class="reference internal" href="relocatable-binaries.html"><span class="doc">Relocatable binaries</span></a> for how this influences the build.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_DOUBLE">
+<code class="descname">GMX_DOUBLE</code><a class="headerlink" href="#cmake-GMX_DOUBLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Many part of GROMACS are implemented in terms of &#8220;real&#8221; precision,
+which is actually either a single- or double-precision type,
+according to the value of this flag. Some parts of the code
+deliberately use single- or double-precision types, and these are
+unaffected by this setting. See reference manual for further
+information.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_RELAXED_DOUBLE_PRECISION">
+<code class="descname">GMX_RELAXED_DOUBLE_PRECISION</code><a class="headerlink" href="#cmake-GMX_RELAXED_DOUBLE_PRECISION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permit a double-precision configuration to compute some quantities
+to single-precision accuracy. Particularly on architectures where
+only double-precision SIMD is available (e.g. Sparc machines such
+as the K computer), it is faster to default to <code class="docutils literal"><span class="pre">GMX_DOUBLE=ON</span></code>
+and use SIMD than to use <code class="docutils literal"><span class="pre">GMX_DOUBLE=OFF</span></code> and use no
+SIMD. However, if the user does not need full double precision,
+then some optimizations can achieve the equivalent of
+single-precision results (e.g. fewer Newton-Raphson iterations for
+a reciprocal square root computation).</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_EXTRAE">
+<code class="descname">GMX_EXTRAE</code><a class="headerlink" href="#cmake-GMX_EXTRAE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_EXTERNAL_BLAS">
+<code class="descname">GMX_EXTERNAL_BLAS</code><a class="headerlink" href="#cmake-GMX_EXTERNAL_BLAS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_EXTERNAL_LAPACK">
+<code class="descname">GMX_EXTERNAL_LAPACK</code><a class="headerlink" href="#cmake-GMX_EXTERNAL_LAPACK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_EXTERNAL_TNG">
+<code class="descname">GMX_EXTERNAL_TNG</code><a class="headerlink" href="#cmake-GMX_EXTERNAL_TNG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_FFT_LIBRARY">
+<code class="descname">GMX_FFT_LIBRARY</code><a class="headerlink" href="#cmake-GMX_FFT_LIBRARY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_GIT_VERSION_INFO">
+<code class="descname">GMX_GIT_VERSION_INFO</code><a class="headerlink" href="#cmake-GMX_GIT_VERSION_INFO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to generate version information dynamically from git for each build
+(e.g., HEAD commit hash).
+Defaults to <code class="docutils literal"><span class="pre">ON</span></code> if the build is from a git repository and <strong class="command">git</strong>
+is found, otherwise <code class="docutils literal"><span class="pre">OFF</span></code>.
+If <code class="docutils literal"><span class="pre">OFF</span></code>, static version information from
+<code class="file docutils literal"><span class="pre">cmake/gmxVersionInfo.cmake</span></code> is used.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_GPU">
+<code class="descname">GMX_GPU</code><a class="headerlink" href="#cmake-GMX_GPU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_LIB_INSTALL_DIR">
+<code class="descname">GMX_LIB_INSTALL_DIR</code><a class="headerlink" href="#cmake-GMX_LIB_INSTALL_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the installation directory for libraries (default is determined by
+standard CMake package <code class="docutils literal"><span class="pre">GNUInstallDirs</span></code>).
+See <a class="reference internal" href="relocatable-binaries.html"><span class="doc">Relocatable binaries</span></a> for how this influences the build.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_LOAD_PLUGINS">
+<code class="descname">GMX_LOAD_PLUGINS</code><a class="headerlink" href="#cmake-GMX_LOAD_PLUGINS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_MPI">
+<code class="descname">GMX_MPI</code><a class="headerlink" href="#cmake-GMX_MPI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_OPENMP">
+<code class="descname">GMX_OPENMP</code><a class="headerlink" href="#cmake-GMX_OPENMP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_PREFER_STATIC_LIBS">
+<code class="descname">GMX_PREFER_STATIC_LIBS</code><a class="headerlink" href="#cmake-GMX_PREFER_STATIC_LIBS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_SIMD">
+<code class="descname">GMX_SIMD</code><a class="headerlink" href="#cmake-GMX_SIMD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_SOFTWARE_INVSQRT">
+<code class="descname">GMX_SOFTWARE_INVSQRT</code><a class="headerlink" href="#cmake-GMX_SOFTWARE_INVSQRT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_THREAD_MPI">
+<code class="descname">GMX_THREAD_MPI</code><a class="headerlink" href="#cmake-GMX_THREAD_MPI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_USE_RDTSCP">
+<code class="descname">GMX_USE_RDTSCP</code><a class="headerlink" href="#cmake-GMX_USE_RDTSCP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_USE_TNG">
+<code class="descname">GMX_USE_TNG</code><a class="headerlink" href="#cmake-GMX_USE_TNG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_VMD_PLUGIN_PATH">
+<code class="descname">GMX_VMD_PLUGIN_PATH</code><a class="headerlink" href="#cmake-GMX_VMD_PLUGIN_PATH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_X11">
+<code class="descname">GMX_X11</code><a class="headerlink" href="#cmake-GMX_X11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_XML">
+<code class="descname">GMX_XML</code><a class="headerlink" href="#cmake-GMX_XML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Currently, this option has no effect on the compilation or linking, since
+there is no code outside the tests that would use <code class="file docutils literal"><span class="pre">libxml2</span></code>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="variables-affecting-the-all-target">
+<h3>Variables affecting the <code class="docutils literal"><span class="pre">all</span></code> target<a class="headerlink" href="#variables-affecting-the-all-target" title="Permalink to this headline">¶</a></h3>
+<dl class="cmake">
+<dt id="cmake-BUILD_TESTING">
+<code class="descname">BUILD_TESTING</code><a class="headerlink" href="#cmake-BUILD_TESTING" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard variable created by CTest that enables/disables all tests.
+Defaults to <code class="docutils literal"><span class="pre">ON</span></code>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_HELP">
+<code class="descname">GMX_BUILD_HELP</code><a class="headerlink" href="#cmake-GMX_BUILD_HELP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Controls handling of man pages and shell completions.  Possible values:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">OFF</span></code> (default for builds from release source distribution)</dt>
+<dd>Man pages and shell completions are not generated as part of the <code class="docutils literal"><span class="pre">all</span></code>
+target, and only installed if compiling from a source package.</dd>
+<dt><code class="docutils literal"><span class="pre">AUTO</span></code> (default for builds from development version)</dt>
+<dd>Shell completions are generated by executing the <code class="file docutils literal"><span class="pre">gmx</span></code> binary as
+part of the <code class="docutils literal"><span class="pre">all</span></code> target.  If it fails, a message is printed, but the
+build succeeds.
+Man pages need to be generated manually by invoking the <code class="docutils literal"><span class="pre">man</span></code> target.
+Man pages and shell completions are installed if they have been
+successfully generated.</dd>
+<dt><code class="docutils literal"><span class="pre">ON</span></code></dt>
+<dd>Works the same as <code class="docutils literal"><span class="pre">AUTO</span></code>, except that if invoking the <code class="file docutils literal"><span class="pre">gmx</span></code> binary
+fails, the build fails as well.</dd>
+</dl>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_DEVELOPER_BUILD">
+<code class="descname">GMX_DEVELOPER_BUILD</code><a class="headerlink" href="#cmake-GMX_DEVELOPER_BUILD" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, the <code class="docutils literal"><span class="pre">all</span></code> target will include also the test binaries using
+Google Test (if <a class="reference internal" href="#cmake-GMX_BUILD_UNITTESTS"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_BUILD_UNITTESTS</span></code></a> is <code class="docutils literal"><span class="pre">ON</span></code>).
+Also, <a class="reference internal" href="#cmake-GMX_COMPILER_WARNINGS"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_COMPILER_WARNINGS</span></code></a> is always enabled.
+In the future, other developer convenience features (as well as features
+inconvenient for a general user) can be added to the set controlled by this
+variable.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="variables-affecting-special-targets">
+<h3>Variables affecting special targets<a class="headerlink" href="#variables-affecting-special-targets" title="Permalink to this headline">¶</a></h3>
+<dl class="cmake">
+<dt id="cmake-CPPCHECK_XML_OUTPUT">
+<code class="descname">CPPCHECK_XML_OUTPUT</code><a class="headerlink" href="#cmake-CPPCHECK_XML_OUTPUT" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, the <code class="docutils literal"><span class="pre">cppcheck</span></code> target generates reports for all found
+issues in XML format.  This is used by Jenkins, which parses the XML files
+to show the issues on the web page.
+If <code class="docutils literal"><span class="pre">OFF</span></code> (the default), issues are reported as plain text to standard
+output and to a text file.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_MANUAL">
+<code class="descname">GMX_BUILD_MANUAL</code><a class="headerlink" href="#cmake-GMX_BUILD_MANUAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, CMake detection for LaTeX and other prerequisites for the
+reference PDF manual is done, and the <code class="docutils literal"><span class="pre">manual</span></code> target for building the
+manual is generated.
+If <code class="docutils literal"><span class="pre">OFF</span></code> (the default), all detection is skipped and the manual cannot be
+built.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_TARBALL">
+<code class="descname">GMX_BUILD_TARBALL</code><a class="headerlink" href="#cmake-GMX_BUILD_TARBALL" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, <code class="docutils literal"><span class="pre">-dev</span></code> suffix is stripped off from version strings and some
+other version info logic is adjusted such that the man pages and other
+documentation generated from this build is suitable for releasing (on the
+web page and/or in the source distribution package).
+Defaults to <code class="docutils literal"><span class="pre">OFF</span></code>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_BUILD_UNITTESTS">
+<code class="descname">GMX_BUILD_UNITTESTS</code><a class="headerlink" href="#cmake-GMX_BUILD_UNITTESTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <code class="docutils literal"><span class="pre">ON</span></code>, test binaries using Google Test are built (either as the separate
+<code class="docutils literal"><span class="pre">tests</span></code> targer, or also as part of the <code class="docutils literal"><span class="pre">all</span></code> target, depending on
+<a class="reference internal" href="#cmake-GMX_DEVELOPER_BUILD"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_DEVELOPER_BUILD</span></code></a>).  All dependencies required for building the
+tests (Google Test and Google Mock frameworks, and tinyxml2) are
+included in <code class="file docutils literal"><span class="pre">src/external/</span></code>.
+Defaults to <code class="docutils literal"><span class="pre">ON</span></code> if <a class="reference internal" href="#cmake-BUILD_TESTING"><code class="xref std std-cmake docutils literal"><span class="pre">BUILD_TESTING</span></code></a> is <code class="docutils literal"><span class="pre">ON</span></code>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-GMX_COMPACT_DOXYGEN">
+<code class="descname">GMX_COMPACT_DOXYGEN</code><a class="headerlink" href="#cmake-GMX_COMPACT_DOXYGEN" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, Doxygen configuration is changed to avoid generating large
+dependency graphs, which makes it significantly faster to run Doxygen and
+reduces disk usage.  This is typically useful when developing the
+documentation to reduce the build times.
+Defaults to <code class="docutils literal"><span class="pre">OFF</span></code>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-REGRESSIONTEST_DOWNLOAD">
+<code class="descname">REGRESSIONTEST_DOWNLOAD</code><a class="headerlink" href="#cmake-REGRESSIONTEST_DOWNLOAD" title="Permalink to this definition">¶</a></dt>
+<dd><p>If set <code class="docutils literal"><span class="pre">ON</span></code>, CMake will download the regression tests and extract them to
+a local directory.  <a class="reference internal" href="#cmake-REGRESSIONTEST_PATH"><code class="xref std std-cmake docutils literal"><span class="pre">REGRESSIONTEST_PATH</span></code></a> is set to the extracted
+tests.  Note that this happens during the configure phase, not during the
+build.
+After the download is done, the variable is automatically reset to <code class="docutils literal"><span class="pre">OFF</span></code>
+again to avoid repeated downloads.  Can be set to <code class="docutils literal"><span class="pre">ON</span></code> to download again.
+Defaults to <code class="docutils literal"><span class="pre">OFF</span></code>.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-REGRESSIONTEST_PATH">
+<code class="descname">REGRESSIONTEST_PATH</code><a class="headerlink" href="#cmake-REGRESSIONTEST_PATH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to extracted regression test suite matching the source tree (the
+directory containing <code class="file docutils literal"><span class="pre">gmxtest.pl</span></code>)
+If set, CTest tests are generated to run the regression tests.
+Defaults to empty.</p>
+</dd></dl>
+
+<dl class="cmake">
+<dt id="cmake-SOURCE_MD5SUM">
+<code class="descname">SOURCE_MD5SUM</code><a class="headerlink" href="#cmake-SOURCE_MD5SUM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the MD5 sum of the release tarball when generating the HTML
+documentation.  It gets inserted into the download section of the HTML
+pages.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="external-libraries">
+<h2>External libraries<a class="headerlink" href="#external-libraries" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="special-targets">
+<h2>Special targets<a class="headerlink" href="#special-targets" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the default <code class="docutils literal"><span class="pre">all</span></code> target, the generated build system has
+several custom targets that are intended to be explicitly built to perform
+various tasks (some of these may also run automatically).  There are various
+other targets as well used internally by these, but those are typically not
+intended to be invoked directly.</p>
+<dl class="docutils">
+<dt>check</dt>
+<dd>Builds all the binaries needed by the tests and runs the tests.  If some
+types of tests are not available, shows a note to the user.
+This is the main target intended for normal users to run the tests.
+See <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a>.</dd>
+<dt>check-source</dt>
+<dd>Runs a custom Python checker script to check for various source-level
+issues.  Uses Doxygen XML documentation as well as rudimentary parsing of
+some parts of the source files.
+This target is used as part of the Jenkins documentation job.
+All CMake code is currently in <code class="file docutils literal"><span class="pre">docs/doxygen/</span></code>.
+See <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a>.</dd>
+<dt>completion</dt>
+<dd>Runs the compiled <code class="file docutils literal"><span class="pre">gmx</span></code> executable to generate shell command-line
+completion definitions.  This target is only added if
+<a class="reference internal" href="#cmake-GMX_BUILD_HELP"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_BUILD_HELP</span></code></a> is not <code class="docutils literal"><span class="pre">OFF</span></code>, and it is run automatically as part
+of the default <code class="docutils literal"><span class="pre">all</span></code> target.  See <a class="reference internal" href="#cmake-GMX_BUILD_HELP"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_BUILD_HELP</span></code></a>.
+All CMake code is in <code class="file docutils literal"><span class="pre">src/programs/</span></code>.</dd>
+<dt>cppcheck</dt>
+<dd>Runs <strong class="command">cppcheck</strong> with the flags used in Jenkins for all the source
+files.  This target is directly used by the Jenkins cppcheck job.
+All CMake code is in <code class="file docutils literal"><span class="pre">tests/CppCheck.cmake</span></code>.</dd>
+<dt>dep-graphs*</dt>
+<dd>Builds include dependency graphs for the source files using <strong class="command">dot</strong>
+from graphviz.
+All CMake code is in <code class="file docutils literal"><span class="pre">docs/doxygen/</span></code>.
+See <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a>.</dd>
+<dt>doxygen-*</dt>
+<dd>Targets that run Doxygen to generate the documentation.
+The <code class="docutils literal"><span class="pre">doxygen-all</span></code> target runs as part of the <code class="docutils literal"><span class="pre">webpage</span></code> target, which in
+turn runs as part of the Jenkins documentation job.
+All CMake code is in <code class="file docutils literal"><span class="pre">docs/doxygen/</span></code>.
+See <a class="reference internal" href="doxygen.html"><span class="doc">Using Doxygen</span></a>.</dd>
+<dt>install-guide</dt>
+<dd>Runs Sphinx to generate a plain-text INSTALL file for the source package.
+The files is generated at <code class="file docutils literal"><span class="pre">docs/install-guide/text/</span></code>, from where it
+gets put at the root of the source package by CPack.
+All CMake code is in <code class="file docutils literal"><span class="pre">docs/</span></code>.</dd>
+<dt>man</dt>
+<dd>Runs Sphinx to generate man pages for the programs.
+Internally, also runs the compiled <code class="file docutils literal"><span class="pre">gmx</span></code> executable to generate the
+input files for Sphinx.
+All CMake code is in <code class="file docutils literal"><span class="pre">docs/</span></code>.
+See <a class="reference internal" href="#cmake-GMX_BUILD_HELP"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_BUILD_HELP</span></code></a> for information on when the man pages are
+installed.</dd>
+<dt>manual</dt>
+<dd>Runs LaTeX to generate the reference PDF manual.
+All CMake code is in <code class="file docutils literal"><span class="pre">docs/manual/</span></code>.
+See <a class="reference internal" href="#cmake-GMX_BUILD_MANUAL"><code class="xref std std-cmake docutils literal"><span class="pre">GMX_BUILD_MANUAL</span></code></a>.</dd>
+<dt>package_source</dt>
+<dd>Standard target created by CPack that builds a source package.
+This target is used to generate the released source packages.</dd>
+<dt>test</dt>
+<dd>Standard target created by CTest that runs all the registered tests.
+Note that this does not build the test binaries, only runs them, so you need
+to first ensure that they are up-to-date.
+See <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a>.</dd>
+<dt>tests</dt>
+<dd>Builds all the binaries needed by the tests (but not <code class="docutils literal"><span class="pre">gmx</span></code>).
+See <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a>.</dd>
+<dt>webpage</dt>
+<dd>Collection target that runs the other documentation targets to generate the
+full set of HTML (and linked) documentaion.
+This target is used as part of the Jenkins documentation job.
+All CMake code is in <code class="file docutils literal"><span class="pre">docs/</span></code>.</dd>
+<dt>webpage-sphinx</dt>
+<dd>Runs Sphinx to generate most content for the HTML documentation (the set of
+web pages this developer guide is also part of).
+Internally, also runs the compiled <code class="file docutils literal"><span class="pre">gmx</span></code> executable to generate some
+input files for Sphinx.
+All CMake code is in <code class="file docutils literal"><span class="pre">docs/</span></code>.</dd>
+</dl>
+</div>
+<div class="section" id="passing-information-to-source-code">
+<h2>Passing information to source code<a class="headerlink" href="#passing-information-to-source-code" title="Permalink to this headline">¶</a></h2>
+<p>The build system uses a few different mechanisms to influence the compilation:</p>
+<ul>
+<li><p class="first">On the highest level, some CMake options select what files will be compiled.</p>
+</li>
+<li><p class="first">Some options are passed on the compiler command line using <code class="docutils literal"><span class="pre">-D</span></code> or
+equivalent, such that they are available in every compilation unit.  This
+should be used with care to keep the compiler command lines manageable.
+You can find the current set of such defines with</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git grep add_definitions
+</pre></div>
+</div>
+</li>
+<li><p class="first">A few header files are generated using CMake <code class="docutils literal"><span class="pre">configure_file()</span></code> and
+included in the desired source files.  These files must exist for the
+compilation to pass.  Only a few files use an <code class="docutils literal"><span class="pre">#ifdef</span> <span class="pre">HAVE_CONFIG_H</span></code> to
+protect against inclusion in case the define is not set; this is used in
+files that may get compiled outside the main build system.</p>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">buildinfo.h</span></code></dt>
+<dd><p class="first last">Contains various strings about the build environment, used mainly for
+outputting version information to log files and when requested.</p>
+</dd>
+<dt><code class="file docutils literal"><span class="pre">config.h</span></code></dt>
+<dd><p class="first last">Contains defines for conditional compilation within source files.</p>
+</dd>
+<dt><code class="file docutils literal"><span class="pre">gmxpre-config.h</span></code></dt>
+<dd><p class="first last">Included by <code class="file docutils literal"><span class="pre">gmxpre.h</span></code> as the first thing in every source file.
+Should only contain defines that are required before any other header for
+correct operation.  For example, defines that affect the behavior of system
+headers fall in this category.  See Doxygen documentation for
+<code class="file docutils literal"><span class="pre">gmxpre.h</span></code>.</p>
+</dd>
+</dl>
+<p>All the above files get generated in <code class="file docutils literal"><span class="pre">src/</span></code>.</p>
+<p>Additionally, the following file is generated by the build system:</p>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">baseversion-gen.c</span></code></dt>
+<dd><p class="first last">Provides definitions for declarations in <code class="file docutils literal"><span class="pre">baseversion-gen.h</span></code> for
+version info output.  The contents are generated either from Git version
+info, or from static version info if not building from a git repository.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Build system overview</a><ul>
+<li><a class="reference internal" href="#build-types">Build types</a></li>
+<li><a class="reference internal" href="#cmake-cache-variables">CMake cache variables</a><ul>
+<li><a class="reference internal" href="#compiler-flags">Compiler flags</a></li>
+<li><a class="reference internal" href="#variables-affecting-compilation-linking">Variables affecting compilation/linking</a></li>
+<li><a class="reference internal" href="#variables-affecting-the-all-target">Variables affecting the <code class="docutils literal"><span class="pre">all</span></code> target</a></li>
+<li><a class="reference internal" href="#variables-affecting-special-targets">Variables affecting special targets</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#external-libraries">External libraries</a></li>
+<li><a class="reference internal" href="#special-targets">Special targets</a></li>
+<li><a class="reference internal" href="#passing-information-to-source-code">Passing information to source code</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">Codebase overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="relocatable-binaries.html"
+                        title="next chapter">Relocatable binaries</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/build-system.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="relocatable-binaries.html" title="Relocatable binaries"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Codebase overview"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

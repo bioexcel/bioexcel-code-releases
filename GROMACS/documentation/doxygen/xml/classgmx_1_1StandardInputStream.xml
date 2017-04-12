@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1StandardInputStream" kind="class" prot="public">
+    <compoundname>gmx::StandardInputStream</compoundname>
+    <basecompoundref refid="classgmx_1_1TextInputStream" prot="public" virt="non-virtual">gmx::TextInputStream</basecompoundref>
+    <includes local="no">gromacs/utility/filestream.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1StandardInputStream_1a8e3dd5f3f24948bb4d385b89bad78132" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::StandardInputStream::isInteractive</definition>
+        <argsstring>() const </argsstring>
+        <name>isInteractive</name>
+        <briefdescription>
+<para>Returns whether <computeroutput>stdin</computeroutput> is an interactive terminal. </para>        </briefdescription>
+        <detaileddescription>
+<para>Only works on Unix, otherwise always returns true.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.h" line="80" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.cpp" bodystart="166" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1StandardInputStream_1aa5ad8913486249810956dd5919407045" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool gmx::StandardInputStream::readLine</definition>
+        <argsstring>(std::string *line)</argsstring>
+        <name>readLine</name>
+        <reimplements refid="classgmx_1_1TextInputStream_1addd5947a5b6f6065db02467d8f3c5137">readLine</reimplements>
+        <param>
+          <type>std::string *</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Reads a line (with newline included) from the stream. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String to receive the line. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><computeroutput>false</computeroutput> if nothing was read because the stream ended.</para></simplesect>
+On error or when <computeroutput>false</computeroutput> is returned, <computeroutput>line</computeroutput> will be empty. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.h" line="83" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.cpp" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1StandardInputStream_1a634299f6ae693bda232945e21de54fc7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void gmx::StandardInputStream::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <reimplements refid="classgmx_1_1TextInputStream_1ad8b5700fa45d4eb69105238d9fdfaca7">close</reimplements>
+        <briefdescription>
+<para>Closes the stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>It is not allowed to read from a stream after it has been closed. See <ref refid="classgmx_1_1TextOutputStream_1a8c624ae9199c3bfd37bc35a1beb7852f" kindref="member">TextOutputStream::close()</ref> for rationale for a <ref refid="classgmx_1_1StandardInputStream_1a634299f6ae693bda232945e21de54fc7" kindref="member">close()</ref> method separate from the destructor. For input, failures during close should be rare, but it is clearer to keep the interface symmetric. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.h" line="84" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.h" bodystart="84" bodyend="84"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgmx_1_1StandardInputStream_1a1a9d9111fdfa96726a06132927fbcbb1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1StandardInputStream" kindref="compound">StandardInputStream</ref> &amp;</type>
+        <definition>StandardInputStream &amp; gmx::StandardInputStream::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <briefdescription>
+<para>Returns a stream for accessing <computeroutput>stdin</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.h" line="91" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.cpp" bodystart="181" bodyend="185"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Text input stream implementation for reading from <computeroutput>stdin</computeroutput>. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> Implementations for the <ref refid="classgmx_1_1TextInputStream" kindref="compound">TextInputStream</ref> methods throw <ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref> on any I/O error. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="2060">
+        <label>gmx::TextInputStream</label>
+        <link refid="classgmx_1_1TextInputStream"/>
+      </node>
+      <node id="2059">
+        <label>gmx::StandardInputStream</label>
+        <link refid="classgmx_1_1StandardInputStream"/>
+        <childnode refid="2060" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2062">
+        <label>gmx::TextInputStream</label>
+        <link refid="classgmx_1_1TextInputStream"/>
+      </node>
+      <node id="2061">
+        <label>gmx::StandardInputStream</label>
+        <link refid="classgmx_1_1StandardInputStream"/>
+        <childnode refid="2062" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.h" line="71" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/filestream.h" bodystart="70" bodyend="92"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1StandardInputStream_1a634299f6ae693bda232945e21de54fc7" prot="public" virt="virtual"><scope>gmx::StandardInputStream</scope><name>close</name></member>
+      <member refid="classgmx_1_1StandardInputStream_1a1a9d9111fdfa96726a06132927fbcbb1" prot="public" virt="non-virtual"><scope>gmx::StandardInputStream</scope><name>instance</name></member>
+      <member refid="classgmx_1_1StandardInputStream_1a8e3dd5f3f24948bb4d385b89bad78132" prot="public" virt="non-virtual"><scope>gmx::StandardInputStream</scope><name>isInteractive</name></member>
+      <member refid="classgmx_1_1StandardInputStream_1aa5ad8913486249810956dd5919407045" prot="public" virt="virtual"><scope>gmx::StandardInputStream</scope><name>readLine</name></member>
+      <member refid="classgmx_1_1TextInputStream_1a652e61df91e62468038de5093975d78b" prot="public" virt="virtual"><scope>gmx::StandardInputStream</scope><name>~TextInputStream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,97 @@
+.. _gmx helix:
+
+gmx helix
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx helix [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`]
+              [:strong:`-cz` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+              [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-r0` :emphasis:`<int>`] [:strong:`-[no]q`] [:strong:`-[no]F`]
+              [:strong:`-[no]db`] [:strong:`-[no]ev`] [:strong:`-ahxstart` :emphasis:`<int>`] [:strong:`-ahxend` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx helix`` computes all kinds of helix properties. First, the peptide
+is checked to find the longest helical part, as determined by
+hydrogen bonds and phi/psi angles.
+That bit is fitted
+to an ideal helix around the *z*-axis and centered around the origin.
+Then the following properties are computed:
+
+ * Helix radius (file ``radius.xvg``). This is merely the
+   RMS deviation in two dimensions for all Calpha atoms.
+   it is calculated as sqrt((sum_i (x^2(i)+y^2(i)))/N) where N is the number
+   of backbone atoms. For an ideal helix the radius is 0.23 nm.
+ * Twist (file ``twist.xvg``). The average helical angle per
+   residue is calculated. For an alpha-helix it is 100 degrees,
+   for 3-10 helices it will be smaller, and
+   for 5-helices it will be larger.
+ * Rise per residue (file ``rise.xvg``). The helical rise per
+   residue is plotted as the difference in *z*-coordinate between Calpha
+   atoms. For an ideal helix, this is 0.15 nm.
+ * Total helix length (file ``len-ahx.xvg``). The total length
+   of the
+   helix in nm. This is simply the average rise (see above) times the
+   number of helical residues (see below).
+ * Helix dipole, backbone only (file ``dip-ahx.xvg``).
+ * RMS deviation from ideal helix, calculated for the Calpha
+   atoms only (file ``rms-ahx.xvg``).
+ * Average Calpha - Calpha dihedral angle (file ``phi-ahx.xvg``).
+ * Average phi and psi angles (file ``phipsi.xvg``).
+ * Ellipticity at 222 nm according to Hirst and Brooks.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-n`` [<.ndx>] (index.ndx)
+    Index file
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+
+Options to specify output files:
+
+``-cz`` [<.gro/.g96/...>] (zconf.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-r0`` <int> (1)
+    The first residue number in the sequence
+``-[no]q``  (no)
+    Check at every step which part of the sequence is helical
+``-[no]F``  (yes)
+    Toggle fit to a perfect helix
+``-[no]db``  (no)
+    Print debug info
+``-[no]ev``  (no)
+    Write a new 'trajectory' file for ED
+``-ahxstart`` <int> (0)
+    First residue in helix
+``-ahxend`` <int> (0)
+    Last residue in helix
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

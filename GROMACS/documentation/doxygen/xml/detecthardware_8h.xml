@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="detecthardware_8h" kind="file">
+    <compoundname>detecthardware.h</compoundname>
+    <includes local="no">cstdio</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="detecthardware_8cpp" local="yes">src/gromacs/hardware/detecthardware.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <includedby refid="nbnxn__ocl__data__mgmt_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</includedby>
+    <includedby refid="resource-division_8cpp" local="yes">src/programs/mdrun/resource-division.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <includedby refid="programs_2mdrun_2tests_2moduletest_8cpp" local="yes">src/programs/mdrun/tests/moduletest.cpp</includedby>
+    <incdepgraph>
+      <node id="9258">
+        <label>stdint.h</label>
+      </node>
+      <node id="9255">
+        <label>src/gromacs/hardware/detecthardware.h</label>
+        <link refid="detecthardware.h"/>
+        <childnode refid="9256" relation="include">
+        </childnode>
+        <childnode refid="9257" relation="include">
+        </childnode>
+      </node>
+      <node id="9256">
+        <label>cstdio</label>
+      </node>
+      <node id="9257">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="9258" relation="include">
+        </childnode>
+        <childnode refid="9259" relation="include">
+        </childnode>
+      </node>
+      <node id="9259">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="9263">
+        <label>src/programs/mdrun/tests/moduletest.cpp</label>
+        <link refid="programs_2mdrun_2tests_2moduletest_8cpp"/>
+      </node>
+      <node id="9260">
+        <label>src/gromacs/hardware/detecthardware.h</label>
+        <link refid="detecthardware.h"/>
+        <childnode refid="9261" relation="include">
+        </childnode>
+        <childnode refid="9262" relation="include">
+        </childnode>
+        <childnode refid="9263" relation="include">
+        </childnode>
+      </node>
+      <node id="9262">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="9261">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</label>
+        <link refid="nbnxn__ocl__data__mgmt_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="detecthardware_8h_1a24afa48845bc0b80412ce3ceaf1d40db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool gmx_multiple_gpu_per_node_supported</definition>
+        <argsstring>()</argsstring>
+        <name>gmx_multiple_gpu_per_node_supported</name>
+        <briefdescription>
+<para>Return whether mdrun can use more than one GPU per node. </para>        </briefdescription>
+        <detaileddescription>
+<para>The OpenCL implementation cannot use more than one GPU per node, for example. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="59" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="147" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1ae7b1974902962f9dc45793a2a53ca400" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool gmx_gpu_sharing_supported</definition>
+        <argsstring>()</argsstring>
+        <name>gmx_gpu_sharing_supported</name>
+        <briefdescription>
+<para>Return whether PP ranks can share a GPU. </para>        </briefdescription>
+        <detaileddescription>
+<para>The OpenCL implementation cannot share a GPU between ranks, for example. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="65" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1a2685520e4f51445aa30a32f385b5f1f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structgmx__hw__info__t" kindref="compound">gmx_hw_info_t</ref> *</type>
+        <definition>gmx_hw_info_t* gmx_detect_hardware</definition>
+        <argsstring>(FILE *fplog, const t_commrec *cr, gmx_bool bDetectGPUs)</argsstring>
+        <name>gmx_detect_hardware</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDetectGPUs</declname>
+        </param>
+        <briefdescription>
+<para>Run detection, consistency checks, and make available on all ranks. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine constructs the global hwinfo structure and returns a pointer to it. It will run a preamble before executing cpu and hardware checks, and then run consistency checks afterwards. The results will also be made available on all nodes. Caller is responsible for freeing this pointer. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="75" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="971" bodyend="1030"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1a41f0659608f43a8cb14074ded28e7bdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_print_detected_hardware</definition>
+        <argsstring>(FILE *fplog, const t_commrec *cr, const gmx_hw_info_t *hwinfo)</argsstring>
+        <name>gmx_print_detected_hardware</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__hw__info__t" kindref="compound">gmx_hw_info_t</ref> *</type>
+          <declname>hwinfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="81" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="1264" bodyend="1297"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1a8786566a96f5e1164cd9934620f93f1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_hardware_info_free</definition>
+        <argsstring>(gmx_hw_info_t *hwinfo)</argsstring>
+        <name>gmx_hardware_info_free</name>
+        <param>
+          <type><ref refid="structgmx__hw__info__t" kindref="compound">gmx_hw_info_t</ref> *</type>
+          <declname>hwinfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="84" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="1492" bodyend="1529"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1aaf6aae18636684c5c10d68a602b76d3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_parse_gpu_ids</definition>
+        <argsstring>(gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>gmx_parse_gpu_ids</name>
+        <param>
+          <type><ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="86" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="1320" bodyend="1364"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1adda07c8b56c66a468cf4136e44575690" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_select_gpu_ids</definition>
+        <argsstring>(FILE *fplog, const t_commrec *cr, const gmx_gpu_info_t *gpu_info, gmx_bool bForceUseGPU, gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>gmx_select_gpu_ids</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bForceUseGPU</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="88" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="1366" bodyend="1431"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1af8d3544682be0298fb16c51368ed678a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_check_hw_runconf_consistency</definition>
+        <argsstring>(FILE *fplog, const gmx_hw_info_t *hwinfo, const t_commrec *cr, const gmx_hw_opt_t *hw_opt, gmx_bool bUseGPU)</argsstring>
+        <name>gmx_check_hw_runconf_consistency</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__hw__info__t" kindref="compound">gmx_hw_info_t</ref> *</type>
+          <declname>hwinfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__hw__opt__t" kindref="compound">gmx_hw_opt_t</ref> *</type>
+          <declname>hw_opt</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bUseGPU</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="95" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="343" bodyend="557"/>
+      </memberdef>
+      <memberdef kind="function" id="detecthardware_8h_1ae4d5a96b5be4b10e8cf4fe5acf230dd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_count_gpu_dev_shared</definition>
+        <argsstring>(const gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>gmx_count_gpu_dev_shared</name>
+        <param>
+          <type>const <ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h" line="107" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.cpp" bodystart="566" bodyend="586"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/hardware/detecthardware.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="init_8h" kind="file">
+    <compoundname>init.h</compoundname>
+    <includedby refid="cmdlineinit_8cpp" local="yes">src/gromacs/commandline/cmdlineinit.cpp</includedby>
+    <includedby refid="init_8cpp" local="yes">src/gromacs/utility/init.cpp</includedby>
+    <includedby refid="utility_8h" local="yes">src/gromacs/utility.h</includedby>
+    <invincdepgraph>
+      <node id="23583">
+        <label>src/gromacs/utility.h</label>
+        <link refid="utility_8h"/>
+      </node>
+      <node id="23580">
+        <label>src/gromacs/utility/init.h</label>
+        <link refid="init.h"/>
+        <childnode refid="23581" relation="include">
+        </childnode>
+        <childnode refid="23582" relation="include">
+        </childnode>
+        <childnode refid="23583" relation="include">
+        </childnode>
+      </node>
+      <node id="23581">
+        <label>src/gromacs/commandline/cmdlineinit.cpp</label>
+        <link refid="cmdlineinit_8cpp"/>
+      </node>
+      <node id="23582">
+        <label>src/gromacs/utility/init.cpp</label>
+        <link refid="init_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+    <briefdescription>
+<para>Declares functions for initializing the GROMACS library. </para>    </briefdescription>
+    <detaileddescription>
+<para>Currently, only MPI initialization/finalization management is required, and only if external MPI support is enabled.</para><para>If MPI is already initialized, we should not call MPI_Init() or MPI_Finalize(). This management object permits GROMACS test code to nest calls to functions that might normally implement a stand-alone MPI-using tool. It also permits GROMACS code to be called from code that has already initialized MPI and needs that environment to work and persist after GROMACS code returns (e.g. GROMACS tests, external libraries that call GROMACS code).</para><para>It does so by maintaining a counter of the number of MPI initializations, and only calling MPI_Init() or MPI_Finalize when it is safe (ie. when the counter is at zero).</para><para>Thread-MPI initialization and finalization for mdrun is all managed in runner.c.</para><para><simplesect kind="author"><para>Teemu Murtola <ulink url="mailto:teemu.murtola@gmail.com">teemu.murtola@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/utility/init.h"/>
+  </compounddef>
+</doxygen>

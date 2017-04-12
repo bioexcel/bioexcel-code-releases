@@ -1,0 +1,751 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="gmxfio_8cpp" kind="file">
+    <compoundname>gmxfio.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="gmxfio_8h" local="yes">gmxfio.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">cerrno</includes>
+    <includes local="no">cstdio</includes>
+    <includes local="no">cstring</includes>
+    <includes local="yes">thread_mpi/threads.h</includes>
+    <includes refid="filetypes_8h" local="yes">gromacs/fileio/filetypes.h</includes>
+    <includes refid="md5_8h" local="yes">gromacs/fileio/md5.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="futil_8h" local="yes">gromacs/utility/futil.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="gmxfio-impl_8h" local="yes">gmxfio-impl.h</includes>
+    <incdepgraph>
+      <node id="4018">
+        <label>stdarg.h</label>
+      </node>
+      <node id="4016">
+        <label>thread_mpi/threads.h</label>
+      </node>
+      <node id="4025">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="4026" relation="include">
+        </childnode>
+        <childnode refid="4020" relation="include">
+        </childnode>
+      </node>
+      <node id="4017">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="4018" relation="include">
+        </childnode>
+        <childnode refid="4019" relation="include">
+        </childnode>
+        <childnode refid="4020" relation="include">
+        </childnode>
+      </node>
+      <node id="4021">
+        <label>stdint.h</label>
+      </node>
+      <node id="4010">
+        <label>src/gromacs/fileio/gmxfio.cpp</label>
+        <link refid="gmxfio.cpp"/>
+        <childnode refid="4011" relation="include">
+        </childnode>
+        <childnode refid="4012" relation="include">
+        </childnode>
+        <childnode refid="4013" relation="include">
+        </childnode>
+        <childnode refid="4014" relation="include">
+        </childnode>
+        <childnode refid="4015" relation="include">
+        </childnode>
+        <childnode refid="4016" relation="include">
+        </childnode>
+        <childnode refid="4017" relation="include">
+        </childnode>
+        <childnode refid="4023" relation="include">
+        </childnode>
+        <childnode refid="4025" relation="include">
+        </childnode>
+        <childnode refid="4027" relation="include">
+        </childnode>
+      </node>
+      <node id="4011">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="4026">
+        <label>stddef.h</label>
+      </node>
+      <node id="4024">
+        <label>limits.h</label>
+      </node>
+      <node id="4014">
+        <label>cstdio</label>
+      </node>
+      <node id="4027">
+        <label>gmxfio-impl.h</label>
+        <link refid="gmxfio-impl_8h"/>
+        <childnode refid="4028" relation="include">
+        </childnode>
+      </node>
+      <node id="4028">
+        <label>thread_mpi/lock.h</label>
+      </node>
+      <node id="4013">
+        <label>cerrno</label>
+      </node>
+      <node id="4023">
+        <label>gromacs/utility/futil.h</label>
+        <link refid="futil_8h"/>
+        <childnode refid="4024" relation="include">
+        </childnode>
+        <childnode refid="4019" relation="include">
+        </childnode>
+        <childnode refid="4020" relation="include">
+        </childnode>
+      </node>
+      <node id="4020">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="4021" relation="include">
+        </childnode>
+        <childnode refid="4022" relation="include">
+        </childnode>
+      </node>
+      <node id="4012">
+        <label>config.h</label>
+      </node>
+      <node id="4019">
+        <label>stdio.h</label>
+      </node>
+      <node id="4015">
+        <label>cstring</label>
+      </node>
+      <node id="4022">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="gmxfio_8cpp_1ac0cbdd746ffa6a363b18524b7b8efa1d" prot="public" static="no">
+        <name>CPT_CHK_LEN</name>
+        <initializer>1048576</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="461" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="gmxfio_8cpp_1a472135ec77411e033d41594805b028c5" prot="public" static="yes" mutable="no">
+        <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+        <definition>t_fileio* open_files</definition>
+        <argsstring></argsstring>
+        <name>open_files</name>
+        <initializer>= NULL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="70" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="gmxfio_8cpp_1ab11edc6f070196c3ad1ae6bd859d49bc" prot="public" static="yes" mutable="no">
+        <type>tMPI_Thread_mutex_t</type>
+        <definition>tMPI_Thread_mutex_t open_file_mutex</definition>
+        <argsstring></argsstring>
+        <name>open_file_mutex</name>
+        <initializer>= TMPI_THREAD_MUTEX_INITIALIZER</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="82" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gmxfio_8cpp_1aeba7c84f1c32b37c65fabba82cd2db1b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int gmx_fio_int_flush</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_int_flush</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="90" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="90" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a6b64e194a9f690f2ae27aa5495d01998" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_fio_lock</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_lock</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+<para>lock the mutex associated with a fio </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="104" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="104" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1af9a825270c1e4deeb55fca0b1146e927" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_fio_unlock</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_unlock</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+<para>unlock the mutex associated with a fio </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="109" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="109" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a5163d45ef818a36c42432ad3f0c89c6c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx_fio_make_dummy</definition>
+        <argsstring>(void)</argsstring>
+        <name>gmx_fio_make_dummy</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="115" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="115" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a26db87a60a824a95ba987cbf3658cf2d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx_fio_insert</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_insert</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="142" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="142" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a8e6bbe6b59cbd1cf159adaa80313667c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx_fio_remove</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_remove</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="182" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="182" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a1d95c4bd3c12fd476406cdb310c9c777" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+        <definition>static t_fileio* gmx_fio_get_first</definition>
+        <argsstring>(void)</argsstring>
+        <name>gmx_fio_get_first</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="203" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="203" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a5b697432ed4fc7b43271edd69542cfd8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+        <definition>static t_fileio* gmx_fio_get_next</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_get_next</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="234" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="234" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1afb92265165c6266a7343c518e18a4ef5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx_fio_stop_getting_next</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_stop_getting_next</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="255" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="255" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a3d6f5bd4e86ec17ed43c055fa9d76cc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+        <definition>t_fileio* gmx_fio_open</definition>
+        <argsstring>(const char *fn, const char *mode)</argsstring>
+        <name>gmx_fio_open</name>
+        <param>
+          <type>const char *</type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="269" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="269" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a81431167ab86ced4af3c77d3ec5ba501" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int gmx_fio_close_locked</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_close_locked</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="364" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="364" bodyend="381"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1abc6bfdf4cdd3bf88675b78ff82051102" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_close</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_close</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="383" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="383" bodyend="403"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a2aea88b791c737294bb63c40b15d2cb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_fp_close</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_fp_close</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="406" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="406" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a5b4c13181b841c040d4b22a952c977ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FILE *</type>
+        <definition>FILE* gmx_fio_fopen</definition>
+        <argsstring>(const char *fn, const char *mode)</argsstring>
+        <name>gmx_fio_fopen</name>
+        <param>
+          <type>const char *</type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="420" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="420" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a0dbd6bfed83abb64d1cf7d1025c0707e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_fclose</definition>
+        <argsstring>(FILE *fp)</argsstring>
+        <name>gmx_fio_fclose</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="433" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="433" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a976f663d86e051f6df1143a50f1db3c8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int gmx_fio_int_get_file_md5</definition>
+        <argsstring>(t_fileio *fio, gmx_off_t offset, unsigned char digest[])</argsstring>
+        <name>gmx_fio_int_get_file_md5</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <param>
+          <type><ref refid="futil_8h_1a64ea88d267946ddd697e3f64f27b2096" kindref="member">gmx_off_t</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>digest</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="457" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="457" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a1f94d3805ea429c5ba274fd980208248" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_get_file_md5</definition>
+        <argsstring>(t_fileio *fio, gmx_off_t offset, unsigned char digest[])</argsstring>
+        <name>gmx_fio_get_file_md5</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <param>
+          <type><ref refid="futil_8h_1a64ea88d267946ddd697e3f64f27b2096" kindref="member">gmx_off_t</ref></type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>digest</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="550" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="550" bodyend="560"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a369bbc410c1e3be4030f828c520ebd7c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int gmx_fio_int_get_file_position</definition>
+        <argsstring>(t_fileio *fio, gmx_off_t *offset)</argsstring>
+        <name>gmx_fio_int_get_file_position</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <param>
+          <type><ref refid="futil_8h_1a64ea88d267946ddd697e3f64f27b2096" kindref="member">gmx_off_t</ref> *</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="563" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="563" bodyend="585"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a05f711d05038962b399ba07d46eaee4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_get_output_file_positions</definition>
+        <argsstring>(gmx_file_position_t **p_outputfiles, int *p_nfiles)</argsstring>
+        <name>gmx_fio_get_output_file_positions</name>
+        <param>
+          <type><ref refid="structgmx__file__position__t" kindref="compound">gmx_file_position_t</ref> **</type>
+          <declname>p_outputfiles</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>p_nfiles</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="587" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="587" bodyend="633"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1ada79f779c70a3d456615e5396b6edf76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* gmx_fio_getname</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_getname</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="636" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="636" bodyend="644"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1ab5b64b1d5303ed0dbf32f1cb05ebe3c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_getftp</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_getftp</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="646" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="646" bodyend="655"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1ad08c704fdf20a26d1f5b2a2e3f506a62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_fio_rewind</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_rewind</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="657" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="657" bodyend="672"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1ae4ef0f2798a947851420ef53507e5254" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_flush</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_flush</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="675" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="675" bodyend="684"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1abc207e92ea3c66f9c6b477485058b2ac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int gmx_fio_int_fsync</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_int_fsync</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="688" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="688" bodyend="697"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a241a621f9891dae1d28d19618baf5ad3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_fsync</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_fsync</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="700" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="700" bodyend="709"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a544cf588e47716cbb8ab6f4c312b10e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+        <definition>t_fileio* gmx_fio_all_output_fsync</definition>
+        <argsstring>(void)</argsstring>
+        <name>gmx_fio_all_output_fsync</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="713" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="713" bodyend="745"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a09e5729e0ed3cc26b5f85f9572bc74c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="futil_8h_1a64ea88d267946ddd697e3f64f27b2096" kindref="member">gmx_off_t</ref></type>
+        <definition>gmx_off_t gmx_fio_ftell</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_ftell</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="748" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="748" bodyend="759"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a29ec98971f4b9810bebc2fc48caa40ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fio_seek</definition>
+        <argsstring>(t_fileio *fio, gmx_off_t fpos)</argsstring>
+        <name>gmx_fio_seek</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <param>
+          <type><ref refid="futil_8h_1a64ea88d267946ddd697e3f64f27b2096" kindref="member">gmx_off_t</ref></type>
+          <declname>fpos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="761" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="761" bodyend="777"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1adddaa3e3d1448e70bbd6262c2fdd7d2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FILE *</type>
+        <definition>FILE* gmx_fio_getfp</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_getfp</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="779" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="779" bodyend="790"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a07c491f426eadf7ba2209af89f337c73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool gmx_fio_getread</definition>
+        <argsstring>(t_fileio *fio)</argsstring>
+        <name>gmx_fio_getread</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="792" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="792" bodyend="801"/>
+      </memberdef>
+      <memberdef kind="function" id="gmxfio_8cpp_1a80518450088f004804525d22367fcb46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int xtc_seek_time</definition>
+        <argsstring>(t_fileio *fio, real time, int natoms, gmx_bool bSeekForwardOnly)</argsstring>
+        <name>xtc_seek_time</name>
+        <param>
+          <type><ref refid="structt__fileio" kindref="compound">t_fileio</ref> *</type>
+          <declname>fio</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bSeekForwardOnly</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" line="803" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp" bodystart="803" bodyend="812"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fileio/gmxfio.cpp"/>
+  </compounddef>
+</doxygen>

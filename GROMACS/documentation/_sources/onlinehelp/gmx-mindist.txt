@@ -1,0 +1,109 @@
+.. _gmx mindist:
+
+gmx mindist
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx mindist [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                [:strong:`-od` :emphasis:`[<.xvg>]`] [:strong:`-on` :emphasis:`[<.xvg>]`] [:strong:`-o` :emphasis:`[<.out>]`]
+                [:strong:`-ox` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-or` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`]
+                [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-[no]w`]
+                [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]matrix`] [:strong:`-[no]max`] [:strong:`-d` :emphasis:`<real>`]
+                [:strong:`-[no]group`] [:strong:`-[no]pi`] [:strong:`-[no]split`] [:strong:`-ng` :emphasis:`<int>`]
+                [:strong:`-[no]pbc`] [:strong:`-[no]respertime`] [:strong:`-[no]printresname`]
+
+Description
+-----------
+
+``gmx mindist`` computes the distance between one group and a number of
+other groups. Both the minimum distance
+(between any pair of atoms from the respective groups)
+and the number of contacts within a given
+distance are written to two separate output files.
+With the ``-group`` option a contact of an atom in another group
+with multiple atoms in the first group is counted as one contact
+instead of as multiple contacts.
+With ``-or``, minimum distances to each residue in the first
+group are determined and plotted as a function of residue number.
+
+With option ``-pi`` the minimum distance of a group to its
+periodic image is plotted. This is useful for checking if a protein
+has seen its periodic image during a simulation. Only one shift in
+each direction is considered, giving a total of 26 shifts.
+It also plots the maximum distance within the group and the lengths
+of the three box vectors.
+
+Also :doc:`gmx distance <gmx-distance>` and :doc:`gmx pairdist <gmx-pairdist>` calculate distances.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr) (Optional)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-od`` [<.xvg>] (mindist.xvg)
+    xvgr/xmgr file
+``-on`` [<.xvg>] (numcont.xvg) (Optional)
+    xvgr/xmgr file
+``-o`` [<.out>] (atm-pair.out) (Optional)
+    Generic output file
+``-ox`` [<.xtc/.trr/...>] (mindist.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-or`` [<.xvg>] (mindistres.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]matrix``  (no)
+    Calculate half a matrix of group-group distances
+``-[no]max``  (no)
+    Calculate *maximum* distance instead of minimum
+``-d`` <real> (0.6)
+    Distance for contacts
+``-[no]group``  (no)
+    Count contacts with multiple atoms in the first group as one
+``-[no]pi``  (no)
+    Calculate minimum distance with periodic images
+``-[no]split``  (no)
+    Split graph where time is zero
+``-ng`` <int> (1)
+    Number of secondary groups to compute distance to a central group
+``-[no]pbc``  (yes)
+    Take periodic boundary conditions into account
+``-[no]respertime``  (no)
+    When writing per-residue distances, write distance for each time point
+``-[no]printresname``  (no)
+    Write residue names
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

@@ -1,0 +1,768 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="runner_8cpp" kind="file">
+    <compoundname>runner.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="runner_8h" local="yes">runner.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">signal.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="filenm_8h" local="yes">gromacs/commandline/filenm.h</includes>
+    <includes refid="domdec_8h" local="yes">gromacs/domdec/domdec.h</includes>
+    <includes refid="domdec__struct_8h" local="yes">gromacs/domdec/domdec_struct.h</includes>
+    <includes refid="edsam_8h" local="yes">gromacs/essentialdynamics/edsam.h</includes>
+    <includes refid="pme_8h" local="yes">gromacs/ewald/pme.h</includes>
+    <includes refid="checkpoint_8h" local="yes">gromacs/fileio/checkpoint.h</includes>
+    <includes refid="oenv_8h" local="yes">gromacs/fileio/oenv.h</includes>
+    <includes refid="tpxio_8h" local="yes">gromacs/fileio/tpxio.h</includes>
+    <includes refid="md__logging_8h" local="yes">gromacs/gmxlib/md_logging.h</includes>
+    <includes refid="network_8h" local="yes">gromacs/gmxlib/network.h</includes>
+    <includes refid="gpu__utils_8h" local="yes">gromacs/gpu_utils/gpu_utils.h</includes>
+    <includes refid="cpuinfo_8h" local="yes">gromacs/hardware/cpuinfo.h</includes>
+    <includes refid="detecthardware_8h" local="yes">gromacs/hardware/detecthardware.h</includes>
+    <includes refid="disre_8h" local="yes">gromacs/listed-forces/disre.h</includes>
+    <includes refid="orires_8h" local="yes">gromacs/listed-forces/orires.h</includes>
+    <includes refid="calculate-ewald-splitting-coefficient_8h" local="yes">gromacs/math/calculate-ewald-splitting-coefficient.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="utilities_8h" local="yes">gromacs/math/utilities.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="calc__verletbuf_8h" local="yes">gromacs/mdlib/calc_verletbuf.h</includes>
+    <includes refid="constr_8h" local="yes">gromacs/mdlib/constr.h</includes>
+    <includes refid="force_8h" local="yes">gromacs/mdlib/force.h</includes>
+    <includes refid="mdlib_2forcerec_8h" local="yes">gromacs/mdlib/forcerec.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="integrator_8h" local="yes">gromacs/mdlib/integrator.h</includes>
+    <includes refid="main_8h" local="yes">gromacs/mdlib/main.h</includes>
+    <includes refid="md__support_8h" local="yes">gromacs/mdlib/md_support.h</includes>
+    <includes refid="mdatoms_8h" local="yes">gromacs/mdlib/mdatoms.h</includes>
+    <includes refid="mdrun_8h" local="yes">gromacs/mdlib/mdrun.h</includes>
+    <includes refid="minimize_8h" local="yes">gromacs/mdlib/minimize.h</includes>
+    <includes refid="nbnxn__search_8h" local="yes">gromacs/mdlib/nbnxn_search.h</includes>
+    <includes refid="qmmm_8h" local="yes">gromacs/mdlib/qmmm.h</includes>
+    <includes refid="sighandler_8h" local="yes">gromacs/mdlib/sighandler.h</includes>
+    <includes refid="sim__util_8h" local="yes">gromacs/mdlib/sim_util.h</includes>
+    <includes refid="tpi_8h" local="yes">gromacs/mdlib/tpi.h</includes>
+    <includes refid="threadaffinity_8h" local="yes">gromacs/mdrunutility/threadaffinity.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="state_8h" local="yes">gromacs/mdtypes/state.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="pull_8h" local="yes">gromacs/pulling/pull.h</includes>
+    <includes refid="pull__rotation_8h" local="yes">gromacs/pulling/pull_rotation.h</includes>
+    <includes refid="wallcycle_8h" local="yes">gromacs/timing/wallcycle.h</includes>
+    <includes refid="mtop__util_8h" local="yes">gromacs/topology/mtop_util.h</includes>
+    <includes refid="trajectoryframe_8h" local="yes">gromacs/trajectory/trajectoryframe.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="exceptions_8h" local="yes">gromacs/utility/exceptions.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="gmxmpi_8h" local="yes">gromacs/utility/gmxmpi.h</includes>
+    <includes refid="pleasecite_8h" local="yes">gromacs/utility/pleasecite.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="deform_8h" local="yes">deform.h</includes>
+    <includes refid="md_8h" local="yes">md.h</includes>
+    <includes refid="membed_8h" local="yes">membed.h</includes>
+    <includes refid="repl__ex_8h" local="yes">repl_ex.h</includes>
+    <includes refid="resource-division_8h" local="yes">resource-division.h</includes>
+    <incdepgraph>
+      <node id="24801">
+        <label>stdarg.h</label>
+      </node>
+      <node id="24788">
+        <label>gromacs/pulling/pull_internal.h</label>
+        <link refid="pull__internal_8h"/>
+        <childnode refid="24758" relation="include">
+        </childnode>
+        <childnode refid="24787" relation="include">
+        </childnode>
+        <childnode refid="24769" relation="include">
+        </childnode>
+      </node>
+      <node id="24798">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="24770">
+        <label>gromacs/essentialdynamics/edsam.h</label>
+        <link refid="edsam_8h"/>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24764">
+        <label>gromacs/commandline/filenm.h</label>
+        <link refid="filenm_8h"/>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24759">
+        <label>assert.h</label>
+      </node>
+      <node id="24789">
+        <label>gromacs/pulling/pull_rotation.h</label>
+        <link refid="pull__rotation_8h"/>
+      </node>
+      <node id="24781">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="24782" relation="include">
+        </childnode>
+        <childnode refid="24783" relation="include">
+        </childnode>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24783">
+        <label>cstdint</label>
+      </node>
+      <node id="24803">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="24804" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24800">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="24801" relation="include">
+        </childnode>
+        <childnode refid="24766" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24765">
+        <label>gromacs/domdec/domdec.h</label>
+        <link refid="domdec_8h"/>
+        <childnode refid="24766" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24755">
+        <label>stdint.h</label>
+      </node>
+      <node id="24761">
+        <label>stdlib.h</label>
+      </node>
+      <node id="24751">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="24790">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="24766" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24782">
+        <label>cmath</label>
+      </node>
+      <node id="24784">
+        <label>gromacs/mdrunutility/threadaffinity.h</label>
+        <link refid="threadaffinity_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24776">
+        <label>string</label>
+      </node>
+      <node id="24750">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner.cpp"/>
+        <childnode refid="24751" relation="include">
+        </childnode>
+        <childnode refid="24752" relation="include">
+        </childnode>
+        <childnode refid="24758" relation="include">
+        </childnode>
+        <childnode refid="24759" relation="include">
+        </childnode>
+        <childnode refid="24760" relation="include">
+        </childnode>
+        <childnode refid="24761" relation="include">
+        </childnode>
+        <childnode refid="24762" relation="include">
+        </childnode>
+        <childnode refid="24763" relation="include">
+        </childnode>
+        <childnode refid="24764" relation="include">
+        </childnode>
+        <childnode refid="24765" relation="include">
+        </childnode>
+        <childnode refid="24767" relation="include">
+        </childnode>
+        <childnode refid="24770" relation="include">
+        </childnode>
+        <childnode refid="24771" relation="include">
+        </childnode>
+        <childnode refid="24772" relation="include">
+        </childnode>
+        <childnode refid="24773" relation="include">
+        </childnode>
+        <childnode refid="24778" relation="include">
+        </childnode>
+        <childnode refid="24779" relation="include">
+        </childnode>
+        <childnode refid="24780" relation="include">
+        </childnode>
+        <childnode refid="24781" relation="include">
+        </childnode>
+        <childnode refid="24784" relation="include">
+        </childnode>
+        <childnode refid="24785" relation="include">
+        </childnode>
+        <childnode refid="24786" relation="include">
+        </childnode>
+        <childnode refid="24789" relation="include">
+        </childnode>
+        <childnode refid="24790" relation="include">
+        </childnode>
+        <childnode refid="24791" relation="include">
+        </childnode>
+        <childnode refid="24800" relation="include">
+        </childnode>
+        <childnode refid="24799" relation="include">
+        </childnode>
+        <childnode refid="24769" relation="include">
+        </childnode>
+        <childnode refid="24802" relation="include">
+        </childnode>
+        <childnode refid="24803" relation="include">
+        </childnode>
+        <childnode refid="24805" relation="include">
+        </childnode>
+      </node>
+      <node id="24786">
+        <label>gromacs/pulling/pull.h</label>
+        <link refid="pull_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+        <childnode refid="24787" relation="include">
+        </childnode>
+        <childnode refid="24788" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24774">
+        <label>map</label>
+      </node>
+      <node id="24767">
+        <label>gromacs/domdec/domdec_struct.h</label>
+        <link refid="domdec__struct_8h"/>
+        <childnode refid="24768" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24769" relation="include">
+        </childnode>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24793">
+        <label>exception</label>
+      </node>
+      <node id="24804">
+        <label>stddef.h</label>
+      </node>
+      <node id="24791">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+        <childnode refid="24792" relation="include">
+        </childnode>
+        <childnode refid="24793" relation="include">
+        </childnode>
+        <childnode refid="24794" relation="include">
+        </childnode>
+        <childnode refid="24776" relation="include">
+        </childnode>
+        <childnode refid="24795" relation="include">
+        </childnode>
+        <childnode refid="24796" relation="include">
+        </childnode>
+        <childnode refid="24777" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24797" relation="include">
+        </childnode>
+        <childnode refid="24798" relation="include">
+        </childnode>
+        <childnode refid="24799" relation="include">
+        </childnode>
+      </node>
+      <node id="24773">
+        <label>gromacs/hardware/cpuinfo.h</label>
+        <link refid="cpuinfo_8h"/>
+        <childnode refid="24774" relation="include">
+        </childnode>
+        <childnode refid="24775" relation="include">
+        </childnode>
+        <childnode refid="24776" relation="include">
+        </childnode>
+        <childnode refid="24777" relation="include">
+        </childnode>
+      </node>
+      <node id="24778">
+        <label>gromacs/listed-forces/disre.h</label>
+        <link refid="disre_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24757">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="24762">
+        <label>string.h</label>
+      </node>
+      <node id="24753">
+        <label>cstdio</label>
+      </node>
+      <node id="24799">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24798" relation="include">
+        </childnode>
+      </node>
+      <node id="24772">
+        <label>gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24779">
+        <label>gromacs/listed-forces/orires.h</label>
+        <link refid="orires_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+      </node>
+      <node id="24777">
+        <label>vector</label>
+      </node>
+      <node id="24760">
+        <label>signal.h</label>
+      </node>
+      <node id="24797">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="24794" relation="include">
+        </childnode>
+      </node>
+      <node id="24792">
+        <label>cstdlib</label>
+      </node>
+      <node id="24805">
+        <label>md.h</label>
+        <link refid="md_8h"/>
+      </node>
+      <node id="24752">
+        <label>runner.h</label>
+        <link refid="runner_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24768">
+        <label>cstddef</label>
+      </node>
+      <node id="24785">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="24754" relation="include">
+        </childnode>
+      </node>
+      <node id="24754">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="24755" relation="include">
+        </childnode>
+        <childnode refid="24756" relation="include">
+        </childnode>
+      </node>
+      <node id="24771">
+        <label>gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="24766" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24795">
+        <label>type_traits</label>
+      </node>
+      <node id="24775">
+        <label>set</label>
+      </node>
+      <node id="24758">
+        <label>config.h</label>
+      </node>
+      <node id="24802">
+        <label>gromacs/utility/pleasecite.h</label>
+        <link refid="pleasecite_8h"/>
+        <childnode refid="24753" relation="include">
+        </childnode>
+      </node>
+      <node id="24763">
+        <label>algorithm</label>
+      </node>
+      <node id="24769">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="24758" relation="include">
+        </childnode>
+      </node>
+      <node id="24787">
+        <label>gromacs/mdtypes/pull-params.h</label>
+        <link refid="pull-params_8h"/>
+        <childnode refid="24785" relation="include">
+        </childnode>
+        <childnode refid="24754" relation="include">
+        </childnode>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24766">
+        <label>stdio.h</label>
+      </node>
+      <node id="24780">
+        <label>gromacs/math/calculate-ewald-splitting-coefficient.h</label>
+        <link refid="calculate-ewald-splitting-coefficient_8h"/>
+        <childnode refid="24757" relation="include">
+        </childnode>
+      </node>
+      <node id="24794">
+        <label>memory</label>
+      </node>
+      <node id="24756">
+        <label>inttypes.h</label>
+      </node>
+      <node id="24796">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="runner_8cpp_1aa7bb25f96f0e989b4b7c45d407a1b63c" prot="public" static="no">
+        <name>NNSTL</name>
+        <initializer>sizeof(<ref refid="runner_8cpp_1a9195aab8a873fcea20c8d6922ea60ca0" kindref="member">nstlist_try</ref>)/sizeof(<ref refid="runner_8cpp_1a9195aab8a873fcea20c8d6922ea60ca0" kindref="member">nstlist_try</ref>[0])</initializer>
+        <briefdescription>
+<para>Number of elements in the neighborsearch list trials. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="306" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="306" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="runner_8cpp_1af306bc580320e345b7fa518562fae356" prot="public" static="no" mutable="no">
+        <type>gmx_int64_t</type>
+        <definition>gmx_int64_t deform_init_init_step_tpx</definition>
+        <argsstring></argsstring>
+        <name>deform_init_init_step_tpx</name>
+        <briefdescription>
+<para>First step used in pressure scaling. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="122" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1a60d8123eae41fb6d1b3f6517e6a34d86" prot="public" static="no" mutable="no">
+        <type>matrix</type>
+        <definition>matrix deform_init_box_tpx</definition>
+        <argsstring></argsstring>
+        <name>deform_init_box_tpx</name>
+        <briefdescription>
+<para>Initial box for pressure scaling. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="124" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1ac66d5235ad92c0f710ad2b942ec2ac26" prot="public" static="no" mutable="no">
+        <type>tMPI_Thread_mutex_t</type>
+        <definition>tMPI_Thread_mutex_t deform_init_box_mutex</definition>
+        <argsstring></argsstring>
+        <name>deform_init_box_mutex</name>
+        <initializer>= TMPI_THREAD_MUTEX_INITIALIZER</initializer>
+        <briefdescription>
+<para>MPI variable for use in pressure scaling. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="126" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1a970ddbb74e9928c5a958532c832d122b" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int nbnxnReferenceNstlist</definition>
+        <argsstring></argsstring>
+        <name>nbnxnReferenceNstlist</name>
+        <initializer>= 10</initializer>
+        <briefdescription>
+<para>Cost of non-bonded kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para>We determine the extra cost of the non-bonded kernels compared to a reference nstlist value of 10 (which is the default in grompp). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="302" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1a9195aab8a873fcea20c8d6922ea60ca0" prot="public" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int nstlist_try[]</definition>
+        <argsstring>[]</argsstring>
+        <name>nstlist_try</name>
+        <initializer>= { 20, 25, 40 }</initializer>
+        <briefdescription>
+<para>The values to try when switching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="304" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="304" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1a9abe33db3ec00be48e110fd279e6ce17" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float nbnxn_cpu_listfac_ok</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_cpu_listfac_ok</name>
+        <initializer>= 1.05</initializer>
+        <briefdescription>
+<para>Max OK performance ratio beween force calc and neighbor searching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="318" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="318" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1af3c34c27d41f941bb7b9237a9cfbb43b" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float nbnxn_cpu_listfac_max</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_cpu_listfac_max</name>
+        <initializer>= 1.09</initializer>
+        <briefdescription>
+<para>Too high performance ratio beween force calc and neighbor searching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="320" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="320" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1abdb39ad97f3c121b91caac1545ff6f92" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float nbnxn_knl_listfac_ok</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_knl_listfac_ok</name>
+        <initializer>= 1.22</initializer>
+        <briefdescription>
+<para>Max OK performance ratio beween force calc and neighbor searching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="323" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="323" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1ac73f5864a061700937dba84d33a86e71" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float nbnxn_knl_listfac_max</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_knl_listfac_max</name>
+        <initializer>= 1.3</initializer>
+        <briefdescription>
+<para>Too high performance ratio beween force calc and neighbor searching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="325" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="325" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1a925ed449e31844832b0243c7fbd5c492" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float nbnxn_gpu_listfac_ok</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_gpu_listfac_ok</name>
+        <initializer>= 1.20</initializer>
+        <briefdescription>
+<para>Max OK performance ratio beween force calc and neighbor searching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="328" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="328" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="runner_8cpp_1ad7ad71998af11e7b0c1eb959a4db4b31" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float nbnxn_gpu_listfac_max</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_gpu_listfac_max</name>
+        <initializer>= 1.30</initializer>
+        <briefdescription>
+<para>Too high performance ratio beween force calc and neighbor searching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="330" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="runner_8cpp_1a5513321210cfa9da8faa5623badaad45" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void increase_nstlist</definition>
+        <argsstring>(FILE *fp, t_commrec *cr, t_inputrec *ir, int nstlist_cmdline, const gmx_mtop_t *mtop, matrix box, gmx_bool bGPU, const gmx::CpuInfo &amp;cpuinfo)</argsstring>
+        <name>increase_nstlist</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nstlist_cmdline</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bGPU</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1CpuInfo" kindref="compound">gmx::CpuInfo</ref> &amp;</type>
+          <declname>cpuinfo</declname>
+        </param>
+        <briefdescription>
+<para>Try to increase nstlist when using the Verlet cut-off scheme. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="333" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="333" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="runner_8cpp_1ab5791e0ecf6ed7158a3d8f83af91caec" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void prepare_verlet_scheme</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, t_inputrec *ir, int nstlist_cmdline, const gmx_mtop_t *mtop, matrix box, gmx_bool bUseGPU, const gmx::CpuInfo &amp;cpuinfo)</argsstring>
+        <name>prepare_verlet_scheme</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nstlist_cmdline</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bUseGPU</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1CpuInfo" kindref="compound">gmx::CpuInfo</ref> &amp;</type>
+          <declname>cpuinfo</declname>
+        </param>
+        <briefdescription>
+<para>Initialize variables for Verlet scheme simulation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="545" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="545" bodyend="594"/>
+      </memberdef>
+      <memberdef kind="function" id="runner_8cpp_1ae8d4da9f11b7d78c21b1eedafc2be6a7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void override_nsteps_cmdline</definition>
+        <argsstring>(FILE *fplog, gmx_int64_t nsteps_cmdline, t_inputrec *ir, const t_commrec *cr)</argsstring>
+        <name>override_nsteps_cmdline</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>nsteps_cmdline</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+<para>Override the nslist value in inputrec. </para>        </briefdescription>
+        <detaileddescription>
+<para>with value passed on the command line (if any) </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" line="600" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp" bodystart="600" bodyend="635"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements the MD runner routine calling all integrators. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>David van der Spoel <ulink url="mailto:david.vanderspoel@icm.uu.se">david.vanderspoel@icm.uu.se</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/programs/mdrun/runner.cpp"/>
+  </compounddef>
+</doxygen>

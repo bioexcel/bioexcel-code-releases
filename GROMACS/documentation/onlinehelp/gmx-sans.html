@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx sans &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx sasa" href="gmx-sasa.html" />
+    <link rel="prev" title="gmx saltbr" href="gmx-saltbr.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-sasa.html" title="gmx sasa"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-saltbr.html" title="gmx saltbr"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-sans">
+<span id="id1"></span><h1>gmx sans<a class="headerlink" href="#gmx-sans" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx sans [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+         [<strong>-d</strong> <em>[&lt;.dat&gt;]</em>] [<strong>-pr</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-sq</strong> <em>[&lt;.xvg&gt;]</em>]
+         [<strong>-prframe</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-sqframe</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>]
+         [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+         [<strong>-bin</strong> <em>&lt;real&gt;</em>] [<strong>-mode</strong> <em>&lt;enum&gt;</em>] [<strong>-mcover</strong> <em>&lt;real&gt;</em>]
+         [<strong>-method</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]pbc</strong>] [<strong>-grid</strong> <em>&lt;real&gt;</em>] [<strong>-startq</strong> <em>&lt;real&gt;</em>]
+         [<strong>-endq</strong> <em>&lt;real&gt;</em>] [<strong>-qstep</strong> <em>&lt;real&gt;</em>] [<strong>-seed</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sans</span></code> computes SANS spectra using Debye formula.
+It currently uses topology file (since it need to assigne element for each atom).</p>
+<p>Parameters:</p>
+<p><code class="docutils literal"><span class="pre">-pr</span></code> Computes normalized g(r) function averaged over trajectory</p>
+<p><code class="docutils literal"><span class="pre">-prframe</span></code> Computes normalized g(r) function for each frame</p>
+<p><code class="docutils literal"><span class="pre">-sq</span></code> Computes SANS intensity curve averaged over trajectory</p>
+<p><code class="docutils literal"><span class="pre">-sqframe</span></code> Computes SANS intensity curve for each frame</p>
+<p><code class="docutils literal"><span class="pre">-startq</span></code> Starting q value in nm</p>
+<p><code class="docutils literal"><span class="pre">-endq</span></code> Ending q value in nm</p>
+<p><code class="docutils literal"><span class="pre">-qstep</span></code> Stepping in q space</p>
+<p>Note: When using Debye direct method computational cost increases as
+1/2 * N * (N - 1) where N is atom number in group of interest.</p>
+<p>WARNING: If sq or pr specified this tool can produce large number of files! Up to two times larger than number of frames!</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/...&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-d</span></code> [&lt;.dat&gt;] (nsfactor.dat) (Optional)</dt>
+<dd>Generic data file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-pr</span></code> [&lt;.xvg&gt;] (pr.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-sq</span></code> [&lt;.xvg&gt;] (sq.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-prframe</span></code> [&lt;.xvg&gt;] (prframe.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-sqframe</span></code> [&lt;.xvg&gt;] (sqframe.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-bin</span></code> &lt;real&gt; (0.2)</dt>
+<dd>[HIDDEN]Binwidth (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-mode</span></code> &lt;enum&gt; (direct)</dt>
+<dd>Mode for sans spectra calculation: direct, mc</dd>
+<dt><code class="docutils literal"><span class="pre">-mcover</span></code> &lt;real&gt; (-1)</dt>
+<dd>Monte-Carlo coverage should be -1(default) or (0,1]</dd>
+<dt><code class="docutils literal"><span class="pre">-method</span></code> &lt;enum&gt; (debye)</dt>
+<dd>[HIDDEN]Method for sans spectra calculation: debye, fft</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions for computing distances</dd>
+<dt><code class="docutils literal"><span class="pre">-grid</span></code> &lt;real&gt; (0.05)</dt>
+<dd>[HIDDEN]Grid spacing (in nm) for FFTs</dd>
+<dt><code class="docutils literal"><span class="pre">-startq</span></code> &lt;real&gt; (0)</dt>
+<dd>Starting q (1/nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-endq</span></code> &lt;real&gt; (2)</dt>
+<dd>Ending q (1/nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-qstep</span></code> &lt;real&gt; (0.01)</dt>
+<dd>Stepping in q (1/nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-seed</span></code> &lt;int&gt; (0)</dt>
+<dd>Random seed for Monte-Carlo</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx sans</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-saltbr.html"
+                        title="previous chapter">gmx saltbr</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-sasa.html"
+                        title="next chapter">gmx sasa</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-sans.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-sasa.html" title="gmx sasa"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-saltbr.html" title="gmx saltbr"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

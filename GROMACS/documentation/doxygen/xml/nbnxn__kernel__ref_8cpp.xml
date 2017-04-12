@@ -1,0 +1,605 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__kernel__ref_8cpp" kind="file">
+    <compoundname>nbnxn_kernel_ref.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="nbnxn__kernel__ref_8h" local="yes">nbnxn_kernel_ref.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="force_8h" local="yes">gromacs/mdlib/force.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__consts_8h" local="yes">gromacs/mdlib/nbnxn_consts.h</includes>
+    <includes refid="nbnxn__kernel__common_8h" local="yes">gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_common.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="ishift_8h" local="yes">gromacs/pbcutil/ishift.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="nbnxn__kernel__ref__includes_8h" local="yes">gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref_includes.h</includes>
+    <incdepgraph>
+      <node id="11400">
+        <label>stdarg.h</label>
+      </node>
+      <node id="11389">
+        <label>assert.h</label>
+      </node>
+      <node id="11392">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="11390" relation="include">
+        </childnode>
+        <childnode refid="11393" relation="include">
+        </childnode>
+        <childnode refid="11394" relation="include">
+        </childnode>
+      </node>
+      <node id="11393">
+        <label>cstdint</label>
+      </node>
+      <node id="11402">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="11403" relation="include">
+        </childnode>
+        <childnode refid="11396" relation="include">
+        </childnode>
+      </node>
+      <node id="11399">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="11400" relation="include">
+        </childnode>
+        <childnode refid="11401" relation="include">
+        </childnode>
+        <childnode refid="11396" relation="include">
+        </childnode>
+      </node>
+      <node id="11397">
+        <label>stdint.h</label>
+      </node>
+      <node id="11386">
+        <label>src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp</label>
+        <link refid="nbnxn_kernel_ref.cpp"/>
+        <childnode refid="11387" relation="include">
+        </childnode>
+        <childnode refid="11388" relation="include">
+        </childnode>
+        <childnode refid="11389" relation="include">
+        </childnode>
+        <childnode refid="11390" relation="include">
+        </childnode>
+        <childnode refid="11391" relation="include">
+        </childnode>
+        <childnode refid="11392" relation="include">
+        </childnode>
+        <childnode refid="11395" relation="include">
+        </childnode>
+        <childnode refid="11399" relation="include">
+        </childnode>
+        <childnode refid="11402" relation="include">
+        </childnode>
+      </node>
+      <node id="11387">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="11390">
+        <label>cmath</label>
+      </node>
+      <node id="11403">
+        <label>stddef.h</label>
+      </node>
+      <node id="11394">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="11395">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="11396" relation="include">
+        </childnode>
+      </node>
+      <node id="11396">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="11397" relation="include">
+        </childnode>
+        <childnode refid="11398" relation="include">
+        </childnode>
+      </node>
+      <node id="11388">
+        <label>config.h</label>
+      </node>
+      <node id="11391">
+        <label>algorithm</label>
+      </node>
+      <node id="11401">
+        <label>stdio.h</label>
+      </node>
+      <node id="11398">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a0692ae4852b3317ca1c89061cdc5e80c" prot="public" static="no">
+        <name>CALC_COUL_RF</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="79" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="80" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac79c0b18417b519aa844c6a758ca5789" prot="public" static="no">
+        <name>LJ_FORCE_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="83" column="13" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a91cd8a0696733938362a6770d64a985a" prot="public" static="no">
+        <name>LJ_POT_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="86" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac68bdc25acce9ea9d30e80e4a41d0956" prot="public" static="no">
+        <name>LJ_EWALD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="89" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="90" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a198066db3bac26ef767f19381e1a79e0" prot="public" static="no">
+        <name>LJ_EWALD_COMB_GEOM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="91" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ade8def97d45d75aafab1ad9cdbed9e0d" prot="public" static="no">
+        <name>LJ_EWALD_COMB_LB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="94" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a70ff6d392dbe17e23255f3a26f1934ab" prot="public" static="no">
+        <name>CALC_COUL_TAB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="103" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="104" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac79c0b18417b519aa844c6a758ca5789" prot="public" static="no">
+        <name>LJ_FORCE_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="107" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a91cd8a0696733938362a6770d64a985a" prot="public" static="no">
+        <name>LJ_POT_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="110" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac68bdc25acce9ea9d30e80e4a41d0956" prot="public" static="no">
+        <name>LJ_EWALD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="113" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="114" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a198066db3bac26ef767f19381e1a79e0" prot="public" static="no">
+        <name>LJ_EWALD_COMB_GEOM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="115" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ade8def97d45d75aafab1ad9cdbed9e0d" prot="public" static="no">
+        <name>LJ_EWALD_COMB_LB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="118" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a49eed4f0952c21ca3618c0ee761efb4b" prot="public" static="no">
+        <name>VDW_CUTOFF_CHECK</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="124" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="125" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac79c0b18417b519aa844c6a758ca5789" prot="public" static="no">
+        <name>LJ_FORCE_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="128" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a91cd8a0696733938362a6770d64a985a" prot="public" static="no">
+        <name>LJ_POT_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="131" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac68bdc25acce9ea9d30e80e4a41d0956" prot="public" static="no">
+        <name>LJ_EWALD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="134" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="135" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a198066db3bac26ef767f19381e1a79e0" prot="public" static="no">
+        <name>LJ_EWALD_COMB_GEOM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="136" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ade8def97d45d75aafab1ad9cdbed9e0d" prot="public" static="no">
+        <name>LJ_EWALD_COMB_LB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="139" column="11" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="nbnxn__kernel__ref_8cpp_1a68c01102755fc7d1c810bb0b0635fa90" prot="public" static="no">
+        <name>@72</name>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1a68c01102755fc7d1c810bb0b0635fa90a3bdbb78e8fafa648bad24b883770637c" prot="public">
+          <name>coultRF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1a68c01102755fc7d1c810bb0b0635fa90a7c898ea54c59357cca637026f90c187f" prot="public">
+          <name>coultTAB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1a68c01102755fc7d1c810bb0b0635fa90aef61183ddc6462544280f98a089a552e" prot="public">
+          <name>coultTAB_TWIN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1a68c01102755fc7d1c810bb0b0635fa90ad5a4b69363e93f25f32e8c69c8c7efd5" prot="public">
+          <name>coultNR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="148" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="148" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="enum" id="nbnxn__kernel__ref_8cpp_1aa618c4d8c29ef4efe6f10c741fb1f47a" prot="public" static="no">
+        <name>@73</name>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1aa618c4d8c29ef4efe6f10c741fb1f47aab564efff608cf5abbaa8e1e7e13e3048" prot="public">
+          <name>vdwtCUT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1aa618c4d8c29ef4efe6f10c741fb1f47aab95028f4b42f25b6e4cc171da8e773af" prot="public">
+          <name>vdwtFSWITCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1aa618c4d8c29ef4efe6f10c741fb1f47aa08dc3739a4831d3b1138eb1f46e3cddb" prot="public">
+          <name>vdwtPSWITCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1aa618c4d8c29ef4efe6f10c741fb1f47aa6be11315bf3ec8dba9db8007e9e40a91" prot="public">
+          <name>vdwtEWALDGEOM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1aa618c4d8c29ef4efe6f10c741fb1f47aa0138b24ccb494ae40e4db934c8311e2b" prot="public">
+          <name>vdwtEWALDLB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__kernel__ref_8cpp_1aa618c4d8c29ef4efe6f10c741fb1f47aac373991838011bc264f72fbda4090bab" prot="public">
+          <name>vdwtNR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="152" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="152" bodyend="154"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="nbnxn__kernel__ref_8cpp_1a726db5a70360812c60759ff4d56d1130" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* p_nbk_func_noener)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift)</definition>
+        <argsstring>)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift)</argsstring>
+        <name>p_nbk_func_noener</name>
+        <briefdescription>
+<para>Typedefs for declaring lookup tables of kernel functions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="62" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__kernel__ref_8cpp_1af5bdbb2bd1989324fffc5ecac6fbd5f0" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* p_nbk_func_ener)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift, real *Vvdw, real *Vc)</definition>
+        <argsstring>)(const nbnxn_pairlist_t *nbl, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, real *f, real *fshift, real *Vvdw, real *Vc)</argsstring>
+        <name>p_nbk_func_ener</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="69" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nbnxn__kernel__ref_8cpp_1a1d5584eafc3cf12084127599894719f1" prot="public" static="no" mutable="no">
+        <type>p_nbk_func_noener</type>
+        <definition>p_nbk_func_noener p_nbk_c_noener[coultNR][vdwtNR]</definition>
+        <argsstring>[coultNR][vdwtNR]</argsstring>
+        <name>p_nbk_c_noener</name>
+        <initializer>=
+{
+    { nbnxn_kernel_ElecRF_VdwLJ_F_ref,           nbnxn_kernel_ElecRF_VdwLJFsw_F_ref,           nbnxn_kernel_ElecRF_VdwLJPsw_F_ref,           nbnxn_kernel_ElecRF_VdwLJEwCombGeom_F_ref,           nbnxn_kernel_ElecRF_VdwLJEwCombLB_F_ref           },
+    { nbnxn_kernel_ElecQSTab_VdwLJ_F_ref,        nbnxn_kernel_ElecQSTab_VdwLJFsw_F_ref,        nbnxn_kernel_ElecQSTab_VdwLJPsw_F_ref,        nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_F_ref,        nbnxn_kernel_ElecQSTab_VdwLJEwCombLB_F_ref        },
+    { nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_F_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJFsw_F_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJPsw_F_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_F_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombLB_F_ref }
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="156" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__ref_8cpp_1a26effc0201ad0f43c8e791647dc45d62" prot="public" static="no" mutable="no">
+        <type>p_nbk_func_ener</type>
+        <definition>p_nbk_func_ener p_nbk_c_ener[coultNR][vdwtNR]</definition>
+        <argsstring>[coultNR][vdwtNR]</argsstring>
+        <name>p_nbk_c_ener</name>
+        <initializer>=
+{
+    { nbnxn_kernel_ElecRF_VdwLJ_VF_ref,           nbnxn_kernel_ElecRF_VdwLJFsw_VF_ref,           nbnxn_kernel_ElecRF_VdwLJPsw_VF_ref,           nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VF_ref,           nbnxn_kernel_ElecRF_VdwLJEwCombLB_VF_ref            },
+    { nbnxn_kernel_ElecQSTab_VdwLJ_VF_ref,        nbnxn_kernel_ElecQSTab_VdwLJFsw_VF_ref,        nbnxn_kernel_ElecQSTab_VdwLJPsw_VF_ref,        nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VF_ref,        nbnxn_kernel_ElecQSTab_VdwLJEwCombLB_VF_ref         },
+    { nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJFsw_VF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJPsw_VF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombLB_VF_ref  }
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="163" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__kernel__ref_8cpp_1ace824f3a4b31998462404b089c6c284d" prot="public" static="no" mutable="no">
+        <type>p_nbk_func_ener</type>
+        <definition>p_nbk_func_ener p_nbk_c_energrp[coultNR][vdwtNR]</definition>
+        <argsstring>[coultNR][vdwtNR]</argsstring>
+        <name>p_nbk_c_energrp</name>
+        <initializer>=
+{
+    { nbnxn_kernel_ElecRF_VdwLJ_VgrpF_ref,           nbnxn_kernel_ElecRF_VdwLJFsw_VgrpF_ref,           nbnxn_kernel_ElecRF_VdwLJPsw_VgrpF_ref,           nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VgrpF_ref,           nbnxn_kernel_ElecRF_VdwLJEwCombLB_VgrpF_ref           },
+    { nbnxn_kernel_ElecQSTab_VdwLJ_VgrpF_ref,        nbnxn_kernel_ElecQSTab_VdwLJFsw_VgrpF_ref,        nbnxn_kernel_ElecQSTab_VdwLJPsw_VgrpF_ref,        nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VgrpF_ref,        nbnxn_kernel_ElecQSTab_VdwLJEwCombLB_VgrpF_ref        },
+    { nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VgrpF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJFsw_VgrpF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJPsw_VgrpF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VgrpF_ref, nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombLB_VgrpF_ref }
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="170" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__kernel__ref_8cpp_1a8938dc6a8d1c8cc421512faec84a884e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_kernel_ref</definition>
+        <argsstring>(const nbnxn_pairlist_set_t *nbl_list, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shift_vec, int force_flags, int clearF, real *fshift, real *Vc, real *Vvdw)</argsstring>
+        <name>nbnxn_kernel_ref</name>
+        <param>
+          <type>const <ref refid="structnbnxn__pairlist__set__t" kindref="compound">nbnxn_pairlist_set_t</ref> *</type>
+          <declname>nbl_list</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>shift_vec</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>force_flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>clearF</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fshift</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>Vc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>Vvdw</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="178" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="178" bodyend="333"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp"/>
+  </compounddef>
+</doxygen>

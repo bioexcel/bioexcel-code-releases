@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx rdf &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx rms" href="gmx-rms.html" />
+    <link rel="prev" title="gmx rama" href="gmx-rama.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-rms.html" title="gmx rms"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-rama.html" title="gmx rama"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-rdf">
+<span id="id1"></span><h1>gmx rdf<a class="headerlink" href="#gmx-rdf" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx rdf [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+        [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-cn</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+        [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-fgroup</strong> <em>&lt;selection&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+        [<strong>-[no]rmpbc</strong>] [<strong>-[no]pbc</strong>] [<strong>-sf</strong> <em>&lt;file&gt;</em>] [<strong>-selrpos</strong> <em>&lt;enum&gt;</em>]
+        [<strong>-seltype</strong> <em>&lt;enum&gt;</em>] [<strong>-bin</strong> <em>&lt;real&gt;</em>] [<strong>-norm</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]xy</strong>]
+        [<strong>-[no]excl</strong>] [<strong>-cut</strong> <em>&lt;real&gt;</em>] [<strong>-rmax</strong> <em>&lt;real&gt;</em>] [<strong>-surf</strong> <em>&lt;enum&gt;</em>]
+        [<strong>-ref</strong> <em>&lt;selection&gt;</em>] [<strong>-sel</strong> <em>&lt;selection&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">rdf</span></code> calculates radial distribution functions from one
+reference set of position (set with <code class="docutils literal"><span class="pre">-ref</span></code>) to one or more
+sets of positions (set with <code class="docutils literal"><span class="pre">-sel</span></code>).  To compute the RDF with
+respect to the closest position in a set in <code class="docutils literal"><span class="pre">-ref</span></code> instead, use
+<code class="docutils literal"><span class="pre">-surf</span></code>: if set, then <code class="docutils literal"><span class="pre">-ref</span></code> is partitioned into sets
+based on the value of <code class="docutils literal"><span class="pre">-surf</span></code>, and the closest position in each
+set is used. To compute the RDF around axes parallel to the
+<em>z</em>-axis, i.e., only in the <em>x</em>-<em>y</em> plane, use
+<code class="docutils literal"><span class="pre">-xy</span></code>.</p>
+<p>To set the bin width and maximum distance to use in the RDF, use
+<code class="docutils literal"><span class="pre">-bin</span></code> and <code class="docutils literal"><span class="pre">-rmax</span></code>, respectively. The latter can be
+used to limit the computational cost if the RDF is not of interest
+up to the default (half of the box size with PBC, three times the
+box size without PBC).</p>
+<p>To use exclusions from the topology (<code class="docutils literal"><span class="pre">-s</span></code>), set <code class="docutils literal"><span class="pre">-excl</span></code>
+and ensure that both <code class="docutils literal"><span class="pre">-ref</span></code> and <code class="docutils literal"><span class="pre">-sel</span></code> only select atoms.
+A rougher alternative to exclude intra-molecular peaks is to set
+<code class="docutils literal"><span class="pre">-cut</span></code> to a non-zero value to clear the RDF at small
+distances.</p>
+<p>The RDFs are normalized by 1) average number of positions in
+<code class="docutils literal"><span class="pre">-ref</span></code> (the number of groups with <code class="docutils literal"><span class="pre">-surf</span></code>), 2) volume
+of the bin, and 3) average particle density of <code class="docutils literal"><span class="pre">-sel</span></code> positions
+for that selection. To change the normalization, use <code class="docutils literal"><span class="pre">-norm</span></code>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">rdf</span></code>: Use all factors for normalization.
+This produces a normal RDF.</li>
+<li><code class="docutils literal"><span class="pre">number_density</span></code>: Use the first two factors.
+This produces a number density as a function of distance.</li>
+<li><code class="docutils literal"><span class="pre">none</span></code>: Use only the first factor.
+In this case, the RDF is only scaled with the bin width to make
+the integral of the curve represent the number of pairs within a
+range.</li>
+</ul>
+<p>Note that exclusions do not affect the normalization: even if
+<code class="docutils literal"><span class="pre">-excl</span></code> is set, or <code class="docutils literal"><span class="pre">-ref</span></code> and
+<code class="docutils literal"><span class="pre">-sel</span></code> contain the same selection, the normalization factor
+is still N*M, not N*(M-excluded).</p>
+<p>For <code class="docutils literal"><span class="pre">-surf</span></code>, the selection provided to <code class="docutils literal"><span class="pre">-ref</span></code> must
+select atoms, i.e., centers of mass are not supported. Further,
+<code class="docutils literal"><span class="pre">-nonorm</span></code> is implied, as the bins have irregular shapes and
+the volume of a bin is not easily computable.</p>
+<p>Option <code class="docutils literal"><span class="pre">-cn</span></code> produces the cumulative number RDF,
+i.e. the average number of particles within a distance r.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/...&gt;] (traj.xtc) (Optional)</dt>
+<dd>Input trajectory or single configuration: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/...&gt;] (topol.tpr) (Optional)</dt>
+<dd>Input structure: <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Extra index groups</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (rdf.xvg)</dt>
+<dd>Computed RDFs</dd>
+<dt><code class="docutils literal"><span class="pre">-cn</span></code> [&lt;.xvg&gt;] (rdf_cn.xvg) (Optional)</dt>
+<dd>Cumulative RDFs</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame if t MOD dt == first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-fgroup</span></code> &lt;selection&gt;</dt>
+<dd>Atoms stored in the trajectory file (if not set, assume first N atoms)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>Plot formatting: none, xmgrace, xmgr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmpbc</span></code>  (yes)</dt>
+<dd>Make molecules whole for each frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions for distance calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-sf</span></code> &lt;file&gt;</dt>
+<dd>Provide selections from files</dd>
+<dt><code class="docutils literal"><span class="pre">-selrpos</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-seltype</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Default selection output positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-bin</span></code> &lt;real&gt; (0.002)</dt>
+<dd>Bin width (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-norm</span></code> &lt;enum&gt; (rdf)</dt>
+<dd>Normalization: rdf, number_density, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]xy</span></code>  (no)</dt>
+<dd>Use only the x and y components of the distance</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]excl</span></code>  (no)</dt>
+<dd>Use exclusions from topology</dd>
+<dt><code class="docutils literal"><span class="pre">-cut</span></code> &lt;real&gt; (0)</dt>
+<dd>Shortest distance (nm) to be considered</dd>
+<dt><code class="docutils literal"><span class="pre">-rmax</span></code> &lt;real&gt; (0)</dt>
+<dd>Largest distance (nm) to calculate</dd>
+<dt><code class="docutils literal"><span class="pre">-surf</span></code> &lt;enum&gt; (no)</dt>
+<dd>RDF with respect to the surface of the reference: no, mol, res</dd>
+<dt><code class="docutils literal"><span class="pre">-ref</span></code> &lt;selection&gt;</dt>
+<dd>Reference selection for RDF computation</dd>
+<dt><code class="docutils literal"><span class="pre">-sel</span></code> &lt;selection&gt;</dt>
+<dd>Selections to compute RDFs for from the reference</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx rdf</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-rama.html"
+                        title="previous chapter">gmx rama</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-rms.html"
+                        title="next chapter">gmx rms</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-rdf.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-rms.html" title="gmx rms"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-rama.html" title="gmx rama"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

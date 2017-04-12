@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx pme_error &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx polystat" href="gmx-polystat.html" />
+    <link rel="prev" title="gmx pdb2gmx" href="gmx-pdb2gmx.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-polystat.html" title="gmx polystat"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-pdb2gmx.html" title="gmx pdb2gmx"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-pme-error">
+<span id="id1"></span><h1>gmx pme_error<a class="headerlink" href="#gmx-pme-error" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx pme_error [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-o</strong> <em>[&lt;.out&gt;]</em>] [<strong>-so</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-beta</strong> <em>&lt;real&gt;</em>]
+             [<strong>-[no]tune</strong>] [<strong>-self</strong> <em>&lt;real&gt;</em>] [<strong>-seed</strong> <em>&lt;int&gt;</em>] [<strong>-[no]v</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">pme_error</span></code> estimates the error of the electrostatic forces
+if using the sPME algorithm. The flag <code class="docutils literal"><span class="pre">-tune</span></code> will determine
+the splitting parameter such that the error is equally
+distributed over the real and reciprocal space part.
+The part of the error that stems from self interaction of the particles is computationally demanding. However, a good a approximation is to
+just use a fraction of the particles for this term which can be
+indicated by the flag <code class="docutils literal"><span class="pre">-self</span></code>.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.out&gt;] (error.out)</dt>
+<dd>Generic output file</dd>
+<dt><code class="docutils literal"><span class="pre">-so</span></code> [&lt;.tpr&gt;] (tuned.tpr) (Optional)</dt>
+<dd>Portable xdr run input file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-beta</span></code> &lt;real&gt; (-1)</dt>
+<dd>If positive, overwrite ewald_beta from <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file with this value</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]tune</span></code>  (no)</dt>
+<dd>Tune the splitting parameter such that the error is equally distributed between real and reciprocal space</dd>
+<dt><code class="docutils literal"><span class="pre">-self</span></code> &lt;real&gt; (1)</dt>
+<dd>If between 0.0 and 1.0, determine self interaction error from just this fraction of the charged particles</dd>
+<dt><code class="docutils literal"><span class="pre">-seed</span></code> &lt;int&gt; (0)</dt>
+<dd>Random number seed used for Monte Carlo algorithm when <code class="docutils literal"><span class="pre">-self</span></code> is set to a value between 0.0 and 1.0</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]v</span></code>  (no)</dt>
+<dd>Be loud and noisy</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx pme_error</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-pdb2gmx.html"
+                        title="previous chapter">gmx pdb2gmx</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-polystat.html"
+                        title="next chapter">gmx polystat</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-pme_error.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-polystat.html" title="gmx polystat"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-pdb2gmx.html" title="gmx pdb2gmx"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

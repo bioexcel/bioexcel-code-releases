@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="cyclecounter_8h" kind="file">
+    <compoundname>cyclecounter.h</compoundname>
+    <includes local="yes">config.h</includes>
+    <includedby refid="nbnxn__internal_8h" local="yes">src/gromacs/mdlib/nbnxn_internal.h</includedby>
+    <includedby refid="pme-grid_8cpp" local="yes">src/gromacs/ewald/pme-grid.cpp</includedby>
+    <includedby refid="pme-only_8cpp" local="yes">src/gromacs/ewald/pme-only.cpp</includedby>
+    <includedby refid="pme_8cpp" local="yes">src/gromacs/ewald/pme.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="pull__rotation_8cpp" local="yes">src/gromacs/pulling/pull_rotation.cpp</includedby>
+    <includedby refid="cyclecounter_8cpp" local="yes">src/gromacs/timing/cyclecounter.cpp</includedby>
+    <includedby refid="wallcycle_8cpp" local="yes">src/gromacs/timing/wallcycle.cpp</includedby>
+    <incdepgraph>
+      <node id="18916">
+        <label>src/gromacs/timing/cyclecounter.h</label>
+        <link refid="cyclecounter.h"/>
+        <childnode refid="18917" relation="include">
+        </childnode>
+      </node>
+      <node id="18917">
+        <label>config.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="18919">
+        <label>src/gromacs/ewald/pme.cpp</label>
+        <link refid="pme_8cpp"/>
+      </node>
+      <node id="18918">
+        <label>src/gromacs/timing/cyclecounter.h</label>
+        <link refid="cyclecounter.h"/>
+        <childnode refid="18919" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="cyclecounter_8h_1a7b04e633389542df9f5535b05b873baa" prot="public" static="no">
+        <type>long</type>
+        <definition>typedef long gmx_cycles_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_cycles_t</name>
+        <briefdescription>
+<para>Integer-like datatype for cycle counter values. </para>        </briefdescription>
+        <detaileddescription>
+<para>Depending on your system this will usually be something like long long, or a special cycle datatype from the system header files. It is NOT necessarily real processor cycles - many systems count in nanoseconds or a special external time register at fixed frequency (not the CPU freq.)</para><para>You can subtract or add gmx_cycle_t types just as normal integers, and if you run the calibration routine you can also multiply it with a factor to translate the cycle data to seconds. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h" line="190" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="cyclecounter_8h_1a2a7996b372df6309ac36d3b4cbbc58c3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__inline__ <ref refid="cyclecounter_8h_1a7b04e633389542df9f5535b05b873baa" kindref="member">gmx_cycles_t</ref></type>
+        <definition>static __inline__ gmx_cycles_t gmx_cycles_read</definition>
+        <argsstring>(void)</argsstring>
+        <name>gmx_cycles_read</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Read CPU cycle counter. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine returns an abstract datatype containing a cycle counter timestamp.</para><para><simplesect kind="return"><para>Opaque data corresponding to a cycle reading.</para></simplesect>
+Please note that on most systems it takes several cycles to read and return the cycle counters. If you are measuring small intervals, you can compensate for this time by calling the routine twice and calculating what the difference is. Subtract this from your other measurements to get an accurate result.</para><para>Use gmx_cycles_difference() to get a real number corresponding to the difference between two gmx_cycles_t values returned from this routine. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h" line="212" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h" bodystart="212" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="cyclecounter_8h_1a104228c4fa44503c13741351d9e2d7eb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>__inline__ int</type>
+        <definition>static __inline__ int gmx_cycles_have_counter</definition>
+        <argsstring>(void)</argsstring>
+        <name>gmx_cycles_have_counter</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Check if high-resolution cycle counters are available. </para>        </briefdescription>
+        <detaileddescription>
+<para>Not all architectures provide any way to read timestep counters in the CPU, and on some it is broken. Although we refer to it as cycle counters, it is not necessarily given in units of cycles.</para><para>If you notice that system is missing, implement support for it, find out how to detect the system during preprocessing, and send us a patch.</para><para><simplesect kind="return"><para>1 if cycle counters are available, 0 if not.</para></simplesect>
+<simplesect kind="note"><para>This functions not need to be in the header for performance reasons, but it is very important that we get exactly the same detection as for <ref refid="cyclecounter_8h_1a2a7996b372df6309ac36d3b4cbbc58c3" kindref="member">gmx_cycles_read()</ref> routines. If you compile the library with one compiler, and then use a different one when later linking to the library it might happen that the library supports cyclecounters but not the headers, or vice versa. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h" line="450" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h" bodystart="450" bodyend="453"/>
+      </memberdef>
+      <memberdef kind="function" id="cyclecounter_8h_1a15e94a5a32400864b027b6d54c7963e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double gmx_cycles_calibrate</definition>
+        <argsstring>(double sampletime)</argsstring>
+        <name>gmx_cycles_calibrate</name>
+        <param>
+          <type>double</type>
+          <declname>sampletime</declname>
+        </param>
+        <briefdescription>
+<para>Calculate number of seconds per cycle tick on host. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine runs a timer loop to calibrate the number of seconds per the units returned fro <ref refid="cyclecounter_8h_1a2a7996b372df6309ac36d3b4cbbc58c3" kindref="member">gmx_cycles_read()</ref>.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sampletime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Minimum real sample time. It takes some trial-and-error to find the correct delay loop size, so the total runtime of this routine is about twice this time. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Number of seconds per cycle unit. If it is not possible to calculate on this system (for whatever reason) the return value will be -1, so check that it is positive before using it. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h" line="601" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.cpp" bodystart="64" bodyend="144"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>High-resolution timestamp or CPU clock cycle counters. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  After reading the current value with <ref refid="cyclecounter_8h_1a2a7996b372df6309ac36d3b4cbbc58c3" kindref="member">gmx_cycles_read()</ref> you can add or subtract these numbers as normal integers of type gmx_cycles_t. </para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/timing/cyclecounter.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,354 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="swapcoords_8h" kind="file">
+    <compoundname>swapcoords.h</compoundname>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="wallcycle_8h" local="yes">gromacs/timing/wallcycle.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="gromacs_2swap_2swapcoords_8cpp" local="yes">src/gromacs/swap/swapcoords.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <invincdepgraph>
+      <node id="18884">
+        <label>src/gromacs/swap/swapcoords.cpp</label>
+        <link refid="gromacs_2swap_2swapcoords_8cpp"/>
+      </node>
+      <node id="18883">
+        <label>src/gromacs/swap/swapcoords.h</label>
+        <link refid="swapcoords.h"/>
+        <childnode refid="18884" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="swapcoords_8h_1a8dc97b814a68187058ed66db52ff89d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_swapcoords</definition>
+        <argsstring>(FILE *fplog, gmx_bool bVerbose, t_inputrec *ir, const char *fn, gmx_mtop_t *mtop, rvec x[], matrix box, swapstate_t *swapstate, t_commrec *cr, const gmx_output_env_t *oenv, unsigned long Flags)</argsstring>
+        <name>init_swapcoords</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structswapstate__t" kindref="compound">swapstate_t</ref> *</type>
+          <declname>swapstate</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>Flags</declname>
+        </param>
+        <briefdescription>
+<para>Initialize ion / water position swapping (&quot;Computational Electrophysiology&quot;). </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine does the memory allocation for various helper arrays, opens the output file, sets up swap data checkpoint writing, etc.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>General output file, normally md.log. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bVerbose</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Should we be quiet or verbose? </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure containing MD input parameters, among those also the structure needed for position swapping. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output file name for swap data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Molecular topology. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial positions of all particles. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">swapstate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Swap-related data that is read from or written to checkpoint. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to MPI communication data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">oenv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Needed to open the swap output XVGR file. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">Flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags passed over from main, used to determine whether we are doing a rerun, appending, etc. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.h" line="83" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.cpp" bodystart="1454" bodyend="1827"/>
+      </memberdef>
+      <memberdef kind="function" id="swapcoords_8h_1afdb661b9210ffab279294198a1b029f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void finish_swapcoords</definition>
+        <argsstring>(t_swapcoords *sc)</argsstring>
+        <name>finish_swapcoords</name>
+        <param>
+          <type><ref refid="structt__swapcoords" kindref="compound">t_swapcoords</ref> *</type>
+          <declname>sc</declname>
+        </param>
+        <briefdescription>
+<para>Finalizes ion / water position swapping. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">sc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to swap data. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.h" line="101" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.cpp" bodystart="1830" bodyend="1837"/>
+      </memberdef>
+      <memberdef kind="function" id="swapcoords_8h_1af60cc081bfc0158fc18e957ca4363bfa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_make_local_swap_groups</definition>
+        <argsstring>(gmx_domdec_t *dd, t_swapcoords *si_pub)</argsstring>
+        <name>dd_make_local_swap_groups</name>
+        <param>
+          <type><ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__swapcoords" kindref="compound">t_swapcoords</ref> *</type>
+          <declname>si_pub</declname>
+        </param>
+        <briefdescription>
+<para>Make a selection of the home atoms for the swap groups. These are the ions, the water, and the channels. This routine should be called at every domain decomposition. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure containing domain decomposition data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">si_pub</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the swap data structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.h" line="111" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.cpp" bodystart="1840" bodyend="1854"/>
+      </memberdef>
+      <memberdef kind="function" id="swapcoords_8h_1aea069b838b358f694d0bb1e19a11eed6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool do_swapcoords</definition>
+        <argsstring>(t_commrec *cr, gmx_int64_t step, double t, t_inputrec *ir, gmx_wallcycle_t wcycle, rvec x[], matrix box, gmx_mtop_t *mtop, gmx_bool bVerbose, gmx_bool bRerun)</argsstring>
+        <name>do_swapcoords</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bRerun</declname>
+        </param>
+        <briefdescription>
+<para>&quot;Computational Electrophysiology&quot; main routine within MD loop. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to MPI communication data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of the MD time step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure containing MD input parameters, among those also the structure needed for position swapping. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Count wallcycles of swap routines for diagnostic output. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Positions of home particles this node owns. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Molecular topology. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bVerbose</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Should we be quiet or verbose? </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bRerun</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Are we doing a rerun?</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Whether at least one pair of molecules was swapped. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.h" line="130" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.cpp" bodystart="1986" bodyend="2168"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The &quot;Computational Electrophysiology&quot; protocol for ion/water position swapping. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  <simplesect kind="author"><para>Carsten Kutzner <ulink url="mailto:ckutzne@gwdg.de">ckutzne@gwdg.de</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/swap/swapcoords.h"/>
+  </compounddef>
+</doxygen>

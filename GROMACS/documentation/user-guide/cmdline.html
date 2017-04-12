@@ -1,0 +1,942 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Command-line reference &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="User guide" href="index.html" />
+    <link rel="next" title="molecular dynamics simulation suite" href="../onlinehelp/gmx.html" />
+    <link rel="prev" title="File formats" href="file-formats.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../onlinehelp/gmx.html" title="molecular dynamics simulation suite"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="file-formats.html" title="File formats"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="command-line-reference">
+<h1>Command-line reference<a class="headerlink" href="#command-line-reference" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>GROMACS includes many tools for preparing, running and analyzing
+molecular dynamics simulations. These are all structured as part of a single
+<strong class="command">gmx</strong> wrapper binary, and invoked with commands like <strong class="command">gmx grompp</strong>.
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">mdrun</span></a> is the only other binary that
+<a class="reference internal" href="../install-guide/index.html#building-just-the-mdrun-binary"><span class="std std-ref">can be built</span></a>; in the normal
+build it can be run with <strong class="command">gmx mdrun</strong>. Documentation for these can
+be found at the respective sections below, as well as on man pages (e.g.,
+<em class="manpage">gmx-grompp(1)</em>) and with <code class="samp docutils literal"><span class="pre">gmx</span> <span class="pre">help</span> <em><span class="pre">command</span></em></code> or
+<code class="samp docutils literal"><span class="pre">gmx</span> <em><span class="pre">command</span></em> <span class="pre">-h</span></code>.</p>
+<p>If you&#8217;ve installed an MPI version of GROMACS, by default the
+<strong class="command">gmx</strong> binary is called <strong class="command">gmx_mpi</strong> and you should adapt
+accordingly.</p>
+<div class="section" id="command-line-interface-and-conventions">
+<h2>Command-line interface and conventions<a class="headerlink" href="#command-line-interface-and-conventions" title="Permalink to this headline">¶</a></h2>
+<p>All GROMACS commands require an option before any arguments (i.e., all
+command-line arguments need to be preceded by an argument starting with a
+dash, and values not starting with a dash are arguments to the preceding
+option).  Most options, except for boolean flags, expect an argument (or
+multiple in some cases) after the option name.
+The argument must be a separate command-line argument, i.e., separated by
+space, as in <code class="docutils literal"><span class="pre">-f</span> <span class="pre">traj.xtc</span></code>.  If more than one argument needs to be given to
+an option, they should be similarly separated from each other.
+Some options also have default arguments, i.e., just specifying the option
+without any argument uses the default argument.
+If an option is not specified at all, a default value is used; in the case of
+optional files, the default might be not to use that file (see below).</p>
+<p>All GROMACS command options start with a single dash, whether they are
+single- or multiple-letter options.  However, two dashes are also recognized
+(starting from 5.1).</p>
+<p>In addition to command-specific options, some options are handled by the
+<strong class="command">gmx</strong> wrapper, and can be specified for any command.  See
+<a class="reference internal" href="../onlinehelp/gmx.html"><span class="doc">wrapper binary help</span></a> for the list of such options.
+These options are recognized both before the command name (e.g.,
+<strong class="command">gmx -quiet grompp</strong>) as well as after the command name (e.g.,
+<strong class="command">gmx grompp -quiet</strong>).
+There is also a <code class="docutils literal"><span class="pre">-hidden</span></code> option that can be specified in combination with
+<code class="docutils literal"><span class="pre">-h</span></code> to show help for advanced/developer-targeted options.</p>
+<p>Most analysis commands can process a trajectory with fewer atoms than the
+run input or structure file, but only if the trajectory consists of the
+first <em>n</em> atoms of the run input or structure file.</p>
+<div class="section" id="handling-specific-types-of-command-line-options">
+<h3>Handling specific types of command-line options<a class="headerlink" href="#handling-specific-types-of-command-line-options" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>boolean options</dt>
+<dd>Boolean flags can be specified like <code class="docutils literal"><span class="pre">-pbc</span></code> and negated like <code class="docutils literal"><span class="pre">-nopbc</span></code>.
+It is also possible to use an explicit value like <code class="docutils literal"><span class="pre">-pbc</span> <span class="pre">no</span></code> and
+<code class="docutils literal"><span class="pre">-pbc</span> <span class="pre">yes</span></code>.</dd>
+<dt>file name options</dt>
+<dd><p class="first">Options that accept files names have features that support using default file
+names (where the default file name is specific to that option):</p>
+<ul class="simple">
+<li>If a required option is not set, the default is used.</li>
+<li>If an option is marked optional, the file is not used unless the option
+is set (or other conditions make the file required).</li>
+<li>If an option is set, and no file name is provided, the default is used.</li>
+</ul>
+<p>All such options will accept file names without a file extension.
+The extension is automatically appended in such a case.
+When multiple input formats are accepted, such as a generic structure format,
+the directory will be searched for files of each type with the supplied or
+default name. When no file with a recognized extension is found, an error is given.
+For output files with multiple formats, a default file type will be used.</p>
+<p class="last">Some file formats can also be read from compressed (<code class="file docutils literal"><span class="pre">.Z</span></code> or
+<code class="file docutils literal"><span class="pre">.gz</span></code>) formats.</p>
+</dd>
+<dt>enum options</dt>
+<dd>Enumerated options (enum) should be used with one of the arguments listed in
+the option description. The argument may be abbreviated, and the first match
+to the shortest argument in the list will be selected.</dd>
+<dt>vector options</dt>
+<dd>Some options accept a vector of values.  Either 1 or 3 parameters can be
+supplied; when only one parameter is supplied the two other values are also
+set to this value.</dd>
+<dt>selection options</dt>
+<dd>See <a class="reference internal" href="../onlinehelp/selections.html"><span class="doc">Selection syntax and usage</span></a>.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="commands-by-name">
+<h2>Commands by name<a class="headerlink" href="#commands-by-name" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="../onlinehelp/gmx.html"><span class="doc">gmx</span></a> - molecular dynamics simulation suite</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-anadock.html"><span class="doc">gmx anadock</span></a> - Cluster structures from Autodock runs</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-anaeig.html"><span class="doc">gmx anaeig</span></a> - Analyze eigenvectors/normal modes</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-analyze.html"><span class="doc">gmx analyze</span></a> - Analyze data sets</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-angle.html"><span class="doc">gmx angle</span></a> - Calculate distributions and correlations for angles and dihedrals</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-bar.html"><span class="doc">gmx bar</span></a> - Calculate free energy difference estimates through Bennett&#8217;s acceptance ratio</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-bundle.html"><span class="doc">gmx bundle</span></a> - Analyze bundles of axes, e.g., helices</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-check.html"><span class="doc">gmx check</span></a> - Check and compare files</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-chi.html"><span class="doc">gmx chi</span></a> - Calculate everything you want to know about chi and other dihedrals</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-cluster.html"><span class="doc">gmx cluster</span></a> - Cluster structures</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-clustsize.html"><span class="doc">gmx clustsize</span></a> - Calculate size distributions of atomic clusters</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-confrms.html"><span class="doc">gmx confrms</span></a> - Fit two structures and calculates the RMSD</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-convert-tpr.html"><span class="doc">gmx convert-tpr</span></a> - Make a modifed run-input file</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-covar.html"><span class="doc">gmx covar</span></a> - Calculate and diagonalize the covariance matrix</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-current.html"><span class="doc">gmx current</span></a> - Calculate dielectric constants and current autocorrelation function</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-density.html"><span class="doc">gmx density</span></a> - Calculate the density of the system</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-densmap.html"><span class="doc">gmx densmap</span></a> - Calculate 2D planar or axial-radial density maps</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-densorder.html"><span class="doc">gmx densorder</span></a> - Calculate surface fluctuations</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-dielectric.html"><span class="doc">gmx dielectric</span></a> - Calculate frequency dependent dielectric constants</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-dipoles.html"><span class="doc">gmx dipoles</span></a> - Compute the total dipole plus fluctuations</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-disre.html"><span class="doc">gmx disre</span></a> - Analyze distance restraints</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-distance.html"><span class="doc">gmx distance</span></a> - Calculate distances between pairs of positions</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-do_dssp.html"><span class="doc">gmx do_dssp</span></a> - Assign secondary structure and calculate solvent accessible surface area</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-dos.html"><span class="doc">gmx dos</span></a> - Analyze density of states and properties based on that</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-dump.html"><span class="doc">gmx dump</span></a> - Make binary files human readable</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-dyecoupl.html"><span class="doc">gmx dyecoupl</span></a> - Extract dye dynamics from trajectories</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-dyndom.html"><span class="doc">gmx dyndom</span></a> - Interpolate and extrapolate structure rotations</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-editconf.html"><span class="doc">gmx editconf</span></a> - Convert and manipulates structure files</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-eneconv.html"><span class="doc">gmx eneconv</span></a> - Convert energy files</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-enemat.html"><span class="doc">gmx enemat</span></a> - Extract an energy matrix from an energy file</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-energy.html"><span class="doc">gmx energy</span></a> - Writes energies to xvg files and display averages</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-filter.html"><span class="doc">gmx filter</span></a> - Frequency filter trajectories, useful for making smooth movies</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-freevolume.html"><span class="doc">gmx freevolume</span></a> - Calculate free volume</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-gangle.html"><span class="doc">gmx gangle</span></a> - Calculate angles</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-genconf.html"><span class="doc">gmx genconf</span></a> - Multiply a conformation in &#8216;random&#8217; orientations</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-genion.html"><span class="doc">gmx genion</span></a> - Generate monoatomic ions on energetically favorable positions</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-genrestr.html"><span class="doc">gmx genrestr</span></a> - Generate position restraints or distance restraints for index groups</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-grompp.html"><span class="doc">gmx grompp</span></a> - Make a run input file</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-gyrate.html"><span class="doc">gmx gyrate</span></a> - Calculate the radius of gyration</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-h2order.html"><span class="doc">gmx h2order</span></a> - Compute the orientation of water molecules</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-hbond.html"><span class="doc">gmx hbond</span></a> - Compute and analyze hydrogen bonds</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-helix.html"><span class="doc">gmx helix</span></a> - Calculate basic properties of alpha helices</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-helixorient.html"><span class="doc">gmx helixorient</span></a> - Calculate local pitch/bending/rotation/orientation inside helices</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-help.html"><span class="doc">gmx help</span></a> - Print help information</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-hydorder.html"><span class="doc">gmx hydorder</span></a> - Compute tetrahedrality parameters around a given atom</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-insert-molecules.html"><span class="doc">gmx insert-molecules</span></a> - Insert molecules into existing vacancies</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-lie.html"><span class="doc">gmx lie</span></a> - Estimate free energy from linear combinations</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-make_edi.html"><span class="doc">gmx make_edi</span></a> - Generate input files for essential dynamics sampling</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-make_ndx.html"><span class="doc">gmx make_ndx</span></a> - Make index files</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-mdmat.html"><span class="doc">gmx mdmat</span></a> - Calculate residue contact maps</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> - Perform a simulation, do a normal mode analysis or an energy minimization</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-mindist.html"><span class="doc">gmx mindist</span></a> - Calculate the minimum distance between two groups</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-mk_angndx.html"><span class="doc">gmx mk_angndx</span></a> - Generate index files for &#8216;gmx angle&#8217;</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-morph.html"><span class="doc">gmx morph</span></a> - Interpolate linearly between conformations</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-msd.html"><span class="doc">gmx msd</span></a> - Calculates mean square displacements</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-nmeig.html"><span class="doc">gmx nmeig</span></a> - Diagonalize the Hessian for normal mode analysis</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-nmens.html"><span class="doc">gmx nmens</span></a> - Generate an ensemble of structures from the normal modes</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-nmtraj.html"><span class="doc">gmx nmtraj</span></a> - Generate a virtual oscillating trajectory from an eigenvector</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-order.html"><span class="doc">gmx order</span></a> - Compute the order parameter per atom for carbon tails</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-pairdist.html"><span class="doc">gmx pairdist</span></a> - Calculate pairwise distances between groups of positions</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html"><span class="doc">gmx pdb2gmx</span></a> - Convert coordinate files to topology and FF-compliant coordinate files</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-pme_error.html"><span class="doc">gmx pme_error</span></a> - Estimate the error of using PME with a given input file</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-polystat.html"><span class="doc">gmx polystat</span></a> - Calculate static properties of polymers</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-potential.html"><span class="doc">gmx potential</span></a> - Calculate the electrostatic potential across the box</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-principal.html"><span class="doc">gmx principal</span></a> - Calculate principal axes of inertia for a group of atoms</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-rama.html"><span class="doc">gmx rama</span></a> - Compute Ramachandran plots</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-rdf.html"><span class="doc">gmx rdf</span></a> - Calculate radial distribution functions</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-rms.html"><span class="doc">gmx rms</span></a> - Calculate RMSDs with a reference structure and RMSD matrices</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-rmsdist.html"><span class="doc">gmx rmsdist</span></a> - Calculate atom pair distances averaged with power -2, -3 or -6</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-rmsf.html"><span class="doc">gmx rmsf</span></a> - Calculate atomic fluctuations</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-rotacf.html"><span class="doc">gmx rotacf</span></a> - Calculate the rotational correlation function for molecules</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-rotmat.html"><span class="doc">gmx rotmat</span></a> - Plot the rotation matrix for fitting to a reference structure</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-saltbr.html"><span class="doc">gmx saltbr</span></a> - Compute salt bridges</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-sans.html"><span class="doc">gmx sans</span></a> - Compute small angle neutron scattering spectra</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-sasa.html"><span class="doc">gmx sasa</span></a> - Compute solvent accessible surface area</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-saxs.html"><span class="doc">gmx saxs</span></a> - Compute small angle X-ray scattering spectra</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-select.html"><span class="doc">gmx select</span></a> - Print general information about selections</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-sham.html"><span class="doc">gmx sham</span></a> - Compute free energies or other histograms from histograms</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-sigeps.html"><span class="doc">gmx sigeps</span></a> - Convert c6/12 or c6/cn combinations to and from sigma/epsilon</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-solvate.html"><span class="doc">gmx solvate</span></a> - Solvate a system</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-sorient.html"><span class="doc">gmx sorient</span></a> - Analyze solvent orientation around solutes</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-spatial.html"><span class="doc">gmx spatial</span></a> - Calculate the spatial distribution function</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-spol.html"><span class="doc">gmx spol</span></a> - Analyze solvent dipole orientation and polarization around solutes</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-tcaf.html"><span class="doc">gmx tcaf</span></a> - Calculate viscosities of liquids</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-traj.html"><span class="doc">gmx traj</span></a> - Plot x, v, f, box, temperature and rotational energy from trajectories</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-trjcat.html"><span class="doc">gmx trjcat</span></a> - Concatenate trajectory files</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-trjconv.html"><span class="doc">gmx trjconv</span></a> - Convert and manipulates trajectory files</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-trjorder.html"><span class="doc">gmx trjorder</span></a> - Order molecules according to their distance to a group</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-tune_pme.html"><span class="doc">gmx tune_pme</span></a> - Time mdrun as a function of PME ranks to optimize settings</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-vanhove.html"><span class="doc">gmx vanhove</span></a> - Compute Van Hove displacement and correlation functions</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-velacc.html"><span class="doc">gmx velacc</span></a> - Calculate velocity autocorrelation functions</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-view.html"><span class="doc">gmx view</span></a> - View a trajectory on an X-Windows terminal</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-wham.html"><span class="doc">gmx wham</span></a> - Perform weighted histogram analysis after umbrella sampling</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-wheel.html"><span class="doc">gmx wheel</span></a> - Plot helical wheels</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-x2top.html"><span class="doc">gmx x2top</span></a> - Generate a primitive topology from coordinates</li>
+<li><a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html"><span class="doc">gmx xpm2ps</span></a> - Convert XPM (XPixelMap) matrices to postscript or XPM</li>
+</ul>
+</div>
+<div class="section" id="commands-by-topic">
+<h2>Commands by topic<a class="headerlink" href="#commands-by-topic" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="trajectory-analysis">
+<h3>Trajectory analysis<a class="headerlink" href="#trajectory-analysis" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-gangle.html"><span class="doc">gmx gangle</span></a></dt>
+<dd>Calculate angles</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-distance.html"><span class="doc">gmx distance</span></a></dt>
+<dd>Calculate distances between pairs of positions</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-freevolume.html"><span class="doc">gmx freevolume</span></a></dt>
+<dd>Calculate free volume</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-pairdist.html"><span class="doc">gmx pairdist</span></a></dt>
+<dd>Calculate pairwise distances between groups of positions</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rdf.html"><span class="doc">gmx rdf</span></a></dt>
+<dd>Calculate radial distribution functions</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-sasa.html"><span class="doc">gmx sasa</span></a></dt>
+<dd>Compute solvent accessible surface area</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-select.html"><span class="doc">gmx select</span></a></dt>
+<dd>Print general information about selections</dd>
+</dl>
+</div>
+<div class="section" id="generating-topologies-and-coordinates">
+<h3>Generating topologies and coordinates<a class="headerlink" href="#generating-topologies-and-coordinates" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-editconf.html"><span class="doc">gmx editconf</span></a></dt>
+<dd>Edit the box and write subgroups</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-x2top.html"><span class="doc">gmx x2top</span></a></dt>
+<dd>Generate a primitive topology from coordinates</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-solvate.html"><span class="doc">gmx solvate</span></a></dt>
+<dd>Solvate a system</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-insert-molecules.html"><span class="doc">gmx insert-molecules</span></a></dt>
+<dd>Insert molecules into existing vacancies</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-genconf.html"><span class="doc">gmx genconf</span></a></dt>
+<dd>Multiply a conformation in &#8216;random&#8217; orientations</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-genion.html"><span class="doc">gmx genion</span></a></dt>
+<dd>Generate monoatomic ions on energetically favorable positions</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-genrestr.html"><span class="doc">gmx genrestr</span></a></dt>
+<dd>Generate position restraints or distance restraints for index groups</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html"><span class="doc">gmx pdb2gmx</span></a></dt>
+<dd>Convert coordinate files to topology and FF-compliant coordinate files</dd>
+</dl>
+</div>
+<div class="section" id="running-a-simulation">
+<h3>Running a simulation<a class="headerlink" href="#running-a-simulation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-grompp.html"><span class="doc">gmx grompp</span></a></dt>
+<dd>Make a run input file</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-mdrun.html"><span class="doc">gmx mdrun</span></a></dt>
+<dd>Perform a simulation, do a normal mode analysis or an energy minimization</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-convert-tpr.html"><span class="doc">gmx convert-tpr</span></a></dt>
+<dd>Make a modifed run-input file</dd>
+</dl>
+</div>
+<div class="section" id="viewing-trajectories">
+<h3>Viewing trajectories<a class="headerlink" href="#viewing-trajectories" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-nmtraj.html"><span class="doc">gmx nmtraj</span></a></dt>
+<dd>Generate a virtual oscillating trajectory from an eigenvector</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-view.html"><span class="doc">gmx view</span></a></dt>
+<dd>View a trajectory on an X-Windows terminal</dd>
+</dl>
+</div>
+<div class="section" id="processing-energies">
+<h3>Processing energies<a class="headerlink" href="#processing-energies" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-enemat.html"><span class="doc">gmx enemat</span></a></dt>
+<dd>Extract an energy matrix from an energy file</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-energy.html"><span class="doc">gmx energy</span></a></dt>
+<dd>Writes energies to xvg files and display averages</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-mdrun.html"><span class="doc">gmx mdrun</span></a></dt>
+<dd>(Re)calculate energies for trajectory frames with -rerun</dd>
+</dl>
+</div>
+<div class="section" id="converting-files">
+<h3>Converting files<a class="headerlink" href="#converting-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-editconf.html"><span class="doc">gmx editconf</span></a></dt>
+<dd>Convert and manipulates structure files</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-eneconv.html"><span class="doc">gmx eneconv</span></a></dt>
+<dd>Convert energy files</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-sigeps.html"><span class="doc">gmx sigeps</span></a></dt>
+<dd>Convert c6/12 or c6/cn combinations to and from sigma/epsilon</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-trjcat.html"><span class="doc">gmx trjcat</span></a></dt>
+<dd>Concatenate trajectory files</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-trjconv.html"><span class="doc">gmx trjconv</span></a></dt>
+<dd>Convert and manipulates trajectory files</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html"><span class="doc">gmx xpm2ps</span></a></dt>
+<dd>Convert XPM (XPixelMap) matrices to postscript or XPM</dd>
+</dl>
+</div>
+<div class="section" id="tools">
+<h3>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-analyze.html"><span class="doc">gmx analyze</span></a></dt>
+<dd>Analyze data sets</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-dyndom.html"><span class="doc">gmx dyndom</span></a></dt>
+<dd>Interpolate and extrapolate structure rotations</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-filter.html"><span class="doc">gmx filter</span></a></dt>
+<dd>Frequency filter trajectories, useful for making smooth movies</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-lie.html"><span class="doc">gmx lie</span></a></dt>
+<dd>Estimate free energy from linear combinations</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-morph.html"><span class="doc">gmx morph</span></a></dt>
+<dd>Interpolate linearly between conformations</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-pme_error.html"><span class="doc">gmx pme_error</span></a></dt>
+<dd>Estimate the error of using PME with a given input file</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-sham.html"><span class="doc">gmx sham</span></a></dt>
+<dd>Compute free energies or other histograms from histograms</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-spatial.html"><span class="doc">gmx spatial</span></a></dt>
+<dd>Calculate the spatial distribution function</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-traj.html"><span class="doc">gmx traj</span></a></dt>
+<dd>Plot x, v, f, box, temperature and rotational energy from trajectories</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-tune_pme.html"><span class="doc">gmx tune_pme</span></a></dt>
+<dd>Time mdrun as a function of PME ranks to optimize settings</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-wham.html"><span class="doc">gmx wham</span></a></dt>
+<dd>Perform weighted histogram analysis after umbrella sampling</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-check.html"><span class="doc">gmx check</span></a></dt>
+<dd>Check and compare files</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-dump.html"><span class="doc">gmx dump</span></a></dt>
+<dd>Make binary files human readable</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-make_ndx.html"><span class="doc">gmx make_ndx</span></a></dt>
+<dd>Make index files</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-mk_angndx.html"><span class="doc">gmx mk_angndx</span></a></dt>
+<dd>Generate index files for &#8216;gmx angle&#8217;</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-trjorder.html"><span class="doc">gmx trjorder</span></a></dt>
+<dd>Order molecules according to their distance to a group</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html"><span class="doc">gmx xpm2ps</span></a></dt>
+<dd>Convert XPM (XPixelMap) matrices to postscript or XPM</dd>
+</dl>
+</div>
+<div class="section" id="distances-between-structures">
+<h3>Distances between structures<a class="headerlink" href="#distances-between-structures" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-cluster.html"><span class="doc">gmx cluster</span></a></dt>
+<dd>Cluster structures</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-confrms.html"><span class="doc">gmx confrms</span></a></dt>
+<dd>Fit two structures and calculates the RMSD</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rms.html"><span class="doc">gmx rms</span></a></dt>
+<dd>Calculate RMSDs with a reference structure and RMSD matrices</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rmsf.html"><span class="doc">gmx rmsf</span></a></dt>
+<dd>Calculate atomic fluctuations</dd>
+</dl>
+</div>
+<div class="section" id="distances-in-structures-over-time">
+<h3>Distances in structures over time<a class="headerlink" href="#distances-in-structures-over-time" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-mindist.html"><span class="doc">gmx mindist</span></a></dt>
+<dd>Calculate the minimum distance between two groups</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-mdmat.html"><span class="doc">gmx mdmat</span></a></dt>
+<dd>Calculate residue contact maps</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-polystat.html"><span class="doc">gmx polystat</span></a></dt>
+<dd>Calculate static properties of polymers</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rmsdist.html"><span class="doc">gmx rmsdist</span></a></dt>
+<dd>Calculate atom pair distances averaged with power -2, -3 or -6</dd>
+</dl>
+</div>
+<div class="section" id="mass-distribution-properties-over-time">
+<h3>Mass distribution properties over time<a class="headerlink" href="#mass-distribution-properties-over-time" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-gyrate.html"><span class="doc">gmx gyrate</span></a></dt>
+<dd>Calculate the radius of gyration</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-msd.html"><span class="doc">gmx msd</span></a></dt>
+<dd>Calculates mean square displacements</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-polystat.html"><span class="doc">gmx polystat</span></a></dt>
+<dd>Calculate static properties of polymers</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rdf.html"><span class="doc">gmx rdf</span></a></dt>
+<dd>Calculate radial distribution functions</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rotacf.html"><span class="doc">gmx rotacf</span></a></dt>
+<dd>Calculate the rotational correlation function for molecules</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rotmat.html"><span class="doc">gmx rotmat</span></a></dt>
+<dd>Plot the rotation matrix for fitting to a reference structure</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-sans.html"><span class="doc">gmx sans</span></a></dt>
+<dd>Compute small angle neutron scattering spectra</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-saxs.html"><span class="doc">gmx saxs</span></a></dt>
+<dd>Compute small angle X-ray scattering spectra</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-traj.html"><span class="doc">gmx traj</span></a></dt>
+<dd>Plot x, v, f, box, temperature and rotational energy from trajectories</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-vanhove.html"><span class="doc">gmx vanhove</span></a></dt>
+<dd>Compute Van Hove displacement and correlation functions</dd>
+</dl>
+</div>
+<div class="section" id="analyzing-bonded-interactions">
+<h3>Analyzing bonded interactions<a class="headerlink" href="#analyzing-bonded-interactions" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-angle.html"><span class="doc">gmx angle</span></a></dt>
+<dd>Calculate distributions and correlations for angles and dihedrals</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-mk_angndx.html"><span class="doc">gmx mk_angndx</span></a></dt>
+<dd>Generate index files for &#8216;gmx angle&#8217;</dd>
+</dl>
+</div>
+<div class="section" id="structural-properties">
+<h3>Structural properties<a class="headerlink" href="#structural-properties" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-anadock.html"><span class="doc">gmx anadock</span></a></dt>
+<dd>Cluster structures from Autodock runs</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-bundle.html"><span class="doc">gmx bundle</span></a></dt>
+<dd>Analyze bundles of axes, e.g., helices</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-clustsize.html"><span class="doc">gmx clustsize</span></a></dt>
+<dd>Calculate size distributions of atomic clusters</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-disre.html"><span class="doc">gmx disre</span></a></dt>
+<dd>Analyze distance restraints</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-hbond.html"><span class="doc">gmx hbond</span></a></dt>
+<dd>Compute and analyze hydrogen bonds</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-order.html"><span class="doc">gmx order</span></a></dt>
+<dd>Compute the order parameter per atom for carbon tails</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-principal.html"><span class="doc">gmx principal</span></a></dt>
+<dd>Calculate principal axes of inertia for a group of atoms</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rdf.html"><span class="doc">gmx rdf</span></a></dt>
+<dd>Calculate radial distribution functions</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-saltbr.html"><span class="doc">gmx saltbr</span></a></dt>
+<dd>Compute salt bridges</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-sorient.html"><span class="doc">gmx sorient</span></a></dt>
+<dd>Analyze solvent orientation around solutes</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-spol.html"><span class="doc">gmx spol</span></a></dt>
+<dd>Analyze solvent dipole orientation and polarization around solutes</dd>
+</dl>
+</div>
+<div class="section" id="kinetic-properties">
+<h3>Kinetic properties<a class="headerlink" href="#kinetic-properties" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-bar.html"><span class="doc">gmx bar</span></a></dt>
+<dd>Calculate free energy difference estimates through Bennett&#8217;s acceptance ratio</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-current.html"><span class="doc">gmx current</span></a></dt>
+<dd>Calculate dielectric constants and current autocorrelation function</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-dos.html"><span class="doc">gmx dos</span></a></dt>
+<dd>Analyze density of states and properties based on that</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-dyecoupl.html"><span class="doc">gmx dyecoupl</span></a></dt>
+<dd>Extract dye dynamics from trajectories</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-principal.html"><span class="doc">gmx principal</span></a></dt>
+<dd>Calculate principal axes of inertia for a group of atoms</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-tcaf.html"><span class="doc">gmx tcaf</span></a></dt>
+<dd>Calculate viscosities of liquids</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-traj.html"><span class="doc">gmx traj</span></a></dt>
+<dd>Plot x, v, f, box, temperature and rotational energy from trajectories</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-vanhove.html"><span class="doc">gmx vanhove</span></a></dt>
+<dd>Compute Van Hove displacement and correlation functions</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-velacc.html"><span class="doc">gmx velacc</span></a></dt>
+<dd>Calculate velocity autocorrelation functions</dd>
+</dl>
+</div>
+<div class="section" id="electrostatic-properties">
+<h3>Electrostatic properties<a class="headerlink" href="#electrostatic-properties" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-current.html"><span class="doc">gmx current</span></a></dt>
+<dd>Calculate dielectric constants and current autocorrelation function</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-dielectric.html"><span class="doc">gmx dielectric</span></a></dt>
+<dd>Calculate frequency dependent dielectric constants</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-dipoles.html"><span class="doc">gmx dipoles</span></a></dt>
+<dd>Compute the total dipole plus fluctuations</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-potential.html"><span class="doc">gmx potential</span></a></dt>
+<dd>Calculate the electrostatic potential across the box</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-spol.html"><span class="doc">gmx spol</span></a></dt>
+<dd>Analyze solvent dipole orientation and polarization around solutes</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-genion.html"><span class="doc">gmx genion</span></a></dt>
+<dd>Generate monoatomic ions on energetically favorable positions</dd>
+</dl>
+</div>
+<div class="section" id="protein-specific-analysis">
+<h3>Protein-specific analysis<a class="headerlink" href="#protein-specific-analysis" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-do_dssp.html"><span class="doc">gmx do_dssp</span></a></dt>
+<dd>Assign secondary structure and calculate solvent accessible surface area</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-chi.html"><span class="doc">gmx chi</span></a></dt>
+<dd>Calculate everything you want to know about chi and other dihedrals</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-helix.html"><span class="doc">gmx helix</span></a></dt>
+<dd>Calculate basic properties of alpha helices</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-helixorient.html"><span class="doc">gmx helixorient</span></a></dt>
+<dd>Calculate local pitch/bending/rotation/orientation inside helices</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-rama.html"><span class="doc">gmx rama</span></a></dt>
+<dd>Compute Ramachandran plots</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-wheel.html"><span class="doc">gmx wheel</span></a></dt>
+<dd>Plot helical wheels</dd>
+</dl>
+</div>
+<div class="section" id="interfaces">
+<h3>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-bundle.html"><span class="doc">gmx bundle</span></a></dt>
+<dd>Analyze bundles of axes, e.g., helices</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-density.html"><span class="doc">gmx density</span></a></dt>
+<dd>Calculate the density of the system</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-densmap.html"><span class="doc">gmx densmap</span></a></dt>
+<dd>Calculate 2D planar or axial-radial density maps</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-densorder.html"><span class="doc">gmx densorder</span></a></dt>
+<dd>Calculate surface fluctuations</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-h2order.html"><span class="doc">gmx h2order</span></a></dt>
+<dd>Compute the orientation of water molecules</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-hydorder.html"><span class="doc">gmx hydorder</span></a></dt>
+<dd>Compute tetrahedrality parameters around a given atom</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-order.html"><span class="doc">gmx order</span></a></dt>
+<dd>Compute the order parameter per atom for carbon tails</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-potential.html"><span class="doc">gmx potential</span></a></dt>
+<dd>Calculate the electrostatic potential across the box</dd>
+</dl>
+</div>
+<div class="section" id="covariance-analysis">
+<h3>Covariance analysis<a class="headerlink" href="#covariance-analysis" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-anaeig.html"><span class="doc">gmx anaeig</span></a></dt>
+<dd>Analyze the eigenvectors</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-covar.html"><span class="doc">gmx covar</span></a></dt>
+<dd>Calculate and diagonalize the covariance matrix</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-make_edi.html"><span class="doc">gmx make_edi</span></a></dt>
+<dd>Generate input files for essential dynamics sampling</dd>
+</dl>
+</div>
+<div class="section" id="normal-modes">
+<h3>Normal modes<a class="headerlink" href="#normal-modes" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="../onlinehelp/gmx-anaeig.html"><span class="doc">gmx anaeig</span></a></dt>
+<dd>Analyze the normal modes</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-nmeig.html"><span class="doc">gmx nmeig</span></a></dt>
+<dd>Diagonalize the Hessian for normal mode analysis</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-nmtraj.html"><span class="doc">gmx nmtraj</span></a></dt>
+<dd>Generate a virtual oscillating trajectory from an eigenvector</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-nmens.html"><span class="doc">gmx nmens</span></a></dt>
+<dd>Generate an ensemble of structures from the normal modes</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-grompp.html"><span class="doc">gmx grompp</span></a></dt>
+<dd>Make a run input file</dd>
+<dt><a class="reference internal" href="../onlinehelp/gmx-mdrun.html"><span class="doc">gmx mdrun</span></a></dt>
+<dd>Find a potential energy minimum and calculate the Hessian</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="special-topics">
+<h2>Special topics<a class="headerlink" href="#special-topics" title="Permalink to this headline">¶</a></h2>
+<p>The information in these topics is also accessible through
+<code class="samp docutils literal"><span class="pre">gmx</span> <span class="pre">help</span> <em><span class="pre">topic</span></em></code> on the command line.</p>
+<div class="section" id="selection-syntax-and-usage">
+<h3>Selection syntax and usage<a class="headerlink" href="#selection-syntax-and-usage" title="Permalink to this headline">¶</a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../onlinehelp/selections.html">Selection syntax and usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#specifying-selections-from-command-line">Specifying selections from command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#selection-syntax">Selection syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#specifying-positions-in-selections">Specifying positions in selections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#arithmetic-expressions-in-selections">Arithmetic expressions in selections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#selection-keywords">Selection keywords</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../onlinehelp/selections.html#selecting-atoms-by-name-atomname-name-pdbatomname-pdbname">Selecting atoms by name - atomname, name, pdbatomname, pdbname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../onlinehelp/selections.html#selecting-based-on-distance-dist-distance-mindist-mindistance-within">Selecting based on distance - dist, distance, mindist, mindistance, within</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../onlinehelp/selections.html#selecting-atoms-in-a-solid-angle-insolidangle">Selecting atoms in a solid angle - insolidangle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../onlinehelp/selections.html#merging-selections-merge-plus">Merging selections - merge, plus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../onlinehelp/selections.html#permuting-selections-permute">Permuting selections - permute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../onlinehelp/selections.html#selecting-atoms-by-residue-number-resid-residue-resindex-resnr">Selecting atoms by residue number - resid, residue, resindex, resnr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../onlinehelp/selections.html#extending-selections-same">Extending selections - same</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#selection-evaluation-and-optimization">Selection evaluation and optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#selection-limitations">Selection limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../onlinehelp/selections.html#selection-examples">Selection examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="command-changes-between-versions">
+<span id="command-changes"></span><h2>Command changes between versions<a class="headerlink" href="#command-changes-between-versions" title="Permalink to this headline">¶</a></h2>
+<p>Starting from GROMACS 5.0, some of the analysis commands (and a few other
+commands as well) have changed significantly.</p>
+<p>One main driver for this has been that many new tools mentioned below now
+accept selections through one or more command-line options instead of prompting
+for a static index group.  To take full advantage of selections, the interface
+to the commands has changed somewhat, and some previous command-line options
+are no longer present as the same effect can be achieved with suitable
+selections.
+Please see <a class="reference internal" href="../onlinehelp/selections.html"><span class="doc">Selection syntax and usage</span></a> additional information on how to use
+selections.</p>
+<p>In the process, some old analysis commands have been removed in favor of more
+powerful functionality that is available through an alternative tool.
+For removed or replaced commands, this page documents how to perform the same
+tasks with new tools.
+For new commands, a brief note on the available features is given.  See the
+linked help for the new commands for a full description.</p>
+<p>This section lists only major changes; minor changes like additional/removed
+options or bug fixes are not typically included.</p>
+<div class="section" id="version-2016">
+<h3>Version 2016<a class="headerlink" href="#version-2016" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="analysis-on-arbitrary-subsets-of-atoms">
+<h4>Analysis on arbitrary subsets of atoms<a class="headerlink" href="#analysis-on-arbitrary-subsets-of-atoms" title="Permalink to this headline">¶</a></h4>
+<p>Tools implemented in the new analysis framework can now operate upon trajectories
+that match only a subset of the atoms in the input structure file.</p>
+</div>
+<div class="section" id="gmx-insert-molecules">
+<h4>gmx insert-molecules<a class="headerlink" href="#gmx-insert-molecules" title="Permalink to this headline">¶</a></h4>
+<p><strong>improved</strong></p>
+<p><a class="reference internal" href="../onlinehelp/gmx-insert-molecules.html#gmx-insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a> has gained an option <code class="docutils literal"><span class="pre">-replace</span></code> that makes it
+possible to insert molecules into a solvated configuration, replacing any
+overlapping solvent atoms.  In a fully solvated box, it is also possible to
+insert into a certain region of the solvent only by selecting a subset of the
+solvent atoms (<code class="docutils literal"><span class="pre">-replace</span></code> takes a selection that can also contain expressions
+like <code class="docutils literal"><span class="pre">not</span> <span class="pre">within</span> <span class="pre">1</span> <span class="pre">of</span> <span class="pre">...</span></code>).</p>
+</div>
+<div class="section" id="gmx-rdf">
+<h4>gmx rdf<a class="headerlink" href="#gmx-rdf" title="Permalink to this headline">¶</a></h4>
+<p><strong>improved</strong></p>
+<p>The normalization for the output RDF can now also be the radial number density.</p>
+</div>
+<div class="section" id="gmx-genconf">
+<h4>gmx genconf<a class="headerlink" href="#gmx-genconf" title="Permalink to this headline">¶</a></h4>
+<p><strong>simplified</strong></p>
+<p>Removed <code class="docutils literal"><span class="pre">-block</span></code>, <code class="docutils literal"><span class="pre">-sort</span></code> and <code class="docutils literal"><span class="pre">-shuffle</span></code>.</p>
+</div>
+</div>
+<div class="section" id="version-5-1">
+<h3>Version 5.1<a class="headerlink" href="#version-5-1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="general">
+<h4>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h4>
+<p>Symbolic links from 5.0 are no longer supported.  The only way to invoke a
+command is through <code class="samp docutils literal"><span class="pre">gmx</span> <em><span class="pre">&lt;command&gt;</span></em></code>.</p>
+</div>
+<div class="section" id="gmx-pairdist">
+<h4>gmx pairdist<a class="headerlink" href="#gmx-pairdist" title="Permalink to this headline">¶</a></h4>
+<p><strong>new</strong></p>
+<p><a class="reference internal" href="../onlinehelp/gmx-pairdist.html#gmx-pairdist"><span class="std std-ref">gmx pairdist</span></a> has been introduced as a selection-enabled replacement for
+<a class="reference internal" href="../onlinehelp/gmx-mindist.html#gmx-mindist"><span class="std std-ref">gmx mindist</span></a> (<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mindist</span></code> still exists unchanged).  It can calculate
+min/max pairwise distances between a pair of selections, including, e.g.,
+per-residue minimum distances or distances from a single point to a set of
+residue-centers-of-mass.</p>
+</div>
+<div class="section" id="id1">
+<h4>gmx rdf<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p><strong>rewritten</strong></p>
+<p><a class="reference internal" href="../onlinehelp/gmx-rdf.html#gmx-rdf"><span class="std std-ref">gmx rdf</span></a> has been rewritten for 5.1 to use selections for specifying the
+points from which the RDFs are calculated.  The interface is mostly the same,
+except that there are new command-line options to specify the selections.
+The following additional changes have been made:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-com</span></code> and <code class="docutils literal"><span class="pre">-rdf</span></code> options have been removed.  Equivalent functionality is
+available through selections:<ul>
+<li><code class="docutils literal"><span class="pre">-com</span></code> can be replaced with a <code class="samp docutils literal"><span class="pre">com</span> <span class="pre">of</span> <em><span class="pre">&lt;selection&gt;</span></em></code> as the
+reference selection.</li>
+<li><code class="docutils literal"><span class="pre">-rdf</span></code> can be replaced with a suitable set of selections (e.g.,
+<code class="samp docutils literal"><span class="pre">res_com</span> <span class="pre">of</span> <em><span class="pre">&lt;selection&gt;</span></em></code>) and/or using <code class="docutils literal"><span class="pre">-seltype</span></code>.</li>
+</ul>
+</li>
+<li><code class="docutils literal"><span class="pre">-rmax</span></code> option is added to specify a cutoff for the RDFs.  If set to a
+value that is significantly smaller than half the box size, it can speed up
+the calculation significantly if a grid-based neighborhood search can be
+used.</li>
+<li><code class="docutils literal"><span class="pre">-hq</span></code> and <code class="docutils literal"><span class="pre">-fade</span></code> options have been removed, as they are simply
+postprocessing steps on the raw numbers that can be easily done after the
+analysis.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="version-5-0">
+<h3>Version 5.0<a class="headerlink" href="#version-5-0" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h4>General<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>Version 5.0 introduced the <strong class="command">gmx</strong> wrapper binary.
+For backwards compatibility, this version still creates symbolic links by default for
+old tools: e.g., <code class="docutils literal"><span class="pre">g_order</span> <span class="pre">&lt;options&gt;</span></code> is equivalent to <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">order</span> <span class="pre">&lt;options&gt;</span></code>, and
+<code class="docutils literal"><span class="pre">g_order</span></code> is simply a symbolic link on the file system.</p>
+</div>
+<div class="section" id="g-bond">
+<h4>g_bond<a class="headerlink" href="#g-bond" title="Permalink to this headline">¶</a></h4>
+<p><strong>replaced</strong></p>
+<p>This tool has been removed in 5.0. A replacement is <a class="reference internal" href="../onlinehelp/gmx-distance.html#gmx-distance"><span class="std std-ref">gmx distance</span></a>.</p>
+<p>You can provide your existing index file to <a class="reference internal" href="../onlinehelp/gmx-distance.html#gmx-distance"><span class="std std-ref">gmx distance</span></a>, and it will
+calculate the same distances.  The differences are:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-blen</span></code> and <code class="docutils literal"><span class="pre">-tol</span></code> options have different default values.</li>
+<li>You can control the output histogram with <code class="docutils literal"><span class="pre">-binw</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">-aver</span></code> and <code class="docutils literal"><span class="pre">-averdist</span></code> options are not present.  Instead, you can choose
+between the different things to calculate using <code class="docutils literal"><span class="pre">-oav</span></code> (corresponds to
+<code class="docutils literal"><span class="pre">-d</span></code> with <code class="docutils literal"><span class="pre">-averdist</span></code>), <code class="docutils literal"><span class="pre">-oall</span></code> (corresponds to <code class="docutils literal"><span class="pre">-d</span></code> without
+<code class="docutils literal"><span class="pre">-averdist</span></code>), <code class="docutils literal"><span class="pre">-oh</span></code> (corresponds to <code class="docutils literal"><span class="pre">-o</span></code> with <code class="docutils literal"><span class="pre">-aver</span></code>), and
+<code class="docutils literal"><span class="pre">-oallstat</span></code> (corresponds to <code class="docutils literal"><span class="pre">-l</span></code> without <code class="docutils literal"><span class="pre">-aver</span></code>).</li>
+</ul>
+<p>You can produce any combination of output files.  Compared to <code class="docutils literal"><span class="pre">g_bond</span></code>,
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">distance</span> <span class="pre">-oall</span></code> is currently missing labels for the output columns.</p>
+</div>
+<div class="section" id="g-dist">
+<h4>g_dist<a class="headerlink" href="#g-dist" title="Permalink to this headline">¶</a></h4>
+<p><strong>replaced</strong></p>
+<p>This tool has been removed in 5.0.  A replacement is <a class="reference internal" href="../onlinehelp/gmx-distance.html#gmx-distance"><span class="std std-ref">gmx distance</span></a> (for
+most options) or <a class="reference internal" href="../onlinehelp/gmx-select.html#gmx-select"><span class="std std-ref">gmx select</span></a> (for <code class="docutils literal"><span class="pre">-dist</span></code> or <code class="docutils literal"><span class="pre">-lt</span></code>).</p>
+<p>If you had index groups A and B in <code class="file docutils literal"><span class="pre">index.ndx</span></code> for <code class="docutils literal"><span class="pre">g_dist</span></code>, you can use the
+following command to compute the same distance with <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">distance</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">distance</span> <span class="o">-</span><span class="n">n</span> <span class="n">index</span><span class="o">.</span><span class="n">ndx</span> <span class="o">-</span><span class="n">select</span> <span class="s1">&#39;com of group &quot;A&quot; plus com of group &quot;B&quot;&#39;</span> <span class="o">-</span><span class="n">oxyz</span> <span class="o">-</span><span class="n">oall</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">-intra</span></code> switch is replaced with <code class="docutils literal"><span class="pre">-nopbc</span></code>.</p>
+<p>If you used <code class="docutils literal"><span class="pre">-dist</span> <span class="pre">D</span></code>, you can do the same calculation with <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">select</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">select</span> <span class="o">-</span><span class="n">n</span> <span class="n">index</span><span class="o">.</span><span class="n">ndx</span> <span class="o">-</span><span class="n">select</span> <span class="s1">&#39;group &quot;B&quot; and within D of com of group &quot;A&quot;&#39;</span> <span class="o">-</span><span class="n">on</span><span class="o">/-</span><span class="n">oi</span><span class="o">/-</span><span class="n">os</span><span class="o">/-</span><span class="n">olt</span>
+</pre></div>
+</div>
+<p>You can select the output option that best suits your post-processing needs
+(<code class="docutils literal"><span class="pre">-olt</span></code> is a replacement for <code class="docutils literal"><span class="pre">g_dist</span> <span class="pre">-dist</span> <span class="pre">-lt</span></code>)</p>
+</div>
+<div class="section" id="gmx-distance">
+<h4>gmx distance<a class="headerlink" href="#gmx-distance" title="Permalink to this headline">¶</a></h4>
+<p><strong>new</strong></p>
+<p><a class="reference internal" href="../onlinehelp/gmx-distance.html#gmx-distance"><span class="std std-ref">gmx distance</span></a> has been introduced as a selection-enabled replacement for
+various tools that computed distances between fixed pairs of atoms (or
+centers-of-mass of groups).  It has a combination of the features of <code class="docutils literal"><span class="pre">g_bond</span></code>
+and <code class="docutils literal"><span class="pre">g_dist</span></code>, allowing computation of one or multiple distances, either
+between atom-atom pairs or centers-of-mass of groups, and providing a
+combination of output options that were available in one of the tools.</p>
+</div>
+<div class="section" id="gmx-gangle">
+<h4>gmx gangle<a class="headerlink" href="#gmx-gangle" title="Permalink to this headline">¶</a></h4>
+<p><strong>new</strong></p>
+<p><a class="reference internal" href="../onlinehelp/gmx-gangle.html#gmx-gangle"><span class="std std-ref">gmx gangle</span></a> has been introduced as a selection-enabled replacement for
+<code class="docutils literal"><span class="pre">g_sgangle</span></code>.  In addition to supporting atom-atom vectors, centers-of-mass
+can be used as endpoints of the vectors, and there are a few additional angle
+types that can be calculated.  The command also has basic support for
+calculating normal angles between three atoms and/or centers-of-mass, making it
+a partial replacement for <a class="reference internal" href="../onlinehelp/gmx-angle.html#gmx-angle"><span class="std std-ref">gmx angle</span></a> as well.</p>
+</div>
+<div class="section" id="gmx-protonate">
+<h4>gmx protonate<a class="headerlink" href="#gmx-protonate" title="Permalink to this headline">¶</a></h4>
+<p><strong>replaced</strong></p>
+<p>This was a very old tool originally written for united atom force fields,
+where it was necessary to generate all hydrogens after running a trajectory
+in order to calculate e.g. distance restraint violations. The functionality
+to simply protonate a structure is available in <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>.
+If there is significant interest, we might reintroduce it after moving to new
+topology formats in the future.</p>
+</div>
+<div class="section" id="gmx-freevolume">
+<h4>gmx freevolume<a class="headerlink" href="#gmx-freevolume" title="Permalink to this headline">¶</a></h4>
+<p><strong>new</strong></p>
+<p>This tool has been introduced in 5.0.  It uses a Monte Carlo sampling method to
+calculate the fraction of free volume within the box (using a probe of a given
+size).</p>
+</div>
+<div class="section" id="g-sas">
+<h4>g_sas<a class="headerlink" href="#g-sas" title="Permalink to this headline">¶</a></h4>
+<p><strong>rewritten</strong></p>
+<p>This tool has been rewritten in 5.0, and renamed to <a class="reference internal" href="../onlinehelp/gmx-sasa.html#gmx-sasa"><span class="std std-ref">gmx sasa</span></a> (the
+underlying surface area calculation algorithm is still the same).</p>
+<p>The main difference in the new tool is support for selections.  Instead of
+prompting for an index group, a (potentially dynamic) selection for the
+calculation can be given with <code class="docutils literal"><span class="pre">-surface</span></code>.  Any number of output groups can be
+given with <code class="docutils literal"><span class="pre">-output</span></code>, allowing multiple parts of the surface area to be
+computed in a single run.  The total area of the <code class="docutils literal"><span class="pre">-surface</span></code> group is now
+always calculated.</p>
+<p>The tool no longer automatically divides the surface into hydrophobic and
+hydrophilic areas, and there is no <code class="docutils literal"><span class="pre">-f_index</span></code> option.  The same effects can
+be obtained by defining suitable selections for <code class="docutils literal"><span class="pre">-output</span></code>.  If you want
+output that contains the same numbers as with the old tool for a calculation
+group <code class="docutils literal"><span class="pre">A</span></code> and output group <code class="docutils literal"><span class="pre">B</span></code>, you can use</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">sasa</span> <span class="o">-</span><span class="n">surface</span> <span class="s1">&#39;group &quot;A&quot;&#39;</span> <span class="o">-</span><span class="n">output</span> <span class="s1">&#39;&quot;Hydrophobic&quot; group &quot;A&quot; and charge {-0.2 to 0.2}; &quot;Hydrophilic&quot; group &quot;B&quot; and not charge {-0.2 to 0.2}; &quot;Total&quot; group &quot;B&quot;&#39;</span>
+</pre></div>
+</div>
+<p>Solvation free energy estimates are now calculated only if separately requested
+with <code class="docutils literal"><span class="pre">-odg</span></code>, and are written into a separate file.</p>
+<p>Output option <code class="docutils literal"><span class="pre">-i</span></code> for a position restraint file is not currently implemented
+in the new tool, but would not be very difficult to add if requested.</p>
+</div>
+<div class="section" id="g-sgangle">
+<h4>g_sgangle<a class="headerlink" href="#g-sgangle" title="Permalink to this headline">¶</a></h4>
+<p><strong>replaced</strong></p>
+<p>This tool has been removed in 5.0.  A replacement is <a class="reference internal" href="../onlinehelp/gmx-gangle.html#gmx-gangle"><span class="std std-ref">gmx gangle</span></a> (for
+angle calculation) and <a class="reference internal" href="../onlinehelp/gmx-distance.html#gmx-distance"><span class="std std-ref">gmx distance</span></a> (for <code class="docutils literal"><span class="pre">-od</span></code>, <code class="docutils literal"><span class="pre">-od1</span></code>, <code class="docutils literal"><span class="pre">-od2</span></code>).</p>
+<p>If you had index groups A and B in index.ndx for <code class="docutils literal"><span class="pre">g_sgangle</span></code>, you can use the
+following command to compute the same angle with <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">gangle</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">gangle</span> <span class="o">-</span><span class="n">n</span> <span class="n">index</span><span class="o">.</span><span class="n">ndx</span> <span class="o">-</span><span class="n">g1</span> <span class="n">vector</span><span class="o">/</span><span class="n">plane</span> <span class="o">-</span><span class="n">group1</span> <span class="s1">&#39;group &quot;A&quot;&#39;</span> <span class="o">-</span><span class="n">g2</span> <span class="n">vector</span><span class="o">/</span><span class="n">plane</span> <span class="o">-</span><span class="n">group2</span> <span class="s1">&#39;group &quot;B&quot;&#39;</span> <span class="o">-</span><span class="n">oav</span>
+</pre></div>
+</div>
+<p>You need to select either <code class="docutils literal"><span class="pre">vector</span></code> or <code class="docutils literal"><span class="pre">plane</span></code> for the <code class="docutils literal"><span class="pre">-g1</span></code> and <code class="docutils literal"><span class="pre">-g2</span></code>
+options depending on which one your index groups specify.</p>
+<p>If you only had a single index group A in index.ndx and you used <code class="docutils literal"><span class="pre">g_sgangle</span></code>
+<code class="docutils literal"><span class="pre">-z</span></code> or <code class="docutils literal"><span class="pre">-one</span></code>, you can use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">gangle</span> <span class="o">-</span><span class="n">n</span> <span class="n">index</span><span class="o">.</span><span class="n">ndx</span> <span class="o">-</span><span class="n">g1</span> <span class="n">vector</span><span class="o">/</span><span class="n">plane</span> <span class="o">-</span><span class="n">group1</span> <span class="s1">&#39;group &quot;A&quot;&#39;</span> <span class="o">-</span><span class="n">g2</span> <span class="n">z</span><span class="o">/</span><span class="n">t0</span> <span class="o">-</span><span class="n">oav</span>
+</pre></div>
+</div>
+<p>For the distances, you can use <a class="reference internal" href="../onlinehelp/gmx-distance.html#gmx-distance"><span class="std std-ref">gmx distance</span></a> to compute one or more
+distances as you want.  Both distances between centers of groups or individual
+atoms are supported using the new selection syntax.</p>
+</div>
+<div class="section" id="genbox">
+<h4>genbox<a class="headerlink" href="#genbox" title="Permalink to this headline">¶</a></h4>
+<p>This tool has been split to <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">gmx solvate</span></a> and <a class="reference internal" href="../onlinehelp/gmx-insert-molecules.html#gmx-insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a>.</p>
+</div>
+<div class="section" id="tpbconv">
+<h4>tpbconv<a class="headerlink" href="#tpbconv" title="Permalink to this headline">¶</a></h4>
+<p>This tool has been renamed <a class="reference internal" href="../onlinehelp/gmx-convert-tpr.html#gmx-convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Command-line reference</a><ul>
+<li><a class="reference internal" href="#command-line-interface-and-conventions">Command-line interface and conventions</a><ul>
+<li><a class="reference internal" href="#handling-specific-types-of-command-line-options">Handling specific types of command-line options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#commands-by-name">Commands by name</a></li>
+<li><a class="reference internal" href="#commands-by-topic">Commands by topic</a><ul>
+<li><a class="reference internal" href="#trajectory-analysis">Trajectory analysis</a></li>
+<li><a class="reference internal" href="#generating-topologies-and-coordinates">Generating topologies and coordinates</a></li>
+<li><a class="reference internal" href="#running-a-simulation">Running a simulation</a></li>
+<li><a class="reference internal" href="#viewing-trajectories">Viewing trajectories</a></li>
+<li><a class="reference internal" href="#processing-energies">Processing energies</a></li>
+<li><a class="reference internal" href="#converting-files">Converting files</a></li>
+<li><a class="reference internal" href="#tools">Tools</a></li>
+<li><a class="reference internal" href="#distances-between-structures">Distances between structures</a></li>
+<li><a class="reference internal" href="#distances-in-structures-over-time">Distances in structures over time</a></li>
+<li><a class="reference internal" href="#mass-distribution-properties-over-time">Mass distribution properties over time</a></li>
+<li><a class="reference internal" href="#analyzing-bonded-interactions">Analyzing bonded interactions</a></li>
+<li><a class="reference internal" href="#structural-properties">Structural properties</a></li>
+<li><a class="reference internal" href="#kinetic-properties">Kinetic properties</a></li>
+<li><a class="reference internal" href="#electrostatic-properties">Electrostatic properties</a></li>
+<li><a class="reference internal" href="#protein-specific-analysis">Protein-specific analysis</a></li>
+<li><a class="reference internal" href="#interfaces">Interfaces</a></li>
+<li><a class="reference internal" href="#covariance-analysis">Covariance analysis</a></li>
+<li><a class="reference internal" href="#normal-modes">Normal modes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#special-topics">Special topics</a><ul>
+<li><a class="reference internal" href="#selection-syntax-and-usage">Selection syntax and usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-changes-between-versions">Command changes between versions</a><ul>
+<li><a class="reference internal" href="#version-2016">Version 2016</a><ul>
+<li><a class="reference internal" href="#analysis-on-arbitrary-subsets-of-atoms">Analysis on arbitrary subsets of atoms</a></li>
+<li><a class="reference internal" href="#gmx-insert-molecules">gmx insert-molecules</a></li>
+<li><a class="reference internal" href="#gmx-rdf">gmx rdf</a></li>
+<li><a class="reference internal" href="#gmx-genconf">gmx genconf</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-5-1">Version 5.1</a><ul>
+<li><a class="reference internal" href="#general">General</a></li>
+<li><a class="reference internal" href="#gmx-pairdist">gmx pairdist</a></li>
+<li><a class="reference internal" href="#id1">gmx rdf</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-5-0">Version 5.0</a><ul>
+<li><a class="reference internal" href="#id2">General</a></li>
+<li><a class="reference internal" href="#g-bond">g_bond</a></li>
+<li><a class="reference internal" href="#g-dist">g_dist</a></li>
+<li><a class="reference internal" href="#gmx-distance">gmx distance</a></li>
+<li><a class="reference internal" href="#gmx-gangle">gmx gangle</a></li>
+<li><a class="reference internal" href="#gmx-protonate">gmx protonate</a></li>
+<li><a class="reference internal" href="#gmx-freevolume">gmx freevolume</a></li>
+<li><a class="reference internal" href="#g-sas">g_sas</a></li>
+<li><a class="reference internal" href="#g-sgangle">g_sgangle</a></li>
+<li><a class="reference internal" href="#genbox">genbox</a></li>
+<li><a class="reference internal" href="#tpbconv">tpbconv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="file-formats.html"
+                        title="previous chapter">File formats</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../onlinehelp/gmx.html"
+                        title="next chapter">molecular dynamics simulation suite</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/cmdline.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../onlinehelp/gmx.html" title="molecular dynamics simulation suite"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="file-formats.html" title="File formats"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

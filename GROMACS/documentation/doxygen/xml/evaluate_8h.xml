@@ -1,0 +1,907 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="evaluate_8h" kind="file">
+    <compoundname>evaluate.h</compoundname>
+    <includes refid="selelem_8h" local="yes">selelem.h</includes>
+    <includedby refid="compiler_8cpp" local="yes">src/gromacs/selection/compiler.cpp</includedby>
+    <includedby refid="evaluate_8cpp" local="yes">src/gromacs/selection/evaluate.cpp</includedby>
+    <incdepgraph>
+      <node id="15783">
+        <label>src/gromacs/selection/evaluate.h</label>
+        <link refid="evaluate.h"/>
+        <childnode refid="15784" relation="include">
+        </childnode>
+      </node>
+      <node id="15786">
+        <label>string</label>
+      </node>
+      <node id="15787">
+        <label>gromacs/selection/indexutil.h</label>
+        <link refid="indexutil_8h"/>
+        <childnode refid="15788" relation="include">
+        </childnode>
+        <childnode refid="15786" relation="include">
+        </childnode>
+      </node>
+      <node id="15790">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="15784">
+        <label>selelem.h</label>
+        <link refid="selelem_8h"/>
+        <childnode refid="15785" relation="include">
+        </childnode>
+        <childnode refid="15786" relation="include">
+        </childnode>
+        <childnode refid="15787" relation="include">
+        </childnode>
+        <childnode refid="15789" relation="include">
+        </childnode>
+        <childnode refid="15790" relation="include">
+        </childnode>
+        <childnode refid="15791" relation="include">
+        </childnode>
+      </node>
+      <node id="15788">
+        <label>cstdio</label>
+      </node>
+      <node id="15789">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="15785" relation="include">
+        </childnode>
+      </node>
+      <node id="15791">
+        <label>selvalue.h</label>
+        <link refid="selvalue_8h"/>
+        <childnode refid="15790" relation="include">
+        </childnode>
+      </node>
+      <node id="15785">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="15792">
+        <label>src/gromacs/selection/evaluate.h</label>
+        <link refid="evaluate.h"/>
+        <childnode refid="15793" relation="include">
+        </childnode>
+        <childnode refid="15794" relation="include">
+        </childnode>
+      </node>
+      <node id="15794">
+        <label>src/gromacs/selection/evaluate.cpp</label>
+        <link refid="evaluate_8cpp"/>
+      </node>
+      <node id="15793">
+        <label>src/gromacs/selection/compiler.cpp</label>
+        <link refid="compiler_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structgmx__sel__evaluate__t" prot="public">gmx_sel_evaluate_t</innerclass>
+      <sectiondef kind="user-defined">
+      <header>Utility functions</header>
+      <memberdef kind="function" id="evaluate_8h_1a482ebcc109e7ba24d9547ab607644943" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_init</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, gmx_sel_mempool_t *mp, gmx_ana_index_t *gall, t_topology *top, t_trxframe *fr, t_pbc *pbc)</argsstring>
+        <name>_gmx_sel_evaluate_init</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__sel__mempool__t" kindref="compound">gmx_sel_mempool_t</ref> *</type>
+          <declname>mp</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>gall</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__topology" kindref="compound">t_topology</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__trxframe" kindref="compound">t_trxframe</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <briefdescription>
+<para>Initializes an evaluation data structure. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Evaluation data structure to initialize. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Memory pool for intermediate evaluation values. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gall</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index group with all the atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure for evaluation. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New frame for evaluation. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New PBC information for evaluation. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="82" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="370" bodyend="379"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a600480954fec604538852f15df6eaefe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_children</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_children</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates the children of a general selection element. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Evaluates each child of <computeroutput>sel</computeroutput> in <computeroutput>g</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="87" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="507" bodyend="520"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a1d501c105c8a232f7170019c4be46af8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_method_params</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_method_params</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates the children of a <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a3d3bb644ace8fdc5beac6feed4911a1f" kindref="member">SEL_EXPRESSION</ref> element. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Evaluates each child of a <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a3d3bb644ace8fdc5beac6feed4911a1f" kindref="member">SEL_EXPRESSION</ref> element. The value of <computeroutput>sel</computeroutput> is not touched.</para><para>This function is not used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref>, but is used internally. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="92" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="918" bodyend="939"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Misc. evaluation functions</header>
+      <memberdef kind="function" id="evaluate_8h_1a79daf4be35b439ed6b6cb4ea0751f0ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_root</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_root</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a root selection element. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated (not used, can be NULL). </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Evaluates the first child element in the group defined by <computeroutput>sel-&gt;u.cgrp</computeroutput>. If <computeroutput>sel-&gt;u.cgrp</computeroutput> is empty, nothing is done. The value of <computeroutput>sel</computeroutput> is not touched (root elements do not evaluate to values).</para><para>This function can be used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a4374c0be00e03bae94a94c4f2d88569d" kindref="member">SEL_ROOT</ref> elements. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="118" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="523" bodyend="534"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1ad01c21de50e69fa134d137c5cbc59bfe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_static</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_static</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a static group selection element. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 for success.</para></simplesect>
+Sets the value of <computeroutput>sel</computeroutput> to the intersection of <computeroutput>g</computeroutput> and <computeroutput>sel-&gt;u.cgrp</computeroutput>.</para><para>This function can be used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46afae2ba2c065f70efcda76e4b7a7d17d0" kindref="member">SEL_CONST</ref> elements with value type <ref refid="selvalue_8h_1a70b42b87d434580bf1493591857b8beca70a2af6eafa48adfab506ceee60471f6" kindref="member">GROUP_VALUE</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="135" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="537" bodyend="551"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a14a3db05296df8d7ac560696640238f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_arithmetic</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_arithmetic</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates an arithmetic expression element. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="140" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="1184" bodyend="1242"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Subexpression evaluation functions</header>
+      <memberdef kind="function" id="evaluate_8h_1ac8ea88712bfef29f856d59993cc1ea1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_subexpr_simple</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_subexpr_simple</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a subexpression when there is only one reference. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Evaluates the child element (there should be exactly one) in <computeroutput>g</computeroutput>. The compiler has taken care that the child actually stores the evaluated value in the value pointer of this element.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a4b01539a457afb7dbdf486c2a2e6dafb" kindref="member">SEL_SUBEXPR</ref> elements that are used only once, and hence do not need full subexpression handling. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="150" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="573" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1ac475341903c467650d7a6ee8fed4282b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_subexpr_staticeval</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_subexpr_staticeval</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a subexpression when the evaluation group is static. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+If this is the first call for this frame, evaluates the child element there should be exactly one in <computeroutput>g</computeroutput>. The compiler has taken care that the child actually stores the evaluated value in the value pointer of this element. Assumes that <computeroutput>g</computeroutput> is persistent for the duration of the whole evaluation.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a4b01539a457afb7dbdf486c2a2e6dafb" kindref="member">SEL_SUBEXPR</ref> elements that have a static evaluation group, and hence do not need full subexpression handling. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="155" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="601" bodyend="618"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a83156ae734e0a975b7498826dee5bee4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_subexpr</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_subexpr</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a subexpression. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Finds the part of <computeroutput>g</computeroutput> for which the subexpression has not yet been evaluated by comparing <computeroutput>g</computeroutput> to <computeroutput>sel-&gt;u.cgrp</computeroutput>. If the part is not empty, the child expression is evaluated for this part, and the results merged to the old values of the child. The value of <computeroutput>sel</computeroutput> itself is undefined after the call.</para><para><xrefsect id="todo_1_todo000046"><xreftitle>Todo</xreftitle><xrefdescription><para>The call to <ref refid="indexutil_8cpp_1a36418762a1d83eed47840281d779e312" kindref="member">gmx_ana_index_difference()</ref> can take quite a lot of unnecessary time if the subexpression is evaluated either several times for the same group or for completely distinct groups. However, in the majority of cases, these situations occur when <ref refid="evaluate_8cpp_1ac475341903c467650d7a6ee8fed4282b" kindref="member">_gmx_sel_evaluate_subexpr_staticeval()</ref> can be used, so this should not be a major problem. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="160" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="641" bodyend="737"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1aec3bcc71ed6201eeff6f56decd08abfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_subexprref_simple</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_subexprref_simple</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a subexpression reference when there are no other references. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 for success.</para></simplesect>
+Sets the value pointers of the child and its child to point to the same memory as the value pointer of this element to avoid copying, and then evaluates evaluates the child.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement" kindref="compound">gmx::SelectionTreeElement</ref>:evaluate for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46af3e44c019a776df8511a73457f9b32b4" kindref="member">SEL_SUBEXPRREF</ref> elements for which the <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a4b01539a457afb7dbdf486c2a2e6dafb" kindref="member">SEL_SUBEXPR</ref> does not have other references. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="165" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="754" bodyend="774"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a8bbd2e0498131ecbabc6c93dcb4c26c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_subexprref</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_subexprref</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a subexpression reference. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+If the value type is <ref refid="selvalue_8h_1a70b42b87d434580bf1493591857b8beca31a47fbfbc85ad1472ce3d2a168fd1ec" kindref="member">POS_VALUE</ref>, the value of the child is simply copied to set the value of <computeroutput>sel</computeroutput> (the child subexpression should already have been evaluated by its root). If the value type is something else, the child is evaluated for the group <computeroutput>g</computeroutput>, and the value of the child is then copied. There should be only one child element.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46af3e44c019a776df8511a73457f9b32b4" kindref="member">SEL_SUBEXPRREF</ref> elements. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="170" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="793" bodyend="899"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Method evaluation functions</header>
+      <memberdef kind="function" id="evaluate_8h_1a87e169c8a37e1e9c93ebd7a70b1a34ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_method</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_method</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a method expression. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Evaluates all child selections (using <ref refid="evaluate_8cpp_1a1d501c105c8a232f7170019c4be46af8" kindref="member">_gmx_sel_evaluate_method_params()</ref>) to evaluate any parameter values. If this is the first time this expression is evaluated for the frame, <ref refid="selmethod_8h_1ad7e63789da3cadbb99800dbe18d837f7" kindref="member">sel_framefunc()</ref> callback is called if one is provided. If a reference position calculation has been initialized for this element, the positions are also updated, and <ref refid="selmethod_8h_1a0b18405511e5ed5fabfe37fc98888121" kindref="member">sel_updatefunc_pos()</ref> is used to evaluate the value. Otherwise, <ref refid="selmethod_8h_1aa1474cb37018590caa7b2626ad6042d4" kindref="member">sel_updatefunc()</ref> is used.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a3d3bb644ace8fdc5beac6feed4911a1f" kindref="member">SEL_EXPRESSION</ref> elements. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="181" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="959" bodyend="995"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a94ada882a74748f76625338499fc9c33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_modifier</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_modifier</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a modifier expression. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Evaluates all child selections (using <ref refid="evaluate_8cpp_1a1d501c105c8a232f7170019c4be46af8" kindref="member">_gmx_sel_evaluate_method_params()</ref>) to evaluate any parameter values. If this is the first time this expression is evaluated for the frame, <ref refid="selmethod_8h_1ad7e63789da3cadbb99800dbe18d837f7" kindref="member">sel_framefunc()</ref> callback is called if one is provided. The modifier is then evaluated using <ref refid="selmethod_8h_1a0b18405511e5ed5fabfe37fc98888121" kindref="member">sel_updatefunc_pos()</ref>.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46a6be1ee895a50c28639608b8b47843422" kindref="member">SEL_MODIFIER</ref> elements. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="186" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="1013" bodyend="1030"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Boolean evaluation functions</header>
+      <memberdef kind="function" id="evaluate_8h_1a45ba7466c6a44d41c3f6945c66088ef7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_not</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_not</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a boolean NOT element. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Evaluates the child element (there should be only one) in the group <computeroutput>g</computeroutput>, and then sets the value of <computeroutput>sel</computeroutput> to the complement of the child value.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46ae886c4e170c3abd5527de0af74ba4a45" kindref="member">SEL_BOOLEAN</ref> elements with <ref refid="selelem_8h_1ad24657d98854e03c3d6c46c37022a446a1a54e3beb472c1dc0a37a631f979f8ce" kindref="member">BOOL_NOT</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="196" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="1051" bodyend="1058"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a5e69c1398559aabcbdbc5070f2bbf10e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_and</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_and</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a boolean AND element with short-circuiting. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Short-circuiting evaluation of logical AND expressions.</para><para>Starts by evaluating the first child element in the group <computeroutput>g</computeroutput>. The each following child element is evaluated in the intersection of all the previous values until all children have been evaluated or the intersection becomes empty. The value of <computeroutput>sel</computeroutput> is set to the intersection of all the (evaluated) child values.</para><para>If the first child does not have an evaluation function, it is skipped and the evaluation is started at the second child. This happens if the first child is a constant expression and during compilation it was detected that the evaluation group is always a subset of the constant group (currently, the compiler never detects this).</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46ae886c4e170c3abd5527de0af74ba4a45" kindref="member">SEL_BOOLEAN</ref> elements with <ref refid="selelem_8h_1ad24657d98854e03c3d6c46c37022a446a3663c8941f6519e97a7a734d3b29b865" kindref="member">BOOL_AND</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="201" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="1086" bodyend="1110"/>
+      </memberdef>
+      <memberdef kind="function" id="evaluate_8h_1a22b6b6a3749e81a0c332121000e6df78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _gmx_sel_evaluate_or</definition>
+        <argsstring>(gmx_sel_evaluate_t *data, const gmx::SelectionTreeElementPointer &amp;sel, gmx_ana_index_t *g)</argsstring>
+        <name>_gmx_sel_evaluate_or</name>
+        <param>
+          <type><ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;</type>
+          <declname>sel</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+<para>Evaluates a boolean OR element with short-circuiting. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data for the current frame. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Selection element being evaluated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">g</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group for which <computeroutput>sel</computeroutput> should be evaluated. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, a non-zero error code on error.</para></simplesect>
+Short-circuiting evaluation of logical OR expressions.</para><para>Starts by evaluating the first child element in the group <computeroutput>g</computeroutput>. For each subsequent child, finds the part of <computeroutput>g</computeroutput> that is not included the value of any previous child, and evaluates the child in that group until the last child is evaluated or all of <computeroutput>g</computeroutput> is included in some child value. The value of <computeroutput>sel</computeroutput> is set to the union of all the (evaluated) child values.</para><para>If the first child does not have an evaluation function, its value is used without evaluation. This happens if the first child is a constant expression, the selection has been compiled, and the evaluation group is the same for each frame. In this case, the compiler has taken care of that the child value is a subset of <computeroutput>g</computeroutput>, making it unnecessary to evaluate it.</para><para>This function is used as <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> for <ref refid="selelem_8h_1a1f104d5c71b1198ef51acc4ef016ae46ae886c4e170c3abd5527de0af74ba4a45" kindref="member">SEL_BOOLEAN</ref> elements with <ref refid="selelem_8h_1ad24657d98854e03c3d6c46c37022a446a8c0bc1b3b7b2d3182a79286aaec0d13e" kindref="member">BOOL_OR</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h" line="206" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.cpp" bodystart="1139" bodyend="1170"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Evaluation functions for <ref refid="namespacegmx_1af63a35a5828a347c7d53a3365de983e9" kindref="member">sel_evalfunc()</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para>This is an implementation header: there should be no need to use it outside this directory. Users should only use SelectionCollection::evaluate() to evaluate selections.</para><para>The functions defined in this header file are all the possible values for the <ref refid="classgmx_1_1SelectionTreeElement_1aa2729334e9625ab9446f87dee5e2acf4" kindref="member">gmx::SelectionTreeElement::evaluate</ref> field (in addition to NULL).</para><para><simplesect kind="author"><para>Teemu Murtola <ulink url="mailto:teemu.murtola@gmail.com">teemu.murtola@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/evaluate.h"/>
+  </compounddef>
+</doxygen>

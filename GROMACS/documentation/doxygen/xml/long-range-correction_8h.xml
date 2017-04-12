@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="long-range-correction_8h" kind="file">
+    <compoundname>long-range-correction.h</compoundname>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="mdtypes_2forcerec_8h" local="yes">gromacs/mdtypes/forcerec.h</includes>
+    <includes refid="block_8h" local="yes">gromacs/topology/block.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="long-range-correction_8cpp" local="yes">src/gromacs/ewald/long-range-correction.cpp</includedby>
+    <includedby refid="force_8cpp" local="yes">src/gromacs/mdlib/force.cpp</includedby>
+    <incdepgraph>
+      <node id="3125">
+        <label>src/gromacs/ewald/long-range-correction.h</label>
+        <link refid="long-range-correction.h"/>
+        <childnode refid="3126" relation="include">
+        </childnode>
+        <childnode refid="3129" relation="include">
+        </childnode>
+      </node>
+      <node id="3127">
+        <label>stdint.h</label>
+      </node>
+      <node id="3129">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="3126">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="3127" relation="include">
+        </childnode>
+        <childnode refid="3128" relation="include">
+        </childnode>
+      </node>
+      <node id="3128">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="long-range-correction_8h_1a8451ba246c81f7ba30641ad09b628627" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ewald_LRcorrection</definition>
+        <argsstring>(int numAtomsLocal, t_commrec *cr, int numThreads, int thread, t_forcerec *fr, real *chargeA, real *chargeB, real *C6A, real *C6B, real *sigmaA, real *sigmaB, real *sigma3A, real *sigma3B, gmx_bool bHaveChargeOrTypePerturbed, gmx_bool calc_excl_corr, t_blocka *excl, rvec x[], matrix box, rvec mu_tot[], int ewald_geometry, real epsilon_surface, rvec *f, tensor vir_q, tensor vir_lj, real *Vcorr_q, real *Vcorr_lj, real lambda_q, real lambda_lj, real *dvdlambda_q, real *dvdlambda_lj)</argsstring>
+        <name>ewald_LRcorrection</name>
+        <param>
+          <type>int</type>
+          <declname>numAtomsLocal</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>numThreads</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>chargeA</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>chargeB</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>C6A</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>C6B</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigmaA</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigmaB</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigma3A</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>sigma3B</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bHaveChargeOrTypePerturbed</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>calc_excl_corr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__blocka" kindref="compound">t_blocka</ref> *</type>
+          <declname>excl</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>mu_tot</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ewald_geometry</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>epsilon_surface</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_q</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_lj</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>Vcorr_q</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>Vcorr_lj</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda_q</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda_lj</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlambda_q</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlambda_lj</declname>
+        </param>
+        <briefdescription>
+<para>Calculate long-range Ewald correction terms. </para>        </briefdescription>
+        <detaileddescription>
+<para>For the group cutoff scheme (only), calculates the correction to the Ewald sums (electrostatic and/or LJ) due to pairs excluded from the long-ranged part.</para><para>For both cutoff schemes, but only for Coulomb interactions, calculates correction for surface dipole terms. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/long-range-correction.h" line="69" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/long-range-correction.cpp" bodystart="63" bodyend="567"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains function declarations necessary for computing energies and forces for the PME long-ranged part (Coulomb and LJ). </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Erik Lindahl <ulink url="mailto:erik@kth.se">erik@kth.se</ulink> </para><simplesectsep/><para>Berk Hess <ulink url="mailto:hess@kth.se">hess@kth.se</ulink> </para><simplesectsep/><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/ewald/long-range-correction.h"/>
+  </compounddef>
+</doxygen>

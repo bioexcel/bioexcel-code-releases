@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="todo" kind="page">
+    <compoundname>todo</compoundname>
+    <title>Todo List</title>
+    <detaileddescription>
+<para><variablelist>
+<varlistentry><term><anchor id="todo_1_todo000046"/>Member <ref refid="evaluate_8h_1a83156ae734e0a975b7498826dee5bee4" kindref="member">_gmx_sel_evaluate_subexpr</ref>  (<ref refid="structgmx__sel__evaluate__t" kindref="compound">gmx_sel_evaluate_t</ref> *data, const <ref refid="namespacegmx_1a2804c9c82f2a9bd0ec94d3c2f1003f42" kindref="member">gmx::SelectionTreeElementPointer</ref> &amp;sel, <ref refid="structgmx__ana__index__t" kindref="compound">gmx_ana_index_t</ref> *g)</term></varlistentry>
+<listitem><para>The call to <ref refid="indexutil_8cpp_1a36418762a1d83eed47840281d779e312" kindref="member">gmx_ana_index_difference()</ref> can take quite a lot of unnecessary time if the subexpression is evaluated either several times for the same group or for completely distinct groups. However, in the majority of cases, these situations occur when <ref refid="evaluate_8cpp_1ac475341903c467650d7a6ee8fed4282b" kindref="member">_gmx_sel_evaluate_subexpr_staticeval()</ref> can be used, so this should not be a major problem.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000052"/>Member <ref refid="parser__internal_8h_1a62f90d9ec52c521531374502dccc7cc2" kindref="member">CHECK_SEL</ref>  (sel)</term></varlistentry>
+<listitem><para>Get rid of this macro. It should now be possible to handle all errors using exceptions.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000042"/>File <ref refid="compiler_8cpp" kindref="compound">compiler.cpp</ref>  </term></varlistentry>
+<listitem><para>Better error handling and memory management in error situations. At least, the main compilation function leaves the selection collection in a bad state if an error occurs.</para><para>The memory usage could still be optimized. Use of memory pooling could still be extended, and a lot of redundant gmin/gmax data could be eliminated for complex arithmetic expressions. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000058"/>Page <ref refid="page_module_selection_custom" kindref="compound">Custom selection methods</ref>  </term></varlistentry>
+<listitem><para>The modifier handling could be made more flexible and more generic; the current implementation does not allow many things which would be possible with slight changes in the internals of the library. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000068"/>Member <ref refid="dir__separator_8h_1a0920890c442b665b0c6609fa796e9047" kindref="member">DIR_SEPARATOR</ref>  </term></varlistentry>
+<listitem><para>Get rid of this (Redmine #950). It is not necessary for constructing paths on the systems that it currently supports, and is not reliable in parsing input paths either, since Windows needs to accept both instead of only DIR_SEPARATOR. At the very least, we should refactor the clients of this header so that they operate upon path objects rather than raw path strings.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000014"/>File <ref refid="domdec__network_8h" kindref="compound">domdec_network.h</ref>  </term></varlistentry>
+<listitem><para>Wrap the raw dd_bcast in md.cpp into a higher-level function in the domdec module, then this file can be module-internal. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000045"/>File <ref refid="evaluate_8cpp" kindref="compound">evaluate.cpp</ref>  </term></varlistentry>
+<listitem><para>One of the major bottlenecks for selection performance is that all the evaluation is carried out for atoms. There are several cases when the evaluation could be done for residues or molecules instead, including keywords that select by residue and cases where residue centers are used as reference positions. Implementing this would require a mechanism for recognizing whether something can be evaluated by residue/molecule instead by atom, and converting selections by residue/molecule into selections by atom when necessary. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000033"/>Member <ref refid="handlerestart_8cpp_1a87d603f29eae3a3e1ab7a6879ec247f4" kindref="member">exist_output_file</ref>  (const char *fnm_cp, int nfile, const <ref refid="structt__filenm" kindref="compound">t_filenm</ref> fnm[])</term></varlistentry>
+<listitem><para>This could be implemented sanely with a for loop.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000012"/>Member <ref refid="expfit_8h_1a560ea7d97277b9e0576776ec695fb9b3" kindref="member">fit_acf</ref>  (int ncorr, int fitfn, const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *oenv, gmx_bool bVerbose, real tbeginfit, real tendfit, real dt, real c1[], real *fit)</term></varlistentry>
+<listitem><para>check parameters  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000021"/>Member <ref refid="listed-forces_8h_1af9092de62680856f5250dbef08056f74" kindref="member">ftype_is_bonded_potential</ref>  (int ftype)</term></varlistentry>
+<listitem><para>This function could go away when idef is not a big bucket of everything.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000006"/>Class <ref refid="classgmx_1_1AbstractAnalysisArrayData" kindref="compound">gmx::AbstractAnalysisArrayData</ref>  </term></varlistentry>
+<listitem><para>Add support for multiple data sets. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000001"/>Class <ref refid="classgmx_1_1AbstractAnalysisData" kindref="compound">gmx::AbstractAnalysisData</ref>  </term></varlistentry>
+<listitem><para>Improve the exception-handling semantics. In most cases, it doesn&apos;t make much sense to continue data processing after one module fails, but having the alternative would not hurt. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000002"/>Member <ref refid="classgmx_1_1AbstractAnalysisData_1a8e6f762df563d577f8a1d34a35273952" kindref="member">gmx::AbstractAnalysisData::addColumnModule</ref>  (int col, int span, AnalysisDataModulePointer module)</term></varlistentry>
+<listitem><para>This method doesn&apos;t currently work in all cases with multipoint data or with multiple data sets. In particular, if the added module requests storage and uses getDataFrame(), it will behave unpredictably (most likely asserts).</para><para>Generalize this method to multiple data sets (e.g., for adding modules that only process a single data set). </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000004"/>Member <ref refid="classgmx_1_1AbstractAnalysisData_1ae095550bd347b42db3c49e064bc44228" kindref="member">gmx::AbstractAnalysisData::applyModule</ref>  (IAnalysisDataModule *module)</term></varlistentry>
+<listitem><para>Currently, this method may not work correctly if <computeroutput>module</computeroutput> requests storage (addModule() has the same problem if called after data is started).  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000037"/>Member <ref refid="classgmx_1_1AbstractOptionStorage_1a9aa8495e558f50edd35b80754a508052" kindref="member">gmx::AbstractOptionStorage::processSet</ref>  ()=0</term></varlistentry>
+<listitem><para>Improve the call semantics. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000005"/>Class <ref refid="classgmx_1_1AnalysisData" kindref="compound">gmx::AnalysisData</ref>  </term></varlistentry>
+<listitem><para>Parallel implementation is not complete. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000010"/>Member <ref refid="classgmx_1_1AnalysisDataPlotSettings_1aef8546966ea7b5238aa92d91a6df291b" kindref="member">gmx::AnalysisDataPlotSettings::plotFormat</ref>  () const </term></varlistentry>
+<listitem><para>Use a proper enum.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000009"/>Class <ref refid="classgmx_1_1AnalysisDataStorage" kindref="compound">gmx::AnalysisDataStorage</ref>  </term></varlistentry>
+<listitem><para>Proper multi-threaded implementation. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000049"/>Class <ref refid="classgmx_1_1AnalysisNeighborhood" kindref="compound">gmx::AnalysisNeighborhood</ref>  </term></varlistentry>
+<listitem><para>Generalize the exclusion machinery to make it easier to use for other cases than atom-atom exclusions from the topology. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000050"/>Class <ref refid="classgmx_1_1AnalysisNeighborhoodSearch" kindref="compound">gmx::AnalysisNeighborhoodSearch</ref>  </term></varlistentry>
+<listitem><para>Make it such that reset() is not necessary to call in code that repeatedly assigns the result of AnalysisNeighborhood::initSearch() to the same variable (see <ref refid="sm__distance_8cpp" kindref="compound">sm_distance.cpp</ref>).</para><para>Consider merging nearestPoint() and minimumDistance() by adding the distance to AnalysisNeighborhoodPair. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000066"/>Class <ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef&lt; T &gt;</ref>  </term></varlistentry>
+<listitem><para>This class is not complete. At least, it should be possible to convert an ArrayRef to a ConstArrayRef. There are likely also methods missing (not required for current usage). </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000067"/>Member <ref refid="structgmx_1_1DataFileInfo_1a539535c0a378efd8cc95d7124fcfdec5" kindref="member">gmx::DataFileInfo::bFromDefaultDir</ref>  </term></varlistentry>
+<listitem><para>Consider replacing with an enum that identifies the source (current dir, GMXLIB, default).  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000069"/>Class <ref refid="classgmx_1_1ExceptionInitializer" kindref="compound">gmx::ExceptionInitializer</ref>  </term></varlistentry>
+<listitem><para>With the exception of the reason string, information added with this class is not currently accessible through any public API, except for calling <ref refid="group__module__utility_1gac6287dc8a550a2d54429e44994e00e58" kindref="member">printFatalErrorMessage()</ref>, <ref refid="group__module__utility_1gac7703ad35b606758d2d12edc0a3d5217" kindref="member">formatExceptionMessageToString()</ref> or <ref refid="group__module__utility_1gac5e6f6ec944fb2484d6f273c9a0ff495" kindref="member">formatExceptionMessageToFile()</ref>. This is not implemented as there is not yet need for it, and it is not clear what would be the best alternative for the access. It should be possible to refactor the internal implementation to suit the needs of such external access without requiring changes in code that throws these exceptions. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000038"/>Member <ref refid="classgmx_1_1FileNameOption_1aa182da8a00d4ff7556615cedc38a8de2" kindref="member">gmx::FileNameOption::libraryFile</ref>  (bool bLibrary=true)</term></varlistentry>
+<listitem><para>Currently, this flag only affects the help output. Callers must take care themselves to actually search the file in the library directories. It would be nicer to do this searching within the file name option implementation.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000039"/>Class <ref refid="classgmx_1_1FileNameOptionManager" kindref="compound">gmx::FileNameOptionManager</ref>  </term></varlistentry>
+<listitem><para>Most of the functionality in this class is specific to command line parsing, so it would be cleaner to replace this with an interface, and have the actual code in the <computeroutput>commandline</computeroutput> module. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000070"/>Member <ref refid="classgmx_1_1GromacsException_1a1bd116912e67c096ae949ddae85afe06" kindref="member">gmx::GromacsException::prependContext</ref>  (const std::string &amp;context)</term></varlistentry>
+<listitem><para>The added information is currently not accessible through what(), nor through any other means except for calling <ref refid="group__module__utility_1gac6287dc8a550a2d54429e44994e00e58" kindref="member">printFatalErrorMessage()</ref>, <ref refid="group__module__utility_1gac7703ad35b606758d2d12edc0a3d5217" kindref="member">formatExceptionMessageToString()</ref> or <ref refid="group__module__utility_1gac5e6f6ec944fb2484d6f273c9a0ff495" kindref="member">formatExceptionMessageToFile()</ref>. See ExceptionInitializer for more discussion.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000036"/>Member <ref refid="classgmx_1_1HelpWriterContext_1a6bec872f46ecd34601df72141fca3739" kindref="member">gmx::HelpWriterContext::setReplacement</ref>  (const std::string &amp;search, const std::string &amp;replace)</term></varlistentry>
+<listitem><para>Improve semantics if the same <computeroutput>search</computeroutput> item is set multiple times.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000007"/>Member <ref refid="classgmx_1_1internal_1_1AnalysisDataStorageImpl_1a8dfd060c7a8f18c78a8e5ad4854ef000" kindref="member">gmx::internal::AnalysisDataStorageImpl::needStorage</ref>  () const </term></varlistentry>
+<listitem><para>This could be extended to non-multipoint data as well. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000008"/>Member <ref refid="classgmx_1_1internal_1_1AnalysisDataStorageImpl_1ae5a3ef651453e7c82201e5ec01a29833" kindref="member">gmx::internal::AnalysisDataStorageImpl::pendingLimit_</ref>  </term></varlistentry>
+<listitem><para>Get rid of this alltogether, as it is no longer used much. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000040"/>Member <ref refid="namespacegmx_1a3f775199bddf83f286ee8172f7dda987" kindref="member">gmx::OptionFlag</ref>  </term></varlistentry>
+<listitem><para>The flags related to default values are confusing, consider reorganizing them.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000071"/>Member <ref refid="classgmx_1_1Regex_1aceab26e90155f03d222ce104b5243cc6" kindref="member">gmx::Regex::Regex</ref>  (const char *value)</term></varlistentry>
+<listitem><para>Consider whether some other exception type would be better.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000055"/>Member <ref refid="classgmx_1_1Selection_1aa7007210627e2b003a1ee0d54c02908a" kindref="member">gmx::Selection::setEvaluateVelocities</ref>  (bool bEnabled)</term></varlistentry>
+<listitem><para>Implement it such that in the above case, hasVelocities() will return false for such frames. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000056"/>Class <ref refid="classgmx_1_1SelectionOption" kindref="compound">gmx::SelectionOption</ref>  </term></varlistentry>
+<listitem><para>Support for specifying that an option accepts, e.g., two to four selections. Currently, only a fixed count or any number of selections is possible. In addition to allowing this in OptionTemplate, also SelectionOptionManager needs to be updated.</para><para></para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000064"/>Member <ref refid="classgmx_1_1SurfaceAreaCalculator_1a394a6b0cd33620427f3ff8d2a86c62dd" kindref="member">gmx::SurfaceAreaCalculator::calculate</ref>  (const rvec *x, const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *pbc, int nat, int index[], int flags, real *area, real *volume, real **at_area, real **lidots, int *n_dots) const </term></varlistentry>
+<listitem><para>Make the output options more C++-like, in particular for the array outputs.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000065"/>Class <ref refid="classgmx_1_1test_1_1AbstractTrajectoryAnalysisModuleTestFixture" kindref="compound">gmx::test::AbstractTrajectoryAnalysisModuleTestFixture</ref>  </term></varlistentry>
+<listitem><para>Adding facilities to AnalysisData to check whether there are any output modules attached to the data object (directly or indirectly), marking the mocks as output modules, and using these checks in the tools instead of or in addition to the output file presence would be a superior. Also, the full file names should be deducible from the options. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000011"/>Class <ref refid="classgmx_1_1test_1_1AnalysisDataTestFixture" kindref="compound">gmx::test::AnalysisDataTestFixture</ref>  </term></varlistentry>
+<listitem><para>Support for arbitrary AnalysisDataValues (errors and missing values). </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000084"/>Class <ref refid="classgmx_1_1test_1_1FloatingPointTolerance" kindref="compound">gmx::test::FloatingPointTolerance</ref>  </term></varlistentry>
+<listitem><para>The factory methods that take ULP difference could be better formulated as methods that take the acceptable number of incorrect bits and/or the number of accurate bits. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000081"/>Member <ref refid="classgmx_1_1test_1_1IntegrationTestFixture_1aeb906e09deabe7d1d793919532c64bcd" kindref="member">gmx::test::IntegrationTestFixture::redirectStderrToDevNull</ref>  ()</term></varlistentry>
+<listitem><para>Implement this when the output routines are sufficiently modular to permit it to work.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000080"/>Member <ref refid="classgmx_1_1test_1_1IntegrationTestFixture_1a551657d5b61a3ad4aacd5e9261843558" kindref="member">gmx::test::IntegrationTestFixture::redirectStdoutToDevNull</ref>  ()</term></varlistentry>
+<listitem><para>Implement this when the output routines are sufficiently modular to permit it to work.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000030"/>Class <ref refid="classgmx_1_1test_1_1SettleTest" kindref="compound">gmx::test::SettleTest</ref>  </term></varlistentry>
+<listitem><para>This also tests that if the calling code requires velocities and virial updates, that those outputs do change, but does not test that those changes are correct.</para><para>Only no-PBC and cubic-PBC are tested here, but the correct function of the SIMD version of set_pbx_auic in all cases should be tested elsewhere.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000079"/>Class <ref refid="classgmx_1_1test_1_1TerminationHelper" kindref="compound">gmx::test::TerminationHelper</ref>  </term></varlistentry>
+<listitem><para>This approach is not very elegant, but &quot;stuff doesn&apos;t
+segfault or give a fatal error&quot; is a useful result. We can improve it when we can mock out more <ref refid="namespacegmx_1a19f6a93a5bf9ce1e585bebf205d6f6ea" kindref="member">do_md()</ref> functionality. Before that, we&apos;d probably prefer not to run this test case in per-patchset verification, but this is the best we can do for now. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000082"/>Member <ref refid="namespacegmx_1_1test_1a26d94b8bbe10b3fa39e5c03ef3833b4a" kindref="member">gmx::test::throwIfNonEmptyAndOnlyWhitespace</ref>  (const std::string &amp;s, const char *id)</term></varlistentry>
+<listitem><para>Eliminate this limitation of TinyXML2. See e.g. <ulink url="https://github.com/leethomason/tinyxml2/issues/432">https://github.com/leethomason/tinyxml2/issues/432</ulink>  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000074"/>Member <ref refid="classgmx_1_1TextWriter_1a87a974330d5791f7410e6b20e516d5ae" kindref="member">gmx::TextWriter::wrapperSettings</ref>  ()</term></varlistentry>
+<listitem><para>Wrapping is not currently implemented for code that writes partial lines with writeString().  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000041"/>Class <ref refid="classgmx_1_1TimeUnitManager" kindref="compound">gmx::TimeUnitManager</ref>  </term></varlistentry>
+<listitem><para>This class is independent of the options implementation. To ease reuse, it could be moved to the utility module, and only TimeUnitBehavior left here.</para><para></para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000063"/>Class <ref refid="classgmx_1_1TrajectoryAnalysisSettings" kindref="compound">gmx::TrajectoryAnalysisSettings</ref>  </term></varlistentry>
+<listitem><para>Remove plain flags from the public interface. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000075"/>File <ref refid="programs_2mdrun_2tests_2grompp_8cpp" kindref="compound">grompp.cpp</ref>  </term></varlistentry>
+<listitem><para>Refactor SimulationRunner to split off SimulationPreparer, so that integration tests of grompp can stand apart from tests of mdrun. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000032"/>File <ref refid="handlerestart_8cpp" kindref="compound">handlerestart.cpp</ref>  </term></varlistentry>
+<listitem><para>Clean up the error-prone logic here. Add doxygen. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000035"/>File <ref refid="handlerestart_8h" kindref="compound">handlerestart.h</ref>  </term></varlistentry>
+<listitem><para>There may be other code in <ref refid="runner_8cpp" kindref="compound">runner.cpp</ref> etc. that can usefully live here </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000061"/>File <ref refid="tests_2indexutil_8cpp" kindref="compound">indexutil.cpp</ref>  </term></varlistentry>
+<listitem><para>Tests for other functions, at least the set operations. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000022"/>File <ref refid="tests_2invertmatrix_8cpp" kindref="compound">invertmatrix.cpp</ref>  </term></varlistentry>
+<listitem><para>Test error conditions when they throw exceptions </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000047"/>File <ref refid="mempool_8h" kindref="compound">mempool.h</ref>  </term></varlistentry>
+<listitem><para>Document these functions. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000013"/>Group <ref refid="group__module__domdec" kindref="compound">module_domdec</ref>  </term></varlistentry>
+<listitem><para>Get domdec stuff out of mdtypes/commrec.h </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000076"/>File <ref refid="multisimtest_8cpp" kindref="compound">multisimtest.cpp</ref>  </term></varlistentry>
+<listitem><para>Test mdrun -multidir also </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000062"/>File <ref refid="tests_2nbsearch_8cpp" kindref="compound">nbsearch.cpp</ref>  </term></varlistentry>
+<listitem><para>Increase coverage of these tests for different corner cases: other PBC cases than full 3D, large cutoffs (larger than half the box size), etc. At least some of these probably don&apos;t work correctly. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000048"/>File <ref refid="nbsearch_8cpp" kindref="compound">nbsearch.cpp</ref>  </term></varlistentry>
+<listitem><para>The grid implementation could still be optimized in several different ways:<itemizedlist>
+<listitem><para>Pruning grid cells from the search list if they are completely outside the sphere that is being considered.</para></listitem><listitem><para>A better heuristic could be added for falling back to simple loops for a small number of reference particles.</para></listitem><listitem><para>A better heuristic for selecting the grid size.</para></listitem><listitem><para>A multi-level grid implementation could be used to be able to use small grids for short cutoffs with very inhomogeneous particle distributions without a memory cost. </para></listitem></itemizedlist>
+</para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000019"/>Member <ref refid="oclutils_8h_1a820dcad2db335a788636545ba5769adf" kindref="member">ocl_pmalloc</ref>  (void **h_ptr, size_t nbytes)</term></varlistentry>
+<listitem><para>This function should allocate page-locked memory to help reduce D2H and H2D transfer times, similar with pmalloc from pmalloc_cuda.cu. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000020"/>Member <ref refid="bonded_8cpp_1a0b5b07882ef47de8bab88e30660c593b" kindref="member">pbc_rvec_sub</ref>  (const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *pbc, const rvec xi, const rvec xj, rvec dx)</term></varlistentry>
+<listitem><para>This kind of code appears in many places. Consolidate it  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000053"/>File <ref refid="poscalc_8cpp" kindref="compound">poscalc.cpp</ref>  </term></varlistentry>
+<listitem><para>There is probably some room for optimization in the calculation of positions with bases. In particular, the current implementation may do a lot of unnecessary copying. The interface would need to be changed to make it possible to use the same output positions for several calculations.</para><para>The current algorithm for setting up base calculations could be improved in cases when there are calculations that cannot use a common base but still overlap partially (e.g., with three calculations A, B, and C such that A could use both B and C as a base, but B and C cannot use the same base). Setting up the bases in an optimal manner in every possible situation can be quite difficult unless several bases are allowed for one calculation, but better heuristics could probably be implemented. For best results, the setup should probably be postponed (at least partially) to gmx_ana_poscalc_init_eval(). </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000034"/>Member <ref refid="handlerestart_8cpp_1a484fc35b0ab94a243071315b17a4cb62" kindref="member">read_checkpoint_data</ref>  (const char *filename, int *simulation_part, <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *cr, gmx_bool bTryToAppendFiles, int nfile, const <ref refid="structt__filenm" kindref="compound">t_filenm</ref> fnm[], const char *part_suffix, gmx_bool *bAddPart, gmx_bool *bDoAppendFiles)</term></varlistentry>
+<listitem><para>Clean this up (next patch) </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000057"/>Member <ref refid="selelem_8h_1a6fee1910b915d2f6e873f134e297ab47" kindref="member">SEL_ALLOCVAL</ref>  </term></varlistentry>
+<listitem><para>This flag overlaps with the function of <computeroutput>v.nalloc</computeroutput> field, and could probably be removed, making memory management simpler. Currently, the <computeroutput>v.nalloc</computeroutput> field is not kept up-to-date in all cases when this flag is changed and is used in places where this flag is not, so this would require a careful investigation of the selection code.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000044"/>Page <ref refid="page_module_selection_compiler" kindref="compound">Selection compilation</ref>  </term></varlistentry>
+<listitem><para>Some combinations of method parameter flags are not yet properly treated by the compiler or the evaluation functions in <ref refid="evaluate_8cpp" kindref="compound">evaluate.cpp</ref>. All the ones used by currently implemented methods should work, but new combinations might not. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000072"/>Member <ref refid="smalloc_8h_1ab3d98b1efa6c2b42d2c0d216eafafec5" kindref="member">set_over_alloc_dd</ref>  (gmx_bool set)</term></varlistentry>
+<listitem><para>This is mdrun-specific, so it might be better to put this and <ref refid="smalloc_8h_1af1533c63c1d40c5bb9bfaaa6d898369a" kindref="member">over_alloc_dd()</ref> much higher up.  </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000028"/>File <ref refid="simulationsignal_8cpp" kindref="compound">simulationsignal.cpp</ref>  </term></varlistentry>
+<listitem><para>Move this to mdrunutility module alongside gathering multi-simulation communication infrastructure there. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000029"/>File <ref refid="simulationsignal_8h" kindref="compound">simulationsignal.h</ref>  </term></varlistentry>
+<listitem><para>Move this to mdrunutility module alongside gathering multi-simulation communication infrastructure there. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000059"/>File <ref refid="sm__insolidangle_8cpp" kindref="compound">sm_insolidangle.cpp</ref>  </term></varlistentry>
+<listitem><para>The implementation could be optimized quite a bit.</para><para>Move the covered fraction stuff somewhere else and make it more generic (along the lines it is handled in selection.h and trajana.h in the old C API). </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000073"/>File <ref refid="snprintf_8h" kindref="compound">snprintf.h</ref>  </term></varlistentry>
+<listitem><para>When all callers of snprintf compile as C++, perhaps use <ref refid="group__module__utility_1gaed06df18ca6f9fc3f42bad9ea4d7e025" kindref="member">gmx::formatString()</ref> everywhere instead of snprintf. </para></listitem>
+<varlistentry><term><anchor id="todo_1_todo000083"/>File <ref refid="testasserts_8h" kindref="compound">testasserts.h</ref>  </term></varlistentry>
+<listitem><para>The implementation is somewhat ugly, and accesses some Google Test internals. Could be nice to clean it up a bit.</para><para></para></listitem>
+</variablelist>
+</para>    </detaileddescription>
+  </compounddef>
+</doxygen>

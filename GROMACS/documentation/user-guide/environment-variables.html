@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Environment Variables &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="User guide" href="index.html" />
+    <link rel="next" title="Developer guide" href="../dev-manual/index.html" />
+    <link rel="prev" title="Selection syntax and usage" href="../onlinehelp/selections.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../dev-manual/index.html" title="Developer guide"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../onlinehelp/selections.html" title="Selection syntax and usage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="environment-variables">
+<h1>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h1>
+<p>GROMACS programs may be influenced by the use of
+environment variables.  First of all, the variables set in
+the <code class="docutils literal"><span class="pre">GMXRC</span></code> file are essential for running and
+compiling GROMACS. Some other useful environment variables are
+listed in the following sections. Most environment variables function
+by being set in your shell to any non-NULL value. Specific
+requirements are described below if other values need to be set. You
+should consult the documentation for your shell for instructions on
+how to set environment variables in the current shell, or in configuration
+files for future shells. Note that requirements for exporting
+environment variables to jobs run under batch control systems vary and
+you should consult your local documentation for details.</p>
+<div class="section" id="output-control">
+<h2>Output Control<a class="headerlink" href="#output-control" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GMX_CONSTRAINTVIR</span></code></dt>
+<dd>Print constraint virial and force virial energy terms.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_MAXBACKUP</span></code></dt>
+<dd>GROMACS automatically backs up old
+copies of files when trying to write a new file of the same
+name, and this variable controls the maximum number of
+backups that will be made, default 99. If set to 0 it fails to
+run if any output file already exists. And if set to -1 it
+overwrites any output file without making a backup.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_QUOTES</span></code></dt>
+<dd>if this is explicitly set, no cool quotes
+will be printed at the end of a program.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_SUPPRESS_DUMP</span></code></dt>
+<dd>prevent dumping of step files during
+(for example) blowing up during failure of constraint
+algorithms.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_TPI_DUMP</span></code></dt>
+<dd>dump all configurations to a <a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a>
+file that have an interaction energy less than the value set
+in this environment variable.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_VIEW_XPM</span></code></dt>
+<dd><code class="docutils literal"><span class="pre">GMX_VIEW_XVG</span></code>, <code class="docutils literal"><span class="pre">GMX_VIEW_EPS</span></code> and <code class="docutils literal"><span class="pre">GMX_VIEW_PDB</span></code>, commands used to
+automatically view <a class="reference internal" href="file-formats.html#xvg"><span class="std std-ref">xvg</span></a>, <a class="reference internal" href="file-formats.html#xpm"><span class="std std-ref">xpm</span></a>, <a class="reference internal" href="file-formats.html#eps"><span class="std std-ref">eps</span></a>
+and <a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a> file types, respectively; they default to <code class="docutils literal"><span class="pre">xv</span></code>, <code class="docutils literal"><span class="pre">xmgrace</span></code>,
+<code class="docutils literal"><span class="pre">ghostview</span></code> and <code class="docutils literal"><span class="pre">rasmol</span></code>. Set to empty to disable
+automatic viewing of a particular file type. The command will
+be forked off and run in the background at the same priority
+as the GROMACS tool (which might not be what you want).
+Be careful not to use a command which blocks the terminal
+(e.g. <code class="docutils literal"><span class="pre">vi</span></code>), since multiple instances might be run.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_VIRIAL_TEMPERATURE</span></code></dt>
+<dd>print virial temperature energy term</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_LOG_BUFFER</span></code></dt>
+<dd>the size of the buffer for file I/O. When set
+to 0, all file I/O will be unbuffered and therefore very slow.
+This can be handy for debugging purposes, because it ensures
+that all files are always totally up-to-date.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_LOGO_COLOR</span></code></dt>
+<dd>set display color for logo in <a class="reference internal" href="../onlinehelp/gmx-view.html#gmx-view"><span class="std std-ref">gmx view</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_PRINT_LONGFORMAT</span></code></dt>
+<dd>use long float format when printing
+decimal values.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_COMPELDUMP</span></code></dt>
+<dd>Applies for computational electrophysiology setups
+only (see reference manual). The initial structure gets dumped to
+<a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a> file, which allows to check whether multimeric channels have
+the correct PBC representation.</dd>
+</dl>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GMX_PRINT_DEBUG_LINES</span></code></dt>
+<dd>when set, print debugging info on line numbers.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DD_NST_DUMP</span></code></dt>
+<dd>number of steps that elapse between dumping
+the current DD to a PDB file (default 0). This only takes effect
+during domain decomposition, so it should typically be
+0 (never), 1 (every DD phase) or a multiple of <a class="reference internal" href="mdp-options.html#mdp-nstlist"><code class="xref std std-mdp docutils literal"><span class="pre">nstlist</span></code></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DD_NST_DUMP_GRID</span></code></dt>
+<dd>number of steps that elapse between dumping
+the current DD grid to a PDB file (default 0). This only takes effect
+during domain decomposition, so it should typically be
+0 (never), 1 (every DD phase) or a multiple of <a class="reference internal" href="mdp-options.html#mdp-nstlist"><code class="xref std std-mdp docutils literal"><span class="pre">nstlist</span></code></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DD_DEBUG</span></code></dt>
+<dd>general debugging trigger for every domain
+decomposition (default 0, meaning off). Currently only checks
+global-local atom index mapping for consistency.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DD_NPULSE</span></code></dt>
+<dd>over-ride the number of DD pulses used
+(default 0, meaning no over-ride). Normally 1 or 2.</dd>
+</dl>
+<p>There are a number of extra environment variables like these
+that are used in debugging - check the code!</p>
+</div>
+<div class="section" id="performance-and-run-control">
+<h2>Performance and Run Control<a class="headerlink" href="#performance-and-run-control" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GMX_DO_GALACTIC_DYNAMICS</span></code></dt>
+<dd>planetary simulations are made possible (just for fun) by setting
+this environment variable, which allows setting <a class="reference internal" href="mdp-options.html#mdp-epsilon-r"><code class="xref std std-mdp docutils literal"><span class="pre">epsilon-r</span></code></a> to -1 in the <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a>
+file. Normally, <a class="reference internal" href="mdp-options.html#mdp-epsilon-r"><code class="xref std std-mdp docutils literal"><span class="pre">epsilon-r</span></code></a> must be greater than zero to prevent a fatal error.
+See <a class="reference external" href="http://www.gromacs.org">webpage</a> for example input files for a planetary simulation.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_ALLOW_CPT_MISMATCH</span></code></dt>
+<dd>when set, runs will not exit if the
+ensemble set in the <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file does not match that of the
+<a class="reference internal" href="file-formats.html#cpt"><span class="std std-ref">cpt</span></a> file.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_CUDA_NB_EWALD_TWINCUT</span></code></dt>
+<dd>force the use of twin-range cutoff kernel even if <a class="reference internal" href="mdp-options.html#mdp-rvdw"><code class="xref std std-mdp docutils literal"><span class="pre">rvdw</span></code></a> equals
+<a class="reference internal" href="mdp-options.html#mdp-rcoulomb"><code class="xref std std-mdp docutils literal"><span class="pre">rcoulomb</span></code></a> after PP-PME load balancing. The switch to twin-range kernels is automated,
+so this variable should be used only for benchmarking.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_CUDA_NB_ANA_EWALD</span></code></dt>
+<dd>force the use of analytical Ewald kernels. Should be used only for benchmarking.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_CUDA_NB_TAB_EWALD</span></code></dt>
+<dd>force the use of tabulated Ewald kernels. Should be used only for benchmarking.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_CUDA_STREAMSYNC</span></code></dt>
+<dd>force the use of cudaStreamSynchronize on ECC-enabled GPUs, which leads
+to performance loss due to a known CUDA driver bug present in API v5.0 NVIDIA drivers (pre-30x.xx).
+Cannot be set simultaneously with <code class="docutils literal"><span class="pre">GMX_NO_CUDA_STREAMSYNC</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DISABLE_CUDALAUNCH</span></code></dt>
+<dd>disable the use of the lower-latency cudaLaunchKernel API even when supported (CUDA &gt;=v7.0).
+Should only be used for benchmarking purposes.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DISABLE_CUDA_TIMING</span></code></dt>
+<dd>Disables GPU timing of CUDA tasks; synonymous with <code class="docutils literal"><span class="pre">GMX_DISABLE_GPU_TIMING</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_CYCLE_ALL</span></code></dt>
+<dd>times all code during runs.  Incompatible with threads.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_CYCLE_BARRIER</span></code></dt>
+<dd>calls MPI_Barrier before each cycle start/stop call.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DD_ORDER_ZYX</span></code></dt>
+<dd>build domain decomposition cells in the order
+(z, y, x) rather than the default (x, y, z).</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DD_USE_SENDRECV2</span></code></dt>
+<dd>during constraint and vsite communication, use a pair
+of <code class="docutils literal"><span class="pre">MPI_Sendrecv</span></code> calls instead of two simultaneous non-blocking calls
+(default 0, meaning off). Might be faster on some MPI implementations.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DLB_BASED_ON_FLOPS</span></code></dt>
+<dd>do domain-decomposition dynamic load balancing based on flop count rather than
+measured time elapsed (default 0, meaning off).
+This makes the load balancing reproducible, which can be useful for debugging purposes.
+A value of 1 uses the flops; a value &gt; 1 adds (value - 1)*5% of noise to the flops to increase the imbalance and the scaling.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DLB_MAX_BOX_SCALING</span></code></dt>
+<dd>maximum percentage box scaling permitted per domain-decomposition
+load-balancing step (default 10)</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DD_RECORD_LOAD</span></code></dt>
+<dd>record DD load statistics for reporting at end of the run (default 1, meaning on)</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DETAILED_PERF_STATS</span></code></dt>
+<dd>when set, print slightly more detailed performance information
+to the <a class="reference internal" href="file-formats.html#log"><span class="std std-ref">log</span></a> file. The resulting output is the way performance summary is reported in versions
+4.5.x and thus may be useful for anyone using scripts to parse <a class="reference internal" href="file-formats.html#log"><span class="std std-ref">log</span></a> files or standard output.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DISABLE_SIMD_KERNELS</span></code></dt>
+<dd>disables architecture-specific SIMD-optimized (SSE2, SSE4.1, AVX, etc.)
+non-bonded kernels thus forcing the use of plain C kernels.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DISABLE_GPU_TIMING</span></code></dt>
+<dd>timing of asynchronously executed GPU operations can have a
+non-negligible overhead with short step times. Disabling timing can improve performance in these cases.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DISABLE_GPU_DETECTION</span></code></dt>
+<dd>when set, disables GPU detection even if <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> was compiled
+with GPU support.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_GPU_APPLICATION_CLOCKS</span></code></dt>
+<dd>setting this variable to a value of &#8220;0&#8221;, &#8220;ON&#8221;, or &#8220;DISABLE&#8221; (case insensitive)
+allows disabling the CUDA GPU allication clock support.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DISRE_ENSEMBLE_SIZE</span></code></dt>
+<dd>the number of systems for distance restraint ensemble
+averaging. Takes an integer value.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_EMULATE_GPU</span></code></dt>
+<dd>emulate GPU runs by using algorithmically equivalent CPU reference code instead of
+GPU-accelerated functions. As the CPU code is slow, it is intended to be used only for debugging purposes.
+The behavior is automatically triggered if non-bonded calculations are turned off using <code class="docutils literal"><span class="pre">GMX_NO_NONBONDED</span></code>
+case in which the non-bonded calculations will not be called, but the CPU-GPU transfer will also be skipped.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_ENX_NO_FATAL</span></code></dt>
+<dd>disable exiting upon encountering a corrupted frame in an <a class="reference internal" href="file-formats.html#edr"><span class="std std-ref">edr</span></a>
+file, allowing the use of all frames up until the corruption.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_FORCE_UPDATE</span></code></dt>
+<dd>update forces when invoking <code class="docutils literal"><span class="pre">mdrun</span> <span class="pre">-rerun</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_GPU_ID</span></code></dt>
+<dd>set in the same way as <code class="docutils literal"><span class="pre">mdrun</span> <span class="pre">-gpu_id</span></code>, <code class="docutils literal"><span class="pre">GMX_GPU_ID</span></code>
+allows the user to specify different GPU id-s, which can be useful for selecting different
+devices on different compute nodes in a cluster.  Cannot be used in conjunction with <code class="docutils literal"><span class="pre">mdrun</span> <span class="pre">-gpu_id</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_IGNORE_FSYNC_FAILURE_ENV</span></code></dt>
+<dd>allow <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> to continue even if
+a file is missing.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_LJCOMB_TOL</span></code></dt>
+<dd>when set to a floating-point value, overrides the default tolerance of
+1e-5 for force-field floating-point parameters.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_MAXCONSTRWARN</span></code></dt>
+<dd>if set to -1, <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> will
+not exit if it produces too many LINCS warnings.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NB_GENERIC</span></code></dt>
+<dd>use the generic C kernel.  Should be set if using
+the group-based cutoff scheme and also sets <code class="docutils literal"><span class="pre">GMX_NO_SOLV_OPT</span></code> to be true,
+thus disabling solvent optimizations as well.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NB_MIN_CI</span></code></dt>
+<dd>neighbor list balancing parameter used when running on GPU. Sets the
+target minimum number pair-lists in order to improve multi-processor load-balance for better
+performance with small simulation systems. Must be set to a non-negative integer,
+the 0 value disables list splitting.
+The default value is optimized for supported GPUs (NVIDIA Fermi to Maxwell),
+therefore changing it is not necessary for normal usage, but it can be useful on future architectures.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NBLISTCG</span></code></dt>
+<dd>use neighbor list and kernels based on charge groups.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NBNXN_CYCLE</span></code></dt>
+<dd>when set, print detailed neighbor search cycle counting.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NBNXN_EWALD_ANALYTICAL</span></code></dt>
+<dd>force the use of analytical Ewald non-bonded kernels,
+mutually exclusive of <code class="docutils literal"><span class="pre">GMX_NBNXN_EWALD_TABLE</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NBNXN_EWALD_TABLE</span></code></dt>
+<dd>force the use of tabulated Ewald non-bonded kernels,
+mutually exclusive of <code class="docutils literal"><span class="pre">GMX_NBNXN_EWALD_ANALYTICAL</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NBNXN_SIMD_2XNN</span></code></dt>
+<dd>force the use of 2x(N+N) SIMD CPU non-bonded kernels,
+mutually exclusive of <code class="docutils literal"><span class="pre">GMX_NBNXN_SIMD_4XN</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NBNXN_SIMD_4XN</span></code></dt>
+<dd>force the use of 4xN SIMD CPU non-bonded kernels,
+mutually exclusive of <code class="docutils literal"><span class="pre">GMX_NBNXN_SIMD_2XNN</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_ALLVSALL</span></code></dt>
+<dd>disables optimized all-vs-all kernels.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_CART_REORDER</span></code></dt>
+<dd>used in initializing domain decomposition communicators. Rank reordering
+is default, but can be switched off with this environment variable.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_LJ_COMB_RULE</span></code></dt>
+<dd>force the use of LJ paremeter lookup instead of using combination rules
+in the non-bonded kernels.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_CUDA_STREAMSYNC</span></code></dt>
+<dd>the opposite of <code class="docutils literal"><span class="pre">GMX_CUDA_STREAMSYNC</span></code>. Disables the use of the
+standard cudaStreamSynchronize-based GPU waiting to improve performance when using CUDA driver API
+ealier than v5.0 with ECC-enabled GPUs.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_INT</span></code>, <code class="docutils literal"><span class="pre">GMX_NO_TERM</span></code>, <code class="docutils literal"><span class="pre">GMX_NO_USR1</span></code></dt>
+<dd>disable signal handlers for SIGINT,
+SIGTERM, and SIGUSR1, respectively.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_NODECOMM</span></code></dt>
+<dd>do not use separate inter- and intra-node communicators.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_NONBONDED</span></code></dt>
+<dd>skip non-bonded calculations; can be used to estimate the possible
+performance gain from adding a GPU accelerator to the current hardware setup &#8211; assuming that this is
+fast enough to complete the non-bonded calculations while the CPU does bonded force and PME computation.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_PULLVIR</span></code></dt>
+<dd>when set, do not add virial contribution to COM pull forces.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NOPREDICT</span></code></dt>
+<dd>shell positions are not predicted.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NO_SOLV_OPT</span></code></dt>
+<dd>turns off solvent optimizations; automatic if <code class="docutils literal"><span class="pre">GMX_NB_GENERIC</span></code>
+is enabled.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NSCELL_NCG</span></code></dt>
+<dd>the ideal number of charge groups per neighbor searching grid cell is hard-coded
+to a value of 10. Setting this environment variable to any other integer value overrides this hard-coded
+value.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_PME_NTHREADS</span></code></dt>
+<dd>set the number of OpenMP or PME threads (overrides the number guessed by
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_PME_P3M</span></code></dt>
+<dd>use P3M-optimized influence function instead of smooth PME B-spline interpolation.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_PME_THREAD_DIVISION</span></code></dt>
+<dd>PME thread division in the format &#8220;x y z&#8221; for all three dimensions. The
+sum of the threads in each dimension must equal the total number of PME threads (set in
+<cite>GMX_PME_NTHREADS</cite>).</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_PMEONEDD</span></code></dt>
+<dd>if the number of domain decomposition cells is set to 1 for both x and y,
+decompose PME in one dimension.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_REQUIRE_SHELL_INIT</span></code></dt>
+<dd>require that shell positions are initiated.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_REQUIRE_TABLES</span></code></dt>
+<dd>require the use of tabulated Coulombic
+and van der Waals interactions.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_SCSIGMA_MIN</span></code></dt>
+<dd>the minimum value for soft-core sigma. <strong>Note</strong> that this value is set
+using the <a class="reference internal" href="mdp-options.html#mdp-sc-sigma"><code class="xref std std-mdp docutils literal"><span class="pre">sc-sigma</span></code></a> keyword in the <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file, but this environment variable can be used
+to reproduce pre-4.5 behavior with respect to this parameter.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_TPIC_MASSES</span></code></dt>
+<dd>should contain multiple masses used for test particle insertion into a cavity.
+The center of mass of the last atoms is used for insertion into the cavity.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_USE_GRAPH</span></code></dt>
+<dd>use graph for bonded interactions.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_VERLET_BUFFER_RES</span></code></dt>
+<dd>resolution of buffer size in Verlet cutoff scheme.  The default value is
+0.001, but can be overridden with this environment variable.</dd>
+<dt><code class="docutils literal"><span class="pre">HWLOC_XMLFILE</span></code></dt>
+<dd>Not strictly a GROMACS environment variable, but on large machines
+the hwloc detection can take a few seconds if you have lots of MPI processes.
+If you run the hwloc command <cite>lstopo out.xml</cite> and set this environment
+variable to point to the location of this file, the hwloc library will use
+the cached information instead, which can be faster.</dd>
+<dt><code class="docutils literal"><span class="pre">MPIRUN</span></code></dt>
+<dd>the <code class="docutils literal"><span class="pre">mpirun</span></code> command used by <a class="reference internal" href="../onlinehelp/gmx-tune_pme.html#gmx-tune-pme"><span class="std std-ref">gmx tune_pme</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">MDRUN</span></code></dt>
+<dd>the <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> command used by <a class="reference internal" href="../onlinehelp/gmx-tune_pme.html#gmx-tune-pme"><span class="std std-ref">gmx tune_pme</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_NSTLIST</span></code></dt>
+<dd>sets the default value for <a class="reference internal" href="mdp-options.html#mdp-nstlist"><code class="xref std std-mdp docutils literal"><span class="pre">nstlist</span></code></a>, preventing it from being tuned during
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> startup when using the Verlet cutoff scheme.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_USE_TREEREDUCE</span></code></dt>
+<dd>use tree reduction for nbnxn force reduction. Potentially faster for large number of
+OpenMP threads (if memory locality is important).</dd>
+</dl>
+</div>
+<div class="section" id="opencl-management">
+<span id="id1"></span><h2>OpenCL management<a class="headerlink" href="#opencl-management" title="Permalink to this headline">¶</a></h2>
+<p>Currently, several environment variables exist that help customize some aspects
+of the <a class="reference external" href="https://www.khronos.org/opencl/">OpenCL</a> version of GROMACS. They are mostly related to the runtime
+compilation of OpenCL kernels, but they are also used in device selection.</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_NOGENCACHE</span></code></dt>
+<dd>If set, disable caching for OpenCL kernel builds. Caching is
+normally useful so that future runs can re-use the compiled
+kernels from previous runs. Currently, caching is always
+disabled, until we solve concurrency issues.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_GENCACHE</span></code></dt>
+<dd>Enable OpenCL binary caching. Only intended to be used for
+development and (expert) testing as neither concurrency
+nor cache invalidation is implemented safely!</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_NOFASTGEN</span></code></dt>
+<dd>If set, generate and compile all algorithm flavors, otherwise
+only the flavor required for the simulation is generated and
+compiled.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_DISABLE_FASTMATH</span></code></dt>
+<dd>Prevents the use of <code class="docutils literal"><span class="pre">-cl-fast-relaxed-math</span></code> compiler option.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_DUMP_LOG</span></code></dt>
+<dd>If defined, the OpenCL build log is always written to the
+mdrun log file. Otherwise, the build log is written to the
+log file only when an error occurs.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_VERBOSE</span></code></dt>
+<dd>If defined, it enables verbose mode for OpenCL kernel build.
+Currently available only for NVIDIA GPUs. See <code class="docutils literal"><span class="pre">GMX_OCL_DUMP_LOG</span></code>
+for details about how to obtain the OpenCL build log.</dd>
+</dl>
+<p><code class="docutils literal"><span class="pre">GMX_OCL_DUMP_INTERM_FILES</span></code></p>
+<blockquote>
+<div><p>If defined, intermediate language code corresponding to the
+OpenCL build process is saved to file. Caching has to be
+turned off in order for this option to take effect (see
+<code class="docutils literal"><span class="pre">GMX_OCL_NOGENCACHE</span></code>).</p>
+<blockquote>
+<div><ul class="simple">
+<li>NVIDIA GPUs: PTX code is saved in the current directory
+with the name <code class="docutils literal"><span class="pre">device_name.ptx</span></code></li>
+<li>AMD GPUs: <code class="docutils literal"><span class="pre">.IL/.ISA</span></code> files will be created for each OpenCL
+kernel built.  For details about where these files are
+created check AMD documentation for <code class="docutils literal"><span class="pre">-save-temps</span></code> compiler
+option.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_DEBUG</span></code></dt>
+<dd>Use in conjunction with <code class="docutils literal"><span class="pre">OCL_FORCE_CPU</span></code> or with an AMD device.
+It adds the debug flag to the compiler options (-g).</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_NOOPT</span></code></dt>
+<dd>Disable optimisations. Adds the option <code class="docutils literal"><span class="pre">cl-opt-disable</span></code> to the
+compiler options.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_FORCE_CPU</span></code></dt>
+<dd>Force the selection of a CPU device instead of a GPU.  This
+exists only for debugging purposes. Do not expect GROMACS to
+function properly with this option on, it is solely for the
+simplicity of stepping in a kernel and see what is happening.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_DISABLE_I_PREFETCH</span></code></dt>
+<dd>Disables i-atom data (type or LJ parameter) prefetch allowig
+testing.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_ENABLE_I_PREFETCH</span></code></dt>
+<dd>Enables i-atom data (type or LJ parameter) prefetch allowig
+testing on platforms where this behavior is not default.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_NB_ANA_EWALD</span></code></dt>
+<dd>Forces the use of analytical Ewald kernels. Equivalent of
+CUDA environment variable <code class="docutils literal"><span class="pre">GMX_CUDA_NB_ANA_EWALD</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_NB_TAB_EWALD</span></code></dt>
+<dd>Forces the use of tabulated Ewald kernel. Equivalent
+of CUDA environment variable <code class="docutils literal"><span class="pre">GMX_OCL_NB_TAB_EWALD</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_NB_EWALD_TWINCUT</span></code></dt>
+<dd>Forces the use of twin-range cutoff kernel. Equivalent of
+CUDA environment variable <code class="docutils literal"><span class="pre">GMX_CUDA_NB_EWALD_TWINCUT</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DISABLE_OCL_TIMING</span></code></dt>
+<dd>Disables timing for OpenCL operations</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_OCL_FILE_PATH</span></code></dt>
+<dd>Use this parameter to force GROMACS to load the OpenCL
+kernels from a custom location. Use it only if you want to
+override GROMACS default behavior, or if you want to test
+your own kernels.</dd>
+</dl>
+</div>
+<div class="section" id="analysis-and-core-functions">
+<h2>Analysis and Core Functions<a class="headerlink" href="#analysis-and-core-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GMX_QM_ACCURACY</span></code></dt>
+<dd>accuracy in Gaussian L510 (MC-SCF) component program.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_ORCA_BASENAME</span></code></dt>
+<dd>prefix of <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> files, used in Orca calculations
+for input and output file names.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_CPMCSCF</span></code></dt>
+<dd>when set to a nonzero value, Gaussian QM calculations will
+iteratively solve the CP-MCSCF equations.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_MODIFIED_LINKS_DIR</span></code></dt>
+<dd>location of modified links in Gaussian.</dd>
+<dt><code class="docutils literal"><span class="pre">DSSP</span></code></dt>
+<dd>used by <a class="reference internal" href="../onlinehelp/gmx-do_dssp.html#gmx-do-dssp"><span class="std std-ref">gmx do_dssp</span></a> to point to the <code class="docutils literal"><span class="pre">dssp</span></code>
+executable (not just its path).</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_GAUSS_DIR</span></code></dt>
+<dd>directory where Gaussian is installed.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_GAUSS_EXE</span></code></dt>
+<dd>name of the Gaussian executable.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_DIPOLE_SPACING</span></code></dt>
+<dd>spacing used by <a class="reference internal" href="../onlinehelp/gmx-dipoles.html#gmx-dipoles"><span class="std std-ref">gmx dipoles</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_MAXRESRENUM</span></code></dt>
+<dd>sets the maximum number of residues to be renumbered by
+<a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a>. A value of -1 indicates all residues should be renumbered.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_FFRTP_TER_RENAME</span></code></dt>
+<dd>Some force fields (like AMBER) use specific names for N- and C-
+terminal residues (NXXX and CXXX) as <a class="reference internal" href="file-formats.html#rtp"><span class="std std-ref">rtp</span></a> entries that are normally renamed. Setting
+this environment variable disables this renaming.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_PATH_GZIP</span></code></dt>
+<dd><code class="docutils literal"><span class="pre">gunzip</span></code> executable, used by <a class="reference internal" href="../onlinehelp/gmx-wham.html#gmx-wham"><span class="std std-ref">gmx wham</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_FONT</span></code></dt>
+<dd>name of X11 font used by <a class="reference internal" href="../onlinehelp/gmx-view.html#gmx-view"><span class="std std-ref">gmx view</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">GMXTIMEUNIT</span></code></dt>
+<dd>the time unit used in output files, can be
+anything in fs, ps, ns, us, ms, s, m or h.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_GAUSSIAN_MEMORY</span></code></dt>
+<dd>memory used for Gaussian QM calculation.</dd>
+<dt><code class="docutils literal"><span class="pre">MULTIPROT</span></code></dt>
+<dd>name of the <code class="docutils literal"><span class="pre">multiprot</span></code> executable, used by the
+contributed program <code class="docutils literal"><span class="pre">do_multiprot</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">NCPUS</span></code></dt>
+<dd>number of CPUs to be used for Gaussian QM calculation</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_ORCA_PATH</span></code></dt>
+<dd>directory where Orca is installed.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_SA_STEP</span></code></dt>
+<dd>simulated annealing step size for Gaussian QM calculation.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_QM_GROUND_STATE</span></code></dt>
+<dd>defines state for Gaussian surface hopping calculation.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_TOTAL</span></code></dt>
+<dd>name of the <code class="docutils literal"><span class="pre">total</span></code> executable used by the contributed
+<code class="docutils literal"><span class="pre">do_shift</span></code> program.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_ENER_VERBOSE</span></code></dt>
+<dd>make <a class="reference internal" href="../onlinehelp/gmx-energy.html#gmx-energy"><span class="std std-ref">gmx energy</span></a> and <a class="reference internal" href="../onlinehelp/gmx-eneconv.html#gmx-eneconv"><span class="std std-ref">gmx eneconv</span></a>
+loud and noisy.</dd>
+<dt><code class="docutils literal"><span class="pre">VMD_PLUGIN_PATH</span></code></dt>
+<dd>where to find VMD plug-ins. Needed to be
+able to read file formats recognized only by a VMD plug-in.</dd>
+<dt><code class="docutils literal"><span class="pre">VMDDIR</span></code></dt>
+<dd>base path of VMD installation.</dd>
+<dt><code class="docutils literal"><span class="pre">GMX_USE_XMGR</span></code></dt>
+<dd>sets viewer to <code class="docutils literal"><span class="pre">xmgr</span></code> (deprecated) instead of <code class="docutils literal"><span class="pre">xmgrace</span></code>.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Environment Variables</a><ul>
+<li><a class="reference internal" href="#output-control">Output Control</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+<li><a class="reference internal" href="#performance-and-run-control">Performance and Run Control</a></li>
+<li><a class="reference internal" href="#opencl-management">OpenCL management</a></li>
+<li><a class="reference internal" href="#analysis-and-core-functions">Analysis and Core Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../onlinehelp/selections.html"
+                        title="previous chapter">Selection syntax and usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../dev-manual/index.html"
+                        title="next chapter">Developer guide</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/environment-variables.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../dev-manual/index.html" title="Developer guide"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../onlinehelp/selections.html" title="Selection syntax and usage"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

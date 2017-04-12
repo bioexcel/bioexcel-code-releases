@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx pdb2gmx &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx pme_error" href="gmx-pme_error.html" />
+    <link rel="prev" title="gmx pairdist" href="gmx-pairdist.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-pme_error.html" title="gmx pme_error"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-pairdist.html" title="gmx pairdist"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-pdb2gmx">
+<span id="id1"></span><h1>gmx pdb2gmx<a class="headerlink" href="#gmx-pdb2gmx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx pdb2gmx [<strong>-f</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-o</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-p</strong> <em>[&lt;.top&gt;]</em>]
+            [<strong>-i</strong> <em>[&lt;.itp&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-q</strong> <em>[&lt;.gro/.g96/...&gt;]</em>]
+            [<strong>-chainsep</strong> <em>&lt;enum&gt;</em>] [<strong>-merge</strong> <em>&lt;enum&gt;</em>] [<strong>-ff</strong> <em>&lt;string&gt;</em>]
+            [<strong>-water</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]inter</strong>] [<strong>-[no]ss</strong>] [<strong>-[no]ter</strong>]
+            [<strong>-[no]lys</strong>] [<strong>-[no]arg</strong>] [<strong>-[no]asp</strong>] [<strong>-[no]glu</strong>] [<strong>-[no]gln</strong>]
+            [<strong>-[no]his</strong>] [<strong>-angle</strong> <em>&lt;real&gt;</em>] [<strong>-dist</strong> <em>&lt;real&gt;</em>] [<strong>-[no]una</strong>]
+            [<strong>-[no]ignh</strong>] [<strong>-[no]missing</strong>] [<strong>-[no]v</strong>] [<strong>-posrefc</strong> <em>&lt;real&gt;</em>]
+            [<strong>-vsite</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]heavyh</strong>] [<strong>-[no]deuterate</strong>]
+            [<strong>-[no]chargegrp</strong>] [<strong>-[no]cmap</strong>] [<strong>-[no]renum</strong>] [<strong>-[no]rtpres</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">pdb2gmx</span></code> reads a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> (or <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">.gro</span></a>) file, reads
+some database files, adds hydrogens to the molecules and generates
+coordinates in GROMACS (GROMOS), or optionally <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a>, format
+and a topology in GROMACS format.
+These files can subsequently be processed to generate a run input file.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">pdb2gmx</span></code> will search for force fields by looking for
+a <code class="docutils literal"><span class="pre">forcefield.itp</span></code> file in subdirectories <code class="docutils literal"><span class="pre">&lt;forcefield&gt;.ff</span></code>
+of the current working directory and of the GROMACS library directory
+as inferred from the path of the binary or the <code class="docutils literal"><span class="pre">GMXLIB</span></code> environment
+variable.
+By default the forcefield selection is interactive,
+but you can use the <code class="docutils literal"><span class="pre">-ff</span></code> option to specify one of the short names
+in the list on the command line instead. In that case <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">pdb2gmx</span></code> just looks
+for the corresponding <code class="docutils literal"><span class="pre">&lt;forcefield&gt;.ff</span></code> directory.</p>
+<p>After choosing a force field, all files will be read only from
+the corresponding force field directory.
+If you want to modify or add a residue types, you can copy the force
+field directory from the GROMACS library directory to your current
+working directory. If you want to add new protein residue types,
+you will need to modify <code class="docutils literal"><span class="pre">residuetypes.dat</span></code> in the library directory
+or copy the whole library directory to a local directory and set
+the environment variable <code class="docutils literal"><span class="pre">GMXLIB</span></code> to the name of that directory.
+Check Chapter 5 of the manual for more information about file formats.</p>
+<p>Note that a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file is nothing more than a file format, and it
+need not necessarily contain a protein structure. Every kind of
+molecule for which there is support in the database can be converted.
+If there is no support in the database, you can add it yourself.</p>
+<p>The program has limited intelligence, it reads a number of database
+files, that allow it to make special bonds (Cys-Cys, Heme-His, etc.),
+if necessary this can be done manually. The program can prompt the
+user to select which kind of LYS, ASP, GLU, CYS or HIS residue is
+desired. For Lys the choice is between neutral (two protons on NZ) or
+protonated (three protons, default), for Asp and Glu unprotonated
+(default) or protonated, for His the proton can be either on ND1,
+on NE2 or on both. By default these selections are done automatically.
+For His, this is based on an optimal hydrogen bonding
+conformation. Hydrogen bonds are defined based on a simple geometric
+criterion, specified by the maximum hydrogen-donor-acceptor angle
+and donor-acceptor distance, which are set by <code class="docutils literal"><span class="pre">-angle</span></code> and
+<code class="docutils literal"><span class="pre">-dist</span></code> respectively.</p>
+<p>The protonation state of N- and C-termini can be chosen interactively
+with the <code class="docutils literal"><span class="pre">-ter</span></code> flag.  Default termini are ionized (NH3+ and COO-),
+respectively.  Some force fields support zwitterionic forms for chains of
+one residue, but for polypeptides these options should NOT be selected.
+The AMBER force fields have unique forms for the terminal residues,
+and these are incompatible with the <code class="docutils literal"><span class="pre">-ter</span></code> mechanism. You need
+to prefix your N- or C-terminal residue names with &#8220;N&#8221; or &#8220;C&#8221;
+respectively to use these forms, making sure you preserve the format
+of the coordinate file. Alternatively, use named terminating residues
+(e.g. ACE, NME).</p>
+<p>The separation of chains is not entirely trivial since the markup
+in user-generated PDB files frequently varies and sometimes it
+is desirable to merge entries across a TER record, for instance
+if you want a disulfide bridge or distance restraints between
+two protein chains or if you have a HEME group bound to a protein.
+In such cases multiple chains should be contained in a single
+<code class="docutils literal"><span class="pre">moleculetype</span></code> definition.
+To handle this, <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">pdb2gmx</span></code> uses two separate options.
+First, <code class="docutils literal"><span class="pre">-chainsep</span></code> allows you to choose when a new chemical chain should
+start, and termini added when applicable. This can be done based on the
+existence of TER records, when the chain id changes, or combinations of either
+or both of these. You can also do the selection fully interactively.
+In addition, there is a <code class="docutils literal"><span class="pre">-merge</span></code> option that controls how multiple chains
+are merged into one moleculetype, after adding all the chemical termini (or not).
+This can be turned off (no merging), all non-water chains can be merged into a
+single molecule, or the selection can be done interactively.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">pdb2gmx</span></code> will also check the occupancy field of the <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file.
+If any of the occupancies are not one, indicating that the atom is
+not resolved well in the structure, a warning message is issued.
+When a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file does not originate from an X-ray structure determination
+all occupancy fields may be zero. Either way, it is up to the user
+to verify the correctness of the input data (read the article!).</p>
+<p>During processing the atoms will be reordered according to GROMACS
+conventions. With <code class="docutils literal"><span class="pre">-n</span></code> an index file can be generated that
+contains one group reordered in the same way. This allows you to
+convert a GROMOS trajectory and coordinate file to GROMOS. There is
+one limitation: reordering is done after the hydrogens are stripped
+from the input and before new hydrogens are added. This means that
+you should not use <code class="docutils literal"><span class="pre">-ignh</span></code>.</p>
+<p>The <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">.gro</span></a> and <code class="docutils literal"><span class="pre">.g96</span></code> file formats do not support chain
+identifiers. Therefore it is useful to enter a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file name at
+the <code class="docutils literal"><span class="pre">-o</span></code> option when you want to convert a multi-chain <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file.</p>
+<p>The option <code class="docutils literal"><span class="pre">-vsite</span></code> removes hydrogen and fast improper dihedral
+motions. Angular and out-of-plane motions can be removed by changing
+hydrogens into virtual sites and fixing angles, which fixes their
+position relative to neighboring atoms. Additionally, all atoms in the
+aromatic rings of the standard amino acids (i.e. PHE, TRP, TYR and HIS)
+can be converted into virtual sites, eliminating the fast improper dihedral
+fluctuations in these rings. <strong>Note</strong> that in this case all other hydrogen
+atoms are also converted to virtual sites. The mass of all atoms that are
+converted into virtual sites, is added to the heavy atoms.</p>
+<p>Also slowing down of dihedral motion can be done with <code class="docutils literal"><span class="pre">-heavyh</span></code>
+done by increasing the hydrogen-mass by a factor of 4. This is also
+done for water hydrogens to slow down the rotational motion of water.
+The increase in mass of the hydrogens is subtracted from the bonded
+(heavy) atom so that the total mass of the system remains the same.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.gro/.g96/...&gt;] (eiwit.pdb)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.gro/.g96/...&gt;] (conf.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+<dt><code class="docutils literal"><span class="pre">-p</span></code> [&lt;.top&gt;] (topol.top)</dt>
+<dd>Topology file</dd>
+<dt><code class="docutils literal"><span class="pre">-i</span></code> [&lt;.itp&gt;] (posre.itp)</dt>
+<dd>Include file for topology</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (clean.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-q</span></code> [&lt;.gro/.g96/...&gt;] (clean.pdb) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-chainsep</span></code> &lt;enum&gt; (id_or_ter)</dt>
+<dd>Condition in PDB files when a new chain should be started (adding termini): id_or_ter, id_and_ter, ter, id, interactive</dd>
+<dt><code class="docutils literal"><span class="pre">-merge</span></code> &lt;enum&gt; (no)</dt>
+<dd>Merge multiple chains into a single [moleculetype]: no, all, interactive</dd>
+<dt><code class="docutils literal"><span class="pre">-ff</span></code> &lt;string&gt; (select)</dt>
+<dd>Force field, interactive by default. Use <code class="docutils literal"><span class="pre">-h</span></code> for information.</dd>
+<dt><code class="docutils literal"><span class="pre">-water</span></code> &lt;enum&gt; (select)</dt>
+<dd>Water model to use: select, none, spc, spce, tip3p, tip4p, tip5p</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]inter</span></code>  (no)</dt>
+<dd>Set the next 8 options to interactive</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ss</span></code>  (no)</dt>
+<dd>Interactive SS bridge selection</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ter</span></code>  (no)</dt>
+<dd>Interactive termini selection, instead of charged (default)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]lys</span></code>  (no)</dt>
+<dd>Interactive lysine selection, instead of charged</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]arg</span></code>  (no)</dt>
+<dd>Interactive arginine selection, instead of charged</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]asp</span></code>  (no)</dt>
+<dd>Interactive aspartic acid selection, instead of charged</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]glu</span></code>  (no)</dt>
+<dd>Interactive glutamic acid selection, instead of charged</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]gln</span></code>  (no)</dt>
+<dd>Interactive glutamine selection, instead of neutral</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]his</span></code>  (no)</dt>
+<dd>Interactive histidine selection, instead of checking H-bonds</dd>
+<dt><code class="docutils literal"><span class="pre">-angle</span></code> &lt;real&gt; (135)</dt>
+<dd>Minimum hydrogen-donor-acceptor angle for a H-bond (degrees)</dd>
+<dt><code class="docutils literal"><span class="pre">-dist</span></code> &lt;real&gt; (0.3)</dt>
+<dd>Maximum donor-acceptor distance for a H-bond (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]una</span></code>  (no)</dt>
+<dd>Select aromatic rings with united CH atoms on phenylalanine, tryptophane and tyrosine</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ignh</span></code>  (no)</dt>
+<dd>Ignore hydrogen atoms that are in the coordinate file</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]missing</span></code>  (no)</dt>
+<dd>Continue when atoms are missing, dangerous</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]v</span></code>  (no)</dt>
+<dd>Be slightly more verbose in messages</dd>
+<dt><code class="docutils literal"><span class="pre">-posrefc</span></code> &lt;real&gt; (1000)</dt>
+<dd>Force constant for position restraints</dd>
+<dt><code class="docutils literal"><span class="pre">-vsite</span></code> &lt;enum&gt; (none)</dt>
+<dd>Convert atoms to virtual sites: none, hydrogens, aromatics</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]heavyh</span></code>  (no)</dt>
+<dd>Make hydrogen atoms heavy</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]deuterate</span></code>  (no)</dt>
+<dd>Change the mass of hydrogens to 2 amu</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]chargegrp</span></code>  (yes)</dt>
+<dd>Use charge groups in the <a class="reference internal" href="../user-guide/file-formats.html#rtp"><span class="std std-ref">.rtp</span></a> file</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]cmap</span></code>  (yes)</dt>
+<dd>Use cmap torsions (if enabled in the <a class="reference internal" href="../user-guide/file-formats.html#rtp"><span class="std std-ref">.rtp</span></a> file)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]renum</span></code>  (no)</dt>
+<dd>Renumber the residues consecutively in the output</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rtpres</span></code>  (no)</dt>
+<dd>Use <a class="reference internal" href="../user-guide/file-formats.html#rtp"><span class="std std-ref">.rtp</span></a> entry names as residue names</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx pdb2gmx</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-pairdist.html"
+                        title="previous chapter">gmx pairdist</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-pme_error.html"
+                        title="next chapter">gmx pme_error</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-pdb2gmx.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-pme_error.html" title="gmx pme_error"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-pairdist.html" title="gmx pairdist"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

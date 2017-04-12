@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Automatic source code formatting &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Development-time tools" href="tools.html" />
+    <link rel="next" title="Unit testing" href="testutils.html" />
+    <link rel="prev" title="Source tree checker scripts" href="gmxtree.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="testutils.html" title="Unit testing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmxtree.html" title="Source tree checker scripts"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" accesskey="U">Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="automatic-source-code-formatting">
+<h1>Automatic source code formatting<a class="headerlink" href="#automatic-source-code-formatting" title="Permalink to this headline">¶</a></h1>
+<p>The source code can be automatically formatted using uncrustify, an automatic
+source code formatting tool, to follow the guidelines in
+<a class="reference internal" href="formatting.html"><span class="doc">Guidelines for code formatting</span></a>.
+Additionally, Python scripts are used for a few other automatic
+formatting/checking tasks.  The overview tools page contains a list of these
+tools: <a class="reference internal" href="tools.html#dev-formatting-tools"><span class="std std-ref">Code formatting and style</span></a>.
+This page provides more details for uncrustify and copyright scripts.</p>
+<p>Jenkins uses these same scripts (in particular, <code class="docutils literal"><span class="pre">uncrustify.sh</span></code> and the
+<code class="docutils literal"><span class="pre">check-source</span></code> target) to enforce that the code stays invariant under such
+formatting.</p>
+<div class="section" id="setting-up-uncrustify">
+<h2>Setting up uncrustify<a class="headerlink" href="#setting-up-uncrustify" title="Permalink to this headline">¶</a></h2>
+<p>A patched version of uncrustify is used for GROMACS.  To set this up, you need
+to do these (once):</p>
+<ol class="arabic">
+<li><p class="first">Change to a directory under which you want to build uncrustify and run:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone -b gromacs git://github.com/rolandschulz/uncrustify.git
+<span class="nb">cd</span> uncrustify
+./configure
+make
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the binary <code class="docutils literal"><span class="pre">src/uncrustify</span></code> into a directory of your choice
+(<code class="docutils literal"><span class="pre">/path/to/uncrustify</span></code> below).</p>
+</li>
+</ol>
+<p>Alternatively, if you are running Linux, you can try whether the binary from
+<a class="reference external" href="http://redmine.gromacs.org/issues/845">http://redmine.gromacs.org/issues/845</a> works for you.</p>
+<p>In order to use the binary for <code class="docutils literal"><span class="pre">uncrustify.sh</span></code> and for the pre-commit hook, you
+also need to run this in each of your GROMACS repositories:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git config hooks.uncrustifypath /path/to/uncrustify
+</pre></div>
+</div>
+<p>Alternatively, if you just want to use <code class="docutils literal"><span class="pre">uncrustify.sh</span></code>, you can set the
+<code class="docutils literal"><span class="pre">UNCRUSTIFY</span></code> environment variable to <code class="docutils literal"><span class="pre">/path/to/uncrustify</span></code>.</p>
+<p>Using the pre-commit hook or git filters needs additional setup; see the
+respective sections below.</p>
+</div>
+<div class="section" id="what-is-automatically-formatted">
+<h2>What is automatically formatted?<a class="headerlink" href="#what-is-automatically-formatted" title="Permalink to this headline">¶</a></h2>
+<p>To identify which files are subject to automatic formatting, the scripts use
+git filters, specified in <code class="docutils literal"><span class="pre">.gitattributes</span></code> files.  Only files that have the
+attribute <code class="docutils literal"><span class="pre">filter</span></code> set to one of the below values are processed:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">filter=uncrustify</span></code>: uncrustify is run, copyright headers are checked, and
+include order is enforced</li>
+<li><code class="docutils literal"><span class="pre">filter=uncrustify_only</span></code>: only uncrustify is run</li>
+<li><code class="docutils literal"><span class="pre">filter=includesort</span></code>: include order is enforced and copyright headers are
+checked</li>
+<li><code class="docutils literal"><span class="pre">filter=copyright</span></code>: only copyright headers are checked</li>
+</ul>
+<p>Other files are ignored by <code class="docutils literal"><span class="pre">uncrustify.sh</span></code> and <code class="docutils literal"><span class="pre">reformat_all.sh</span></code> scripts (see
+below).</p>
+</div>
+<div class="section" id="scripts">
+<h2>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="copyright-py">
+<h3><code class="docutils literal"><span class="pre">copyright.py</span></code><a class="headerlink" href="#copyright-py" title="Permalink to this headline">¶</a></h3>
+<p>This script provides low-level functionality to check and update copyright
+headers in C/C++ source files, as well as in several other types of files like
+CMake and Python scripts.</p>
+<p>This file is also used as a loadable Python module for kernel generators, and
+provides the functionality to generate conformant copyright headers for such
+scripts.</p>
+<p>The script is similar to uncrustify in that there is rarely need to run it
+directly, but instead the bash scripts below use it internally.  You can run
+the script with <code class="docutils literal"><span class="pre">--help</span></code> option if you want to see what all options it provides
+if you need to do some maintenance on the copyright headers themselves.</p>
+</div>
+<div class="section" id="uncrustify-sh">
+<h3><code class="docutils literal"><span class="pre">uncrustify.sh</span></code><a class="headerlink" href="#uncrustify-sh" title="Permalink to this headline">¶</a></h3>
+<p>This script runs uncrustify and <code class="docutils literal"><span class="pre">copyright.py</span></code> on modified files and
+reports/applies the results.
+By default, the current HEAD commit is compared to the work tree,
+and files that</p>
+<ol class="arabic simple">
+<li>are different between these two trees and</li>
+<li>change under uncrustify and/or have outdated copyright header</li>
+</ol>
+<p>are reported.  This behavior can be changed by</p>
+<ol class="arabic">
+<li><p class="first">Specifying an <code class="docutils literal"><span class="pre">--rev=REV</span></code> argument, which uses <code class="docutils literal"><span class="pre">REV</span></code> instead of HEAD as
+the base of the comparison.  A typical use case is to specify <code class="docutils literal"><span class="pre">--rev=HEAD^</span></code>
+to check the HEAD commit.</p>
+</li>
+<li><p class="first">Specifying an action:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">check-*</span></code>:   reports the files that uncrustify changes</li>
+<li><code class="docutils literal"><span class="pre">diff-*</span></code>:    prints the actual diff of what would change</li>
+<li><code class="docutils literal"><span class="pre">update-*</span></code>:  applies the changes to the repository</li>
+<li><code class="docutils literal"><span class="pre">*-workdir</span></code>: operates on the working directory (files on disk)</li>
+<li><code class="docutils literal"><span class="pre">*-index</span></code>:   operates on the index of the repository</li>
+</ul>
+<p>For convenience, if you omit the workdir/index suffix, workdir is assumed
+(i.e., <code class="docutils literal"><span class="pre">diff</span></code> equals <code class="docutils literal"><span class="pre">diff-workdir</span></code>).</p>
+</li>
+<li><p class="first">Specifying <code class="docutils literal"><span class="pre">--uncrustify=off</span></code>, which does not run uncrustify.</p>
+</li>
+<li><p class="first">Specifying <code class="docutils literal"><span class="pre">--copyright=&lt;mode&gt;</span></code>, which alters the level of copyright
+checking is done:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">off</span></code></dt>
+<dd><p class="first last">does not check copyright headers at all</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">year</span></code></dt>
+<dd><p class="first last">only update copyright year in new-format copyright headers</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">add</span></code></dt>
+<dd><p class="first last">in addition to <code class="docutils literal"><span class="pre">year</span></code>, add copyright headers to files that do not
+have any</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">update</span></code></dt>
+<dd><p class="first last">in addition to <code class="docutils literal"><span class="pre">year</span></code> and <code class="docutils literal"><span class="pre">add</span></code>, also update new-format copyright
+headers if they are broken or outdated</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">replace</span></code></dt>
+<dd><p class="first last">replace any copyright header with a new-format copyright header</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">full</span></code></dt>
+<dd><p class="first last">do all of the above</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p>By default, <code class="docutils literal"><span class="pre">update-*</span></code> refuses to update dirty files (i.e., that differ
+between the disk and the index) to make it easy to revert the changes.
+This can be overridden by adding a <code class="docutils literal"><span class="pre">-f</span></code>/<code class="docutils literal"><span class="pre">--force</span></code> option.</p>
+</div>
+<div class="section" id="git-pre-commit-hook">
+<h3>git pre-commit hook<a class="headerlink" href="#git-pre-commit-hook" title="Permalink to this headline">¶</a></h3>
+<p>If you want to run <code class="docutils literal"><span class="pre">uncrustify.sh</span></code> automatically for changes you make, you can
+configure a pre-commit hook using <code class="docutils literal"><span class="pre">admin/git-pre-commit</span></code>:</p>
+<ol class="arabic">
+<li><p class="first">Copy the <code class="docutils literal"><span class="pre">git-pre-commit</span></code> script to .git/hooks/pre-commit.</p>
+</li>
+<li><p class="first">Specify the path to uncrustify for the hook if you have not already done
+so:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git config hooks.uncrustifypath /path/to/uncrustify
+</pre></div>
+</div>
+</li>
+<li><p class="first">Set the operation mode for the hook:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git config hooks.uncrustifymode check
+git config hooks.copyrightmode  update
+</pre></div>
+</div>
+</li>
+</ol>
+<p>With this configuration, all source files modified in the commit are run
+through uncrustify and checked for correct copyright headers.
+If any file would be changed by <code class="docutils literal"><span class="pre">uncrustify.sh</span></code>, the names of those files are
+reported and the commit is prevented.  The issues can be fixed by running
+<code class="docutils literal"><span class="pre">uncrustify.sh</span></code> manually.</p>
+<p>To disable the hook without removing the <code class="docutils literal"><span class="pre">pre-commit</span></code> file, you can set</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git config hooks.uncrustifymode off
+git config hooks.copyrightmode off
+</pre></div>
+</div>
+<p>To disable it temporarily for a commit, set NO_FORMAT_CHECK environment
+variable.  For example,</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="nv">NO_FORMAT_CHECK</span><span class="o">=</span><span class="m">1</span> git commit -a
+</pre></div>
+</div>
+<p>You can also run <code class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--no-verify</span></code>, but that also disables other hooks,
+such as the Change-Id <code class="docutils literal"><span class="pre">commit-msg</span></code> hook used by Gerrit.</p>
+<p>Note that when you run <code class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code>, the hook is only run for the
+changes that are getting amended, not for the whole commit.  During a rebase,
+the hook is not run.</p>
+<p>The actual work is done by the <code class="docutils literal"><span class="pre">admin/uncrustify.sh</span></code> script, which gets
+run with the <code class="docutils literal"><span class="pre">check-index</span></code> action, and with <code class="docutils literal"><span class="pre">--uncrustify</span></code> and <code class="docutils literal"><span class="pre">--copyright</span></code>
+getting set according to the <code class="docutils literal"><span class="pre">git</span> <span class="pre">config</span></code> settings.</p>
+</div>
+<div class="section" id="reformat-all-sh">
+<h3><code class="docutils literal"><span class="pre">reformat_all.sh</span></code><a class="headerlink" href="#reformat-all-sh" title="Permalink to this headline">¶</a></h3>
+<p>This script runs uncrustify, <code class="docutils literal"><span class="pre">copyright.py</span></code>, or the include sorter for all
+applicable files in the source tree.  See <code class="docutils literal"><span class="pre">reformat_all.sh</span> <span class="pre">-h</span></code> for the
+invocation.</p>
+<p>The script can also produce the list of files for which these commands would be
+run.  To do this, specify <code class="docutils literal"><span class="pre">list-files</span></code> on the command line and use
+<code class="docutils literal"><span class="pre">--filter=&lt;type&gt;</span></code> to specify which command to get the file list for.  This can
+be used together with, e.g., <code class="docutils literal"><span class="pre">xargs</span></code> to run other scripts on the same set of
+files.</p>
+<p>For all the operations, it is also possible to apply patters (of the same style
+that various git commands accept, i.e., <code class="docutils literal"><span class="pre">src/*.cpp</span></code> matches all <code class="docutils literal"><span class="pre">.cpp</span></code> files
+recursively under <code class="docutils literal"><span class="pre">src/</span></code>).  The patterns can be specified with
+<code class="docutils literal"><span class="pre">--pattern=&lt;pattern&gt;</span></code>, and multiple <code class="docutils literal"><span class="pre">--pattern</span></code> arguments can be given.</p>
+<p>As with <code class="docutils literal"><span class="pre">uncrustify.sh</span></code>, <code class="docutils literal"><span class="pre">-f</span></code>/<code class="docutils literal"><span class="pre">--force</span></code> is necessary if the working tree and
+the git index do not match.</p>
+</div>
+</div>
+<div class="section" id="using-git-filters">
+<h2>Using git filters<a class="headerlink" href="#using-git-filters" title="Permalink to this headline">¶</a></h2>
+<p>An alternative to using a pre-commit hook to automatically apply uncrustify on
+changes is to use a git filter (does not require <code class="docutils literal"><span class="pre">uncrustify.sh</span></code>, only the
+<code class="docutils literal"><span class="pre">.gitattributes</span></code> file).  You can run</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git config filter.uncrustify.clean <span class="se">\</span>
+    <span class="s2">&quot;/path/to/uncrustify -c admin/uncrustify.cfg -q -l cpp&quot;</span>
+</pre></div>
+</div>
+<p>To configure a filter for all files that specify <code class="docutils literal"><span class="pre">filter=uncrustify</span></code> attribute.</p>
+<p>The pre-commit hook + manually running <code class="docutils literal"><span class="pre">uncrustify.sh</span></code> gives better/more
+intuitive control (with the filter, it is possible to have a work tree that is
+different from HEAD and still have an empty <code class="docutils literal"><span class="pre">git</span> <span class="pre">diff</span></code>) and provides better
+performance for changes that modify many files.  It is the only way that
+currently also checks the copyright headers.</p>
+<p>The filter allows one to transparently merge branches that have not been run
+through uncrustify, and is applied more consistently (the pre-commit hook is
+not run for every commit, e.g., during a rebase).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Automatic source code formatting</a><ul>
+<li><a class="reference internal" href="#setting-up-uncrustify">Setting up uncrustify</a></li>
+<li><a class="reference internal" href="#what-is-automatically-formatted">What is automatically formatted?</a></li>
+<li><a class="reference internal" href="#scripts">Scripts</a><ul>
+<li><a class="reference internal" href="#copyright-py"><code class="docutils literal"><span class="pre">copyright.py</span></code></a></li>
+<li><a class="reference internal" href="#uncrustify-sh"><code class="docutils literal"><span class="pre">uncrustify.sh</span></code></a></li>
+<li><a class="reference internal" href="#git-pre-commit-hook">git pre-commit hook</a></li>
+<li><a class="reference internal" href="#reformat-all-sh"><code class="docutils literal"><span class="pre">reformat_all.sh</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#using-git-filters">Using git filters</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmxtree.html"
+                        title="previous chapter">Source tree checker scripts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testutils.html"
+                        title="next chapter">Unit testing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/uncrustify.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="testutils.html" title="Unit testing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmxtree.html" title="Source tree checker scripts"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >Development-time tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx editconf &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx eneconv" href="gmx-eneconv.html" />
+    <link rel="prev" title="gmx dyndom" href="gmx-dyndom.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-eneconv.html" title="gmx eneconv"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-dyndom.html" title="gmx dyndom"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-editconf">
+<span id="id1"></span><h1>gmx editconf<a class="headerlink" href="#gmx-editconf" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx editconf [<strong>-f</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-bf</strong> <em>[&lt;.dat&gt;]</em>]
+             [<strong>-o</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-mead</strong> <em>[&lt;.pqr&gt;]</em>] [<strong>-[no]w</strong>]
+             [<strong>-[no]ndef</strong>] [<strong>-bt</strong> <em>&lt;enum&gt;</em>] [<strong>-box</strong> <em>&lt;vector&gt;</em>]
+             [<strong>-angles</strong> <em>&lt;vector&gt;</em>] [<strong>-d</strong> <em>&lt;real&gt;</em>] [<strong>-[no]c</strong>]
+             [<strong>-center</strong> <em>&lt;vector&gt;</em>] [<strong>-aligncenter</strong> <em>&lt;vector&gt;</em>]
+             [<strong>-align</strong> <em>&lt;vector&gt;</em>] [<strong>-translate</strong> <em>&lt;vector&gt;</em>]
+             [<strong>-rotate</strong> <em>&lt;vector&gt;</em>] [<strong>-[no]princ</strong>] [<strong>-scale</strong> <em>&lt;vector&gt;</em>]
+             [<strong>-density</strong> <em>&lt;real&gt;</em>] [<strong>-[no]pbc</strong>] [<strong>-resnr</strong> <em>&lt;int&gt;</em>] [<strong>-[no]grasp</strong>]
+             [<strong>-rvdw</strong> <em>&lt;real&gt;</em>] [<strong>-[no]sig56</strong>] [<strong>-[no]vdwread</strong>] [<strong>-[no]atom</strong>]
+             [<strong>-[no]legend</strong>] [<strong>-label</strong> <em>&lt;string&gt;</em>] [<strong>-[no]conect</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">editconf</span></code> converts generic structure format to <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">.gro</span></a>, <code class="docutils literal"><span class="pre">.g96</span></code>
+or <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a>.</p>
+<p>The box can be modified with options <code class="docutils literal"><span class="pre">-box</span></code>, <code class="docutils literal"><span class="pre">-d</span></code> and
+<code class="docutils literal"><span class="pre">-angles</span></code>. Both <code class="docutils literal"><span class="pre">-box</span></code> and <code class="docutils literal"><span class="pre">-d</span></code>
+will center the system in the box, unless <code class="docutils literal"><span class="pre">-noc</span></code> is used.</p>
+<p>Option <code class="docutils literal"><span class="pre">-bt</span></code> determines the box type: <code class="docutils literal"><span class="pre">triclinic</span></code> is a
+triclinic box, <code class="docutils literal"><span class="pre">cubic</span></code> is a rectangular box with all sides equal
+<code class="docutils literal"><span class="pre">dodecahedron</span></code> represents a rhombic dodecahedron and
+<code class="docutils literal"><span class="pre">octahedron</span></code> is a truncated octahedron.
+The last two are special cases of a triclinic box.
+The length of the three box vectors of the truncated octahedron is the
+shortest distance between two opposite hexagons.
+Relative to a cubic box with some periodic image distance, the volume of a
+dodecahedron with this same periodic distance is 0.71 times that of the cube,
+and that of a truncated octahedron is 0.77 times.</p>
+<p>Option <code class="docutils literal"><span class="pre">-box</span></code> requires only
+one value for a cubic, rhombic dodecahedral, or truncated octahedral box.</p>
+<p>With <code class="docutils literal"><span class="pre">-d</span></code> and a <code class="docutils literal"><span class="pre">triclinic</span></code> box the size of the system in the <em>x</em>-, <em>y</em>-,
+and <em>z</em>-directions is used. With <code class="docutils literal"><span class="pre">-d</span></code> and <code class="docutils literal"><span class="pre">cubic</span></code>,
+<code class="docutils literal"><span class="pre">dodecahedron</span></code> or <code class="docutils literal"><span class="pre">octahedron</span></code> boxes, the dimensions are set
+to the diameter of the system (largest distance between atoms) plus twice
+the specified distance.</p>
+<p>Option <code class="docutils literal"><span class="pre">-angles</span></code> is only meaningful with option <code class="docutils literal"><span class="pre">-box</span></code> and
+a triclinic box and cannot be used with option <code class="docutils literal"><span class="pre">-d</span></code>.</p>
+<p>When <code class="docutils literal"><span class="pre">-n</span></code> or <code class="docutils literal"><span class="pre">-ndef</span></code> is set, a group
+can be selected for calculating the size and the geometric center,
+otherwise the whole system is used.</p>
+<p><code class="docutils literal"><span class="pre">-rotate</span></code> rotates the coordinates and velocities.</p>
+<p><code class="docutils literal"><span class="pre">-princ</span></code> aligns the principal axes of the system along the
+coordinate axes, with the longest axis aligned with the <em>x</em>-axis.
+This may allow you to decrease the box volume,
+but beware that molecules can rotate significantly in a nanosecond.</p>
+<p>Scaling is applied before any of the other operations are
+performed. Boxes and coordinates can be scaled to give a certain density (option
+<code class="docutils literal"><span class="pre">-density</span></code>). Note that this may be inaccurate in case a <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">.gro</span></a>
+file is given as input. A special feature of the scaling option is that when the
+factor -1 is given in one dimension, one obtains a mirror image,
+mirrored in one of the planes. When one uses -1 in three dimensions,
+a point-mirror image is obtained.</p>
+<p>Groups are selected after all operations have been applied.</p>
+<p>Periodicity can be removed in a crude manner.
+It is important that the box vectors at the bottom of your input file
+are correct when the periodicity is to be removed.</p>
+<p>When writing <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files, B-factors can be
+added with the <code class="docutils literal"><span class="pre">-bf</span></code> option. B-factors are read
+from a file with with following format: first line states number of
+entries in the file, next lines state an index
+followed by a B-factor. The B-factors will be attached per residue
+unless the number of B-factors is larger than the number of the residues or unless the
+<code class="docutils literal"><span class="pre">-atom</span></code> option is set. Obviously, any type of numeric data can
+be added instead of B-factors. <code class="docutils literal"><span class="pre">-legend</span></code> will produce
+a row of CA atoms with B-factors ranging from the minimum to the
+maximum value found, effectively making a legend for viewing.</p>
+<p>With the option <code class="docutils literal"><span class="pre">-mead</span></code> a special <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> (.pqr)
+file for the MEAD electrostatics
+program (Poisson-Boltzmann solver) can be made. A further prerequisite
+is that the input file is a run input file.
+The B-factor field is then filled with the Van der Waals radius
+of the atoms while the occupancy field will hold the charge.</p>
+<p>The option <code class="docutils literal"><span class="pre">-grasp</span></code> is similar, but it puts the charges in the B-factor
+and the radius in the occupancy.</p>
+<p>Option <code class="docutils literal"><span class="pre">-align</span></code> allows alignment
+of the principal axis of a specified group against the given vector,
+with an optional center of rotation specified by <code class="docutils literal"><span class="pre">-aligncenter</span></code>.</p>
+<p>Finally, with option <code class="docutils literal"><span class="pre">-label</span></code>, <code class="docutils literal"><span class="pre">editconf</span></code> can add a chain identifier
+to a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file, which can be useful for analysis with e.g. Rasmol.</p>
+<p>To convert a truncated octrahedron file produced by a package which uses
+a cubic box with the corners cut off (such as GROMOS), use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">editconf</span> <span class="o">-</span><span class="n">f</span> <span class="ow">in</span> <span class="o">-</span><span class="n">rotate</span> <span class="mi">0</span> <span class="mi">45</span> <span class="mf">35.264</span> <span class="o">-</span><span class="n">bt</span> <span class="n">o</span> <span class="o">-</span><span class="n">box</span> <span class="n">veclen</span> <span class="o">-</span><span class="n">o</span> <span class="n">out</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">veclen</span></code> is the size of the cubic box times sqrt(3)/2.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.gro/.g96/...&gt;] (conf.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-bf</span></code> [&lt;.dat&gt;] (bfact.dat) (Optional)</dt>
+<dd>Generic data file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.gro/.g96/...&gt;] (out.gro) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+<dt><code class="docutils literal"><span class="pre">-mead</span></code> [&lt;.pqr&gt;] (mead.pqr) (Optional)</dt>
+<dd>Coordinate file for MEAD</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ndef</span></code>  (no)</dt>
+<dd>Choose output from default index groups</dd>
+<dt><code class="docutils literal"><span class="pre">-bt</span></code> &lt;enum&gt; (triclinic)</dt>
+<dd>Box type for <code class="docutils literal"><span class="pre">-box</span></code> and <code class="docutils literal"><span class="pre">-d</span></code>: triclinic, cubic, dodecahedron, octahedron</dd>
+<dt><code class="docutils literal"><span class="pre">-box</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Box vector lengths (a,b,c)</dd>
+<dt><code class="docutils literal"><span class="pre">-angles</span></code> &lt;vector&gt; (90 90 90)</dt>
+<dd>Angles between the box vectors (bc,ac,ab)</dd>
+<dt><code class="docutils literal"><span class="pre">-d</span></code> &lt;real&gt; (0)</dt>
+<dd>Distance between the solute and the box</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]c</span></code>  (no)</dt>
+<dd>Center molecule in box (implied by <code class="docutils literal"><span class="pre">-box</span></code> and <code class="docutils literal"><span class="pre">-d</span></code>)</dd>
+<dt><code class="docutils literal"><span class="pre">-center</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Coordinates of geometrical center</dd>
+<dt><code class="docutils literal"><span class="pre">-aligncenter</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Center of rotation for alignment</dd>
+<dt><code class="docutils literal"><span class="pre">-align</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Align to target vector</dd>
+<dt><code class="docutils literal"><span class="pre">-translate</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Translation</dd>
+<dt><code class="docutils literal"><span class="pre">-rotate</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Rotation around the X, Y and Z axes in degrees</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]princ</span></code>  (no)</dt>
+<dd>Orient molecule(s) along their principal axes</dd>
+<dt><code class="docutils literal"><span class="pre">-scale</span></code> &lt;vector&gt; (1 1 1)</dt>
+<dd>Scaling factor</dd>
+<dt><code class="docutils literal"><span class="pre">-density</span></code> &lt;real&gt; (1000)</dt>
+<dd>Density (g/L) of the output box achieved by scaling</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (no)</dt>
+<dd>Remove the periodicity (make molecule whole again)</dd>
+<dt><code class="docutils literal"><span class="pre">-resnr</span></code> &lt;int&gt; (-1)</dt>
+<dd>Renumber residues starting from resnr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]grasp</span></code>  (no)</dt>
+<dd>Store the charge of the atom in the B-factor field and the radius of the atom in the occupancy field</dd>
+<dt><code class="docutils literal"><span class="pre">-rvdw</span></code> &lt;real&gt; (0.12)</dt>
+<dd>Default Van der Waals radius (in nm) if one can not be found in the database or if no parameters are present in the topology file</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]sig56</span></code>  (no)</dt>
+<dd>Use rmin/2 (minimum in the Van der Waals potential) rather than sigma/2</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]vdwread</span></code>  (no)</dt>
+<dd>Read the Van der Waals radii from the file <code class="docutils literal"><span class="pre">vdwradii.dat</span></code> rather than computing the radii based on the force field</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]atom</span></code>  (no)</dt>
+<dd>Force B-factor attachment per atom</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]legend</span></code>  (no)</dt>
+<dd>Make B-factor legend</dd>
+<dt><code class="docutils literal"><span class="pre">-label</span></code> &lt;string&gt; (A)</dt>
+<dd>Add chain label for all residues</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]conect</span></code>  (no)</dt>
+<dd>Add CONECT records to a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file when written. Can only be done when a topology is present</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>For complex molecules, the periodicity removal routine may break down, in that case you can use <a class="reference internal" href="gmx-trjconv.html"><span class="doc">gmx trjconv</span></a>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx editconf</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-dyndom.html"
+                        title="previous chapter">gmx dyndom</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-eneconv.html"
+                        title="next chapter">gmx eneconv</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-editconf.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-eneconv.html" title="gmx eneconv"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-dyndom.html" title="gmx dyndom"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

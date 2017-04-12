@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting good performance from mdrun &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="User guide" href="index.html" />
+    <link rel="next" title="Molecular dynamics parameters (.mdp options)" href="mdp-options.html" />
+    <link rel="prev" title="Useful mdrun features" href="mdrun-features.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mdp-options.html" title="Molecular dynamics parameters (.mdp options)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mdrun-features.html" title="Useful mdrun features"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-good-performance-from-mdrun">
+<h1>Getting good performance from mdrun<a class="headerlink" href="#getting-good-performance-from-mdrun" title="Permalink to this headline">¶</a></h1>
+<p>The GROMACS build system and the <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> tool has a lot of built-in
+and configurable intelligence to detect your hardware and make pretty
+effective use of that hardware. For a lot of casual and serious use of
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>, the automatic machinery works well enough. But to get the
+most from your hardware to maximize your scientific quality, read on!</p>
+<div class="section" id="hardware-background-information">
+<h2>Hardware background information<a class="headerlink" href="#hardware-background-information" title="Permalink to this headline">¶</a></h2>
+<p>Modern computer hardware is complex and heterogeneous, so we need to
+discuss a little bit of background information and set up some
+definitions. Experienced HPC users can skip this section.</p>
+<dl class="glossary docutils">
+<dt id="term-core">core</dt>
+<dd>A hardware compute unit that actually executes
+instructions. There is normally more than one core in a
+processor, often many more.</dd>
+<dt id="term-cache">cache</dt>
+<dd>A special kind of memory local to core(s) that is much faster
+to access than main memory, kind of like the top of a human&#8217;s
+desk, compared to their filing cabinet. There are often
+several layers of caches associated with a core.</dd>
+<dt id="term-socket">socket</dt>
+<dd>A group of cores that share some kind of locality, such as a
+shared cache. This makes it more efficient to spread
+computational work over cores within a socket than over cores
+in different sockets. Modern processors often have more than
+one socket.</dd>
+<dt id="term-node">node</dt>
+<dd>A group of sockets that share coarser-level locality, such as
+shared access to the same memory without requiring any network
+hardware. A normal laptop or desktop computer is a node. A
+node is often the smallest amount of a large compute cluster
+that a user can request to use.</dd>
+<dt id="term-thread">thread</dt>
+<dd>A stream of instructions for a core to execute. There are many
+different programming abstractions that create and manage
+spreading computation over multiple threads, such as OpenMP,
+pthreads, winthreads, CUDA, OpenCL, and OpenACC. Some kinds of
+hardware can map more than one software thread to a core; on
+Intel x86 processors this is called &#8220;hyper-threading&#8221;, while
+the more general concept is often called SMT for
+&#8220;simultaneous multi-threading&#8221;. IBM Power8 can for instance use
+up to 8 hardware threads per core.
+This feature can usually be enabled or disabled either in
+the hardware bios or through a setting in the Linux operating
+system. GROMACS can typically make use of this, for a moderate
+free performance boost. In most cases it will be
+enabled by default e.g. on new x86 processors, but in some cases
+the system administrators might have disabled it. If that is the
+case, ask if they can re-enable it for you. If you are not sure
+if it is enabled, check the output of the CPU information in
+the log file and compare with CPU specifications you find online.</dd>
+<dt id="term-thread-affinity-pinning">thread affinity (pinning)</dt>
+<dd>By default, most operating systems allow software threads to migrate
+between cores (or hardware threads) to help automatically balance
+workload. However, the performance of <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> can deteriorate
+if this is permitted and will degrade dramatically especially when
+relying on multi-threading within a rank. To avoid this,
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> will by default
+set the affinity of its threads to individual cores/hardware threads,
+unless the user or software environment has already done so
+(or not the entire node is used for the run, i.e. there is potential
+for node sharing).
+Setting thread affinity is sometimes called thread &#8220;pinning&#8221;.</dd>
+<dt id="term-mpi">MPI</dt>
+<dd>The dominant multi-node parallelization-scheme, which provides
+a standardized language in which programs can be written that
+work across more than one node.</dd>
+<dt id="term-rank">rank</dt>
+<dd>In MPI, a rank is the smallest grouping of hardware used in
+the multi-node parallelization scheme. That grouping can be
+controlled by the user, and might correspond to a core, a
+socket, a node, or a group of nodes. The best choice varies
+with the hardware, software and compute task. Sometimes an MPI
+rank is called an MPI process.</dd>
+<dt id="term-gpu">GPU</dt>
+<dd>A graphics processing unit, which is often faster and more
+efficient than conventional processors for particular kinds of
+compute workloads. A GPU is always associated with a
+particular node, and often a particular socket within that
+node.</dd>
+<dt id="term-openmp">OpenMP</dt>
+<dd>A standardized technique supported by many compilers to share
+a compute workload over multiple cores. Often combined with
+MPI to achieve hybrid MPI/OpenMP parallelism.</dd>
+<dt id="term-cuda">CUDA</dt>
+<dd>A proprietary parallel computing framework and API developed by NVIDIA
+that allows targeting their accelerator hardware.
+GROMACS uses CUDA for GPU acceleration support with NVIDIA hardware.</dd>
+<dt id="term-opencl">OpenCL</dt>
+<dd>An open standard-based parallel computing framework that consists
+of a C99-based compiler and a programming API for targeting heterogeneous
+and accelerator hardware. GROMACS uses OpenCL for GPU acceleration
+on AMD devices (both GPUs and APUs); NVIDIA hardware is also supported.</dd>
+<dt id="term-simd">SIMD</dt>
+<dd>Modern CPU cores have instructions that can execute large
+numbers of floating-point instructions in a single cycle.</dd>
+</dl>
+</div>
+<div class="section" id="gromacs-background-information">
+<h2>GROMACS background information<a class="headerlink" href="#gromacs-background-information" title="Permalink to this headline">¶</a></h2>
+<p>The algorithms in <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> and their implementations are most relevant
+when choosing how to make good use of the hardware. For details,
+see the Reference Manual. The most important of these are</p>
+<dl class="glossary docutils">
+<dt id="term-domain-decomposition">Domain Decomposition</dt>
+<dd>The domain decomposition (DD) algorithm decomposes the
+(short-ranged) component of the non-bonded interactions into
+domains that share spatial locality, which permits efficient
+code to be written. Each domain handles all of the
+particle-particle (PP) interactions for its members, and is
+mapped to a single rank. Within a PP rank, OpenMP threads can
+share the workload, or the work can be off-loaded to a
+GPU. The PP rank also handles any bonded interactions for the
+members of its domain. A GPU may perform work for more than
+one PP rank, but it is normally most efficient to use a single
+PP rank per GPU and for that rank to have thousands of
+particles. When the work of a PP rank is done on the CPU, mdrun
+will make extensive use of the SIMD capabilities of the
+core. There are various <cite>command-line options
+&lt;controlling-the-domain-decomposition-algorithm</cite> to control
+the behaviour of the DD algorithm.</dd>
+<dt id="term-particle-mesh-ewald">Particle-mesh Ewald</dt>
+<dd>The particle-mesh Ewald (PME) algorithm treats the long-ranged
+components of the non-bonded interactions (Coulomb and/or
+Lennard-Jones).  Either all, or just a subset of ranks may
+participate in the work for computing long-ranged component
+(often inaccurately called simple the &#8220;PME&#8221;
+component). Because the algorithm uses a 3D FFT that requires
+global communication, its performance gets worse as more ranks
+participate, which can mean it is fastest to use just a subset
+of ranks (e.g.  one-quarter to one-half of the ranks). If
+there are separate PME ranks, then the remaining ranks handle
+the PP work. Otherwise, all ranks do both PP and PME work.</dd>
+</dl>
+</div>
+<div class="section" id="running-mdrun-within-a-single-node">
+<h2>Running mdrun within a single node<a class="headerlink" href="#running-mdrun-within-a-single-node" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> can be configured and compiled in several different ways that
+are efficient to use within a single <a class="reference internal" href="#term-node"><span class="xref std std-term">node</span></a>. The default configuration
+using a suitable compiler will deploy a multi-level hybrid parallelism
+that uses CUDA, OpenMP and the threading platform native to the
+hardware. For programming convenience, in GROMACS, those native
+threads are used to implement on a single node the same MPI scheme as
+would be used between nodes, but much more efficient; this is called
+thread-MPI. From a user&#8217;s perspective, real MPI and thread-MPI look
+almost the same, and GROMACS refers to MPI ranks to mean either kind,
+except where noted. A real external MPI can be used for <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> within
+a single node, but runs more slowly than the thread-MPI version.</p>
+<p>By default, <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> will inspect the hardware available at run time
+and do its best to make fairly efficient use of the whole node. The
+log file, stdout and stderr are used to print diagnostics that
+inform the user about the choices made and possible consequences.</p>
+<p>A number of command-line parameters are available to vary the default
+behavior.</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-nt</span></code></dt>
+<dd>The total number of threads to use. The default, 0, will start as
+many threads as available cores. Whether the threads are
+thread-MPI ranks, or OpenMP threads within such ranks depends on
+other settings.</dd>
+<dt><code class="docutils literal"><span class="pre">-ntmpi</span></code></dt>
+<dd>The total number of thread-MPI ranks to use. The default, 0,
+will start one rank per GPU (if present), and otherwise one rank
+per core.</dd>
+<dt><code class="docutils literal"><span class="pre">-ntomp</span></code></dt>
+<dd>The total number of OpenMP threads per rank to start. The
+default, 0, will start one thread on each available core.
+Alternatively, mdrun will honor the appropriate system
+environment variable (e.g. <code class="docutils literal"><span class="pre">OMP_NUM_THREADS</span></code>) if set.</dd>
+<dt><code class="docutils literal"><span class="pre">-npme</span></code></dt>
+<dd>The total number of ranks to dedicate to the long-ranged
+component of PME, if used. The default, -1, will dedicate ranks
+only if the total number of threads is at least 12, and will use
+around one-third of the ranks for the long-ranged component.</dd>
+<dt><code class="docutils literal"><span class="pre">-ntomp_pme</span></code></dt>
+<dd>When using PME with separate PME ranks,
+the total number of OpenMP threads per separate PME ranks.
+The default, 0, copies the value from <code class="docutils literal"><span class="pre">-ntomp</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">-gpu_id</span></code></dt>
+<dd>A string that specifies the ID numbers of the GPUs to be
+used by corresponding PP ranks on this node. For example,
+&#8220;0011&#8221; specifies that the lowest two PP ranks use GPU 0,
+and the other two use GPU 1.</dd>
+<dt><code class="docutils literal"><span class="pre">-pin</span></code></dt>
+<dd>Can be set to &#8220;auto,&#8221; &#8220;on&#8221; or &#8220;off&#8221; to control whether
+mdrun will attempt to set the affinity of threads to cores.
+Defaults to &#8220;auto,&#8221; which means that if mdrun detects that all the
+cores on the node are being used for mdrun, then it should behave
+like &#8220;on,&#8221; and attempt to set the affinities (unless they are
+already set by something else).</dd>
+<dt><code class="docutils literal"><span class="pre">-pinoffset</span></code></dt>
+<dd>If <code class="docutils literal"><span class="pre">-pin</span> <span class="pre">on</span></code>, specifies the logical core number to
+which mdrun should pin the first thread. When running more than
+one instance of mdrun on a node, use this option to to avoid
+pinning threads from different mdrun instances to the same core.</dd>
+<dt><code class="docutils literal"><span class="pre">-pinstride</span></code></dt>
+<dd>If <code class="docutils literal"><span class="pre">-pin</span> <span class="pre">on</span></code>, specifies the stride in logical core
+numbers for the cores to which mdrun should pin its threads. When
+running more than one instance of mdrun on a node, use this option
+to to avoid pinning threads from different mdrun instances to the
+same core.  Use the default, 0, to minimize the number of threads
+per physical core - this lets mdrun manage the hardware-, OS- and
+configuration-specific details of how to map logical cores to
+physical cores.</dd>
+<dt><code class="docutils literal"><span class="pre">-ddorder</span></code></dt>
+<dd>Can be set to &#8220;interleave,&#8221; &#8220;pp_pme&#8221; or &#8220;cartesian.&#8221;
+Defaults to &#8220;interleave,&#8221; which means that any separate PME ranks
+will be mapped to MPI ranks in an order like PP, PP, PME, PP, PP,
+PME, ... etc. This generally makes the best use of the available
+hardware. &#8220;pp_pme&#8221; maps all PP ranks first, then all PME
+ranks. &#8220;cartesian&#8221; is a special-purpose mapping generally useful
+only on special torus networks with accelerated global
+communication for Cartesian communicators. Has no effect if there
+are no separate PME ranks.</dd>
+<dt><code class="docutils literal"><span class="pre">-nb</span></code></dt>
+<dd>Can be set to &#8220;auto&#8221;, &#8220;cpu&#8221;, &#8220;gpu&#8221;, &#8220;cpu_gpu.&#8221;
+Defaults to &#8220;auto,&#8221; which uses a compatible GPU if available.
+Setting &#8220;cpu&#8221; requires that no GPU is used. Setting &#8220;gpu&#8221; requires
+that a compatible GPU be available and will be used. Setting
+&#8220;cpu_gpu&#8221; permits the CPU to execute a GPU-like code path, which
+will run slowly on the CPU and should only be used for debugging.</dd>
+</dl>
+<div class="section" id="examples-for-mdrun-on-one-node">
+<h3>Examples for mdrun on one node<a class="headerlink" href="#examples-for-mdrun-on-one-node" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span>
+</pre></div>
+</div>
+<p>Starts mdrun using all the available resources. mdrun
+will automatically choose a fairly efficient division
+into thread-MPI ranks, OpenMP threads and assign work
+to compatible GPUs. Details will vary with hardware
+and the kind of simulation being run.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">nt</span> <span class="mi">8</span>
+</pre></div>
+</div>
+<p>Starts mdrun using 8 threads, which might be thread-MPI
+or OpenMP threads depending on hardware and the kind
+of simulation being run.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">ntmpi</span> <span class="mi">2</span> <span class="o">-</span><span class="n">ntomp</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>Starts mdrun using eight total threads, with four thread-MPI
+ranks and two OpenMP threads per core. You should only use
+these options when seeking optimal performance, and
+must take care that the ranks you create can have
+all of their OpenMP threads run on the same socket.
+The number of ranks must be a multiple of the number of
+sockets, and the number of cores per node must be
+a multiple of the number of threads per rank.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="mi">12</span>
+</pre></div>
+</div>
+<p>Starts mdrun using GPUs with IDs 1 and 2 (e.g. because
+GPU 0 is dedicated to running a display). This requires
+two thread-MPI ranks, and will split the available
+CPU cores between them using OpenMP threads.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">ntmpi</span> <span class="mi">4</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="s2">&quot;1122&quot;</span>
+</pre></div>
+</div>
+<p>Starts mdrun using four thread-MPI ranks, and maps them
+to GPUs with IDs 1 and 2. The CPU cores available will
+be split evenly between the ranks using OpenMP threads.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">nt</span> <span class="mi">6</span> <span class="o">-</span><span class="n">pin</span> <span class="n">on</span> <span class="o">-</span><span class="n">pinoffset</span> <span class="mi">0</span>
+<span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">nt</span> <span class="mi">6</span> <span class="o">-</span><span class="n">pin</span> <span class="n">on</span> <span class="o">-</span><span class="n">pinoffset</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Starts two mdrun processes, each with six total threads.
+Threads will have their affinities set to particular
+logical cores, beginning from the logical core
+with rank 0 or 3, respectively. The above would work
+well on an Intel CPU with six physical cores and
+hyper-threading enabled. Use this kind of setup only
+if restricting mdrun to a subset of cores to share a
+node with other processes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">2</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span>
+</pre></div>
+</div>
+<p>When using an <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> compiled with external MPI,
+this will start two ranks and as many OpenMP threads
+as the hardware and MPI setup will permit. If the
+MPI setup is restricted to one node, then the resulting
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> will be local to that node.</p>
+</div>
+</div>
+<div class="section" id="running-mdrun-on-more-than-one-node">
+<h2>Running mdrun on more than one node<a class="headerlink" href="#running-mdrun-on-more-than-one-node" title="Permalink to this headline">¶</a></h2>
+<p>This requires configuring GROMACS to build with an external MPI
+library. By default, this mdrun executable is run with
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a>. All of the considerations for running single-node
+mdrun still apply, except that <code class="docutils literal"><span class="pre">-ntmpi</span></code> and <code class="docutils literal"><span class="pre">-nt</span></code> cause a fatal
+error, and instead the number of ranks is controlled by the
+MPI environment.
+Settings such as <code class="docutils literal"><span class="pre">-npme</span></code> are much more important when
+using multiple nodes. Configuring the MPI environment to
+produce one rank per core is generally good until one
+approaches the strong-scaling limit. At that point, using
+OpenMP to spread the work of an MPI rank over more than one
+core is needed to continue to improve absolute performance.
+The location of the scaling limit depends on the processor,
+presence of GPUs, network, and simulation algorithm, but
+it is worth measuring at around ~200 particles/core if you
+need maximum throughput.</p>
+<p>There are further command-line parameters that are relevant in these
+cases.</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-tunepme</span></code></dt>
+<dd>Defaults to &#8220;on.&#8221; If &#8220;on,&#8221; will optimize various aspects of the
+PME and DD algorithms, shifting load between ranks and/or GPUs to
+maximize throughput</dd>
+<dt><code class="docutils literal"><span class="pre">-dlb</span></code></dt>
+<dd>Can be set to &#8220;auto,&#8221; &#8220;no,&#8221; or &#8220;yes.&#8221;
+Defaults to &#8220;auto.&#8221; Doing Dynamic Load Balancing between MPI ranks
+is needed to maximize performance. This is particularly important
+for molecular systems with heterogeneous particle or interaction
+density. When a certain threshold for performance loss is
+exceeded, DLB activates and shifts particles between ranks to improve
+performance.</dd>
+<dt><code class="docutils literal"><span class="pre">-gcom</span></code></dt>
+<dd>During the simulation <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> must communicate between all ranks to
+compute quantities such as kinetic energy. By default, this
+happens whenever plausible, and is influenced by a lot of [.mdp
+options](#mdp-options). The period between communication phases
+must be a multiple of <a class="reference internal" href="mdp-options.html#mdp-nstlist"><code class="xref std std-mdp docutils literal"><span class="pre">nstlist</span></code></a>, and defaults to
+the minimum of <a class="reference internal" href="mdp-options.html#mdp-nstcalcenergy"><code class="xref std std-mdp docutils literal"><span class="pre">nstcalcenergy</span></code></a> and <a class="reference internal" href="mdp-options.html#mdp-nstlist"><code class="xref std std-mdp docutils literal"><span class="pre">nstlist</span></code></a>.
+<code class="docutils literal"><span class="pre">mdrun</span> <span class="pre">-gcom</span></code> sets the number of steps that must elapse between
+such communication phases, which can improve performance when
+running on a lot of ranks. Note that this means that _e.g._
+temperature coupling algorithms will
+effectively remain at constant energy until the next
+communication phase. <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> will always honor the
+setting of <code class="docutils literal"><span class="pre">mdrun</span> <span class="pre">-gcom</span></code>, by changing <a class="reference internal" href="mdp-options.html#mdp-nstcalcenergy"><code class="xref std std-mdp docutils literal"><span class="pre">nstcalcenergy</span></code></a>,
+<a class="reference internal" href="mdp-options.html#mdp-nstenergy"><code class="xref std std-mdp docutils literal"><span class="pre">nstenergy</span></code></a>, <a class="reference internal" href="mdp-options.html#mdp-nstlog"><code class="xref std std-mdp docutils literal"><span class="pre">nstlog</span></code></a>, <a class="reference internal" href="mdp-options.html#mdp-nsttcouple"><code class="xref std std-mdp docutils literal"><span class="pre">nsttcouple</span></code></a> and/or
+<a class="reference internal" href="mdp-options.html#mdp-nstpcouple"><code class="xref std std-mdp docutils literal"><span class="pre">nstpcouple</span></code></a> if necessary.</dd>
+</dl>
+<p>Note that <code class="docutils literal"><span class="pre">-tunepme</span></code> has more effect when there is more than one
+<a class="reference internal" href="#term-node"><span class="xref std std-term">node</span></a>, because the cost of communication for the PP and PME
+ranks differs. It still shifts load between PP and PME ranks, but does
+not change the number of separate PME ranks in use.</p>
+<p>Note also that <code class="docutils literal"><span class="pre">-dlb</span></code> and <code class="docutils literal"><span class="pre">-tunepme</span></code> can interfere with each other, so
+if you experience performance variation that could result from this,
+you may wish to tune PME separately, and run the result with <code class="docutils literal"><span class="pre">mdrun</span>
+<span class="pre">-notunepme</span> <span class="pre">-dlb</span> <span class="pre">yes</span></code>.</p>
+<p>The <a class="reference internal" href="../onlinehelp/gmx-tune_pme.html#gmx-tune-pme"><span class="std std-ref">gmx tune_pme</span></a> utility is available to search a wider
+range of parameter space, including making safe
+modifications to the <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file, and varying <code class="docutils literal"><span class="pre">-npme</span></code>.
+It is only aware of the number of ranks created by
+the MPI environment, and does not explicitly manage
+any aspect of OpenMP during the optimization.</p>
+<div class="section" id="examples-for-mdrun-on-more-than-one-node">
+<h3>Examples for mdrun on more than one node<a class="headerlink" href="#examples-for-mdrun-on-more-than-one-node" title="Permalink to this headline">¶</a></h3>
+<p>The examples and explanations for for single-node mdrun are
+still relevant, but <code class="docutils literal"><span class="pre">-nt</span></code> is no longer the way
+to choose the number of MPI ranks.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">16</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> with 16 ranks, which are mapped to
+the hardware by the MPI library, e.g. as specified
+in an MPI hostfile. The available cores will be
+automatically split among ranks using OpenMP threads,
+depending on the hardware and any environment settings
+such as <code class="docutils literal"><span class="pre">OMP_NUM_THREADS</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">16</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">npme</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> with 16 ranks, as above, and
+require that 5 of them are dedicated to the PME
+component.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">11</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">ntomp</span> <span class="mi">2</span> <span class="o">-</span><span class="n">npme</span> <span class="mi">6</span> <span class="o">-</span><span class="n">ntomp_pme</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> with 11 ranks, as above, and
+require that six of them are dedicated to the PME
+component with one OpenMP thread each. The remaining
+five do the PP component, with two OpenMP threads
+each.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">4</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">ntomp</span> <span class="mi">6</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="mi">00</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> on a machine with two nodes, using
+four total ranks, each rank with six OpenMP threads,
+and both ranks on a node sharing GPU with ID 0.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">8</span> <span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">ntomp</span> <span class="mi">3</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="mi">0000</span>
+</pre></div>
+</div>
+<p>Using a same/similar hardware as above,
+starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> on a machine with two nodes, using
+eight total ranks, each rank with three OpenMP threads,
+and all four ranks on a node sharing GPU with ID 0.
+This may or may not be faster than the previous setup
+on the same hardware.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">20</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">ntomp</span> <span class="mi">4</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> with 20 ranks, and assigns the CPU cores evenly
+across ranks each to one OpenMP thread. This setup is likely to be
+suitable when there are ten nodes, each with one GPU, and each node
+has two sockets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">20</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="mi">00</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> with 20 ranks, and assigns the CPU cores evenly
+across ranks each to one OpenMP thread. This setup is likely to be
+suitable when there are ten nodes, each with one GPU, and each node
+has two sockets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">20</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="mi">01</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> with 20 ranks. This setup is likely
+to be suitable when there are ten nodes, each with two
+GPUs.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">40</span> <span class="n">gmx_mpi</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">gpu_id</span> <span class="mi">0011</span>
+</pre></div>
+</div>
+<p>Starts <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#mdrun-mpi"><span class="std std-ref">gmx mdrun</span></a> with 40 ranks. This setup is likely
+to be suitable when there are ten nodes, each with two
+GPUs, and OpenMP performs poorly on the hardware.</p>
+</div>
+</div>
+<div class="section" id="controlling-the-domain-decomposition-algorithm">
+<h2>Controlling the domain decomposition algorithm<a class="headerlink" href="#controlling-the-domain-decomposition-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>This section lists all the options that affect how the domain
+decomposition algorithm decomposes the workload to the available
+parallel hardware.</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-rdd</span></code></dt>
+<dd>Can be used to set the required maximum distance for inter
+charge-group bonded interactions. Communication for two-body
+bonded interactions below the non-bonded cut-off distance always
+comes for free with the non-bonded communication. Particles beyond
+the non-bonded cut-off are only communicated when they have
+missing bonded interactions; this means that the extra cost is
+minor and nearly independent of the value of <code class="docutils literal"><span class="pre">-rdd</span></code>. With dynamic
+load balancing, option <code class="docutils literal"><span class="pre">-rdd</span></code> also sets the lower limit for the
+domain decomposition cell sizes. By default <code class="docutils literal"><span class="pre">-rdd</span></code> is determined
+by <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> based on the initial coordinates. The chosen value will
+be a balance between interaction range and communication cost.</dd>
+<dt><code class="docutils literal"><span class="pre">-ddcheck</span></code></dt>
+<dd>On by default. When inter charge-group bonded interactions are
+beyond the bonded cut-off distance, <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> terminates with an
+error message. For pair interactions and tabulated bonds that do
+not generate exclusions, this check can be turned off with the
+option <code class="docutils literal"><span class="pre">-noddcheck</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">-rcon</span></code></dt>
+<dd>When constraints are present, option <code class="docutils literal"><span class="pre">-rcon</span></code> influences
+the cell size limit as well.
+Particles connected by NC constraints, where NC is the LINCS order
+plus 1, should not be beyond the smallest cell size. A error
+message is generated when this happens, and the user should change
+the decomposition or decrease the LINCS order and increase the
+number of LINCS iterations.  By default <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> estimates the
+minimum cell size required for P-LINCS in a conservative
+fashion. For high parallelization, it can be useful to set the
+distance required for P-LINCS with <code class="docutils literal"><span class="pre">-rcon</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">-dds</span></code></dt>
+<dd>Sets the minimum allowed x, y and/or z scaling of the cells with
+dynamic load balancing. <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> will ensure that the cells can
+scale down by at least this factor. This option is used for the
+automated spatial decomposition (when not using <code class="docutils literal"><span class="pre">-dd</span></code>) as well as
+for determining the number of grid pulses, which in turn sets the
+minimum allowed cell size. Under certain circumstances the value
+of <code class="docutils literal"><span class="pre">-dds</span></code> might need to be adjusted to account for high or low
+spatial inhomogeneity of the system.</dd>
+</dl>
+</div>
+<div class="section" id="finding-out-how-to-run-mdrun-better">
+<h2>Finding out how to run mdrun better<a class="headerlink" href="#finding-out-how-to-run-mdrun-better" title="Permalink to this headline">¶</a></h2>
+<p>The Wallcycle module is used for runtime performance measurement of <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>.
+At the end of the log file of each run, the &#8220;Real cycle and time accounting&#8221; section
+provides a table with runtime statistics for different parts of the <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> code
+in rows of the table.
+The table contains colums indicating the number of ranks and threads that
+executed the respective part of the run, wall-time and cycle
+count aggregates (across all threads and ranks) averaged over the entire run.
+The last column also shows what precentage of the total runtime each row represents.
+Note that the <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> timer resetting functionalities (<cite>-resethway</cite> and <cite>-resetstep</cite>)
+reset the performance counters and therefore are useful to avoid startup overhead and
+performance instability (e.g. due to load balancing) at the beginning of the run.</p>
+<p>The performance counters are:</p>
+<ul class="simple">
+<li>Particle-particle during Particle mesh Ewald</li>
+<li>Domain decomposition</li>
+<li>Domain decomposition communication load</li>
+<li>Domain decomposition communication bounds</li>
+<li>Virtual site constraints</li>
+<li>Send X to Particle mesh Ewald</li>
+<li>Neighbor search</li>
+<li>Launch GPU operations</li>
+<li>Communication of coordinates</li>
+<li>Born radii</li>
+<li>Force</li>
+<li>Waiting + Communication of force</li>
+<li>Particle mesh Ewald</li>
+<li>PME redist. X/F</li>
+<li>PME spread/gather</li>
+<li>PME 3D-FFT</li>
+<li>PME 3D-FFT Communication</li>
+<li>PME solve Lennard-Jones</li>
+<li>PME solve Elec</li>
+<li>PME wait for particle-particle</li>
+<li>Wait + Receive PME force</li>
+<li>Wait GPU nonlocal</li>
+<li>Wait GPU local</li>
+<li>Non-bonded position/force buffer operations</li>
+<li>Virtual site spread</li>
+<li>COM pull force</li>
+<li>Write trajectory</li>
+<li>Update</li>
+<li>Constraints</li>
+<li>Communication of energies</li>
+<li>Enforced rotation</li>
+<li>Add rotational forces</li>
+<li>Position swapping</li>
+<li>Interactive MD</li>
+</ul>
+<p>As performance data is collected for every run, they are essential to assessing
+and tuning the performance of <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> performance. Therefore, they benefit
+both code developers as well as users of the program.
+The counters are an average of the time/cycles different parts of the simulation take,
+hence can not directly reveal fluctuations during a single run (although comparisons across
+multiple runs are still very useful).</p>
+<p>Counters will appear in MD log file only if the related parts of the code were
+executed during the <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> run. There is also a special counter called &#8220;Rest&#8221; which
+indicated for the amount of time not accounted for by any of the counters above. Theerfore,
+a significant amount &#8220;Rest&#8221; time (more than a few percent) will often be an indication of
+parallelization inefficiency (e.g. serial code) and it is recommended to be reported to the
+developers.</p>
+<p>An additional set of subcounters can offer more fine-grained inspection of performance. They are:</p>
+<ul class="simple">
+<li>Domain decomposition redistribution</li>
+<li>DD neighbor search grid + sort</li>
+<li>DD setup communication</li>
+<li>DD make topology</li>
+<li>DD make constraints</li>
+<li>DD topology other</li>
+<li>Neighbor search grid local</li>
+<li>NS grid non-local</li>
+<li>NS search local</li>
+<li>NS search non-local</li>
+<li>Bonded force</li>
+<li>Bonded-FEP force</li>
+<li>Restraints force</li>
+<li>Listed buffer operations</li>
+<li>Nonbonded force</li>
+<li>Ewald force correction</li>
+<li>Non-bonded position buffer operations</li>
+<li>Non-bonded force buffer operations</li>
+</ul>
+<p>Subcounters are geared toward developers and have to be enabled during compilation. See
+<a class="reference internal" href="../dev-manual/build-system.html"><span class="doc">Build system overview</span></a> for more information.</p>
+<p>TODO In future patch:
+- red flags in log files, how to interpret wallcycle output
+- hints to devs how to extend wallcycles</p>
+<p>TODO In future patch: import wiki page stuff on performance checklist; maybe here,
+maybe elsewhere</p>
+</div>
+<div class="section" id="running-mdrun-with-gpus">
+<h2>Running mdrun with GPUs<a class="headerlink" href="#running-mdrun-with-gpus" title="Permalink to this headline">¶</a></h2>
+<p>NVIDIA GPUs from the professional line (Tesla or Quadro) starting with
+the Kepler generation (compute capability 3.5 and later) support changing the
+processor and memory clock frequency with the help of the applications clocks feature.
+With many workloads, using higher clock rates than the default provides significant
+performance improvements.
+For more information see the <a class="reference external" href="https://devblogs.nvidia.com/parallelforall/increase-performance-gpu-boost-k80-autoboost/">NVIDIA blog article</a> on this topic.
+For GROMACS the highest application clock rates are optimal on all hardware
+available to date (up to and including Maxwell, compute capability 5.2).</p>
+<p>Application clocks can be set using the NVIDIA system managemet tool
+<code class="docutils literal"><span class="pre">nvidia-smi</span></code>. If the system permissions allow, <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> has
+built-in support to set application clocks if built with NVML support. # TODO add ref to relevant section
+Note that application clocks are a global setting, hence affect the
+performance of all applications that use the respective GPU(s).
+For this reason, <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> sets application clocks at initialization
+to the values optimal for GROMACS and it restores them before exiting
+to the values found at startup, unless it detects that they were altered
+during its runtime.</p>
+<div class="section" id="reducing-overheads-in-gpu-accelerated-runs">
+<h3>Reducing overheads in GPU accelerated runs<a class="headerlink" href="#reducing-overheads-in-gpu-accelerated-runs" title="Permalink to this headline">¶</a></h3>
+<p>In order for CPU cores and GPU(s) to execute concurrently, tasks are
+launched and executed asynchronously on the GPU(s) while the CPU cores
+execute non-offloaded force computation (like long-range PME electrostatics).
+Asynchronous task launches are handled by GPU device driver and
+require CPU involvement. Therefore, the work of scheduling
+GPU tasks will incur an overhead that can in some cases significantly
+delay or interfere with the CPU execution.</p>
+<p>Delays in CPU execution are caused by the latency of launching GPU tasks,
+an overhead that can become significant as simulation ns/day increases
+(i.e. with shorter wall-time per step).
+The overhead is measured by <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> and reported in the performance
+summary section of the log file (&#8220;Launch GPU ops&#8221; row).
+A few percent of runtime spent in this category is normal,
+but in fast-iterating and multi-GPU parallel runs 10% or larger overheads can be observed.
+In general, there a user can do little to avoid such overheads, but there
+are a few cases where tweaks can give performance benefits.
+In single-rank runs timing of GPU tasks is by default enabled and,
+while in most cases its impact is small, in fast runs performance can be affected.
+The performance impact will be most significant on NVIDIA GPUs with CUDA,
+less on AMD with OpenCL.
+In these cases, when more than a few percent of &#8220;Launch GPU ops&#8221; time is observed,
+it is recommended turning off timing by setting the <code class="docutils literal"><span class="pre">GMX_DISABLE_GPU_TIMING</span></code>
+environment variable.
+In parallel runs with with many ranks sharing a GPU
+launch overheads can also be reduced by staring fewer thread-MPI
+or MPI ranks per GPU; e.g. most often one rank per thread or core is not optimal.</p>
+<p>The second type of overhead, interference of the GPU driver with CPU computation,
+is caused by the scheduling and coordination of GPU tasks.
+A separate GPU driver thread can require CPU resources
+which may clash with the concurrently running non-offloaded tasks,
+potentially degrading the performance of PME or bonded force computation.
+This effect is most pronounced when using AMD GPUs with OpenCL with
+all stable driver releases to date (up to and including fglrx 12.15).
+To minimize the overhead it is recommended to
+leave a CPU hardware thread unused when launching <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>,
+especially on CPUs with high core count and/or HyperThreading enabled.
+E.g. on a machine with a 4-core CPU and eight threads (via HyperThreading) and an AMD GPU,
+try <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span> <span class="pre">-ntomp</span> <span class="pre">7</span> <span class="pre">-pin</span> <span class="pre">on</span></code>.
+This will leave free CPU resources for the GPU task scheduling
+reducing interference with CPU computation.
+Note that assigning fewer resources to <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> CPU computation
+involves a tradeoff which may outweigh the benefits of reduced GPU driver overhead,
+in particular without HyperThreading and with few CPU cores.</p>
+<p>TODO In future patch: any tips not covered above</p>
+</div>
+</div>
+<div class="section" id="running-the-opencl-version-of-mdrun">
+<h2>Running the OpenCL version of mdrun<a class="headerlink" href="#running-the-opencl-version-of-mdrun" title="Permalink to this headline">¶</a></h2>
+<p>The current version works with GCN-based AMD GPUs, and NVIDIA CUDA
+GPUs. Make sure that you have the latest drivers installed. For AMD GPUs,
+Mesa version 17.0 or newer with LLVM 4.0 or newer is supported in addition
+to the proprietary driver. For NVIDIA GPUs, using the proprietary driver is
+required as the open source nouveau driver (available in Mesa) does not
+provide the OpenCL support.
+The minimum OpenCL version required is 1.1. See
+also the <a class="reference internal" href="#opencl-known-limitations"><span class="std std-ref">known limitations</span></a>.</p>
+<p>Devices from the AMD GCN architectures (all series) and NVIDIA Fermi
+and later (compute capability 2.0) are known to work, but before
+doing production runs always make sure that the GROMACS tests
+pass successfully on the hardware.</p>
+<p>The OpenCL GPU kernels are compiled at run time. Hence,
+building the OpenCL program can take a few seconds introducing a slight
+delay in the <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> startup. This is not normally a
+problem for long production MD, but you might prefer to do some kinds
+of work, e.g. that runs very few steps, on just the CPU (e.g. see <code class="docutils literal"><span class="pre">-nb</span></code> above).</p>
+<p>The same <code class="docutils literal"><span class="pre">-gpu_id</span></code> option (or <code class="docutils literal"><span class="pre">GMX_GPU_ID</span></code> environment variable)
+used to select CUDA devices, or to define a mapping of GPUs to PP
+ranks, is used for OpenCL devices.</p>
+<p>Some other <a class="reference internal" href="environment-variables.html#opencl-management"><span class="std std-ref">OpenCL management</span></a> environment
+variables may be of interest to developers.</p>
+<div class="section" id="known-limitations-of-the-opencl-support">
+<span id="opencl-known-limitations"></span><h3>Known limitations of the OpenCL support<a class="headerlink" href="#known-limitations-of-the-opencl-support" title="Permalink to this headline">¶</a></h3>
+<p>Limitations in the current OpenCL support of interest to GROMACS users:</p>
+<ul class="simple">
+<li>No Intel devices (CPUs, GPUs or Xeon Phi) are supported</li>
+<li>Due to blocking behavior of some asynchronous task enqueuing functions
+in the NVIDIA OpenCL runtime, with the affected driver versions there is
+almost no performance gain when using NVIDIA GPUs.
+The issue affects NVIDIA driver versions up to 349 series, but it
+known to be fixed 352 and later driver releases.</li>
+<li>On NVIDIA GPUs the OpenCL kernels achieve much lower performance
+than the equivalent CUDA kernels due to limitations of the NVIDIA OpenCL
+compiler.</li>
+<li>The AMD APPSDK version 3.0 ships with OpenCL compiler/runtime components,
+libamdocl12cl64.so and libamdocl64.so (only in earlier releases),
+that conflict with newer fglrx GPU drivers which provide the same libraries.
+This conflict manifests in kernel launch failures as, due to the library path
+setup, the OpenCL runtime loads the APPSDK version of the aforementioned
+libraries instead of the ones provided by the driver installer.
+The recommended workaround is to remove or rename the APPSDK versions of the
+offending libraries.</li>
+</ul>
+<p>Limitations of interest to GROMACS developers:</p>
+<ul class="simple">
+<li>The current implementation is not compatible with OpenCL devices that are
+not using warp/wavefronts or for which the warp/wavefront size is not a
+multiple of 32</li>
+<li>Some Ewald tabulated kernels are known to produce incorrect results, so
+(correct) analytical kernels are used instead.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting good performance from mdrun</a><ul>
+<li><a class="reference internal" href="#hardware-background-information">Hardware background information</a></li>
+<li><a class="reference internal" href="#gromacs-background-information">GROMACS background information</a></li>
+<li><a class="reference internal" href="#running-mdrun-within-a-single-node">Running mdrun within a single node</a><ul>
+<li><a class="reference internal" href="#examples-for-mdrun-on-one-node">Examples for mdrun on one node</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-mdrun-on-more-than-one-node">Running mdrun on more than one node</a><ul>
+<li><a class="reference internal" href="#examples-for-mdrun-on-more-than-one-node">Examples for mdrun on more than one node</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#controlling-the-domain-decomposition-algorithm">Controlling the domain decomposition algorithm</a></li>
+<li><a class="reference internal" href="#finding-out-how-to-run-mdrun-better">Finding out how to run mdrun better</a></li>
+<li><a class="reference internal" href="#running-mdrun-with-gpus">Running mdrun with GPUs</a><ul>
+<li><a class="reference internal" href="#reducing-overheads-in-gpu-accelerated-runs">Reducing overheads in GPU accelerated runs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-the-opencl-version-of-mdrun">Running the OpenCL version of mdrun</a><ul>
+<li><a class="reference internal" href="#known-limitations-of-the-opencl-support">Known limitations of the OpenCL support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mdrun-features.html"
+                        title="previous chapter">Useful mdrun features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mdp-options.html"
+                        title="next chapter">Molecular dynamics parameters (.mdp options)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/mdrun-performance.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mdp-options.html" title="Molecular dynamics parameters (.mdp options)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mdrun-features.html" title="Useful mdrun features"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

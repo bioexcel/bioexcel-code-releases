@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacegmx_1_1ocl" kind="namespace">
+    <compoundname>gmx::ocl</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacegmx_1_1ocl_1a43990c4ecc1c0f99089d3446b518af61" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool gmx::ocl::useBuildCache</definition>
+        <argsstring></argsstring>
+        <name>useBuildCache</name>
+        <initializer>= getenv(&quot;GMX_OCL_GENCACHE&quot;)</initializer>
+        <briefdescription>
+<para>True if OpenCL binary caching is enabled. </para>        </briefdescription>
+        <detaileddescription>
+<para>Currently caching is disabled by default unless the env var override is used until we resolve concurrency issues. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="77" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a5b515187d7c833b248857f4e45384edc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx::ocl::fclose_wrapper</definition>
+        <argsstring>(FILE *fp)</argsstring>
+        <name>fclose_wrapper</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+<para>RAII helper to use with <ref refid="classgmx_1_1scoped__cptr" kindref="compound">scoped_cptr</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para>Can&apos;t use fclose because the template requires a function that returns void.</para><para><xrefsect id="todo_1_todo000015"><xreftitle>Todo</xreftitle><xrefdescription><para>Either generalise <ref refid="classgmx_1_1scoped__cptr" kindref="compound">scoped_cptr</ref> somehow, or (better) make general infrastructure for reading and writing binary lumps. Neither of these is a priority while JIT caching is inactive. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" line="80" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" bodystart="80" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1ae34a9b611989f015369774e77b45c02f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string gmx::ocl::makeBinaryCacheFilename</definition>
+        <argsstring>(const std::string &amp;kernelFilename, cl_device_id deviceId)</argsstring>
+        <name>makeBinaryCacheFilename</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>kernelFilename</declname>
+        </param>
+        <param>
+          <type>cl_device_id</type>
+          <declname>deviceId</declname>
+        </param>
+        <briefdescription>
+<para>Construct the name for the binary cache file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">kernelFilename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the kernel from which the binary will be compiled. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deviceId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the device upon which the binary is used.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<xrefsect id="todo_1_todo000016"><xreftitle>Todo</xreftitle><xrefdescription><para>The set of preprocessor options should also form part of the identification of the cached binary. Also perhaps compiler, runtime and device version info?</para></xrefdescription></xrefsect></para><para><xrefsect id="todo_1_todo000017"><xreftitle>Todo</xreftitle><xrefdescription><para>Mutual exclusion of ranks and nodes should also be implemented if/when caching is re-enabled.</para></xrefdescription></xrefsect></para><para><simplesect kind="return"><para>The name of the cache file. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" line="86" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" bodystart="86" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a9f9b1fc653bcb02f7f46e5bd6bb2f05d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>cl_program</type>
+        <definition>cl_program gmx::ocl::makeProgramFromCache</definition>
+        <argsstring>(const std::string &amp;filename, cl_context context, cl_device_id deviceId)</argsstring>
+        <name>makeProgramFromCache</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>cl_context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>cl_device_id</type>
+          <declname>deviceId</declname>
+        </param>
+        <briefdescription>
+<para>Check if there&apos;s a valid cache available, and return it if so. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of valid file containing the binary cache </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The OpenCL context </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deviceId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ID of the device on which to use the program</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The OpenCL program read from the cache</para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if an OpenCL error was encountered <ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref> if the file could not be opened </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" line="117" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" bodystart="117" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a5933b9fb33aade812f471ea890f4da95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::ocl::writeBinaryToCache</definition>
+        <argsstring>(cl_program program, const std::string &amp;filename)</argsstring>
+        <name>writeBinaryToCache</name>
+        <param>
+          <type>cl_program</type>
+          <declname>program</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+<para>Implement caching of OpenCL binaries. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">program</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of program to cache </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of file to use for the cache</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if an OpenCL error was encountered <ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref> if the file could not be opened </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" line="169" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" bodystart="169" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a13e52e8f2ecb9f335e7add2d7672f377" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx::ocl::writeOclBuildLog</definition>
+        <argsstring>(FILE *fplog, cl_program program, cl_device_id deviceId, const std::string &amp;kernelFilename, const std::string &amp;preprocessorOptions, bool buildFailed)</argsstring>
+        <name>writeOclBuildLog</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>cl_program</type>
+          <declname>program</declname>
+        </param>
+        <param>
+          <type>cl_device_id</type>
+          <declname>deviceId</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>kernelFilename</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>preprocessorOptions</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>buildFailed</declname>
+        </param>
+        <briefdescription>
+<para>Handles writing the OpenCL JIT compilation log to <computeroutput>fplog</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>If <computeroutput>fplog</computeroutput> is non-null and either the GMX_OCL_DUMP_LOG environment variable is set or the compilation failed, then the OpenCL compilation log is written.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Open file pointer to log file </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>program</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenCL program that was compiled </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deviceId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Id of the device for which compilation took place </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>kernelFilename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1File" kindref="compound">File</ref> name containing the kernel </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>preprocessorOptions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>String containing the preprocessor command-line options used for the build </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buildFailed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the OpenCL build succeeded</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="94" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="94" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a6bde0c7f936af91ceaa177e69642f06e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string gmx::ocl::selectCompilerOptions</definition>
+        <argsstring>(ocl_vendor_id_t deviceVendorId)</argsstring>
+        <name>selectCompilerOptions</name>
+        <param>
+          <type><ref refid="oclutils_8h_1a10849a150bcdfa716f8adaf20cfaabb7" kindref="member">ocl_vendor_id_t</ref></type>
+          <declname>deviceVendorId</declname>
+        </param>
+        <briefdescription>
+<para>Construct compiler options string. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>deviceVendorId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Device vendor id. Used to automatically enable some vendor-specific options </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The string with the compiler options </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="168" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="168" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1ac9f044f1c8d1ee7487395c2d0845c895" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string gmx::ocl::getKernelRootPath</definition>
+        <argsstring>()</argsstring>
+        <name>getKernelRootPath</name>
+        <briefdescription>
+<para>Get the path to the main folder storing OpenCL kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para>By default, this function constructs the full path to the OpenCL from the known location of the binary that is running, so that we handle both in-source and installed builds. The user can override this behavior by defining GMX_OCL_FILE_PATH environment variable.</para><para><simplesect kind="return"><para>OS-normalized path string to the main folder storing OpenCL kernels</para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. <ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref> if GMX_OCL_FILE_PATH does not specify a readable path </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="218" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="218" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a20c23dde520f2d5ef02b60ce2ac5d36c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>static size_t gmx::ocl::getWarpSize</definition>
+        <argsstring>(cl_context context, cl_device_id deviceId)</argsstring>
+        <name>getWarpSize</name>
+        <param>
+          <type>cl_context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>cl_device_id</type>
+          <declname>deviceId</declname>
+        </param>
+        <briefdescription>
+<para>Get the warp size reported by device. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is platform implementation dependant and seems to only work on the Nvidia and AMD platforms! Nvidia reports 32, AMD for GPU 64. Ignore the rest</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Current OpenCL context </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>deviceId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenCL device with the context </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>cl_int value of the warp size</para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if an OpenCL error was encountered </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="260" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="260" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a5403afa0a9e93841b0acaeeb17773dc5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>static const char* gmx::ocl::makeVendorFlavorChoice</definition>
+        <argsstring>(ocl_vendor_id_t vendorId)</argsstring>
+        <name>makeVendorFlavorChoice</name>
+        <param>
+          <type><ref refid="oclutils_8h_1a10849a150bcdfa716f8adaf20cfaabb7" kindref="member">ocl_vendor_id_t</ref></type>
+          <declname>vendorId</declname>
+        </param>
+        <briefdescription>
+<para>Select a compilation-line define for a vendor-specific kernel choice from vendor id. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">vendorId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vendor id enumerator</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The appropriate compilation-line define </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="315" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="315" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a5ce1f5476c9c60781ef668547a319962" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string gmx::ocl::makeKernelIncludePathOption</definition>
+        <argsstring>(const std::string &amp;unescapedKernelRootPath)</argsstring>
+        <name>makeKernelIncludePathOption</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>unescapedKernelRootPath</declname>
+        </param>
+        <briefdescription>
+<para>Create include paths for kernel sources. </para>        </briefdescription>
+        <detaileddescription>
+<para>All OpenCL kernel files are expected to be stored in one single folder.</para><para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="339" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="339" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1a4a4d3905bc6f5b519a247ac400edcbb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string gmx::ocl::makePreprocessorOptions</definition>
+        <argsstring>(const std::string &amp;kernelRootPath, size_t warpSize, ocl_vendor_id_t deviceVendorId, const std::string &amp;extraDefines)</argsstring>
+        <name>makePreprocessorOptions</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>kernelRootPath</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>warpSize</declname>
+        </param>
+        <param>
+          <type><ref refid="oclutils_8h_1a10849a150bcdfa716f8adaf20cfaabb7" kindref="member">ocl_vendor_id_t</ref></type>
+          <declname>deviceVendorId</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>extraDefines</declname>
+        </param>
+        <briefdescription>
+<para>Builds a string with build options for the OpenCL kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="370" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="370" bodyend="389"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1ocl_1ae1be13f6b4d97b949cbdb66407bad6c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>cl_program</type>
+        <definition>cl_program gmx::ocl::compileProgram</definition>
+        <argsstring>(FILE *fplog, const std::string &amp;kernelBaseFilename, const std::string &amp;extraDefines, cl_context context, cl_device_id deviceId, ocl_vendor_id_t deviceVendorId)</argsstring>
+        <name>compileProgram</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>kernelBaseFilename</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>extraDefines</declname>
+        </param>
+        <param>
+          <type>cl_context</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>cl_device_id</type>
+          <declname>deviceId</declname>
+        </param>
+        <param>
+          <type><ref refid="oclutils_8h_1a10849a150bcdfa716f8adaf20cfaabb7" kindref="member">ocl_vendor_id_t</ref></type>
+          <declname>deviceVendorId</declname>
+        </param>
+        <briefdescription>
+<para>Compile the specified kernel for the context and device. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Open file pointer for log output </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">kernelBaseFilename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the kernel source file to compile, e.g. &quot;nbnxn_ocl_kernels.cl&quot; </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">extraDefines</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Preprocessor defines required by the calling code, e.g. for configuring the kernels </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">context</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenCL context on the device to compile for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deviceId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>OpenCL device id of the device to compile for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">deviceVendorId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Enumerator of the device vendor to compile for</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The compiled OpenCL program</para></simplesect>
+<xrefsect id="todo_1_todo000018"><xreftitle>Todo</xreftitle><xrefdescription><para>Consider whether we can parallelize the compilation of all the kernels by compiling them in separate programs - but since the resulting programs can&apos;t refer to each other, that might lead to bloat of util code?</para></xrefdescription></xrefsect></para><para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. <ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref> if a file I/O error prevents returning a valid compiled program. <ref refid="classgmx_1_1InternalError" kindref="compound">InternalError</ref> if an OpenCL API error prevents returning a valid compiled program. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" line="392" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_compiler.cpp" bodystart="392" bodyend="528"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/ocl_caching.cpp" line="69" column="1"/>
+  </compounddef>
+</doxygen>

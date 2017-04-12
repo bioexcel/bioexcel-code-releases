@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Developer guide &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="next" title="Codebase overview" href="overview.html" />
+    <link rel="prev" title="Environment Variables" href="../user-guide/environment-variables.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="overview.html" title="Codebase overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../user-guide/environment-variables.html" title="Environment Variables"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="developer-guide">
+<h1>Developer guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h1>
+<p>This set of pages contains guidelines, instructions, and explanations related
+to GROMACS development.  The actual code is documented in Doxygen
+documentation linked from the front page of the documentation.</p>
+<p>The focus is (at least for now) on things that are tightly tied to the code
+itself, such as helper scripts that reside in the source repository and
+organization of the code itself, and may require the documentation to be
+updated in sync.</p>
+<p>The guide is currently split into a few main parts:</p>
+<ul class="simple">
+<li>Overview of the GROMACS codebase.</li>
+<li>Collection of overview pages that describe some important implementation
+aspects.</li>
+<li>Generic guidelines to follow when developing GROMACS.
+For some of the guidelines, scripts exist (see below) to automatically
+reformat the code and/or enforce the guidelines for each commit.</li>
+<li>Instructions on what tools are used, and how to use them.</li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Codebase overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#source-code-organization">Source code organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#documentation-organization">Documentation organization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build-system.html">Build system overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#build-types">Build types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#cmake-cache-variables">CMake cache variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#external-libraries">External libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#special-targets">Special targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html#passing-information-to-source-code">Passing information to source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="relocatable-binaries.html">Relocatable binaries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="relocatable-binaries.html#finding-shared-libraries">Finding shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="relocatable-binaries.html#finding-data-files">Finding data files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="relocatable-binaries.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="style.html">Style guidelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="formatting.html">Guidelines for code formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="includestyle.html">Guidelines for #include directives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naming.html">Naming conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language-features.html">Allowed language features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Development-time tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html">Using Doxygen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jenkins.html">Understanding Jenkins builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/index.html">releng repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmxtree.html">Source tree checker scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html">Automatic source code formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testutils.html">Unit testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#change-management">Change management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#build-system">Build system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#code-formatting-and-style">Code formatting and style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#documentation-generation">Documentation generation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../user-guide/environment-variables.html"
+                        title="previous chapter">Environment Variables</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="next chapter">Codebase overview</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="overview.html" title="Codebase overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../user-guide/environment-variables.html" title="Environment Variables"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

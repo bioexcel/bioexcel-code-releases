@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx bar &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx bundle" href="gmx-bundle.html" />
+    <link rel="prev" title="gmx angle" href="gmx-angle.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-bundle.html" title="gmx bundle"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-angle.html" title="gmx angle"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-bar">
+<span id="id1"></span><h1>gmx bar<a class="headerlink" href="#gmx-bar" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx bar [<strong>-f</strong> <em>[&lt;.xvg&gt; [...]]</em>] [<strong>-g</strong> <em>[&lt;.edr&gt; [...]]</em>] [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-oi</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oh</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+        [<strong>-b</strong> <em>&lt;real&gt;</em>] [<strong>-e</strong> <em>&lt;real&gt;</em>] [<strong>-temp</strong> <em>&lt;real&gt;</em>] [<strong>-prec</strong> <em>&lt;int&gt;</em>]
+        [<strong>-nbmin</strong> <em>&lt;int&gt;</em>] [<strong>-nbmax</strong> <em>&lt;int&gt;</em>] [<strong>-nbin</strong> <em>&lt;int&gt;</em>] [<strong>-[no]extp</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">bar</span></code> calculates free energy difference estimates through
+Bennett&#8217;s acceptance ratio method (BAR). It also automatically
+adds series of individual free energies obtained with BAR into
+a combined free energy estimate.</p>
+<p>Every individual BAR free energy difference relies on two
+simulations at different states: say state A and state B, as
+controlled by a parameter, lambda (see the <a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> parameter
+<code class="docutils literal"><span class="pre">init_lambda</span></code>). The BAR method calculates a ratio of weighted
+average of the Hamiltonian difference of state B given state A and
+vice versa.
+The energy differences to the other state must be calculated
+explicitly during the simulation. This can be done with
+the <a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> option <code class="docutils literal"><span class="pre">foreign_lambda</span></code>.</p>
+<p>Input option <code class="docutils literal"><span class="pre">-f</span></code> expects multiple <code class="docutils literal"><span class="pre">dhdl.xvg</span></code> files.
+Two types of input files are supported:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Files with more than one <em>y</em>-value.
+The files should have columns
+with dH/dlambda and Deltalambda.
+The lambda values are inferred
+from the legends: lambda of the simulation from the legend of
+dH/dlambda and the foreign lambda values from the
+legends of Delta H</li>
+<li>Files with only one <em>y</em>-value. Using the
+<code class="docutils literal"><span class="pre">-extp</span></code> option for these files, it is assumed
+that the <em>y</em>-value is dH/dlambda and that the
+Hamiltonian depends linearly on lambda.
+The lambda value of the simulation is inferred from the
+subtitle (if present), otherwise from a number in the subdirectory
+in the file name.</li>
+</ul>
+</div></blockquote>
+<p>The lambda of the simulation is parsed from
+<code class="docutils literal"><span class="pre">dhdl.xvg</span></code> file&#8217;s legend containing the string &#8216;dH&#8217;, the
+foreign lambda values from the legend containing the
+capitalized letters &#8216;D&#8217; and &#8216;H&#8217;. The temperature is parsed from
+the legend line containing &#8216;T =&#8217;.</p>
+<p>The input option <code class="docutils literal"><span class="pre">-g</span></code> expects multiple <a class="reference internal" href="../user-guide/file-formats.html#edr"><span class="std std-ref">.edr</span></a> files.
+These can contain either lists of energy differences (see the
+<a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> option <code class="docutils literal"><span class="pre">separate_dhdl_file</span></code>), or a series of
+histograms (see the <a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> options <code class="docutils literal"><span class="pre">dh_hist_size</span></code> and
+<code class="docutils literal"><span class="pre">dh_hist_spacing</span></code>).
+The temperature and lambda
+values are automatically deduced from the <code class="docutils literal"><span class="pre">ener.edr</span></code> file.</p>
+<p>In addition to the <a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> option <code class="docutils literal"><span class="pre">foreign_lambda</span></code>,
+the energy difference can also be extrapolated from the
+dH/dlambda values. This is done with the``-extp``
+option, which assumes that the system&#8217;s Hamiltonian depends linearly
+on lambda, which is not normally the case.</p>
+<p>The free energy estimates are determined using BAR with bisection,
+with the precision of the output set with <code class="docutils literal"><span class="pre">-prec</span></code>.
+An error estimate taking into account time correlations
+is made by splitting the data into blocks and determining
+the free energy differences over those blocks and assuming
+the blocks are independent.
+The final error estimate is determined from the average variance
+over 5 blocks. A range of block numbers for error estimation can
+be provided with the options <code class="docutils literal"><span class="pre">-nbmin</span></code> and <code class="docutils literal"><span class="pre">-nbmax</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">bar</span></code> tries to aggregate samples with the same &#8216;native&#8217; and
+&#8216;foreign&#8217; lambda values, but always assumes independent
+samples. <strong>Note</strong> that when aggregating energy
+differences/derivatives with different sampling intervals, this is
+almost certainly not correct. Usually subsequent energies are
+correlated and different time intervals mean different degrees
+of correlation between samples.</p>
+<p>The results are split in two parts: the last part contains the final
+results in kJ/mol, together with the error estimate for each part
+and the total. The first part contains detailed free energy
+difference estimates and phase space overlap measures in units of
+kT (together with their computed error estimate). The printed
+values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>lam_A: the lambda values for point A.</li>
+<li>lam_B: the lambda values for point B.</li>
+<li>DG: the free energy estimate.</li>
+<li>s_A: an estimate of the relative entropy of B in A.</li>
+<li>s_B: an estimate of the relative entropy of A in B.</li>
+<li>stdev: an estimate expected per-sample standard deviation.</li>
+</ul>
+</div></blockquote>
+<p>The relative entropy of both states in each other&#8217;s ensemble can be
+interpreted as a measure of phase space overlap:
+the relative entropy s_A of the work samples of lambda_B in the
+ensemble of lambda_A (and vice versa for s_B), is a
+measure of the &#8216;distance&#8217; between Boltzmann distributions of
+the two states, that goes to zero for identical distributions. See
+Wu &amp; Kofke, J. Chem. Phys. 123 084109 (2005) for more information.</p>
+<p>The estimate of the expected per-sample standard deviation, as given
+in Bennett&#8217;s original BAR paper: Bennett, J. Comp. Phys. 22, p 245 (1976).
+Eq. 10 therein gives an estimate of the quality of sampling (not directly
+of the actual statistical error, because it assumes independent samples).</p>
+<p>To get a visual estimate of the phase space overlap, use the
+<code class="docutils literal"><span class="pre">-oh</span></code> option to write series of histograms, together with the
+<code class="docutils literal"><span class="pre">-nbin</span></code> option.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xvg&gt; [...]] (dhdl.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.edr&gt; [...]] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (bar.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oi</span></code> [&lt;.xvg&gt;] (barint.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oh</span></code> [&lt;.xvg&gt;] (histogram.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;real&gt; (0)</dt>
+<dd>Begin time for BAR</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;real&gt; (-1)</dt>
+<dd>End time for BAR</dd>
+<dt><code class="docutils literal"><span class="pre">-temp</span></code> &lt;real&gt; (-1)</dt>
+<dd>Temperature (K)</dd>
+<dt><code class="docutils literal"><span class="pre">-prec</span></code> &lt;int&gt; (2)</dt>
+<dd>The number of digits after the decimal point</dd>
+<dt><code class="docutils literal"><span class="pre">-nbmin</span></code> &lt;int&gt; (5)</dt>
+<dd>Minimum number of blocks for error estimation</dd>
+<dt><code class="docutils literal"><span class="pre">-nbmax</span></code> &lt;int&gt; (5)</dt>
+<dd>Maximum number of blocks for error estimation</dd>
+<dt><code class="docutils literal"><span class="pre">-nbin</span></code> &lt;int&gt; (100)</dt>
+<dd>Number of bins for histogram output</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]extp</span></code>  (no)</dt>
+<dd>Whether to linearly extrapolate dH/dl values to use as energies</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx bar</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-angle.html"
+                        title="previous chapter">gmx angle</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-bundle.html"
+                        title="next chapter">gmx bundle</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-bar.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-bundle.html" title="gmx bundle"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-angle.html" title="gmx angle"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

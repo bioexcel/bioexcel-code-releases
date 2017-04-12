@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData" kind="class" prot="public">
+    <compoundname>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</compoundname>
+    <basecompoundref refid="classgmx_1_1TrajectoryAnalysisModuleData" prot="public" virt="non-virtual">gmx::TrajectoryAnalysisModuleData</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData_1ae6ef917c4fc4678fe5469809b30810ba" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+        <definition>std::vector&lt;real&gt; gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData::surfaceDist2_</definition>
+        <argsstring></argsstring>
+        <name>surfaceDist2_</name>
+        <briefdescription>
+<para>Minimum distance to each surface group. </para>        </briefdescription>
+        <detaileddescription>
+<para>One entry for each group (residue/molecule, per -surf) in the reference selection. This is needed to support neighborhood searching, which may not return the reference positions in order: for each position, we need to search through all the reference positions and update this array to find the minimum distance to each surface group, and then compute the RDF from these numbers. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" line="453" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" bodystart="453" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData_1a1aaa209e9ec17919e6ed89cd2ba508d6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData::RdfModuleData</definition>
+        <argsstring>(TrajectoryAnalysisModule *module, const AnalysisDataParallelOptions &amp;opt, const SelectionCollection &amp;selections, int surfaceGroupCount)</argsstring>
+        <name>RdfModuleData</name>
+        <param>
+          <type><ref refid="classgmx_1_1TrajectoryAnalysisModule" kindref="compound">TrajectoryAnalysisModule</ref> *</type>
+          <declname>module</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1AnalysisDataParallelOptions" kindref="compound">AnalysisDataParallelOptions</ref> &amp;</type>
+          <declname>opt</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1SelectionCollection" kindref="compound">SelectionCollection</ref> &amp;</type>
+          <declname>selections</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>surfaceGroupCount</declname>
+        </param>
+        <briefdescription>
+<para>Reserves memory for the frame-local data. </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput>surfaceGroupCount</computeroutput> will be zero if -surf is not specified. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" line="431" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" bodystart="431" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData_1aa8d30f0a7dbc90196b6875bd8362c584" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData::finish</definition>
+        <argsstring>()</argsstring>
+        <name>finish</name>
+        <reimplements refid="classgmx_1_1TrajectoryAnalysisModuleData_1a5760c7d0ef360a9c0f95accadb3a5364">finish</reimplements>
+        <briefdescription>
+<para>Performs any finishing actions after all frames have been processed. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>unspecified</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Implementation may throw exceptions to indicate errors.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This function is called immediately before the destructor, after <ref refid="classgmx_1_1TrajectoryAnalysisModule_1a9d14bf1683086d3fafdb11e23e003de4" kindref="member">TrajectoryAnalysisModule::finishFrames()</ref>. Derived classes should implement any final operations that need to be done after successful analysis. All implementations should call <ref refid="classgmx_1_1TrajectoryAnalysisModuleData_1ae4cc5f36cd255c175678f9d7d737e937" kindref="member">finishDataHandles()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" line="440" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" bodystart="440" bodyend="440"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Temporary memory for use within a single-frame calculation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="991">
+        <label>gmx::TrajectoryAnalysisModuleData</label>
+        <link refid="classgmx_1_1TrajectoryAnalysisModuleData"/>
+      </node>
+      <node id="990">
+        <label>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</label>
+        <link refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData"/>
+        <childnode refid="991" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="993">
+        <label>gmx::TrajectoryAnalysisModuleData</label>
+        <link refid="classgmx_1_1TrajectoryAnalysisModuleData"/>
+      </node>
+      <node id="992">
+        <label>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</label>
+        <link refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData"/>
+        <childnode refid="993" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" line="424" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/rdf.cpp" bodystart="423" bodyend="454"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1ae600024eaa634d84157bc7c75c020e97" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>dataHandle</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData_1aa8d30f0a7dbc90196b6875bd8362c584" prot="public" virt="virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>finish</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1ae4cc5f36cd255c175678f9d7d737e937" prot="protected" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>finishDataHandles</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1a4e23dbf4cfd2554ac011664b49c1c7e0" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>parallelSelection</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1a4ffe3dec6ef34ae7e6af7a46b9fc7d0b" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>parallelSelections</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData_1a1aaa209e9ec17919e6ed89cd2ba508d6" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>RdfModuleData</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02rdf_8cpp_03_1_1RdfModuleData_1ae6ef917c4fc4678fe5469809b30810ba" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>surfaceDist2_</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1a488e9fa560e4c41aae0cc1366827010a" prot="protected" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>TrajectoryAnalysisModuleData</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1af92b33272c7fca4040d631105a1344a6" prot="public" virt="virtual"><scope>gmx::analysismodules::anonymous_namespace{rdf.cpp}::RdfModuleData</scope><name>~TrajectoryAnalysisModuleData</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

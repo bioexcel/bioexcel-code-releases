@@ -1,0 +1,1298 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="gromacs_2gmxpreprocess_2grompp_8cpp" kind="file">
+    <compoundname>grompp.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="grompp_8h" local="yes">grompp.h</includes>
+    <includes local="no">errno.h</includes>
+    <includes local="no">limits.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">sys/types.h</includes>
+    <includes refid="pargs_8h" local="yes">gromacs/commandline/pargs.h</includes>
+    <includes refid="calcgrid_8h" local="yes">gromacs/fft/calcgrid.h</includes>
+    <includes refid="confio_8h" local="yes">gromacs/fileio/confio.h</includes>
+    <includes refid="enxio_8h" local="yes">gromacs/fileio/enxio.h</includes>
+    <includes refid="tpxio_8h" local="yes">gromacs/fileio/tpxio.h</includes>
+    <includes refid="trxio_8h" local="yes">gromacs/fileio/trxio.h</includes>
+    <includes refid="warninp_8h" local="yes">gromacs/fileio/warninp.h</includes>
+    <includes refid="add__par_8h" local="yes">gromacs/gmxpreprocess/add_par.h</includes>
+    <includes refid="convparm_8h" local="yes">gromacs/gmxpreprocess/convparm.h</includes>
+    <includes refid="gen__maxwell__velocities_8h" local="yes">gromacs/gmxpreprocess/gen_maxwell_velocities.h</includes>
+    <includes refid="gpp__atomtype_8h" local="yes">gromacs/gmxpreprocess/gpp_atomtype.h</includes>
+    <includes refid="grompp-impl_8h" local="yes">gromacs/gmxpreprocess/grompp-impl.h</includes>
+    <includes refid="notset_8h" local="yes">gromacs/gmxpreprocess/notset.h</includes>
+    <includes refid="readir_8h" local="yes">gromacs/gmxpreprocess/readir.h</includes>
+    <includes refid="tomorse_8h" local="yes">gromacs/gmxpreprocess/tomorse.h</includes>
+    <includes refid="topio_8h" local="yes">gromacs/gmxpreprocess/topio.h</includes>
+    <includes refid="toputil_8h" local="yes">gromacs/gmxpreprocess/toputil.h</includes>
+    <includes refid="vsite__parm_8h" local="yes">gromacs/gmxpreprocess/vsite_parm.h</includes>
+    <includes refid="imd_8h" local="yes">gromacs/imd/imd.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="invertmatrix_8h" local="yes">gromacs/math/invertmatrix.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="calc__verletbuf_8h" local="yes">gromacs/mdlib/calc_verletbuf.h</includes>
+    <includes refid="compute__io_8h" local="yes">gromacs/mdlib/compute_io.h</includes>
+    <includes refid="constr_8h" local="yes">gromacs/mdlib/constr.h</includes>
+    <includes refid="genborn_8h" local="yes">gromacs/mdlib/genborn.h</includes>
+    <includes refid="perf__est_8h" local="yes">gromacs/mdlib/perf_est.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="nblist_8h" local="yes">gromacs/mdtypes/nblist.h</includes>
+    <includes refid="state_8h" local="yes">gromacs/mdtypes/state.h</includes>
+    <includes refid="boxutilities_8h" local="yes">gromacs/pbcutil/boxutilities.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="pull_8h" local="yes">gromacs/pulling/pull.h</includes>
+    <includes refid="seed_8h" local="yes">gromacs/random/seed.h</includes>
+    <includes refid="ifunc_8h" local="yes">gromacs/topology/ifunc.h</includes>
+    <includes refid="mtop__util_8h" local="yes">gromacs/topology/mtop_util.h</includes>
+    <includes refid="symtab_8h" local="yes">gromacs/topology/symtab.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="trajectoryframe_8h" local="yes">gromacs/trajectory/trajectoryframe.h</includes>
+    <includes refid="arraysize_8h" local="yes">gromacs/utility/arraysize.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="futil_8h" local="yes">gromacs/utility/futil.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="snprintf_8h" local="yes">gromacs/utility/snprintf.h</includes>
+    <incdepgraph>
+      <node id="8283">
+        <label>stdarg.h</label>
+      </node>
+      <node id="8275">
+        <label>gromacs/pulling/pull_internal.h</label>
+        <link refid="pull__internal_8h"/>
+        <childnode refid="8267" relation="include">
+        </childnode>
+        <childnode refid="8274" relation="include">
+        </childnode>
+        <childnode refid="8276" relation="include">
+        </childnode>
+      </node>
+      <node id="8286">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="8261">
+        <label>gromacs/commandline/filenm.h</label>
+        <link refid="filenm_8h"/>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8268">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="8257" relation="include">
+        </childnode>
+        <childnode refid="8269" relation="include">
+        </childnode>
+        <childnode refid="8265" relation="include">
+        </childnode>
+      </node>
+      <node id="8269">
+        <label>cstdint</label>
+      </node>
+      <node id="8287">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="8288" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8282">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="8283" relation="include">
+        </childnode>
+        <childnode refid="8281" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8263">
+        <label>stdint.h</label>
+      </node>
+      <node id="8270">
+        <label>gromacs/math/invertmatrix.h</label>
+        <link refid="invertmatrix_8h"/>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8253">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="8280">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="8281" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8257">
+        <label>cmath</label>
+      </node>
+      <node id="8254">
+        <label>errno.h</label>
+      </node>
+      <node id="8279">
+        <label>gromacs/utility/arraysize.h</label>
+        <link refid="arraysize_8h"/>
+      </node>
+      <node id="8272">
+        <label>gromacs/pulling/pull.h</label>
+        <link refid="pull_8h"/>
+        <childnode refid="8273" relation="include">
+        </childnode>
+        <childnode refid="8274" relation="include">
+        </childnode>
+        <childnode refid="8275" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+        <childnode refid="8265" relation="include">
+        </childnode>
+      </node>
+      <node id="8277">
+        <label>gromacs/random/seed.h</label>
+        <link refid="seed_8h"/>
+        <childnode refid="8278" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8288">
+        <label>stddef.h</label>
+      </node>
+      <node id="8255">
+        <label>limits.h</label>
+      </node>
+      <node id="8278">
+        <label>random</label>
+      </node>
+      <node id="8265">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="8259">
+        <label>sys/types.h</label>
+      </node>
+      <node id="8256">
+        <label>string.h</label>
+      </node>
+      <node id="8273">
+        <label>cstdio</label>
+      </node>
+      <node id="8285">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="8262" relation="include">
+        </childnode>
+        <childnode refid="8286" relation="include">
+        </childnode>
+      </node>
+      <node id="8252">
+        <label>src/gromacs/gmxpreprocess/grompp.cpp</label>
+        <link refid="gromacs/gmxpreprocess/grompp.cpp"/>
+        <childnode refid="8253" relation="include">
+        </childnode>
+        <childnode refid="8254" relation="include">
+        </childnode>
+        <childnode refid="8255" relation="include">
+        </childnode>
+        <childnode refid="8256" relation="include">
+        </childnode>
+        <childnode refid="8257" relation="include">
+        </childnode>
+        <childnode refid="8258" relation="include">
+        </childnode>
+        <childnode refid="8259" relation="include">
+        </childnode>
+        <childnode refid="8260" relation="include">
+        </childnode>
+        <childnode refid="8266" relation="include">
+        </childnode>
+        <childnode refid="8268" relation="include">
+        </childnode>
+        <childnode refid="8270" relation="include">
+        </childnode>
+        <childnode refid="8271" relation="include">
+        </childnode>
+        <childnode refid="8272" relation="include">
+        </childnode>
+        <childnode refid="8277" relation="include">
+        </childnode>
+        <childnode refid="8279" relation="include">
+        </childnode>
+        <childnode refid="8280" relation="include">
+        </childnode>
+        <childnode refid="8282" relation="include">
+        </childnode>
+        <childnode refid="8284" relation="include">
+        </childnode>
+        <childnode refid="8285" relation="include">
+        </childnode>
+        <childnode refid="8287" relation="include">
+        </childnode>
+        <childnode refid="8289" relation="include">
+        </childnode>
+      </node>
+      <node id="8289">
+        <label>gromacs/utility/snprintf.h</label>
+        <link refid="snprintf_8h"/>
+        <childnode refid="8267" relation="include">
+        </childnode>
+        <childnode refid="8281" relation="include">
+        </childnode>
+      </node>
+      <node id="8266">
+        <label>gromacs/imd/imd.h</label>
+        <link refid="imd_8h"/>
+        <childnode refid="8267" relation="include">
+        </childnode>
+      </node>
+      <node id="8260">
+        <label>gromacs/commandline/pargs.h</label>
+        <link refid="pargs_8h"/>
+        <childnode refid="8261" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+        <childnode refid="8265" relation="include">
+        </childnode>
+      </node>
+      <node id="8284">
+        <label>gromacs/utility/futil.h</label>
+        <link refid="futil_8h"/>
+        <childnode refid="8255" relation="include">
+        </childnode>
+        <childnode refid="8281" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8271">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="8262" relation="include">
+        </childnode>
+      </node>
+      <node id="8262">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="8263" relation="include">
+        </childnode>
+        <childnode refid="8264" relation="include">
+        </childnode>
+      </node>
+      <node id="8267">
+        <label>config.h</label>
+      </node>
+      <node id="8258">
+        <label>algorithm</label>
+      </node>
+      <node id="8276">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="8267" relation="include">
+        </childnode>
+      </node>
+      <node id="8274">
+        <label>gromacs/mdtypes/pull-params.h</label>
+        <link refid="pull-params_8h"/>
+        <childnode refid="8271" relation="include">
+        </childnode>
+        <childnode refid="8262" relation="include">
+        </childnode>
+        <childnode refid="8265" relation="include">
+        </childnode>
+      </node>
+      <node id="8281">
+        <label>stdio.h</label>
+      </node>
+      <node id="8264">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="gromacs_2gmxpreprocess_2grompp_8cpp_1aaeb812b8830bd1c3fa31fbb313c3ae4d" prot="public" static="no">
+        <name>MAXMISMATCH</name>
+        <initializer>20</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="119" column="9"/>
+      </memberdef>
+      <memberdef kind="define" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a8485f4e81de2537e6a0935626167a775" prot="public" static="no">
+        <name>NFILE</name>
+        <initializer><ref refid="group__module__utility_1ga0883345a58f8f63aefa249a4f127f707" kindref="member">asize</ref>(fnm)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1777" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a41abbd5e8e1da3e37ab87b7aba07bf6a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int rm_interactions</definition>
+        <argsstring>(int ifunc, int nrmols, t_molinfo mols[])</argsstring>
+        <name>rm_interactions</name>
+        <param>
+          <type>int</type>
+          <declname>ifunc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrmols</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref></type>
+          <declname>mols</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="100" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="100" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a64c78426858dbd670123821070285e31" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int check_atom_names</definition>
+        <argsstring>(const char *fn1, const char *fn2, gmx_mtop_t *mtop, const t_atoms *at)</argsstring>
+        <name>check_atom_names</name>
+        <param>
+          <type>const char *</type>
+          <declname>fn1</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fn2</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>at</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="114" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="114" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a77852ce9f55ac6df87c20d786b247c08" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_eg_vs_cg</definition>
+        <argsstring>(gmx_mtop_t *mtop)</argsstring>
+        <name>check_eg_vs_cg</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="157" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="157" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a79e812c504e95c93e473e47bf5e358cc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_cg_sizes</definition>
+        <argsstring>(const char *topfn, t_block *cgs, warninp_t wi)</argsstring>
+        <name>check_cg_sizes</name>
+        <param>
+          <type>const char *</type>
+          <declname>topfn</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__block" kindref="compound">t_block</ref> *</type>
+          <declname>cgs</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="193" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="193" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1ae15f9f112163b26aed3956fae7da8c23" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_bonds_timestep</definition>
+        <argsstring>(gmx_mtop_t *mtop, double dt, warninp_t wi)</argsstring>
+        <name>check_bonds_timestep</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="221" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="221" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a050457c3f9eaba7eedd3b3ba19b47a13" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_vel</definition>
+        <argsstring>(gmx_mtop_t *mtop, rvec v[])</argsstring>
+        <name>check_vel</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>v</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="363" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="363" bodyend="379"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1aa1f3aa922c05c5c96d3940b19a3f7bc4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_shells_inputrec</definition>
+        <argsstring>(gmx_mtop_t *mtop, t_inputrec *ir, warninp_t wi)</argsstring>
+        <name>check_shells_inputrec</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="381" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="381" bodyend="408"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1ab003d0c9b346f9642efc47bc76b84c8b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>static gmx_bool nint_ftype</definition>
+        <argsstring>(gmx_mtop_t *mtop, t_molinfo *mi, int ftype)</argsstring>
+        <name>nint_ftype</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> *</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ftype</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="412" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="412" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1aed1e9b7f8c366a6377d576e25dc6ca3a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void renumber_moltypes</definition>
+        <argsstring>(gmx_mtop_t *sys, int *nmolinfo, t_molinfo **molinfo)</argsstring>
+        <name>renumber_moltypes</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>sys</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nmolinfo</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> **</type>
+          <declname>molinfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="429" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="429" bodyend="481"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a24083ba18a5eba157cf76f9271c15841" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void molinfo2mtop</definition>
+        <argsstring>(int nmi, t_molinfo *mi, gmx_mtop_t *mtop)</argsstring>
+        <name>molinfo2mtop</name>
+        <param>
+          <type>int</type>
+          <declname>nmi</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> *</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="483" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="483" bodyend="499"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1afd081bcc439307f94673a8016d11c6bf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void new_status</definition>
+        <argsstring>(const char *topfile, const char *topppfile, const char *confin, t_gromppopts *opts, t_inputrec *ir, gmx_bool bZero, gmx_bool bGenVel, gmx_bool bVerbose, t_state *state, gpp_atomtype_t atype, gmx_mtop_t *sys, int *nmi, t_molinfo **mi, t_molinfo **intermolecular_interactions, t_params plist[], int *comb, double *reppow, real *fudgeQQ, gmx_bool bMorse, warninp_t wi)</argsstring>
+        <name>new_status</name>
+        <param>
+          <type>const char *</type>
+          <declname>topfile</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>topppfile</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>confin</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__gromppopts" kindref="compound">t_gromppopts</ref> *</type>
+          <declname>opts</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bZero</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bGenVel</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="structgpp__atomtype" kindref="compound">gpp_atomtype_t</ref></type>
+          <declname>atype</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>sys</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nmi</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> **</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> **</type>
+          <declname>intermolecular_interactions</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__params" kindref="compound">t_params</ref></type>
+          <declname>plist</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>comb</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>reppow</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fudgeQQ</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bMorse</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="502" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="502" bodyend="673"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1ae079a8257d5f9709a7049500f361007e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void copy_state</definition>
+        <argsstring>(const char *slog, t_trxframe *fr, gmx_bool bReadVel, t_state *state, double *use_time)</argsstring>
+        <name>copy_state</name>
+        <param>
+          <type>const char *</type>
+          <declname>slog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__trxframe" kindref="compound">t_trxframe</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bReadVel</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>use_time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="675" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="675" bodyend="712"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a57c6a528b188a7cb7af16caadca56de5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void cont_status</definition>
+        <argsstring>(const char *slog, const char *ener, gmx_bool bNeedVel, gmx_bool bGenVel, real fr_time, t_inputrec *ir, t_state *state, gmx_mtop_t *sys, const gmx_output_env_t *oenv)</argsstring>
+        <name>cont_status</name>
+        <param>
+          <type>const char *</type>
+          <declname>slog</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>ener</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNeedVel</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bGenVel</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>fr_time</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>sys</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="714" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="714" bodyend="802"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1aeaf564e96b6bc32cc9fa18df950395fe" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void read_posres</definition>
+        <argsstring>(gmx_mtop_t *mtop, t_molinfo *molinfo, gmx_bool bTopB, char *fn, int rc_scaling, int ePBC, rvec com, warninp_t wi)</argsstring>
+        <name>read_posres</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> *</type>
+          <declname>molinfo</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bTopB</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rc_scaling</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>com</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="804" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="804" bodyend="984"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a44b720a4664647dbdefce5504b8cd560" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gen_posres</definition>
+        <argsstring>(gmx_mtop_t *mtop, t_molinfo *mi, char *fnA, char *fnB, int rc_scaling, int ePBC, rvec com, rvec comB, warninp_t wi)</argsstring>
+        <name>gen_posres</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> *</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>fnA</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>fnB</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rc_scaling</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>com</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>comB</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="986" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="986" bodyend="997"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1ac86a7c5c2669ee170d6de5ca94438244" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void set_wall_atomtype</definition>
+        <argsstring>(gpp_atomtype_t at, t_gromppopts *opts, t_inputrec *ir, warninp_t wi)</argsstring>
+        <name>set_wall_atomtype</name>
+        <param>
+          <type><ref refid="structgpp__atomtype" kindref="compound">gpp_atomtype_t</ref></type>
+          <declname>at</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__gromppopts" kindref="compound">t_gromppopts</ref> *</type>
+          <declname>opts</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="999" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="999" bodyend="1018"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a58db83d02f926d430ff23ff7edabc34b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int nrdf_internal</definition>
+        <argsstring>(t_atoms *atoms)</argsstring>
+        <name>nrdf_internal</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1020" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1020" bodyend="1044"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a199bb98e1e45f43b1ddb3990e18ad77f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spline1d</definition>
+        <argsstring>(double dx, double *y, int n, double *u, double *y2)</argsstring>
+        <name>spline1d</name>
+        <param>
+          <type>double</type>
+          <declname>dx</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>y2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1047" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1047" bodyend="1073"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a3ed46b9a003677cb73138c73681c76ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void interpolate1d</definition>
+        <argsstring>(double xmin, double dx, double *ya, double *y2a, double x, double *y, double *y1)</argsstring>
+        <name>interpolate1d</name>
+        <param>
+          <type>double</type>
+          <declname>xmin</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dx</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>ya</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>y2a</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>y1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1077" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1077" bodyend="1095"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1aa2c2ecf114fceeae8aaf19490230628e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setup_cmap</definition>
+        <argsstring>(int grid_spacing, int nc, real *grid, gmx_cmap_t *cmap_grid)</argsstring>
+        <name>setup_cmap</name>
+        <param>
+          <type>int</type>
+          <declname>grid_spacing</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__cmap__t" kindref="compound">gmx_cmap_t</ref> *</type>
+          <declname>cmap_grid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1099" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1099" bodyend="1174"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1aafafd247eab7cb555540e0ae5880f0a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_cmap_grid</definition>
+        <argsstring>(gmx_cmap_t *cmap_grid, int ngrid, int grid_spacing)</argsstring>
+        <name>init_cmap_grid</name>
+        <param>
+          <type><ref refid="structgmx__cmap__t" kindref="compound">gmx_cmap_t</ref> *</type>
+          <declname>cmap_grid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ngrid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>grid_spacing</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1176" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1176" bodyend="1190"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a06440010dc72c6b44af53c24509ef9a8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int count_constraints</definition>
+        <argsstring>(gmx_mtop_t *mtop, t_molinfo *mi, warninp_t wi)</argsstring>
+        <name>count_constraints</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__molinfo" kindref="compound">t_molinfo</ref> *</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1193" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1193" bodyend="1232"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a1bcc1609360c337567743bff8f6dd036" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_gbsa_params_charged</definition>
+        <argsstring>(gmx_mtop_t *sys, gpp_atomtype_t atype)</argsstring>
+        <name>check_gbsa_params_charged</name>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>sys</declname>
+        </param>
+        <param>
+          <type><ref refid="structgpp__atomtype" kindref="compound">gpp_atomtype_t</ref></type>
+          <declname>atype</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1234" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1234" bodyend="1267"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a922d0f093e01a334de5e430865a71cea" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void check_gbsa_params</definition>
+        <argsstring>(gpp_atomtype_t atype)</argsstring>
+        <name>check_gbsa_params</name>
+        <param>
+          <type><ref refid="structgpp__atomtype" kindref="compound">gpp_atomtype_t</ref></type>
+          <declname>atype</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1270" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1270" bodyend="1299"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1ad8e4f118d0542c956688e9ef1a7eea74" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real calc_temp</definition>
+        <argsstring>(const gmx_mtop_t *mtop, const t_inputrec *ir, rvec *v)</argsstring>
+        <name>calc_temp</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1301" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1301" bodyend="1323"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a738dbaac40522dd345baea30f7947112" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real get_max_reference_temp</definition>
+        <argsstring>(const t_inputrec *ir, warninp_t wi)</argsstring>
+        <name>get_max_reference_temp</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1325" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1325" bodyend="1356"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1accb9f6a6a5187f420f12e8faa09abcc3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void checkForUnboundAtoms</definition>
+        <argsstring>(const gmx_moltype_t *molt, warninp_t wi)</argsstring>
+        <name>checkForUnboundAtoms</name>
+        <param>
+          <type>const <ref refid="structgmx__moltype__t" kindref="compound">gmx_moltype_t</ref> *</type>
+          <declname>molt</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1361" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1361" bodyend="1413"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a00ef2d606b34b7c9c30173e3168f3eb8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void checkForUnboundAtoms</definition>
+        <argsstring>(const gmx_mtop_t *mtop, warninp_t wi)</argsstring>
+        <name>checkForUnboundAtoms</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1416" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1416" bodyend="1423"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a89ccdb3553edcd9361463697eb13dcc1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool haveDecoupledModeInMol</definition>
+        <argsstring>(const gmx_moltype_t *molt, const t_iparams *iparams, real massFactorThreshold)</argsstring>
+        <name>haveDecoupledModeInMol</name>
+        <param>
+          <type>const <ref refid="structgmx__moltype__t" kindref="compound">gmx_moltype_t</ref> *</type>
+          <declname>molt</declname>
+        </param>
+        <param>
+          <type>const <ref refid="uniont__iparams" kindref="compound">t_iparams</ref> *</type>
+          <declname>iparams</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>massFactorThreshold</declname>
+        </param>
+        <briefdescription>
+<para>Checks if there are decoupled modes in moleculetype <computeroutput>molt</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>The specific decoupled modes this routine check for are angle modes where the two bonds are constrained and the atoms a both ends are only involved in a single constraint; the mass of the two atoms needs to differ by more than <computeroutput>massFactorThreshold</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1432" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1432" bodyend="1509"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a9d3b497eccaf26a28521e3df2b8a22e6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void checkDecoupledModeAccuracy</definition>
+        <argsstring>(const gmx_mtop_t *mtop, const t_inputrec *ir, warninp_t wi)</argsstring>
+        <name>checkDecoupledModeAccuracy</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+<para>Checks if the Verlet buffer and constraint accuracy is sufficient for decoupled dynamic modes. </para>        </briefdescription>
+        <detaileddescription>
+<para>When decoupled modes are present and the accuray in insufficient, this routine issues a warning if the accuracy is insufficient. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1516" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1516" bodyend="1591"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1a1004445ae16304a08eec76fa97f91442" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void set_verlet_buffer</definition>
+        <argsstring>(const gmx_mtop_t *mtop, t_inputrec *ir, real buffer_temp, matrix box, warninp_t wi)</argsstring>
+        <name>set_verlet_buffer</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>buffer_temp</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structwarninp" kindref="compound">warninp_t</ref></type>
+          <declname>wi</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1593" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1593" bodyend="1636"/>
+      </memberdef>
+      <memberdef kind="function" id="gromacs_2gmxpreprocess_2grompp_8cpp_1abf49f1a613ed3f5e0300fcf21e570f58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_grompp</definition>
+        <argsstring>(int argc, char *argv[])</argsstring>
+        <name>gmx_grompp</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" line="1638" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp" bodystart="1638" bodyend="2338"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/grompp.cpp"/>
+  </compounddef>
+</doxygen>

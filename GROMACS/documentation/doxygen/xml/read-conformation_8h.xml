@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="read-conformation_8h" kind="file">
+    <compoundname>read-conformation.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="insert-molecules_8cpp" local="yes">src/gromacs/gmxpreprocess/insert-molecules.cpp</includedby>
+    <includedby refid="read-conformation_8cpp" local="yes">src/gromacs/gmxpreprocess/read-conformation.cpp</includedby>
+    <includedby refid="solvate_8cpp" local="yes">src/gromacs/gmxpreprocess/solvate.cpp</includedby>
+    <incdepgraph>
+      <node id="8591">
+        <label>src/gromacs/gmxpreprocess/read-conformation.h</label>
+        <link refid="read-conformation.h"/>
+        <childnode refid="8592" relation="include">
+        </childnode>
+        <childnode refid="8593" relation="include">
+        </childnode>
+      </node>
+      <node id="8593">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="8592">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="read-conformation_8h_1ac9540a1b6d773252101ddc1fa30d1725" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+        <definition>std::vector&lt;real&gt; makeExclusionDistances</definition>
+        <argsstring>(const t_atoms *a, gmx_atomprop *aps, real defaultDistance, real scaleFactor)</argsstring>
+        <name>makeExclusionDistances</name>
+        <param>
+          <type>const <ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__atomprop" kindref="compound">gmx_atomprop</ref> *</type>
+          <declname>aps</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>defaultDistance</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>scaleFactor</declname>
+        </param>
+        <briefdescription>
+<para>Allocate and fill an array of inter-atomic half distances. </para>        </briefdescription>
+        <detaileddescription>
+<para>These are either scaled VDW radii taken from vdwradii.dat, or the default value. Used directly and indirectly by solvate and insert-molecules for deciding whether molecules clash. The return pointer should be freed by the caller. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/read-conformation.h" line="54" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="read-conformation_8h_1a0190b67aad205e333bcc452f74c24078" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void readConformation</definition>
+        <argsstring>(const char *confin, t_topology *top, std::vector&lt; gmx::RVec &gt; *x, std::vector&lt; gmx::RVec &gt; *v, int *ePBC, matrix box, const char *statusTitle)</argsstring>
+        <name>readConformation</name>
+        <param>
+          <type>const char *</type>
+          <declname>confin</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__topology" kindref="compound">t_topology</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt; *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>statusTitle</declname>
+        </param>
+        <briefdescription>
+<para>Read a conformation from a file, allocate and fill data structures. </para>        </briefdescription>
+        <detaileddescription>
+<para>Used by solvate and insert-molecules. The returned pointers *x and *v should be freed by the caller. top should have its destructor called. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/read-conformation.h" line="62" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxpreprocess/read-conformation.h"/>
+  </compounddef>
+</doxygen>

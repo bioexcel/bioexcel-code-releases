@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="calculate-ewald-splitting-coefficient_8h" kind="file">
+    <compoundname>calculate-ewald-splitting-coefficient.h</compoundname>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="gmx__pme__error_8cpp" local="yes">src/gromacs/gmxana/gmx_pme_error.cpp</includedby>
+    <includedby refid="calculate-ewald-splitting-coefficient_8cpp" local="yes">src/gromacs/math/calculate-ewald-splitting-coefficient.cpp</includedby>
+    <includedby refid="calc__verletbuf_8cpp" local="yes">src/gromacs/mdlib/calc_verletbuf.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <incdepgraph>
+      <node id="9828">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="9827">
+        <label>src/gromacs/math/calculate-ewald-splitting-coefficient.h</label>
+        <link refid="calculate-ewald-splitting-coefficient.h"/>
+        <childnode refid="9828" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="9830">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="9829">
+        <label>src/gromacs/math/calculate-ewald-splitting-coefficient.h</label>
+        <link refid="calculate-ewald-splitting-coefficient.h"/>
+        <childnode refid="9830" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="calculate-ewald-splitting-coefficient_8h_1a2ceed7963f0e96ff83476b643863b09a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real calc_ewaldcoeff_q</definition>
+        <argsstring>(real rc, real rtol)</argsstring>
+        <name>calc_ewaldcoeff_q</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rtol</declname>
+        </param>
+        <briefdescription>
+<para>Computes the Ewald splitting coefficient for Coulomb. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns a value of beta that satisfies rtol &gt; erfc(beta * rc) (and is very close to equality). That value is used the same way in all Coulomb-based Ewald methods.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">rc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cutoff radius </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rtol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Required maximum value of the short-ranged potential at the cutoff (ie. ewald-rtol) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the splitting coefficient that produces the required dtol at rc. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/math/calculate-ewald-splitting-coefficient.h" line="69" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/math/calculate-ewald-splitting-coefficient.cpp" bodystart="46" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="calculate-ewald-splitting-coefficient_8h_1a8db698a5ed92de3929f700c453046c4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real calc_ewaldcoeff_lj</definition>
+        <argsstring>(real rc, real rtol)</argsstring>
+        <name>calc_ewaldcoeff_lj</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rtol</declname>
+        </param>
+        <briefdescription>
+<para>Computes the Ewald splitting coefficient for LJ. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns a value of beta that satisfies dtol &gt; erfc(beta * rc) * (1<itemizedlist>
+<listitem><para>beta^2 * rc^2 + 0.5 * beta^4 * rc^4) (and is very close to equality), which is used in LJ-PME.</para></listitem></itemizedlist>
+</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">rc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cutoff radius </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rtol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Required maximum value of the short-ranged potential at the cutoff (ie. ewald-rtol-lj) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the splitting coefficient that produces the required dtol at rc. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/math/calculate-ewald-splitting-coefficient.h" line="84" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/math/calculate-ewald-splitting-coefficient.cpp" bodystart="88" bodyend="117"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares functions for computing Ewald splitting coefficients. </para>    </briefdescription>
+    <detaileddescription>
+<para>These belong in the maths module because they do simple maths and are used many parts of Gromacs.</para><para><simplesect kind="author"><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/math/calculate-ewald-splitting-coefficient.h"/>
+  </compounddef>
+</doxygen>

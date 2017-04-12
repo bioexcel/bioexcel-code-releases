@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Codebase overview &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Developer guide" href="index.html" />
+    <link rel="next" title="Build system overview" href="build-system.html" />
+    <link rel="prev" title="Developer guide" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="build-system.html" title="Build system overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Developer guide"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="codebase-overview">
+<h1>Codebase overview<a class="headerlink" href="#codebase-overview" title="Permalink to this headline">¶</a></h1>
+<p>The root directory of the GROMACS repository only contains <code class="file docutils literal"><span class="pre">CMakeLists.txt</span></code>
+(the root file for the CMake build system), a few files supporting the build
+system, and a few standard informative files (<code class="file docutils literal"><span class="pre">README</span></code> etc.).  The
+<code class="file docutils literal"><span class="pre">INSTALL</span></code> is generated for source packages from
+<code class="file docutils literal"><span class="pre">docs/install-guide/index.rst</span></code>.</p>
+<p>All other content is in the following top-level directories:</p>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">admin/</span></code></dt>
+<dd>Contains various scripts for developer use, as well as configuration files
+and scripts for some of the tools used.</dd>
+<dt><code class="file docutils literal"><span class="pre">cmake/</span></code></dt>
+<dd>Contains code fragments and find modules for CMake.
+Some content here is copied and/or adapted from newer versions of CMake than
+the minimum currently supported.
+Default suppression file for valgrind is also included here.
+See <a class="reference internal" href="build-system.html"><span class="doc">Build system overview</span></a> for details of the build system.</dd>
+<dt><code class="file docutils literal"><span class="pre">docs/</span></code></dt>
+<dd>Contains the build system logic and source code for all documentation, both
+user-facing and developer-facing.  Some of the documentation is generated
+from the source code under <code class="file docutils literal"><span class="pre">src/</span></code>; see <a class="reference internal" href="#dev-doc-layout"><span class="std std-ref">Documentation organization</span></a>.
+This directory also contains some developer scripts that use the Doxygen
+documentation for their operation.</dd>
+<dt><code class="file docutils literal"><span class="pre">scripts/</span></code></dt>
+<dd>Contains the templates for <code class="file docutils literal"><span class="pre">GMXRC</span></code> script, some other installed scripts,
+as well as installation rules for all these scripts.</dd>
+<dt><code class="file docutils literal"><span class="pre">share/</span></code></dt>
+<dd>Contains data files that will be installed under <code class="file docutils literal"><span class="pre">share/</span></code>.  These
+include a template for writing C++ analysis tools, and data files used by
+GROMACS.</dd>
+<dt><code class="file docutils literal"><span class="pre">src/</span></code></dt>
+<dd>Contains all source code.  See <a class="reference internal" href="#dev-source-layout"><span class="std std-ref">Source code organization</span></a>.</dd>
+<dt><code class="file docutils literal"><span class="pre">tests/</span></code></dt>
+<dd>Contains build system logic for some high-level tests.  Currently, only the
+regression test build system logic and cppcheck rules are in this directory,
+while other tests are under <code class="file docutils literal"><span class="pre">src/</span></code>.</dd>
+</dl>
+<div class="section" id="source-code-organization">
+<span id="dev-source-layout"></span><h2>Source code organization<a class="headerlink" href="#source-code-organization" title="Permalink to this headline">¶</a></h2>
+<p>The following figure shows a high-level view of components of what gets built
+from the source code under <code class="file docutils literal"><span class="pre">src/</span></code> and how the code is organized.
+The build system is described in detail in <a class="reference internal" href="build-system.html"><span class="doc">Build system overview</span></a>.
+With default options, the green and white components are built as part of the
+default target.  If <code class="docutils literal"><span class="pre">GMX_BUILD_MDRUN_ONLY</span></code> is <code class="docutils literal"><span class="pre">ON</span></code>, then the blue and white
+components are built instead; <code class="file docutils literal"><span class="pre">libgromacs_mdrun</span></code> is built from a subset
+of the code used for <code class="file docutils literal"><span class="pre">libgromacs</span></code>.
+The gray parts are for testing, and are by default only built as part of the
+<code class="docutils literal"><span class="pre">tests</span></code> target, but if <code class="docutils literal"><span class="pre">GMX_DEVELOPER_BUILD</span></code> is <code class="docutils literal"><span class="pre">ON</span></code>, then these are
+included in the default build target.
+See <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a> for details of the testing side.</p>
+<img src="../_images/graphviz-9694dfe401cf976ff7daa5ac1d3e94dc57d1d3c3.png" alt="digraph dev_high_level_components {
+concentrate = yes
+node [ shape=box, style=filled, width=2 ]
+
+subgraph {
+  rank = same
+  externals [
+    label=&quot;externals\nsrc/external/&quot;, group=common, style=rounded
+  ]
+  gtest [
+    label=&quot;Google Test &amp; Mock\nsrc/external/gmock-1.7.0/&quot;, group=test
+    style=&quot;rounded,filled&quot;, fillcolor=&quot;0 0 0.9&quot;
+  ]
+}
+subgraph {
+  rank = same
+  libgromacs [
+    label=&quot;libgromacs\nsrc/gromacs/&quot;, group=gmx, fillcolor=&quot;0.33 0.3 1&quot;
+  ]
+  libgromacs_mdrun [
+    label=&quot;libgromacs_mdrun\nsrc/gromacs/&quot;, group=mdrun, fillcolor=&quot;0.66 0.3 1&quot;
+  ]
+}
+testutils [
+  label=&quot;testutils\nsrc/testutils/&quot;, group=test
+  style=&quot;rounded,filled&quot;, fillcolor=&quot;0 0 0.9&quot;
+]
+mdrun_objlib [
+  label=&quot;mdrun object lib.\nsrc/programs/mdrun/&quot;, group=common, style=rouded
+]
+subgraph {
+  rank = same
+  gmx [
+    label=&quot;gmx\nsrc/programs/&quot;, group=gmx, fillcolor=&quot;0.33 0.3 1&quot;
+  ]
+  mdrun [
+    label=&quot;mdrun\nsrc/programs/&quot;, group=mdrun, fillcolor=&quot;0.66 0.3 1&quot;
+  ]
+  tests [
+    label=&quot;test binaries\nsrc/.../tests/&quot;, group=test
+    style=&quot;rounded,filled&quot;, fillcolor=&quot;0 0 0.9&quot;
+  ]
+  template [
+    label=&quot;analysis template\nshare/template/&quot;, group=common
+    fillcolor=&quot;0.33 0.3 1&quot;
+  ]
+
+  gmx -&gt; template [ style=invis, constraint=no ]
+  template -&gt; mdrun [ style=invis, constraint=no ]
+}
+
+libgromacs -&gt; externals
+libgromacs_mdrun -&gt; externals
+mdrun_objlib -&gt; libgromacs
+gmx -&gt; libgromacs
+gmx -&gt; mdrun_objlib
+mdrun -&gt; libgromacs_mdrun
+mdrun -&gt; mdrun_objlib
+testutils -&gt; externals
+testutils -&gt; gtest
+testutils -&gt; libgromacs
+tests -&gt; gtest
+tests -&gt; libgromacs
+tests -&gt; mdrun_objlib
+tests -&gt; testutils
+template -&gt; libgromacs
+
+template -&gt; mdrun_objlib [ style=invis ]
+mdrun_objlib -&gt; externals [ style=invis ]
+}" />
+<p>All the source code (except for the analysis template) is under the
+<code class="file docutils literal"><span class="pre">src/</span></code> directory.  Only a few files related to the build system are
+included at the root level.  All actual code is in subdirectories:</p>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">src/gromacs/</span></code></dt>
+<dd>The code under this directory is built into a single library,
+<code class="file docutils literal"><span class="pre">libgromacs</span></code>.  Installed headers are also located in this hierarchy.
+This is the main part of the code, and is organized into further subdirectories
+as <em>modules</em>.  See below for details.</dd>
+<dt><code class="file docutils literal"><span class="pre">src/programs/</span></code></dt>
+<dd>GROMACS executables are built from code under this directory.
+Although some build options can change this, there is typically only a single
+binary, <code class="file docutils literal"><span class="pre">gmx</span></code>, built.</dd>
+<dt><code class="file docutils literal"><span class="pre">src/</span><em><span class="pre">...</span></em><span class="pre">/tests/</span></code></dt>
+<dd>Various subdirectories under <code class="file docutils literal"><span class="pre">src/</span></code> contain a subdirectory named
+<code class="file docutils literal"><span class="pre">tests/</span></code>.  The code from each such directory is built into a test
+binary.  Some such directories also provide shared test code as object
+libraries that is linked into multiple test binaries from different folders.
+See <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a> for details.</dd>
+<dt><code class="file docutils literal"><span class="pre">src/testutils/</span></code></dt>
+<dd>Contains shared utility code for writing Google Test tests.
+See <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a> for details.</dd>
+<dt><code class="file docutils literal"><span class="pre">src/external/</span></code></dt>
+<dd>Contains bundled source code for various libraries and
+components that GROMACS uses internally.  All the code from these
+directories are built using our custom build rules into <code class="file docutils literal"><span class="pre">libgromacs</span></code>,
+or in some cases into the test binaries.  Some CMake options change which
+parts of this code are included in the build.
+See <a class="reference internal" href="build-system.html"><span class="doc">Build system overview</span></a> for some explanation about how the code in this
+directory is used.</dd>
+<dt><code class="file docutils literal"><span class="pre">src/contrib/</span></code></dt>
+<dd>Contains collection of less well maintained code that may or may
+not compile.  It is not included in the build.</dd>
+<dt><code class="file docutils literal"><span class="pre">src/contrib/fftw/</span></code></dt>
+<dd>As an exception to the above, this folder contains the build system code for
+downloading and building FFTW to be included into <code class="file docutils literal"><span class="pre">libgromacs</span></code>.</dd>
+</dl>
+<p>When compiling, the include search path is set to <code class="file docutils literal"><span class="pre">src/</span></code>.
+Some directories from under <code class="file docutils literal"><span class="pre">src/external/</span></code> may also be included,
+depending on the compilation options.</p>
+<div class="section" id="organization-under-src-gromacs">
+<h3>Organization under <code class="file docutils literal"><span class="pre">src/gromacs/</span></code><a class="headerlink" href="#organization-under-src-gromacs" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="file docutils literal"><span class="pre">libgromacs</span></code> library is built from code under <code class="file docutils literal"><span class="pre">src/gromacs/</span></code>.
+Again, the top-level directory contains build and installation rules for the
+library, and <em class="dfn">public API convenience headers</em>.  These convenience headers
+provide the main installed headers that other code can use.  They do not
+contain any declarations, but only include a suitable set of headers from the
+subdirectories.  They typically also contain high-level Doxygen documentation
+for the subdirectory with the same name: <code class="file docutils literal"><em><span class="pre">module</span></em><span class="pre">.h</span></code> corresponds to
+<code class="file docutils literal"><em><span class="pre">module</span></em><span class="pre">/</span></code>.</p>
+<p>The code is organized into subdirectories.  These subdirectories are denoted as
+<em class="dfn">modules</em> throughout this documentation.  Each module consists of a set
+of routines that do some well-defined task or a collection of tasks.</p>
+<p>Installed headers are a subset of the headers under <code class="file docutils literal"><span class="pre">src/gromacs/</span></code>.
+They are installed into a corresponding hierarchy under
+<code class="file docutils literal"><span class="pre">include/gromacs/</span></code> in the installation directory.
+Comments at the top of the header files contain a note about their visibility:
+public (installed), intra-library (can be used from inside the library), or
+intra-module/intra-file.</p>
+<p>See <a class="reference internal" href="naming.html"><span class="doc">Naming conventions</span></a> for some common naming patterns for files that can help
+locating declarations.</p>
+<p>Tests, and data required for them, are in a <code class="file docutils literal"><span class="pre">tests/</span></code> subdirectory under
+the module directory.
+See <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="documentation-organization">
+<span id="dev-doc-layout"></span><h2>Documentation organization<a class="headerlink" href="#documentation-organization" title="Permalink to this headline">¶</a></h2>
+<p>All documentation (including this developer guide) is produced from source
+files under <code class="file docutils literal"><span class="pre">docs/</span></code>, except for some command-line help that is generated
+from the source code (by executing the compiled <code class="file docutils literal"><span class="pre">gmx</span></code> binary).
+The build system provides various custom targets that build the documentation;
+see <a class="reference internal" href="build-system.html"><span class="doc">Build system overview</span></a> for details.</p>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">docs/fragments/</span></code></dt>
+<dd>Contains reStructuredText fragments used through <code class="docutils literal"><span class="pre">..</span> <span class="pre">include::</span></code> mechanism
+from various places in the documentation.</dd>
+</dl>
+<div class="section" id="user-documentation">
+<h3>User documentation<a class="headerlink" href="#user-documentation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">docs/install-guide/</span></code></dt>
+<dd>Contains reStructuredText source files for building the install guide section
+of the user documentation, as well as the <code class="file docutils literal"><span class="pre">INSTALL</span></code> file for the source
+package.
+The build rules are in <code class="file docutils literal"><span class="pre">docs/CMakeLists.txt</span></code>.</dd>
+<dt><code class="file docutils literal"><span class="pre">docs/manual/</span></code></dt>
+<dd>Contains LaTeX source files and build rules for the reference (PDF) manual.</dd>
+<dt><code class="file docutils literal"><span class="pre">docs/user-guide/</span></code></dt>
+<dd>Contains reStructuredText source files for building the user guide section
+of the user documentation.
+The build rules are in <code class="file docutils literal"><span class="pre">docs/CMakeLists.txt</span></code>.</dd>
+</dl>
+</div>
+<div class="section" id="unix-man-pages">
+<h3>Unix man pages<a class="headerlink" href="#unix-man-pages" title="Permalink to this headline">¶</a></h3>
+<p>Man pages for programs are generated by running the <code class="file docutils literal"><span class="pre">gmx</span></code> executable
+after compiling it, and then using Sphinx on the reStructuredText files that
+<code class="file docutils literal"><span class="pre">gmx</span></code> writes out.</p>
+<p>The build rules for the man pages are in <code class="file docutils literal"><span class="pre">docs/CMakeLists.txt</span></code>.</p>
+</div>
+<div class="section" id="developer-guide">
+<h3>Developer guide<a class="headerlink" href="#developer-guide" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">docs/dev-manual/</span></code></dt>
+<dd>Contains reStructuredText source files used to build the developer guide.
+The build rules are in <code class="file docutils literal"><span class="pre">docs/CMakeLists.txt</span></code>.</dd>
+</dl>
+<p>The organization of the developer guide is explained on the <a class="reference internal" href="index.html"><span class="doc">front page of
+the guide</span></a>.</p>
+</div>
+<div class="section" id="doxygen-documentation">
+<h3>Doxygen documentation<a class="headerlink" href="#doxygen-documentation" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="file docutils literal"><span class="pre">docs/doxygen/</span></code></dt>
+<dd>Contains the build rules and some overview content for the Doxygen
+documentation.
+See <a class="reference internal" href="doxygen.html"><span class="doc">Using Doxygen</span></a> for details of how the Doxygen documentation is built and
+organized.</dd>
+</dl>
+<p>The Doxygen documentation is made of a few different parts.  Use the list
+below as a guideline on where to look for a particular kind of content.
+Since the documentation has been written over a long period of time and the
+approach has evolved, not all the documentation yet follows these guidelines,
+but this is where we are aiming at.</p>
+<dl class="docutils">
+<dt>documentation pages</dt>
+<dd>These contain mainly overview content, from general-level introduction down
+into explanation of some particular areas of individual modules.
+These are generally the place to start familiarizing with the code or a new
+area of the code.
+They can be reached by links from the main page, and also through cross-links
+from places in the documentation where that information is relevant to
+understand the context.</dd>
+<dt>module documentation</dt>
+<dd>These contain mainly techical content, explaining the general implementation of
+a particular module and listing the classes, functions etc. in the module.
+They complement pages that describe the concepts.
+They can be reached from the Modules tab, and also from all individual classes,
+functions etc. that make up the module.</dd>
+<dt>class documentation</dt>
+<dd>These document the usage of an individual class, and in some cases that of
+closely related classes.  Where necessary (and time allowing), a broader
+overview is given on a separate page and/or in the module documentation.</dd>
+<dt>method documentation</dt>
+<dd>These document the individual method.  Typically, the class documentation or
+other overview content is the place to look for how different methods interact.</dd>
+<dt>file and namespace documentation</dt>
+<dd>These are generally only placeholders for links, and do not contain much else.
+The main content is the list of classes and other entities declared in that
+file.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Codebase overview</a><ul>
+<li><a class="reference internal" href="#source-code-organization">Source code organization</a><ul>
+<li><a class="reference internal" href="#organization-under-src-gromacs">Organization under <code class="file docutils literal"><span class="pre">src/gromacs/</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentation-organization">Documentation organization</a><ul>
+<li><a class="reference internal" href="#user-documentation">User documentation</a></li>
+<li><a class="reference internal" href="#unix-man-pages">Unix man pages</a></li>
+<li><a class="reference internal" href="#developer-guide">Developer guide</a></li>
+<li><a class="reference internal" href="#doxygen-documentation">Doxygen documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Developer guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="build-system.html"
+                        title="next chapter">Build system overview</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/overview.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="build-system.html" title="Build system overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Developer guide"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,762 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="mshift_8cpp" kind="file">
+    <compoundname>mshift.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="mshift_8h" local="yes">mshift.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="idef_8h" local="yes">gromacs/topology/idef.h</includes>
+    <includes refid="ifunc_8h" local="yes">gromacs/topology/ifunc.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <incdepgraph>
+      <node id="14849">
+        <label>stdarg.h</label>
+      </node>
+      <node id="14844">
+        <label>src/gromacs/pbcutil/mshift.cpp</label>
+        <link refid="mshift.cpp"/>
+        <childnode refid="14845" relation="include">
+        </childnode>
+        <childnode refid="14846" relation="include">
+        </childnode>
+        <childnode refid="14847" relation="include">
+        </childnode>
+        <childnode refid="14848" relation="include">
+        </childnode>
+        <childnode refid="14854" relation="include">
+        </childnode>
+      </node>
+      <node id="14854">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="14855" relation="include">
+        </childnode>
+        <childnode refid="14851" relation="include">
+        </childnode>
+      </node>
+      <node id="14848">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="14849" relation="include">
+        </childnode>
+        <childnode refid="14850" relation="include">
+        </childnode>
+        <childnode refid="14851" relation="include">
+        </childnode>
+      </node>
+      <node id="14852">
+        <label>stdint.h</label>
+      </node>
+      <node id="14845">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="14855">
+        <label>stddef.h</label>
+      </node>
+      <node id="14846">
+        <label>string.h</label>
+      </node>
+      <node id="14851">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="14852" relation="include">
+        </childnode>
+        <childnode refid="14853" relation="include">
+        </childnode>
+      </node>
+      <node id="14847">
+        <label>algorithm</label>
+      </node>
+      <node id="14850">
+        <label>stdio.h</label>
+      </node>
+      <node id="14853">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="mshift_8cpp_1ad964a3f8c753d6ff74ed62496c8d3193" prot="public" static="no">
+        <name>GCHECK</name>
+        <param><defname>g</defname></param>
+        <initializer>if (g == NULL) g_error(__LINE__, __FILE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="153" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="mshift_8cpp_1a7c46ef0c2ef90626aec7863968b7b83b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void add_gbond</definition>
+        <argsstring>(t_graph *g, int a0, int a1)</argsstring>
+        <name>add_gbond</name>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a0</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>a1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="65" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="65" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1af585d200bb6132186eafbaf83f187bf5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void mk_igraph</definition>
+        <argsstring>(t_graph *g, int ftype, const t_ilist *il, int at_start, int at_end, int *part)</argsstring>
+        <name>mk_igraph</name>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ftype</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__ilist" kindref="compound">t_ilist</ref> *</type>
+          <declname>il</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_end</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>part</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="89" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1ac0060106b6f75c7491d76a73e33f5e43" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void g_error</definition>
+        <argsstring>(int line, const char *file)</argsstring>
+        <name>g_error</name>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>file</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="148" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="148" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1ae94be670331b165498b82bd9fbfa5205" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void p_graph</definition>
+        <argsstring>(FILE *log, const char *title, t_graph *g)</argsstring>
+        <name>p_graph</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="155" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="155" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a50be150d6031acdb57360fcee926787e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_1se</definition>
+        <argsstring>(t_graph *g, int ftype, const t_ilist *il, int nbond[], int at_start, int at_end)</argsstring>
+        <name>calc_1se</name>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ftype</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__ilist" kindref="compound">t_ilist</ref> *</type>
+          <declname>il</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbond</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="187" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="187" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a5bc85b554b9c9448d6d30e632eed3ac2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int calc_start_end</definition>
+        <argsstring>(FILE *fplog, t_graph *g, const t_ilist il[], int at_start, int at_end, int nbond[])</argsstring>
+        <name>calc_start_end</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__ilist" kindref="compound">t_ilist</ref></type>
+          <declname>il</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_end</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbond</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="239" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="239" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a175b9b5696aaf407d1654ba8c933ae7b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void compact_graph</definition>
+        <argsstring>(FILE *fplog, t_graph *g)</argsstring>
+        <name>compact_graph</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="286" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="286" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1ac7de74ffe11313a455cef6839e37af04" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>static gmx_bool determine_graph_parts</definition>
+        <argsstring>(t_graph *g, int *part)</argsstring>
+        <name>determine_graph_parts</name>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>part</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="315" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="315" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1ac6b5c38604639e1d7bedbb030d1342e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mk_graph_ilist</definition>
+        <argsstring>(FILE *fplog, const t_ilist *ilist, int at_start, int at_end, gmx_bool bShakeOnly, gmx_bool bSettle, t_graph *g)</argsstring>
+        <name>mk_graph_ilist</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__ilist" kindref="compound">t_ilist</ref> *</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_end</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bShakeOnly</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bSettle</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="367" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="367" bodyend="472"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a9b3936be4fe417b289fd75fe28d7832c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+        <definition>t_graph* mk_graph</definition>
+        <argsstring>(FILE *fplog, const t_idef *idef, int at_start, int at_end, gmx_bool bShakeOnly, gmx_bool bSettle)</argsstring>
+        <name>mk_graph</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__idef" kindref="compound">t_idef</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>at_end</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bShakeOnly</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bSettle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="474" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="474" bodyend="485"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a473491dbf5a7b57bc73d0feea44ab4f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void done_graph</definition>
+        <argsstring>(t_graph *g)</argsstring>
+        <name>done_graph</name>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="487" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="487" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1ab2b294aa5bab3e9a01ed7b9e78886a91" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void mk_1shift_tric</definition>
+        <argsstring>(int npbcdim, const matrix box, const rvec hbox, const rvec xi, const rvec xj, int *mi, int *mj)</argsstring>
+        <name>mk_1shift_tric</name>
+        <param>
+          <type>int</type>
+          <declname>npbcdim</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>hbox</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>xi</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>xj</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>mj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="506" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="506" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a76b7f4735f4171fed9f7c7bedfd8af66" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void mk_1shift</definition>
+        <argsstring>(int npbcdim, const rvec hbox, const rvec xi, const rvec xj, int *mi, int *mj)</argsstring>
+        <name>mk_1shift</name>
+        <param>
+          <type>int</type>
+          <declname>npbcdim</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>hbox</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>xi</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>xj</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>mj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="544" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="544" bodyend="572"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a04be04390c5fa4286977d9594fb40e48" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void mk_1shift_screw</definition>
+        <argsstring>(const matrix box, const rvec hbox, const rvec xi, const rvec xj, int *mi, int *mj)</argsstring>
+        <name>mk_1shift_screw</name>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>hbox</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>xi</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>xj</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>mi</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>mj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="574" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="574" bodyend="629"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a8311aa93348717f892cc99534b26f566" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int mk_grey</definition>
+        <argsstring>(egCol egc[], t_graph *g, int *AtomI, int npbcdim, const matrix box, const rvec x[], int *nerror)</argsstring>
+        <name>mk_grey</name>
+        <param>
+          <type>egCol</type>
+          <declname>egc</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>AtomI</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>npbcdim</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nerror</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="631" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="631" bodyend="699"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a64127b34effc3f8cd8f9b14015feb4b7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int first_colour</definition>
+        <argsstring>(int fC, egCol Col, t_graph *g, egCol egc[])</argsstring>
+        <name>first_colour</name>
+        <param>
+          <type>int</type>
+          <declname>fC</declname>
+        </param>
+        <param>
+          <type>egCol</type>
+          <declname>Col</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>egCol</type>
+          <declname>egc</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="701" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="701" bodyend="717"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a030cab2c5af715eb1841363aa11623e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void mk_mshift</definition>
+        <argsstring>(FILE *log, t_graph *g, int ePBC, const matrix box, const rvec x[])</argsstring>
+        <name>mk_mshift</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="719" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="719" bodyend="840"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a4ca6305b4617993be02ff5f4fe0c47da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void shift_x</definition>
+        <argsstring>(const t_graph *g, const matrix box, const rvec x[], rvec x_s[])</argsstring>
+        <name>shift_x</name>
+        <param>
+          <type>const <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x_s</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="848" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="848" bodyend="918"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a263491f8215ebfb3f4bdf24c220198be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void shift_self</definition>
+        <argsstring>(const t_graph *g, const matrix box, rvec x[])</argsstring>
+        <name>shift_self</name>
+        <param>
+          <type>const <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="920" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="920" bodyend="964"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a792546657709ffd253406ee59767e7f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void unshift_x</definition>
+        <argsstring>(const t_graph *g, const matrix box, rvec x[], const rvec x_s[])</argsstring>
+        <name>unshift_x</name>
+        <param>
+          <type>const <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x_s</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="966" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="966" bodyend="1017"/>
+      </memberdef>
+      <memberdef kind="function" id="mshift_8cpp_1a90e20cd98356ad19d61bdd21eae2e53b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void unshift_self</definition>
+        <argsstring>(const t_graph *g, const matrix box, rvec x[])</argsstring>
+        <name>unshift_self</name>
+        <param>
+          <type>const <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" line="1019" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp" bodystart="1019" bodyend="1060"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/pbcutil/mshift.cpp"/>
+  </compounddef>
+</doxygen>

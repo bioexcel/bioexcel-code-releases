@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="imdsocket_8h" kind="file">
+    <compoundname>imdsocket.h</compoundname>
+    <includes local="yes">config.h</includes>
+    <includes local="no">netinet/in.h</includes>
+    <includes local="no">sys/socket.h</includes>
+    <includedby refid="imd_8cpp" local="yes">src/gromacs/imd/imd.cpp</includedby>
+    <includedby refid="imdsocket_8cpp" local="yes">src/gromacs/imd/imdsocket.cpp</includedby>
+    <incdepgraph>
+      <node id="9387">
+        <label>netinet/in.h</label>
+      </node>
+      <node id="9388">
+        <label>sys/socket.h</label>
+      </node>
+      <node id="9386">
+        <label>config.h</label>
+      </node>
+      <node id="9385">
+        <label>src/gromacs/imd/imdsocket.h</label>
+        <link refid="imdsocket.h"/>
+        <childnode refid="9386" relation="include">
+        </childnode>
+        <childnode refid="9387" relation="include">
+        </childnode>
+        <childnode refid="9388" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="9390">
+        <label>src/gromacs/imd/imd.cpp</label>
+        <link refid="imd_8cpp"/>
+      </node>
+      <node id="9391">
+        <label>src/gromacs/imd/imdsocket.cpp</label>
+        <link refid="imdsocket_8cpp"/>
+      </node>
+      <node id="9389">
+        <label>src/gromacs/imd/imdsocket.h</label>
+        <link refid="imdsocket.h"/>
+        <childnode refid="9390" relation="include">
+        </childnode>
+        <childnode refid="9391" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structIMDSocket" prot="public">IMDSocket</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="imdsocket_8h_1af7f3e7daa81f0171e6a9d7e1b54ec20d" prot="public" static="no">
+        <name>GMX_IMD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="65" column="12" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="imdsocket_8h_1a07734695ad7a2b0667fc34542ce762b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+        <definition>IMDSocket* imdsock_create</definition>
+        <argsstring>()</argsstring>
+        <name>imdsock_create</name>
+        <briefdescription>
+<para>Create an IMD master socket. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The IMD socket if successful. Otherwise prints an error message and returns NULL. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="99" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="142" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1adaeb6d400c3797d065b24a49ffacea1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int imdsock_bind</definition>
+        <argsstring>(IMDSocket *sock, int port)</argsstring>
+        <name>imdsock_bind</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Bind the IMD socket to address and port. </para>        </briefdescription>
+        <detaileddescription>
+<para>Prints out an error message if unsuccessful. If port == 0, bind() assigns a free port automatically.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The port to bind to.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 if successful. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="113" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="165" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1aa316be6aa09bd1ae7adecd9b00d96489" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int imd_sock_listen</definition>
+        <argsstring>(IMDSocket *sock)</argsstring>
+        <name>imd_sock_listen</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <briefdescription>
+<para>Set socket to listening state. </para>        </briefdescription>
+        <detaileddescription>
+<para>Prints out an error message if unsuccessful.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 if successful. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="125" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="190" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1a2c76389c3d95790d10aa96c545474aa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+        <definition>IMDSocket* imdsock_accept</definition>
+        <argsstring>(IMDSocket *sock)</argsstring>
+        <name>imdsock_accept</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <briefdescription>
+<para>Accept incoming connection and redirect to client socket. </para>        </briefdescription>
+        <detaileddescription>
+<para>Prints out an error message if unsuccessful.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>IMD socket if successful, NULL otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="136" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="211" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1a0c18f91dee51a7660fa5e16d662808f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int imdsock_getport</definition>
+        <argsstring>(IMDSocket *sock, int *port)</argsstring>
+        <name>imdsock_getport</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>port</declname>
+        </param>
+        <briefdescription>
+<para>Get the port number used for IMD connection. </para>        </briefdescription>
+        <detaileddescription>
+<para>Prints out an error message if unsuccessful.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The assigned port number.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 if successful, an error code otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="148" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="243" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1aa8f1a5c6bfb4ca0d354be8f4112a1b78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int imdsock_write</definition>
+        <argsstring>(IMDSocket *sock, const char *buffer, int length)</argsstring>
+        <name>imdsock_write</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Write to socket. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data to write. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to write.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of bytes written, or -1. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="160" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="270" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1ab4dcd3f05931fcc7b25faeaebbc2a7c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int imdsock_read</definition>
+        <argsstring>(IMDSocket *sock, char *buffer, int length)</argsstring>
+        <name>imdsock_read</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Read from socket. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>buffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Buffer to put the read data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>length</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of bytes to read.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of bytes read, or -1 for errors. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="171" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="285" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1a7a41a5e90541e3e49794f109183c4b5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void imdsock_shutdown</definition>
+        <argsstring>(IMDSocket *sock)</argsstring>
+        <name>imdsock_shutdown</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <briefdescription>
+<para>Shutdown the socket. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="179" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="300" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1a7eab0245b1764d6babc65b2ba735bc4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int imdsock_destroy</definition>
+        <argsstring>(IMDSocket *sock)</argsstring>
+        <name>imdsock_destroy</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <briefdescription>
+<para>Close the socket and free the sock struct memory. </para>        </briefdescription>
+        <detaileddescription>
+<para>Writes an error message if unsuccessful.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>1 on success, or 0 if unsuccessful. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="190" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="324" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="imdsocket_8h_1add2248b65174a0b155ec495c37fef34d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int imdsock_tryread</definition>
+        <argsstring>(IMDSocket *sock, int timeoutsec, int timeoutusec)</argsstring>
+        <name>imdsock_tryread</name>
+        <param>
+          <type><ref refid="structIMDSocket" kindref="compound">IMDSocket</ref> *</type>
+          <declname>sock</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeoutsec</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>timeoutusec</declname>
+        </param>
+        <briefdescription>
+<para>Try to read from the socket. </para>        </briefdescription>
+        <detaileddescription>
+<para>Time out after waiting the interval specified. Print an error message if unsuccessful.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD socket. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeoutsec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time out seconds </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeoutusec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time out microseconds </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h" line="203" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.cpp" bodystart="355" bodyend="393"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements the parts of the vmdsock.h interface needed for IMD communication. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Martin Hoefling, Carsten Kutzner <ulink url="mailto:ckutzne@gwdg.de">ckutzne@gwdg.de</ulink></para></simplesect>
+For more information, see <ulink url="https://www-s.ks.uiuc.edu/Research/vmd/imd/">https://www-s.ks.uiuc.edu/Research/vmd/imd/</ulink> for general IMD information and <ulink url="https://www-s.ks.uiuc.edu/Research/vmd/imd/code/imdapi.tar.gz">https://www-s.ks.uiuc.edu/Research/vmd/imd/code/imdapi.tar.gz</ulink> for the IMD reference implementation and API. </para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/imd/imdsocket.h"/>
+  </compounddef>
+</doxygen>

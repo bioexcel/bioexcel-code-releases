@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="gmx__lmcurve_8cpp" kind="file">
+    <compoundname>gmx_lmcurve.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="gmx__lmcurve_8h" local="yes">gmx_lmcurve.h</includes>
+    <includes local="no">lmmin.h</includes>
+    <includes local="no">lmstruct.h</includes>
+    <incdepgraph>
+      <node id="2581">
+        <label>lmstruct.h</label>
+      </node>
+      <node id="2579">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="2578">
+        <label>src/gromacs/correlationfunctions/gmx_lmcurve.cpp</label>
+        <link refid="gmx_lmcurve.cpp"/>
+        <childnode refid="2579" relation="include">
+        </childnode>
+        <childnode refid="2580" relation="include">
+        </childnode>
+        <childnode refid="2582" relation="include">
+        </childnode>
+        <childnode refid="2581" relation="include">
+        </childnode>
+      </node>
+      <node id="2582">
+        <label>lmmin.h</label>
+      </node>
+      <node id="2580">
+        <label>gmx_lmcurve.h</label>
+        <link refid="gmx__lmcurve_8h"/>
+        <childnode refid="2581" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structlmcurve__data__struct" prot="public">lmcurve_data_struct</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gmx__lmcurve_8cpp_1a4001ef5e58f15f119e754baba8ad5192" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void lmcurve_evaluate</definition>
+        <argsstring>(const double *par, const int m_dat, const void *data, double *fvec, int *info)</argsstring>
+        <name>lmcurve_evaluate</name>
+        <param>
+          <type>const double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>m_dat</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>fvec</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>Callback function used by lmmin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/gmx_lmcurve.cpp" line="58" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/gmx_lmcurve.cpp" bodystart="58" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__lmcurve_8cpp_1a86a0d584b9cd73da7d64c370825ca601" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_lmcurve</definition>
+        <argsstring>(const int n_par, double *par, const int m_dat, const double *t, const double *y, const double *dy, double(*f)(double t, const double *par), const lm_control_struct *control, lm_status_struct *status)</argsstring>
+        <name>gmx_lmcurve</name>
+        <param>
+          <type>const int</type>
+          <declname>n_par</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>par</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>m_dat</declname>
+        </param>
+        <param>
+          <type>const double *</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const double *</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const double *</type>
+          <declname>dy</declname>
+        </param>
+        <param>
+          <type>double(*)(double t, const double *par)</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const lm_control_struct *</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>lm_status_struct *</type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+<para>Calls lmmin with the given data, with callback function <computeroutput>f</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/gmx_lmcurve.cpp" line="76" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/gmx_lmcurve.cpp" bodystart="76" bodyend="86"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Defines a driver routine for lmfit, and a callback for it to use. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>David van der Spoel <ulink url="mailto:david.vanderspoel@icm.uu.se">david.vanderspoel@icm.uu.se</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/correlationfunctions/gmx_lmcurve.cpp"/>
+  </compounddef>
+</doxygen>

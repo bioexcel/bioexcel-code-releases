@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structgmx__ana__selparam__t" kind="struct" prot="public">
+    <compoundname>gmx_ana_selparam_t</compoundname>
+    <includes local="no">gromacs/selection/selparam.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structgmx__ana__selparam__t_1aea9a08de7a476d011563eac78b577f10" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* gmx_ana_selparam_t::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Name of the parameter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" line="146" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__selparam__t_1a1a2ccba901e24c9c8e2c00c2b61b24d2" prot="public" static="no" mutable="no">
+        <type><ref refid="structgmx__ana__selvalue__t" kindref="compound">gmx_ana_selvalue_t</ref></type>
+        <definition>gmx_ana_selvalue_t gmx_ana_selparam_t::val</definition>
+        <argsstring></argsstring>
+        <name>val</name>
+        <briefdescription>
+<para>The parameter value. </para>        </briefdescription>
+        <detaileddescription>
+<para>Type <ref refid="selvalue_8h_1a70b42b87d434580bf1493591857b8beca4d694119ce83b62d74ff06b5e017dca8" kindref="member">NO_VALUE</ref> can be used to define a boolean parameter. The number of values should be 0 for boolean parameters.</para><para>The value pointer be initialized to NULL in the definition of a <computeroutput><ref refid="structgmx__ana__selmethod__t" kindref="compound">gmx_ana_selmethod_t</ref></computeroutput> and initialized in the <computeroutput><ref refid="structgmx__ana__selmethod__t_1af844fcaa1c2be666b4a8558aa0dd31c2" kindref="member">gmx_ana_selmethod_t::init_data</ref></computeroutput> call (see <ref refid="selmethod_8h_1a5acbf2d7bead71c4d96f9e69b267df56" kindref="member">sel_datafunc()</ref>). However, if <ref refid="selparam_8h_1a400330277d7e17cdfef1610cc37838ea" kindref="member">SPAR_VARNUM</ref> is provided and the parameter is not <ref refid="selvalue_8h_1a70b42b87d434580bf1493591857b8beca31a47fbfbc85ad1472ce3d2a168fd1ec" kindref="member">POS_VALUE</ref>, this field should not be initialized. Instead, sufficient memory is allocated automatically and the pointer should be stored in <computeroutput><ref refid="structgmx__ana__selmethod__t_1ab8c8ba47a888095b9635219f488b4a0f" kindref="member">gmx_ana_selmethod_t::init</ref></computeroutput> (see <ref refid="selmethod_8h_1a7149ff249973e9c0fd49a34276305a76" kindref="member">sel_initfunc()</ref>).</para><para>The values cannot be accessed outside these two functions: the compiler makes a copy of the parameter structure for each instance of the method, and the original parameter array is not changed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" line="167" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__selparam__t_1a766e1c92299f5389d51227777a7cff14" prot="public" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* gmx_ana_selparam_t::nvalptr</definition>
+        <argsstring></argsstring>
+        <name>nvalptr</name>
+        <briefdescription>
+<para>Pointer to store the number of values. </para>        </briefdescription>
+        <detaileddescription>
+<para>If not NULL, the number of values for the parameter is stored in the pointed value. Should be specified if <ref refid="selparam_8h_1a400330277d7e17cdfef1610cc37838ea" kindref="member">SPAR_VARNUM</ref> and <ref refid="selparam_8h_1ae44a94b4d013d2a344cfb3a9f8c5479f" kindref="member">SPAR_DYNAMIC</ref> are both set.</para><para>Should be initialized to NULL in the definition a <computeroutput><ref refid="structgmx__ana__selmethod__t" kindref="compound">gmx_ana_selmethod_t</ref></computeroutput> and initialized in <ref refid="selmethod_8h_1a5acbf2d7bead71c4d96f9e69b267df56" kindref="member">sel_datafunc()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" line="179" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__selparam__t_1a930d49c12a78b6824e4793179b37bc02" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gmx_ana_selparam_t::flags</definition>
+        <argsstring></argsstring>
+        <name>flags</name>
+        <briefdescription>
+<para>Flags that alter the way the parameter is parsed/handled. </para>        </briefdescription>
+        <detaileddescription>
+<para>See <ref refid="selparam_8h_1selparam_flags" kindref="member">selparam_flags</ref> for allowed values. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" line="185" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Describes a single parameter for a selection method. </para>    </briefdescription>
+    <detaileddescription>
+<internal></internal>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2788">
+        <label>gmx_ana_index_t</label>
+        <link refid="structgmx__ana__index__t"/>
+      </node>
+      <node id="2790">
+        <label>gmx_ana_indexmap_t</label>
+        <link refid="structgmx__ana__indexmap__t"/>
+        <childnode refid="2791" relation="usage">
+          <edgelabel>mapb</edgelabel>
+          <edgelabel>b</edgelabel>
+        </childnode>
+      </node>
+      <node id="2789">
+        <label>gmx_ana_pos_t</label>
+        <link refid="structgmx__ana__pos__t"/>
+        <childnode refid="2790" relation="usage">
+          <edgelabel>m</edgelabel>
+        </childnode>
+      </node>
+      <node id="2787">
+        <label>gmx_ana_selvalue_t</label>
+        <link refid="structgmx__ana__selvalue__t"/>
+        <childnode refid="2788" relation="usage">
+          <edgelabel>g</edgelabel>
+        </childnode>
+        <childnode refid="2789" relation="usage">
+          <edgelabel>p</edgelabel>
+        </childnode>
+      </node>
+      <node id="2786">
+        <label>gmx_ana_selparam_t</label>
+        <link refid="structgmx__ana__selparam__t"/>
+        <childnode refid="2787" relation="usage">
+          <edgelabel>val</edgelabel>
+        </childnode>
+      </node>
+      <node id="2791">
+        <label>t_blocka</label>
+        <link refid="structt__blocka"/>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" line="144" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/selection/selparam.h" bodystart="143" bodyend="186"/>
+    <listofallmembers>
+      <member refid="structgmx__ana__selparam__t_1a930d49c12a78b6824e4793179b37bc02" prot="public" virt="non-virtual"><scope>gmx_ana_selparam_t</scope><name>flags</name></member>
+      <member refid="structgmx__ana__selparam__t_1aea9a08de7a476d011563eac78b577f10" prot="public" virt="non-virtual"><scope>gmx_ana_selparam_t</scope><name>name</name></member>
+      <member refid="structgmx__ana__selparam__t_1a766e1c92299f5389d51227777a7cff14" prot="public" virt="non-virtual"><scope>gmx_ana_selparam_t</scope><name>nvalptr</name></member>
+      <member refid="structgmx__ana__selparam__t_1a1a2ccba901e24c9c8e2c00c2b61b24d2" prot="public" virt="non-virtual"><scope>gmx_ana_selparam_t</scope><name>val</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

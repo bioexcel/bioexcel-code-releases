@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx enemat &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Command-line reference" href="../user-guide/cmdline.html" />
+    <link rel="next" title="gmx energy" href="gmx-energy.html" />
+    <link rel="prev" title="gmx eneconv" href="gmx-eneconv.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-energy.html" title="gmx energy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-eneconv.html" title="gmx eneconv"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-enemat">
+<span id="id1"></span><h1>gmx enemat<a class="headerlink" href="#gmx-enemat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx enemat [<strong>-f</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-groups</strong> <em>[&lt;.dat&gt;]</em>] [<strong>-eref</strong> <em>[&lt;.dat&gt;]</em>]
+           [<strong>-emat</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-etot</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+           [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]sum</strong>]
+           [<strong>-skip</strong> <em>&lt;int&gt;</em>] [<strong>-[no]mean</strong>] [<strong>-nlevels</strong> <em>&lt;int&gt;</em>] [<strong>-max</strong> <em>&lt;real&gt;</em>]
+           [<strong>-min</strong> <em>&lt;real&gt;</em>] [<strong>-[no]coulsr</strong>] [<strong>-[no]coul14</strong>] [<strong>-[no]ljsr</strong>]
+           [<strong>-[no]lj14</strong>] [<strong>-[no]bhamsr</strong>] [<strong>-[no]free</strong>] [<strong>-temp</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">enemat</span></code> extracts an energy matrix from the energy file (<code class="docutils literal"><span class="pre">-f</span></code>).
+With <code class="docutils literal"><span class="pre">-groups</span></code> a file must be supplied with on each
+line a group of atoms to be used. For these groups matrix of
+interaction energies will be extracted from the energy file
+by looking for energy groups with names corresponding to pairs
+of groups of atoms, e.g. if your <code class="docutils literal"><span class="pre">-groups</span></code> file contains:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="n">Protein</span>
+<span class="n">SOL</span>
+</pre></div>
+</div>
+<p>then energy groups with names like &#8216;Coul-SR:Protein-SOL&#8217; and
+&#8216;LJ:Protein-SOL&#8217; are expected in the energy file (although
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">enemat</span></code> is most useful if many groups are analyzed
+simultaneously). Matrices for different energy types are written
+out separately, as controlled by the
+<code class="docutils literal"><span class="pre">-[no]coul</span></code>, <code class="docutils literal"><span class="pre">-[no]coulr</span></code>, <code class="docutils literal"><span class="pre">-[no]coul14</span></code>,
+<code class="docutils literal"><span class="pre">-[no]lj</span></code>, <code class="docutils literal"><span class="pre">-[no]lj14</span></code>,
+<code class="docutils literal"><span class="pre">-[no]bham</span></code> and <code class="docutils literal"><span class="pre">-[no]free</span></code> options.
+Finally, the total interaction energy energy per group can be
+calculated (<code class="docutils literal"><span class="pre">-etot</span></code>).</p>
+<p>An approximation of the free energy can be calculated using:
+E_free = E_0 + kT log(&lt;exp((E-E_0)/kT)&gt;), where &#8216;&lt;&gt;&#8217;
+stands for time-average. A file with reference free energies
+can be supplied to calculate the free energy difference
+with some reference state. Group names (e.g. residue names)
+in the reference file should correspond to the group names
+as used in the <code class="docutils literal"><span class="pre">-groups</span></code> file, but a appended number
+(e.g. residue number) in the <code class="docutils literal"><span class="pre">-groups</span></code> will be ignored
+in the comparison.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.edr&gt;] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-groups</span></code> [&lt;.dat&gt;] (groups.dat)</dt>
+<dd>Generic data file</dd>
+<dt><code class="docutils literal"><span class="pre">-eref</span></code> [&lt;.dat&gt;] (eref.dat) (Optional)</dt>
+<dd>Generic data file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-emat</span></code> [&lt;.xpm&gt;] (emat.xpm)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-etot</span></code> [&lt;.xvg&gt;] (energy.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]sum</span></code>  (no)</dt>
+<dd>Sum the energy terms selected rather than display them all</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (0)</dt>
+<dd>Skip number of frames between data points</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]mean</span></code>  (yes)</dt>
+<dd>with <code class="docutils literal"><span class="pre">-groups</span></code> extracts matrix of mean energies instead of matrix for each timestep</dd>
+<dt><code class="docutils literal"><span class="pre">-nlevels</span></code> &lt;int&gt; (20)</dt>
+<dd>number of levels for matrix colors</dd>
+<dt><code class="docutils literal"><span class="pre">-max</span></code> &lt;real&gt; (1e+20)</dt>
+<dd>max value for energies</dd>
+<dt><code class="docutils literal"><span class="pre">-min</span></code> &lt;real&gt; (-1e+20)</dt>
+<dd>min value for energies</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]coulsr</span></code>  (yes)</dt>
+<dd>extract Coulomb SR energies</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]coul14</span></code>  (no)</dt>
+<dd>extract Coulomb 1-4 energies</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ljsr</span></code>  (yes)</dt>
+<dd>extract Lennard-Jones SR energies</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]lj14</span></code>  (no)</dt>
+<dd>extract Lennard-Jones 1-4 energies</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]bhamsr</span></code>  (no)</dt>
+<dd>extract Buckingham SR energies</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]free</span></code>  (yes)</dt>
+<dd>calculate free energy</dd>
+<dt><code class="docutils literal"><span class="pre">-temp</span></code> &lt;real&gt; (300)</dt>
+<dd>reference temperature for free energy calculation</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx enemat</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-eneconv.html"
+                        title="previous chapter">gmx eneconv</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-energy.html"
+                        title="next chapter">gmx energy</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-enemat.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-energy.html" title="gmx energy"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-eneconv.html" title="gmx eneconv"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

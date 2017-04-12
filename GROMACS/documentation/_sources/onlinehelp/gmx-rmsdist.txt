@@ -1,0 +1,104 @@
+.. _gmx rmsdist:
+
+gmx rmsdist
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx rmsdist [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                [:strong:`-equiv` :emphasis:`[<.dat>]`] [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-rms` :emphasis:`[<.xpm>]`]
+                [:strong:`-scl` :emphasis:`[<.xpm>]`] [:strong:`-mean` :emphasis:`[<.xpm>]`] [:strong:`-nmr3` :emphasis:`[<.xpm>]`]
+                [:strong:`-nmr6` :emphasis:`[<.xpm>]`] [:strong:`-noe` :emphasis:`[<.dat>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+                [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-nlevels` :emphasis:`<int>`]
+                [:strong:`-max` :emphasis:`<real>`] [:strong:`-[no]sumh`] [:strong:`-[no]pbc`]
+
+Description
+-----------
+
+``gmx rmsdist`` computes the root mean square deviation of atom distances,
+which has the advantage that no fit is needed like in standard RMS
+deviation as computed by :doc:`gmx rms <gmx-rms>`.
+The reference structure is taken from the structure file.
+The RMSD at time t is calculated as the RMS
+of the differences in distance between atom-pairs in the reference
+structure and the structure at time t.
+
+``gmx rmsdist`` can also produce matrices of the rms distances, rms distances
+scaled with the mean distance and the mean distances and matrices with
+NMR averaged distances (1/r^3 and 1/r^6 averaging). Finally, lists
+of atom pairs with 1/r^3 and 1/r^6 averaged distance below the
+maximum distance (``-max``, which will default to 0.6 in this case)
+can be generated, by default averaging over equivalent hydrogens
+(all triplets of hydrogens named \*[123]). Additionally a list of
+equivalent atoms can be supplied (``-equiv``), each line containing
+a set of equivalent atoms specified as residue number and name and
+atom name; e.g.:
+
+``HB* 3 SER  HB1 3 SER  HB2``
+
+Residue and atom names must exactly match those in the structure
+file, including case. Specifying non-sequential atoms is undefined.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-equiv`` [<.dat>] (equiv.dat) (Optional)
+    Generic data file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (distrmsd.xvg)
+    xvgr/xmgr file
+``-rms`` [<.xpm>] (rmsdist.xpm) (Optional)
+    X PixMap compatible matrix file
+``-scl`` [<.xpm>] (rmsscale.xpm) (Optional)
+    X PixMap compatible matrix file
+``-mean`` [<.xpm>] (rmsmean.xpm) (Optional)
+    X PixMap compatible matrix file
+``-nmr3`` [<.xpm>] (nmr3.xpm) (Optional)
+    X PixMap compatible matrix file
+``-nmr6`` [<.xpm>] (nmr6.xpm) (Optional)
+    X PixMap compatible matrix file
+``-noe`` [<.dat>] (noe.dat) (Optional)
+    Generic data file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-nlevels`` <int> (40)
+    Discretize RMS in this number of levels
+``-max`` <real> (-1)
+    Maximum level in matrices
+``-[no]sumh``  (yes)
+    Average distance over equivalent hydrogens
+``-[no]pbc``  (yes)
+    Use periodic boundary conditions when computing distances
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

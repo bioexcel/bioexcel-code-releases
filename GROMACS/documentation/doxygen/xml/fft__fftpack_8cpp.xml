@@ -1,0 +1,495 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="fft__fftpack_8cpp" kind="file">
+    <compoundname>fft_fftpack.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes local="no">errno.h</includes>
+    <includes local="no">math.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="yes">external/fftpack/fftpack.h</includes>
+    <includes refid="fft_8h" local="yes">gromacs/fft/fft.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includes local="no">stdio.h</includes>
+    <incdepgraph>
+      <node id="3711">
+        <label>stdarg.h</label>
+      </node>
+      <node id="3710">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="3711" relation="include">
+        </childnode>
+        <childnode refid="3708" relation="include">
+        </childnode>
+        <childnode refid="3712" relation="include">
+        </childnode>
+      </node>
+      <node id="3713">
+        <label>stdint.h</label>
+      </node>
+      <node id="3704">
+        <label>stdlib.h</label>
+      </node>
+      <node id="3701">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="3702">
+        <label>errno.h</label>
+      </node>
+      <node id="3707">
+        <label>gromacs/fft/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="3708" relation="include">
+        </childnode>
+        <childnode refid="3709" relation="include">
+        </childnode>
+      </node>
+      <node id="3706">
+        <label>external/fftpack/fftpack.h</label>
+      </node>
+      <node id="3709">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="3705">
+        <label>string.h</label>
+      </node>
+      <node id="3700">
+        <label>src/gromacs/fft/fft_fftpack.cpp</label>
+        <link refid="fft_fftpack.cpp"/>
+        <childnode refid="3701" relation="include">
+        </childnode>
+        <childnode refid="3702" relation="include">
+        </childnode>
+        <childnode refid="3703" relation="include">
+        </childnode>
+        <childnode refid="3704" relation="include">
+        </childnode>
+        <childnode refid="3705" relation="include">
+        </childnode>
+        <childnode refid="3706" relation="include">
+        </childnode>
+        <childnode refid="3707" relation="include">
+        </childnode>
+        <childnode refid="3710" relation="include">
+        </childnode>
+        <childnode refid="3709" relation="include">
+        </childnode>
+        <childnode refid="3708" relation="include">
+        </childnode>
+      </node>
+      <node id="3703">
+        <label>math.h</label>
+      </node>
+      <node id="3712">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="3713" relation="include">
+        </childnode>
+        <childnode refid="3714" relation="include">
+        </childnode>
+      </node>
+      <node id="3708">
+        <label>stdio.h</label>
+      </node>
+      <node id="3714">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structgmx__fft__fftpack" prot="public">gmx_fft_fftpack</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="fft__fftpack_8cpp_1aa6fed0fe723f01f2e7a7753a3e7667f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fft_init_1d</definition>
+        <argsstring>(gmx_fft_t *pfft, int nx, int flags)</argsstring>
+        <name>gmx_fft_init_1d</name>
+        <param>
+          <type><ref refid="fft_8h_1ac4aa41b4b80187da5d55a98e5f63a025" kindref="member">gmx_fft_t</ref> *</type>
+          <declname>fft</declname>
+          <defname>pfft</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nx</declname>
+        </param>
+        <param>
+          <type><ref refid="fft_8h_1aa6b68fb966512d287910879d38472bb4" kindref="member">gmx_fft_flag</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Setup a 1-dimensional complex-to-complex transform. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fft</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to opaque Gromacs FFT datatype </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of transform </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>FFT options</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>status - 0 or a standard error message.</para></simplesect>
+<simplesect kind="note"><para>Since some of the libraries (e.g. MKL) store work array data in their handles this datatype should only be used for one thread at a time, i.e. you should create one copy per thread when executing in parallel. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="78" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="78" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="fft__fftpack_8cpp_1a59f37a354dbd035b7fd722910f1328ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fft_init_1d_real</definition>
+        <argsstring>(gmx_fft_t *pfft, int nx, int flags)</argsstring>
+        <name>gmx_fft_init_1d_real</name>
+        <param>
+          <type><ref refid="fft_8h_1ac4aa41b4b80187da5d55a98e5f63a025" kindref="member">gmx_fft_t</ref> *</type>
+          <declname>fft</declname>
+          <defname>pfft</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nx</declname>
+        </param>
+        <param>
+          <type><ref refid="fft_8h_1aa6b68fb966512d287910879d38472bb4" kindref="member">gmx_fft_flag</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Setup a 1-dimensional real-to-complex transform. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fft</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to opaque Gromacs FFT datatype </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of transform in real space </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>FFT options</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>status - 0 or a standard error message.</para></simplesect>
+<simplesect kind="note"><para>Since some of the libraries (e.g. MKL) store work array data in their handles this datatype should only be used for one thread at a time, i.e. you should create one copy per thread when executing in parallel. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="118" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="118" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="fft__fftpack_8cpp_1a0db5ff359c073a55c7ce8386f00c5f2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fft_init_2d_real</definition>
+        <argsstring>(gmx_fft_t *pfft, int nx, int ny, int flags)</argsstring>
+        <name>gmx_fft_init_2d_real</name>
+        <param>
+          <type><ref refid="fft_8h_1ac4aa41b4b80187da5d55a98e5f63a025" kindref="member">gmx_fft_t</ref> *</type>
+          <declname>fft</declname>
+          <defname>pfft</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nx</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ny</declname>
+        </param>
+        <param>
+          <type><ref refid="fft_8h_1aa6b68fb966512d287910879d38472bb4" kindref="member">gmx_fft_flag</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Setup a 2-dimensional real-to-complex transform. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fft</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to opaque Gromacs FFT datatype </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of transform in first dimension </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ny</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of transform in second dimension </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>FFT options</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The normal space is assumed to be real, while the values in frequency space are complex.</para><para><simplesect kind="return"><para>status - 0 or a standard error message.</para></simplesect>
+<simplesect kind="note"><para>Since some of the libraries (e.g. MKL) store work array data in their handles this datatype should only be used for one thread at a time, i.e. you should create one copy per thread when executing in parallel. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="156" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="156" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="fft__fftpack_8cpp_1acf51abd5822094e61281d619a91f9bac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fft_1d</definition>
+        <argsstring>(gmx_fft_t fft, enum gmx_fft_direction dir, void *in_data, void *out_data)</argsstring>
+        <name>gmx_fft_1d</name>
+        <param>
+          <type><ref refid="fft_8h_1ac4aa41b4b80187da5d55a98e5f63a025" kindref="member">gmx_fft_t</ref></type>
+          <declname>setup</declname>
+          <defname>fft</defname>
+        </param>
+        <param>
+          <type>enum <ref refid="fft_8h_1af2aa0b3a5f3a4339ecb2bd67cb8f8302" kindref="member">gmx_fft_direction</ref></type>
+          <declname>dir</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>out_data</declname>
+        </param>
+        <briefdescription>
+<para>Perform a 1-dimensional complex-to-complex transform. </para>        </briefdescription>
+        <detaileddescription>
+<para>Performs an instance of a transform previously initiated.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>setup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Setup returned from <ref refid="fft_8h_1a9236a69dfa724f4bf45d2940713a12ec" kindref="member">gmx_fft_init_1d()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forward or Backward </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input grid data. This should be allocated with gmx_new() to make it 16-byte aligned for better performance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output grid data. This should be allocated with gmx_new() to make it 16-byte aligned for better performance. You can provide the same pointer for in_data and out_data to perform an in-place transform.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, or an error code.</para></simplesect>
+<simplesect kind="note"><para>Data pointers are declared as void, to avoid casting pointers depending on your grid type. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="203" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="203" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="fft__fftpack_8cpp_1a684d01412901075611a84b0b9125e064" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fft_1d_real</definition>
+        <argsstring>(gmx_fft_t fft, enum gmx_fft_direction dir, void *in_data, void *out_data)</argsstring>
+        <name>gmx_fft_1d_real</name>
+        <param>
+          <type><ref refid="fft_8h_1ac4aa41b4b80187da5d55a98e5f63a025" kindref="member">gmx_fft_t</ref></type>
+          <declname>setup</declname>
+          <defname>fft</defname>
+        </param>
+        <param>
+          <type>enum <ref refid="fft_8h_1af2aa0b3a5f3a4339ecb2bd67cb8f8302" kindref="member">gmx_fft_direction</ref></type>
+          <declname>dir</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>out_data</declname>
+        </param>
+        <briefdescription>
+<para>Perform a 1-dimensional real-to-complex transform. </para>        </briefdescription>
+        <detaileddescription>
+<para>Performs an instance of a transform previously initiated.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>setup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Setup returned from <ref refid="fft_8h_1a035cb8cb8a57712aa06abe12736f0ed7" kindref="member">gmx_fft_init_1d_real()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Real-to-complex or complex-to-real </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input grid data. This should be allocated with gmx_new() to make it 16-byte aligned for better performance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output grid data. This should be allocated with gmx_new() to make it 16-byte aligned for better performance. You can provide the same pointer for in_data and out_data to perform an in-place transform.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If you are doing an in-place transform, the array must be padded up to an even integer length so n/2 complex numbers can fit. Out-of-place arrays should not be padded (although it doesn&apos;t matter in 1d).</para><para><simplesect kind="return"><para>0 on success, or an error code.</para></simplesect>
+<simplesect kind="note"><para>Data pointers are declared as void, to avoid casting pointers depending on transform direction. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="261" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="261" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="fft__fftpack_8cpp_1ab80cc8e14f6dac52cbd30c7594999482" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_fft_2d_real</definition>
+        <argsstring>(gmx_fft_t fft, enum gmx_fft_direction dir, void *in_data, void *out_data)</argsstring>
+        <name>gmx_fft_2d_real</name>
+        <param>
+          <type><ref refid="fft_8h_1ac4aa41b4b80187da5d55a98e5f63a025" kindref="member">gmx_fft_t</ref></type>
+          <declname>setup</declname>
+          <defname>fft</defname>
+        </param>
+        <param>
+          <type>enum <ref refid="fft_8h_1af2aa0b3a5f3a4339ecb2bd67cb8f8302" kindref="member">gmx_fft_direction</ref></type>
+          <declname>dir</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>out_data</declname>
+        </param>
+        <briefdescription>
+<para>Perform a 2-dimensional real-to-complex transform. </para>        </briefdescription>
+        <detaileddescription>
+<para>Performs an instance of a transform previously initiated.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>setup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Setup returned from <ref refid="fft_8h_1a035cb8cb8a57712aa06abe12736f0ed7" kindref="member">gmx_fft_init_1d_real()</ref> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Real-to-complex or complex-to-real </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>in_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input grid data. This should be allocated with gmx_new() to make it 16-byte aligned for better performance. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output grid data. This should be allocated with gmx_new() to make it 16-byte aligned for better performance. You can provide the same pointer for in_data and out_data to perform an in-place transform.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, or an error code.</para></simplesect>
+<simplesect kind="note"><para>If you are doing an in-place transform, the last dimension of the array MUST be padded up to an even integer length so n/2 complex numbers can fit. Thus, if the real grid e.g. has dimension 5*3, you must allocate it as a 5*4 array, where the last element in the second dimension is padding. The complex data will be written to the same array, but since that dimension is 5*2 it will now fill the entire array. Reverse complex-to-real in-place transformation will produce the same sort of padded array.</para></simplesect>
+The padding does NOT apply to out-of-place transformation. In that case the input array will simply be 5*3 of real, while the output is 5*2 of complex.</para><para><simplesect kind="note"><para>Data pointers are declared as void, to avoid casting pointers depending on transform direction. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="354" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="354" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="fft__fftpack_8cpp_1ae6df754d152f0256d6ae2e80bdc0e386" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_fft_destroy</definition>
+        <argsstring>(gmx_fft_t fft)</argsstring>
+        <name>gmx_fft_destroy</name>
+        <param>
+          <type><ref refid="fft_8h_1ac4aa41b4b80187da5d55a98e5f63a025" kindref="member">gmx_fft_t</ref></type>
+          <declname>setup</declname>
+          <defname>fft</defname>
+        </param>
+        <briefdescription>
+<para>Release an FFT setup structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>Destroy setup and release all allocated memory.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>setup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Setup returned from <ref refid="fft_8h_1a9236a69dfa724f4bf45d2940713a12ec" kindref="member">gmx_fft_init_1d()</ref>, or one of the other initializers. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="481" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="481" bodyend="492"/>
+      </memberdef>
+      <memberdef kind="function" id="fft__fftpack_8cpp_1a3e04a1246fe2cc655a8b9c67a49b88f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_fft_cleanup</definition>
+        <argsstring>()</argsstring>
+        <name>gmx_fft_cleanup</name>
+        <briefdescription>
+<para>Cleanup global data of FFT. </para>        </briefdescription>
+        <detaileddescription>
+<para>Any plans are invalid after this function. Should be called after all plans have been destroyed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" line="494" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp" bodystart="494" bodyend="496"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/fft/fft_fftpack.cpp"/>
+  </compounddef>
+</doxygen>

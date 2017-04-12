@@ -1,0 +1,627 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__ocl_8cpp" kind="file">
+    <compoundname>nbnxn_ocl.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="oclutils_8h" local="yes">gromacs/gpu_utils/oclutils.h</includes>
+    <includes refid="hw__info_8h" local="yes">gromacs/hardware/hw_info.h</includes>
+    <includes refid="force__flags_8h" local="yes">gromacs/mdlib/force_flags.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__consts_8h" local="yes">gromacs/mdlib/nbnxn_consts.h</includes>
+    <includes refid="nbnxn__pairlist_8h" local="yes">gromacs/mdlib/nbnxn_pairlist.h</includes>
+    <includes refid="gpu__timing_8h" local="yes">gromacs/timing/gpu_timing.h</includes>
+    <includes refid="nbnxn__gpu_8h" local="yes">gromacs/mdlib/nbnxn_gpu.h</includes>
+    <includes refid="nbnxn__gpu__data__mgmt_8h" local="yes">gromacs/mdlib/nbnxn_gpu_data_mgmt.h</includes>
+    <includes refid="ishift_8h" local="yes">gromacs/pbcutil/ishift.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="nbnxn__ocl__internal_8h" local="yes">nbnxn_ocl_internal.h</includes>
+    <includes refid="nbnxn__ocl__types_8h" local="yes">nbnxn_ocl_types.h</includes>
+    <incdepgraph>
+      <node id="12103">
+        <label>stdarg.h</label>
+      </node>
+      <node id="12105">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="12088">
+        <label>assert.h</label>
+      </node>
+      <node id="12094">
+        <label>gromacs/mdlib/nbnxn_gpu.h</label>
+        <link refid="nbnxn__gpu_8h"/>
+        <childnode refid="12095" relation="include">
+        </childnode>
+        <childnode refid="12098" relation="include">
+        </childnode>
+      </node>
+      <node id="12102">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="12103" relation="include">
+        </childnode>
+        <childnode refid="12101" relation="include">
+        </childnode>
+        <childnode refid="12095" relation="include">
+        </childnode>
+      </node>
+      <node id="12099">
+        <label>gromacs/mdlib/nbnxn_gpu_data_mgmt.h</label>
+        <link refid="nbnxn__gpu__data__mgmt_8h"/>
+      </node>
+      <node id="12096">
+        <label>stdint.h</label>
+      </node>
+      <node id="12089">
+        <label>stdlib.h</label>
+      </node>
+      <node id="12107">
+        <label>nbnxn_ocl_types.h</label>
+        <link refid="nbnxn__ocl__types_8h"/>
+        <childnode refid="12091" relation="include">
+        </childnode>
+        <childnode refid="12098" relation="include">
+        </childnode>
+      </node>
+      <node id="12086">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="12100">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="12101" relation="include">
+        </childnode>
+        <childnode refid="12095" relation="include">
+        </childnode>
+      </node>
+      <node id="12092">
+        <label>string</label>
+      </node>
+      <node id="12085">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp</label>
+        <link refid="nbnxn_ocl.cpp"/>
+        <childnode refid="12086" relation="include">
+        </childnode>
+        <childnode refid="12087" relation="include">
+        </childnode>
+        <childnode refid="12088" relation="include">
+        </childnode>
+        <childnode refid="12089" relation="include">
+        </childnode>
+        <childnode refid="12090" relation="include">
+        </childnode>
+        <childnode refid="12093" relation="include">
+        </childnode>
+        <childnode refid="12094" relation="include">
+        </childnode>
+        <childnode refid="12099" relation="include">
+        </childnode>
+        <childnode refid="12100" relation="include">
+        </childnode>
+        <childnode refid="12102" relation="include">
+        </childnode>
+        <childnode refid="12104" relation="include">
+        </childnode>
+        <childnode refid="12106" relation="include">
+        </childnode>
+        <childnode refid="12107" relation="include">
+        </childnode>
+      </node>
+      <node id="12090">
+        <label>gromacs/gpu_utils/oclutils.h</label>
+        <link refid="oclutils_8h"/>
+        <childnode refid="12091" relation="include">
+        </childnode>
+        <childnode refid="12092" relation="include">
+        </childnode>
+      </node>
+      <node id="12106">
+        <label>nbnxn_ocl_internal.h</label>
+        <link refid="nbnxn__ocl__internal_8h"/>
+        <childnode refid="12086" relation="include">
+        </childnode>
+        <childnode refid="12107" relation="include">
+        </childnode>
+      </node>
+      <node id="12098">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="12091">
+        <label>CL/opencl.h</label>
+      </node>
+      <node id="12104">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="12095" relation="include">
+        </childnode>
+        <childnode refid="12105" relation="include">
+        </childnode>
+      </node>
+      <node id="12093">
+        <label>gromacs/timing/gpu_timing.h</label>
+        <link refid="gpu__timing_8h"/>
+      </node>
+      <node id="12095">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="12096" relation="include">
+        </childnode>
+        <childnode refid="12097" relation="include">
+        </childnode>
+      </node>
+      <node id="12087">
+        <label>config.h</label>
+      </node>
+      <node id="12101">
+        <label>stdio.h</label>
+      </node>
+      <node id="12097">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="user-defined">
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1af82c1fe9145625d0e61a3eb21b4ba30d" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_numClPerSupercl</definition>
+        <argsstring></argsstring>
+        <name>c_numClPerSupercl</name>
+        <initializer>= c_nbnxnGpuNumClusterPerSupercluster</initializer>
+        <briefdescription>
+<para>Convenience constants. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="83" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1ab62974946d29c968946d8d3782d6d445" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_clSize</definition>
+        <argsstring></argsstring>
+        <name>c_clSize</name>
+        <initializer>= c_nbnxnGpuClusterSize</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="84" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1a4c5d44c9f4c4d4290e0b5ac1bf640069" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool always_ener</definition>
+        <argsstring></argsstring>
+        <name>always_ener</name>
+        <initializer>= (getenv(&quot;GMX_GPU_ALWAYS_ENER&quot;) != NULL)</initializer>
+        <briefdescription>
+<para>Always/never run the energy/pruning kernels <ndash/> only for benchmarking purposes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1aa6cca6e0a9803222b02a53248796e19d" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool never_ener</definition>
+        <argsstring></argsstring>
+        <name>never_ener</name>
+        <initializer>= (getenv(&quot;GMX_GPU_NEVER_ENER&quot;) != NULL)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="90" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1acc978118a8f186528d521db75364ff25" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool always_prune</definition>
+        <argsstring></argsstring>
+        <name>always_prune</name>
+        <initializer>= (getenv(&quot;GMX_GPU_ALWAYS_PRUNE&quot;) != NULL)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="91" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__ocl_8cpp_1a6b64265b38d21f9fee1fb21b198c5f23" prot="public" static="no">
+        <name>DEBUG_RUN_STEP</name>
+        <initializer>2</initializer>
+        <briefdescription>
+<para>Specifies which kernel run to debug. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="98" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1a77a7f405415ff49b13a5777be1804beb" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* nb_kfunc_noener_noprune_ptr[eelOclNR][evdwOclNR]</definition>
+        <argsstring>[eelOclNR][evdwOclNR]</argsstring>
+        <name>nb_kfunc_noener_noprune_ptr</name>
+        <initializer>=
+{
+    { &quot;nbnxn_kernel_ElecCut_VdwLJ_F_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombGeom_F_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombLB_F_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJFsw_F_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJPsw_F_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombGeom_F_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombLB_F_opencl&quot;            },
+    { &quot;nbnxn_kernel_ElecRF_VdwLJ_F_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombGeom_F_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombLB_F_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJFsw_F_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJPsw_F_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombGeom_F_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombLB_F_opencl&quot;             },
+    { &quot;nbnxn_kernel_ElecEwQSTab_VdwLJ_F_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombGeom_F_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombLB_F_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJFsw_F_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJPsw_F_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombGeom_F_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombLB_F_opencl&quot;        },
+    { &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJ_F_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombGeom_F_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombLB_F_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJFsw_F_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJPsw_F_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombGeom_F_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombLB_F_opencl&quot; },
+    { &quot;nbnxn_kernel_ElecEw_VdwLJ_F_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombGeom_F_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombLB_F_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJFsw_F_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJPsw_F_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombGeom_F_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombLB_F_opencl&quot;             },
+    { &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJ_F_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_F_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_F_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJFsw_F_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJPsw_F_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_F_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombLB_F_opencl&quot;      }
+}</initializer>
+        <briefdescription>
+<para>Force-only kernel function names. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="151" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1a616841c4168c4d1e22f77a512e309618" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* nb_kfunc_ener_noprune_ptr[eelOclNR][evdwOclNR]</definition>
+        <argsstring>[eelOclNR][evdwOclNR]</argsstring>
+        <name>nb_kfunc_ener_noprune_ptr</name>
+        <initializer>=
+{
+    { &quot;nbnxn_kernel_ElecCut_VdwLJ_VF_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombGeom_VF_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombLB_VF_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJFsw_VF_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJPsw_VF_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombGeom_VF_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombLB_VF_opencl&quot;            },
+    { &quot;nbnxn_kernel_ElecRF_VdwLJ_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombGeom_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombLB_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJFsw_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJPsw_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombLB_VF_opencl&quot;             },
+    { &quot;nbnxn_kernel_ElecEwQSTab_VdwLJ_VF_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombGeom_VF_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombLB_VF_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJFsw_VF_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJPsw_VF_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombGeom_VF_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombLB_VF_opencl&quot;        },
+    { &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJ_VF_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombGeom_VF_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombLB_VF_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJFsw_VF_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJPsw_VF_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombGeom_VF_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombLB_VF_opencl&quot; },
+    { &quot;nbnxn_kernel_ElecEw_VdwLJ_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombGeom_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombLB_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJFsw_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJPsw_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VF_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombLB_VF_opencl&quot;             },
+    { &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJ_VF_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VF_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VF_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJFsw_VF_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJPsw_VF_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VF_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombLB_VF_opencl&quot;      }
+}</initializer>
+        <briefdescription>
+<para>Force + energy kernel function pointers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="162" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1aceea675d9fe3d1d73a5267a8ab0f29c0" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* nb_kfunc_noener_prune_ptr[eelOclNR][evdwOclNR]</definition>
+        <argsstring>[eelOclNR][evdwOclNR]</argsstring>
+        <name>nb_kfunc_noener_prune_ptr</name>
+        <initializer>=
+{
+    { &quot;nbnxn_kernel_ElecCut_VdwLJ_F_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombGeom_F_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombLB_F_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJFsw_F_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJPsw_F_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombGeom_F_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombLB_F_prune_opencl&quot;             },
+    { &quot;nbnxn_kernel_ElecRF_VdwLJ_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombGeom_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombLB_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJFsw_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJPsw_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombGeom_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombLB_F_prune_opencl&quot;              },
+    { &quot;nbnxn_kernel_ElecEwQSTab_VdwLJ_F_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombGeom_F_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombLB_F_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJFsw_F_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJPsw_F_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombGeom_F_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombLB_F_prune_opencl&quot;         },
+    { &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJ_F_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombGeom_F_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombLB_F_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJFsw_F_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJPsw_F_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombGeom_F_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombLB_F_prune_opencl&quot;  },
+    { &quot;nbnxn_kernel_ElecEw_VdwLJ_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombGeom_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombLB_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJFsw_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJPsw_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombGeom_F_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombLB_F_prune_opencl&quot;              },
+    { &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJ_F_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_F_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_F_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJFsw_F_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJPsw_F_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_F_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombLB_F_prune_opencl&quot;       }
+}</initializer>
+        <briefdescription>
+<para>Force + pruning kernel function pointers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="173" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__ocl_8cpp_1a071fa2f0e9faba95226a316f0b84a988" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* nb_kfunc_ener_prune_ptr[eelOclNR][evdwOclNR]</definition>
+        <argsstring>[eelOclNR][evdwOclNR]</argsstring>
+        <name>nb_kfunc_ener_prune_ptr</name>
+        <initializer>=
+{
+    { &quot;nbnxn_kernel_ElecCut_VdwLJ_VF_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombGeom_VF_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJCombLB_VF_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJFsw_VF_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJPsw_VF_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombGeom_VF_prune_opencl&quot;,            &quot;nbnxn_kernel_ElecCut_VdwLJEwCombLB_VF_prune_opencl&quot;            },
+    { &quot;nbnxn_kernel_ElecRF_VdwLJ_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombGeom_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJCombLB_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJFsw_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJPsw_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecRF_VdwLJEwCombLB_VF_prune_opencl&quot;             },
+    { &quot;nbnxn_kernel_ElecEwQSTab_VdwLJ_VF_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombGeom_VF_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJCombLB_VF_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJFsw_VF_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJPsw_VF_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombGeom_VF_prune_opencl&quot;,        &quot;nbnxn_kernel_ElecEwQSTab_VdwLJEwCombLB_VF_prune_opencl&quot;        },
+    { &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJ_VF_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombGeom_VF_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJCombLB_VF_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJFsw_VF_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJPsw_VF_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombGeom_VF_prune_opencl&quot;, &quot;nbnxn_kernel_ElecEwQSTabTwinCut_VdwLJEwCombLB_VF_prune_opencl&quot; },
+    { &quot;nbnxn_kernel_ElecEw_VdwLJ_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombGeom_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJCombLB_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJFsw_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJPsw_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VF_prune_opencl&quot;,             &quot;nbnxn_kernel_ElecEw_VdwLJEwCombLB_VF_prune_opencl&quot;             },
+    { &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJ_VF_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VF_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VF_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJFsw_VF_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJPsw_VF_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VF_prune_opencl&quot;,      &quot;nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombLB_VF_prune_opencl&quot;      }
+}</initializer>
+        <briefdescription>
+<para>Force + energy + pruning kernel function pointers. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="184" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1a953dbc2f8803a41ec8d2a0cdaa8fcbdb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void validate_global_work_size</definition>
+        <argsstring>(size_t *global_work_size, int work_dim, gmx_device_info_t *dinfo)</argsstring>
+        <name>validate_global_work_size</name>
+        <param>
+          <type>size_t *</type>
+          <declname>global_work_size</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>work_dim</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__device__info__t" kindref="compound">gmx_device_info_t</ref> *</type>
+          <declname>dinfo</declname>
+        </param>
+        <briefdescription>
+<para>Validates the input global work size parameter. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="102" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="102" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1a00f7839f831302e0d7a807d183f2c7d5" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>cl_kernel</type>
+        <definition>static cl_kernel select_nbnxn_kernel</definition>
+        <argsstring>(gmx_nbnxn_ocl_t *nb, int eeltype, int evdwtype, bool bDoEne, bool bDoPrune)</argsstring>
+        <name>select_nbnxn_kernel</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_ocl_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>eeltype</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>evdwtype</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bDoEne</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bDoPrune</declname>
+        </param>
+        <briefdescription>
+<para>Return a pointer to the kernel version to be executed at the current step. OpenCL kernel objects are cached in nb. If the requested kernel is not found in the cache, it will be created and the cache will be updated. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="199" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="199" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1a65059da2b1374c91a33f8b0ff74e4e4e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int calc_shmem_required</definition>
+        <argsstring>(int vdwType, bool bPrefetchLjParam)</argsstring>
+        <name>calc_shmem_required</name>
+        <param>
+          <type>int</type>
+          <declname>vdwType</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bPrefetchLjParam</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the amount of shared memory required by the OpenCL kernel in use. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="251" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="251" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1a1071851184ba7c0b5d9f653c2ba1ab9a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void fillin_ocl_structures</definition>
+        <argsstring>(cl_nbparam_t *nbp, cl_nbparam_params_t *nbparams_params)</argsstring>
+        <name>fillin_ocl_structures</name>
+        <param>
+          <type><ref refid="nbnxn__ocl__types_8h_1a843768e0200ba88ef306abedc4a2dc19" kindref="member">cl_nbparam_t</ref> *</type>
+          <declname>nbp</declname>
+        </param>
+        <param>
+          <type><ref refid="nbnxn__ocl__types_8h_1af03d752568b4866a7daf8a769e8d02ad" kindref="member">cl_nbparam_params_t</ref> *</type>
+          <declname>nbparams_params</declname>
+        </param>
+        <briefdescription>
+<para>Initializes data structures that are going to be sent to the OpenCL device. </para>        </briefdescription>
+        <detaileddescription>
+<para>The device can&apos;t use the same data structures as the host for two main reasons:<itemizedlist>
+<listitem><para>OpenCL restrictions (pointers are not accepted inside data structures)</para></listitem><listitem><para>some host side fields are not needed for the OpenCL kernels. </para></listitem></itemizedlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="288" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="288" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1a3b8ad939f39ee05ed0d881e4286ae8d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void wait_ocl_event</definition>
+        <argsstring>(cl_event *ocl_event)</argsstring>
+        <name>wait_ocl_event</name>
+        <param>
+          <type>cl_event *</type>
+          <declname>ocl_event</declname>
+        </param>
+        <briefdescription>
+<para>Waits for the commands associated with the input event to finish. Then it releases the event and sets it to 0. Don&apos;t use this function when more than one wait will be issued for the event. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="315" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="315" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1a47fb96256cf6780e422163b8ae374f11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void sync_ocl_event</definition>
+        <argsstring>(cl_command_queue stream, cl_event *ocl_event)</argsstring>
+        <name>sync_ocl_event</name>
+        <param>
+          <type>cl_command_queue</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type>cl_event *</type>
+          <declname>ocl_event</declname>
+        </param>
+        <briefdescription>
+<para>Enqueues a wait for event completion. </para>        </briefdescription>
+        <detaileddescription>
+<para>Then it releases the event and sets it to 0. Don&apos;t use this function when more than one wait will be issued for the event. Equivalent to Cuda Stream Sync. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="334" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="334" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1afb424ad7d3bc1b2c8fe6d145702a4771" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double ocl_event_elapsed_ms</definition>
+        <argsstring>(cl_event *ocl_event)</argsstring>
+        <name>ocl_event_elapsed_ms</name>
+        <param>
+          <type>cl_event *</type>
+          <declname>ocl_event</declname>
+        </param>
+        <briefdescription>
+<para>Returns the duration in milliseconds for the command associated with the event. </para>        </briefdescription>
+        <detaileddescription>
+<para>It then releases the event and sets it to 0. Before calling this function, make sure the command has finished either by calling clFinish or clWaitForEvents. The function returns 0.0 if the input event, *ocl_event, is 0. Don&apos;t use this function when more than one wait will be issued for the event. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="361" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="361" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1aa37e92795bc867df33b27d5243c3f8cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_launch_kernel</definition>
+        <argsstring>(gmx_nbnxn_ocl_t *nb, const struct nbnxn_atomdata_t *nbatom, int flags, int iloc)</argsstring>
+        <name>nbnxn_gpu_launch_kernel</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_ocl_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbatom</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iloc</declname>
+        </param>
+        <briefdescription>
+<para>Launch GPU kernel. </para>        </briefdescription>
+        <detaileddescription>
+<para>Launch asynchronously the nonbonded force calculations.</para><para>As we execute nonbonded workload in separate queues, before launching the kernel we need to make sure that he following operations have completed:<itemizedlist>
+<listitem><para>atomdata allocation and related H2D transfers (every nstlist step);</para></listitem><listitem><para>pair list H2D transfer (every nstlist step);</para></listitem><listitem><para>shift vector H2D transfer (every nstlist step);</para></listitem><listitem><para>force (+shift force and energy) output clearing (every step).</para></listitem></itemizedlist>
+</para><para>These operations are issued in the local queue at the beginning of the step and therefore always complete before the local kernel launch. The non-local kernel is launched after the local on the same device/context, so this is inherently scheduled after the operations in the local stream (including the above &quot;misc_ops&quot;). However, for the sake of having a future-proof implementation, we use the misc_ops_done event to record the point in time when the above operations are finished and synchronize with this event in the non-local stream. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="407" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="407" bodyend="656"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1a94e5e56bd2d0b16dccd9ee6397a6ad09" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_launch_cpyback</definition>
+        <argsstring>(gmx_nbnxn_ocl_t *nb, const struct nbnxn_atomdata_t *nbatom, int flags, int aloc)</argsstring>
+        <name>nbnxn_gpu_launch_cpyback</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_ocl_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbatom</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>aloc</declname>
+        </param>
+        <briefdescription>
+<para>Launch asynchronously the download of nonbonded forces from the GPU (and energies/shift forces if required). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="661" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="661" bodyend="776"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1ac9e98bf97c2b2212d9ad6e1441ec3b05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_wait_for_gpu</definition>
+        <argsstring>(gmx_nbnxn_ocl_t *nb, int flags, int aloc, real *e_lj, real *e_el, rvec *fshift)</argsstring>
+        <name>nbnxn_gpu_wait_for_gpu</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_ocl_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>aloc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>e_lj</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>e_el</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>fshift</declname>
+        </param>
+        <briefdescription>
+<para>Wait for the asynchronously launched nonbonded calculations and data transfers to finish. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="782" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="782" bodyend="897"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__ocl_8cpp_1ae9a6120b6a1b95d61a49599c35952562" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int nbnxn_gpu_pick_ewald_kernel_type</definition>
+        <argsstring>(bool bTwinCut)</argsstring>
+        <name>nbnxn_gpu_pick_ewald_kernel_type</name>
+        <param>
+          <type>bool</type>
+          <declname>bTwinCut</declname>
+        </param>
+        <briefdescription>
+<para>Selects the Ewald kernel type, analytical or tabulated, single or twin cut-off. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" line="900" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp" bodystart="900" bodyend="954"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Define OpenCL implementation of <ref refid="nbnxn__gpu_8h" kindref="compound">nbnxn_gpu.h</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Anca Hamuraru <ulink url="mailto:anca@streamcomputing.eu">anca@streamcomputing.eu</ulink> </para><simplesectsep/><para>Teemu Virolainen <ulink url="mailto:teemu@streamcomputing.eu">teemu@streamcomputing.eu</ulink> </para><simplesectsep/><para>Dimitrios Karkoulis <ulink url="mailto:dimitris.karkoulis@gmail.com">dimitris.karkoulis@gmail.com</ulink> </para><simplesectsep/><para>Szilárd Páll <ulink url="mailto:pall.szilard@gmail.com">pall.szilard@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp"/>
+  </compounddef>
+</doxygen>

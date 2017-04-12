@@ -1,0 +1,82 @@
+.. _gmx hydorder:
+
+gmx hydorder
+============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx hydorder [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-s` :emphasis:`[<.tpr>]`]
+                 [:strong:`-o` :emphasis:`[<.xpm> [...]]`] [:strong:`-or` :emphasis:`[<.out> [...]]`]
+                 [:strong:`-Spect` :emphasis:`[<.out> [...]]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+                 [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-d` :emphasis:`<enum>`] [:strong:`-bw` :emphasis:`<real>`]
+                 [:strong:`-sgang1` :emphasis:`<real>`] [:strong:`-sgang2` :emphasis:`<real>`] [:strong:`-tblock` :emphasis:`<int>`]
+                 [:strong:`-nlevel` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx hydorder`` computes the tetrahedrality order parameters around a
+given atom. Both angle an distance order parameters are calculated. See
+P.-L. Chau and A.J. Hardwick, Mol. Phys., 93, (1998), 511-518.
+for more details.
+
+``gmx hydorder`` calculates the order parameter in a 3d-mesh in the box, and
+with 2 phases in the box gives the user the option to define a 2D interface in time
+separating the faces by specifying parameters ``-sgang1`` and
+``-sgang2`` (it is important to select these judiciously).
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx)
+    Index file
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-o`` [<.xpm> [...]] (intf.xpm)
+    X PixMap compatible matrix file
+``-or`` [<.out> [...]] (raw.out) (Optional)
+    Generic output file
+``-Spect`` [<.out> [...]] (intfspect.out) (Optional)
+    Generic output file
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-d`` <enum> (z)
+    Direction of the normal on the membrane: z, x, y
+``-bw`` <real> (1)
+    Binwidth of box mesh
+``-sgang1`` <real> (1)
+    tetrahedral angle parameter in Phase 1 (bulk)
+``-sgang2`` <real> (1)
+    tetrahedral angle parameter in Phase 2 (bulk)
+``-tblock`` <int> (1)
+    Number of frames in one time-block average
+``-nlevel`` <int> (100)
+    Number of Height levels in 2D - XPixMaps
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

@@ -1,0 +1,435 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__pairlist_8h" kind="file">
+    <compoundname>nbnxn_pairlist.h</compoundname>
+    <includes local="no">cstddef</includes>
+    <includes local="yes">thread_mpi/atomic.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="nblist_8h" local="yes">gromacs/mdtypes/nblist.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="bitmask_8h" local="yes">gromacs/utility/bitmask.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="nb__verlet_8h" local="yes">src/gromacs/mdlib/nb_verlet.h</includedby>
+    <includedby refid="nbnxn__internal_8h" local="yes">src/gromacs/mdlib/nbnxn_internal.h</includedby>
+    <includedby refid="nbnxn__util_8h" local="yes">src/gromacs/mdlib/nbnxn_util.h</includedby>
+    <includedby refid="nbnxn__atomdata_8h" local="yes">src/gromacs/mdlib/nbnxn_atomdata.h</includedby>
+    <includedby refid="nbnxn__search_8h" local="yes">src/gromacs/mdlib/nbnxn_search.h</includedby>
+    <includedby refid="nbnxn__cuda__types_8h" local="yes">src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h</includedby>
+    <includedby refid="nbnxn__kernel__common_8h" local="yes">src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_common.h</includedby>
+    <includedby refid="nbnxn__kernel__gpu__ref_8h" local="yes">src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_gpu_ref.h</includedby>
+    <includedby refid="nbnxn__kernel__ref_8h" local="yes">src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.h</includedby>
+    <includedby refid="nbnxn__kernel__simd__2xnn_8h" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn.h</includedby>
+    <includedby refid="nbnxn__kernel__simd__4xn_8h" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn.h</includedby>
+    <includedby refid="nbnxn__ocl_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp</includedby>
+    <includedby refid="nbnxn__ocl__types_8h" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_types.h</includedby>
+    <incdepgraph>
+      <node id="12197">
+        <label>gromacs/utility/bitmask.h</label>
+        <link refid="bitmask_8h"/>
+        <childnode refid="12198" relation="include">
+        </childnode>
+        <childnode refid="12199" relation="include">
+        </childnode>
+        <childnode refid="12194" relation="include">
+        </childnode>
+      </node>
+      <node id="12195">
+        <label>stdint.h</label>
+      </node>
+      <node id="12193">
+        <label>thread_mpi/atomic.h</label>
+      </node>
+      <node id="12200">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="12199">
+        <label>string.h</label>
+      </node>
+      <node id="12192">
+        <label>cstddef</label>
+      </node>
+      <node id="12194">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="12195" relation="include">
+        </childnode>
+        <childnode refid="12196" relation="include">
+        </childnode>
+      </node>
+      <node id="12191">
+        <label>src/gromacs/mdlib/nbnxn_pairlist.h</label>
+        <link refid="nbnxn_pairlist.h"/>
+        <childnode refid="12192" relation="include">
+        </childnode>
+        <childnode refid="12193" relation="include">
+        </childnode>
+        <childnode refid="12194" relation="include">
+        </childnode>
+        <childnode refid="12197" relation="include">
+        </childnode>
+        <childnode refid="12200" relation="include">
+        </childnode>
+      </node>
+      <node id="12198">
+        <label>config.h</label>
+      </node>
+      <node id="12196">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="12202">
+        <label>src/gromacs/mdlib/nbnxn_cuda/nbnxn_cuda_types.h</label>
+        <link refid="nbnxn__cuda__types_8h"/>
+      </node>
+      <node id="12204">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_types.h</label>
+        <link refid="nbnxn__ocl__types_8h"/>
+        <childnode refid="12205" relation="include">
+        </childnode>
+        <childnode refid="12203" relation="include">
+        </childnode>
+        <childnode refid="12206" relation="include">
+        </childnode>
+        <childnode refid="12207" relation="include">
+        </childnode>
+      </node>
+      <node id="12203">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp</label>
+        <link refid="nbnxn__ocl_8cpp"/>
+      </node>
+      <node id="12207">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_jit_support.cpp</label>
+        <link refid="nbnxn__ocl__jit__support_8cpp"/>
+      </node>
+      <node id="12205">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_internal.h</label>
+        <link refid="nbnxn__ocl__internal_8h"/>
+        <childnode refid="12203" relation="include">
+        </childnode>
+        <childnode refid="12206" relation="include">
+        </childnode>
+      </node>
+      <node id="12206">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</label>
+        <link refid="nbnxn__ocl__data__mgmt_8cpp"/>
+      </node>
+      <node id="12201">
+        <label>src/gromacs/mdlib/nbnxn_pairlist.h</label>
+        <link refid="nbnxn_pairlist.h"/>
+        <childnode refid="12202" relation="include">
+        </childnode>
+        <childnode refid="12203" relation="include">
+        </childnode>
+        <childnode refid="12204" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structgmx__cache__protect__t" prot="public">gmx_cache_protect_t</innerclass>
+    <innerclass refid="structnbnxn__cj__t" prot="public">nbnxn_cj_t</innerclass>
+    <innerclass refid="structnbnxn__ci__t" prot="public">nbnxn_ci_t</innerclass>
+    <innerclass refid="structnbnxn__sci__t" prot="public">nbnxn_sci_t</innerclass>
+    <innerclass refid="structnbnxn__im__ei__t" prot="public">nbnxn_im_ei_t</innerclass>
+    <innerclass refid="structnbnxn__cj4__t" prot="public">nbnxn_cj4_t</innerclass>
+    <innerclass refid="structnbnxn__excl__t" prot="public">nbnxn_excl_t</innerclass>
+    <innerclass refid="structnbnxn__pairlist__t" prot="public">nbnxn_pairlist_t</innerclass>
+    <innerclass refid="structnbnxn__pairlist__set__t" prot="public">nbnxn_pairlist_set_t</innerclass>
+    <innerclass refid="structnbnxn__atomdata__output__t" prot="public">nbnxn_atomdata_output_t</innerclass>
+    <innerclass refid="structnbnxn__buffer__flags__t" prot="public">nbnxn_buffer_flags_t</innerclass>
+    <innerclass refid="structnbnxn__atomdata__t" prot="public">nbnxn_atomdata_t</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__pairlist_8h_1a5c5eb76c6c6759e6484311bad1f61cf4" prot="public" static="no">
+        <name>NBNXN_CI_SHIFT</name>
+        <initializer>127</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="111" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__pairlist_8h_1a06e75dfd0236de1c43c4d40a52ddf7b5" prot="public" static="no">
+        <name>NBNXN_CI_DO_LJ</name>
+        <param><defname>subc</defname></param>
+        <initializer>(1&lt;&lt;(7+3*(subc)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="112" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__pairlist_8h_1a3effe9e4daa2e34a01f8db1d10325c48" prot="public" static="no">
+        <name>NBNXN_CI_HALF_LJ</name>
+        <param><defname>subc</defname></param>
+        <initializer>(1&lt;&lt;(8+3*(subc)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="113" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__pairlist_8h_1a8414c3eb6c23e2a24bdbf31d49a4cef7" prot="public" static="no">
+        <name>NBNXN_CI_DO_COUL</name>
+        <param><defname>subc</defname></param>
+        <initializer>(1&lt;&lt;(9+3*(subc)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="114" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__pairlist_8h_1ac8cb78685e1eec8889d2bb6bcfdc5a32" prot="public" static="no">
+        <name>NBNXN_BUFFERFLAG_SIZE</name>
+        <initializer>16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="223" column="10" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__pairlist_8h_1a0dcd28c5ceae47f5a5699b5b062c628c" prot="public" static="no">
+        <name>NBNXN_BUFFERFLAG_MAX_THREADS</name>
+        <initializer>(<ref refid="bitmask_8h_1ac010424c8bddcebd86a1b763e4b45b1e" kindref="member">BITMASK_SIZE</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="229" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="nbnxn__pairlist_8h_1a79e9f285d34216706a748fd7ba8941b7" prot="public" static="no">
+        <name>@76</name>
+        <enumvalue id="nbnxn__pairlist_8h_1a79e9f285d34216706a748fd7ba8941b7a191563e2c593dc4502115c1435bf8509" prot="public">
+          <name>nbatXYZ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__pairlist_8h_1a79e9f285d34216706a748fd7ba8941b7a2d17ba337487c7cdb5368055949aed35" prot="public">
+          <name>nbatXYZQ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__pairlist_8h_1a79e9f285d34216706a748fd7ba8941b7acb854c271994bddd28c8c9b1f5bedf30" prot="public">
+          <name>nbatX4</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__pairlist_8h_1a79e9f285d34216706a748fd7ba8941b7a18e0fff8d3176383e48f72df24424568" prot="public">
+          <name>nbatX8</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="199" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="199" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="enum" id="nbnxn__pairlist_8h_1abe974f22edeef8189603ba75fd90ff3c" prot="public" static="no">
+        <name>@77</name>
+        <enumvalue id="nbnxn__pairlist_8h_1abe974f22edeef8189603ba75fd90ff3caa49bb7782b5723b50fcb9ac1606ee9f1" prot="public">
+          <name>ljcrGEOM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__pairlist_8h_1abe974f22edeef8189603ba75fd90ff3caa804dcc480d2e440b4098cb6dd7de411" prot="public">
+          <name>ljcrLB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__pairlist_8h_1abe974f22edeef8189603ba75fd90ff3ca222064fbeb91665a2e6567d16d6f646a" prot="public">
+          <name>ljcrNONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nbnxn__pairlist_8h_1abe974f22edeef8189603ba75fd90ff3ca684971202a268c64d06c50acf531f22c" prot="public">
+          <name>ljcrNR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="239" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="239" bodyend="241"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="nbnxn__pairlist_8h_1a41ece6776fdeb7f4b5f41800a871897a" prot="public" static="no">
+        <type>struct <ref refid="structnbnxn__search" kindref="compound">nbnxn_search</ref> *</type>
+        <definition>typedef struct nbnxn_search* nbnxn_search_t</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_search_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="78" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__pairlist_8h_1adb326a71f76686d6e0c17d6ff3a9405b" prot="public" static="no">
+        <type>void</type>
+        <definition>typedef void nbnxn_alloc_t(void **ptr, size_t nbytes)</definition>
+        <argsstring>(void **ptr, size_t nbytes)</argsstring>
+        <name>nbnxn_alloc_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="84" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__pairlist_8h_1ab3befa5b0a53bd74a7047db01c6cf9da" prot="public" static="no">
+        <type>void</type>
+        <definition>typedef void nbnxn_free_t(void *ptr)</definition>
+        <argsstring>(void *ptr)</argsstring>
+        <name>nbnxn_free_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="89" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__pairlist_8h_1a36418e91ed231ec10c0825eef9ba8746" prot="public" static="no">
+        <type>struct <ref refid="structnbnxn__pairlist__t" kindref="compound">nbnxn_pairlist_t</ref></type>
+        <definition>typedef struct nbnxn_pairlist_t  nbnxn_pairlist_t</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_pairlist_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="184" column="1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="nbnxn__pairlist_8h_1a9865aa3074a8b9b3684230236e6dfa6c" prot="public" static="no">
+        <type>struct <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref></type>
+        <definition>typedef struct nbnxn_atomdata_t  nbnxn_atomdata_t</definition>
+        <argsstring></argsstring>
+        <name>nbnxn_atomdata_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="286" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nbnxn__pairlist_8h_1aacfe1900b5d039a22a00b2a7ebc53eb4" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_nbnxnGpuClusterSize</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnGpuClusterSize</name>
+        <initializer>= 8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="50" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__pairlist_8h_1a6dd06d8d97174838c1f721ede2df515a" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_nbnxnGpuNumClusterPerSupercluster</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnGpuNumClusterPerSupercluster</name>
+        <initializer>= 8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="53" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__pairlist_8h_1a2ecb43c726a723a1544b9e9832aa0442" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_nbnxnGpuJgroupSize</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnGpuJgroupSize</name>
+        <initializer>= 32/c_nbnxnGpuNumClusterPerSupercluster</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="58" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__pairlist_8h_1a4233b54175399ee7a96db8916e263147" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_nbnxnGpuClusterpairSplit</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnGpuClusterpairSplit</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="63" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__pairlist_8h_1a0666262b5750528363271bc9aaa279aa" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_nbnxnGpuExclSize</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnGpuExclSize</name>
+        <initializer>= c_nbnxnGpuClusterSize*c_nbnxnGpuClusterSize/c_nbnxnGpuClusterpairSplit</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" line="66" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/mdlib/nbnxn_pairlist.h"/>
+  </compounddef>
+</doxygen>

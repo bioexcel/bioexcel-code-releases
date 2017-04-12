@@ -1,0 +1,1548 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nrnb_8h" kind="file">
+    <compoundname>nrnb.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="domdec_8h" local="yes">src/gromacs/domdec/domdec.h</includedby>
+    <includedby refid="constr_8h" local="yes">src/gromacs/mdlib/constr.h</includedby>
+    <includedby refid="pme_8h" local="yes">src/gromacs/ewald/pme.h</includedby>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="edsam_8cpp" local="yes">src/gromacs/essentialdynamics/edsam.cpp</includedby>
+    <includedby refid="pme-only_8cpp" local="yes">src/gromacs/ewald/pme-only.cpp</includedby>
+    <includedby refid="pme_8cpp" local="yes">src/gromacs/ewald/pme.cpp</includedby>
+    <includedby refid="bonded_8h" local="yes">src/gromacs/listed-forces/bonded.h</includedby>
+    <includedby refid="gmx__clustsize_8cpp" local="yes">src/gromacs/gmxana/gmx_clustsize.cpp</includedby>
+    <includedby refid="gmx__disre_8cpp" local="yes">src/gromacs/gmxana/gmx_disre.cpp</includedby>
+    <includedby refid="nb__free__energy_8h" local="yes">src/gromacs/gmxlib/nonbonded/nb_free_energy.h</includedby>
+    <includedby refid="nb__kernel_8h" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel.h</includedby>
+    <includedby refid="nb__free__energy_8cpp" local="yes">src/gromacs/gmxlib/nonbonded/nb_free_energy.cpp</includedby>
+    <includedby refid="nonbonded_8h" local="yes">src/gromacs/gmxlib/nonbonded/nonbonded.h</includedby>
+    <includedby refid="nb__generic_8h" local="yes">src/gromacs/gmxlib/nonbonded/nb_generic.h</includedby>
+    <includedby refid="nb__generic_8cpp" local="yes">src/gromacs/gmxlib/nonbonded/nb_generic.cpp</includedby>
+    <includedby refid="nb__generic__cg_8h" local="yes">src/gromacs/gmxlib/nonbonded/nb_generic_cg.h</includedby>
+    <includedby refid="nb__generic__cg_8cpp" local="yes">src/gromacs/gmxlib/nonbonded/nb_generic_cg.cpp</includedby>
+    <includedby refid="nb__kernel__allvsall_8h" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_allvsall.h</includedby>
+    <includedby refid="nb__kernel__allvsall_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_allvsall.c</includedby>
+    <includedby refid="nb__kernel__allvsallgb_8h" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_allvsallgb.h</includedby>
+    <includedby refid="nb__kernel__allvsallgb_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_allvsallgb.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwBham__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwBham_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwBham__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwBham_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwBham__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwBham_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwBham__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwBham_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwBham__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwBham_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwCSTab__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwCSTab_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwCSTab__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwCSTab_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwCSTab__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwCSTab_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwCSTab__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwCSTab_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwCSTab__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwCSTab_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwLJ__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwLJ_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwLJ__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwLJ_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwLJ__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwLJ_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwLJ__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwLJ_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwLJ__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwLJ_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwNone__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwNone_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwNone__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwNone_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwNone__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwNone_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCoul__VdwNone__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCoul_VdwNone_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwBham__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwBham_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwBham__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwBham_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwBham__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwBham_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwBham__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwBham_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwBham__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwBham_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwCSTab__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwCSTab_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwCSTab__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwCSTab_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwCSTab__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwCSTab_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwCSTab__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwCSTab_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwCSTab__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwCSTab_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwLJ__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwLJ_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwLJ__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwLJ_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwLJ__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwLJ_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwLJ__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwLJ_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwLJ__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwLJ_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwNone__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwNone_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwNone__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwNone_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwNone__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwNone_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecCSTab__VdwNone__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecCSTab_VdwNone_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwBham__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwBham_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwBham__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwBham_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwBham__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwBham_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwBham__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwBham_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwBham__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwBham_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwCSTab__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwCSTab_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwCSTab__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwCSTab_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwCSTab__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwCSTab_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwCSTab__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwCSTab_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwCSTab__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwCSTab_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJ__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJ_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJ__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJ_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJ__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJ_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJ__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJ_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJ__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJ_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJEw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJEw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJEw__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJEw_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJEw__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJEw_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJEw__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJEw_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwLJEw__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwLJEw_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwNone__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwNone_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwNone__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwNone_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwNone__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwNone_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEw__VdwNone__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEw_VdwNone_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwBhamSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwBhamSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwBhamSh__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwBhamSh_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwBhamSh__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwBhamSh_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwBhamSh__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwBhamSh_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwBhamSh__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwBhamSh_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJEwSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJEwSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJEwSh__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJEwSh_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJEwSh__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJEwSh_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJEwSh__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJEwSh_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJEwSh__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJEwSh_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJSh__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJSh_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJSh__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJSh_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJSh__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJSh_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwLJSh__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwLJSh_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwNone__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwNone_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwNone__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwNone_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwNone__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwNone_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSh__VdwNone__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSh_VdwNone_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwBhamSw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwBhamSw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwBhamSw__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwBhamSw_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwBhamSw__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwBhamSw_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwBhamSw__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwBhamSw_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwBhamSw__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwBhamSw_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwLJSw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwLJSw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwLJSw__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwLJSw_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwLJSw__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwLJSw_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwLJSw__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwLJSw_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwLJSw__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwLJSw_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwNone__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwNone_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwNone__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwNone_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwNone__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwNone_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecEwSw__VdwNone__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecEwSw_VdwNone_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecGB__VdwBham__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecGB_VdwBham_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecGB__VdwCSTab__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecGB_VdwCSTab_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecGB__VdwLJ__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecGB_VdwLJ_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecGB__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecGB_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwBham__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwBham_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwBhamSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwBhamSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwBhamSw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwBhamSw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwCSTab__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwCSTab_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwLJ__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwLJ_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwLJEw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwLJEw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwLJEwSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwLJEwSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwLJSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwLJSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecNone__VdwLJSw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecNone_VdwLJSw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwBham__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwBham_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwBham__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwBham_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwBham__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwBham_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwBham__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwBham_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwBham__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwBham_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwCSTab__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwCSTab_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwCSTab__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwCSTab_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwCSTab__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwCSTab_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwCSTab__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwCSTab_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwCSTab__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwCSTab_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwLJ__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwLJ_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwLJ__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwLJ_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwLJ__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwLJ_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwLJ__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwLJ_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwLJ__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwLJ_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwNone__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwNone_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwNone__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwNone_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwNone__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwNone_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRF__VdwNone__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRF_VdwNone_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSh__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSh_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSh__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSh_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSh__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSh_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSh__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSh_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSw__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSw_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSw__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSw_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSw__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSw_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwBhamSw__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwBhamSw_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwCSTab__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwCSTab_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwCSTab__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwCSTab_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwCSTab__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwCSTab_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwCSTab__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwCSTab_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwCSTab__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwCSTab_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSh__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSh_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSh__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSh_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSh__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSh_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSh__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSh_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSh__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSh_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSw__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSw_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSw__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSw_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSw__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSw_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSw__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSw_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwLJSw__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwLJSw_GeomW4W4_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwNone__GeomP1P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwNone_GeomP1P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwNone__GeomW3P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwNone_GeomW3P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwNone__GeomW3W3__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwNone_GeomW3W3_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwNone__GeomW4P1__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwNone_GeomW4P1_c.c</includedby>
+    <includedby refid="nb__kernel__ElecRFCut__VdwNone__GeomW4W4__c_8c" local="yes">src/gromacs/gmxlib/nonbonded/nb_kernel_c/nb_kernel_ElecRFCut_VdwNone_GeomW4W4_c.c</includedby>
+    <includedby refid="nonbonded_8cpp" local="yes">src/gromacs/gmxlib/nonbonded/nonbonded.cpp</includedby>
+    <includedby refid="nrnb_8cpp" local="yes">src/gromacs/gmxlib/nrnb.cpp</includedby>
+    <includedby refid="listed-forces_8cpp" local="yes">src/gromacs/listed-forces/listed-forces.cpp</includedby>
+    <includedby refid="position-restraints_8cpp" local="yes">src/gromacs/listed-forces/position-restraints.cpp</includedby>
+    <includedby refid="clincs_8cpp" local="yes">src/gromacs/mdlib/clincs.cpp</includedby>
+    <includedby refid="constr_8cpp" local="yes">src/gromacs/mdlib/constr.cpp</includedby>
+    <includedby refid="coupling_8cpp" local="yes">src/gromacs/mdlib/coupling.cpp</includedby>
+    <includedby refid="expanded_8cpp" local="yes">src/gromacs/mdlib/expanded.cpp</includedby>
+    <includedby refid="force_8cpp" local="yes">src/gromacs/mdlib/force.cpp</includedby>
+    <includedby refid="genborn_8cpp" local="yes">src/gromacs/mdlib/genborn.cpp</includedby>
+    <includedby refid="integrator_8h" local="yes">src/gromacs/mdlib/integrator.h</includedby>
+    <includedby refid="md__support_8cpp" local="yes">src/gromacs/mdlib/md_support.cpp</includedby>
+    <includedby refid="minimize_8cpp" local="yes">src/gromacs/mdlib/minimize.cpp</includedby>
+    <includedby refid="nbnxn__search_8cpp" local="yes">src/gromacs/mdlib/nbnxn_search.cpp</includedby>
+    <includedby refid="ns_8cpp" local="yes">src/gromacs/mdlib/ns.cpp</includedby>
+    <includedby refid="qm__orca_8cpp" local="yes">src/gromacs/mdlib/qm_orca.cpp</includedby>
+    <includedby refid="qmmm_8cpp" local="yes">src/gromacs/mdlib/qmmm.cpp</includedby>
+    <includedby refid="shakef_8cpp" local="yes">src/gromacs/mdlib/shakef.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="tpi_8cpp" local="yes">src/gromacs/mdlib/tpi.cpp</includedby>
+    <includedby refid="update_8cpp" local="yes">src/gromacs/mdlib/update.cpp</includedby>
+    <includedby refid="vsite_8cpp" local="yes">src/gromacs/mdlib/vsite.cpp</includedby>
+    <includedby refid="wall_8cpp" local="yes">src/gromacs/mdlib/wall.cpp</includedby>
+    <includedby refid="wnblist_8cpp" local="yes">src/gromacs/mdlib/wnblist.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <incdepgraph>
+      <node id="7892">
+        <label>stdint.h</label>
+      </node>
+      <node id="7889">
+        <label>src/gromacs/gmxlib/nrnb.h</label>
+        <link refid="nrnb.h"/>
+        <childnode refid="7890" relation="include">
+        </childnode>
+        <childnode refid="7891" relation="include">
+        </childnode>
+      </node>
+      <node id="7891">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="7892" relation="include">
+        </childnode>
+        <childnode refid="7893" relation="include">
+        </childnode>
+      </node>
+      <node id="7890">
+        <label>stdio.h</label>
+      </node>
+      <node id="7893">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="7898">
+        <label>src/gromacs/domdec/domdec_box.cpp</label>
+        <link refid="domdec__box_8cpp"/>
+      </node>
+      <node id="7905">
+        <label>src/gromacs/mdlib/minimize.cpp</label>
+        <link refid="minimize_8cpp"/>
+      </node>
+      <node id="7896">
+        <label>src/gromacs/domdec/domdec_internal.h</label>
+        <link refid="domdec__internal_8h"/>
+        <childnode refid="7897" relation="include">
+        </childnode>
+      </node>
+      <node id="7903">
+        <label>src/gromacs/ewald/pme-load-balancing.cpp</label>
+        <link refid="pme-load-balancing_8cpp"/>
+      </node>
+      <node id="7909">
+        <label>src/gromacs/ewald/pme.cpp</label>
+        <link refid="pme_8cpp"/>
+      </node>
+      <node id="7895">
+        <label>src/gromacs/domdec/domdec.h</label>
+        <link refid="domdec_8h"/>
+        <childnode refid="7896" relation="include">
+        </childnode>
+        <childnode refid="7898" relation="include">
+        </childnode>
+        <childnode refid="7899" relation="include">
+        </childnode>
+        <childnode refid="7900" relation="include">
+        </childnode>
+        <childnode refid="7901" relation="include">
+        </childnode>
+        <childnode refid="7897" relation="include">
+        </childnode>
+        <childnode refid="7902" relation="include">
+        </childnode>
+        <childnode refid="7903" relation="include">
+        </childnode>
+        <childnode refid="7904" relation="include">
+        </childnode>
+        <childnode refid="7905" relation="include">
+        </childnode>
+        <childnode refid="7906" relation="include">
+        </childnode>
+        <childnode refid="7907" relation="include">
+        </childnode>
+      </node>
+      <node id="7902">
+        <label>src/gromacs/domdec/domdec_vsite.cpp</label>
+        <link refid="domdec__vsite_8cpp"/>
+      </node>
+      <node id="7907">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="7910">
+        <label>src/gromacs/listed-forces/bonded.h</label>
+        <link refid="bonded_8h"/>
+        <childnode refid="7911" relation="include">
+        </childnode>
+        <childnode refid="7912" relation="include">
+        </childnode>
+      </node>
+      <node id="7912">
+        <label>src/gromacs/listed-forces/listed-forces.cpp</label>
+        <link refid="listed-forces_8cpp"/>
+      </node>
+      <node id="7894">
+        <label>src/gromacs/gmxlib/nrnb.h</label>
+        <link refid="nrnb.h"/>
+        <childnode refid="7895" relation="include">
+        </childnode>
+        <childnode refid="7908" relation="include">
+        </childnode>
+        <childnode refid="7909" relation="include">
+        </childnode>
+        <childnode refid="7910" relation="include">
+        </childnode>
+        <childnode refid="7912" relation="include">
+        </childnode>
+        <childnode refid="7913" relation="include">
+        </childnode>
+        <childnode refid="7905" relation="include">
+        </childnode>
+        <childnode refid="7906" relation="include">
+        </childnode>
+      </node>
+      <node id="7900">
+        <label>src/gromacs/domdec/domdec_setup.cpp</label>
+        <link refid="domdec__setup_8cpp"/>
+      </node>
+      <node id="7904">
+        <label>src/gromacs/ewald/pme-pp.cpp</label>
+        <link refid="pme-pp_8cpp"/>
+      </node>
+      <node id="7906">
+        <label>src/gromacs/mdlib/tpi.cpp</label>
+        <link refid="tpi_8cpp"/>
+      </node>
+      <node id="7897">
+        <label>src/gromacs/domdec/domdec_topology.cpp</label>
+        <link refid="domdec__topology_8cpp"/>
+      </node>
+      <node id="7899">
+        <label>src/gromacs/domdec/domdec_constraints.cpp</label>
+        <link refid="domdec__constraints_8cpp"/>
+      </node>
+      <node id="7911">
+        <label>src/gromacs/listed-forces/bonded.cpp</label>
+        <link refid="bonded_8cpp"/>
+      </node>
+      <node id="7901">
+        <label>src/gromacs/domdec/domdec_specatomcomm.cpp</label>
+        <link refid="domdec__specatomcomm_8cpp"/>
+      </node>
+      <node id="7908">
+        <label>src/gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="7904" relation="include">
+        </childnode>
+        <childnode refid="7909" relation="include">
+        </childnode>
+        <childnode refid="7905" relation="include">
+        </childnode>
+        <childnode refid="7906" relation="include">
+        </childnode>
+        <childnode refid="7907" relation="include">
+        </childnode>
+      </node>
+      <node id="7913">
+        <label>src/gromacs/listed-forces/position-restraints.cpp</label>
+        <link refid="position-restraints_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structt__nrnb" prot="public">t_nrnb</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nrnb_8h_1a6d2d929b7f250bf0ea5f396c91d753c7" prot="public" static="no">
+        <name>eNR_NBKERNEL_NONE</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="45" column="9" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nrnb_8h_1a1ffd51dd2d9736af0616d33e78429450" prot="public" static="no">
+        <name>inc_nrnb</name>
+        <param><defname>nrnb</defname></param>
+        <param><defname>enr</defname></param>
+        <param><defname>inc</defname></param>
+        <initializer>(nrnb)-&gt;n[enr] += inc</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="149" column="10" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cff" prot="public" static="no">
+        <name>@49</name>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa85f142d1745924e73ce29c96610c15bd" prot="public">
+          <name>eNR_NBKERNEL_VDW_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa0aa5e32729cfbc3f9799cafc2be2745e" prot="public">
+          <name>eNR_NBKERNEL_VDW_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffab4af85d5ac3bcf1406cc05b0562e1620" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaed123d863f9be4acbee5120220254bcd" prot="public">
+          <name>eNR_NBKERNEL_ELEC_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa0f65ee083baea80dd304f8624cd59384" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W3_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa556ea88e1bbc441af0f5aebe682bafde" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W3_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa31c148ceb7f8062582b77bb32e5a1e48" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W3W3_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa99cf7ad437b0b2cb3259a02a41849918" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W3W3_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa82fed34f56f8bfe666920ef2acd86ffe" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W4_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaaf204c98f917aca1126d4be480f172c7" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W4_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffac501d699529d301e70cf6319be6ceaa6" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W4W4_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa262000dd4387aa9ec76396cf08eb9da1" prot="public">
+          <name>eNR_NBKERNEL_ELEC_W4W4_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa9241c2adcf4d89b5379313d66b06ae01" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaf89414fc65912ceb098837770f18f9ec" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa61261301e7d7717fa078869b55436381" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W3_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffab35e778628e9f315226e0520cb8ae267" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W3_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaff6b77fede8de825bafcc8fdeb510eb3" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W3W3_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa0c6b969a5fd9033943fa64f3d9e9c7d4" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W3W3_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa26816f49f90f169a1f59ce998be35670" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W4_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffac9d608be41a6892a60cccdb62933155c" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W4_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa1a8ead313dec00e2b629b7203e79a118" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W4W4_VF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa59a788319cc5ce916bb748e16de0c683" prot="public">
+          <name>eNR_NBKERNEL_ELEC_VDW_W4W4_F</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa844a624a1e400fa4f8c9f39bae227dd0" prot="public">
+          <name>eNR_NBKERNEL_NR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffab918664510c2be4d425b1682e46ee549" prot="public">
+          <name>eNR_NBKERNEL_GENERIC</name>
+          <initializer>= eNR_NBKERNEL_NR</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa548a571fad18b8a51840be1a7d83d94a" prot="public">
+          <name>eNR_NBKERNEL_GENERIC_CG</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffae6320043cd8907f4450fbcb0fe2b7e05" prot="public">
+          <name>eNR_NBKERNEL_FREE_ENERGY</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa6ee5b3f0bd16e03e39909fbb391dcbf1" prot="public">
+          <name>eNR_NBKERNEL_ALLVSALL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaa11a300a1938ab5b647492e4fd31a7a0" prot="public">
+          <name>eNR_NBKERNEL_ALLVSALLGB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa458065591e18f927e6dc6e3bdb9f57a9" prot="public">
+          <name>eNR_NBNXN_DIST2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaf26fc972974c8d9f123daa9f2fe799f5" prot="public">
+          <name>eNR_NBNXN_LJ_RF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa926f0eceaecb1e09a51f553330c50c79" prot="public">
+          <name>eNR_NBNXN_LJ_RF_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaa671fd21da6248ec1dcfaf10e0a163fc" prot="public">
+          <name>eNR_NBNXN_LJ_TAB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa789011b1a5a106ef21e2e440ec07ba6e" prot="public">
+          <name>eNR_NBNXN_LJ_TAB_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa7fa8eb96632c5c7f3a25df1ec0e6a85c" prot="public">
+          <name>eNR_NBNXN_LJ_EWALD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa3c0df183c0d3719e939413ba7becd823" prot="public">
+          <name>eNR_NBNXN_LJ_EWALD_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa1fc5a3318bee3bf8535c18ec2b1a0831" prot="public">
+          <name>eNR_NBNXN_LJ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaa547e03a9991626055d84449db1d1bff" prot="public">
+          <name>eNR_NBNXN_LJ_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffabd3e80fa678e4728d0d69600953abf41" prot="public">
+          <name>eNR_NBNXN_RF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa9cb7266ad3919c685c649374abd3499d" prot="public">
+          <name>eNR_NBNXN_RF_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa589f41a82fd538c02d1a0d0321c3016d" prot="public">
+          <name>eNR_NBNXN_TAB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa5b7359e8b05109bfa347200dd19a1cf0" prot="public">
+          <name>eNR_NBNXN_TAB_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffada5cbecf14a0df31cd0a4c0005f47c22" prot="public">
+          <name>eNR_NBNXN_EWALD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffac2c87b52c94b5bd16f1f09b7e63954ee" prot="public">
+          <name>eNR_NBNXN_EWALD_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa9760990049b9d4d104425d961a655839" prot="public">
+          <name>eNR_NBNXN_ADD_LJ_FSW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa66f2149005907c5af86a7704230b79a1" prot="public">
+          <name>eNR_NBNXN_ADD_LJ_FSW_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa8dc341a79ebbc0b20a39fa635a2f444e" prot="public">
+          <name>eNR_NBNXN_ADD_LJ_PSW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffad0f6d5ec0085da7f0b66f4a2d0aa200a" prot="public">
+          <name>eNR_NBNXN_ADD_LJ_PSW_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa0bfa8dbca09f050fc1d847aaaa817a66" prot="public">
+          <name>eNR_NBNXN_ADD_LJ_EWALD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa145c86a4cd9cf657e1c7eec5c2af548c" prot="public">
+          <name>eNR_NBNXN_ADD_LJ_EWALD_E</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffabc22290fd13334c724314ff58dc8526f" prot="public">
+          <name>eNR_NB14</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffabc00c8b9cacf6897c0f620494121a15a" prot="public">
+          <name>eNR_BORN_RADII_STILL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa744f1ac9bdede3a40280c32d8824d15d" prot="public">
+          <name>eNR_BORN_RADII_HCT_OBC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa2b8bfd836282c9daf9e82a5e22294b9c" prot="public">
+          <name>eNR_BORN_CHAINRULE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa9619f86f0e385fc95fca97788cd1ac8a" prot="public">
+          <name>eNR_BORN_AVA_RADII_STILL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa7f9b117c3c2521efbabdafa695d5ed74" prot="public">
+          <name>eNR_BORN_AVA_RADII_HCT_OBC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaf53efb4b7012ab028c8a380427f36ece" prot="public">
+          <name>eNR_BORN_AVA_CHAINRULE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa1d43579561a29dba48b07d6909f48407" prot="public">
+          <name>eNR_WEIGHTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa4dd32769325e2ad4d9100c0c0411edb3" prot="public">
+          <name>eNR_SPREAD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa819646a006ce0b752171a76d0bccef4c" prot="public">
+          <name>eNR_SPREADBSP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa79a3f4a9a63f144f5c65cbe969f80f6d" prot="public">
+          <name>eNR_GATHERF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa51c744b61d8e5e96fe2464dc3834ef05" prot="public">
+          <name>eNR_GATHERFBSP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaabdec4dd1ac6f9037f5b612296a4889b" prot="public">
+          <name>eNR_FFT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffae575a21aa7944bc0039c8f7b928b84ea" prot="public">
+          <name>eNR_CONV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaece1a9c908a0e5fd4bdf20b498361586" prot="public">
+          <name>eNR_SOLVEPME</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffab3fa5070a729134aef4a1a472323d066" prot="public">
+          <name>eNR_NS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffafa3e40c6044686d3a787b572a50d54aa" prot="public">
+          <name>eNR_RESETX</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa831620142ceb392b053bbf18243de5da" prot="public">
+          <name>eNR_SHIFTX</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa339dafc5a2a5e8717826d5db44c4acf6" prot="public">
+          <name>eNR_CGCM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffafef4410c6c02b8d48f97cc424751ecee" prot="public">
+          <name>eNR_FSUM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffab41209bd3474e6655f0fe9ba1dc414f7" prot="public">
+          <name>eNR_BONDS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa871ed3d88035727cdfa1f9caf18faf2b" prot="public">
+          <name>eNR_G96BONDS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa246282a115fed8d5a116093d77522275" prot="public">
+          <name>eNR_FENEBONDS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa883853f5f5f2f33b94726b747686dd08" prot="public">
+          <name>eNR_TABBONDS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaa1d8a8ad2d761a39b19699fbc810a6da" prot="public">
+          <name>eNR_RESTRBONDS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa3e70c754e659cba9dc141a3650da3a38" prot="public">
+          <name>eNR_LINEAR_ANGLES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffae9e260aaf9f2455197cee64eeb9a582a" prot="public">
+          <name>eNR_ANGLES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa66a9febd0563ff486c5a825648d364a0" prot="public">
+          <name>eNR_G96ANGLES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa1f10fca6914a3fac8204a8747251a33b" prot="public">
+          <name>eNR_QANGLES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa81e332a8053bad8b94e10393778ab897" prot="public">
+          <name>eNR_TABANGLES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa0325a10e69056af9c18c4d1cbcd5b8fb" prot="public">
+          <name>eNR_PROPER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa307e85901999b0558eb778ccba388f36" prot="public">
+          <name>eNR_IMPROPER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa6ce1744b4e05dd88282b78317edd8805" prot="public">
+          <name>eNR_RB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa2cc99b88f4a899d02158bc47776b5041" prot="public">
+          <name>eNR_FOURDIH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa627f2aea7b03fd95716dd6dd7221cd00" prot="public">
+          <name>eNR_TABDIHS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa8347d5995bdb78304d53e669b4834bb5" prot="public">
+          <name>eNR_DISRES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffadcc6ebd8f26a4671bd1cc1b7487f661b" prot="public">
+          <name>eNR_ORIRES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa0ba229c59ff66b43d11574135d67a290" prot="public">
+          <name>eNR_DIHRES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa178d307fa524dfacf5936f1a38e649e7" prot="public">
+          <name>eNR_POSRES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaf468193a49dfc8abb9c73f0194667aad" prot="public">
+          <name>eNR_FBPOSRES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffab7ca5aca3a016fc14f0e362f7a8df972" prot="public">
+          <name>eNR_ANGRES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffacff8839c937317d73b531348f10cf5db" prot="public">
+          <name>eNR_ANGRESZ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa073aa1c5603edf5518e28cf8daf21be1" prot="public">
+          <name>eNR_MORSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa3dc3e5ec60868dfe965f340d9bce0a26" prot="public">
+          <name>eNR_CUBICBONDS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa024425f9bb9290e9bb200dcecfa7e5ae" prot="public">
+          <name>eNR_WALLS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffae4b347fae4c67b76631d16b6e5453475" prot="public">
+          <name>eNR_POLARIZE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa2312b92acddbd095f0898c806fddeb16" prot="public">
+          <name>eNR_ANHARM_POL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffad9c2b497fed2ba5342c22ac5b62afce8" prot="public">
+          <name>eNR_WPOL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa67c18c3c6d85e770421c947b914846df" prot="public">
+          <name>eNR_THOLE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa6a545512416bc1fbfc54ede57103875b" prot="public">
+          <name>eNR_VIRIAL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa35039019e90dc79633796f2cd39386a1" prot="public">
+          <name>eNR_UPDATE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa303b4b75ee3f7e2ed20dc6069cc7299b" prot="public">
+          <name>eNR_EXTUPDATE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaee2ee54ff7aab4f947e1ce6bea429e86" prot="public">
+          <name>eNR_STOPCM</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa35c605e4ff39e66f5a5268a6c7c31afb" prot="public">
+          <name>eNR_PCOUPL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa50ec46882c0d99dda30c2b3cc64bb3d3" prot="public">
+          <name>eNR_EKIN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffacda604dfa88e33ae7db326b1080489fe" prot="public">
+          <name>eNR_LINCS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa4713d888ddd8320a11cc612119fed45f" prot="public">
+          <name>eNR_LINCSMAT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaef3a9f4faaef5dcbd15c05d6c6c7102a" prot="public">
+          <name>eNR_SHAKE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa9d089cbbff8bc84201709a0b15cd9eed" prot="public">
+          <name>eNR_CONSTR_V</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa88fea3814bde228ea985e2fb6cac3b2c" prot="public">
+          <name>eNR_SHAKE_RIJ</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa4ac0e6b5efab80c6802b6d07a556cb8e" prot="public">
+          <name>eNR_CONSTR_VIR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffac2bafa508abe2ba5593013ffbfe677bf" prot="public">
+          <name>eNR_SETTLE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa17a2ded338f88d2cf538a433e13b56f4" prot="public">
+          <name>eNR_VSITE2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffae88652143ddd76c3c3a3b5429ae645f9" prot="public">
+          <name>eNR_VSITE3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa5bb36db6e3db8cf990663eabf40069c1" prot="public">
+          <name>eNR_VSITE3FD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaf0078b87302fe47dad6cd31a73008d31" prot="public">
+          <name>eNR_VSITE3FAD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa8ce83e8871510a84d8d07b4e937e53ee" prot="public">
+          <name>eNR_VSITE3OUT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa41ff75d1f35dcd2e0e7f499d5f8808ab" prot="public">
+          <name>eNR_VSITE4FD</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaafec41d251d067ec2606eadc0a58363b" prot="public">
+          <name>eNR_VSITE4FDN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffa05f223bbdf74c72a50ebb0a8bd4ce162" prot="public">
+          <name>eNR_VSITEN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffaefe162ec55c4a5049dfc2e16b2d03675" prot="public">
+          <name>eNR_GB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffab7d94b74246454c9c0d9e1a8dea5b933" prot="public">
+          <name>eNR_CMAP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="nrnb_8h_1af715e26dfffd1f8de1c18449e2770cffae2a37ac8058faf9f1efa3d5eebbb3931" prot="public">
+          <name>eNRNB</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="48" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" bodystart="47" bodyend="121"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="nrnb_8h_1ad2de3199b5afdef5f1a972a7deee7d97" prot="public" static="no">
+        <type>struct <ref refid="structt__nrnb" kindref="compound">t_nrnb</ref></type>
+        <definition>typedef struct t_nrnb
+ t_nrnb</definition>
+        <argsstring></argsstring>
+        <name>t_nrnb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="128" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nrnb_8h_1aa5f71eebec0a75246933f199955fd044" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_nrnb</definition>
+        <argsstring>(t_nrnb *nrnb)</argsstring>
+        <name>init_nrnb</name>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="136" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="262" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a4e981583b3717a7ece8bc4b142518284" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cp_nrnb</definition>
+        <argsstring>(t_nrnb *dest, t_nrnb *src)</argsstring>
+        <name>cp_nrnb</name>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="138" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="272" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a73a55334f0352edf33d899a80387f856" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_nrnb</definition>
+        <argsstring>(t_nrnb *dest, t_nrnb *s1, t_nrnb *s2)</argsstring>
+        <name>add_nrnb</name>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>s1</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>s2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="140" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="282" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1ae10d062e996d0cc66abfae59a74ad9ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_nrnb</definition>
+        <argsstring>(FILE *out, t_nrnb *nrnb)</argsstring>
+        <name>print_nrnb</name>
+        <param>
+          <type>FILE *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="142" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="292" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a6e77bfb829547a63f481822a090a5bf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _inc_nrnb</definition>
+        <argsstring>(t_nrnb *nrnb, int enr, int inc, char *file, int line)</argsstring>
+        <name>_inc_nrnb</name>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>enr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>inc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="144" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="305" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a2389d159201220ca050538f57cd330a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_flop</definition>
+        <argsstring>(FILE *out, t_nrnb *nrnb, double *nbfs, double *mflop)</argsstring>
+        <name>print_flop</name>
+        <param>
+          <type>FILE *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>nbfs</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>mflop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="153" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="326" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a71cb31946715bd9f7b1d0b3ab818a0d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_perf</definition>
+        <argsstring>(FILE *out, double nodetime, double realtime, gmx_int64_t nsteps, double delta_t, double nbfs, double mflop)</argsstring>
+        <name>print_perf</name>
+        <param>
+          <type>FILE *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>nodetime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>realtime</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>nsteps</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>delta_t</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>nbfs</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>mflop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="158" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="440" bodyend="501"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a690fe57bc2f42722e04984d9a7d127dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pr_load</definition>
+        <argsstring>(FILE *log, struct t_commrec *cr, t_nrnb nrnb[])</argsstring>
+        <name>pr_load</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref></type>
+          <declname>nrnb</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="163" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="557" bodyend="646"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a7d440566a6bcca2b86fb841abebff822" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int cost_nrnb</definition>
+        <argsstring>(int enr)</argsstring>
+        <name>cost_nrnb</name>
+        <param>
+          <type>int</type>
+          <declname>enr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="166" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="503" bodyend="506"/>
+      </memberdef>
+      <memberdef kind="function" id="nrnb_8h_1a5a7edb309e3c81a1ca49a4da10475971" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* nrnb_str</definition>
+        <argsstring>(int enr)</argsstring>
+        <name>nrnb_str</name>
+        <param>
+          <type>int</type>
+          <declname>enr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h" line="169" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.cpp" bodystart="508" bodyend="511"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gmxlib/nrnb.h"/>
+  </compounddef>
+</doxygen>

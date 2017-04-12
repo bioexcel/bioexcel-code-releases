@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData" kind="class" prot="public">
+    <compoundname>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</compoundname>
+    <basecompoundref refid="classgmx_1_1TrajectoryAnalysisModuleData" prot="public" virt="non-virtual">gmx::TrajectoryAnalysisModuleData</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a3d03773fa56451e10594429d38f38420" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+        <definition>std::vector&lt;real&gt; gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData::distArray_</definition>
+        <argsstring></argsstring>
+        <name>distArray_</name>
+        <briefdescription>
+<para>Squared distance between each group. </para>        </briefdescription>
+        <detaileddescription>
+<para>One entry for each group pair for the current selection. Enough memory is allocated to fit the largest calculation selection. This is needed to support neighborhood searching, which may not return the pairs in order: for each group pair, we need to search through all the position pairs and update this array to find the minimum/maximum distance between them. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" line="374" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" bodystart="374" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a7cf5ab91bd4369791648a84a9086fe91" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData::countArray_</definition>
+        <argsstring></argsstring>
+        <name>countArray_</name>
+        <briefdescription>
+<para>Number of pairs within the cutoff that have contributed to the value in <computeroutput>distArray_</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is needed to identify whether there were any pairs inside the cutoff and whether there were additional pairs outside the cutoff that were not covered by the neihborhood search. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" line="383" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" bodystart="383" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1afd87b9fa31f0f2cc2b751ec8bb6c5d87" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData::refCountArray_</definition>
+        <argsstring></argsstring>
+        <name>refCountArray_</name>
+        <briefdescription>
+<para>Number of positions within each reference group. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is used to more efficiently compute the total number of pairs (for comparison with <computeroutput>countArray_</computeroutput>), as otherwise these numbers would need to be recomputed for each selection. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" line="391" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" bodystart="391" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1aee31955e41d398a1738d90c17b9448d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData::PairDistanceModuleData</definition>
+        <argsstring>(TrajectoryAnalysisModule *module, const AnalysisDataParallelOptions &amp;opt, const SelectionCollection &amp;selections, int refGroupCount, const Selection &amp;refSel, int maxGroupCount)</argsstring>
+        <name>PairDistanceModuleData</name>
+        <param>
+          <type><ref refid="classgmx_1_1TrajectoryAnalysisModule" kindref="compound">TrajectoryAnalysisModule</ref> *</type>
+          <declname>module</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1AnalysisDataParallelOptions" kindref="compound">AnalysisDataParallelOptions</ref> &amp;</type>
+          <declname>opt</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1SelectionCollection" kindref="compound">SelectionCollection</ref> &amp;</type>
+          <declname>selections</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>refGroupCount</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> &amp;</type>
+          <declname>refSel</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxGroupCount</declname>
+        </param>
+        <briefdescription>
+<para>Reserves memory for the frame-local data. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" line="323" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" bodystart="323" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a92d254ffab481ce4f1f61fab6864b069" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData::finish</definition>
+        <argsstring>()</argsstring>
+        <name>finish</name>
+        <reimplements refid="classgmx_1_1TrajectoryAnalysisModuleData_1a5760c7d0ef360a9c0f95accadb3a5364">finish</reimplements>
+        <briefdescription>
+<para>Performs any finishing actions after all frames have been processed. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>unspecified</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Implementation may throw exceptions to indicate errors.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This function is called immediately before the destructor, after <ref refid="classgmx_1_1TrajectoryAnalysisModule_1a9d14bf1683086d3fafdb11e23e003de4" kindref="member">TrajectoryAnalysisModule::finishFrames()</ref>. Derived classes should implement any final operations that need to be done after successful analysis. All implementations should call <ref refid="classgmx_1_1TrajectoryAnalysisModuleData_1ae4cc5f36cd255c175678f9d7d737e937" kindref="member">finishDataHandles()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" line="340" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" bodystart="340" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a509cf2ac158fa51a674e3f9c5598e5f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData::initRefCountArray</definition>
+        <argsstring>(const Selection &amp;refSel)</argsstring>
+        <name>initRefCountArray</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> &amp;</type>
+          <declname>refSel</declname>
+        </param>
+        <briefdescription>
+<para>Computes the number of positions in each group in <computeroutput>refSel</computeroutput> and stores them into <computeroutput>refCountArray_</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" line="346" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" bodystart="346" bodyend="362"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Temporary memory for use within a single-frame calculation. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="983">
+        <label>gmx::TrajectoryAnalysisModuleData</label>
+        <link refid="classgmx_1_1TrajectoryAnalysisModuleData"/>
+      </node>
+      <node id="982">
+        <label>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</label>
+        <link refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData"/>
+        <childnode refid="983" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="985">
+        <label>gmx::TrajectoryAnalysisModuleData</label>
+        <link refid="classgmx_1_1TrajectoryAnalysisModuleData"/>
+      </node>
+      <node id="984">
+        <label>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</label>
+        <link refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData"/>
+        <childnode refid="985" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" line="318" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/trajectoryanalysis/modules/pairdist.cpp" bodystart="317" bodyend="392"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a7cf5ab91bd4369791648a84a9086fe91" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>countArray_</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1ae600024eaa634d84157bc7c75c020e97" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>dataHandle</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a3d03773fa56451e10594429d38f38420" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>distArray_</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a92d254ffab481ce4f1f61fab6864b069" prot="public" virt="virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>finish</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1ae4cc5f36cd255c175678f9d7d737e937" prot="protected" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>finishDataHandles</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1a509cf2ac158fa51a674e3f9c5598e5f7" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>initRefCountArray</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1aee31955e41d398a1738d90c17b9448d7" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>PairDistanceModuleData</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1a4e23dbf4cfd2554ac011664b49c1c7e0" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>parallelSelection</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1a4ffe3dec6ef34ae7e6af7a46b9fc7d0b" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>parallelSelections</name></member>
+      <member refid="classgmx_1_1analysismodules_1_1anonymous__namespace_02pairdist_8cpp_03_1_1PairDistanceModuleData_1afd87b9fa31f0f2cc2b751ec8bb6c5d87" prot="public" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>refCountArray_</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1a488e9fa560e4c41aae0cc1366827010a" prot="protected" virt="non-virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>TrajectoryAnalysisModuleData</name></member>
+      <member refid="classgmx_1_1TrajectoryAnalysisModuleData_1af92b33272c7fca4040d631105a1344a6" prot="public" virt="virtual"><scope>gmx::analysismodules::anonymous_namespace{pairdist.cpp}::PairDistanceModuleData</scope><name>~TrajectoryAnalysisModuleData</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

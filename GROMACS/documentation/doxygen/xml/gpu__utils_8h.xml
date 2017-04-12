@@ -1,0 +1,642 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="gpu__utils_8h" kind="file">
+    <compoundname>gpu_utils.h</compoundname>
+    <includes local="no">cstdio</includes>
+    <includes refid="gpu__macros_8h" local="yes">gromacs/gpu_utils/gpu_macros.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="gpu__utils_8cpp" local="yes">src/gromacs/gpu_utils/gpu_utils.cpp</includedby>
+    <includedby refid="gpu__utils__ocl_8cpp" local="yes">src/gromacs/gpu_utils/gpu_utils_ocl.cpp</includedby>
+    <includedby refid="detecthardware_8cpp" local="yes">src/gromacs/hardware/detecthardware.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <includedby refid="nbnxn__ocl__data__mgmt_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</includedby>
+    <includedby refid="nbnxn__ocl__jit__support_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_jit_support.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <incdepgraph>
+      <node id="9015">
+        <label>stdint.h</label>
+      </node>
+      <node id="9013">
+        <label>cstdio</label>
+      </node>
+      <node id="9012">
+        <label>src/gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu_utils.h"/>
+        <childnode refid="9013" relation="include">
+        </childnode>
+        <childnode refid="9014" relation="include">
+        </childnode>
+      </node>
+      <node id="9014">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="9015" relation="include">
+        </childnode>
+        <childnode refid="9016" relation="include">
+        </childnode>
+      </node>
+      <node id="9016">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="9019">
+        <label>src/gromacs/gpu_utils/gpu_utils_ocl.cpp</label>
+        <link refid="gpu__utils__ocl_8cpp"/>
+      </node>
+      <node id="9022">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="9021">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_jit_support.cpp</label>
+        <link refid="nbnxn__ocl__jit__support_8cpp"/>
+      </node>
+      <node id="9017">
+        <label>src/gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu_utils.h"/>
+        <childnode refid="9018" relation="include">
+        </childnode>
+        <childnode refid="9019" relation="include">
+        </childnode>
+        <childnode refid="9020" relation="include">
+        </childnode>
+        <childnode refid="9021" relation="include">
+        </childnode>
+        <childnode refid="9022" relation="include">
+        </childnode>
+      </node>
+      <node id="9020">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</label>
+        <link refid="nbnxn__ocl__data__mgmt_8cpp"/>
+      </node>
+      <node id="9018">
+        <label>src/gromacs/gpu_utils/gpu_utils.cpp</label>
+        <link refid="gpu__utils_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="gpu__utils_8h_1a4a5340aac0cf9145eaae8a5ac5d6b0dc" prot="public" static="no">
+        <type>void</type>
+        <definition>typedef void gmx_host_alloc_t(void **ptr, size_t nbytes)</definition>
+        <argsstring>(void **ptr, size_t nbytes)</argsstring>
+        <name>gmx_host_alloc_t</name>
+        <briefdescription>
+<para>Returns a pointer *ptr to page-locked memory of size nbytes. </para>        </briefdescription>
+        <detaileddescription>
+<para>The allocated memory is suitable to be used for data transfers between host and GPU. Error handling should be done within this function. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="222" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="gpu__utils_8h_1aff7e0f62ae0592b0aefadcf9071d0435" prot="public" static="no">
+        <type>void</type>
+        <definition>typedef void gmx_host_free_t(void *ptr)</definition>
+        <argsstring>(void *ptr)</argsstring>
+        <name>gmx_host_free_t</name>
+        <briefdescription>
+<para>Frees page-locked memory pointed to by *ptr. </para>        </briefdescription>
+        <detaileddescription>
+<para>NULL should not be passed to this function. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="228" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gpu__utils_8h_1a6cc60186e3cbb57446ed0b08630c0be4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int detect_gpus</definition>
+        <argsstring>(struct gmx_gpu_info_t *gpu_info, char *err_str)</argsstring>
+        <name>detect_gpus</name>
+        <param>
+          <type>struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>err_str</declname>
+        </param>
+        <briefdescription>
+<para>Detect all GPUs in the system. </para>        </briefdescription>
+        <detaileddescription>
+<para>Will detect every GPU supported by the device driver in use. Also check for the compatibility of each and fill the gpu_info-&gt;gpu_dev array with the required information on each the device: ID, device properties, status.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to structure holding GPU information. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">err_str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The error message of any GPU API error that caused the detection to fail (if there was any). The memory the pointer points to should be managed externally. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>non-zero if the detection encountered a failure, zero otherwise.</para></simplesect>
+Detect all GPUs in the system. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="70" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils_ocl.cpp" bodystart="170" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1aab76db8c3287673503a2462224cb918b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pick_compatible_gpus</definition>
+        <argsstring>(const struct gmx_gpu_info_t *gpu_info, gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>pick_compatible_gpus</name>
+        <param>
+          <type>const struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+<para>Select the compatible GPUs. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function selects the compatible gpus and initializes gpu_info-&gt;dev_use and gpu_info-&gt;n_dev_use.</para><para>Given the list of GPUs available in the system check each device in gpu_info-&gt;gpu_dev and place the indices of the compatible GPUs into dev_use with this marking the respective GPUs as &quot;available for use.&quot; Note that <computeroutput>detect_gpus</computeroutput> must have been called before.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to structure holding GPU information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">gpu_opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to structure holding GPU options </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="86" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a2d1b8175a3e875d40a2606a35c010d9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool check_selected_gpus</definition>
+        <argsstring>(int *checkres, const struct gmx_gpu_info_t *gpu_info, gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>check_selected_gpus</name>
+        <param>
+          <type>int *</type>
+          <declname>checkres</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+<para>Check the existence/compatibility of a set of GPUs specified by their device IDs. </para>        </briefdescription>
+        <detaileddescription>
+<para>Given the a list of gpu_opt-&gt;n_dev_use GPU device IDs stored in gpu_opt-&gt;dev_use check the existence and compatibility of the respective GPUs. Also provide the caller with an array containing the result of checks in <computeroutput>checkres</computeroutput>.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">checkres</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>check result for each ID passed in requested_devs </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to structure holding GPU information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">gpu_opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to structure holding GPU options </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>TRUE if every the requested GPUs are compatible </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="102" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1aca84b5cc77147071ae8504cfd6193ad5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void free_gpu_info</definition>
+        <argsstring>(const struct gmx_gpu_info_t *gpu_info)</argsstring>
+        <name>free_gpu_info</name>
+        <param>
+          <type>const struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <briefdescription>
+<para>Frees the gpu_dev and dev_use array fields of <computeroutput>gpu_info</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to structure holding GPU information </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="111" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1ad48b2fdc51150dd0c2beff0f5775ef90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool init_gpu</definition>
+        <argsstring>(FILE *fplog, int mygpu, char *result_str, const struct gmx_gpu_info_t *gpu_info, const gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>init_gpu</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mygpu</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>result_str</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the GPU with the given index. </para>        </briefdescription>
+        <detaileddescription>
+<para>The varible <computeroutput>mygpu</computeroutput> is the index of the GPU to initialize in the gpu_info.gpu_dev array.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>log file to write to </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mygpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the GPU to initialize </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">result_str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the message related to the error that occurred during the initialization (if there was any). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GPU info of all detected devices in the system. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>options for using the GPUs in gpu_info </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if no error occurs during initialization. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="127" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a10aeedc5ccc459189d33d32a024a2a48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool free_cuda_gpu</definition>
+        <argsstring>(int mygpu, char *result_str, const gmx_gpu_info_t *gpu_info, const gmx_gpu_opt_t *gpu_opt)</argsstring>
+        <name>free_cuda_gpu</name>
+        <param>
+          <type>int</type>
+          <declname>mygpu</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>result_str</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <briefdescription>
+<para>Frees up the CUDA GPU used by the active context at the time of calling. </para>        </briefdescription>
+        <detaileddescription>
+<para>The context is explicitly destroyed and therefore all data uploaded to the GPU is lost. This should only be called when none of this data is required anymore.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mygpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the GPU clean up for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">result_str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the message related to the error that occurred during the initialization (if there was any). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GPU info of all detected devices in the system. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>options for using the GPUs in gpu_info </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if no error occurs during the freeing. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="146" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1aefeb87fd57039f9d5dd877d6f2caf857" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int get_current_cuda_gpu_device_id</definition>
+        <argsstring>(void)</argsstring>
+        <name>get_current_cuda_gpu_device_id</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the device ID of the CUDA GPU currently in use. </para>        </briefdescription>
+        <detaileddescription>
+<para>The GPU used is the one that is active at the time of the call in the active context.</para><para><simplesect kind="return"><para>device ID of the GPU in use at the time of the call </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="158" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a2c78de44bceaca470ef300f6bfcec808" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int get_gpu_device_id</definition>
+        <argsstring>(const struct gmx_gpu_info_t *gpu_info, const gmx_gpu_opt_t *gpu_opt, int idx)</argsstring>
+        <name>get_gpu_device_id</name>
+        <param>
+          <type>const struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Returns an identifier for the GPU with a given index into the array of used GPUs. </para>        </briefdescription>
+        <detaileddescription>
+<para>Getter function which, given an index into the array of GPUs in use (dev_use) <ndash/> typically an MPI rank <ndash/>, returns an identifier of the respective GPU.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to structure holding GPU information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to structure holding GPU options </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index into the array of used GPUs </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>device ID of the requested GPU </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="172" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a6c7608b06602727b20cb87cd2acbe7bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* get_ocl_gpu_device_name</definition>
+        <argsstring>(const struct gmx_gpu_info_t *gpu_info, const gmx_gpu_opt_t *gpu_opt, int idx)</argsstring>
+        <name>get_ocl_gpu_device_name</name>
+        <param>
+          <type>const struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__gpu__opt__t" kindref="compound">gmx_gpu_opt_t</ref> *</type>
+          <declname>gpu_opt</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Returns the name for the OpenCL GPU with a given index into the array of used GPUs. </para>        </briefdescription>
+        <detaileddescription>
+<para>Getter function which, given an index into the array of GPUs in use (dev_use) <ndash/> typically a tMPI/MPI rank <ndash/>, returns the device name for the respective OpenCL GPU.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to structure holding GPU information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_opt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to structure holding GPU options </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index into the array of used GPUs </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A string with the name of the requested OpenCL GPU </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="188" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a8633d345b05452997b7f7315027f67f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void get_gpu_device_info_string</definition>
+        <argsstring>(char *s, const struct gmx_gpu_info_t *gpu_info, int index)</argsstring>
+        <name>get_gpu_device_info_string</name>
+        <param>
+          <type>char *</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> *</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Formats and returns a device information string for a given GPU. </para>        </briefdescription>
+        <detaileddescription>
+<para>Given an index <emphasis>directly</emphasis> into the array of available GPUs (gpu_dev) returns a formatted info string for the respective GPU which includes ID, name, compute capability, and detection status.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to output string (has to be allocated externally) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to structure holding GPU information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>an index <emphasis>directly</emphasis> into the array of available GPUs </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="203" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1ac368c4a971290513fbabe74a0c80b716" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t sizeof_gpu_dev_info</definition>
+        <argsstring>(void)</argsstring>
+        <name>sizeof_gpu_dev_info</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Returns the size of the gpu_dev_info struct. </para>        </briefdescription>
+        <detaileddescription>
+<para>The size of gpu_dev_info can be used for allocation and communication.</para><para><simplesect kind="return"><para>size in bytes of gpu_dev_info</para></simplesect>
+Returns the size of the gpu_dev_info struct. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="214" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils_ocl.cpp" bodystart="514" bodyend="517"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1ab791918a19cd4aefc96a099f27f0ca1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gpu_set_host_malloc_and_free</definition>
+        <argsstring>(bool bUseGpuKernels, gmx_host_alloc_t **nb_alloc, gmx_host_free_t **nb_free)</argsstring>
+        <name>gpu_set_host_malloc_and_free</name>
+        <param>
+          <type>bool</type>
+          <declname>bUseGpuKernels</declname>
+        </param>
+        <param>
+          <type><ref refid="gpu__utils_8h_1a4a5340aac0cf9145eaae8a5ac5d6b0dc" kindref="member">gmx_host_alloc_t</ref> **</type>
+          <declname>nb_alloc</declname>
+        </param>
+        <param>
+          <type><ref refid="gpu__utils_8h_1aff7e0f62ae0592b0aefadcf9071d0435" kindref="member">gmx_host_free_t</ref> **</type>
+          <declname>nb_free</declname>
+        </param>
+        <briefdescription>
+<para>Set page-locked memory allocation functions used by the GPU host. </para>        </briefdescription>
+        <detaileddescription>
+<para>Set page-locked memory allocation functions used by the GPU host.</para><para>Since GPU support is not configured, there is no host memory to allocate. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="231" column="1" bodyfile="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.cpp" bodystart="48" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a4a7aa4fffbbd8a56589d49b25021f268" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void startGpuProfiler</definition>
+        <argsstring>(void)</argsstring>
+        <name>startGpuProfiler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Starts the GPU profiler if mdrun is being profiled. </para>        </briefdescription>
+        <detaileddescription>
+<para>When a profiler run is in progress (based on the presence of the NVPROF_ID env. var.), the profiler is started to begin collecting data during the rest of the run (or until stopGpuProfiler is called).</para><para>Note that this is implemented only for the CUDA API. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="246" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a437ab09a563614df382d80d53f662b4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void resetGpuProfiler</definition>
+        <argsstring>(void)</argsstring>
+        <name>resetGpuProfiler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Resets the GPU profiler if mdrun is being profiled. </para>        </briefdescription>
+        <detaileddescription>
+<para>When a profiler run is in progress (based on the presence of the NVPROF_ID env. var.), the profiler data is restet in order to eliminate the data collected from the preceding part fo the run.</para><para>This function should typically be called at the mdrun counter reset time.</para><para>Note that this is implemented only for the CUDA API. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="260" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8h_1a49e144aebbc0f0af255f1b49c67d598b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void stopGpuProfiler</definition>
+        <argsstring>(void)</argsstring>
+        <name>stopGpuProfiler</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+<para>Stops the CUDA profiler if mdrun is being profiled. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function can be called at cleanup when skipping recording recording subsequent API calls from being traces/profiled is desired, e.g. before uninitialization.</para><para>Note that this is implemented only for the CUDA API. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h" line="272" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declare functions for detection and initialization for GPU devices. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  <simplesect kind="author"><para>Szilard Pall <ulink url="mailto:pall.szilard@gmail.com">pall.szilard@gmail.com</ulink> </para><simplesectsep/><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/mnt/workspace/Release_workflow_2016/gromacs-2016.3/src/gromacs/gpu_utils/gpu_utils.h"/>
+  </compounddef>
+</doxygen>

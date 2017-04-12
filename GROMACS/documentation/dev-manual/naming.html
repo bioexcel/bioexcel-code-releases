@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Naming conventions &mdash; GROMACS 2016.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2016.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="GROMACS 2016.3 documentation" href="../index.html" />
+    <link rel="up" title="Style guidelines" href="style.html" />
+    <link rel="next" title="Allowed language features" href="language-features.html" />
+    <link rel="prev" title="Guidelines for #include directives" href="includestyle.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="language-features.html" title="Allowed language features"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="includestyle.html" title="Guidelines for #include directives"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" accesskey="U">Style guidelines</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="naming-conventions">
+<h1>Naming conventions<a class="headerlink" href="#naming-conventions" title="Permalink to this headline">¶</a></h1>
+<p>The conventions here should be applied to all new code, and with common sense
+when modifying existing code.  For example, renaming a widely used, existing
+function to follow these conventions may not be justified unless the whole code
+is getting a rework.</p>
+<p>Currently, this only documents the present state of the code: no particular
+attempt has been made to consolidate the naming.</p>
+<div class="section" id="files">
+<h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">C++ source files have a <code class="docutils literal"><span class="pre">.cpp</span></code> extension, C source files <code class="docutils literal"><span class="pre">.c</span></code>, and
+headers for both use <code class="docutils literal"><span class="pre">.h</span></code>.</p>
+</li>
+<li><p class="first">For source file <code class="file docutils literal"><em><span class="pre">file</span></em><span class="pre">.c</span></code>/<code class="file docutils literal"><em><span class="pre">file</span></em><span class="pre">.cpp</span></code>, declarations that are
+visible outside the source file should go into a correspondingly named
+header: <code class="file docutils literal"><em><span class="pre">file</span></em><span class="pre">.h</span></code>.  Some code may deviate from this rule to improve
+readability and/or usability of the API, but this should then be clearly
+documented.</p>
+<p>There can also be a <code class="file docutils literal"><em><span class="pre">file</span></em><span class="pre">-impl.h</span></code> file that declares classes or
+functions that are not accessible outside the module.  If the whole file only
+declares symbols internal to the module, then the <code class="file docutils literal"><span class="pre">-impl.h</span></code> suffix is
+omitted.</p>
+<p>In most cases, declarations that are not used outside a single source file
+are in the source file.</p>
+</li>
+<li><p class="first">Use suffix <code class="file docutils literal"><span class="pre">-doc.h</span></code> for files that contain only Doxygen documentation
+for some module or such, for cases where there is no natural single header
+for putting the documentation.</p>
+</li>
+<li><p class="first">For C++ files, prefer naming the file the same as the (main) class it
+contains.  Currently all file names are all-lowercase, even though class
+names contain capital letters.
+It is OK to use commonly known abbreviations, and/or omit the name of the
+containing directory if that would cause unnecessary repetition (e.g., as a
+common prefix to every file name in the directory) and the remaining part of
+the name is unique enough.</p>
+</li>
+<li><p class="first">Avoid having multiple files with the same name in different places within
+the same library.  In addition to making things harder to find, C++ source
+files with the same name can cause obscure problems with some compilers.
+Currently, unit tests are an exception to the rule (there is only one
+particular compiler that had problems with this, and a workaround is
+possible if/when that starts to affect more than a few of the test files).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="common-guidelines-for-c-and-c-code">
+<h2>Common guidelines for C and C++ code<a class="headerlink" href="#common-guidelines-for-c-and-c-code" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Preprocessor macros should be all upper-case.  Do not use leading
+underscores, as all such names are reserved according to the C/C++ standard.</li>
+<li>Name include guards like <code class="docutils literal"><span class="pre">GMX_DIRNAME_HEADERNAME_H</span></code>.</li>
+<li>Avoid abbreviations that are not obvious to a general reader.</li>
+<li>If you use acronyms (e.g., PME, DD) in names, follow the Microsoft policy on
+casing: two letters is uppercase (DD), three or more is lowercase (Pme).
+If the first letter would be lowercase in the context where it is used
+(e.g., at the beginning of a function name, or anywhere in a C function
+name), it is clearest to use all-lowercase acronym.</li>
+</ul>
+</div>
+<div class="section" id="c-code">
+<h2>C code<a class="headerlink" href="#c-code" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>All function and variable names are lowercase, with underscores as word
+separators where needed for clarity.</li>
+<li>All functions that are part of the public API should start with <code class="docutils literal"><span class="pre">gmx_</span></code>.
+Preferably, other functions should as well.
+Some parts of the code use a <code class="docutils literal"><span class="pre">_gmx_</span></code> prefix for internal functions, but
+strictly speaking, these are reserved names, so, e.g., a trailing underscore
+would be better.</li>
+<li>Old C code and changes to it can still use the hungarian notation for
+booleans and enumerated variable names, as well as enum values, where they
+are prefixed with <code class="docutils literal"><span class="pre">b</span></code> and <code class="docutils literal"><span class="pre">e</span></code> respectively, or you can gradually move
+to the C++ practice below. Whatever you choose, avoid complex abbreviations.</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2>C++ code<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Use CamelCase for all names.  Start types (such as classes, structs, and
+typedefs) with a capital letter, other names (functions, variables) with a
+lowercase letter.
+You may use an all-lowercase name with underscores if your class closely
+resembles an external construct (e.g., a standard library construct) named
+that way.</li>
+<li>C++ interfaces are named with an <code class="docutils literal"><span class="pre">I</span></code> prefix, such as in ICommandLineModule.
+This keeps interfaces identifiable, without introducing too much clutter
+(as the interface is typically used quite widely, spelling out
+<code class="docutils literal"><span class="pre">Interface</span></code> would make many of the names unnecessarily long).</li>
+<li>Abstract base classes are typically named with an <code class="docutils literal"><span class="pre">Abstract</span></code> prefix.</li>
+<li>Member variables are named with a trailing underscore.</li>
+<li>Accessors for a variable <code class="docutils literal"><span class="pre">foo_</span></code> are named <code class="docutils literal"><span class="pre">foo()</span></code> and <code class="docutils literal"><span class="pre">setFoo()</span></code>.</li>
+<li>Global variables are named with a <code class="docutils literal"><span class="pre">g_</span></code> prefix.</li>
+<li>Static class variables are named with a <code class="docutils literal"><span class="pre">s_</span></code> prefix.</li>
+<li>Global constants are often named with a <code class="docutils literal"><span class="pre">c_</span></code> prefix.</li>
+<li>If the main responsibility of a file is to implement a particular class,
+then the name of the file should match that class, except for possible
+abbreviations to avoid repetition in file names (e.g., if all classes within
+a module start with the module name, omitting or abbreviating the module
+name is OK).  Currently, all source file names are lowercase, but this
+casing difference should be the only difference.</li>
+<li>For new C++ code, avoid using the hungarian notation that is a descendant
+from the C code (i.e., the practice of using a <code class="docutils literal"><span class="pre">b</span></code> prefix for boolean
+variables and an <code class="docutils literal"><span class="pre">e</span></code> prefix for enumerated variables and/or values).
+Instead, make the names long with a good description of what they control,
+typically including a verb for boolean variables, like <code class="docutils literal"><span class="pre">foundAtom</span></code>.</li>
+<li>It is a good idea to include the name of the enum type
+as a base in the name of enum values, e.g., <code class="docutils literal"><span class="pre">HelpOutputFormat_Console</span></code>,
+in particular for settings exposed to other modules.</li>
+<li>Prefer to use enumerated types and values instead of booleans as control
+parameters to functions. It is reasonably easy to understand what the
+argument <code class="docutils literal"><span class="pre">HelpOutputFormat_Console</span></code> is controling, while it is almost
+impossible to decipher <code class="docutils literal"><span class="pre">TRUE</span></code> in the same place without checking the
+documentation for the role of the parameter.</li>
+</ul>
+<p>The rationale for the trailing underscore and the global/static prefixes is
+that it is immediately clear whether a variable referenced in a method is local
+to the function or has wider scope, improving the readability of the code.</p>
+</div>
+<div class="section" id="unit-tests">
+<h2>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Test fixtures (the first parameter to <code class="docutils literal"><span class="pre">TEST</span></code>/<code class="docutils literal"><span class="pre">TEST_F</span></code>) are named with a
+<code class="docutils literal"><span class="pre">Test</span></code> suffix.</li>
+<li>Classes meant as base classes for test fixtures (or as names to be typedefed
+to be fixtures) are named with a <code class="docutils literal"><span class="pre">TestBase</span></code> or <code class="docutils literal"><span class="pre">Fixture</span></code> suffix.</li>
+<li>The CTest test is named with CamelCase, ending with <code class="docutils literal"><span class="pre">Tests</span></code> (e.g.,
+<code class="docutils literal"><span class="pre">OptionsUnitTests</span></code>).</li>
+<li>The test binary is named with the name of the module and a <code class="docutils literal"><span class="pre">-test</span></code> suffix.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Naming conventions</a><ul>
+<li><a class="reference internal" href="#files">Files</a></li>
+<li><a class="reference internal" href="#common-guidelines-for-c-and-c-code">Common guidelines for C and C++ code</a></li>
+<li><a class="reference internal" href="#c-code">C code</a></li>
+<li><a class="reference internal" href="#id1">C++ code</a></li>
+<li><a class="reference internal" href="#unit-tests">Unit tests</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="includestyle.html"
+                        title="previous chapter">Guidelines for #include directives</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="language-features.html"
+                        title="next chapter">Allowed language features</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/naming.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="language-features.html" title="Allowed language features"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="includestyle.html" title="Guidelines for #include directives"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2016.3</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" >Style guidelines</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2017, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

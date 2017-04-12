@@ -1,0 +1,100 @@
+.. _gmx nmeig:
+
+gmx nmeig
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx nmeig [:strong:`-f` :emphasis:`[<.mtx>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-of` :emphasis:`[<.xvg>]`] [:strong:`-ol` :emphasis:`[<.xvg>]`]
+              [:strong:`-os` :emphasis:`[<.xvg>]`] [:strong:`-qc` :emphasis:`[<.xvg>]`] [:strong:`-v` :emphasis:`[<.trr/.cpt/...>]`]
+              [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]m`] [:strong:`-first` :emphasis:`<int>`] [:strong:`-last` :emphasis:`<int>`]
+              [:strong:`-maxspec` :emphasis:`<int>`] [:strong:`-T` :emphasis:`<real>`] [:strong:`-[no]constr`] [:strong:`-width` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx nmeig`` calculates the eigenvectors/values of a (Hessian) matrix,
+which can be calculated with :doc:`gmx mdrun <gmx-mdrun>`.
+The eigenvectors are written to a trajectory file (``-v``).
+The structure is written first with t=0. The eigenvectors
+are written as frames with the eigenvector number and eigenvalue
+written as step number and timestamp, respectively.
+The eigenvectors can be analyzed with :doc:`gmx anaeig <gmx-anaeig>`.
+An ensemble of structures can be generated from the eigenvectors with
+:doc:`gmx nmens <gmx-nmens>`. When mass weighting is used, the generated eigenvectors
+will be scaled back to plain Cartesian coordinates before generating the
+output. In this case, they will no longer be exactly orthogonal in the
+standard Cartesian norm, but in the mass-weighted norm they would be.
+
+This program can be optionally used to compute quantum corrections to heat capacity
+and enthalpy by providing an extra file argument ``-qcorr``. See the GROMACS
+manual, Chapter 1, for details. The result includes subtracting a harmonic
+degree of freedom at the given temperature.
+The total correction is printed on the terminal screen.
+The recommended way of getting the corrections out is:
+
+``gmx nmeig -s topol.tpr -f nm.mtx -first 7 -last 10000 -T 300 -qc [-constr]``
+
+The ``-constr`` option should be used when bond constraints were used during the
+simulation **for all the covalent bonds**. If this is not the case,
+you need to analyze the ``quant_corr.xvg`` file yourself.
+
+To make things more flexible, the program can also take virtual sites into account
+when computing quantum corrections. When selecting ``-constr`` and
+``-qc``, the ``-begin`` and ``-end`` options will be set automatically as well.
+Again, if you think you know it better, please check the ``eigenfreq.xvg``
+output.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.mtx>] (hessian.mtx)
+    Hessian matrix
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-of`` [<.xvg>] (eigenfreq.xvg)
+    xvgr/xmgr file
+``-ol`` [<.xvg>] (eigenval.xvg)
+    xvgr/xmgr file
+``-os`` [<.xvg>] (spectrum.xvg) (Optional)
+    xvgr/xmgr file
+``-qc`` [<.xvg>] (quant_corr.xvg) (Optional)
+    xvgr/xmgr file
+``-v`` [<.trr/.cpt/...>] (eigenvec.trr)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+
+Other options:
+
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]m``  (yes)
+    Divide elements of Hessian by product of sqrt(mass) of involved atoms prior to diagonalization. This should be used for 'Normal Modes' analysis
+``-first`` <int> (1)
+    First eigenvector to write away
+``-last`` <int> (50)
+    Last eigenvector to write away
+``-maxspec`` <int> (4000)
+    Highest frequency (1/cm) to consider in the spectrum
+``-T`` <real> (298.15)
+    Temperature for computing quantum heat capacity and enthalpy when using normal mode calculations to correct classical simulations
+``-[no]constr``  (no)
+    If constraints were used in the simulation but not in the normal mode analysis (this is the recommended way of doing it) you will need to set this for computing the quantum corrections.
+``-width`` <real> (1)
+    Width (sigma) of the gaussian peaks (1/cm) when generating a spectrum
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.
