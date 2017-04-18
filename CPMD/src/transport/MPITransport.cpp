@@ -60,13 +60,11 @@ void MPITransport::initClient(std::string path) {
 }
 
 int MPITransport::connectAddress(int id) {
-    MPI_Comm_connect(port[id], MPI_INFO_NULL, 0, host_comm, &intercomm[id]);
-    return 0;
+    return MPI_Comm_connect(port[id], MPI_INFO_NULL, 0, host_comm, &intercomm[id]);
 }
 
 int MPITransport::acceptConnection(int id) {
-    MPI_Comm_accept(port[id], MPI_INFO_NULL, 0, host_comm, &intercomm[id]);
-    return 0;
+    return MPI_Comm_accept(port[id], MPI_INFO_NULL, 0, host_comm, &intercomm[id]);
 }
 
 void MPITransport::closeConnection(int id) {

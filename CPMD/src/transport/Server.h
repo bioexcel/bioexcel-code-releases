@@ -57,6 +57,10 @@ public:
     void set_clients_number(int clients_number) {
         Server::clientsNumber = clients_number;
     }
+
+    int getClientsNumber() {
+        return clientsNumber;
+    }
 };
 
 

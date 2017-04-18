@@ -123,6 +123,14 @@ public:
      */
     virtual void destroy () {}
 
+    /**
+     * Add new client to the clients list
+     * @param client endpoint to add
+     */
+    void addClient(Endpoint* client) {
+        client_list.push_back(client);
+    }
+
     std::string transform_path(std::string original_path) {
         char sep = '/';
         std::string transformed_path = std::string(original_path);
@@ -155,6 +163,10 @@ public:
 
     void setPath(std::string path) {
         Endpoint::path = path;
+    }
+
+    const std::vector<Endpoint *> &getClient_list() const {
+        return client_list;
     }
 };
 
