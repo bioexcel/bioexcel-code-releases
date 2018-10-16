@@ -1,0 +1,324 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Managing long simulations &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Answers to frequently asked questions (FAQs)" href="faq.html" />
+    <link rel="prev" title="System preparation" href="system-preparation.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="Answers to frequently asked questions (FAQs)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="system-preparation.html" title="System preparation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="managing-long-simulations">
+<span id="id1"></span><h1>Managing long simulations<a class="headerlink" href="#managing-long-simulations" title="Permalink to this headline">¶</a></h1>
+<p>Molecular simulations often extend beyond the lifetime of a single
+UNIX command-line process. It is useful to be able to stop and
+restart the simulation in a
+way that is equivalent to a single run. When <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> is
+halted, it writes a checkpoint file that can restart the simulation
+exactly as if there was no interruption. To do this, the checkpoint
+retains a full-precision version of the positions and velocities,
+along with state information necessary to restart algorithms e.g.
+that implement coupling to external thermal reservoirs. A restart can
+be attempted using e.g. a <a class="reference internal" href="file-formats.html#gro"><span class="std std-ref">gro</span></a> file with velocities, but since
+the <a class="reference internal" href="file-formats.html#gro"><span class="std std-ref">gro</span></a> file has significantly less precision, and none of
+the coupling algorithms will have their state carried over, such
+a restart is less continuous than a normal MD step.</p>
+<p>Such a checkpoint file is also written periodically by <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> during the run. The interval is given by the <code class="docutils literal"><span class="pre">-cpt</span></code> flag to
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>. When <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> attemps to write each
+successive checkpoint file, it first renames the old file with the
+suffix <code class="docutils literal"><span class="pre">_prev</span></code>, so that even if something goes wrong while writing
+the new checkpoint file, only recent progress can be lost.</p>
+<p><a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> can be halted in several ways:</p>
+<ul class="simple">
+<li>the number of simulation <a class="reference internal" href="mdp-options.html#mdp-nsteps"><code class="xref std std-mdp docutils literal"><span class="pre">nsteps</span></code></a> can expire</li>
+<li>the user issues a termination signal (e.g. with Ctrl-C on the terminal)</li>
+<li>the job scheduler issues a termination signal when time expires</li>
+<li>when <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> detects that the length specified with
+<code class="docutils literal"><span class="pre">-maxh</span></code> has elapsed (this option is useful to help cooperate with
+a job scheduler, but can be problematic if jobs can be suspended)</li>
+<li>some kind of catastrophic failure, such as loss of power, or a
+disk filling up, or a network failing</li>
+</ul>
+<p>To use the checkpoint file for a restart, use a command line such as</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">cpi</span> <span class="n">state</span>
+</pre></div>
+</div>
+<p>which directs mdrun to use the checkpoint file (which is named
+<code class="docutils literal"><span class="pre">state.cpt</span></code> by default). You can choose to give the output
+checkpoint file a different name with the <code class="docutils literal"><span class="pre">-cpo</span></code> flag, but if so
+then you must provide that name as input to <code class="docutils literal"><span class="pre">-cpi</span></code> when you later
+use that file. You can
+query the contents of checkpoint files with <a class="reference internal" href="../onlinehelp/gmx-check.html#gmx-check"><span class="std std-ref">gmx check</span></a> and
+<a class="reference internal" href="../onlinehelp/gmx-dump.html#gmx-dump"><span class="std std-ref">gmx dump</span></a>.</p>
+<div class="section" id="appending-to-output-files">
+<h2>Appending to output files<a class="headerlink" href="#appending-to-output-files" title="Permalink to this headline">¶</a></h2>
+<p>By default, <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> will append to the old output files. If
+the previous part ended in a regular way, then the performance data at
+the end of the log file will will be removed, some new information
+about the run context written, and the simulation will proceed. Otherwise,
+mdrun will truncate all the output files back to the time of the last
+written checkpoint file, and continue from there, as if the simulation
+stopped at that checkpoint in a regular way.</p>
+<p>You can choose not to append the output files by using the
+<code class="docutils literal"><span class="pre">-noappend</span></code> flag, which forces mdrun to write each output to a
+separate file, whose name includes a “.partXXXX” string to describe
+which simulation part is contained in this file. This numbering starts
+from zero and increases monotonically as simulations are restarted,
+but does not reflect the number of simulation steps in each part. The
+<a class="reference internal" href="mdp-options.html#mdp-simulation-part"><code class="xref std std-mdp docutils literal"><span class="pre">simulation-part</span></code></a> option can be used to set this number manually
+in <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a>, which can be useful if data has been lost,
+e.g. through filesystem failure or user error.</p>
+<p>Appending will not work if any output files have been modified or
+removed after mdrun wrote them, because the checkpoint file maintains
+a checksum of each file that it will verify before it writes to them
+again. In such cases, you must either restore the file, name them
+as the checkpoint file expects, or continue with <code class="docutils literal"><span class="pre">-noappend</span></code>. If
+your original run used <code class="docutils literal"><span class="pre">-deffnm</span></code>, and you want appending, then
+your continuations must also use <code class="docutils literal"><span class="pre">-deffnm</span></code>.</p>
+</div>
+<div class="section" id="backing-up-your-files">
+<h2>Backing up your files<a class="headerlink" href="#backing-up-your-files" title="Permalink to this headline">¶</a></h2>
+<p>You should arrange to back up your simulation files frequently. Network
+file systems on clusters can be configured in more or less conservative
+ways, and this can lead <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> to be told that a checkpoint
+file has been written to disk when actually it is still in memory
+somewhere and vulnerable to a power failure or disk that fills or
+fails in the meantime. The UNIX tool rsync can be a useful way to
+periodically copy your simulation output to a remote storage location,
+which works safely even while the simulation is underway. Keeping a copy
+of the final checkpoint file from each part of a job submitted to a
+cluster can be useful if a file system is unreliable.</p>
+</div>
+<div class="section" id="extending-a-tpr-file">
+<h2>Extending a .tpr file<a class="headerlink" href="#extending-a-tpr-file" title="Permalink to this headline">¶</a></h2>
+<p>If the simulation described by <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file has completed and should
+be extended, use the <a class="reference internal" href="../onlinehelp/gmx-convert-tpr.html#gmx-convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a> tool to extend the run, e.g.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">convert</span><span class="o">-</span><span class="n">tpr</span> <span class="o">-</span><span class="n">s</span> <span class="n">previous</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">extend</span> <span class="n">timetoextendby</span> <span class="o">-</span><span class="n">o</span> <span class="nb">next</span><span class="o">.</span><span class="n">tpr</span>
+<span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">s</span> <span class="nb">next</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">cpi</span> <span class="n">state</span><span class="o">.</span><span class="n">cpt</span>
+</pre></div>
+</div>
+<p>The time can also be extended using the <code class="docutils literal"><span class="pre">-until</span></code> and <code class="docutils literal"><span class="pre">-nsteps</span></code>
+options. Note that the original <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file may have generated
+velocities, but that is a one-time operation within <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a>
+that is never performed again by any other tool.</p>
+</div>
+<div class="section" id="changing-mdp-options-for-a-restart">
+<h2>Changing mdp options for a restart<a class="headerlink" href="#changing-mdp-options-for-a-restart" title="Permalink to this headline">¶</a></h2>
+<p>If you wish to make changes to your simulations settings other than
+length, then you should do so in the <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file or topology, and
+then call</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">grompp</span> <span class="o">-</span><span class="n">f</span> <span class="n">possibly</span><span class="o">-</span><span class="n">changed</span><span class="o">.</span><span class="n">mdp</span> <span class="o">-</span><span class="n">p</span> <span class="n">possibly</span><span class="o">-</span><span class="n">changed</span><span class="o">.</span><span class="n">top</span> <span class="o">-</span><span class="n">c</span> <span class="n">state</span><span class="o">.</span><span class="n">cpt</span> <span class="o">-</span><span class="n">o</span> <span class="n">new</span><span class="o">.</span><span class="n">tpr</span>
+<span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">s</span> <span class="n">new</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">cpi</span> <span class="n">state</span><span class="o">.</span><span class="n">cpt</span>
+</pre></div>
+</div>
+<p>to instruct <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> to copy the full-precision coordinates
+in the checkpoint file into the new <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file. You should
+consider your choices for <a class="reference internal" href="mdp-options.html#mdp-tinit"><code class="xref std std-mdp docutils literal"><span class="pre">tinit</span></code></a>, <a class="reference internal" href="mdp-options.html#mdp-init-step"><code class="xref std std-mdp docutils literal"><span class="pre">init-step</span></code></a>,
+<a class="reference internal" href="mdp-options.html#mdp-nsteps"><code class="xref std std-mdp docutils literal"><span class="pre">nsteps</span></code></a> and <a class="reference internal" href="mdp-options.html#mdp-simulation-part"><code class="xref std std-mdp docutils literal"><span class="pre">simulation-part</span></code></a>. You should generally not
+regenerate velocities with <a class="reference internal" href="mdp-options.html#mdp-gen-vel"><code class="xref std std-mdp docutils literal"><span class="pre">gen-vel</span></code></a>, and generally select
+<a class="reference internal" href="mdp-options.html#mdp-continuation"><code class="xref std std-mdp docutils literal"><span class="pre">continuation</span></code></a> so that constraints are not re-applied before
+the first integration step.</p>
+</div>
+<div class="section" id="restarts-without-checkpoint-files">
+<h2>Restarts without checkpoint files<a class="headerlink" href="#restarts-without-checkpoint-files" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to perform an exact restart a simulation if you lack a
+checkpoint file but have a matching pair of frames in a <a class="reference internal" href="file-formats.html#trr"><span class="std std-ref">trr</span></a> and
+<a class="reference internal" href="file-formats.html#edr"><span class="std std-ref">edr</span></a> file written by <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>. To do this, use</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">convert</span><span class="o">-</span><span class="n">tpr</span> <span class="o">-</span><span class="n">s</span> <span class="n">old</span><span class="o">.</span><span class="n">tpr</span> <span class="o">-</span><span class="n">e</span> <span class="n">matching</span><span class="o">.</span><span class="n">edr</span> <span class="o">-</span><span class="n">t</span> <span class="n">matching</span><span class="o">.</span><span class="n">trr</span> <span class="o">-</span><span class="n">o</span> <span class="n">new</span><span class="o">.</span><span class="n">tpr</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="are-continuations-exact">
+<h2>Are continuations exact?<a class="headerlink" href="#are-continuations-exact" title="Permalink to this headline">¶</a></h2>
+<p>If you had a computer with unlimited precision, or if you integrated
+the time-discretized equations of motion by hand, exact continuation
+would lead to identical results. But since practical computers have
+limited precision and MD is chaotic, trajectories will diverge very
+rapidly even if one bit is different. Such trajectories will all be
+equally valid, but eventually very different. Continuation using a
+checkpoint file, using the same code compiled with the same compiler
+and running on the same computer architecture using the same number of
+processors without GPUs (see next section) would lead to binary
+identical results. However,
+by default the actual work load will be balanced across the hardware
+according to the observed execution times. Such trajectories are
+in principle not reproducible, and in particular a run that took
+place in more than one part will not be identical with an equivalent
+run in one part - but neither of them is better in any sense.</p>
+</div>
+<div class="section" id="reproducibility">
+<h2>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this headline">¶</a></h2>
+<p>The following factors affect the reproducibility of a simulation, and thus its output:</p>
+<ul class="simple">
+<li>Precision (mixed / double) with double giving “better” reproducibility.</li>
+<li>Number of cores, due to different order in which forces are
+accumulated. For instance (a+b)+c is not necessarily binary
+identical to a+(b+c) in floating-point arithmetic.</li>
+<li>Type of processors. Even within the same processor family there can be slight differences.</li>
+<li>Optimization level when compiling.</li>
+<li>Optimizations at run time: e.g. the FFTW library that is typically
+used for fast Fourier transforms determines at startup which version
+of their algorithms is fastest, and uses that for the remainder of
+the calculations. Since the speed estimate is not deterministic, the
+results may vary from run to run.</li>
+<li>Random numbers used for instance as a seed for generating velocities
+(in GROMACS at the preprocessing stage).</li>
+<li>Uninitialized variables in the code (but there shouldn’t be any)</li>
+<li>Dynamic linking to different versions of shared libraries (e.g. for FFTs)</li>
+<li>Dynamic load balancing, since particles are redistributed to
+processors based on elapsed wallclock time, which will lead to
+(a+b)+c != a+(b+c) issues as above</li>
+<li>Number of PME-only ranks (for parallel PME simulations)</li>
+<li>MPI reductions typically do not guarantee the order of the
+operations, and so the absence of associativity for floating-point
+arithmetic means the result of a reduction depends on the order
+actually chosen</li>
+<li>On GPUs, the reduction of e.g. non-bonded forces has a non-deterministic
+summation order, so any fast implementation is non-reprodudible by
+design.</li>
+</ul>
+<p>The important question is whether it is a problem if simulations are
+not completely reproducible. The answer is yes and no. Reproducibility
+is a cornerstone of science in general, and hence it is important.
+The <cite>Central Limit Theorem &lt;https://en.wikipedia.org/wiki/Central_limit_theorem&gt;</cite>
+tells us that in the case of infinitely long
+simulations, all observables converge to their equilibrium
+values. Molecular simulations in GROMACS adhere to this theorem, and
+hence, for instance, the energy of your system will converge to a
+finite value, the diffusion constant of your water molecules will
+converge to a finite value, and so on. That means all the important
+observables, which are the values you would like to get out of your
+simulation, are reproducible. Each individual trajectory is not
+reproducible, however.</p>
+<p>However, there are a few cases where it would be useful if
+trajectories were reproducible, too. These include developers doing
+debugging, and searching for a rare event in a trajectory when, if
+it occurs, you want to have manually saved your checkpoint file so
+you can restart the simulation under different conditions, e.g.
+writing output much more frequently.</p>
+<p>In order to obtain this reproducible trajectory, it is important
+to look over the list above and eliminate the factors that could
+affect it. Further, using</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">mdrun</span> <span class="o">-</span><span class="n">reprod</span>
+</pre></div>
+</div>
+<p>will eliminate all sources of non-reproducibility that it can,
+i.e. same executable + same hardware + same shared libraries + same
+run input file + same command line parameters will lead to
+reproducible results.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Managing long simulations</a><ul>
+<li><a class="reference internal" href="#appending-to-output-files">Appending to output files</a></li>
+<li><a class="reference internal" href="#backing-up-your-files">Backing up your files</a></li>
+<li><a class="reference internal" href="#extending-a-tpr-file">Extending a .tpr file</a></li>
+<li><a class="reference internal" href="#changing-mdp-options-for-a-restart">Changing mdp options for a restart</a></li>
+<li><a class="reference internal" href="#restarts-without-checkpoint-files">Restarts without checkpoint files</a></li>
+<li><a class="reference internal" href="#are-continuations-exact">Are continuations exact?</a></li>
+<li><a class="reference internal" href="#reproducibility">Reproducibility</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="system-preparation.html"
+                        title="previous chapter">System preparation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="faq.html"
+                        title="next chapter">Answers to frequently asked questions (FAQs)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/managing-simulations.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="Answers to frequently asked questions (FAQs)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="system-preparation.html" title="System preparation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

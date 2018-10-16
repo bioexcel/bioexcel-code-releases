@@ -1,0 +1,109 @@
+.. _gmx check:
+
+gmx check
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx check [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-f2` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s1` :emphasis:`[<.tpr>]`]
+              [:strong:`-s2` :emphasis:`[<.tpr>]`] [:strong:`-c` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-e` :emphasis:`[<.edr>]`]
+              [:strong:`-e2` :emphasis:`[<.edr>]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-m` :emphasis:`[<.tex>]`] [:strong:`-vdwfac` :emphasis:`<real>`]
+              [:strong:`-bonlo` :emphasis:`<real>`] [:strong:`-bonhi` :emphasis:`<real>`] [:strong:`-[no]rmsd`] [:strong:`-tol` :emphasis:`<real>`]
+              [:strong:`-abstol` :emphasis:`<real>`] [:strong:`-[no]ab`] [:strong:`-lastener` :emphasis:`<string>`]
+
+Description
+-----------
+
+``gmx check`` reads a trajectory (:ref:`.tng <tng>`, :ref:`.trr <trr>` or
+:ref:`.xtc <xtc>`), an energy file (:ref:`.edr <edr>`)
+or an index file (:ref:`.ndx <ndx>`)
+and prints out useful information about them.
+
+Option ``-c`` checks for presence of coordinates,
+velocities and box in the file, for close contacts (smaller than
+``-vdwfac`` and not bonded, i.e. not between ``-bonlo``
+and ``-bonhi``, all relative to the sum of both Van der Waals
+radii) and atoms outside the box (these may occur often and are
+no problem). If velocities are present, an estimated temperature
+will be calculated from them.
+
+If an index file, is given its contents will be summarized.
+
+If both a trajectory and a :ref:`.tpr <tpr>` file are given (with ``-s1``)
+the program will check whether the bond lengths defined in the tpr
+file are indeed correct in the trajectory. If not you may have
+non-matching files due to e.g. deshuffling or due to problems with
+virtual sites. With these flags, ``gmx check`` provides a quick check for such problems.
+
+The program can compare two run input (:ref:`.tpr <tpr>`)
+files
+when both ``-s1`` and ``-s2`` are supplied. When comparing
+run input files this way, the default relative tolerance is reduced
+to 0.000001 and the absolute tolerance set to zero to find any differences
+not due to minor compiler optimization differences, although you can
+of course still set any other tolerances through the options.Similarly a pair of trajectory files can be compared (using the ``-f2``
+option), or a pair of energy files (using the ``-e2`` option).
+
+For free energy simulations the A and B state topology from one
+run input file can be compared with options ``-s1`` and ``-ab``.
+
+In case the ``-m`` flag is given a LaTeX file will be written
+consisting of a rough outline for a methods section for a paper.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-f2`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s1`` [<.tpr>] (top1.tpr) (Optional)
+    Portable xdr run input file
+``-s2`` [<.tpr>] (top2.tpr) (Optional)
+    Portable xdr run input file
+``-c`` [<.tpr/.gro/...>] (topol.tpr) (Optional)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-e`` [<.edr>] (ener.edr) (Optional)
+    Energy file
+``-e2`` [<.edr>] (ener2.edr) (Optional)
+    Energy file
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-m`` [<.tex>] (doc.tex) (Optional)
+    LaTeX file
+
+Other options:
+
+``-vdwfac`` <real> (0.8)
+    Fraction of sum of VdW radii used as warning cutoff
+``-bonlo`` <real> (0.4)
+    Min. fract. of sum of VdW radii for bonded atoms
+``-bonhi`` <real> (0.7)
+    Max. fract. of sum of VdW radii for bonded atoms
+``-[no]rmsd``  (no)
+    Print RMSD for x, v and f
+``-tol`` <real> (0.001)
+    Relative tolerance for comparing real values defined as 2*(a-b)/(\|a\|+\|b\|)
+``-abstol`` <real> (0.001)
+    Absolute tolerance, useful when sums are close to zero.
+``-[no]ab``  (no)
+    Compare the A and B topology from one file
+``-lastener`` <string>
+    Last energy term to compare (if not given all are tested). It makes sense to go up until the Pressure.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

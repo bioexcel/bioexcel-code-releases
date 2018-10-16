@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="page_logging" kind="page">
+    <compoundname>page_logging</compoundname>
+    <title>Logging</title>
+    <detaileddescription>
+<para>Currently, mdrun is using a combination of direct C-style I/O into <computeroutput>fplog</computeroutput> and <computeroutput>stderr</computeroutput>, and the facilities described here. However, more and more should get moved to this interface in the future.</para><para>The parts that make up the logging system are shown below.</para><para><dot> 
+    digraph logging_overview {
+        builder [label=&quot;LoggerBuilder&quot;, URL=&quot;\ref gmx::LoggerBuilder&quot;]
+        owner [label=&quot;LoggerOwner&quot;, URL=&quot;\ref gmx::LoggerOwner&quot;]
+        logger [label=&quot;MDLogger&quot;, URL=&quot;\ref gmx::MDLogger&quot;]
+        target [label=&quot;ILogTarget&quot;, URL=&quot;\ref gmx::ILogTarget&quot;]
+        user [label=&quot;using code&quot;]
+
+        builder -&gt; owner [label=&quot;builds&quot;]
+        owner -&gt; logger
+        owner -&gt; target [label=&quot;owns&quot;]
+        logger -&gt; target [label=&quot;references&quot;]
+        user -&gt; builder [label=&quot;set logging targets&quot;]
+        user -&gt; logger [label=&quot;write with\nGMX_LOG()&quot;]
+    }
+</dot></para><para>To initialize the logging system, the using code creates an instance of <ref refid="classgmx_1_1LoggerBuilder" kindref="compound">gmx::LoggerBuilder</ref>, and sets the desired logging targets with provided methods. Once all targets have been initialized, the code calls <ref refid="classgmx_1_1LoggerBuilder_1aff6003351ad3607565bf516313d6a1cd" kindref="member">gmx::LoggerBuilder::build()</ref> and gets a <ref refid="classgmx_1_1LoggerOwner" kindref="compound">gmx::LoggerOwner</ref>, which is responsible of managing the memory allocated for the logger.</para><para>To log information, the using code uses an <ref refid="classgmx_1_1MDLogger" kindref="compound">gmx::MDLogger</ref> returned by <ref refid="classgmx_1_1LoggerOwner_1addda4ee187e284a59788b95902bb2a48" kindref="member">gmx::LoggerOwner::logger()</ref> with the <ref refid="group__module__utility_1gae729bb685d65e62bab6be8c4fe02ae87" kindref="member">GMX_LOG</ref> macro. Code that writes to the log only needs to know of this class (and helper classes used to implement the macro), which is a relatively simple container for references to the logging targets. If there is no log target that would consume the information written with <ref refid="group__module__utility_1gae729bb685d65e62bab6be8c4fe02ae87" kindref="member">GMX_LOG</ref>, the whole statement evaluates to a conditional that reads the log target from a member variable and compares it against <computeroutput>nullptr</computeroutput>. All the code that formats the output is skipped in this case.</para><para>Currently the implementation is geared to making <ref refid="group__module__utility_1gae729bb685d65e62bab6be8c4fe02ae87" kindref="member">GMX_LOG</ref> behavior stable, and to be relatively extensible. However, using any other approach than <ref refid="group__module__utility_1gae729bb685d65e62bab6be8c4fe02ae87" kindref="member">GMX_LOG</ref> for writing to the log should first think about how the API could be best organized for that.</para><para>All information written to the log is composed of <emphasis>log entries</emphasis>. Each <ref refid="group__module__utility_1gae729bb685d65e62bab6be8c4fe02ae87" kindref="member">GMX_LOG</ref> statement writes a single log entry, meaning that newlines are automatically added.</para><para>The logging methods are not thread-safe, so it is the responsibility of the calling code to only use them from a single thread or otherwise synchronize access. </para>    </detaileddescription>
+  </compounddef>
+</doxygen>

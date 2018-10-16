@@ -1,0 +1,653 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1CommandLineModuleManager" kind="class" prot="public">
+    <compoundname>gmx::CommandLineModuleManager</compoundname>
+    <includes local="no">gromacs/commandline/cmdlinemodulemanager.h</includes>
+    <innerclass refid="classgmx_1_1CommandLineModuleManager_1_1Impl" prot="public">gmx::CommandLineModuleManager::Impl</innerclass>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgmx_1_1CommandLineModuleManager_1a94bd50159202f6c90d5625bc00a60d7f" prot="public" static="no">
+        <type>int(*</type>
+        <definition>typedef int(* gmx::CommandLineModuleManager::CMainFunction)(int argc, char *argv[])</definition>
+        <argsstring>)(int argc, char *argv[])</argsstring>
+        <name>CMainFunction</name>
+        <briefdescription>
+<para>Function pointer type for a C main function. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="99" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classgmx_1_1CommandLineModuleManager_1a2cc4c17942e77a57739f8050335f2bc8" prot="public" static="no">
+        <type>void(*</type>
+        <definition>typedef void(* gmx::CommandLineModuleManager::InitSettingsFunction)(CommandLineModuleSettings *settings)</definition>
+        <argsstring>)(CommandLineModuleSettings *settings)</argsstring>
+        <name>InitSettingsFunction</name>
+        <briefdescription>
+<para>Function pointer to a settings provider. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="101" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1CommandLineModuleManager_1a060996184175cd17e48fc05d1498edb3" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1PrivateImplPointer" kindref="compound">PrivateImplPointer</ref>&lt; <ref refid="classgmx_1_1CommandLineModuleManager_1_1Impl" kindref="compound">Impl</ref> &gt;</type>
+        <definition>PrivateImplPointer&lt;Impl&gt; gmx::CommandLineModuleManager::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="349" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" bodystart="347" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a81d63649f04804faf577e44ddf158073" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::CommandLineModuleManager::runAsMainSingleModule</definition>
+        <argsstring>(int argc, char *argv[], ICommandLineModule *module)</argsstring>
+        <name>runAsMainSingleModule</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref> *</type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Implements a <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref> method that runs a single module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argc</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argv</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to run.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method allows for uniform behavior for binaries that only contain a single module without duplicating any of the implementation from <ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">CommandLineModuleManager</ref> (startup headers, common options etc.).</para><para>The signature assumes that <computeroutput>module</computeroutput> construction does not throw (because otherwise the caller would need to duplicate all the exception handling code). It is possible to move the construction inside the try/catch in this method using an indirection similar to <ref refid="classgmx_1_1TrajectoryAnalysisCommandLineRunner_1a12cd1b40ed04cda667f315e2adee3337" kindref="member">TrajectoryAnalysisCommandLineRunner::runAsMain()</ref>, but until that is necessary, the current approach leads to simpler code.</para><para>Usage: <programlisting><codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[])</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>CustomCommandLineModule<sp/>module;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1CommandLineModuleManager_1a81d63649f04804faf577e44ddf158073" kindref="member">gmx::CommandLineModuleManager::runAsMainSingleModule</ref>(argc,<sp/>argv,<sp/>&amp;module);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">*<sp/></highlight></codeline>
+</programlisting></para><para>Does not throw. All exceptions are caught and handled internally. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="133" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="599" bodyend="616"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a4854a50ca50f67912d7cf149d5577f41" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::CommandLineModuleManager::runAsMainCMain</definition>
+        <argsstring>(int argc, char *argv[], CMainFunction mainFunction)</argsstring>
+        <name>runAsMainCMain</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager_1a94bd50159202f6c90d5625bc00a60d7f" kindref="member">CMainFunction</ref></type>
+          <declname>mainFunction</declname>
+        </param>
+        <briefdescription>
+<para>Implements a <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref> method that runs a given function. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argc</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argv</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mainFunction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>-like method to wrap.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method creates a dummy command-line module that does its processing by calling <computeroutput>mainFunction</computeroutput>; see <ref refid="classgmx_1_1CommandLineModuleManager_1af70e6bccbcd30cb41d7ce54cafbd8583" kindref="member">addModuleCMain()</ref> for details. It then runs this module with <ref refid="classgmx_1_1CommandLineModuleManager_1a81d63649f04804faf577e44ddf158073" kindref="member">runAsMainSingleModule()</ref>. This allows the resulting executable to handle common options and do other common actions (e.g., startup headers) without duplicate code in the main methods.</para><para>Usage: <programlisting><codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>my_main(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[])</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>&lt;...&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[])</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1CommandLineModuleManager_1a4854a50ca50f67912d7cf149d5577f41" kindref="member">gmx::CommandLineModuleManager::runAsMainCMain</ref>(argc,<sp/>argv,<sp/>&amp;my_main);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">*<sp/></highlight></codeline>
+</programlisting></para><para>Does not throw. All exceptions are caught and handled internally. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="164" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="619" bodyend="624"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a83264d16575326b1986713f1e55de503" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::CommandLineModuleManager::runAsMainCMainWithSettings</definition>
+        <argsstring>(int argc, char *argv[], CMainFunction mainFunction, InitSettingsFunction settingsFunction)</argsstring>
+        <name>runAsMainCMainWithSettings</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager_1a94bd50159202f6c90d5625bc00a60d7f" kindref="member">CMainFunction</ref></type>
+          <declname>mainFunction</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager_1a2cc4c17942e77a57739f8050335f2bc8" kindref="member">InitSettingsFunction</ref></type>
+          <declname>settingsFunction</declname>
+        </param>
+        <briefdescription>
+<para>Implements a <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref> method that runs a given function with custom settings. </para>        </briefdescription>
+        <detaileddescription>
+<para>This method does the same as <ref refid="classgmx_1_1CommandLineModuleManager_1a4854a50ca50f67912d7cf149d5577f41" kindref="member">runAsMainCMain()</ref>, but additionally calls <computeroutput>settingsFunction</computeroutput> to initialize <ref refid="classgmx_1_1CommandLineModuleSettings" kindref="compound">CommandLineModuleSettings</ref>. This allows specifying, e.g., a different default nice level. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="174" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="627" bodyend="633"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a03290a2c767a1e7ff7c6673658074cb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::CommandLineModuleManager::CommandLineModuleManager</definition>
+        <argsstring>(const char *binaryName, CommandLineProgramContext *programContext)</argsstring>
+        <name>CommandLineModuleManager</name>
+        <param>
+          <type>const char *</type>
+          <declname>binaryName</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineProgramContext" kindref="compound">CommandLineProgramContext</ref> *</type>
+          <declname>programContext</declname>
+        </param>
+        <briefdescription>
+<para>Initializes a command-line module manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">binaryName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the running binary (without Gromacs binary suffix or .exe on Windows). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>programContext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Program information for the running binary. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<computeroutput>binaryName</computeroutput> is used to detect when the binary is run through a symlink, and automatically invoke a matching module in such a case.</para><para><computeroutput>programInfo</computeroutput> is non-const to allow the manager to amend it based on the actual module that is getting executed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="192" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="448" bodyend="452"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a31c4818e799f4ccca6cb908f8dbe4e1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::CommandLineModuleManager::~CommandLineModuleManager</definition>
+        <argsstring>()</argsstring>
+        <name>~CommandLineModuleManager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="194" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="454" bodyend="456"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a36d83b3b08b82460acc422ad129f47e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::setQuiet</definition>
+        <argsstring>(bool bQuiet)</argsstring>
+        <name>setQuiet</name>
+        <param>
+          <type>bool</type>
+          <declname>bQuiet</declname>
+        </param>
+        <briefdescription>
+<para>Sets the module manager to quiet mode: don&apos;t print anything. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bQuiet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the module manager should remain silent.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Normally, the module manager prints out some information to <computeroutput>stderr</computeroutput> before it starts the module and after it finishes. This removes that output, which is useful in particular for unit tests so that they don&apos;t spam <computeroutput>stderr</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="206" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="458" bodyend="461"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1aae24e2bb5b578bf3517385cd92f8225c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::setOutputRedirector</definition>
+        <argsstring>(IFileOutputRedirector *output)</argsstring>
+        <name>setOutputRedirector</name>
+        <param>
+          <type><ref refid="classgmx_1_1IFileOutputRedirector" kindref="compound">IFileOutputRedirector</ref> *</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+<para>Redirects the output of the module manager to a file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1File" kindref="compound">File</ref> redirector to use for output.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Normally, the module manager prints explicitly requested text such as help output to <computeroutput>stdout</computeroutput>, but this method can be used to redirect that output to a file. For exporting help from the module manager, several files are written, and can be redirected with this method as well.</para><para>This is used for unit tests, either to keep them quiet or to verify that output. To keep implementation options open, behavior with <computeroutput>output == NULL</computeroutput> is undefined and should not be relied on. For tests, there should only be need to call this a single time, right after creating the manager. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="224" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="463" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1addea672d0288f039526cd3a7c87fa4f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::setSingleModule</definition>
+        <argsstring>(ICommandLineModule *module)</argsstring>
+        <name>setSingleModule</name>
+        <param>
+          <type><ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref> *</type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Makes the manager always run a single module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to run.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method disables all mechanisms for selecting a module, and directly passes all command-line arguments to <computeroutput>module</computeroutput>. Help arguments are an exception: these are still recognized by the manager and translated into a call to <ref refid="classgmx_1_1ICommandLineModule_1a947eea9c2e648aa837d385fcbe01c1bd" kindref="member">ICommandLineModule::writeHelp()</ref>.</para><para>This is public mainly for unit testing purposes; for other code, <ref refid="classgmx_1_1CommandLineModuleManager_1a81d63649f04804faf577e44ddf158073" kindref="member">runAsMainSingleModule()</ref> typically provides the desired functionality.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="243" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="470" bodyend="473"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1adbfda58116f0d497b78a9f82254baddf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::addModule</definition>
+        <argsstring>(CommandLineModulePointer module)</argsstring>
+        <name>addModule</name>
+        <param>
+          <type><ref refid="group__module__commandline_1ga92d17acbe7afad4effeda8d9be200305" kindref="member">CommandLineModulePointer</ref></type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Adds a given module to this manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to add. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The manager takes ownership of the object.</para><para>This method is public mostly for testing purposes; for typical uses, <ref refid="classgmx_1_1CommandLineModuleManager_1a6f9f28cb035bad5e8b217e9ab13bb217" kindref="member">registerModule()</ref> is a more convenient way of adding modules.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1CommandLineModuleManager_1a6f9f28cb035bad5e8b217e9ab13bb217" kindref="member">registerModule()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="257" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="475" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1af70e6bccbcd30cb41d7ce54cafbd8583" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::addModuleCMain</definition>
+        <argsstring>(const char *name, const char *shortDescription, CMainFunction mainFunction)</argsstring>
+        <name>addModuleCMain</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>shortDescription</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager_1a94bd50159202f6c90d5625bc00a60d7f" kindref="member">CMainFunction</ref></type>
+          <declname>mainFunction</declname>
+        </param>
+        <briefdescription>
+<para>Adds a module that runs a given <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>-like function. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shortDescription</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>One-line description for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mainFunction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Main function to wrap. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+There is normally no need to call this method outside the Gromacs library. User code usually wants to use <ref refid="classgmx_1_1CommandLineModuleManager_1a4854a50ca50f67912d7cf149d5577f41" kindref="member">runAsMainCMain()</ref>.</para><para><computeroutput>name</computeroutput> and <computeroutput>shortDescription</computeroutput> should be string constants, or the caller should otherwise ensure that they stay in scope for the duration the <ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">CommandLineModuleManager</ref> object exists. <computeroutput>mainFunction</computeroutput> should call <ref refid="group__module__commandline_1ga5140c89919960e8e1e218a5b0d881cd5" kindref="member">parse_common_args()</ref> to process its command-line arguments. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="275" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="480" bodyend="488"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1af21af5e9ad63041beb004b294181318a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::addModuleCMainWithSettings</definition>
+        <argsstring>(const char *name, const char *shortDescription, CMainFunction mainFunction, InitSettingsFunction settingsFunction)</argsstring>
+        <name>addModuleCMainWithSettings</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>shortDescription</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager_1a94bd50159202f6c90d5625bc00a60d7f" kindref="member">CMainFunction</ref></type>
+          <declname>mainFunction</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager_1a2cc4c17942e77a57739f8050335f2bc8" kindref="member">InitSettingsFunction</ref></type>
+          <declname>settingsFunction</declname>
+        </param>
+        <briefdescription>
+<para>Adds a module that runs a given <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>-like function with custom settings. </para>        </briefdescription>
+        <detaileddescription>
+<para>This method does the same as <ref refid="classgmx_1_1CommandLineModuleManager_1a4854a50ca50f67912d7cf149d5577f41" kindref="member">runAsMainCMain()</ref>, but additionally calls <computeroutput>settingsFunction</computeroutput> to initialize <ref refid="classgmx_1_1CommandLineModuleSettings" kindref="compound">CommandLineModuleSettings</ref>. This allows specifying, e.g., a different default nice level. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="285" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="490" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a6f9f28cb035bad5e8b217e9ab13bb217" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Module</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::registerModule</definition>
+        <argsstring>()</argsstring>
+        <name>registerModule</name>
+        <briefdescription>
+<para>Registers a module of a certain type to this manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of module to register. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<computeroutput>Module</computeroutput> must be default-constructible and implement <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref>.</para><para>This method is provided as a convenient alternative to <ref refid="classgmx_1_1CommandLineModuleManager_1adbfda58116f0d497b78a9f82254baddf" kindref="member">addModule()</ref> for cases where each module is implemented by a different type (which should be the case for typical situations outside unit tests). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="303" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" bodystart="303" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a5759ea1e79f4b2267161794d507b109c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1CommandLineModuleGroup" kindref="compound">CommandLineModuleGroup</ref></type>
+        <definition>CommandLineModuleGroup gmx::CommandLineModuleManager::addModuleGroup</definition>
+        <argsstring>(const char *title)</argsstring>
+        <name>addModuleGroup</name>
+        <param>
+          <type>const char *</type>
+          <declname>title</declname>
+        </param>
+        <briefdescription>
+<para>Adds a group for modules to use in help output. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Short title for the group. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Handle that can be used to add modules to the group. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Creates a group that is used to structure the list of all modules in help output. Modules are added to the group using the returned object. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="319" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="500" bodyend="508"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1ae9da9a1f0cf8646a91e5e096f1fbf7eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineModuleManager::addHelpTopic</definition>
+        <argsstring>(HelpTopicPointer topic)</argsstring>
+        <name>addHelpTopic</name>
+        <param>
+          <type><ref refid="namespacegmx_1abb455c7711ece592606e70a093ff80b4" kindref="member">HelpTopicPointer</ref></type>
+          <declname>topic</declname>
+        </param>
+        <briefdescription>
+<para>Makes given help topic available through the manager&apos;s help module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">topic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Help topic to add. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The manager takes ownership of the help topic. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="329" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="510" bodyend="514"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineModuleManager_1a6b3468b2c6cbafe1b528267208f6db46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::CommandLineModuleManager::run</definition>
+        <argsstring>(int argc, char *argv[])</argsstring>
+        <name>run</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Runs a module based on given command line. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements in <computeroutput>argv</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Command-line arguments. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>unspecified</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Throws any exception that the selected module throws. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Exit code for the program. </para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>on successful termination. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no module is specified, or if the module is not found.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Runs the module whose name matches <computeroutput>argv</computeroutput>[1]. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="344" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.cpp" bodystart="516" bodyend="596"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements a wrapper command-line interface for multiple modules. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  Typical usage: <programlisting><codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[])</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1CommandLineProgramContext" kindref="compound">gmx::CommandLineProgramContext</ref><sp/>&amp;programContext<sp/>=<sp/><ref refid="group__module__commandline_1ga8c376f5f94bd1a63a3a97e288c4be50d" kindref="member">gmx::initForCommandLine</ref>(&amp;argc,<sp/>&amp;argv);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">gmx::CommandLineModuleManager</ref><sp/>manager(</highlight><highlight class="stringliteral">&quot;gmx&quot;</highlight><highlight class="normal">,<sp/>&amp;programContext);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>&lt;register<sp/>all<sp/>necessary<sp/>modules&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rc<sp/>=<sp/>manager.run(argc,<sp/>argv);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__module__commandline_1ga49311a4a4e3f3ec07a9ae925fb63151f" kindref="member">gmx::finalizeForCommandLine</ref>();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>rc;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::exception<sp/>&amp;ex)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__module__utility_1gac6287dc8a550a2d54429e44994e00e58" kindref="member">gmx::printFatalErrorMessage</ref>(stderr,<sp/>ex);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="namespacegmx_1ad8fe34835a6e197f2731e7d604f28992" kindref="member">gmx::processExceptionAtExitForCommandLine</ref>(ex);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">*<sp/></highlight></codeline>
+</programlisting></para><para><simplesect kind="see"><para>page_wrapperbinary </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" line="96" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlinemodulemanager.h" bodystart="95" bodyend="350"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1CommandLineModuleManager_1ae9da9a1f0cf8646a91e5e096f1fbf7eb" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>addHelpTopic</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1adbfda58116f0d497b78a9f82254baddf" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>addModule</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1af70e6bccbcd30cb41d7ce54cafbd8583" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>addModuleCMain</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1af21af5e9ad63041beb004b294181318a" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>addModuleCMainWithSettings</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a5759ea1e79f4b2267161794d507b109c" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>addModuleGroup</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a94bd50159202f6c90d5625bc00a60d7f" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>CMainFunction</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a03290a2c767a1e7ff7c6673658074cb0" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>CommandLineModuleManager</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a060996184175cd17e48fc05d1498edb3" prot="private" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>impl_</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a2cc4c17942e77a57739f8050335f2bc8" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>InitSettingsFunction</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a6f9f28cb035bad5e8b217e9ab13bb217" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>registerModule</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a6b3468b2c6cbafe1b528267208f6db46" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>run</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a4854a50ca50f67912d7cf149d5577f41" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>runAsMainCMain</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a83264d16575326b1986713f1e55de503" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>runAsMainCMainWithSettings</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a81d63649f04804faf577e44ddf158073" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>runAsMainSingleModule</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1aae24e2bb5b578bf3517385cd92f8225c" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>setOutputRedirector</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a36d83b3b08b82460acc422ad129f47e6" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>setQuiet</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1addea672d0288f039526cd3a7c87fa4f7" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>setSingleModule</name></member>
+      <member refid="classgmx_1_1CommandLineModuleManager_1a31c4818e799f4ccca6cb908f8dbe4e1d" prot="public" virt="non-virtual"><scope>gmx::CommandLineModuleManager</scope><name>~CommandLineModuleManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

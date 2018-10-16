@@ -1,0 +1,94 @@
+.. _gmx trjcat:
+
+gmx trjcat
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx trjcat [:strong:`-f` :emphasis:`[<.xtc/.trr/...> [...]]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-demux` :emphasis:`[<.xvg>]`]
+               [:strong:`-o` :emphasis:`[<.xtc/.trr/...> [...]]`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-xvg` :emphasis:`<enum>`]
+               [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]settime`]
+               [:strong:`-[no]sort`] [:strong:`-[no]keeplast`] [:strong:`-[no]overwrite`] [:strong:`-[no]cat`]
+
+Description
+-----------
+
+``gmx trjcat`` concatenates several input trajectory files in sorted order.
+In case of double time frames the one in the later file is used.
+By specifying ``-settime`` you will be asked for the start time
+of each file. The input files are taken from the command line,
+such that a command like ``gmx trjcat -f *.trr -o fixed.trr`` should do
+the trick. Using ``-cat``, you can simply paste several files
+together without removal of frames with identical time stamps.
+
+One important option is inferred when the output file is amongst the
+input files. In that case that particular file will be appended to
+which implies you do not need to store double the amount of data.
+Obviously the file to append to has to be the one with lowest starting
+time since one can only append at the end of a file.
+
+If the ``-demux`` option is given, the N trajectories that are
+read, are written in another order as specified in the :ref:`.xvg <xvg>` file.
+The :ref:`.xvg <xvg>` file should contain something like::
+
+    0  0  1  2  3  4  5
+    2  1  0  2  3  5  4
+
+The first number is the time, and subsequent numbers point to
+trajectory indices.
+The frames corresponding to the numbers present at the first line
+are collected into the output trajectory. If the number of frames in
+the trajectory does not match that in the :ref:`.xvg <xvg>` file then the program
+tries to be smart. Beware.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...> [...]] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-demux`` [<.xvg>] (remd.xvg) (Optional)
+    xvgr/xmgr file
+
+Options to specify output files:
+
+``-o`` [<.xtc/.trr/...> [...]] (trajout.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+
+Other options:
+
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-b`` <time> (-1)
+    First time to use (ps)
+``-e`` <time> (-1)
+    Last time to use (ps)
+``-dt`` <time> (0)
+    Only write frame when t MOD dt = first time (ps)
+``-[no]settime``  (no)
+    Change starting time interactively
+``-[no]sort``  (yes)
+    Sort trajectory files (not frames)
+``-[no]keeplast``  (no)
+    Keep overlapping frames at end of trajectory
+``-[no]overwrite``  (no)
+    Overwrite overlapping frames during appending
+``-[no]cat``  (no)
+    Do not discard double time frames
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

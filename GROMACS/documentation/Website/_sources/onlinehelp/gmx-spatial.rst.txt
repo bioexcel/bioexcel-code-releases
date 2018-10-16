@@ -1,0 +1,105 @@
+.. _gmx spatial:
+
+gmx spatial
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx spatial [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-[no]pbc`]
+                [:strong:`-[no]div`] [:strong:`-ign` :emphasis:`<int>`] [:strong:`-bin` :emphasis:`<real>`] [:strong:`-nab` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx spatial`` calculates the spatial distribution function and
+outputs it in a form that can be read by VMD as Gaussian98 cube format.
+For a system of 32,000 atoms and a 50 ns trajectory, the SDF can be generated
+in about 30 minutes, with most of the time dedicated to the two runs through
+``trjconv`` that are required to center everything properly.
+This also takes a whole bunch of space (3 copies of the trajectory file).
+Still, the pictures are pretty and very informative when the fitted selection is properly made.
+3-4 atoms in a widely mobile group (like a free amino acid in solution) works
+well, or select the protein backbone in a stable folded structure to get the SDF
+of solvent and look at the time-averaged solvation shell.
+It is also possible using this program to generate the SDF based on some arbitrary
+Cartesian coordinate. To do that, simply omit the preliminary :doc:`gmx trjconv <gmx-trjconv>` steps.
+
+Usage:
+
+1. Use :doc:`gmx make_ndx <gmx-make_ndx>` to create a group containing the atoms around which you want the SDF
+2. ``gmx trjconv -s a.tpr -f a.tng -o b.tng -boxcenter tric -ur compact -pbc none``
+3. ``gmx trjconv -s a.tpr -f b.tng -o c.tng -fit rot+trans``
+4. run ``gmx spatial`` on the ``c.tng`` output of step #3.
+5. Load ``grid.cube`` into VMD and view as an isosurface.
+
+**Note** that systems such as micelles will require ``gmx trjconv -pbc cluster`` between steps 1 and 2.
+
+Warnings
+^^^^^^^^
+
+The SDF will be generated for a cube that contains all bins that have some non-zero occupancy.
+However, the preparatory ``-fit rot+trans`` option to :doc:`gmx trjconv <gmx-trjconv>` implies that your system will be rotating
+and translating in space (in order that the selected group does not). Therefore the values that are
+returned will only be valid for some region around your central group/coordinate that has full overlap
+with system volume throughout the entire translated/rotated system over the course of the trajectory.
+It is up to the user to ensure that this is the case.
+
+Risky options
+^^^^^^^^^^^^^
+
+To reduce the amount of space and time required, you can output only the coords
+that are going to be used in the first and subsequent run through :doc:`gmx trjconv <gmx-trjconv>`.
+However, be sure to set the ``-nab`` option to a sufficiently high value since
+memory is allocated for cube bins based on the initial coordinates and the ``-nab``
+option value.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-[no]pbc``  (no)
+    Use periodic boundary conditions for computing distances
+``-[no]div``  (yes)
+    Calculate and apply the divisor for bin occupancies based on atoms/minimal cube size. Set as TRUE for visualization and as FALSE (``-nodiv``) to get accurate counts per frame
+``-ign`` <int> (-1)
+    Do not display this number of outer cubes (positive values may reduce boundary speckles; -1 ensures outer surface is visible)
+``-bin`` <real> (0.05)
+    Width of the bins (nm)
+``-nab`` <int> (4)
+    Number of additional bins to ensure proper memory allocation
+
+Known Issues
+------------
+
+* When the allocated memory is not large enough, a segmentation fault may occur. This is usually detected and the program is halted prior to the fault while displaying a warning message suggesting the use of the ``-nab`` (Number of Additional Bins) option. However, the program does not detect all such events. If you encounter a segmentation fault, run it again with an increased ``-nab`` value.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

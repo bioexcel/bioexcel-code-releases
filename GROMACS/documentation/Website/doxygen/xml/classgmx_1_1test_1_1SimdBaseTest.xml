@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1test_1_1SimdBaseTest" kind="class" prot="public">
+    <compoundname>gmx::test::SimdBaseTest</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Test</basecompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1Simd4Test" prot="public" virt="non-virtual">gmx::test::Simd4Test</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1SimdTest" prot="public" virt="non-virtual">gmx::test::SimdTest</derivedcompoundref>
+    <includes local="no">gromacs/simd/tests/base.h</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="group__module__simd_1ga8a2a543330f7b970d26162dcdd99ee01" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int gmx::test::SimdBaseTest::s_nPoints</definition>
+        <argsstring></argsstring>
+        <name>s_nPoints</name>
+        <initializer>= 10000</initializer>
+        <briefdescription>
+<para>Number of test points to use, settable on command line. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="127" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classgmx_1_1test_1_1SimdBaseTest_1a9e2abac54e05356364ecdb0751e8665b" prot="protected" static="no" mutable="no">
+        <type>std::int64_t</type>
+        <definition>std::int64_t gmx::test::SimdBaseTest::ulpTol_</definition>
+        <argsstring></argsstring>
+        <name>ulpTol_</name>
+        <briefdescription>
+<para>Current tolerance in units-in-last-position. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="180" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1test_1_1SimdBaseTest_1a67e1769c0ddf3a84103a1cd47f065bae" prot="protected" static="no" mutable="no">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real gmx::test::SimdBaseTest::absTol_</definition>
+        <argsstring></argsstring>
+        <name>absTol_</name>
+        <briefdescription>
+<para>Current absolute tolerance. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="181" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1test_1_1SimdBaseTest_1a9d70ac319ae213a906f501b0fa63ed34" prot="protected" static="no" mutable="no">
+        <type>std::pair&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref>, <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+        <definition>std::pair&lt;real, real&gt; gmx::test::SimdBaseTest::range_</definition>
+        <argsstring></argsstring>
+        <name>range_</name>
+        <briefdescription>
+<para>Range for math function tests. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="182" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1test_1_1SimdBaseTest_1a293b4002e1c6a4e9863c1f50994f694e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::test::SimdBaseTest::SimdBaseTest</definition>
+        <argsstring>()</argsstring>
+        <name>SimdBaseTest</name>
+        <briefdescription>
+<para>Initialize new SIMD test fixture with default tolerances. </para>        </briefdescription>
+        <detaileddescription>
+<para>The default absolute tolerance is set to 0, which means the we always check the ulp tolerance by default (passing the absolute tolerance test would otherwise mean we approve the test instantly).</para><para>The default ulp tolerance is set based on the target number of bits requested for single or double precision, depending on what the default Gromacs precision is. We add two bits to avoid tests failing due to corner cases where compiler optimization might cause a slight precision loss e.g. for very small numbers.</para><para>Most SIMD math functions actually achieve 2-3 ulp accuracy in single, but by being a bit liberal we only catch real errors rather than doing compiler-standard-compliance debugging.</para><para>The range is used by derived classes to test math functions. The default test range will be [1,10], which is intentionally conservative so it works with (inverse) square root, division, exponentials, logarithms, and error functions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="104" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="104" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1SimdBaseTest_1a379ab155d44071bc98d3fd71b3b76449" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::test::SimdBaseTest::setUlpTol</definition>
+        <argsstring>(std::int64_t newTol)</argsstring>
+        <name>setUlpTol</name>
+        <param>
+          <type>std::int64_t</type>
+          <declname>newTol</declname>
+        </param>
+        <briefdescription>
+<para>Adjust ulp tolerance from the default 10 (float) or 255 (double). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="115" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1SimdBaseTest_1aba2dcd7ec0563e05aafd6c176fb286c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::test::SimdBaseTest::setAbsTol</definition>
+        <argsstring>(real newTol)</argsstring>
+        <name>setAbsTol</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>newTol</declname>
+        </param>
+        <briefdescription>
+<para>Adjust the absolute tolerance from the default 0. </para>        </briefdescription>
+        <detaileddescription>
+<para>If values are closer than the absolute tolerance, the test will pass no matter what their ulp difference is. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="122" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="122" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1SimdBaseTest_1a668d22ee1cb32b9bdd226f95479124f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::test::SimdBaseTest::setRange</definition>
+        <argsstring>(real low, real high)</argsstring>
+        <name>setRange</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>low</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>high</declname>
+        </param>
+        <briefdescription>
+<para>Change math function testing range from the default [1,10]. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="125" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="group__module__simd_1ga44ad308730db9d832e68ee9864f83c21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>::testing::AssertionResult</type>
+        <definition>testing::AssertionResult gmx::test::SimdBaseTest::compareVectorRealUlp</definition>
+        <argsstring>(const char *refExpr, const char *tstExpr, const std::vector&lt; real &gt; &amp;ref, const std::vector&lt; real &gt; &amp;tst)</argsstring>
+        <name>compareVectorRealUlp</name>
+        <param>
+          <type>const char *</type>
+          <declname>refExpr</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tstExpr</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &amp;</type>
+          <declname>ref</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &amp;</type>
+          <declname>tst</declname>
+        </param>
+        <briefdescription>
+<para>Compare two std::vector&lt;real&gt; for approximate equality. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is an internal implementation routine that will be used by routines in derived child classes that first convert SIMD or SIMD4 variables to std::vector&lt;real&gt;. Do not call it directly.</para><para>This routine is designed according to the Google test specs, so the char strings will describe the arguments to the macro.</para><para>The comparison is applied to each element, and it returns true if each element in the vector test variable is within the class tolerances of the corresponding reference elements. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="143" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.cpp" bodystart="75" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1SimdBaseTest_1a22fabd98b32ffe360fa267d8c0e6ac9d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>::testing::AssertionResult</type>
+        <definition>::testing::AssertionResult gmx::test::SimdBaseTest::compareVectorEq</definition>
+        <argsstring>(const char *refExpr, const char *tstExpr, const std::vector&lt; T &gt; &amp;ref, const std::vector&lt; T &gt; &amp;tst)</argsstring>
+        <name>compareVectorEq</name>
+        <param>
+          <type>const char *</type>
+          <declname>refExpr</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tstExpr</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>ref</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>tst</declname>
+        </param>
+        <briefdescription>
+<para>Compare std::vectors for exact equality. </para>        </briefdescription>
+        <detaileddescription>
+<para>The template in this class makes it usable for testing both SIMD floating-point and integers variables, after conversion to vectors. This is an internal implementation routine that will be used by routines in derived child classes that first convert SIMD or SIMD4 variables to std::vector&lt;real&gt;. Do not call it directly.</para><para>This routine is designed according to the Google test specs, so the char strings will describe the arguments to the macro.</para><para>The comparison is applied to each element, and it returns true if each element in the vector test variable is within the class tolerances of the corresponding reference elements. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="163" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="163" bodyend="177"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base class for SIMD test fixtures. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para>This class contains settings that are common for SIMD and SIMD4 tests, and it is thus not used directly for any tests, but derived separately in simd.h and <ref refid="simd4_8h" kindref="compound">simd4.h</ref>. </para></internal>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3242">
+        <label>gmx::test::anonymous_namespace{simd_floatingpoint_util.cpp}::SimdFloatingpointUtilTest</label>
+        <link refid="classgmx_1_1test_1_1anonymous__namespace_02simd__floatingpoint__util_8cpp_03_1_1SimdFloatingpointUtilTest"/>
+        <childnode refid="3241" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3237">
+        <label>gmx::test::SimdBaseTest</label>
+        <link refid="classgmx_1_1test_1_1SimdBaseTest"/>
+        <childnode refid="3238" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3240">
+        <label>gmx::test::Simd4MathTest</label>
+        <link refid="classgmx_1_1test_1_1Simd4MathTest"/>
+        <childnode refid="3239" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3243">
+        <label>gmx::test::SimdMathTest</label>
+        <link refid="classgmx_1_1test_1_1SimdMathTest"/>
+        <childnode refid="3241" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3238">
+        <label>Test</label>
+      </node>
+      <node id="3241">
+        <label>gmx::test::SimdTest</label>
+        <link refid="classgmx_1_1test_1_1SimdTest"/>
+        <childnode refid="3237" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3239">
+        <label>gmx::test::Simd4Test</label>
+        <link refid="classgmx_1_1test_1_1Simd4Test"/>
+        <childnode refid="3237" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3244">
+        <label>gmx::test::SimdBaseTest</label>
+        <link refid="classgmx_1_1test_1_1SimdBaseTest"/>
+        <childnode refid="3245" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3245">
+        <label>Test</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" line="81" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/tests/base.h" bodystart="80" bodyend="183"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1a67e1769c0ddf3a84103a1cd47f065bae" prot="protected" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>absTol_</name></member>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1a22fabd98b32ffe360fa267d8c0e6ac9d" prot="public" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>compareVectorEq</name></member>
+      <member refid="group__module__simd_1ga44ad308730db9d832e68ee9864f83c21" prot="public" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>compareVectorRealUlp</name></member>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1a9d70ac319ae213a906f501b0fa63ed34" prot="protected" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>range_</name></member>
+      <member refid="group__module__simd_1ga8a2a543330f7b970d26162dcdd99ee01" prot="public" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>s_nPoints</name></member>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1aba2dcd7ec0563e05aafd6c176fb286c4" prot="public" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>setAbsTol</name></member>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1a668d22ee1cb32b9bdd226f95479124f0" prot="public" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>setRange</name></member>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1a379ab155d44071bc98d3fd71b3b76449" prot="public" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>setUlpTol</name></member>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1a293b4002e1c6a4e9863c1f50994f694e" prot="public" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>SimdBaseTest</name></member>
+      <member refid="classgmx_1_1test_1_1SimdBaseTest_1a9e2abac54e05356364ecdb0751e8665b" prot="protected" virt="non-virtual"><scope>gmx::test::SimdBaseTest</scope><name>ulpTol_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

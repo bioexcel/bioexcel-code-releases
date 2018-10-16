@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacegmx_1_1anonymous__namespace_02biasparams_8cpp_03" kind="namespace">
+    <compoundname>gmx::anonymous_namespace{biasparams.cpp}</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02biasparams_8cpp_03_1a494f61ade5a5671aec6e944bc7876840" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>gmx_int64_t</type>
+        <definition>gmx_int64_t gmx::anonymous_namespace{biasparams.cpp}::calcTargetUpdateInterval</definition>
+        <argsstring>(const AwhParams &amp;awhParams, const AwhBiasParams &amp;awhBiasParams)</argsstring>
+        <name>calcTargetUpdateInterval</name>
+        <param>
+          <type>const AwhParams &amp;</type>
+          <declname>awhParams</declname>
+        </param>
+        <param>
+          <type>const AwhBiasParams &amp;</type>
+          <declname>awhBiasParams</declname>
+        </param>
+        <briefdescription>
+<para>Determines the interval for updating the target distribution. </para>        </briefdescription>
+        <detaileddescription>
+<para>The interval value is based on the target distrbution type (this could be made a user-option but there is most likely no big need for tweaking this for most users).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">awhParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>AWH parameters. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">awhBiasParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> parameters. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the target update interval in steps. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" line="77" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" bodystart="77" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02biasparams_8cpp_03_1a866d6a9a0b20cb7080c3492760d74b99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>gmx_int64_t</type>
+        <definition>gmx_int64_t gmx::anonymous_namespace{biasparams.cpp}::calcCheckCoveringInterval</definition>
+        <argsstring>(const AwhParams &amp;awhParams, const std::vector&lt; DimParams &gt; &amp;dimParams, const std::vector&lt; GridAxis &gt; &amp;gridAxis)</argsstring>
+        <name>calcCheckCoveringInterval</name>
+        <param>
+          <type>const AwhParams &amp;</type>
+          <declname>awhParams</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="structgmx_1_1DimParams" kindref="compound">DimParams</ref> &gt; &amp;</type>
+          <declname>dimParams</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classgmx_1_1GridAxis" kindref="compound">GridAxis</ref> &gt; &amp;</type>
+          <declname>gridAxis</declname>
+        </param>
+        <briefdescription>
+<para>Determines the step interval for checking for covering. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">awhParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>AWH parameters. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dimParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parameters for the dimensions of the coordinate. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gridAxis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> axes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the check interval in steps. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" line="122" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" bodystart="122" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02biasparams_8cpp_03_1acf834e46175a015207ca8c2579bc9025" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double gmx::anonymous_namespace{biasparams.cpp}::gaussianGeometryFactor</definition>
+        <argsstring>(gmx::ArrayRef&lt; const double &gt; xArray)</argsstring>
+        <name>gaussianGeometryFactor</name>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; const double &gt;</type>
+          <declname>xArray</declname>
+        </param>
+        <briefdescription>
+<para>Returns an approximation of the geometry factor used for initializing the AWH update size. </para>        </briefdescription>
+        <detaileddescription>
+<para>The geometry factor is defined as the following sum of Gaussians: sum_{k!=0} exp(-0.5*(k*pi*x)^2)/(pi*k)^2, where k is a xArray.size()-dimensional integer vector with k_i in {0,1,..}.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">xArray</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array to evaluate. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the geometry factor. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" line="169" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" bodystart="169" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02biasparams_8cpp_03_1a08d0726af55d6b15346eb02bda978c3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double gmx::anonymous_namespace{biasparams.cpp}::getInitialHistogramSizeEstimate</definition>
+        <argsstring>(const std::vector&lt; DimParams &gt; &amp;dimParams, const AwhBiasParams &amp;awhBiasParams, const std::vector&lt; GridAxis &gt; &amp;gridAxis, double beta, double samplingTimestep)</argsstring>
+        <name>getInitialHistogramSizeEstimate</name>
+        <param>
+          <type>const std::vector&lt; <ref refid="structgmx_1_1DimParams" kindref="compound">DimParams</ref> &gt; &amp;</type>
+          <declname>dimParams</declname>
+        </param>
+        <param>
+          <type>const AwhBiasParams &amp;</type>
+          <declname>awhBiasParams</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classgmx_1_1GridAxis" kindref="compound">GridAxis</ref> &gt; &amp;</type>
+          <declname>gridAxis</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>beta</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>samplingTimestep</declname>
+        </param>
+        <briefdescription>
+<para>Estimate a reasonable initial reference weight histogram size. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dimParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parameters for the dimensions of the coordinate. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">awhBiasParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> parameters. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gridAxis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> axes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">beta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1/(k_B T). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">samplingTimestep</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sampling frequency of probability weights. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>estimate of initial histogram size. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" line="246" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" bodystart="246" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02biasparams_8cpp_03_1abc87a8bd2982ae002fc5b4ed3b488155" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::anonymous_namespace{biasparams.cpp}::getNumSharedUpdate</definition>
+        <argsstring>(const AwhBiasParams &amp;awhBiasParams, int numSharingSimulations)</argsstring>
+        <name>getNumSharedUpdate</name>
+        <param>
+          <type>const AwhBiasParams &amp;</type>
+          <declname>awhBiasParams</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>numSharingSimulations</declname>
+        </param>
+        <briefdescription>
+<para>Returns the number of simulations sharing bias updates. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">awhBiasParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> parameters. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numSharingSimulations</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of simulations to share the bias across. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the number of shared updates. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" line="279" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" bodystart="279" bodyend="294"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biasparams.cpp" line="65" column="1"/>
+  </compounddef>
+</doxygen>

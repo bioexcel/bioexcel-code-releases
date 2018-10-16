@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Error handling &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development-time tools" href="tools.html" />
+    <link rel="prev" title="Guidelines for formatting of git commits" href="commitstyle.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tools.html" title="Development-time tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="commitstyle.html" title="Guidelines for formatting of git commits"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" accesskey="U">Style guidelines</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="error-handling">
+<span id="id1"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
+<p>To make GROMACS behave like a proper library, we need to change the
+way errors etc. are handled. Basically, the library should not print
+out anything to stdio/stderr unless it is part of the API
+specification, and even then, there should be a way for the user to
+suppress the output. Also, the library should normally not terminate
+the program without the user having control over this. There are
+different types of errors, which also affects the handling. Different
+cases are discussed separately below, split by the way they are
+handled. These guidelines are starting to take their final form,
+although details may still change.</p>
+<ul class="simple">
+<li>For programming errors, i.e., errors that should never occur if the
+program is correctly written, it’s acceptable to assert and
+terminate the program. This applies to both errors in the library
+and errors in user code or user input that calls the library.
+Older code tends to still use <code class="docutils literal"><span class="pre">assert()</span></code> calls, but new
+code should prefer more expressive functionality such as
+<code class="docutils literal"><span class="pre">GMX_RELEASE_ASSERT()</span></code>. This version of the macro will result
+in asserts that are still present when the build type is Release,
+which is what we want by default. In performance-sensitive parts
+of the code, it is acceptable to rather use <code class="docutils literal"><span class="pre">GMX_ASSERT()</span></code> to
+avoid the performance penalty of a branch when the code is compiled
+for production use. By default, Jenkins builds the RelWithAssert
+build type.</li>
+<li>For some errors it might be feasible to recover gracefully and
+continue execution. In this case, your APIs should be defined
+so that the API-user/programmer does not have to check separately
+whether the problem was due to a programming error, but it’s
+better to e.g. use exceptions for recoverable errors and
+asserts for programming errors.</li>
+<li>Exceptions should only be used for unexpected errors, e.g., out of
+memory or file system IO errors. As a general guideline, incorrect
+user input should not produce an untrapped exception resulting
+in execution termination telling the user an exception occured.
+Instead, you should catch exceptions in an earlier stack frame,
+make a suitable decision about diagnostic messages, and then
+decide how execution should be terminated.</li>
+<li>There is a global list of possible exceptions in
+<code class="docutils literal"><span class="pre">src/gromacs/utility/exceptions.h</span></code>, and the library should throw
+one of these when it fails, possibly providing a more detailed
+description of the reason for the failure. The types of exceptions
+can be extended, and currently include:<ul>
+<li>Out of memory (e.g. <code class="docutils literal"><span class="pre">std::bad_alloc</span></code>)</li>
+<li>File I/O error (e.g. not found)</li>
+<li>Invalid user input (could not be understood)</li>
+<li>Inconsistent user input (parsed correctly, but has internal conflicts)</li>
+<li>Simulation instability</li>
+<li>Invalid API call/value/internal error (an assertion might also be used in such cases)</li>
+<li>In the internals of a module called from code that is not
+exception safe, you can use exceptions for error handling, but
+avoid propagating them to caller code.</li>
+</ul>
+</li>
+<li>Avoid using exceptions to propagate errors across regions that start
+or join threads with OpenMP, since OpenMP cannot make guarantees about
+whether exceptions are caught or if the program will crash.
+Currently we catch all exceptions before we leave an OpenMP threaded region.
+If you throw an exception, make sure that it is caught and handled appropriately
+in the same thread/OpenMP section.</li>
+<li>There are also cases where a library routine wants to report a
+warning or a non-fatal error, but is still able to continue
+processing. In this case you should try to collect all issues and
+report and report them (similar to what grompp does with notes, warnings
+and errors) instead of just returning the first error. It is irritating
+to users if they fix the reported error, but then they keep getting
+a new error message every time the rerun the program.</li>
+<li>A function should not fail as part of its normal operation.
+However, doing nothing can be considered normal operation. A function
+accessing data should typically also be callable when no such data is
+available, but still return through normal means. If the failure is not
+normal, it is OK to rather throw an exception.</li>
+</ul>
+<p>For coding guidelines to make this all work, see <a class="reference internal" href="language-features.html#implementing-exceptions"><span class="std std-ref">Implementing exceptions for error handling</span></a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="commitstyle.html"
+                        title="previous chapter">Guidelines for formatting of git commits</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.html"
+                        title="next chapter">Development-time tools</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/error-handling.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tools.html" title="Development-time tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="commitstyle.html" title="Guidelines for formatting of git commits"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" >Style guidelines</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

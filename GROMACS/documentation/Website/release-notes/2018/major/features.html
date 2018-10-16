@@ -1,0 +1,242 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>New and improved features &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Performance improvements" href="performance.html" />
+    <link rel="prev" title="Highlights" href="highlights.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="performance.html" title="Performance improvements"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="highlights.html" title="Highlights"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="new-and-improved-features">
+<h1>New and improved features<a class="headerlink" href="#new-and-improved-features" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="added-support-for-awh-biasing">
+<h2>Added support for AWH biasing<a class="headerlink" href="#added-support-for-awh-biasing" title="Permalink to this headline">¶</a></h2>
+<p>The AWH (Accelerated Weight Histogram) method is an adaptive biasing
+method used for overcoming free energy barriers and calculating
+free energies (see <a class="reference external" href="http://dx.doi.org/10.1063/1.4890371">http://dx.doi.org/10.1063/1.4890371</a>). Although
+AWH can in general bias any system parameter, this change only
+implements biasing of reaction coordinates. The actual force
+distribution and coordinate handling is taken care of by the pull
+code. AWH interacts with the pull code by registering itself as
+the external potential module for the coordinate that should be
+AWH biased. The AWH code sets the potential and force for those
+coordinates. See the reference manual for full documentation.</p>
+<p>It includes a feature to compute the time-integrated force
+correlation, also known as the friction tensor (see
+e.g. <a class="reference external" href="http://dx.doi.org/10.1103/PhysRevLett.108.190602">http://dx.doi.org/10.1103/PhysRevLett.108.190602</a>). The friction
+tensor defines a metric on the coordinate space and the local volume
+element of this metric is a useful measure for determining which
+regions need more or less sampling.</p>
+</div>
+<div class="section" id="dual-pair-list-buffer-with-dynamic-pruning">
+<h2>Dual pair-list buffer with dynamic pruning<a class="headerlink" href="#dual-pair-list-buffer-with-dynamic-pruning" title="Permalink to this headline">¶</a></h2>
+<p>The GROMACS simulation engine uses a new dual pair-list algorithm with
+dynamic pruning in cases where the Verlet buffer is determined
+automatically (which is the default). This allows further reducing the
+frequency of pair search (and domain decomposition) while avoiding
+large Verlet buffers and the previously inherent increased
+computational cost in the short-ranged nonbonded kernels.  This is
+achieved by constructing an “outer” pair-list built infrequently,
+which includes many pairs in the list that are outside the cut-off
+range for most of the lifetime of the list. Such pairs can be pruned
+out very efficiently every few steps and with that building a smaller, “inner”
+pair-list with a shorter life-time, and importantly a correspondingly
+shorter Verlet buffer (still adhering to the specified tolerance),
+which is then used in the nonbonded kernels. Thanks to this,
+simulations runs are significantly less sensitive to tuning the search
+frequency parameter (“nstlist”).
+When short-ranged interactions are running on the GPU, the dynamic pruning is overlapped
+with the integration on the CPU, so is usually free. This feature
+improves all of simulation rate, hardware utilization, and power
+consumption.</p>
+</div>
+<div class="section" id="added-physical-validation-suite">
+<h2>Added physical validation suite<a class="headerlink" href="#added-physical-validation-suite" title="Permalink to this headline">¶</a></h2>
+<p>These tests run series of short simulations and verify the expected
+statistical properties, e.g. of energy distributions between the
+simulations, as a sensitive test that the code correctly samples
+the expected ensemble.</p>
+<p>To run everything locally (which can take a few hours!) use</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="o">-</span><span class="n">DGMX_PHYSICAL_VALIATION</span><span class="o">=</span><span class="n">ON</span> <span class="o">..</span>
+<span class="n">make</span>
+<span class="n">make</span> <span class="n">check</span><span class="o">-</span><span class="n">phys</span><span class="o">-</span><span class="n">run</span>
+</pre></div>
+</div>
+<p>Currently, the script is only running a few systems, checking
+convergence of energy conservation in NVE system with decaying
+timestep, and the ensembles generated by a few thermostating and
+barostating algorithms. Other systems and ensembles covering a broader
+combination of settings will be added over time.</p>
+</div>
+<div class="section" id="added-reporting-of-conserved-quantities-for-coupling-algorithms">
+<h2>Added reporting of conserved quantities for coupling algorithms<a class="headerlink" href="#added-reporting-of-conserved-quantities-for-coupling-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>The work that some more coupling algorithms (Berendsen pressure,
+Berendsen temperature, and Parrinello-Rahman pressure) applies on the
+system is calculated and integrated. Formulae are in the reference
+manual.</p>
+</div>
+<div class="section" id="added-acceleration-correction-vcm-mode">
+<h2>Added acceleration correction VCM mode<a class="headerlink" href="#added-acceleration-correction-vcm-mode" title="Permalink to this headline">¶</a></h2>
+<p>New mdp option to remove the center of mass translational velocity and
+correct the center of mass position, assuming linear acceleration. This
+is useful e.g. for pulling on a group using an absolute reference.</p>
+</div>
+<div class="section" id="changed-handling-of-gmx-mdrun-gpu-id">
+<h2>Changed handling of <a class="reference internal" href="../../../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> -gpu_id<a class="headerlink" href="#changed-handling-of-gmx-mdrun-gpu-id" title="Permalink to this headline">¶</a></h2>
+<p>As more code is able to be offloaded to the GPU, task assignment has
+become more complex, and is likely to get more complex still. The
+-gpu_id command-line option now merely enables the user to restrict
+which of the detected GPUs are available to the automated task
+assignment scheme, somewhat like the <code class="docutils literal"><span class="pre">CUDA_VISIBLE_DEVICES</span></code> environment
+variable. For the rare cases where full control is needed,
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span> <span class="pre">-gputasks</span></code> is available and documented in the user guide.</p>
+</div>
+<div class="section" id="added-log-output-for-equivalent-1x1-pair-list-setup">
+<h2>Added log output for equivalent 1x1 pair-list setup<a class="headerlink" href="#added-log-output-for-equivalent-1x1-pair-list-setup" title="Permalink to this headline">¶</a></h2>
+<p>The GROMACS NxM setup can use a shorter pair-list buffer than
+other codes’ simpler 1x1 scheme, so our log files now report
+the equivalent setup, to help people doing performance and
+correctness comparisons.</p>
+</div>
+<div class="section" id="new-mdp-input-for-electric-fields">
+<h2>New mdp input for electric fields<a class="headerlink" href="#new-mdp-input-for-electric-fields" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="ew3dc-for-non-neutral-systems">
+<h2>EW3DC for non-neutral systems<a class="headerlink" href="#ew3dc-for-non-neutral-systems" title="Permalink to this headline">¶</a></h2>
+<p>Added the corrections to force and energy according to
+Ballenegger, Arnold, and Cerdà, J. Chem. Phys. 131, 094107 2009
+(<a class="reference external" href="http://dx.doi.org/10.1063/1.3216473">http://dx.doi.org/10.1063/1.3216473</a>). Hinted that people
+read <a class="reference external" href="http://doi.org/10.1021/ct400626b">http://doi.org/10.1021/ct400626b</a> to help make good choices.
+Added a warning in grompp for charged systems with Ewald.</p>
+</div>
+<div class="section" id="reduce-rounding-errors-in-settle">
+<h2>Reduce rounding errors in SETTLE<a class="headerlink" href="#reduce-rounding-errors-in-settle" title="Permalink to this headline">¶</a></h2>
+<p>The parameters for SETTLE are now computed in double precision, which
+lowers the systematic error.</p>
+</div>
+<div class="section" id="made-gmx-mdrun-pforce-terminate-with-non-finite-forces">
+<h2>Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span> <span class="pre">-pforce</span></code> terminate with non-finite forces<a class="headerlink" href="#made-gmx-mdrun-pforce-terminate-with-non-finite-forces" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../../../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> option -pforce used to print non-finite forces,
+but would not terminate the run if any were found. Now a fatal error
+is issued.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">New and improved features</a><ul>
+<li><a class="reference internal" href="#added-support-for-awh-biasing">Added support for AWH biasing</a></li>
+<li><a class="reference internal" href="#dual-pair-list-buffer-with-dynamic-pruning">Dual pair-list buffer with dynamic pruning</a></li>
+<li><a class="reference internal" href="#added-physical-validation-suite">Added physical validation suite</a></li>
+<li><a class="reference internal" href="#added-reporting-of-conserved-quantities-for-coupling-algorithms">Added reporting of conserved quantities for coupling algorithms</a></li>
+<li><a class="reference internal" href="#added-acceleration-correction-vcm-mode">Added acceleration correction VCM mode</a></li>
+<li><a class="reference internal" href="#changed-handling-of-gmx-mdrun-gpu-id">Changed handling of <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span></code> -gpu_id</a></li>
+<li><a class="reference internal" href="#added-log-output-for-equivalent-1x1-pair-list-setup">Added log output for equivalent 1x1 pair-list setup</a></li>
+<li><a class="reference internal" href="#new-mdp-input-for-electric-fields">New mdp input for electric fields</a></li>
+<li><a class="reference internal" href="#ew3dc-for-non-neutral-systems">EW3DC for non-neutral systems</a></li>
+<li><a class="reference internal" href="#reduce-rounding-errors-in-settle">Reduce rounding errors in SETTLE</a></li>
+<li><a class="reference internal" href="#made-gmx-mdrun-pforce-terminate-with-non-finite-forces">Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span> <span class="pre">-pforce</span></code> terminate with non-finite forces</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="highlights.html"
+                        title="previous chapter">Highlights</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="performance.html"
+                        title="next chapter">Performance improvements</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/release-notes/2018/major/features.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="performance.html" title="Performance improvements"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="highlights.html" title="Highlights"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

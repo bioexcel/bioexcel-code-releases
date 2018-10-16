@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03" kind="namespace">
+    <compoundname>gmx::anonymous_namespace{grid.cpp}</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1a39c6b01f360487382bda12fbf0c8db92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::anonymous_namespace{grid.cpp}::centerPeriodicValueAroundZero</definition>
+        <argsstring>(double *x, double period)</argsstring>
+        <name>centerPeriodicValueAroundZero</name>
+        <param>
+          <type>double *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+<para>Modify x so that it is periodic in [-period/2, +period/2). </para>        </briefdescription>
+        <detaileddescription>
+<para>x is modified by shifting its value by a +/- a period if needed. Thus, it is assumed that x is at most one period away from this interval. For period = 0, x is not modified.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the value to modify. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The period, or 0 if not periodic. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="80" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="80" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1a28ad59eaede4409c0875ed81386fd8fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::anonymous_namespace{grid.cpp}::indexWithinPeriod</definition>
+        <argsstring>(int x, int period)</argsstring>
+        <name>indexWithinPeriod</name>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+<para>If period&gt;0, retrun x so that it is periodic in [0, period), else return x. </para>        </briefdescription>
+        <detaileddescription>
+<para>Return x is shifted its value by a +/- a period, if needed. Thus, it is assumed that x is at most one period away from this interval. For this domain and period &gt; 0 this is equivalent to x = x % period. For period = 0, x is not modified.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the value to modify, should be &gt;= 0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The period, or 0 if not periodic. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>for period&gt;0: index value witin [0, period), otherwise: <computeroutput>x</computeroutput>. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="110" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="110" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1a0bb8aaa55ad7ae8feb2558af904cc3e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double gmx::anonymous_namespace{grid.cpp}::getIntervalLengthPeriodic</definition>
+        <argsstring>(double origin, double end, double period)</argsstring>
+        <name>getIntervalLengthPeriodic</name>
+        <param>
+          <type>double</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+<para>Get the length of the interval (origin, end). </para>        </briefdescription>
+        <detaileddescription>
+<para>This returns the distance obtained by connecting the origin point to the end point in the positive direction. Note that this is generally not the shortest distance. For period &gt; 0, both origin and end are expected to take values in the same periodic interval, ie. |origin - end| &lt; period.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Start value of the interval. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>End value of the interval. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The period, or 0 if not periodic. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the interval length from origin to end. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="150" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="150" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1a3e78c72cac8e84929c27aa47a4435550" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double gmx::anonymous_namespace{grid.cpp}::getDeviationPeriodic</definition>
+        <argsstring>(double x, double x0, double period)</argsstring>
+        <name>getDeviationPeriodic</name>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+<para>Get the deviation x - x0. </para>        </briefdescription>
+        <detaileddescription>
+<para>For period &gt; 0, the deviation with minimum absolute value is returned, i.e. with a value in the interval [-period/2, +period/2). Also for period &gt; 0, it is assumed that |x - x0| &lt; period.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>From value. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>To value. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The period, or 0 if not periodic. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the deviation from x to x0. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="179" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="179" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1aafb5ffd801cfe99e19a3e3f8031523df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::anonymous_namespace{grid.cpp}::multiDimGridIndexToLinear</definition>
+        <argsstring>(const std::vector&lt; GridAxis &gt; &amp;axis, const awh_ivec indexMulti)</argsstring>
+        <name>multiDimGridIndexToLinear</name>
+        <param>
+          <type>const std::vector&lt; <ref refid="classgmx_1_1GridAxis" kindref="compound">GridAxis</ref> &gt; &amp;</type>
+          <declname>axis</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>indexMulti</declname>
+        </param>
+        <briefdescription>
+<para>Convert a multidimensional grid point index to a linear one. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">axis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The grid axes. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">indexMulti</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Multidimensional grid point index to convert to a linear one. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the linear index. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="263" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="263" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1a4b9ffc0bfb37b283dd98bb12f47a0568" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::anonymous_namespace{grid.cpp}::stepInMultiDimArray</definition>
+        <argsstring>(int numDim, const awh_ivec numPoints, awh_ivec indexDim)</argsstring>
+        <name>stepInMultiDimArray</name>
+        <param>
+          <type>int</type>
+          <declname>numDim</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>numPoints</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>indexDim</declname>
+        </param>
+        <briefdescription>
+<para>Take a step in a multidimensional array. </para>        </briefdescription>
+        <detaileddescription>
+<para>The multidimensional index gives the starting point to step from. Dimensions are stepped through in order of decreasing dimensional index such that the index is incremented in the highest dimension possible. If the starting point is the end of the array, a step cannot be taken and the index is not modified.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">numDim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of dimensions of the array. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numPoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector with the number of points along each dimension. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">indexDim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Multidimensional index, each with values in [0, numPoints[d] - 1]. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if a step was taken, false if not. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="300" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="300" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1a3313234fd5846d44bedcb861cc30f1d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::anonymous_namespace{grid.cpp}::gridToSubgridIndex</definition>
+        <argsstring>(const Grid &amp;grid, const awh_ivec subgridOrigin, const awh_ivec subgridNpoints, int point, awh_ivec subgridIndex)</argsstring>
+        <name>gridToSubgridIndex</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> &amp;</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>subgridOrigin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>subgridNpoints</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>point</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>subgridIndex</declname>
+        </param>
+        <briefdescription>
+<para>Transforms a grid point index to to the multidimensional index of a subgrid. </para>        </briefdescription>
+        <detaileddescription>
+<para>The subgrid is defined by the location of its origin and the number of points along each dimension. The index transformation thus consists of a projection of the linear index onto each dimension, followed by a translation of the origin. The subgrid may have parts that don&apos;t overlap with the grid. E.g. the origin vector can have negative components meaning the origin lies outside of the grid. However, the given point needs to be both a grid and subgrid point.</para><para>Periodic boundaries are taken care of by wrapping the subgrid around the grid. Thus, for periodic dimensions the number of subgrid points need to be less than the number of points in a period to prevent problems of wrapping around.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">grid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The grid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">subgridOrigin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector locating the subgrid origin relative to the grid origin. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">subgridNpoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of subgrid points in each dimension. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">point</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> point to get subgrid index for. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">subgridIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Subgrid multidimensional index. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="348" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="348" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1a5303c6e38c675bd86327a211e611537e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::anonymous_namespace{grid.cpp}::subgridToGridIndex</definition>
+        <argsstring>(const Grid &amp;grid, const awh_ivec subgridOrigin, const awh_ivec subgridIndex, int *gridIndex)</argsstring>
+        <name>subgridToGridIndex</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> &amp;</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>subgridOrigin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespacegmx_1a74baae008f9132c5e0daf2a02b122b3b" kindref="member">awh_ivec</ref></type>
+          <declname>subgridIndex</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>gridIndex</declname>
+        </param>
+        <briefdescription>
+<para>Transform a multidimensional subgrid index to a grid point index. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the given subgrid point is not a grid point the transformation will not be successful and the grid point index will not be set. Periodic boundaries are taken care of by wrapping the subgrid around the grid.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">grid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The grid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">subgridOrigin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector locating the subgrid origin relative to the grid origin. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">subgridIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Subgrid multidimensional index to get grid point index for. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">gridIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> point index. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the transformation was successful. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="381" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="381" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02grid_8cpp_03_1ab2df3e83b031a01af4f379e4f3c6d071" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::anonymous_namespace{grid.cpp}::setNeighborsOfGridPoint</definition>
+        <argsstring>(int pointIndex, const Grid &amp;grid, std::vector&lt; int &gt; *neighborIndexArray)</argsstring>
+        <name>setNeighborsOfGridPoint</name>
+        <param>
+          <type>int</type>
+          <declname>pointIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> &amp;</type>
+          <declname>grid</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; int &gt; *</type>
+          <declname>neighborIndexArray</declname>
+        </param>
+        <briefdescription>
+<para>Find and set the neighbors of a grid point. </para>        </briefdescription>
+        <detaileddescription>
+<para>The search space for neighbors is a subgrid with size set by a scope cutoff. In general not all point within scope will be valid grid points.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pointIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Grid" kindref="compound">Grid</ref> point index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">grid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The grid. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">neighborIndexArray</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array to fill with neighbor indices. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="605" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" bodystart="605" bodyend="639"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/grid.cpp" line="68" column="1"/>
+  </compounddef>
+</doxygen>

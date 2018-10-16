@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx make_ndx &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx mdmat" href="gmx-mdmat.html" />
+    <link rel="prev" title="gmx make_edi" href="gmx-make_edi.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-mdmat.html" title="gmx mdmat"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-make_edi.html" title="gmx make_edi"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-make-ndx">
+<span id="id1"></span><h1>gmx make_ndx<a class="headerlink" href="#gmx-make-ndx" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx make_ndx [<strong>-f</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt; [...]]</em>] [<strong>-o</strong> <em>[&lt;.ndx&gt;]</em>]
+             [<strong>-natoms</strong> <em>&lt;int&gt;</em>] [<strong>-[no]twin</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Index groups are necessary for almost every GROMACS program.
+All these programs can generate default index groups. You ONLY
+have to use <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">make_ndx</span></code> when you need SPECIAL index groups.
+There is a default index group for the whole system, 9 default
+index groups for proteins, and a default index group
+is generated for every other residue name.</p>
+<p>When no index file is supplied, also <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">make_ndx</span></code> will generate the
+default groups.
+With the index editor you can select on atom, residue and chain names
+and numbers.
+When a run input file is supplied you can also select on atom type.
+You can use boolean operations, you can split groups
+into chains, residues or atoms. You can delete and rename groups.
+Type ‘h’ in the editor for more details.</p>
+<p>The atom numbering in the editor and the index file starts at 1.</p>
+<p>The <code class="docutils literal"><span class="pre">-twin</span></code> switch duplicates all index groups with an offset of
+<code class="docutils literal"><span class="pre">-natoms</span></code>, which is useful for Computational Electrophysiology
+double-layer membrane setups.</p>
+<p>See also <a class="reference internal" href="gmx-select.html"><span class="doc">gmx select</span></a> <code class="docutils literal"><span class="pre">-on</span></code>, which provides an alternative way
+for constructing index groups.  It covers nearly all of <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">make_ndx</span></code>
+functionality, and in many cases much more.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.gro/.g96/…&gt;] (conf.gro) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt; […]] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.ndx&gt;] (index.ndx)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-natoms</span></code> &lt;int&gt; (0)</dt>
+<dd>set number of atoms (default: read from coordinate or index file)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]twin</span></code>  (no)</dt>
+<dd>Duplicate all index groups with an offset of -natoms</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx make_ndx</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-make_edi.html"
+                        title="previous chapter">gmx make_edi</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-mdmat.html"
+                        title="next chapter">gmx mdmat</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-make_ndx.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-mdmat.html" title="gmx mdmat"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-make_edi.html" title="gmx make_edi"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

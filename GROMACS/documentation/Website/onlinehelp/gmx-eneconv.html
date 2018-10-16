@@ -1,0 +1,192 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx eneconv &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx enemat" href="gmx-enemat.html" />
+    <link rel="prev" title="gmx editconf" href="gmx-editconf.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-enemat.html" title="gmx enemat"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-editconf.html" title="gmx editconf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-eneconv">
+<span id="id1"></span><h1>gmx eneconv<a class="headerlink" href="#gmx-eneconv" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx eneconv [<strong>-f</strong> <em>[&lt;.edr&gt; [...]]</em>] [<strong>-o</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-b</strong> <em>&lt;real&gt;</em>] [<strong>-e</strong> <em>&lt;real&gt;</em>]
+            [<strong>-dt</strong> <em>&lt;real&gt;</em>] [<strong>-offset</strong> <em>&lt;real&gt;</em>] [<strong>-[no]settime</strong>] [<strong>-[no]sort</strong>]
+            [<strong>-[no]rmdh</strong>] [<strong>-scalefac</strong> <em>&lt;real&gt;</em>] [<strong>-[no]error</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>With <em>multiple files</em> specified for the <code class="docutils literal"><span class="pre">-f</span></code> option:</p>
+<p>Concatenates several energy files in sorted order.
+In the case of double time frames, the one
+in the later file is used. By specifying <code class="docutils literal"><span class="pre">-settime</span></code> you will be
+asked for the start time of each file. The input files are taken
+from the command line,
+such that the command <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">eneconv</span> <span class="pre">-f</span> <span class="pre">*.edr</span> <span class="pre">-o</span> <span class="pre">fixed.edr</span></code> should do
+the trick.</p>
+<p>With <em>one file</em> specified for <code class="docutils literal"><span class="pre">-f</span></code>:</p>
+<p>Reads one energy file and writes another, applying the <code class="docutils literal"><span class="pre">-dt</span></code>,
+<code class="docutils literal"><span class="pre">-offset</span></code>, <code class="docutils literal"><span class="pre">-t0</span></code> and <code class="docutils literal"><span class="pre">-settime</span></code> options and
+converting to a different format if necessary (indicated by file
+extentions).</p>
+<p><code class="docutils literal"><span class="pre">-settime</span></code> is applied first, then <code class="docutils literal"><span class="pre">-dt</span></code>/<code class="docutils literal"><span class="pre">-offset</span></code>
+followed by <code class="docutils literal"><span class="pre">-b</span></code> and <code class="docutils literal"><span class="pre">-e</span></code> to select which frames to write.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.edr&gt; […]] (ener.edr)</dt>
+<dd>Energy file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.edr&gt;] (fixed.edr)</dt>
+<dd>Energy file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;real&gt; (-1)</dt>
+<dd>First time to use</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;real&gt; (-1)</dt>
+<dd>Last time to use</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;real&gt; (0)</dt>
+<dd>Only write out frame when t MOD dt = offset</dd>
+<dt><code class="docutils literal"><span class="pre">-offset</span></code> &lt;real&gt; (0)</dt>
+<dd>Time offset for <code class="docutils literal"><span class="pre">-dt</span></code> option</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]settime</span></code>  (no)</dt>
+<dd>Change starting time interactively</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]sort</span></code>  (yes)</dt>
+<dd>Sort energy files (not frames)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmdh</span></code>  (no)</dt>
+<dd>Remove free energy block data</dd>
+<dt><code class="docutils literal"><span class="pre">-scalefac</span></code> &lt;real&gt; (1)</dt>
+<dd>Multiply energy component by this factor</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]error</span></code>  (yes)</dt>
+<dd>Stop on errors in the file</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>When combining trajectories the sigma and E^2 (necessary for statistics) are not updated correctly. Only the actual energy is correct. One thus has to compute statistics in another way.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx eneconv</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-editconf.html"
+                        title="previous chapter">gmx editconf</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-enemat.html"
+                        title="next chapter">gmx enemat</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-eneconv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-enemat.html" title="gmx enemat"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-editconf.html" title="gmx editconf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx freevolume &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx gangle" href="gmx-gangle.html" />
+    <link rel="prev" title="gmx filter" href="gmx-filter.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-gangle.html" title="gmx gangle"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-filter.html" title="gmx filter"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-freevolume">
+<span id="id1"></span><h1>gmx freevolume<a class="headerlink" href="#gmx-freevolume" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx freevolume [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>]
+             [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+             [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-fgroup</strong> <em>&lt;selection&gt;</em>]
+             [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]rmpbc</strong>] [<strong>-sf</strong> <em>&lt;file&gt;</em>]
+             [<strong>-selrpos</strong> <em>&lt;enum&gt;</em>] [<strong>-select</strong> <em>&lt;selection&gt;</em>] [<strong>-radius</strong> <em>&lt;real&gt;</em>]
+             [<strong>-seed</strong> <em>&lt;int&gt;</em>] [<strong>-ninsert</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">freevolume</span></code> calculates the free volume in a box as
+a function of time. The free volume is
+plotted as a fraction of the total volume.
+The program tries to insert a probe with a given radius,
+into the simulations box and if the distance between the
+probe and any atom is less than the sums of the
+van der Waals radii of both atoms, the position is
+considered to be occupied, i.e. non-free. By using a
+probe radius of 0, the true free volume is computed.
+By using a larger radius, e.g. 0.14 nm, roughly corresponding
+to a water molecule, the free volume for a hypothetical
+particle with that size will be produced.
+Note however, that since atoms are treated as hard-spheres
+these number are very approximate, and typically only
+relative changes are meaningful, for instance by doing a
+series of simulations at different temperature.</p>
+<p>The group specified by the selection is considered to
+delineate non-free volume.
+The number of insertions per unit of volume is important
+to get a converged result. About 1000/nm^3 yields an overall
+standard deviation that is determined by the fluctuations in
+the trajectory rather than by the fluctuations due to the
+random numbers.</p>
+<p>The results are critically dependent on the van der Waals radii;
+we recommend to use the values due to Bondi (1964).</p>
+<p>The Fractional Free Volume (FFV) that some authors like to use
+is given by 1 - 1.3*(1-Free Volume). This value is printed on
+the terminal.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Input trajectory or single configuration: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Input structure: <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Extra index groups</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (freevolume.xvg) (Optional)</dt>
+<dd>Computed free volume</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame if t MOD dt == first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-fgroup</span></code> &lt;selection&gt;</dt>
+<dd>Atoms stored in the trajectory file (if not set, assume first N atoms)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>Plot formatting: none, xmgrace, xmgr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmpbc</span></code>  (yes)</dt>
+<dd>Make molecules whole for each frame</dd>
+<dt><code class="docutils literal"><span class="pre">-sf</span></code> &lt;file&gt;</dt>
+<dd>Provide selections from files</dd>
+<dt><code class="docutils literal"><span class="pre">-selrpos</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-select</span></code> &lt;selection&gt;</dt>
+<dd>Atoms that are considered as part of the excluded volume</dd>
+<dt><code class="docutils literal"><span class="pre">-radius</span></code> &lt;real&gt; (0)</dt>
+<dd>Radius of the probe to be inserted (nm, 0 yields the true free volume)</dd>
+<dt><code class="docutils literal"><span class="pre">-seed</span></code> &lt;int&gt; (0)</dt>
+<dd>Seed for random number generator (0 means generate).</dd>
+<dt><code class="docutils literal"><span class="pre">-ninsert</span></code> &lt;int&gt; (1000)</dt>
+<dd>Number of probe insertions per cubic nm to try for each frame in the trajectory.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx freevolume</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-filter.html"
+                        title="previous chapter">gmx filter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-gangle.html"
+                        title="next chapter">gmx gangle</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-freevolume.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-gangle.html" title="gmx gangle"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-filter.html" title="gmx filter"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

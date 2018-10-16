@@ -1,0 +1,634 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__kernel__simd__4xn__common_8h" kind="file">
+    <compoundname>nbnxn_kernel_simd_4xn_common.h</compoundname>
+    <includes refid="nbnxn__consts_8h" local="yes">gromacs/mdlib/nbnxn_consts.h</includes>
+    <includes refid="ishift_8h" local="yes">gromacs/pbcutil/ishift.h</includes>
+    <includes refid="simd_8h" local="yes">gromacs/simd/simd.h</includes>
+    <includes refid="simd__math_8h" local="yes">gromacs/simd/simd_math.h</includes>
+    <includes refid="vector__operations_8h" local="yes">gromacs/simd/vector_operations.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="utilities_8h" local="yes">gromacs/math/utilities.h</includes>
+    <includes local="yes">config.h</includes>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJ__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJ_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJ__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJ_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJ__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJ_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombLB__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJCombLB_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombLB__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJCombLB_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJCombLB__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJCombLB_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJEwCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJEwCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJEwCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJEwCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJEwCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJFSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJFSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJFSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJFSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJFSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJFSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJPSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJPSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJPSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJPSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEw__VdwLJPSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEw_VdwLJPSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJ__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJ_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJ__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJ_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJ__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJ_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombLB__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombLB__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJCombLB__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJCombLB_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJEwCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJEwCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJEwCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJEwCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJFSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJFSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJFSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJFSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJPSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJPSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecEwTwinCut__VdwLJPSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecEwTwinCut_VdwLJPSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJ__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJ_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJ__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJ_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJ__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJ_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombLB__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJCombLB_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombLB__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJCombLB_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJCombLB__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJCombLB_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJEwCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJEwCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJEwCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJEwCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJFSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJFSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJFSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJFSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJFSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJFSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJPSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJPSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJPSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJPSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTab__VdwLJPSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTab_VdwLJPSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJ__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJ__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJ__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJ_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombLB__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombLB__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJCombLB__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJCombLB_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJEwCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJEwCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJEwCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJEwCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJFSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJFSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJFSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJFSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJPSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJPSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecQSTabTwinCut__VdwLJPSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecQSTabTwinCut_VdwLJPSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJ__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJ_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJ__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJ_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJ__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJ_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombLB__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJCombLB_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombLB__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJCombLB_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJCombLB__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJCombLB_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJEwCombGeom__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJEwCombGeom_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJEwCombGeom__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJEwCombGeom__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJEwCombGeom_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJFSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJFSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJFSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJFSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJFSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJFSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJPSw__F__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJPSw_F_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJPSw__VF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJPSw_VF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__ElecRF__VdwLJPSw__VgrpF__4xn_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_ElecRF_VdwLJPSw_VgrpF_4xn.cpp</includedby>
+    <includedby refid="nbnxn__kernel__simd__4xn__prune_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_prune.cpp</includedby>
+    <incdepgraph>
+      <node id="16364">
+        <label>impl_reference_util_double.h</label>
+        <link refid="impl__reference__util__double_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16355" relation="include">
+        </childnode>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16357" relation="include">
+        </childnode>
+        <childnode refid="16349" relation="include">
+        </childnode>
+        <childnode refid="16359" relation="include">
+        </childnode>
+      </node>
+      <node id="16361">
+        <label>stdarg.h</label>
+      </node>
+      <node id="16378">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="16380">
+        <label>limits</label>
+      </node>
+      <node id="16366">
+        <label>gromacs/simd/scalar/scalar.h</label>
+        <link refid="scalar_8h"/>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16367" relation="include">
+        </childnode>
+        <childnode refid="16357" relation="include">
+        </childnode>
+      </node>
+      <node id="16381">
+        <label>gromacs/simd/vector_operations.h</label>
+        <link refid="vector__operations_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16340" relation="include">
+        </childnode>
+      </node>
+      <node id="16373">
+        <label>iterator</label>
+      </node>
+      <node id="16343">
+        <label>cstdint</label>
+      </node>
+      <node id="16340">
+        <label>gromacs/simd/simd.h</label>
+        <link refid="simd_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16344" relation="include">
+        </childnode>
+        <childnode refid="16345" relation="include">
+        </childnode>
+        <childnode refid="16347" relation="include">
+        </childnode>
+        <childnode refid="16348" relation="include">
+        </childnode>
+        <childnode refid="16366" relation="include">
+        </childnode>
+        <childnode refid="16368" relation="include">
+        </childnode>
+        <childnode refid="16370" relation="include">
+        </childnode>
+        <childnode refid="16371" relation="include">
+        </childnode>
+      </node>
+      <node id="16352">
+        <label>stdint.h</label>
+      </node>
+      <node id="16365">
+        <label>impl_reference_util_float.h</label>
+        <link refid="impl__reference__util__float_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16355" relation="include">
+        </childnode>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16357" relation="include">
+        </childnode>
+        <childnode refid="16349" relation="include">
+        </childnode>
+        <childnode refid="16363" relation="include">
+        </childnode>
+      </node>
+      <node id="16356">
+        <label>cmath</label>
+      </node>
+      <node id="16355">
+        <label>cassert</label>
+      </node>
+      <node id="16374">
+        <label>stdexcept</label>
+      </node>
+      <node id="16339">
+        <label>src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h</label>
+        <link refid="nbnxn_kernel_simd_4xn_common.h"/>
+        <childnode refid="16340" relation="include">
+        </childnode>
+        <childnode refid="16379" relation="include">
+        </childnode>
+        <childnode refid="16381" relation="include">
+        </childnode>
+        <childnode refid="16351" relation="include">
+        </childnode>
+        <childnode refid="16341" relation="include">
+        </childnode>
+      </node>
+      <node id="16370">
+        <label>gromacs/simd/scalar/scalar_util.h</label>
+        <link refid="scalar__util_8h"/>
+        <childnode refid="16356" relation="include">
+        </childnode>
+      </node>
+      <node id="16345">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="16346" relation="include">
+        </childnode>
+      </node>
+      <node id="16348">
+        <label>impl_reference/impl_reference.h</label>
+        <link refid="impl__reference_8h"/>
+        <childnode refid="16349" relation="include">
+        </childnode>
+        <childnode refid="16350" relation="include">
+        </childnode>
+        <childnode refid="16354" relation="include">
+        </childnode>
+        <childnode refid="16358" relation="include">
+        </childnode>
+        <childnode refid="16359" relation="include">
+        </childnode>
+        <childnode refid="16363" relation="include">
+        </childnode>
+        <childnode refid="16364" relation="include">
+        </childnode>
+        <childnode refid="16365" relation="include">
+        </childnode>
+      </node>
+      <node id="16350">
+        <label>impl_reference_general.h</label>
+        <link refid="impl__reference__general_8h"/>
+        <childnode refid="16351" relation="include">
+        </childnode>
+      </node>
+      <node id="16363">
+        <label>impl_reference_simd_float.h</label>
+        <link refid="impl__reference__simd__float_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16355" relation="include">
+        </childnode>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16357" relation="include">
+        </childnode>
+        <childnode refid="16344" relation="include">
+        </childnode>
+        <childnode refid="16349" relation="include">
+        </childnode>
+      </node>
+      <node id="16379">
+        <label>gromacs/simd/simd_math.h</label>
+        <link refid="simd__math_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16380" relation="include">
+        </childnode>
+        <childnode refid="16340" relation="include">
+        </childnode>
+        <childnode refid="16351" relation="include">
+        </childnode>
+        <childnode refid="16347" relation="include">
+        </childnode>
+      </node>
+      <node id="16377">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="16351" relation="include">
+        </childnode>
+        <childnode refid="16378" relation="include">
+        </childnode>
+      </node>
+      <node id="16347">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="16376">
+        <label>vector</label>
+      </node>
+      <node id="16349">
+        <label>impl_reference_definitions.h</label>
+        <link refid="impl__reference__definitions_8h"/>
+      </node>
+      <node id="16375">
+        <label>utility</label>
+      </node>
+      <node id="16344">
+        <label>array</label>
+      </node>
+      <node id="16359">
+        <label>impl_reference_simd_double.h</label>
+        <link refid="impl__reference__simd__double_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16355" relation="include">
+        </childnode>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16357" relation="include">
+        </childnode>
+        <childnode refid="16344" relation="include">
+        </childnode>
+        <childnode refid="16360" relation="include">
+        </childnode>
+        <childnode refid="16349" relation="include">
+        </childnode>
+        <childnode refid="16363" relation="include">
+        </childnode>
+      </node>
+      <node id="16351">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="16352" relation="include">
+        </childnode>
+        <childnode refid="16353" relation="include">
+        </childnode>
+      </node>
+      <node id="16367">
+        <label>cstdlib</label>
+      </node>
+      <node id="16358">
+        <label>impl_reference_simd4_float.h</label>
+        <link refid="impl__reference__simd4__float_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16355" relation="include">
+        </childnode>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16357" relation="include">
+        </childnode>
+        <childnode refid="16344" relation="include">
+        </childnode>
+        <childnode refid="16349" relation="include">
+        </childnode>
+      </node>
+      <node id="16372">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16344" relation="include">
+        </childnode>
+        <childnode refid="16373" relation="include">
+        </childnode>
+        <childnode refid="16374" relation="include">
+        </childnode>
+        <childnode refid="16375" relation="include">
+        </childnode>
+        <childnode refid="16376" relation="include">
+        </childnode>
+        <childnode refid="16377" relation="include">
+        </childnode>
+      </node>
+      <node id="16342">
+        <label>cstddef</label>
+      </node>
+      <node id="16368">
+        <label>gromacs/simd/scalar/scalar_math.h</label>
+        <link refid="scalar__math_8h"/>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16369" relation="include">
+        </childnode>
+        <childnode refid="16366" relation="include">
+        </childnode>
+      </node>
+      <node id="16369">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16347" relation="include">
+        </childnode>
+      </node>
+      <node id="16341">
+        <label>config.h</label>
+      </node>
+      <node id="16360">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="16361" relation="include">
+        </childnode>
+        <childnode refid="16362" relation="include">
+        </childnode>
+        <childnode refid="16351" relation="include">
+        </childnode>
+      </node>
+      <node id="16357">
+        <label>algorithm</label>
+      </node>
+      <node id="16354">
+        <label>impl_reference_simd4_double.h</label>
+        <link refid="impl__reference__simd4__double_8h"/>
+        <childnode refid="16341" relation="include">
+        </childnode>
+        <childnode refid="16355" relation="include">
+        </childnode>
+        <childnode refid="16356" relation="include">
+        </childnode>
+        <childnode refid="16342" relation="include">
+        </childnode>
+        <childnode refid="16343" relation="include">
+        </childnode>
+        <childnode refid="16357" relation="include">
+        </childnode>
+        <childnode refid="16344" relation="include">
+        </childnode>
+        <childnode refid="16349" relation="include">
+        </childnode>
+      </node>
+      <node id="16362">
+        <label>stdio.h</label>
+      </node>
+      <node id="16346">
+        <label>memory</label>
+      </node>
+      <node id="16353">
+        <label>inttypes.h</label>
+      </node>
+      <node id="16371">
+        <label>gromacs/simd/simd_memory.h</label>
+        <link refid="simd__memory_8h"/>
+        <childnode refid="16372" relation="include">
+        </childnode>
+        <childnode refid="16377" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__kernel__simd__4xn__common_8h_1a4a7a2ca548e28c5e0e8fa14a3724a4dc" prot="public" static="no">
+        <name>UNROLLI</name>
+        <initializer>NBNXN_CPU_CLUSTER_I_SIZE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="51" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__simd__4xn__common_8h_1aff64973b6a6eac1eebe4128edf6a47d3" prot="public" static="no">
+        <name>UNROLLJ</name>
+        <initializer>(<ref refid="group__module__simd_1ga586ccc19c21a1d5e9c97e15b70822fba" kindref="member">GMX_SIMD_REAL_WIDTH</ref>/GMX_SIMD_J_UNROLL_SIZE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="52" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__simd__4xn__common_8h_1a351d54267048643c4365f6a24641d0cf" prot="public" static="no">
+        <name>STRIDE</name>
+        <initializer>(<ref refid="group__module__simd_1ga586ccc19c21a1d5e9c97e15b70822fba" kindref="member">GMX_SIMD_REAL_WIDTH</ref>/GMX_SIMD_J_UNROLL_SIZE)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="56" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__simd__4xn__common_8h_1a3e2924df43ae109fb6484d481a1bbe4e" prot="public" static="no">
+        <name>TAB_FDV0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="70" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__simd__4xn__common_8h_1a3e8fe6230ef97d18e1541a049635fb50" prot="public" static="no">
+        <name>CALC_SHIFTFORCES</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="158" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="nbnxn__kernel__simd__4xn__common_8h_1ad4153fc615d6534b2ac780bdefe9a54f" prot="public" static="no">
+        <type><ref refid="namespacegmx_1a6598cea23dd103ce19bff4743279e3bc" kindref="member">SimdInt32</ref></type>
+        <definition>typedef SimdInt32 SimdBitMask</definition>
+        <argsstring></argsstring>
+        <name>SimdBitMask</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="95" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__kernel__simd__4xn__common_8h_1aa4d3a41c9869e3612011853b48b952b6" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void add_ener_grp</definition>
+        <argsstring>(SimdReal e_S, real *v, const int *offset_jj)</argsstring>
+        <name>add_ener_grp</name>
+        <param>
+          <type><ref refid="namespacegmx_1a8591d5e5ac6d1bec936a013fdc41b904" kindref="member">SimdReal</ref></type>
+          <declname>e_S</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>offset_jj</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="76" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="76" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__kernel__simd__4xn__common_8h_1a6c867c4ef0b278c21b6ce46eeda3dfb8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void gmx_simdcall</type>
+        <definition>static void gmx_simdcall gmx_load_simd_4xn_interactions</definition>
+        <argsstring>(int excl, SimdBitMask filter_S0, SimdBitMask filter_S1, SimdBitMask filter_S2, SimdBitMask filter_S3, real *simd_interaction_array, SimdBool *interact_S0, SimdBool *interact_S1, SimdBool *interact_S2, SimdBool *interact_S3)</argsstring>
+        <name>gmx_load_simd_4xn_interactions</name>
+        <param>
+          <type>int</type>
+          <declname>excl</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1SimdFInt32" kindref="compound">SimdBitMask</ref></type>
+          <declname>filter_S0</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1SimdFInt32" kindref="compound">SimdBitMask</ref></type>
+          <declname>filter_S1</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1SimdFInt32" kindref="compound">SimdBitMask</ref></type>
+          <declname>filter_S2</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1SimdFInt32" kindref="compound">SimdBitMask</ref></type>
+          <declname>filter_S3</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>simd_interaction_array</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a307172d59a1a7c9ed87bc2cb4df83efa" kindref="member">SimdBool</ref> *</type>
+          <declname>interact_S0</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a307172d59a1a7c9ed87bc2cb4df83efa" kindref="member">SimdBool</ref> *</type>
+          <declname>interact_S1</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a307172d59a1a7c9ed87bc2cb4df83efa" kindref="member">SimdBool</ref> *</type>
+          <declname>interact_S2</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a307172d59a1a7c9ed87bc2cb4df83efa" kindref="member">SimdBool</ref> *</type>
+          <declname>interact_S3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" line="101" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h" bodystart="101" bodyend="146"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h"/>
+  </compounddef>
+</doxygen>

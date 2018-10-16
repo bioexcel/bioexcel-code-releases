@@ -1,0 +1,186 @@
+.. _gmx anaeig:
+
+gmx anaeig
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx anaeig [:strong:`-v` :emphasis:`[<.trr/.cpt/...>]`] [:strong:`-v2` :emphasis:`[<.trr/.cpt/...>]`]
+               [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`]
+               [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-eig` :emphasis:`[<.xvg>]`] [:strong:`-eig2` :emphasis:`[<.xvg>]`]
+               [:strong:`-comp` :emphasis:`[<.xvg>]`] [:strong:`-rmsf` :emphasis:`[<.xvg>]`] [:strong:`-proj` :emphasis:`[<.xvg>]`]
+               [:strong:`-2d` :emphasis:`[<.xvg>]`] [:strong:`-3d` :emphasis:`[<.gro/.g96/...>]`]
+               [:strong:`-filt` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-extr` :emphasis:`[<.xtc/.trr/...>]`]
+               [:strong:`-over` :emphasis:`[<.xvg>]`] [:strong:`-inpr` :emphasis:`[<.xpm>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+               [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`]
+               [:strong:`-first` :emphasis:`<int>`] [:strong:`-last` :emphasis:`<int>`] [:strong:`-skip` :emphasis:`<int>`] [:strong:`-max` :emphasis:`<real>`]
+               [:strong:`-nframes` :emphasis:`<int>`] [:strong:`-[no]split`] [:strong:`-[no]entropy`]
+               [:strong:`-temp` :emphasis:`<real>`] [:strong:`-nevskip` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx anaeig`` analyzes eigenvectors. The eigenvectors can be of a
+covariance matrix (:doc:`gmx covar <gmx-covar>`) or of a Normal Modes analysis
+(:doc:`gmx nmeig <gmx-nmeig>`).
+
+When a trajectory is projected on eigenvectors, all structures are
+fitted to the structure in the eigenvector file, if present, otherwise
+to the structure in the structure file. When no run input file is
+supplied, periodicity will not be taken into account. Most analyses
+are performed on eigenvectors ``-first`` to ``-last``, but when
+``-first`` is set to -1 you will be prompted for a selection.
+
+``-comp``: plot the vector components per atom of eigenvectors
+``-first`` to ``-last``.
+
+``-rmsf``: plot the RMS fluctuation per atom of eigenvectors
+``-first`` to ``-last`` (requires ``-eig``).
+
+``-proj``: calculate projections of a trajectory on eigenvectors
+``-first`` to ``-last``.
+The projections of a trajectory on the eigenvectors of its
+covariance matrix are called principal components (pc's).
+It is often useful to check the cosine content of the pc's,
+since the pc's of random diffusion are cosines with the number
+of periods equal to half the pc index.
+The cosine content of the pc's can be calculated with the program
+:doc:`gmx analyze <gmx-analyze>`.
+
+``-2d``: calculate a 2d projection of a trajectory on eigenvectors
+``-first`` and ``-last``.
+
+``-3d``: calculate a 3d projection of a trajectory on the first
+three selected eigenvectors.
+
+``-filt``: filter the trajectory to show only the motion along
+eigenvectors ``-first`` to ``-last``.
+
+``-extr``: calculate the two extreme projections along a trajectory
+on the average structure and interpolate ``-nframes`` frames
+between them, or set your own extremes with ``-max``. The
+eigenvector ``-first`` will be written unless ``-first`` and
+``-last`` have been set explicitly, in which case all eigenvectors
+will be written to separate files. Chain identifiers will be added
+when writing a :ref:`.pdb <pdb>` file with two or three structures (you
+can use ``rasmol -nmrpdb`` to view such a :ref:`.pdb <pdb>` file).
+
+Overlap calculations between covariance analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Note:** the analysis should use the same fitting structure
+
+``-over``: calculate the subspace overlap of the eigenvectors in
+file ``-v2`` with eigenvectors ``-first`` to ``-last``
+in file ``-v``.
+
+``-inpr``: calculate a matrix of inner-products between
+eigenvectors in files ``-v`` and ``-v2``. All eigenvectors
+of both files will be used unless ``-first`` and ``-last``
+have been set explicitly.
+
+When ``-v`` and ``-v2`` are given, a single number for the
+overlap between the covariance matrices is generated. Note that the
+eigenvalues are by default read from the timestamp field in the
+eigenvector input files, but when ``-eig``, or ``-eig2`` are
+given, the corresponding eigenvalues are used instead. The formulas are::
+
+         difference = sqrt(tr((sqrt(M1) - sqrt(M2))^2))
+ normalized overlap = 1 - difference/sqrt(tr(M1) + tr(M2))
+      shape overlap = 1 - sqrt(tr((sqrt(M1/tr(M1)) - sqrt(M2/tr(M2)))^2))
+
+where M1 and M2 are the two covariance matrices and tr is the trace
+of a matrix. The numbers are proportional to the overlap of the square
+root of the fluctuations. The normalized overlap is the most useful
+number, it is 1 for identical matrices and 0 when the sampled
+subspaces are orthogonal.
+
+When the ``-entropy`` flag is given an entropy estimate will be
+computed based on the Quasiharmonic approach and based on
+Schlitter's formula.
+
+Options
+-------
+
+Options to specify input files:
+
+``-v`` [<.trr/.cpt/...>] (eigenvec.trr)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+``-v2`` [<.trr/.cpt/...>] (eigenvec2.trr) (Optional)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+``-f`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr) (Optional)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-eig`` [<.xvg>] (eigenval.xvg) (Optional)
+    xvgr/xmgr file
+``-eig2`` [<.xvg>] (eigenval2.xvg) (Optional)
+    xvgr/xmgr file
+
+Options to specify output files:
+
+``-comp`` [<.xvg>] (eigcomp.xvg) (Optional)
+    xvgr/xmgr file
+``-rmsf`` [<.xvg>] (eigrmsf.xvg) (Optional)
+    xvgr/xmgr file
+``-proj`` [<.xvg>] (proj.xvg) (Optional)
+    xvgr/xmgr file
+``-2d`` [<.xvg>] (2dproj.xvg) (Optional)
+    xvgr/xmgr file
+``-3d`` [<.gro/.g96/...>] (3dproj.pdb) (Optional)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+``-filt`` [<.xtc/.trr/...>] (filtered.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-extr`` [<.xtc/.trr/...>] (extreme.pdb) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-over`` [<.xvg>] (overlap.xvg) (Optional)
+    xvgr/xmgr file
+``-inpr`` [<.xpm>] (inprod.xpm) (Optional)
+    X PixMap compatible matrix file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-first`` <int> (1)
+    First eigenvector for analysis (-1 is select)
+``-last`` <int> (-1)
+    Last eigenvector for analysis (-1 is till the last)
+``-skip`` <int> (1)
+    Only analyse every nr-th frame
+``-max`` <real> (0)
+    Maximum for projection of the eigenvector on the average structure, max=0 gives the extremes
+``-nframes`` <int> (2)
+    Number of frames for the extremes output
+``-[no]split``  (no)
+    Split eigenvector projections where time is zero
+``-[no]entropy``  (no)
+    Compute entropy according to the Quasiharmonic formula or Schlitter's method.
+``-temp`` <real> (298.15)
+    Temperature for entropy calculations
+``-nevskip`` <int> (6)
+    Number of eigenvalues to skip when computing the entropy due to the quasi harmonic approximation. When you do a rotational and/or translational fit prior to the covariance analysis, you get 3 or 6 eigenvalues that are very close to zero, and which should not be taken into account when computing the entropy.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

@@ -1,0 +1,75 @@
+.. _gmx dump:
+
+gmx dump
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx dump [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-e` :emphasis:`[<.edr>]`]
+             [:strong:`-cp` :emphasis:`[<.cpt>]`] [:strong:`-p` :emphasis:`[<.top>]`] [:strong:`-mtx` :emphasis:`[<.mtx>]`] [:strong:`-om` :emphasis:`[<.mdp>]`]
+             [:strong:`-[no]nr`] [:strong:`-[no]param`] [:strong:`-[no]sys`] [:strong:`-[no]orgir`]
+
+Description
+-----------
+
+``gmx dump`` reads a run input file (:ref:`.tpr <tpr>`),
+a trajectory (:ref:`.trr <trr>`/:ref:`.xtc <xtc>`/``/tng``), an energy
+file (:ref:`.edr <edr>`) or a checkpoint file (:ref:`.cpt <cpt>`)
+and prints that to standard output in a readable format.
+This program is essential for checking your run input file in case of
+problems.
+
+The program can also preprocess a topology to help finding problems.
+Note that currently setting ``GMXLIB`` is the only way to customize
+directories used for searching include files.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr) (Optional)
+    Portable xdr run input file
+``-f`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-e`` [<.edr>] (ener.edr) (Optional)
+    Energy file
+``-cp`` [<.cpt>] (state.cpt) (Optional)
+    Checkpoint file
+``-p`` [<.top>] (topol.top) (Optional)
+    Topology file
+``-mtx`` [<.mtx>] (hessian.mtx) (Optional)
+    Hessian matrix
+
+Options to specify output files:
+
+``-om`` [<.mdp>] (grompp.mdp) (Optional)
+    grompp input file with MD parameters
+
+Other options:
+
+``-[no]nr``  (yes)
+    Show index numbers in output (leaving them out makes comparison easier, but creates a useless topology)
+``-[no]param``  (no)
+    Show parameters for each bonded interaction (for comparing dumps, it is useful to combine this with -nonr)
+``-[no]sys``  (no)
+    List the atoms and bonded interactions for the whole system instead of for each molecule type
+``-[no]orgir``  (no)
+    Show input parameters from tpr as they were written by the version that produced the file, instead of how the current version reads them
+
+Known Issues
+------------
+
+* Position restraint output from -sys -s is broken
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

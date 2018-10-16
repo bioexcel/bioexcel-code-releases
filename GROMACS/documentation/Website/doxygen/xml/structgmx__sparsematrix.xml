@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structgmx__sparsematrix" kind="struct" prot="public">
+    <compoundname>gmx_sparsematrix</compoundname>
+    <includes local="no">gromacs/linearalgebra/sparsematrix.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structgmx__sparsematrix_1a8417fbdb655600b4b781f7093ced07a0" prot="public" static="no" mutable="no">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool gmx_sparsematrix::compressed_symmetric</definition>
+        <argsstring></argsstring>
+        <name>compressed_symmetric</name>
+        <briefdescription>
+<para>Store half elements and assume symmetry. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" line="109" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__sparsematrix_1a66c709f29fa9eff4bb76349c3e25fc5e" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int gmx_sparsematrix::nrow</definition>
+        <argsstring></argsstring>
+        <name>nrow</name>
+        <briefdescription>
+<para>Number of rows in matrix. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" line="110" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__sparsematrix_1af39caa125592fae235b73660b9ff6af0" prot="public" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* gmx_sparsematrix::ndata</definition>
+        <argsstring></argsstring>
+        <name>ndata</name>
+        <briefdescription>
+<para>Number of entries on each row (list) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" line="111" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__sparsematrix_1a1a8e1580b68c130e5926a7527de65f80" prot="public" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* gmx_sparsematrix::nalloc</definition>
+        <argsstring></argsstring>
+        <name>nalloc</name>
+        <briefdescription>
+<para>Allocated entry list length for each row. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" line="112" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__sparsematrix_1a8b5cf62783152e0e58b310e714de9ba5" prot="public" static="no" mutable="no">
+        <type><ref refid="structgmx__sparsematrix__entry" kindref="compound">gmx_sparsematrix_entry_t</ref> **</type>
+        <definition>gmx_sparsematrix_entry_t** gmx_sparsematrix::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>data[i] is a list with entries on row i </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" line="113" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Sparse matrix storage format. </para>    </briefdescription>
+    <detaileddescription>
+<para>This structure specifies a storage format for a sparse matrix. The memory requirements are only proportional to the number of nonzero elements, and it provides a reasonably fast way to perform matrix-vector multiplications.</para><para>The data format is very similar to a neighborlist. It is optimized for fast access, but it is difficult to add entries. If you are constructing a matrix you should either do it in exactly the order specified here, or use some other more flexible intermediate structure.</para><para>The index array is of size nrow+1. All non-zero matrix elements on row i are stored in positions index[i] through index[i+1]-1 in the arrays column and value. The column array contains the column index for each entry, in ascending order, and the corresponding position in the value array contains the floating point matrix element.</para><para>index[nrow] should be equal to the total number of elements stored.</para><para>Thus, to find the value of matrix element [5,4] you should loop over positions index[5] to index[6]-1 in column until you either find the value 4, or a higher value (meaning the element was zero).</para><para>It is fairly easy to construct the matrix on-the-fly if you can do it row-by-row.</para><para>IMPORTANT: If compressed_symmetric is set to TRUE, you should only store EITHER the upper OR lower triangle (and the diagonal), and the other half is assumed to be symmetric. Otherwise, if compressed_symmetric==FALSE, no symmetry is implied and all elements should be stored.</para><para>The symmetry compression saves us a factor 2 both in storage and matrix multiplication CPU-time, which can be very useful for huge eigenproblems.</para><para>If you are unsure, just set compressed_symmetric to FALSE and list all elements. If you enable it but still list all elements (both upper and lower triangle) you will be sorry...</para><para>Internally, the sparse data is stored as a separate list for each row, where the list element is a structure with a column and (floating-point) data value. This makes it possible, although not completely transparent, to update values in random access order. The drawback is that the structure will allocate nrow memory regions. The matrix data could be stored in a single contiguous array with indices for each row, but then we could only insert elements at the end without copying the entire matrix.</para><para>After you have</para><para>In other words: Not perfect, but it works. </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="4136">
+        <label>gmx_sparsematrix_entry</label>
+        <link refid="structgmx__sparsematrix__entry"/>
+      </node>
+      <node id="4135">
+        <label>gmx_sparsematrix</label>
+        <link refid="structgmx__sparsematrix"/>
+        <childnode refid="4136" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" line="108" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/sparsematrix.h" bodystart="106" bodyend="114"/>
+    <listofallmembers>
+      <member refid="structgmx__sparsematrix_1a8417fbdb655600b4b781f7093ced07a0" prot="public" virt="non-virtual"><scope>gmx_sparsematrix</scope><name>compressed_symmetric</name></member>
+      <member refid="structgmx__sparsematrix_1a8b5cf62783152e0e58b310e714de9ba5" prot="public" virt="non-virtual"><scope>gmx_sparsematrix</scope><name>data</name></member>
+      <member refid="structgmx__sparsematrix_1a1a8e1580b68c130e5926a7527de65f80" prot="public" virt="non-virtual"><scope>gmx_sparsematrix</scope><name>nalloc</name></member>
+      <member refid="structgmx__sparsematrix_1af39caa125592fae235b73660b9ff6af0" prot="public" virt="non-virtual"><scope>gmx_sparsematrix</scope><name>ndata</name></member>
+      <member refid="structgmx__sparsematrix_1a66c709f29fa9eff4bb76349c3e25fc5e" prot="public" virt="non-virtual"><scope>gmx_sparsematrix</scope><name>nrow</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

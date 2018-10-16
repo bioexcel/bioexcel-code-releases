@@ -31,7 +31,7 @@
 
 __doc__="""
 Program to insert mutated residues in structure files for
-free energy simulations.
+free energy simulations (so far unfinished new version).
 """
 
 import sys,os
@@ -99,10 +99,19 @@ ext_one_letter = {
     'PHE':'F',
     'PRO':'P',
     'SER':'S',
+    'SP1':'SP1', # phosphoserine in charmm36
+    'SP2':'SP2', # phosphoserine in charmm36
     'THR':'T',
     'TRP':'W',
     'TYR':'Y',
     'VAL':'V',
+}
+
+noncanonical_aa = {
+    'S2SP1':'SSP1', # serine to pSer1
+    'S2SP2':'SSP2', # serine to pSer2
+    'SP12S':'SP1S', # pSer1 to serine
+    'SP22S':'SP2S', # pSer2 to setine
 }
 
 dna_names = {
@@ -338,6 +347,10 @@ def rename_to_match_library(res):
 	    atom.name = 'HG'
         if ('S2' in atom.resname) and (atom.name == 'HG1'):
             atom.name = 'HG'
+        if ('SP1' in atom.resname) and (atom.name == 'HG1'): # phosphoserine in charmm36
+            atom.name = 'HG'
+        if ('SP2' in atom.resname) and (atom.name == 'HG1'): # phosphoserine in charmm36
+            atom.name = 'HG'
 	## for cysteine
         if (atom.resname == 'CYS') and (atom.name == 'HG1'):
             atom.name = 'HG'
@@ -376,6 +389,7 @@ def set_conformation(old_res, new_res, rotdic):
         rot = Rotation(a1.x,a2.x)
         for atom in atoms:
             atom.x = rot.apply(atom.x,diff)
+#    sys.exit(0)
     for atom in new_res.atoms:
         if atom.name[0] != 'D':
             atom.x = old_res[atom.name].x
@@ -439,6 +453,8 @@ def apply_aa_mutation(m, residue, new_aa_name, mtp_file, bStrB, infileB):
         olkey = check_OPLS_LYS( residue )
 
     hybrid_residue_name = olkey+'2'+new_aa_name
+    if hybrid_residue_name in noncanonical_aa.keys():
+        hybrid_residue_name = noncanonical_aa[hybrid_residue_name]
     print 'log_> Residue to mutate: %d | %s | %s ' % ( residue.id, residue.resname, residue.chain_id)
     print 'log_> Mutation to apply: %s->%s' % (olkey, new_aa_name)
     print 'log_> Hybrid residue name: %s' % hybrid_residue_name
@@ -609,8 +625,8 @@ def main(argv):
        sys.exit(0)
 
    bStrB = False
-   infile = ''
-   if cmdl['-fB']:
+   infileB = ''
+   if cmdl.opt['-fB'].is_set:
 	bStrB = True
 	infileB = cmdl['-fB']
 
@@ -643,7 +659,7 @@ def main(argv):
            if not ask_next(): do_more = False
        
 
-   m.write(cmdl['-o'])
+   m.write(cmdl['-o'],bPDBTER=True)
    print
    print 'mutations done...........'
    print

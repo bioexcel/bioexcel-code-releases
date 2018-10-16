@@ -1,0 +1,278 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx dipoles &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx disre" href="gmx-disre.html" />
+    <link rel="prev" title="gmx dielectric" href="gmx-dielectric.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-disre.html" title="gmx disre"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-dielectric.html" title="gmx dielectric"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-dipoles">
+<span id="id1"></span><h1>gmx dipoles<a class="headerlink" href="#gmx-dipoles" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx dipoles [<strong>-en</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>]
+            [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-eps</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-a</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-d</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-c</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-g</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-adip</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-dip3d</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-cos</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-cmap</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-slab</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+            [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-mu</strong> <em>&lt;real&gt;</em>]
+            [<strong>-mumax</strong> <em>&lt;real&gt;</em>] [<strong>-epsilonRF</strong> <em>&lt;real&gt;</em>] [<strong>-skip</strong> <em>&lt;int&gt;</em>]
+            [<strong>-temp</strong> <em>&lt;real&gt;</em>] [<strong>-corr</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]pairs</strong>] [<strong>-[no]quad</strong>]
+            [<strong>-ncos</strong> <em>&lt;int&gt;</em>] [<strong>-axis</strong> <em>&lt;string&gt;</em>] [<strong>-sl</strong> <em>&lt;int&gt;</em>]
+            [<strong>-gkratom</strong> <em>&lt;int&gt;</em>] [<strong>-gkratom2</strong> <em>&lt;int&gt;</em>] [<strong>-rcmax</strong> <em>&lt;real&gt;</em>]
+            [<strong>-[no]phi</strong>] [<strong>-nlevels</strong> <em>&lt;int&gt;</em>] [<strong>-ndegrees</strong> <em>&lt;int&gt;</em>]
+            [<strong>-acflen</strong> <em>&lt;int&gt;</em>] [<strong>-[no]normalize</strong>] [<strong>-P</strong> <em>&lt;enum&gt;</em>]
+            [<strong>-fitfn</strong> <em>&lt;enum&gt;</em>] [<strong>-beginfit</strong> <em>&lt;real&gt;</em>] [<strong>-endfit</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">dipoles</span></code> computes the total dipole plus fluctuations of a simulation
+system. From this you can compute e.g. the dielectric constant for
+low-dielectric media.
+For molecules with a net charge, the net charge is subtracted at
+center of mass of the molecule.</p>
+<p>The file <code class="docutils literal"><span class="pre">Mtot.xvg</span></code> contains the total dipole moment of a frame, the
+components as well as the norm of the vector.
+The file <code class="docutils literal"><span class="pre">aver.xvg</span></code> contains &lt;|mu|^2&gt; and |&lt;mu&gt;|^2 during the
+simulation.
+The file <code class="docutils literal"><span class="pre">dipdist.xvg</span></code> contains the distribution of dipole moments during
+the simulation
+The value of <code class="docutils literal"><span class="pre">-mumax</span></code> is used as the highest value in the distribution graph.</p>
+<p>Furthermore, the dipole autocorrelation function will be computed when
+option <code class="docutils literal"><span class="pre">-corr</span></code> is used. The output file name is given with the <code class="docutils literal"><span class="pre">-c</span></code>
+option.
+The correlation functions can be averaged over all molecules
+(<code class="docutils literal"><span class="pre">mol</span></code>), plotted per molecule separately (<code class="docutils literal"><span class="pre">molsep</span></code>)
+or it can be computed over the total dipole moment of the simulation box
+(<code class="docutils literal"><span class="pre">total</span></code>).</p>
+<p>Option <code class="docutils literal"><span class="pre">-g</span></code> produces a plot of the distance dependent Kirkwood
+G-factor, as well as the average cosine of the angle between the dipoles
+as a function of the distance. The plot also includes gOO and hOO
+according to Nymand &amp; Linse, J. Chem. Phys. 112 (2000) pp 6386-6395. In the same plot,
+we also include the energy per scale computed by taking the inner product of
+the dipoles divided by the distance to the third power.</p>
+<p>EXAMPLES</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">dipoles</span> <span class="pre">-corr</span> <span class="pre">mol</span> <span class="pre">-P</span> <span class="pre">1</span> <span class="pre">-o</span> <span class="pre">dip_sqr</span> <span class="pre">-mu</span> <span class="pre">2.273</span> <span class="pre">-mumax</span> <span class="pre">5.0</span></code></p>
+<p>This will calculate the autocorrelation function of the molecular
+dipoles using a first order Legendre polynomial of the angle of the
+dipole vector and itself a time t later. For this calculation 1001
+frames will be used. Further, the dielectric constant will be calculated
+using an <code class="docutils literal"><span class="pre">-epsilonRF</span></code> of infinity (default), temperature of 300 K (default) and
+an average dipole moment of the molecule of 2.273 (SPC). For the
+distribution function a maximum of 5.0 will be used.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-en</span></code> [&lt;.edr&gt;] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (Mtot.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-eps</span></code> [&lt;.xvg&gt;] (epsilon.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-a</span></code> [&lt;.xvg&gt;] (aver.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-d</span></code> [&lt;.xvg&gt;] (dipdist.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-c</span></code> [&lt;.xvg&gt;] (dipcorr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.xvg&gt;] (gkr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-adip</span></code> [&lt;.xvg&gt;] (adip.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-dip3d</span></code> [&lt;.xvg&gt;] (dip3d.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-cos</span></code> [&lt;.xvg&gt;] (cosaver.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-cmap</span></code> [&lt;.xpm&gt;] (cmap.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-slab</span></code> [&lt;.xvg&gt;] (slab.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-mu</span></code> &lt;real&gt; (-1)</dt>
+<dd>dipole of a single molecule (in Debye)</dd>
+<dt><code class="docutils literal"><span class="pre">-mumax</span></code> &lt;real&gt; (5)</dt>
+<dd>max dipole in Debye (for histogram)</dd>
+<dt><code class="docutils literal"><span class="pre">-epsilonRF</span></code> &lt;real&gt; (0)</dt>
+<dd>epsilon of the reaction field used during the simulation, needed for dielectric constant calculation. WARNING: 0.0 means infinity (default)</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (0)</dt>
+<dd>Skip steps in the output (but not in the computations)</dd>
+<dt><code class="docutils literal"><span class="pre">-temp</span></code> &lt;real&gt; (300)</dt>
+<dd>Average temperature of the simulation (needed for dielectric constant calculation)</dd>
+<dt><code class="docutils literal"><span class="pre">-corr</span></code> &lt;enum&gt; (none)</dt>
+<dd>Correlation function to calculate: none, mol, molsep, total</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pairs</span></code>  (yes)</dt>
+<dd>Calculate |cos(theta)| between all pairs of molecules. May be slow</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]quad</span></code>  (no)</dt>
+<dd>Take quadrupole into account</dd>
+<dt><code class="docutils literal"><span class="pre">-ncos</span></code> &lt;int&gt; (1)</dt>
+<dd>Must be 1 or 2. Determines whether the &lt;cos(theta)&gt; is computed between all molecules in one group, or between molecules in two different groups. This turns on the <code class="docutils literal"><span class="pre">-g</span></code> flag.</dd>
+<dt><code class="docutils literal"><span class="pre">-axis</span></code> &lt;string&gt; (Z)</dt>
+<dd>Take the normal on the computational box in direction X, Y or Z.</dd>
+<dt><code class="docutils literal"><span class="pre">-sl</span></code> &lt;int&gt; (10)</dt>
+<dd>Divide the box into this number of slices.</dd>
+<dt><code class="docutils literal"><span class="pre">-gkratom</span></code> &lt;int&gt; (0)</dt>
+<dd>Use the n-th atom of a molecule (starting from 1) to calculate the distance between molecules rather than the center of charge (when 0) in the calculation of distance dependent Kirkwood factors</dd>
+<dt><code class="docutils literal"><span class="pre">-gkratom2</span></code> &lt;int&gt; (0)</dt>
+<dd>Same as previous option in case ncos = 2, i.e. dipole interaction between two groups of molecules</dd>
+<dt><code class="docutils literal"><span class="pre">-rcmax</span></code> &lt;real&gt; (0)</dt>
+<dd>Maximum distance to use in the dipole orientation distribution (with ncos == 2). If zero, a criterion based on the box length will be used.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]phi</span></code>  (no)</dt>
+<dd>Plot the ‘torsion angle’ defined as the rotation of the two dipole vectors around the distance vector between the two molecules in the <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> file from the <code class="docutils literal"><span class="pre">-cmap</span></code> option. By default the cosine of the angle between the dipoles is plotted.</dd>
+<dt><code class="docutils literal"><span class="pre">-nlevels</span></code> &lt;int&gt; (20)</dt>
+<dd>Number of colors in the cmap output</dd>
+<dt><code class="docutils literal"><span class="pre">-ndegrees</span></code> &lt;int&gt; (90)</dt>
+<dd>Number of divisions on the <em>y</em>-axis in the cmap output (for 180 degrees)</dd>
+<dt><code class="docutils literal"><span class="pre">-acflen</span></code> &lt;int&gt; (-1)</dt>
+<dd>Length of the ACF, default is half the number of frames</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]normalize</span></code>  (yes)</dt>
+<dd>Normalize ACF</dd>
+<dt><code class="docutils literal"><span class="pre">-P</span></code> &lt;enum&gt; (0)</dt>
+<dd>Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3</dd>
+<dt><code class="docutils literal"><span class="pre">-fitfn</span></code> &lt;enum&gt; (none)</dt>
+<dd>Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9</dd>
+<dt><code class="docutils literal"><span class="pre">-beginfit</span></code> &lt;real&gt; (0)</dt>
+<dd>Time where to begin the exponential fit of the correlation function</dd>
+<dt><code class="docutils literal"><span class="pre">-endfit</span></code> &lt;real&gt; (-1)</dt>
+<dd>Time where to end the exponential fit of the correlation function, -1 is until the end</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx dipoles</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-dielectric.html"
+                        title="previous chapter">gmx dielectric</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-disre.html"
+                        title="next chapter">gmx disre</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-dipoles.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-disre.html" title="gmx disre"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-dielectric.html" title="gmx dielectric"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

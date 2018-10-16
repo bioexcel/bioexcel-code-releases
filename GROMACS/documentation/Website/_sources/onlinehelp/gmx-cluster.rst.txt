@@ -1,0 +1,200 @@
+.. _gmx cluster:
+
+gmx cluster
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx cluster [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                [:strong:`-dm` :emphasis:`[<.xpm>]`] [:strong:`-om` :emphasis:`[<.xpm>]`] [:strong:`-o` :emphasis:`[<.xpm>]`] [:strong:`-g` :emphasis:`[<.log>]`]
+                [:strong:`-dist` :emphasis:`[<.xvg>]`] [:strong:`-ev` :emphasis:`[<.xvg>]`] [:strong:`-conv` :emphasis:`[<.xvg>]`]
+                [:strong:`-sz` :emphasis:`[<.xvg>]`] [:strong:`-tr` :emphasis:`[<.xpm>]`] [:strong:`-ntr` :emphasis:`[<.xvg>]`]
+                [:strong:`-clid` :emphasis:`[<.xvg>]`] [:strong:`-cl` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-b` :emphasis:`<time>`]
+                [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-[no]w`]
+                [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]dista`] [:strong:`-nlevels` :emphasis:`<int>`]
+                [:strong:`-cutoff` :emphasis:`<real>`] [:strong:`-[no]fit`] [:strong:`-max` :emphasis:`<real>`] [:strong:`-skip` :emphasis:`<int>`]
+                [:strong:`-[no]av`] [:strong:`-wcl` :emphasis:`<int>`] [:strong:`-nst` :emphasis:`<int>`] [:strong:`-rmsmin` :emphasis:`<real>`]
+                [:strong:`-method` :emphasis:`<enum>`] [:strong:`-minstruct` :emphasis:`<int>`] [:strong:`-[no]binary`]
+                [:strong:`-M` :emphasis:`<int>`] [:strong:`-P` :emphasis:`<int>`] [:strong:`-seed` :emphasis:`<int>`] [:strong:`-niter` :emphasis:`<int>`]
+                [:strong:`-nrandom` :emphasis:`<int>`] [:strong:`-kT` :emphasis:`<real>`] [:strong:`-[no]pbc`]
+
+Description
+-----------
+
+``gmx cluster`` can cluster structures using several different methods.
+Distances between structures can be determined from a trajectory
+or read from an :ref:`.xpm <xpm>` matrix file with the ``-dm`` option.
+RMS deviation after fitting or RMS deviation of atom-pair distances
+can be used to define the distance between structures.
+
+single linkage: add a structure to a cluster when its distance to any
+element of the cluster is less than ``cutoff``.
+
+Jarvis Patrick: add a structure to a cluster when this structure
+and a structure in the cluster have each other as neighbors and
+they have a least ``P`` neighbors in common. The neighbors
+of a structure are the M closest structures or all structures within
+``cutoff``.
+
+Monte Carlo: reorder the RMSD matrix using Monte Carlo such that
+the order of the frames is using the smallest possible increments.
+With this it is possible to make a smooth animation going from one
+structure to another with the largest possible (e.g.) RMSD between
+them, however the intermediate steps should be as small as possible.
+Applications could be to visualize a potential of mean force
+ensemble of simulations or a pulling simulation. Obviously the user
+has to prepare the trajectory well (e.g. by not superimposing frames).
+The final result can be inspect visually by looking at the matrix
+:ref:`.xpm <xpm>` file, which should vary smoothly from bottom to top.
+
+diagonalization: diagonalize the RMSD matrix.
+
+gromos: use algorithm as described in Daura *et al.*
+(*Angew. Chem. Int. Ed.* **1999**, *38*, pp 236-240).
+Count number of neighbors using cut-off, take structure with
+largest number of neighbors with all its neighbors as cluster
+and eliminate it from the pool of clusters. Repeat for remaining
+structures in pool.
+
+When the clustering algorithm assigns each structure to exactly one
+cluster (single linkage, Jarvis Patrick and gromos) and a trajectory
+file is supplied, the structure with
+the smallest average distance to the others or the average structure
+or all structures for each cluster will be written to a trajectory
+file. When writing all structures, separate numbered files are made
+for each cluster.
+
+Two output files are always written:
+
+ * ``-o`` writes the RMSD values in the upper left half of the matrix
+   and a graphical depiction of the clusters in the lower right half
+   When ``-minstruct`` = 1 the graphical depiction is black
+   when two structures are in the same cluster.
+   When ``-minstruct`` > 1 different colors will be used for each
+   cluster.
+ * ``-g`` writes information on the options used and a detailed list
+   of all clusters and their members.
+
+Additionally, a number of optional output files can be written:
+
+ * ``-dist`` writes the RMSD distribution.
+ * ``-ev`` writes the eigenvectors of the RMSD matrix
+   diagonalization.
+ * ``-sz`` writes the cluster sizes.
+ * ``-tr`` writes a matrix of the number transitions between
+   cluster pairs.
+ * ``-ntr`` writes the total number of transitions to or from
+   each cluster.
+ * ``-clid`` writes the cluster number as a function of time.
+ * ``-cl`` writes average (with option ``-av``) or central
+   structure of each cluster or writes numbered files with cluster members
+   for a selected set of clusters (with option ``-wcl``, depends on
+   ``-nst`` and ``-rmsmin``). The center of a cluster is the
+   structure with the smallest average RMSD from all other structures
+   of the cluster.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-dm`` [<.xpm>] (rmsd.xpm) (Optional)
+    X PixMap compatible matrix file
+
+Options to specify output files:
+
+``-om`` [<.xpm>] (rmsd-raw.xpm)
+    X PixMap compatible matrix file
+``-o`` [<.xpm>] (rmsd-clust.xpm)
+    X PixMap compatible matrix file
+``-g`` [<.log>] (cluster.log)
+    Log file
+``-dist`` [<.xvg>] (rmsd-dist.xvg) (Optional)
+    xvgr/xmgr file
+``-ev`` [<.xvg>] (rmsd-eig.xvg) (Optional)
+    xvgr/xmgr file
+``-conv`` [<.xvg>] (mc-conv.xvg) (Optional)
+    xvgr/xmgr file
+``-sz`` [<.xvg>] (clust-size.xvg) (Optional)
+    xvgr/xmgr file
+``-tr`` [<.xpm>] (clust-trans.xpm) (Optional)
+    X PixMap compatible matrix file
+``-ntr`` [<.xvg>] (clust-trans.xvg) (Optional)
+    xvgr/xmgr file
+``-clid`` [<.xvg>] (clust-id.xvg) (Optional)
+    xvgr/xmgr file
+``-cl`` [<.xtc/.trr/...>] (clusters.pdb) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]dista``  (no)
+    Use RMSD of distances instead of RMS deviation
+``-nlevels`` <int> (40)
+    Discretize RMSD matrix in this number of levels
+``-cutoff`` <real> (0.1)
+    RMSD cut-off (nm) for two structures to be neighbor
+``-[no]fit``  (yes)
+    Use least squares fitting before RMSD calculation
+``-max`` <real> (-1)
+    Maximum level in RMSD matrix
+``-skip`` <int> (1)
+    Only analyze every nr-th frame
+``-[no]av``  (no)
+    Write average instead of middle structure for each cluster
+``-wcl`` <int> (0)
+    Write the structures for this number of clusters to numbered files
+``-nst`` <int> (1)
+    Only write all structures if more than this number of structures per cluster
+``-rmsmin`` <real> (0)
+    minimum rms difference with rest of cluster for writing structures
+``-method`` <enum> (linkage)
+    Method for cluster determination: linkage, jarvis-patrick, monte-carlo, diagonalization, gromos
+``-minstruct`` <int> (1)
+    Minimum number of structures in cluster for coloring in the :ref:`.xpm <xpm>` file
+``-[no]binary``  (no)
+    Treat the RMSD matrix as consisting of 0 and 1, where the cut-off is given by ``-cutoff``
+``-M`` <int> (10)
+    Number of nearest neighbors considered for Jarvis-Patrick algorithm, 0 is use cutoff
+``-P`` <int> (3)
+    Number of identical nearest neighbors required to form a cluster
+``-seed`` <int> (0)
+    Random number seed for Monte Carlo clustering algorithm (0 means generate)
+``-niter`` <int> (10000)
+    Number of iterations for MC
+``-nrandom`` <int> (0)
+    The first iterations for MC may be done complete random, to shuffle the frames
+``-kT`` <real> (0.001)
+    Boltzmann weighting factor for Monte Carlo optimization (zero turns off uphill steps)
+``-[no]pbc``  (yes)
+    PBC check
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

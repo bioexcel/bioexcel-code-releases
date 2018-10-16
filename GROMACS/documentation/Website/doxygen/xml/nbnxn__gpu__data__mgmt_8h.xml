@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__gpu__data__mgmt_8h" kind="file">
+    <compoundname>nbnxn_gpu_data_mgmt.h</compoundname>
+    <includes refid="gpu__macros_8h" local="yes">gromacs/gpu_utils/gpu_macros.h</includes>
+    <includes refid="nbnxn__gpu__types_8h" local="yes">gromacs/mdlib/nbnxn_gpu_types.h</includes>
+    <includes refid="interaction__const_8h" local="yes">gromacs/mdtypes/interaction_const.h</includes>
+    <includedby refid="pme-load-balancing_8cpp" local="yes">src/gromacs/ewald/pme-load-balancing.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <includedby refid="nbnxn__ocl_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp</includedby>
+    <includedby refid="nbnxn__ocl__data__mgmt_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <invincdepgraph>
+      <node id="15426">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl.cpp</label>
+        <link refid="nbnxn__ocl_8cpp"/>
+      </node>
+      <node id="15427">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp</label>
+        <link refid="nbnxn__ocl__data__mgmt_8cpp"/>
+      </node>
+      <node id="15425">
+        <label>src/gromacs/ewald/pme-load-balancing.cpp</label>
+        <link refid="pme-load-balancing_8cpp"/>
+      </node>
+      <node id="15424">
+        <label>src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h</label>
+        <link refid="nbnxn_gpu_data_mgmt.h"/>
+        <childnode refid="15425" relation="include">
+        </childnode>
+        <childnode refid="15426" relation="include">
+        </childnode>
+        <childnode refid="15427" relation="include">
+        </childnode>
+        <childnode refid="15428" relation="include">
+        </childnode>
+      </node>
+      <node id="15428">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a92806924d9b5b2aaae58911947815dd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_init</definition>
+        <argsstring>(gmx_nbnxn_gpu_t **p_nb, const gmx_device_info_t *deviceInfo, const interaction_const_t *ic, const NbnxnListParameters *listParams, const nbnxn_atomdata_t *nbat, int rank, gmx_bool bLocalAndNonlocal)</argsstring>
+        <name>nbnxn_gpu_init</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> **</type>
+          <declname>p_nb</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__device__info__t" kindref="compound">gmx_device_info_t</ref> *</type>
+          <declname>deviceInfo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>const NbnxnListParameters *</type>
+          <declname>listParams</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rank</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bLocalAndNonlocal</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the data structures related to GPU nonbonded calculations. </para>        </briefdescription>
+        <detaileddescription>
+<para>Initializes the data structures related to GPU nonbonded calculations. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="64" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="719" bodyend="838"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a81c75d1a846c6f0e25e4416eb2c073fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_init_pairlist</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb, const struct nbnxn_pairlist_t *h_nblist, int iloc)</argsstring>
+        <name>nbnxn_gpu_init_pairlist</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structnbnxn__pairlist__t" kindref="compound">nbnxn_pairlist_t</ref> *</type>
+          <declname>h_nblist</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>iloc</declname>
+        </param>
+        <briefdescription>
+<para>Initializes pair-list data for GPU, called at every pair search step. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="75" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1ab9bb9d058b17d32929dfaa1b2e50f46b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_init_atomdata</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb, const nbnxn_atomdata_t *nbat)</argsstring>
+        <name>nbnxn_gpu_init_atomdata</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <briefdescription>
+<para>Initializes atom-data on the GPU, called at every pair search step. </para>        </briefdescription>
+        <detaileddescription>
+<para>Initializes atom-data on the GPU, called at every pair search step. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="81" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="981" bodyend="1075"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a8789a600923bb29ffd13813e258b0cf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_pme_loadbal_update_param</definition>
+        <argsstring>(const struct nonbonded_verlet_t *nbv, const interaction_const_t *ic, const NbnxnListParameters *listParams)</argsstring>
+        <name>nbnxn_gpu_pme_loadbal_update_param</name>
+        <param>
+          <type>const struct <ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>const NbnxnListParameters *</type>
+          <declname>listParams</declname>
+        </param>
+        <briefdescription>
+<para>Re-generate the GPU Ewald force table, resets rlist, and update the electrostatic type switching to twin cut-off (or back) if needed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="88" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a12e0d41a0da2559f44b707944c64babd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_upload_shiftvec</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb, const nbnxn_atomdata_t *nbatom)</argsstring>
+        <name>nbnxn_gpu_upload_shiftvec</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbatom</declname>
+        </param>
+        <briefdescription>
+<para>Uploads shift vector to the GPU if the box is dynamic (otherwise just returns). </para>        </briefdescription>
+        <detaileddescription>
+<para>Uploads shift vector to the GPU if the box is dynamic (otherwise just returns). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="94" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="965" bodyend="978"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a4cd0ed7f1ebf1cce907b3a07e8bdfe91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_clear_outputs</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb, int flags)</argsstring>
+        <name>nbnxn_gpu_clear_outputs</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Clears GPU outputs: nonbonded force, shift force and energy. </para>        </briefdescription>
+        <detaileddescription>
+<para>Clears GPU outputs: nonbonded force, shift force and energy. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="99" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="880" bodyend="895"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a90bfc2d06a0ba2ab89aff68252de986c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_free</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb)</argsstring>
+        <name>nbnxn_gpu_free</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <briefdescription>
+<para>Frees all GPU resources used for the nonbonded calculations. </para>        </briefdescription>
+        <detaileddescription>
+<para>Frees all GPU resources used for the nonbonded calculations. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="104" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="1137" bodyend="1239"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1aea5ea2d6be535e719cfbc25db2480ce5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structgmx__wallclock__gpu__nbnxn__t" kindref="compound">gmx_wallclock_gpu_nbnxn_t</ref> *</type>
+        <definition>struct gmx_wallclock_gpu_nbnxn_t* nbnxn_gpu_get_timings</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb)</argsstring>
+        <name>nbnxn_gpu_get_timings</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <briefdescription>
+<para>Returns the GPU timings structure or NULL if GPU is not used or timing is off. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns the GPU timings structure or NULL if GPU is not used or timing is off. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="108" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="1242" bodyend="1245"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a8863948175e50b345e75ccad0142064e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_gpu_reset_timings</definition>
+        <argsstring>(struct nonbonded_verlet_t *nbv)</argsstring>
+        <name>nbnxn_gpu_reset_timings</name>
+        <param>
+          <type>struct <ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <briefdescription>
+<para>Resets nonbonded GPU timings. </para>        </briefdescription>
+        <detaileddescription>
+<para>Resets nonbonded GPU timings. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="112" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="1248" bodyend="1254"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1a222808caa76f9a2513e187523826a0cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int nbnxn_gpu_min_ci_balanced</definition>
+        <argsstring>(gmx_nbnxn_gpu_t *nb)</argsstring>
+        <name>nbnxn_gpu_min_ci_balanced</name>
+        <param>
+          <type><ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the minimum size of proximity lists to improve SM load balance with GPU non-bonded kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calculates the minimum size of proximity lists to improve SM load balance with GPU non-bonded kernels. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="117" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="1257" bodyend="1261"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__gpu__data__mgmt_8h_1ad6b6e530a4c5b7860a98e98a7849cbd1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool nbnxn_gpu_is_kernel_ewald_analytical</definition>
+        <argsstring>(const gmx_nbnxn_gpu_t *nb)</argsstring>
+        <name>nbnxn_gpu_is_kernel_ewald_analytical</name>
+        <param>
+          <type>const <ref refid="structgmx__nbnxn__ocl__t" kindref="compound">gmx_nbnxn_gpu_t</ref> *</type>
+          <declname>nb</declname>
+        </param>
+        <briefdescription>
+<para>Returns if analytical Ewald GPU kernels are used. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns if analytical Ewald GPU kernels are used. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h" line="121" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_data_mgmt.cpp" bodystart="1264" bodyend="1268"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declare interface for GPU data transfer for NBNXN module. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  <simplesect kind="author"><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_gpu_data_mgmt.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>File formats &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Terminology" href="terminology.html" />
+    <link rel="prev" title="Common errors when using GROMACS" href="run-time-errors.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="terminology.html" title="Terminology"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="run-time-errors.html" title="Common errors when using GROMACS"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="file-formats">
+<h1>File formats<a class="headerlink" href="#file-formats" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary-of-file-formats">
+<h2>Summary of file formats<a class="headerlink" href="#summary-of-file-formats" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameter-files">
+<h3>Parameter files<a class="headerlink" href="#parameter-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="#mdp"><span class="std std-ref">mdp</span></a></dt>
+<dd>run parameters, input for <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> and <a class="reference internal" href="../onlinehelp/gmx-convert-tpr.html#gmx-convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a></dd>
+<dt><a class="reference internal" href="#m2p"><span class="std std-ref">m2p</span></a></dt>
+<dd>input for <a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html#gmx-xpm2ps"><span class="std std-ref">gmx xpm2ps</span></a></dd>
+</dl>
+</div>
+<div class="section" id="structure-files">
+<span id="gmx-structure-files"></span><h3>Structure files<a class="headerlink" href="#structure-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="#gro"><span class="std std-ref">gro</span></a></dt>
+<dd>GROMACS format</dd>
+<dt><a class="reference internal" href="#g96"><span class="std std-ref">g96</span></a></dt>
+<dd>GROMOS-96 format</dd>
+<dt><a class="reference internal" href="#pdb"><span class="std std-ref">pdb</span></a></dt>
+<dd>brookhaven Protein DataBank format</dd>
+<dt><strong>Structure+mass(db):</strong> <a class="reference internal" href="#tpr"><span class="std std-ref">tpr</span></a>, <a class="reference internal" href="#gro"><span class="std std-ref">gro</span></a>, <a class="reference internal" href="#g96"><span class="std std-ref">g96</span></a>, or <a class="reference internal" href="#pdb"><span class="std std-ref">pdb</span></a></dt>
+<dd>Structure and mass input for analysis tools.
+When gro or pdb is used approximate masses will be read from the mass database.</dd>
+</dl>
+</div>
+<div class="section" id="topology-files">
+<h3>Topology files<a class="headerlink" href="#topology-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="#top"><span class="std std-ref">top</span></a></dt>
+<dd>system topology (ascii)</dd>
+<dt><a class="reference internal" href="#itp"><span class="std std-ref">itp</span></a></dt>
+<dd>include topology (ascii)</dd>
+<dt><a class="reference internal" href="#rtp"><span class="std std-ref">rtp</span></a></dt>
+<dd>residue topology (ascii)</dd>
+<dt><a class="reference internal" href="#ndx"><span class="std std-ref">ndx</span></a></dt>
+<dd>index file</dd>
+</dl>
+</div>
+<div class="section" id="run-input-files">
+<h3>Run Input files<a class="headerlink" href="#run-input-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="#tpr"><span class="std std-ref">tpr</span></a></dt>
+<dd>system topology, parameters, coordinates and velocities (binary, portable)</dd>
+</dl>
+</div>
+<div class="section" id="trajectory-files">
+<h3>Trajectory files<a class="headerlink" href="#trajectory-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="#tng"><span class="std std-ref">tng</span></a></dt>
+<dd>Any kind of data (compressed, portable, any precision)</dd>
+<dt><a class="reference internal" href="#trr"><span class="std std-ref">trr</span></a></dt>
+<dd>x, v and f (binary, full precision, portable)</dd>
+<dt><a class="reference internal" href="#xtc"><span class="std std-ref">xtc</span></a></dt>
+<dd>x only (compressed, portable, any precision)</dd>
+<dt><a class="reference internal" href="#gro"><span class="std std-ref">gro</span></a></dt>
+<dd>x and v (ascii, any precision)</dd>
+<dt><a class="reference internal" href="#g96"><span class="std std-ref">g96</span></a></dt>
+<dd>x only (ascii, fixed high precision)</dd>
+<dt><a class="reference internal" href="#pdb"><span class="std std-ref">pdb</span></a></dt>
+<dd>x only (ascii, reduced precision)</dd>
+<dt><strong>Formats for full-precision data:</strong></dt>
+<dd><a class="reference internal" href="#tng"><span class="std std-ref">tng</span></a> or <a class="reference internal" href="#trr"><span class="std std-ref">trr</span></a></dd>
+<dt><strong>Generic trajectory formats:</strong></dt>
+<dd><a class="reference internal" href="#tng"><span class="std std-ref">tng</span></a>, <a class="reference internal" href="#xtc"><span class="std std-ref">xtc</span></a>, <a class="reference internal" href="#trr"><span class="std std-ref">trr</span></a>, <a class="reference internal" href="#gro"><span class="std std-ref">gro</span></a>, <a class="reference internal" href="#g96"><span class="std std-ref">g96</span></a>, or <a class="reference internal" href="#pdb"><span class="std std-ref">pdb</span></a></dd>
+</dl>
+</div>
+<div class="section" id="energy-files">
+<h3>Energy files<a class="headerlink" href="#energy-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="#ene"><span class="std std-ref">ene</span></a></dt>
+<dd>energies, temperature, pressure, box size, density and virials (binary)</dd>
+<dt><a class="reference internal" href="#edr"><span class="std std-ref">edr</span></a></dt>
+<dd>energies, temperature, pressure, box size, density and virials (binary, portable)</dd>
+<dt><strong>Generic energy formats:</strong></dt>
+<dd><a class="reference internal" href="#edr"><span class="std std-ref">edr</span></a> or <a class="reference internal" href="#ene"><span class="std std-ref">ene</span></a></dd>
+</dl>
+</div>
+<div class="section" id="other-files">
+<h3>Other files<a class="headerlink" href="#other-files" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><a class="reference internal" href="#dat"><span class="std std-ref">dat</span></a></dt>
+<dd>generic, preferred for input</dd>
+<dt><a class="reference internal" href="#edi"><span class="std std-ref">edi</span></a></dt>
+<dd>essential dynamics constraints input for <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a></dd>
+<dt><a class="reference internal" href="#eps"><span class="std std-ref">eps</span></a></dt>
+<dd>Encapsulated Postscript</dd>
+<dt><a class="reference internal" href="#log"><span class="std std-ref">log</span></a></dt>
+<dd>log file</dd>
+<dt><a class="reference internal" href="#map"><span class="std std-ref">map</span></a></dt>
+<dd>colormap input for <a class="reference internal" href="../onlinehelp/gmx-do_dssp.html#gmx-do-dssp"><span class="std std-ref">gmx do_dssp</span></a></dd>
+<dt><a class="reference internal" href="#mtx"><span class="std std-ref">mtx</span></a></dt>
+<dd>binary matrix data</dd>
+<dt><a class="reference internal" href="#out"><span class="std std-ref">out</span></a></dt>
+<dd>generic, preferred for output</dd>
+<dt><a class="reference internal" href="#tex"><span class="std std-ref">tex</span></a></dt>
+<dd>LaTeX input</dd>
+<dt><a class="reference internal" href="#xpm"><span class="std std-ref">xpm</span></a></dt>
+<dd>ascii matrix data, use <a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html#gmx-xpm2ps"><span class="std std-ref">gmx xpm2ps</span></a> to convert to <a class="reference internal" href="#eps"><span class="std std-ref">eps</span></a></dd>
+<dt><a class="reference internal" href="#xvg"><span class="std std-ref">xvg</span></a></dt>
+<dd>xvgr input</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="file-format-details">
+<h2>File format details<a class="headerlink" href="#file-format-details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cpt">
+<span id="id1"></span><h3>cpt<a class="headerlink" href="#cpt" title="Permalink to this headline">¶</a></h3>
+<p>The cpt file extension stands for portable checkpoint file.
+The complete state of the simulation is stored in the checkpoint file,
+including extended thermostat/barostat variables, random number states
+and NMR time averaged data.
+With domain decomposition also the some decomposition setup information
+is stored.</p>
+<p>See also <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>.</p>
+</div>
+<div class="section" id="dat">
+<span id="id2"></span><h3>dat<a class="headerlink" href="#dat" title="Permalink to this headline">¶</a></h3>
+<p>Files with the dat file extension contain generic input or output.
+As it is not possible
+to categorize all data file formats, GROMACS has a generic file format called
+dat of which no format is given.</p>
+</div>
+<div class="section" id="dlg">
+<span id="id3"></span><h3>dlg<a class="headerlink" href="#dlg" title="Permalink to this headline">¶</a></h3>
+<p>The dlg file format is used as input for the <a class="reference internal" href="../onlinehelp/gmx-view.html#gmx-view"><span class="std std-ref">gmx view</span></a>
+trajectory viewer. These files are not meant to be altered by the end user.</p>
+<div class="section" id="sample">
+<h4>Sample<a class="headerlink" href="#sample" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="mi">39</span> <span class="mi">18</span> <span class="p">{</span>
+
+<span class="n">group</span> <span class="s2">&quot;Bond Options&quot;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">16</span> <span class="mi">9</span> <span class="p">{</span>
+  <span class="n">radiobuttons</span> <span class="p">{</span> <span class="s2">&quot; Thin Bonds&quot;</span>  <span class="s2">&quot; Fat Bonds&quot;</span> <span class="s2">&quot; Very Fat Bonds&quot;</span> <span class="s2">&quot; Spheres&quot;</span> <span class="p">}</span>
+        <span class="s2">&quot;bonds&quot;</span> <span class="s2">&quot;Ok&quot;</span> <span class="s2">&quot; F&quot;</span> <span class="s2">&quot;help bonds&quot;</span>
+<span class="p">}</span>
+
+<span class="n">group</span> <span class="s2">&quot;Other Options&quot;</span> <span class="mi">18</span> <span class="mi">1</span> <span class="mi">20</span> <span class="mi">13</span> <span class="p">{</span>
+  <span class="n">checkbox</span> <span class="s2">&quot; Show Hydrogens&quot;</span>      <span class="s2">&quot;&quot;</span>  <span class="s2">&quot;&quot;</span> <span class="s2">&quot;FALSE&quot;</span> <span class="s2">&quot;help opts&quot;</span>
+  <span class="n">checkbox</span> <span class="s2">&quot; Draw plus for atoms&quot;</span> <span class="s2">&quot;&quot;</span>  <span class="s2">&quot;&quot;</span> <span class="s2">&quot;TRUE&quot;</span>  <span class="s2">&quot;help opts&quot;</span>
+  <span class="n">checkbox</span> <span class="s2">&quot; Show Box&quot;</span>            <span class="s2">&quot;&quot;</span>  <span class="s2">&quot;&quot;</span> <span class="s2">&quot;TRUE&quot;</span>  <span class="s2">&quot;help opts&quot;</span>
+  <span class="n">checkbox</span> <span class="s2">&quot; Remove PBC&quot;</span>          <span class="s2">&quot;&quot;</span>  <span class="s2">&quot;&quot;</span> <span class="s2">&quot;FALSE&quot;</span> <span class="s2">&quot;help opts&quot;</span>
+  <span class="n">checkbox</span> <span class="s2">&quot; Depth Cueing&quot;</span>        <span class="s2">&quot;&quot;</span>  <span class="s2">&quot;&quot;</span> <span class="s2">&quot;TRUE&quot;</span>  <span class="s2">&quot;help opts&quot;</span>
+  <span class="n">edittext</span> <span class="s2">&quot;Skip frames: &quot;</span>        <span class="s2">&quot;&quot;</span>  <span class="s2">&quot;&quot;</span> <span class="s2">&quot;0&quot;</span>     <span class="s2">&quot;help opts&quot;</span>
+<span class="p">}</span>
+
+<span class="n">simple</span> <span class="mi">1</span> <span class="mi">15</span> <span class="mi">37</span> <span class="mi">2</span> <span class="p">{</span>
+  <span class="n">defbutton</span> <span class="s2">&quot;Ok&quot;</span> <span class="s2">&quot;Ok&quot;</span> <span class="s2">&quot;Ok&quot;</span> <span class="s2">&quot;Ok&quot;</span> <span class="s2">&quot;help bonds&quot;</span>
+<span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="edi">
+<span id="id4"></span><h3>edi<a class="headerlink" href="#edi" title="Permalink to this headline">¶</a></h3>
+<p>Files with the edi file extension contain information for <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>
+to run Molecular Dynamics with Essential Dynamics constraints.
+It used to be possible to generate those through the options
+provided in the <a class="reference external" href="http://swift.cmbi.ru.nl/whatif/">WHAT IF</a> program.</p>
+</div>
+<div class="section" id="edr">
+<span id="id5"></span><h3>edr<a class="headerlink" href="#edr" title="Permalink to this headline">¶</a></h3>
+<p>The edr file extension stands for portable energy file.
+The energies are stored using the xdr protocol.</p>
+<p>See also <a class="reference internal" href="../onlinehelp/gmx-energy.html#gmx-energy"><span class="std std-ref">gmx energy</span></a>.</p>
+</div>
+<div class="section" id="ene">
+<span id="id6"></span><h3>ene<a class="headerlink" href="#ene" title="Permalink to this headline">¶</a></h3>
+<p>The ene file extension stands for binary energy file. It holds the
+energies as generated during your <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>.</p>
+<p>The file can be transformed to a portable energy file (portable
+across hardware platforms), the <a class="reference internal" href="#edr"><span class="std std-ref">edr</span></a> file using the program
+<a class="reference internal" href="../onlinehelp/gmx-eneconv.html#gmx-eneconv"><span class="std std-ref">gmx eneconv</span></a>.</p>
+<p>See also <a class="reference internal" href="../onlinehelp/gmx-energy.html#gmx-energy"><span class="std std-ref">gmx energy</span></a>.</p>
+</div>
+<div class="section" id="eps">
+<span id="id7"></span><h3>eps<a class="headerlink" href="#eps" title="Permalink to this headline">¶</a></h3>
+<p>The eps file format is not a special GROMACS format, but just a
+variant of the standard PostScript(tm). A sample eps file as
+generated by the <a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html#gmx-xpm2ps"><span class="std std-ref">gmx xpm2ps</span></a> program is
+included below. It shows the secondary structure of a peptide as a function
+of time.</p>
+<img alt="hallo" src="../_images/plotje.gif" />
+</div>
+<div class="section" id="g96">
+<span id="id8"></span><h3>g96<a class="headerlink" href="#g96" title="Permalink to this headline">¶</a></h3>
+<p>A file with the g96 extension can be a GROMOS-96 initial/final
+configuration file or a coordinate trajectory file or a combination of both.
+The file is fixed format, all floats are written as 15.9 (files can get huge).
+GROMACS supports the following data blocks in the given order:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Header block:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">TITLE</span></code> (mandatory)</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Frame blocks:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">TIMESTEP</span></code> (optional)</li>
+<li><code class="docutils literal"><span class="pre">POSITION/POSITIONRED</span></code> (mandatory)</li>
+<li><code class="docutils literal"><span class="pre">VELOCITY/VELOCITYRED</span></code> (optional)</li>
+<li><code class="docutils literal"><span class="pre">BOX</span></code> (optional)</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p>See the GROMOS-96 manual for a complete description of the blocks.</p>
+<p>Note that all GROMACS programs can read compressed or g-zipped files.</p>
+</div>
+<div class="section" id="gro">
+<span id="id9"></span><h3>gro<a class="headerlink" href="#gro" title="Permalink to this headline">¶</a></h3>
+<p>Files with the gro file extension contain a molecular structure in
+Gromos87 format. gro files can be used as trajectory by simply
+concatenating files. An attempt will be made to read a time value from
+the title string in each frame, which should be preceded by
+‘<code class="docutils literal"><span class="pre">t=</span></code>’, as in the sample below.</p>
+<p>A sample piece is included below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">MD</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">waters</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span> <span class="mf">0.0</span>
+    <span class="mi">6</span>
+    <span class="mi">1</span><span class="n">WATER</span>  <span class="n">OW1</span>    <span class="mi">1</span>   <span class="mf">0.126</span>   <span class="mf">1.624</span>   <span class="mf">1.679</span>  <span class="mf">0.1227</span> <span class="o">-</span><span class="mf">0.0580</span>  <span class="mf">0.0434</span>
+    <span class="mi">1</span><span class="n">WATER</span>  <span class="n">HW2</span>    <span class="mi">2</span>   <span class="mf">0.190</span>   <span class="mf">1.661</span>   <span class="mf">1.747</span>  <span class="mf">0.8085</span>  <span class="mf">0.3191</span> <span class="o">-</span><span class="mf">0.7791</span>
+    <span class="mi">1</span><span class="n">WATER</span>  <span class="n">HW3</span>    <span class="mi">3</span>   <span class="mf">0.177</span>   <span class="mf">1.568</span>   <span class="mf">1.613</span> <span class="o">-</span><span class="mf">0.9045</span> <span class="o">-</span><span class="mf">2.6469</span>  <span class="mf">1.3180</span>
+    <span class="mi">2</span><span class="n">WATER</span>  <span class="n">OW1</span>    <span class="mi">4</span>   <span class="mf">1.275</span>   <span class="mf">0.053</span>   <span class="mf">0.622</span>  <span class="mf">0.2519</span>  <span class="mf">0.3140</span> <span class="o">-</span><span class="mf">0.1734</span>
+    <span class="mi">2</span><span class="n">WATER</span>  <span class="n">HW2</span>    <span class="mi">5</span>   <span class="mf">1.337</span>   <span class="mf">0.002</span>   <span class="mf">0.680</span> <span class="o">-</span><span class="mf">1.0641</span> <span class="o">-</span><span class="mf">1.1349</span>  <span class="mf">0.0257</span>
+    <span class="mi">2</span><span class="n">WATER</span>  <span class="n">HW3</span>    <span class="mi">6</span>   <span class="mf">1.326</span>   <span class="mf">0.120</span>   <span class="mf">0.568</span>  <span class="mf">1.9427</span> <span class="o">-</span><span class="mf">0.8216</span> <span class="o">-</span><span class="mf">0.0244</span>
+   <span class="mf">1.82060</span>   <span class="mf">1.82060</span>   <span class="mf">1.82060</span>
+</pre></div>
+</div>
+<p>Lines contain the following information (top to bottom):</p>
+<blockquote>
+<div><ul class="simple">
+<li>title string (free format string, optional time in ps after ‘<code class="docutils literal"><span class="pre">t=</span></code>’)</li>
+<li>number of atoms (free format integer)</li>
+<li>one line for each atom (fixed format, see below)</li>
+<li>box vectors (free format, space separated reals), values:
+v1(x) v2(y) v3(z) v1(y) v1(z) v2(x) v2(z) v3(x) v3(y),
+the last 6 values may be omitted (they will be set to zero).
+GROMACS only supports boxes with v1(y)=v1(z)=v2(z)=0.</li>
+</ul>
+</div></blockquote>
+<p>This format is fixed, ie. all columns are in a fixed
+position. Optionally (for now only yet with trjconv) you can write gro
+files with any number of decimal places, the format will then be
+<code class="docutils literal"><span class="pre">n+5</span></code> positions with <code class="docutils literal"><span class="pre">n</span></code> decimal places (<code class="docutils literal"><span class="pre">n+1</span></code>
+for velocities) in stead of <code class="docutils literal"><span class="pre">8</span></code> with <code class="docutils literal"><span class="pre">3</span></code> (with
+<code class="docutils literal"><span class="pre">4</span></code> for velocities). Upon reading, the precision will be
+inferred from the distance between the decimal points (which will be
+<code class="docutils literal"><span class="pre">n+5</span></code>). Columns contain the following information (from left to
+right):</p>
+<blockquote>
+<div><ul class="simple">
+<li>residue number (5 positions, integer)</li>
+<li>residue name (5 characters)</li>
+<li>atom name (5 characters)</li>
+<li>atom number (5 positions, integer)</li>
+<li>position (in nm, x y z in 3 columns, each 8 positions with 3 decimal places)</li>
+<li>velocity (in nm/ps (or km/s), x y z in 3 columns, each 8 positions with 4 decimal places)</li>
+</ul>
+</div></blockquote>
+<p>Note that separate molecules or ions (e.g. water or Cl-) are regarded
+as residues.  If you want to write such a file in your own program
+without using the GROMACS libraries you can use the following formats:</p>
+<dl class="docutils">
+<dt>C format</dt>
+<dd><code class="docutils literal"><span class="pre">&quot;%5d%-5s%5s%5d%8.3f%8.3f%8.3f%8.4f%8.4f%8.4f&quot;</span></code></dd>
+<dt>Fortran format</dt>
+<dd><code class="docutils literal"><span class="pre">(i5,2a5,i5,3f8.3,3f8.4)</span></code></dd>
+<dt>Pascal format</dt>
+<dd>This is left as an exercise for the user</dd>
+</dl>
+<p>Note that this is the format for writing, as in the above example
+fields may be written without spaces, and therefore can not be read
+with the same format statement in C.</p>
+</div>
+<div class="section" id="hdb">
+<span id="id10"></span><h3>hdb<a class="headerlink" href="#hdb" title="Permalink to this headline">¶</a></h3>
+<p>The hdb file extension stands for hydrogen database
+Such a file is needed by <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>
+when building hydrogen atoms that were either originally missing, or that
+were removed with <code class="docutils literal"><span class="pre">-ignh</span></code>.</p>
+</div>
+<div class="section" id="itp">
+<span id="id11"></span><h3>itp<a class="headerlink" href="#itp" title="Permalink to this headline">¶</a></h3>
+<p>The itp file extension stands for include topology. These files are included in
+topology files (with the <a class="reference internal" href="#top"><span class="std std-ref">top</span></a> extension).</p>
+</div>
+<div class="section" id="log">
+<span id="id12"></span><h3>log<a class="headerlink" href="#log" title="Permalink to this headline">¶</a></h3>
+<p>Logfiles are generated by some GROMACS programs and are usually in
+human-readable format. Use <code class="docutils literal"><span class="pre">more</span> <span class="pre">logfile</span></code>.</p>
+</div>
+<div class="section" id="m2p">
+<span id="id13"></span><h3>m2p<a class="headerlink" href="#m2p" title="Permalink to this headline">¶</a></h3>
+<p>The m2p file format contains input options for the
+<a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html#gmx-xpm2ps"><span class="std std-ref">gmx xpm2ps</span></a> program. All of these options
+are very easy to comprehend when you look at the PosScript(tm) output
+from <a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html#gmx-xpm2ps"><span class="std std-ref">gmx xpm2ps</span></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">;</span> <span class="n">Command</span> <span class="n">line</span> <span class="n">options</span> <span class="n">of</span> <span class="n">xpm2ps</span> <span class="n">override</span> <span class="n">the</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">file</span>
+<span class="n">black</span><span class="o">&amp;</span><span class="n">white</span>              <span class="o">=</span> <span class="n">no</span>           <span class="p">;</span> <span class="n">Obsolete</span>
+<span class="n">titlefont</span>                <span class="o">=</span> <span class="n">Times</span><span class="o">-</span><span class="n">Roman</span>  <span class="p">;</span> <span class="n">A</span> <span class="n">PostScript</span> <span class="n">Font</span>
+<span class="n">titlefontsize</span>            <span class="o">=</span> <span class="mi">20</span>           <span class="p">;</span> <span class="n">Font</span> <span class="n">size</span> <span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+<span class="n">legend</span>                   <span class="o">=</span> <span class="n">yes</span>          <span class="p">;</span> <span class="n">Show</span> <span class="n">the</span> <span class="n">legend</span>
+<span class="n">legendfont</span>               <span class="o">=</span> <span class="n">Times</span><span class="o">-</span><span class="n">Roman</span>  <span class="p">;</span> <span class="n">A</span> <span class="n">PostScript</span> <span class="n">Font</span>
+<span class="n">legendlabel</span>              <span class="o">=</span>              <span class="p">;</span> <span class="n">Used</span> <span class="n">when</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">none</span> <span class="ow">in</span> <span class="n">the</span> <span class="o">.</span><span class="n">xpm</span>
+<span class="n">legend2label</span>             <span class="o">=</span>              <span class="p">;</span> <span class="n">Used</span> <span class="n">when</span> <span class="n">merging</span> <span class="n">two</span> <span class="n">xpm</span><span class="s1">&#39;s</span>
+<span class="n">legendfontsize</span>           <span class="o">=</span> <span class="mi">14</span>           <span class="p">;</span> <span class="n">Font</span> <span class="n">size</span> <span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+<span class="n">xbox</span>                     <span class="o">=</span> <span class="mf">2.0</span>          <span class="p">;</span> <span class="n">x</span><span class="o">-</span><span class="n">size</span> <span class="n">of</span> <span class="n">a</span> <span class="n">matrix</span> <span class="n">element</span>
+<span class="n">ybox</span>                     <span class="o">=</span> <span class="mf">2.0</span>          <span class="p">;</span> <span class="n">y</span><span class="o">-</span><span class="n">size</span> <span class="n">of</span> <span class="n">a</span> <span class="n">matrix</span> <span class="n">element</span>
+<span class="n">matrixspacing</span>            <span class="o">=</span> <span class="mf">20.0</span>         <span class="p">;</span> <span class="n">Space</span> <span class="n">between</span> <span class="mi">2</span> <span class="n">matrices</span>
+<span class="n">xoffset</span>                  <span class="o">=</span> <span class="mf">0.0</span>          <span class="p">;</span> <span class="n">Between</span> <span class="n">matrix</span> <span class="ow">and</span> <span class="n">bounding</span> <span class="n">box</span>
+<span class="n">yoffset</span>                  <span class="o">=</span> <span class="mf">0.0</span>          <span class="p">;</span> <span class="n">Between</span> <span class="n">matrix</span> <span class="ow">and</span> <span class="n">bounding</span> <span class="n">box</span>
+<span class="n">x</span><span class="o">-</span><span class="n">major</span>                  <span class="o">=</span> <span class="mi">20</span>           <span class="p">;</span> <span class="n">Major</span> <span class="n">ticks</span> <span class="n">on</span> <span class="n">x</span> <span class="n">axis</span> <span class="n">every</span> <span class="o">..</span> <span class="n">frames</span>
+<span class="n">x</span><span class="o">-</span><span class="n">minor</span>                  <span class="o">=</span> <span class="mi">5</span>            <span class="p">;</span> <span class="n">Id</span><span class="o">.</span> <span class="n">Minor</span> <span class="n">ticks</span>
+<span class="n">x</span><span class="o">-</span><span class="n">firstmajor</span>             <span class="o">=</span> <span class="mi">0</span>            <span class="p">;</span> <span class="n">First</span> <span class="n">frame</span> <span class="k">for</span> <span class="n">major</span> <span class="n">tick</span>
+<span class="n">x</span><span class="o">-</span><span class="n">majorat0</span>               <span class="o">=</span> <span class="n">no</span>           <span class="p">;</span> <span class="n">Major</span> <span class="n">tick</span> <span class="n">at</span> <span class="n">first</span> <span class="n">frame</span>
+<span class="n">x</span><span class="o">-</span><span class="n">majorticklen</span>           <span class="o">=</span> <span class="mf">8.0</span>          <span class="p">;</span> <span class="n">x</span><span class="o">-</span><span class="n">majorticklength</span>
+<span class="n">x</span><span class="o">-</span><span class="n">minorticklen</span>           <span class="o">=</span> <span class="mf">4.0</span>          <span class="p">;</span> <span class="n">x</span><span class="o">-</span><span class="n">minorticklength</span>
+<span class="n">x</span><span class="o">-</span><span class="n">label</span>                  <span class="o">=</span>              <span class="p">;</span> <span class="n">Used</span> <span class="n">when</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">none</span> <span class="ow">in</span> <span class="n">the</span> <span class="o">.</span><span class="n">xpm</span>
+<span class="n">x</span><span class="o">-</span><span class="n">fontsize</span>               <span class="o">=</span> <span class="mi">16</span>           <span class="p">;</span> <span class="n">Font</span> <span class="n">size</span> <span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+<span class="n">x</span><span class="o">-</span><span class="n">font</span>                   <span class="o">=</span> <span class="n">Times</span><span class="o">-</span><span class="n">Roman</span>  <span class="p">;</span> <span class="n">A</span> <span class="n">PostScript</span> <span class="n">Font</span>
+<span class="n">x</span><span class="o">-</span><span class="n">tickfontsize</span>           <span class="o">=</span> <span class="mi">10</span>           <span class="p">;</span> <span class="n">Font</span> <span class="n">size</span> <span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+<span class="n">x</span><span class="o">-</span><span class="n">tickfont</span>               <span class="o">=</span> <span class="n">Helvetica</span>    <span class="p">;</span> <span class="n">A</span> <span class="n">PostScript</span> <span class="n">Font</span>
+<span class="n">y</span><span class="o">-</span><span class="n">major</span>                  <span class="o">=</span> <span class="mi">20</span>
+<span class="n">y</span><span class="o">-</span><span class="n">minor</span>                  <span class="o">=</span> <span class="mi">5</span>
+<span class="n">y</span><span class="o">-</span><span class="n">firstmajor</span>             <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span><span class="o">-</span><span class="n">majorat0</span>               <span class="o">=</span> <span class="n">no</span>
+<span class="n">y</span><span class="o">-</span><span class="n">majorticklen</span>           <span class="o">=</span> <span class="mf">8.0</span>
+<span class="n">y</span><span class="o">-</span><span class="n">minorticklen</span>           <span class="o">=</span> <span class="mf">4.0</span>
+<span class="n">y</span><span class="o">-</span><span class="n">label</span>                  <span class="o">=</span>
+<span class="n">y</span><span class="o">-</span><span class="n">fontsize</span>               <span class="o">=</span> <span class="mi">16</span>
+<span class="n">y</span><span class="o">-</span><span class="n">font</span>                   <span class="o">=</span> <span class="n">Times</span><span class="o">-</span><span class="n">Roman</span>
+<span class="n">y</span><span class="o">-</span><span class="n">tickfontsize</span>           <span class="o">=</span> <span class="mi">10</span>
+<span class="n">y</span><span class="o">-</span><span class="n">tickfont</span>               <span class="o">=</span> <span class="n">Helvetica</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="map">
+<span id="id14"></span><h3>map<a class="headerlink" href="#map" title="Permalink to this headline">¶</a></h3>
+<p>This file maps matrix data to RGB values which is used by the
+<a class="reference internal" href="../onlinehelp/gmx-do_dssp.html#gmx-do-dssp"><span class="std std-ref">gmx do_dssp</span></a> program.</p>
+<p>The format of this file is as follow: first line number of elements
+in the colormap. Then for each line: The first character is
+a code for the secondary structure type.
+Then comes a string for use in the legend of the plot and then the
+R (red) G (green) and B (blue) values.</p>
+<p>In this case the colors are
+(in order of appearance): white, red, black, cyan, yellow, blue, magenta, orange.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">8</span>
+<span class="o">~</span>   <span class="n">Coil</span>            <span class="mf">1.0</span>       <span class="mf">1.0</span>     <span class="mf">1.0</span>
+<span class="n">E</span>   <span class="n">B</span><span class="o">-</span><span class="n">Sheet</span>         <span class="mf">1.0</span>       <span class="mf">0.0</span>     <span class="mf">0.0</span>
+<span class="n">B</span>   <span class="n">B</span><span class="o">-</span><span class="n">Bridge</span>        <span class="mf">0.0</span>       <span class="mf">0.0</span>     <span class="mf">0.0</span>
+<span class="n">S</span>   <span class="n">Bend</span>            <span class="mf">0.0</span>       <span class="mf">0.8</span>     <span class="mf">0.8</span>
+<span class="n">T</span>   <span class="n">Turn</span>            <span class="mf">1.0</span>       <span class="mf">1.0</span>     <span class="mf">0.0</span>
+<span class="n">H</span>   <span class="n">A</span><span class="o">-</span><span class="n">Helix</span>         <span class="mf">0.0</span>       <span class="mf">0.0</span>     <span class="mf">1.0</span>
+<span class="n">G</span>   <span class="mi">3</span><span class="o">-</span><span class="n">Helix</span>         <span class="mf">1.0</span>       <span class="mf">0.0</span>     <span class="mf">1.0</span>
+<span class="n">I</span>   <span class="mi">5</span><span class="o">-</span><span class="n">Helix</span>         <span class="mf">1.0</span>       <span class="mf">0.6</span>     <span class="mf">0.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mdp">
+<span id="id15"></span><h3>mdp<a class="headerlink" href="#mdp" title="Permalink to this headline">¶</a></h3>
+<p>See the user guide for a detailed description of the options.</p>
+<p>Below is a sample mdp file.
+The ordering of the items is not important, but if you enter the same
+thing twice, the <strong>last</strong> is used (<a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> gives you a note when
+overriding values). Dashes and underscores on the left hand side are ignored.</p>
+<p>The values of the options are values for a 1 nanosecond
+MD run of a protein in a box of water.</p>
+<p><strong>Note:</strong> The parameters chosen (<em>e.g.,</em> short-range cutoffs) depend on the
+force field being used.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">integrator</span>               <span class="o">=</span> <span class="n">md</span>
+<span class="n">dt</span>                       <span class="o">=</span> <span class="mf">0.002</span>
+<span class="n">nsteps</span>                   <span class="o">=</span> <span class="mi">500000</span>
+
+<span class="n">nstlog</span>                   <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">nstenergy</span>                <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">nstxout</span><span class="o">-</span><span class="n">compressed</span>       <span class="o">=</span> <span class="mi">5000</span>
+
+<span class="n">continuation</span>             <span class="o">=</span> <span class="n">yes</span>
+<span class="n">constraints</span>              <span class="o">=</span> <span class="nb">all</span><span class="o">-</span><span class="n">bonds</span>
+<span class="n">constraint</span><span class="o">-</span><span class="n">algorithm</span>     <span class="o">=</span> <span class="n">lincs</span>
+
+<span class="n">cutoff</span><span class="o">-</span><span class="n">scheme</span>            <span class="o">=</span> <span class="n">Verlet</span>
+
+<span class="n">coulombtype</span>              <span class="o">=</span> <span class="n">PME</span>
+<span class="n">rcoulomb</span>                 <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">vdwtype</span>                  <span class="o">=</span> <span class="n">Cut</span><span class="o">-</span><span class="n">off</span>
+<span class="n">rvdw</span>                     <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">DispCorr</span>                 <span class="o">=</span> <span class="n">EnerPres</span>
+
+<span class="n">tcoupl</span>                   <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="n">rescale</span>
+<span class="n">tc</span><span class="o">-</span><span class="n">grps</span>                  <span class="o">=</span> <span class="n">Protein</span>  <span class="n">SOL</span>
+<span class="n">tau</span><span class="o">-</span><span class="n">t</span>                    <span class="o">=</span> <span class="mf">0.1</span>      <span class="mf">0.1</span>
+<span class="n">ref</span><span class="o">-</span><span class="n">t</span>                    <span class="o">=</span> <span class="mi">300</span>      <span class="mi">300</span>
+
+<span class="n">pcoupl</span>                   <span class="o">=</span> <span class="n">Parrinello</span><span class="o">-</span><span class="n">Rahman</span>
+<span class="n">tau</span><span class="o">-</span><span class="n">p</span>                    <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">compressibility</span>          <span class="o">=</span> <span class="mf">4.5e-5</span>
+<span class="n">ref</span><span class="o">-</span><span class="n">p</span>                    <span class="o">=</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>With this input <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> will produce a commented file with the default name
+<code class="docutils literal"><span class="pre">mdout.mdp</span></code>. That file will contain the above options, as well as all other
+options not explicitly set, showing their default values.</p>
+</div>
+<div class="section" id="mtx">
+<span id="id16"></span><h3>mtx<a class="headerlink" href="#mtx" title="Permalink to this headline">¶</a></h3>
+<p>Files with the mtx file extension contain a matrix.
+The file format is identical to the <a class="reference internal" href="#trr"><span class="std std-ref">trr</span></a> format.
+Currently this file format is only used for hessian matrices,
+which are produced with <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> and read by
+<a class="reference internal" href="../onlinehelp/gmx-nmeig.html#gmx-nmeig"><span class="std std-ref">gmx nmeig</span></a>.</p>
+</div>
+<div class="section" id="ndx">
+<span id="id17"></span><h3>ndx<a class="headerlink" href="#ndx" title="Permalink to this headline">¶</a></h3>
+<p>The GROMACS index file (usually called index.ndx) contains some
+user definable sets of atoms. The file can be read by
+most analysis programs, by the graphics program
+(<a class="reference internal" href="../onlinehelp/gmx-view.html#gmx-view"><span class="std std-ref">gmx view</span></a>)
+and by the preprocessor (<a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a>).
+Most of these programs create default index groups when no index
+file is supplied, so you only need to make an index file when you need special
+groups.</p>
+<p>First the group name is written between square brackets.
+The following atom numbers may be spread out over as many lines as you like.
+The atom numbering starts at 1.</p>
+<p>An example file is here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">Oxygen</span> <span class="p">]</span>
+<span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">7</span>
+<span class="p">[</span> <span class="n">Hydrogen</span> <span class="p">]</span>
+<span class="mi">2</span>  <span class="mi">3</span>  <span class="mi">5</span>  <span class="mi">6</span>
+<span class="mi">8</span>  <span class="mi">9</span>
+</pre></div>
+</div>
+<p>There are two groups, and total nine atoms. The first group
+<strong>Oxygen</strong> has 3 elements.
+The second group <strong>Hydrogen</strong> has 6 elements.</p>
+<p>An index file generation tool is available:
+<a class="reference internal" href="../onlinehelp/gmx-make_ndx.html#gmx-make-ndx"><span class="std std-ref">gmx make_ndx</span></a>.</p>
+</div>
+<div class="section" id="out">
+<span id="id18"></span><h3>out<a class="headerlink" href="#out" title="Permalink to this headline">¶</a></h3>
+<p>Files with the out file extension contain generic output. As it is not possible
+to categorize all data file formats, GROMACS has a generic file format called
+out of which no format is given.</p>
+</div>
+<div class="section" id="pdb">
+<span id="id19"></span><h3>pdb<a class="headerlink" href="#pdb" title="Permalink to this headline">¶</a></h3>
+<p>Files with the <a class="reference internal" href="#pdb"><span class="std std-ref">pdb</span></a> extension are molecular
+structure files in the protein databank file format.  The protein
+databank file format describes the positions of atoms in a molecular
+structure. Coordinates are read from the ATOM and HETATM records,
+until the file ends or an ENDMDL record is encountered.
+GROMACS programs can read and write a simulation box in the
+CRYST1 entry.
+The pdb format can also be used as a trajectory format:
+several structures, separated by ENDMDL, can be read from
+or written to one file.</p>
+<div class="section" id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<p>A pdb file should look like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ATOM</span>      <span class="mi">1</span>  <span class="n">H1</span>  <span class="n">LYS</span>     <span class="mi">1</span>      <span class="mf">14.260</span>   <span class="mf">6.590</span>  <span class="mf">34.480</span>  <span class="mf">1.00</span>  <span class="mf">0.00</span>
+<span class="n">ATOM</span>      <span class="mi">2</span>  <span class="n">H2</span>  <span class="n">LYS</span>     <span class="mi">1</span>      <span class="mf">13.760</span>   <span class="mf">5.000</span>  <span class="mf">34.340</span>  <span class="mf">1.00</span>  <span class="mf">0.00</span>
+<span class="n">ATOM</span>      <span class="mi">3</span>  <span class="n">N</span>   <span class="n">LYS</span>     <span class="mi">1</span>      <span class="mf">14.090</span>   <span class="mf">5.850</span>  <span class="mf">33.800</span>  <span class="mf">1.00</span>  <span class="mf">0.00</span>
+<span class="n">ATOM</span>      <span class="mi">4</span>  <span class="n">H3</span>  <span class="n">LYS</span>     <span class="mi">1</span>      <span class="mf">14.920</span>   <span class="mf">5.560</span>  <span class="mf">33.270</span>  <span class="mf">1.00</span>  <span class="mf">0.00</span>
+<span class="o">...</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="rtp">
+<span id="id20"></span><h3>rtp<a class="headerlink" href="#rtp" title="Permalink to this headline">¶</a></h3>
+<p>The rtp file extension stands for residue topology.
+Such a file is needed by <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>
+to make a GROMACS topology for a protein contained in a <a class="reference internal" href="#pdb"><span class="std std-ref">pdb</span></a>
+file. The file contains the default interaction type for the 4 bonded
+interactions and residue entries, which consist of atoms and
+optionally bonds, angles dihedrals and impropers.
+Parameters can be added to bonds, angles, dihedrals and impropers,
+these parameters override the standard parameters in the <a class="reference internal" href="#itp"><span class="std std-ref">itp</span></a> files.
+This should only be used in special cases.
+Instead of parameters a string can be added for each bonded interaction,
+the string is copied to the <a class="reference internal" href="#top"><span class="std std-ref">top</span></a> file,
+this is used for the GROMOS96 forcefield.</p>
+<p><a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> automatically generates all angles,
+this means that the <code class="docutils literal"><span class="pre">[angles]</span></code> field is only
+useful for overriding <a class="reference internal" href="#itp"><span class="std std-ref">itp</span></a> parameters.</p>
+<p><a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> automatically generates one proper
+dihedral for every rotatable bond, preferably on heavy atoms.
+When the <code class="docutils literal"><span class="pre">[dihedrals]</span></code> field is used, no other dihedrals will
+be generated for the bonds corresponding to the specified dihedrals.
+It is possible to put more than one dihedral on a rotatable bond.</p>
+<p><a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> sets the number exclusions to 3, which
+means that interactions between atoms connected by at most 3 bonds are
+excluded. Pair interactions are generated for all pairs of atoms which are
+separated by 3 bonds (except pairs of hydrogens).
+When more interactions need to be excluded, or some pair interactions should
+not be generated, an <code class="docutils literal"><span class="pre">[exclusions]</span></code> field can be added, followed by
+pairs of atom names on separate lines. All non-bonded and pair interactions
+between these atoms will be excluded.</p>
+<p>A sample is included below.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">bondedtypes</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">mandatory</span>
+<span class="p">;</span> <span class="n">bonds</span>  <span class="n">angles</span>  <span class="n">dihedrals</span>  <span class="n">impropers</span>
+     <span class="mi">1</span>       <span class="mi">1</span>          <span class="mi">1</span>          <span class="mi">2</span>  <span class="p">;</span> <span class="n">mandatory</span>
+
+<span class="p">[</span> <span class="n">GLY</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">mandatory</span>
+
+ <span class="p">[</span> <span class="n">atoms</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">mandatory</span>
+<span class="p">;</span> <span class="n">name</span>  <span class="nb">type</span>  <span class="n">charge</span>  <span class="n">chargegroup</span>
+     <span class="n">N</span>     <span class="n">N</span>  <span class="o">-</span><span class="mf">0.280</span>     <span class="mi">0</span>
+     <span class="n">H</span>     <span class="n">H</span>   <span class="mf">0.280</span>     <span class="mi">0</span>
+    <span class="n">CA</span>   <span class="n">CH2</span>   <span class="mf">0.000</span>     <span class="mi">1</span>
+     <span class="n">C</span>     <span class="n">C</span>   <span class="mf">0.380</span>     <span class="mi">2</span>
+     <span class="n">O</span>     <span class="n">O</span>  <span class="o">-</span><span class="mf">0.380</span>     <span class="mi">2</span>
+
+ <span class="p">[</span> <span class="n">bonds</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">optional</span>
+<span class="p">;</span><span class="n">atom1</span> <span class="n">atom2</span>      <span class="n">b0</span>      <span class="n">kb</span>
+     <span class="n">N</span>     <span class="n">H</span>
+     <span class="n">N</span>    <span class="n">CA</span>
+    <span class="n">CA</span>     <span class="n">C</span>
+     <span class="n">C</span>     <span class="n">O</span>
+    <span class="o">-</span><span class="n">C</span>     <span class="n">N</span>
+
+ <span class="p">[</span> <span class="n">exclusions</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">optional</span>
+<span class="p">;</span><span class="n">atom1</span> <span class="n">atom2</span>
+
+ <span class="p">[</span> <span class="n">angles</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">optional</span>
+<span class="p">;</span><span class="n">atom1</span> <span class="n">atom2</span> <span class="n">atom3</span>    <span class="n">th0</span>    <span class="n">cth</span>
+
+ <span class="p">[</span> <span class="n">dihedrals</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">optional</span>
+<span class="p">;</span><span class="n">atom1</span> <span class="n">atom2</span> <span class="n">atom3</span> <span class="n">atom4</span>   <span class="n">phi0</span>     <span class="n">cp</span>   <span class="n">mult</span>
+
+ <span class="p">[</span> <span class="n">impropers</span> <span class="p">]</span>  <span class="p">;</span> <span class="n">optional</span>
+<span class="p">;</span><span class="n">atom1</span> <span class="n">atom2</span> <span class="n">atom3</span> <span class="n">atom4</span>     <span class="n">q0</span>     <span class="n">cq</span>
+     <span class="n">N</span>    <span class="o">-</span><span class="n">C</span>    <span class="n">CA</span>     <span class="n">H</span>
+    <span class="o">-</span><span class="n">C</span>   <span class="o">-</span><span class="n">CA</span>     <span class="n">N</span>    <span class="o">-</span><span class="n">O</span>
+
+
+<span class="p">[</span> <span class="n">ZN</span> <span class="p">]</span>
+ <span class="p">[</span> <span class="n">atoms</span> <span class="p">]</span>
+    <span class="n">ZN</span>    <span class="n">ZN</span>   <span class="mf">2.000</span>     <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tex">
+<span id="id21"></span><h3>tex<a class="headerlink" href="#tex" title="Permalink to this headline">¶</a></h3>
+<p>We use <strong>LaTeX</strong> for <em>document</em> processing.
+Although the input is not so
+user friendly, it has some  advantages over <em>word</em> processors.</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>LaTeX</strong> knows a lot about formatting, probably much more than you.</li>
+<li>The input is clear, you always know what you are doing</li>
+<li>It makes anything from letters to a thesis</li>
+<li>Much more…</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="tng">
+<span id="id22"></span><h3>tng<a class="headerlink" href="#tng" title="Permalink to this headline">¶</a></h3>
+<p>Files with the <code class="docutils literal"><span class="pre">.tng</span></code> file extension can contain all kinds of data
+related to the trajectory of a simulation. For example, it might
+contain coordinates, velocities, forces and/or energies. Various <a class="reference internal" href="#mdp"><span class="std std-ref">mdp</span></a>
+file options control which of these are written by <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>, whether data
+is written with compression, and how lossy that compression can be.
+This file is in portable binary format and can be read with <a class="reference internal" href="../onlinehelp/gmx-dump.html#gmx-dump"><span class="std std-ref">gmx dump</span></a>.</p>
+<pre class="literal-block">
+<a class="reference internal" href="../onlinehelp/gmx-dump.html#gmx-dump"><span class="std std-ref">gmx dump</span></a> -f traj.tng
+</pre>
+<p>or if you’re not such a fast reader:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">dump</span> <span class="o">-</span><span class="n">f</span> <span class="n">traj</span><span class="o">.</span><span class="n">tng</span> <span class="o">|</span> <span class="n">less</span>
+</pre></div>
+</div>
+<p>You can also get a quick look in the contents of the file (number of
+frames etc.) using:</p>
+<pre class="literal-block">
+<a class="reference internal" href="../onlinehelp/gmx-check.html#gmx-check"><span class="std std-ref">gmx check</span></a> -f traj.tng
+</pre>
+</div>
+<div class="section" id="top">
+<span id="id23"></span><h3>top<a class="headerlink" href="#top" title="Permalink to this headline">¶</a></h3>
+<p>The top file extension stands for topology. It is an ascii file which is
+read by <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> which processes it
+and creates a binary topology (<a class="reference internal" href="#tpr"><span class="std std-ref">tpr</span></a> file).</p>
+<p>A sample file is included below:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">;</span>
+<span class="p">;</span> <span class="n">Example</span> <span class="n">topology</span> <span class="n">file</span>
+<span class="p">;</span>
+<span class="p">[</span> <span class="n">defaults</span> <span class="p">]</span>
+<span class="p">;</span> <span class="n">nbfunc</span>        <span class="n">comb</span><span class="o">-</span><span class="n">rule</span>       <span class="n">gen</span><span class="o">-</span><span class="n">pairs</span>       <span class="n">fudgeLJ</span> <span class="n">fudgeQQ</span>
+  <span class="mi">1</span>             <span class="mi">1</span>               <span class="n">no</span>              <span class="mf">1.0</span>     <span class="mf">1.0</span>
+
+<span class="p">;</span> <span class="n">The</span> <span class="n">force</span> <span class="n">field</span> <span class="n">files</span> <span class="n">to</span> <span class="n">be</span> <span class="n">included</span>
+<span class="c1">#include &quot;rt41c5.itp&quot;</span>
+
+<span class="p">[</span> <span class="n">moleculetype</span> <span class="p">]</span>
+<span class="p">;</span> <span class="n">name</span>  <span class="n">nrexcl</span>
+<span class="n">Urea</span>         <span class="mi">3</span>
+
+<span class="p">[</span> <span class="n">atoms</span> <span class="p">]</span>
+<span class="p">;</span>   <span class="n">nr</span>    <span class="nb">type</span>   <span class="n">resnr</span>  <span class="n">residu</span>    <span class="n">atom</span>    <span class="n">cgnr</span>  <span class="n">charge</span>
+     <span class="mi">1</span>       <span class="n">C</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">C1</span>       <span class="mi">1</span>   <span class="mf">0.683</span>
+     <span class="mi">2</span>       <span class="n">O</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">O2</span>       <span class="mi">1</span>  <span class="o">-</span><span class="mf">0.683</span>
+     <span class="mi">3</span>      <span class="n">NT</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">N3</span>       <span class="mi">2</span>  <span class="o">-</span><span class="mf">0.622</span>
+     <span class="mi">4</span>       <span class="n">H</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">H4</span>       <span class="mi">2</span>   <span class="mf">0.346</span>
+     <span class="mi">5</span>       <span class="n">H</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">H5</span>       <span class="mi">2</span>   <span class="mf">0.276</span>
+     <span class="mi">6</span>      <span class="n">NT</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">N6</span>       <span class="mi">3</span>  <span class="o">-</span><span class="mf">0.622</span>
+     <span class="mi">7</span>       <span class="n">H</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">H7</span>       <span class="mi">3</span>   <span class="mf">0.346</span>
+     <span class="mi">8</span>       <span class="n">H</span>       <span class="mi">1</span>    <span class="n">UREA</span>      <span class="n">H8</span>       <span class="mi">3</span>   <span class="mf">0.276</span>
+
+<span class="p">[</span> <span class="n">bonds</span> <span class="p">]</span>
+<span class="p">;</span>  <span class="n">ai</span>    <span class="n">aj</span> <span class="n">funct</span>           <span class="n">c0</span>           <span class="n">c1</span>
+    <span class="mi">3</span>     <span class="mi">4</span>     <span class="mi">1</span> <span class="mf">1.000000e-01</span> <span class="mf">3.744680e+05</span>
+    <span class="mi">3</span>     <span class="mi">5</span>     <span class="mi">1</span> <span class="mf">1.000000e-01</span> <span class="mf">3.744680e+05</span>
+    <span class="mi">6</span>     <span class="mi">7</span>     <span class="mi">1</span> <span class="mf">1.000000e-01</span> <span class="mf">3.744680e+05</span>
+    <span class="mi">6</span>     <span class="mi">8</span>     <span class="mi">1</span> <span class="mf">1.000000e-01</span> <span class="mf">3.744680e+05</span>
+    <span class="mi">1</span>     <span class="mi">2</span>     <span class="mi">1</span> <span class="mf">1.230000e-01</span> <span class="mf">5.020800e+05</span>
+    <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">1</span> <span class="mf">1.330000e-01</span> <span class="mf">3.765600e+05</span>
+    <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">1</span> <span class="mf">1.330000e-01</span> <span class="mf">3.765600e+05</span>
+
+<span class="p">[</span> <span class="n">pairs</span> <span class="p">]</span>
+<span class="p">;</span>  <span class="n">ai</span>    <span class="n">aj</span> <span class="n">funct</span>           <span class="n">c0</span>           <span class="n">c1</span>
+    <span class="mi">2</span>     <span class="mi">4</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+    <span class="mi">2</span>     <span class="mi">5</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+    <span class="mi">2</span>     <span class="mi">7</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+    <span class="mi">2</span>     <span class="mi">8</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+    <span class="mi">3</span>     <span class="mi">7</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+    <span class="mi">3</span>     <span class="mi">8</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+    <span class="mi">4</span>     <span class="mi">6</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+    <span class="mi">5</span>     <span class="mi">6</span>     <span class="mi">1</span> <span class="mf">0.000000e+00</span> <span class="mf">0.000000e+00</span>
+
+<span class="p">[</span> <span class="n">angles</span> <span class="p">]</span>
+<span class="p">;</span>  <span class="n">ai</span>    <span class="n">aj</span>    <span class="n">ak</span> <span class="n">funct</span>           <span class="n">c0</span>           <span class="n">c1</span>
+    <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">4</span>     <span class="mi">1</span> <span class="mf">1.200000e+02</span> <span class="mf">2.928800e+02</span>
+    <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">5</span>     <span class="mi">1</span> <span class="mf">1.200000e+02</span> <span class="mf">2.928800e+02</span>
+    <span class="mi">4</span>     <span class="mi">3</span>     <span class="mi">5</span>     <span class="mi">1</span> <span class="mf">1.200000e+02</span> <span class="mf">3.347200e+02</span>
+    <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">7</span>     <span class="mi">1</span> <span class="mf">1.200000e+02</span> <span class="mf">2.928800e+02</span>
+    <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">8</span>     <span class="mi">1</span> <span class="mf">1.200000e+02</span> <span class="mf">2.928800e+02</span>
+    <span class="mi">7</span>     <span class="mi">6</span>     <span class="mi">8</span>     <span class="mi">1</span> <span class="mf">1.200000e+02</span> <span class="mf">3.347200e+02</span>
+    <span class="mi">2</span>     <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">1</span> <span class="mf">1.215000e+02</span> <span class="mf">5.020800e+02</span>
+    <span class="mi">2</span>     <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">1</span> <span class="mf">1.215000e+02</span> <span class="mf">5.020800e+02</span>
+    <span class="mi">3</span>     <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">1</span> <span class="mf">1.170000e+02</span> <span class="mf">5.020800e+02</span>
+
+<span class="p">[</span> <span class="n">dihedrals</span> <span class="p">]</span>
+<span class="p">;</span>  <span class="n">ai</span>    <span class="n">aj</span>    <span class="n">ak</span>    <span class="n">al</span> <span class="n">funct</span>           <span class="n">c0</span>           <span class="n">c1</span>           <span class="n">c2</span>
+    <span class="mi">2</span>     <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">4</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+    <span class="mi">6</span>     <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">4</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+    <span class="mi">2</span>     <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">5</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+    <span class="mi">6</span>     <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">5</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+    <span class="mi">2</span>     <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">7</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+    <span class="mi">3</span>     <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">7</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+    <span class="mi">2</span>     <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">8</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+    <span class="mi">3</span>     <span class="mi">1</span>     <span class="mi">6</span>     <span class="mi">8</span>     <span class="mi">1</span> <span class="mf">1.800000e+02</span> <span class="mf">3.347200e+01</span> <span class="mf">2.000000e+00</span>
+
+<span class="p">[</span> <span class="n">dihedrals</span> <span class="p">]</span>
+<span class="p">;</span>  <span class="n">ai</span>    <span class="n">aj</span>    <span class="n">ak</span>    <span class="n">al</span> <span class="n">funct</span>           <span class="n">c0</span>           <span class="n">c1</span>
+    <span class="mi">3</span>     <span class="mi">4</span>     <span class="mi">5</span>     <span class="mi">1</span>     <span class="mi">2</span> <span class="mf">0.000000e+00</span> <span class="mf">1.673600e+02</span>
+    <span class="mi">6</span>     <span class="mi">7</span>     <span class="mi">8</span>     <span class="mi">1</span>     <span class="mi">2</span> <span class="mf">0.000000e+00</span> <span class="mf">1.673600e+02</span>
+    <span class="mi">1</span>     <span class="mi">3</span>     <span class="mi">6</span>     <span class="mi">2</span>     <span class="mi">2</span> <span class="mf">0.000000e+00</span> <span class="mf">1.673600e+02</span>
+
+<span class="p">;</span> <span class="n">Include</span> <span class="n">SPC</span> <span class="n">water</span> <span class="n">topology</span>
+<span class="c1">#include &quot;spc.itp&quot;</span>
+
+<span class="p">[</span> <span class="n">system</span> <span class="p">]</span>
+<span class="n">Urea</span> <span class="ow">in</span> <span class="n">Water</span>
+
+<span class="p">[</span> <span class="n">molecules</span> <span class="p">]</span>
+<span class="n">Urea</span>    <span class="mi">1</span>
+<span class="n">SOL</span>     <span class="mi">1000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tpr">
+<span id="id24"></span><h3>tpr<a class="headerlink" href="#tpr" title="Permalink to this headline">¶</a></h3>
+<p>The tpr file extension stands for portable binary run input file. This file
+contains  the starting structure of your simulation, the molecular topology
+and all the simulation parameters. Because this file is in binary format it
+cannot be read with a normal editor. To read a portable binary run input
+file type:</p>
+<pre class="literal-block">
+<a class="reference internal" href="../onlinehelp/gmx-dump.html#gmx-dump"><span class="std std-ref">gmx dump</span></a> -s topol.tpr
+</pre>
+<p>or if you’re not such a fast reader:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">dump</span> <span class="o">-</span><span class="n">s</span> <span class="n">topol</span><span class="o">.</span><span class="n">tpr</span> <span class="o">|</span> <span class="n">less</span>
+</pre></div>
+</div>
+<p>You can also compare two tpr files using:</p>
+<pre class="literal-block">
+<a class="reference internal" href="../onlinehelp/gmx-check.html#gmx-check"><span class="std std-ref">gmx check</span></a> -s1 top1 -s2 top2 | less
+</pre>
+</div>
+<div class="section" id="trr">
+<span id="id25"></span><h3>trr<a class="headerlink" href="#trr" title="Permalink to this headline">¶</a></h3>
+<p>Files with the trr file extension contain the trajectory of a simulation.
+In this file all the coordinates, velocities, forces and energies are
+printed as you told GROMACS in your mdp file. This file is in portable binary
+format and can be read with <a class="reference internal" href="../onlinehelp/gmx-dump.html#gmx-dump"><span class="std std-ref">gmx dump</span></a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">dump</span> <span class="o">-</span><span class="n">f</span> <span class="n">traj</span><span class="o">.</span><span class="n">trr</span>
+</pre></div>
+</div>
+<p>or if you’re not such a fast reader:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="n">dump</span> <span class="o">-</span><span class="n">f</span> <span class="n">traj</span><span class="o">.</span><span class="n">trr</span> <span class="o">|</span> <span class="n">less</span>
+</pre></div>
+</div>
+<p>You can also get a quick look in the contents of the file (number of
+frames etc.) using:</p>
+<pre class="literal-block">
+% <a class="reference internal" href="../onlinehelp/gmx-check.html#gmx-check"><span class="std std-ref">gmx check</span></a> -f traj.trr
+</pre>
+</div>
+<div class="section" id="xpm">
+<span id="id26"></span><h3>xpm<a class="headerlink" href="#xpm" title="Permalink to this headline">¶</a></h3>
+<p>The GROMACS xpm file format is compatible with the XPixMap format
+and is used for storing matrix data.
+Thus GROMACS xpm files can be viewed directly with programs like XV.
+Alternatively, they can be imported into GIMP and scaled to 300 DPI,
+using strong antialiasing for font and graphics.
+The first matrix data line in an xpm file corresponds to the last matrix
+row.
+In addition to the XPixMap format, GROMACS xpm files may contain
+extra fields. The information in these fields is used when converting
+an xpm file to EPS with <a class="reference internal" href="../onlinehelp/gmx-xpm2ps.html#gmx-xpm2ps"><span class="std std-ref">gmx xpm2ps</span></a>.
+The optional extra field are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Before the <code class="docutils literal"><span class="pre">gv_xpm</span></code> declaration:  <code class="docutils literal"><span class="pre">title</span></code>, <code class="docutils literal"><span class="pre">legend</span></code>,
+<code class="docutils literal"><span class="pre">x-label</span></code>, <code class="docutils literal"><span class="pre">y-label</span></code> and <code class="docutils literal"><span class="pre">type</span></code>, all followed by a string.
+The <code class="docutils literal"><span class="pre">legend</span></code> field determines the legend title.
+The <code class="docutils literal"><span class="pre">type</span></code> field must be followed by <code class="docutils literal"><span class="pre">&quot;continuous&quot;</span></code> or
+<code class="docutils literal"><span class="pre">&quot;discrete&quot;</span></code>, this determines which type of legend will be drawn in an EPS
+file, the default type is continuous.</li>
+<li>The xpm colormap entries may be followed by a string, which is a label for
+that color.</li>
+<li>Between the colormap and the matrix data, the fields <code class="docutils literal"><span class="pre">x-axis</span></code> and/or
+<code class="docutils literal"><span class="pre">y-axis</span></code> may be present followed by the tick-marks for that axis.</li>
+</ul>
+</div></blockquote>
+<p>The example GROMACS xpm file below contains all the extra fields.
+The C-comment delimiters and the colon in the extra fields are optional.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">XPM</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="n">This</span> <span class="n">matrix</span> <span class="ow">is</span> <span class="n">generated</span> <span class="n">by</span> <span class="n">g_rms</span><span class="o">.</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="n">title</span><span class="p">:</span>   <span class="s2">&quot;Backbone RMSD matrix&quot;</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="n">legend</span><span class="p">:</span>  <span class="s2">&quot;RMSD (nm)&quot;</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="n">x</span><span class="o">-</span><span class="n">label</span><span class="p">:</span> <span class="s2">&quot;Time (ps)&quot;</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="n">y</span><span class="o">-</span><span class="n">label</span><span class="p">:</span> <span class="s2">&quot;Time (ps)&quot;</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="nb">type</span><span class="p">:</span>    <span class="s2">&quot;Continuous&quot;</span> <span class="o">*/</span>
+<span class="n">static</span> <span class="n">char</span> <span class="o">*</span> <span class="n">gv_xpm</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s2">&quot;13 13   6 1&quot;</span><span class="p">,</span>
+<span class="s2">&quot;A  c #FFFFFF &quot;</span> <span class="o">/*</span> <span class="s2">&quot;0&quot;</span> <span class="o">*/</span><span class="p">,</span>
+<span class="s2">&quot;B  c #CCCCCC &quot;</span> <span class="o">/*</span> <span class="s2">&quot;0.0399&quot;</span> <span class="o">*/</span><span class="p">,</span>
+<span class="s2">&quot;C  c #999999 &quot;</span> <span class="o">/*</span> <span class="s2">&quot;0.0798&quot;</span> <span class="o">*/</span><span class="p">,</span>
+<span class="s2">&quot;D  c #666666 &quot;</span> <span class="o">/*</span> <span class="s2">&quot;0.12&quot;</span> <span class="o">*/</span><span class="p">,</span>
+<span class="s2">&quot;E  c #333333 &quot;</span> <span class="o">/*</span> <span class="s2">&quot;0.16&quot;</span> <span class="o">*/</span><span class="p">,</span>
+<span class="s2">&quot;F  c #000000 &quot;</span> <span class="o">/*</span> <span class="s2">&quot;0.2&quot;</span> <span class="o">*/</span><span class="p">,</span>
+<span class="o">/*</span> <span class="n">x</span><span class="o">-</span><span class="n">axis</span><span class="p">:</span>  <span class="mi">0</span> <span class="mi">40</span> <span class="mi">80</span> <span class="mi">120</span> <span class="mi">160</span> <span class="mi">200</span> <span class="mi">240</span> <span class="mi">280</span> <span class="mi">320</span> <span class="mi">360</span> <span class="mi">400</span> <span class="mi">440</span> <span class="mi">480</span> <span class="o">*/</span>
+<span class="o">/*</span> <span class="n">y</span><span class="o">-</span><span class="n">axis</span><span class="p">:</span>  <span class="mi">0</span> <span class="mi">40</span> <span class="mi">80</span> <span class="mi">120</span> <span class="mi">160</span> <span class="mi">200</span> <span class="mi">240</span> <span class="mi">280</span> <span class="mi">320</span> <span class="mi">360</span> <span class="mi">400</span> <span class="mi">440</span> <span class="mi">480</span> <span class="o">*/</span>
+<span class="s2">&quot;FEDDDDCCCCCBA&quot;</span><span class="p">,</span>
+<span class="s2">&quot;FEDDDCCCCBBAB&quot;</span><span class="p">,</span>
+<span class="s2">&quot;FEDDDCCCCBABC&quot;</span><span class="p">,</span>
+<span class="s2">&quot;FDDDDCCCCABBC&quot;</span><span class="p">,</span>
+<span class="s2">&quot;EDDCCCCBACCCC&quot;</span><span class="p">,</span>
+<span class="s2">&quot;EDCCCCBABCCCC&quot;</span><span class="p">,</span>
+<span class="s2">&quot;EDCCCBABCCCCC&quot;</span><span class="p">,</span>
+<span class="s2">&quot;EDCCBABCCCCCD&quot;</span><span class="p">,</span>
+<span class="s2">&quot;EDCCABCCCDDDD&quot;</span><span class="p">,</span>
+<span class="s2">&quot;ECCACCCCCDDDD&quot;</span><span class="p">,</span>
+<span class="s2">&quot;ECACCCCCDDDDD&quot;</span><span class="p">,</span>
+<span class="s2">&quot;DACCDDDDDDEEE&quot;</span><span class="p">,</span>
+<span class="s2">&quot;ADEEEEEEEFFFF&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="xtc">
+<span id="id27"></span><h3>xtc<a class="headerlink" href="#xtc" title="Permalink to this headline">¶</a></h3>
+<p>The xtc format is a <strong>portable</strong> format for trajectories.
+It uses the <em>xdr</em> routines for writing and reading
+data which was created for the Unix NFS system. The trajectories
+are written using a reduced precision algorithm which works
+in the following way: the coordinates (in nm) are multiplied by a scale
+factor, typically 1000, so that you have coordinates in pm.
+These are rounded to integer values. Then several other tricks are
+performed, for instance making use of the fact that atoms close
+in sequence are usually close in space too (e.g. a water molecule).
+To this end, the <em>xdr</em> library is extended with a special routine
+to write 3-D float coordinates. The routine was originally written
+by Frans van Hoesel as part of an Europort project. An updated
+version of it can be obtained through <a class="reference external" href="https://github.com/Pappulab/xdrf">this link</a>.</p>
+<p>All the data is stored using calls to <em>xdr</em> routines.</p>
+<dl class="docutils">
+<dt><strong>int</strong> magic</dt>
+<dd>A magic number, for the current file version its value is 1995.</dd>
+<dt><strong>int</strong> natoms</dt>
+<dd>The number of atoms in the trajectory.</dd>
+<dt><strong>int</strong> step</dt>
+<dd>The simulation step.</dd>
+<dt><strong>float</strong> time</dt>
+<dd>The simulation time.</dd>
+<dt><strong>float</strong> box[3][3]</dt>
+<dd>The computational box which is stored as a set of three basis
+vectors, to allow for triclinic PBC. For a rectangular box the
+box edges are stored on the diagonal of the matrix.</dd>
+<dt><strong>3dfcoord</strong> x[natoms]</dt>
+<dd>The coordinates themselves stored in reduced precision.
+Please note that when the number of atoms is smaller than 9
+no reduced precision is used.</dd>
+</dl>
+<div class="section" id="using-xtc-in-your-c-programs">
+<h4>Using xtc in your “C” programs<a class="headerlink" href="#using-xtc-in-your-c-programs" title="Permalink to this headline">¶</a></h4>
+<p>To read and write these files the following “C” routines are available:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">All</span> <span class="n">functions</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">successful</span><span class="p">,</span> <span class="mi">0</span> <span class="n">otherwise</span> <span class="o">*/</span>
+
+<span class="n">extern</span> <span class="nb">int</span> <span class="n">open_xtc</span><span class="p">(</span><span class="n">XDR</span> <span class="o">*</span><span class="n">xd</span><span class="p">,</span><span class="n">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span><span class="n">char</span> <span class="o">*</span><span class="n">mode</span><span class="p">);</span>
+<span class="o">/*</span> <span class="n">Open</span> <span class="n">a</span> <span class="n">file</span> <span class="k">for</span> <span class="n">xdr</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="o">*/</span>
+
+<span class="n">extern</span> <span class="n">void</span> <span class="n">close_xtc</span><span class="p">(</span><span class="n">XDR</span> <span class="o">*</span><span class="n">xd</span><span class="p">);</span>
+<span class="o">/*</span> <span class="n">Close</span> <span class="n">the</span> <span class="n">file</span> <span class="k">for</span> <span class="n">xdr</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="o">*/</span>
+
+<span class="n">extern</span> <span class="nb">int</span> <span class="n">read_first_xtc</span><span class="p">(</span><span class="n">XDR</span> <span class="o">*</span><span class="n">xd</span><span class="p">,</span><span class="n">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span>
+                          <span class="nb">int</span> <span class="o">*</span><span class="n">natoms</span><span class="p">,</span><span class="nb">int</span> <span class="o">*</span><span class="n">step</span><span class="p">,</span><span class="n">real</span> <span class="o">*</span><span class="n">time</span><span class="p">,</span>
+                          <span class="n">matrix</span> <span class="n">box</span><span class="p">,</span><span class="n">rvec</span> <span class="o">**</span><span class="n">x</span><span class="p">,</span><span class="n">real</span> <span class="o">*</span><span class="n">prec</span><span class="p">);</span>
+<span class="o">/*</span> <span class="n">Open</span> <span class="n">xtc</span> <span class="n">file</span><span class="p">,</span> <span class="n">read</span> <span class="n">xtc</span> <span class="n">file</span> <span class="n">first</span> <span class="n">time</span><span class="p">,</span> <span class="n">allocate</span> <span class="n">memory</span> <span class="k">for</span> <span class="n">x</span> <span class="o">*/</span>
+
+<span class="n">extern</span> <span class="nb">int</span> <span class="n">read_next_xtc</span><span class="p">(</span><span class="n">XDR</span> <span class="o">*</span><span class="n">xd</span><span class="p">,</span>
+                         <span class="nb">int</span> <span class="o">*</span><span class="n">natoms</span><span class="p">,</span><span class="nb">int</span> <span class="o">*</span><span class="n">step</span><span class="p">,</span><span class="n">real</span> <span class="o">*</span><span class="n">time</span><span class="p">,</span>
+                         <span class="n">matrix</span> <span class="n">box</span><span class="p">,</span><span class="n">rvec</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">real</span> <span class="o">*</span><span class="n">prec</span><span class="p">);</span>
+<span class="o">/*</span> <span class="n">Read</span> <span class="n">subsequent</span> <span class="n">frames</span> <span class="o">*/</span>
+
+<span class="n">extern</span> <span class="nb">int</span> <span class="n">write_xtc</span><span class="p">(</span><span class="n">XDR</span> <span class="o">*</span><span class="n">xd</span><span class="p">,</span>
+                     <span class="nb">int</span> <span class="n">natoms</span><span class="p">,</span><span class="nb">int</span> <span class="n">step</span><span class="p">,</span><span class="n">real</span> <span class="n">time</span><span class="p">,</span>
+                     <span class="n">matrix</span> <span class="n">box</span><span class="p">,</span><span class="n">rvec</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">real</span> <span class="n">prec</span><span class="p">);</span>
+<span class="o">/*</span> <span class="n">Write</span> <span class="n">a</span> <span class="n">frame</span> <span class="n">to</span> <span class="n">xtc</span> <span class="n">file</span> <span class="o">*/</span>
+</pre></div>
+</div>
+<p>To use the library function include <code class="docutils literal"><span class="pre">&quot;gromacs/fileio/xtcio.h&quot;</span></code>
+in your file and link with <code class="docutils literal"><span class="pre">-lgmx.$(CPU)</span></code>.</p>
+</div>
+<div class="section" id="using-xtc-in-your-fortran-programs">
+<h4>Using xtc in your FORTRAN programs<a class="headerlink" href="#using-xtc-in-your-fortran-programs" title="Permalink to this headline">¶</a></h4>
+<p>To read and write these in a FORTRAN program use the calls to
+<code class="docutils literal"><span class="pre">readxtc</span></code> and <code class="docutils literal"><span class="pre">writextc</span></code> as in the following sample program
+which reads and xtc file and copies it to a new one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">program</span> <span class="n">testxtc</span>
+
+<span class="n">parameter</span> <span class="p">(</span><span class="n">maxatom</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="n">maxx</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="n">maxatom</span><span class="p">)</span>
+<span class="n">integer</span> <span class="n">xd</span><span class="p">,</span><span class="n">xd2</span><span class="p">,</span><span class="n">natoms</span><span class="p">,</span><span class="n">step</span><span class="p">,</span><span class="n">ret</span><span class="p">,</span><span class="n">i</span>
+<span class="n">real</span>    <span class="n">time</span><span class="p">,</span><span class="n">box</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span><span class="n">x</span><span class="p">(</span><span class="n">maxx</span><span class="p">)</span>
+
+<span class="n">call</span> <span class="n">xdrfopen</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span><span class="s2">&quot;test.xtc&quot;</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">ret</span><span class="p">)</span>
+<span class="nb">print</span> <span class="o">*</span><span class="p">,</span><span class="s1">&#39;opened test.xtc, ret=&#39;</span><span class="p">,</span><span class="n">ret</span>
+<span class="n">call</span> <span class="n">xdrfopen</span><span class="p">(</span><span class="n">xd2</span><span class="p">,</span><span class="s2">&quot;testout.xtc&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">,</span><span class="n">ret</span><span class="p">)</span>
+<span class="nb">print</span> <span class="o">*</span><span class="p">,</span><span class="s1">&#39;opened testout.xtc, ret=&#39;</span><span class="p">,</span><span class="n">ret</span>
+
+<span class="n">call</span> <span class="n">readxtc</span><span class="p">(</span><span class="n">xd</span><span class="p">,</span><span class="n">natoms</span><span class="p">,</span><span class="n">step</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">box</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">prec</span><span class="p">,</span><span class="n">ret</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="n">ret</span> <span class="o">.</span><span class="n">eq</span><span class="o">.</span> <span class="mi">1</span> <span class="p">)</span> <span class="n">then</span>
+   <span class="n">call</span> <span class="n">writextc</span><span class="p">(</span><span class="n">xd2</span><span class="p">,</span><span class="n">natoms</span><span class="p">,</span><span class="n">step</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">box</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">prec</span><span class="p">,</span><span class="n">ret</span><span class="p">)</span>
+<span class="k">else</span>
+   <span class="nb">print</span> <span class="o">*</span><span class="p">,</span><span class="s1">&#39;Error reading xtc&#39;</span>
+<span class="n">endif</span>
+
+<span class="n">stop</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+<p>To link your program use <code class="docutils literal"><span class="pre">-L$(GMXHOME)/lib/$(CPU)</span> <span class="pre">-lxtcf</span></code>
+on your linker command line.</p>
+</div>
+</div>
+<div class="section" id="xvg">
+<span id="id28"></span><h3>xvg<a class="headerlink" href="#xvg" title="Permalink to this headline">¶</a></h3>
+<p>Almost all output from GROMACS analysis tools is ready as input for
+Grace, formerly known as Xmgr. We use Grace, because it is very flexible, and it is also
+free software. It produces PostScript(tm) output, which is very suitable
+for inclusion in eg. LaTeX documents, but also for other word processors.</p>
+<p>A sample Grace session with GROMACS data is shown below:</p>
+<img alt="Sample xvg graphic produced using the |Gromacs| tools" src="../_images/xvgr.gif" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">File formats</a><ul>
+<li><a class="reference internal" href="#summary-of-file-formats">Summary of file formats</a><ul>
+<li><a class="reference internal" href="#parameter-files">Parameter files</a></li>
+<li><a class="reference internal" href="#structure-files">Structure files</a></li>
+<li><a class="reference internal" href="#topology-files">Topology files</a></li>
+<li><a class="reference internal" href="#run-input-files">Run Input files</a></li>
+<li><a class="reference internal" href="#trajectory-files">Trajectory files</a></li>
+<li><a class="reference internal" href="#energy-files">Energy files</a></li>
+<li><a class="reference internal" href="#other-files">Other files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#file-format-details">File format details</a><ul>
+<li><a class="reference internal" href="#cpt">cpt</a></li>
+<li><a class="reference internal" href="#dat">dat</a></li>
+<li><a class="reference internal" href="#dlg">dlg</a><ul>
+<li><a class="reference internal" href="#sample">Sample</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#edi">edi</a></li>
+<li><a class="reference internal" href="#edr">edr</a></li>
+<li><a class="reference internal" href="#ene">ene</a></li>
+<li><a class="reference internal" href="#eps">eps</a></li>
+<li><a class="reference internal" href="#g96">g96</a></li>
+<li><a class="reference internal" href="#gro">gro</a></li>
+<li><a class="reference internal" href="#hdb">hdb</a></li>
+<li><a class="reference internal" href="#itp">itp</a></li>
+<li><a class="reference internal" href="#log">log</a></li>
+<li><a class="reference internal" href="#m2p">m2p</a></li>
+<li><a class="reference internal" href="#map">map</a></li>
+<li><a class="reference internal" href="#mdp">mdp</a></li>
+<li><a class="reference internal" href="#mtx">mtx</a></li>
+<li><a class="reference internal" href="#ndx">ndx</a></li>
+<li><a class="reference internal" href="#out">out</a></li>
+<li><a class="reference internal" href="#pdb">pdb</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rtp">rtp</a></li>
+<li><a class="reference internal" href="#tex">tex</a></li>
+<li><a class="reference internal" href="#tng">tng</a></li>
+<li><a class="reference internal" href="#top">top</a></li>
+<li><a class="reference internal" href="#tpr">tpr</a></li>
+<li><a class="reference internal" href="#trr">trr</a></li>
+<li><a class="reference internal" href="#xpm">xpm</a></li>
+<li><a class="reference internal" href="#xtc">xtc</a><ul>
+<li><a class="reference internal" href="#using-xtc-in-your-c-programs">Using xtc in your “C” programs</a></li>
+<li><a class="reference internal" href="#using-xtc-in-your-fortran-programs">Using xtc in your FORTRAN programs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#xvg">xvg</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="run-time-errors.html"
+                        title="previous chapter">Common errors when using GROMACS</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="terminology.html"
+                        title="next chapter">Terminology</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/file-formats.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="terminology.html" title="Terminology"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="run-time-errors.html" title="Common errors when using GROMACS"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

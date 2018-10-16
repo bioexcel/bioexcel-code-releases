@@ -1,0 +1,230 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx sasa &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx saxs" href="gmx-saxs.html" />
+    <link rel="prev" title="gmx sans" href="gmx-sans.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-saxs.html" title="gmx saxs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-sans.html" title="gmx sans"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-sasa">
+<span id="id1"></span><h1>gmx sasa<a class="headerlink" href="#gmx-sasa" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx sasa [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+         [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-odg</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-or</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oa</strong> <em>[&lt;.xvg&gt;]</em>]
+         [<strong>-tv</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-q</strong> <em>[&lt;.pdb&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+         [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-fgroup</strong> <em>&lt;selection&gt;</em>]
+         [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]rmpbc</strong>] [<strong>-[no]pbc</strong>] [<strong>-sf</strong> <em>&lt;file&gt;</em>]
+         [<strong>-selrpos</strong> <em>&lt;enum&gt;</em>] [<strong>-probe</strong> <em>&lt;real&gt;</em>] [<strong>-ndots</strong> <em>&lt;int&gt;</em>] [<strong>-[no]prot</strong>]
+         [<strong>-dgs</strong> <em>&lt;real&gt;</em>] [<strong>-surface</strong> <em>&lt;selection&gt;</em>] [<strong>-output</strong> <em>&lt;selection&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sasa</span></code> computes solvent accessible surface areas.
+See Eisenhaber F, Lijnzaad P, Argos P, Sander C, &amp; Scharf M
+(1995) J. Comput. Chem. 16, 273-284 for the algorithm used.
+With <code class="docutils literal"><span class="pre">-q</span></code>, the Connolly surface can be generated as well
+in a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file where the nodes are represented as atoms
+and the edges connecting the nearest nodes as CONECT records.
+<code class="docutils literal"><span class="pre">-odg</span></code> allows for estimation of solvation free energies
+from per-atom solvation energies per exposed surface area.</p>
+<p>The program requires a selection for the surface calculation to be
+specified with <code class="docutils literal"><span class="pre">-surface</span></code>. This should always consist of all
+non-solvent atoms in the system. The area of this group is always
+calculated. Optionally, <code class="docutils literal"><span class="pre">-output</span></code> can specify additional
+selections, which should be subsets of the calculation group.
+The solvent-accessible areas for these groups are also extracted
+from the full surface.</p>
+<p>The average and standard deviation of the area over the trajectory
+can be calculated per residue and atom (options <code class="docutils literal"><span class="pre">-or</span></code> and
+<code class="docutils literal"><span class="pre">-oa</span></code>).</p>
+<p>With the <code class="docutils literal"><span class="pre">-tv</span></code> option the total volume and density of the
+molecule can be computed. With <code class="docutils literal"><span class="pre">-pbc</span></code> (the default), you
+must ensure that your molecule/surface group is not split across PBC.
+Otherwise, you will get non-sensical results.
+Please also consider whether the normal probe radius is appropriate
+in this case or whether you would rather use, e.g., 0. It is good
+to keep in mind that the results for volume and density are very
+approximate. For example, in ice Ih, one can easily fit water molecules in the
+pores which would yield a volume that is too low, and surface area and density
+that are both too high.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Input trajectory or single configuration: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Input structure: <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Extra index groups</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (area.xvg)</dt>
+<dd>Total area as a function of time</dd>
+<dt><code class="docutils literal"><span class="pre">-odg</span></code> [&lt;.xvg&gt;] (dgsolv.xvg) (Optional)</dt>
+<dd>Estimated solvation free energy as a function of time</dd>
+<dt><code class="docutils literal"><span class="pre">-or</span></code> [&lt;.xvg&gt;] (resarea.xvg) (Optional)</dt>
+<dd>Average area per residue</dd>
+<dt><code class="docutils literal"><span class="pre">-oa</span></code> [&lt;.xvg&gt;] (atomarea.xvg) (Optional)</dt>
+<dd>Average area per atom</dd>
+<dt><code class="docutils literal"><span class="pre">-tv</span></code> [&lt;.xvg&gt;] (volume.xvg) (Optional)</dt>
+<dd>Total volume and density as a function of time</dd>
+<dt><code class="docutils literal"><span class="pre">-q</span></code> [&lt;.pdb&gt;] (connolly.pdb) (Optional)</dt>
+<dd>PDB file for Connolly surface</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame if t MOD dt == first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-fgroup</span></code> &lt;selection&gt;</dt>
+<dd>Atoms stored in the trajectory file (if not set, assume first N atoms)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>Plot formatting: none, xmgrace, xmgr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmpbc</span></code>  (yes)</dt>
+<dd>Make molecules whole for each frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions for distance calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-sf</span></code> &lt;file&gt;</dt>
+<dd>Provide selections from files</dd>
+<dt><code class="docutils literal"><span class="pre">-selrpos</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-probe</span></code> &lt;real&gt; (0.14)</dt>
+<dd>Radius of the solvent probe (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-ndots</span></code> &lt;int&gt; (24)</dt>
+<dd>Number of dots per sphere, more dots means more accuracy</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]prot</span></code>  (yes)</dt>
+<dd>Output the protein to the Connolly <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file too</dd>
+<dt><code class="docutils literal"><span class="pre">-dgs</span></code> &lt;real&gt; (0)</dt>
+<dd>Default value for solvation free energy per area (kJ/mol/nm^2)</dd>
+<dt><code class="docutils literal"><span class="pre">-surface</span></code> &lt;selection&gt;</dt>
+<dd>Surface calculation selection</dd>
+<dt><code class="docutils literal"><span class="pre">-output</span></code> &lt;selection&gt;</dt>
+<dd>Output selection(s)</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx sasa</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-sans.html"
+                        title="previous chapter">gmx sans</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-saxs.html"
+                        title="next chapter">gmx saxs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-sasa.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-saxs.html" title="gmx saxs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-sans.html" title="gmx sans"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

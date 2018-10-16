@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="parallel__3dfft_8cpp" kind="file">
+    <compoundname>parallel_3dfft.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="parallel__3dfft_8h" local="yes">parallel_3dfft.h</includes>
+    <includes local="no">errno.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes refid="fft_8h" local="yes">gromacs/fft/fft.h</includes>
+    <includes refid="fft5d_8h" local="yes">gromacs/fft/fft5d.h</includes>
+    <includes refid="gmxcomplex_8h" local="yes">gromacs/math/gmxcomplex.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxmpi_8h" local="yes">gromacs/utility/gmxmpi.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <incdepgraph>
+      <node id="6181">
+        <label>stdarg.h</label>
+      </node>
+      <node id="6183">
+        <label>stdint.h</label>
+      </node>
+      <node id="6175">
+        <label>stdlib.h</label>
+      </node>
+      <node id="6174">
+        <label>errno.h</label>
+      </node>
+      <node id="6185">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="6186" relation="include">
+        </childnode>
+      </node>
+      <node id="6188">
+        <label>stddef.h</label>
+      </node>
+      <node id="6176">
+        <label>string.h</label>
+      </node>
+      <node id="6187">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="6188" relation="include">
+        </childnode>
+        <childnode refid="6182" relation="include">
+        </childnode>
+      </node>
+      <node id="6179">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="6173">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="6182">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="6183" relation="include">
+        </childnode>
+        <childnode refid="6184" relation="include">
+        </childnode>
+      </node>
+      <node id="6172">
+        <label>src/gromacs/fft/parallel_3dfft.cpp</label>
+        <link refid="parallel_3dfft.cpp"/>
+        <childnode refid="6173" relation="include">
+        </childnode>
+        <childnode refid="6174" relation="include">
+        </childnode>
+        <childnode refid="6175" relation="include">
+        </childnode>
+        <childnode refid="6176" relation="include">
+        </childnode>
+        <childnode refid="6177" relation="include">
+        </childnode>
+        <childnode refid="6180" relation="include">
+        </childnode>
+        <childnode refid="6185" relation="include">
+        </childnode>
+        <childnode refid="6187" relation="include">
+        </childnode>
+      </node>
+      <node id="6177">
+        <label>gromacs/fft/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="6178" relation="include">
+        </childnode>
+        <childnode refid="6179" relation="include">
+        </childnode>
+      </node>
+      <node id="6186">
+        <label>config.h</label>
+      </node>
+      <node id="6180">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="6181" relation="include">
+        </childnode>
+        <childnode refid="6178" relation="include">
+        </childnode>
+        <childnode refid="6182" relation="include">
+        </childnode>
+      </node>
+      <node id="6178">
+        <label>stdio.h</label>
+      </node>
+      <node id="6184">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structgmx__parallel__3dfft" prot="public">gmx_parallel_3dfft</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="parallel__3dfft_8cpp_1a96cdca49089aa280cb30dedcda7511de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_parallel_3dfft_init</definition>
+        <argsstring>(gmx_parallel_3dfft_t *pfft_setup, ivec ndata, real **real_data, t_complex **complex_data, MPI_Comm comm[2], gmx_bool bReproducible, int nthreads, gmx::PinningPolicy realGridAllocation)</argsstring>
+        <name>gmx_parallel_3dfft_init</name>
+        <param>
+          <type><ref refid="pme-internal_8h_1a31a1d8b5840322d92d8f8c41939b7407" kindref="member">gmx_parallel_3dfft_t</ref> *</type>
+          <declname>pfft_setup</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>ndata</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> **</type>
+          <declname>real_data</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__complex" kindref="compound">t_complex</ref> **</type>
+          <declname>complex_data</declname>
+        </param>
+        <param>
+          <type>MPI_Comm</type>
+          <declname>comm</declname>
+          <array>[2]</array>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bReproducible</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nthreads</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1abe4caed0469c0de84e0c1c1a81972b38" kindref="member">gmx::PinningPolicy</ref></type>
+          <declname>realGridAllocation</declname>
+          <defval>gmx::PinningPolicy::CannotBePinned</defval>
+        </param>
+        <briefdescription>
+<para>Initialize parallel MPI-based 3D-FFT. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine performs real-to-complex and complex-to-real parallel 3D FFTs, but not complex-to-complex.</para><para>The routine is optimized for small-to-medium size FFTs used for PME and PPPM algorithms, and do allocate extra workspace whenever it might improve performance.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pfft_setup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to parallel 3dfft setup structure, previously allocated or with automatic storage. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ndata</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of grid cells in each direction </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>real_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Real data. Input for forward and output for backward. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>complex_data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Complex data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MPI communicator for both parallelization axis. Needs to be either initialized or MPI_NULL for no parallelization in that axis. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bReproducible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Try to avoid FFT timing optimizations and other stuff that could make results differ for two runs with identical input (reproducibility for debugging). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nthreads</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Run in parallel using n threads </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>realGridAllocation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to make real grid use allocation pinned for GPU transfers. Only used in PME mixed CPU+GPU mode.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 or a standard error code. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" line="56" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" bodystart="56" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="parallel__3dfft_8cpp_1a58a6879361663f7581b68acdf1953d02" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int fft5d_limits</definition>
+        <argsstring>(fft5d_plan p, ivec local_ndata, ivec local_offset, ivec local_size)</argsstring>
+        <name>fft5d_limits</name>
+        <param>
+          <type><ref refid="structfft5d__plan__t" kindref="compound">fft5d_plan</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_ndata</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_offset</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" line="96" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" bodystart="96" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="parallel__3dfft_8cpp_1a1fa051a13d6e2c047bef1b5e4ebac65c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_parallel_3dfft_real_limits</definition>
+        <argsstring>(gmx_parallel_3dfft_t pfft_setup, ivec local_ndata, ivec local_offset, ivec local_size)</argsstring>
+        <name>gmx_parallel_3dfft_real_limits</name>
+        <param>
+          <type><ref refid="pme-internal_8h_1a31a1d8b5840322d92d8f8c41939b7407" kindref="member">gmx_parallel_3dfft_t</ref></type>
+          <declname>pfft_setup</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_ndata</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_offset</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_size</declname>
+        </param>
+        <briefdescription>
+<para>Get direct space grid index limits. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" line="124" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" bodystart="124" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="parallel__3dfft_8cpp_1a72a82163d5a1dd88bd70155c792075d0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void reorder_ivec_yzx</definition>
+        <argsstring>(ivec v)</argsstring>
+        <name>reorder_ivec_yzx</name>
+        <param>
+          <type>ivec</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" line="132" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" bodystart="132" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="parallel__3dfft_8cpp_1a03f6d37582f20700103d69aed3ff501f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_parallel_3dfft_complex_limits</definition>
+        <argsstring>(gmx_parallel_3dfft_t pfft_setup, ivec complex_order, ivec local_ndata, ivec local_offset, ivec local_size)</argsstring>
+        <name>gmx_parallel_3dfft_complex_limits</name>
+        <param>
+          <type><ref refid="pme-internal_8h_1a31a1d8b5840322d92d8f8c41939b7407" kindref="member">gmx_parallel_3dfft_t</ref></type>
+          <declname>pfft_setup</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>complex_order</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_ndata</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_offset</declname>
+        </param>
+        <param>
+          <type>ivec</type>
+          <declname>local_size</declname>
+        </param>
+        <briefdescription>
+<para>Get reciprocal space grid index limits. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" line="143" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" bodystart="143" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="parallel__3dfft_8cpp_1a45c7cbbf1e78652052b3e1108400de07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_parallel_3dfft_execute</definition>
+        <argsstring>(gmx_parallel_3dfft_t pfft_setup, enum gmx_fft_direction dir, int thread, gmx_wallcycle_t wcycle)</argsstring>
+        <name>gmx_parallel_3dfft_execute</name>
+        <param>
+          <type><ref refid="pme-internal_8h_1a31a1d8b5840322d92d8f8c41939b7407" kindref="member">gmx_parallel_3dfft_t</ref></type>
+          <declname>pfft_setup</declname>
+        </param>
+        <param>
+          <type>enum <ref refid="fft_8h_1af2aa0b3a5f3a4339ecb2bd67cb8f8302" kindref="member">gmx_fft_direction</ref></type>
+          <declname>dir</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" line="167" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" bodystart="167" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="parallel__3dfft_8cpp_1af61c61ab4ac0d225adf0abf460e68fa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_parallel_3dfft_destroy</definition>
+        <argsstring>(gmx_parallel_3dfft_t pfft_setup)</argsstring>
+        <name>gmx_parallel_3dfft_destroy</name>
+        <param>
+          <type><ref refid="pme-internal_8h_1a31a1d8b5840322d92d8f8c41939b7407" kindref="member">gmx_parallel_3dfft_t</ref></type>
+          <declname>pfft_setup</declname>
+        </param>
+        <briefdescription>
+<para>Release all data in parallel fft setup. </para>        </briefdescription>
+        <detaileddescription>
+<para>All temporary storage and FFT plans are released. The structure itself is not released, but the contents is invalid after this call.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pfft_setup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parallel 3dfft setup.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 or a standard error code. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" line="188" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp" bodystart="188" bodyend="197"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fft/parallel_3dfft.cpp"/>
+  </compounddef>
+</doxygen>

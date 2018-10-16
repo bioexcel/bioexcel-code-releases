@@ -1,0 +1,94 @@
+.. _gmx polystat:
+
+gmx polystat
+============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx polystat [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                 [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-v` :emphasis:`[<.xvg>]`] [:strong:`-p` :emphasis:`[<.xvg>]`] [:strong:`-i` :emphasis:`[<.xvg>]`]
+                 [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`]
+                 [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]mw`] [:strong:`-[no]pc`]
+
+Description
+-----------
+
+``gmx polystat`` plots static properties of polymers as a function of time
+and prints the average.
+
+By default it determines the average end-to-end distance and radii
+of gyration of polymers. It asks for an index group and split this
+into molecules. The end-to-end distance is then determined using
+the first and the last atom in the index group for each molecules.
+For the radius of gyration the total and the three principal components
+for the average gyration tensor are written.
+With option ``-v`` the eigenvectors are written.
+With option ``-pc`` also the average eigenvalues of the individual
+gyration tensors are written.
+With option ``-i`` the mean square internal distances are
+written.
+
+With option ``-p`` the persistence length is determined.
+The chosen index group should consist of atoms that are
+consecutively bonded in the polymer mainchains.
+The persistence length is then determined from the cosine of
+the angles between bonds with an index difference that is even,
+the odd pairs are not used, because straight polymer backbones
+are usually all trans and therefore only every second bond aligns.
+The persistence length is defined as number of bonds where
+the average cos reaches a value of 1/e. This point is determined
+by a linear interpolation of log(<cos>).
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (polystat.xvg)
+    xvgr/xmgr file
+``-v`` [<.xvg>] (polyvec.xvg) (Optional)
+    xvgr/xmgr file
+``-p`` [<.xvg>] (persist.xvg) (Optional)
+    xvgr/xmgr file
+``-i`` [<.xvg>] (intdist.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]mw``  (yes)
+    Use the mass weighting for radii of gyration
+``-[no]pc``  (no)
+    Plot average eigenvalues
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

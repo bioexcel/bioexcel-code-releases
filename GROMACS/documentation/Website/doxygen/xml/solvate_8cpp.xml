@@ -1,0 +1,838 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="solvate_8cpp" kind="file">
+    <compoundname>solvate.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="solvate_8h" local="yes">solvate.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">vector</includes>
+    <includes refid="pargs_8h" local="yes">gromacs/commandline/pargs.h</includes>
+    <includes refid="confio_8h" local="yes">gromacs/fileio/confio.h</includes>
+    <includes refid="pdbio_8h" local="yes">gromacs/fileio/pdbio.h</includes>
+    <includes refid="conformation-utilities_8h" local="yes">gromacs/gmxlib/conformation-utilities.h</includes>
+    <includes refid="read-conformation_8h" local="yes">gromacs/gmxpreprocess/read-conformation.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="boxutilities_8h" local="yes">gromacs/pbcutil/boxutilities.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="nbsearch_8h" local="yes">gromacs/selection/nbsearch.h</includes>
+    <includes refid="atomprop_8h" local="yes">gromacs/topology/atomprop.h</includes>
+    <includes refid="atoms_8h" local="yes">gromacs/topology/atoms.h</includes>
+    <includes refid="atomsbuilder_8h" local="yes">gromacs/topology/atomsbuilder.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="arraysize_8h" local="yes">gromacs/utility/arraysize.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="futil_8h" local="yes">gromacs/utility/futil.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <incdepgraph>
+      <node id="11592">
+        <label>stdarg.h</label>
+      </node>
+      <node id="11585">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="11581">
+        <label>iterator</label>
+      </node>
+      <node id="11568">
+        <label>gromacs/commandline/filenm.h</label>
+        <link refid="filenm_8h"/>
+        <childnode refid="11569" relation="include">
+        </childnode>
+      </node>
+      <node id="11575">
+        <label>cstdint</label>
+      </node>
+      <node id="11570">
+        <label>stdint.h</label>
+      </node>
+      <node id="11588">
+        <label>gromacs/utility/arraysize.h</label>
+        <link refid="arraysize_8h"/>
+      </node>
+      <node id="11589">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="11590" relation="include">
+        </childnode>
+        <childnode refid="11569" relation="include">
+        </childnode>
+      </node>
+      <node id="11574">
+        <label>cmath</label>
+      </node>
+      <node id="11582">
+        <label>stdexcept</label>
+      </node>
+      <node id="11593">
+        <label>gromacs/utility/futil.h</label>
+        <link refid="futil_8h"/>
+        <childnode refid="11594" relation="include">
+        </childnode>
+        <childnode refid="11590" relation="include">
+        </childnode>
+        <childnode refid="11569" relation="include">
+        </childnode>
+      </node>
+      <node id="11586">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="11577" relation="include">
+        </childnode>
+      </node>
+      <node id="11596">
+        <label>stddef.h</label>
+      </node>
+      <node id="11587">
+        <label>gromacs/topology/atomsbuilder.h</label>
+        <link refid="atomsbuilder_8h"/>
+        <childnode refid="11566" relation="include">
+        </childnode>
+        <childnode refid="11586" relation="include">
+        </childnode>
+        <childnode refid="11572" relation="include">
+        </childnode>
+      </node>
+      <node id="11576">
+        <label>gromacs/selection/nbsearch.h</label>
+        <link refid="nbsearch_8h"/>
+        <childnode refid="11577" relation="include">
+        </childnode>
+        <childnode refid="11566" relation="include">
+        </childnode>
+        <childnode refid="11578" relation="include">
+        </childnode>
+        <childnode refid="11586" relation="include">
+        </childnode>
+        <childnode refid="11584" relation="include">
+        </childnode>
+        <childnode refid="11572" relation="include">
+        </childnode>
+      </node>
+      <node id="11567">
+        <label>gromacs/commandline/pargs.h</label>
+        <link refid="pargs_8h"/>
+        <childnode refid="11568" relation="include">
+        </childnode>
+        <childnode refid="11569" relation="include">
+        </childnode>
+        <childnode refid="11572" relation="include">
+        </childnode>
+      </node>
+      <node id="11594">
+        <label>limits.h</label>
+      </node>
+      <node id="11584">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="11569" relation="include">
+        </childnode>
+        <childnode refid="11585" relation="include">
+        </childnode>
+      </node>
+      <node id="11564">
+        <label>string.h</label>
+      </node>
+      <node id="11595">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="11596" relation="include">
+        </childnode>
+        <childnode refid="11569" relation="include">
+        </childnode>
+      </node>
+      <node id="11572">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="11562">
+        <label>src/gromacs/gmxpreprocess/solvate.cpp</label>
+        <link refid="solvate.cpp"/>
+        <childnode refid="11563" relation="include">
+        </childnode>
+        <childnode refid="11564" relation="include">
+        </childnode>
+        <childnode refid="11565" relation="include">
+        </childnode>
+        <childnode refid="11566" relation="include">
+        </childnode>
+        <childnode refid="11567" relation="include">
+        </childnode>
+        <childnode refid="11573" relation="include">
+        </childnode>
+        <childnode refid="11576" relation="include">
+        </childnode>
+        <childnode refid="11587" relation="include">
+        </childnode>
+        <childnode refid="11588" relation="include">
+        </childnode>
+        <childnode refid="11589" relation="include">
+        </childnode>
+        <childnode refid="11591" relation="include">
+        </childnode>
+        <childnode refid="11593" relation="include">
+        </childnode>
+        <childnode refid="11584" relation="include">
+        </childnode>
+        <childnode refid="11595" relation="include">
+        </childnode>
+      </node>
+      <node id="11566">
+        <label>vector</label>
+      </node>
+      <node id="11563">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="11583">
+        <label>utility</label>
+      </node>
+      <node id="11580">
+        <label>array</label>
+      </node>
+      <node id="11569">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="11570" relation="include">
+        </childnode>
+        <childnode refid="11571" relation="include">
+        </childnode>
+      </node>
+      <node id="11578">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="11579" relation="include">
+        </childnode>
+        <childnode refid="11580" relation="include">
+        </childnode>
+        <childnode refid="11581" relation="include">
+        </childnode>
+        <childnode refid="11582" relation="include">
+        </childnode>
+        <childnode refid="11583" relation="include">
+        </childnode>
+        <childnode refid="11566" relation="include">
+        </childnode>
+        <childnode refid="11584" relation="include">
+        </childnode>
+      </node>
+      <node id="11579">
+        <label>cstddef</label>
+      </node>
+      <node id="11573">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="11574" relation="include">
+        </childnode>
+        <childnode refid="11575" relation="include">
+        </childnode>
+        <childnode refid="11572" relation="include">
+        </childnode>
+      </node>
+      <node id="11591">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="11592" relation="include">
+        </childnode>
+        <childnode refid="11590" relation="include">
+        </childnode>
+        <childnode refid="11569" relation="include">
+        </childnode>
+      </node>
+      <node id="11565">
+        <label>algorithm</label>
+      </node>
+      <node id="11590">
+        <label>stdio.h</label>
+      </node>
+      <node id="11577">
+        <label>memory</label>
+      </node>
+      <node id="11571">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structt__moltypes" prot="public">t_moltypes</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="solvate_8cpp_1a8485f4e81de2537e6a0935626167a775" prot="public" static="no">
+        <name>NFILE</name>
+        <initializer><ref refid="group__module__utility_1ga0883345a58f8f63aefa249a4f127f707" kindref="member">asize</ref>(fnm)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="922" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="solvate_8cpp_1ae2168a9da8c34228f7cf770ca3040532" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sort_molecule</definition>
+        <argsstring>(t_atoms **atoms_solvt, std::vector&lt; RVec &gt; *x, std::vector&lt; RVec &gt; *v)</argsstring>
+        <name>sort_molecule</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> **</type>
+          <declname>atoms_solvt</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="78" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="78" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1aa6b5d5c072fdb10c595058cb5391945f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void rm_res_pbc</definition>
+        <argsstring>(const t_atoms *atoms, std::vector&lt; RVec &gt; *x, matrix box)</argsstring>
+        <name>rm_res_pbc</name>
+        <param>
+          <type>const <ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="217" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="217" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1a7d26b6109ee27ace95e17c74708785aa" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void replicateSolventBox</definition>
+        <argsstring>(t_atoms *atoms, std::vector&lt; RVec &gt; *x, std::vector&lt; RVec &gt; *v, std::vector&lt; real &gt; *r, const matrix box, const matrix boxTarget)</argsstring>
+        <name>replicateSolventBox</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; *</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>boxTarget</declname>
+        </param>
+        <briefdescription>
+<para>Generates a solvent configuration of desired size by stacking solvent boxes. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">atoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent velocities (<computeroutput>*v</computeroutput> can be NULL). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent exclusion radii. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initial solvent box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">boxTarget</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Target box size.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The solvent box of desired size is created by stacking the initial box in the smallest k*l*m array that covers the box, and then removing any residue where all atoms are outside the target box (with a small margin). This function does not remove overlap between solvent atoms across the edges.</para><para>Note that the input configuration should be in the rectangular unit cell and have whole residues. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="288" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="288" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1a044979f032705894fdcd99296c7728c3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void removeSolventBoxOverlap</definition>
+        <argsstring>(t_atoms *atoms, std::vector&lt; RVec &gt; *x, std::vector&lt; RVec &gt; *v, std::vector&lt; real &gt; *r, const t_pbc &amp;pbc)</argsstring>
+        <name>removeSolventBoxOverlap</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; *</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> &amp;</type>
+          <declname>pbc</declname>
+        </param>
+        <briefdescription>
+<para>Removes overlap of solvent atoms across the edges. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">atoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent velocities (can be empty). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent exclusion radii. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PBC information.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Solvent residues that lay on the edges that do not touch the origin are removed if they overlap with other solvent atoms across the PBC. This is done in this way as the assumption is that the input solvent configuration is already equilibrated, and so does not contain any undesirable overlap. The only overlap that should be removed is caused by cutting the box in half in replicateSolventBox() and leaving a margin of solvent outside those box edges; these atoms can then overlap with those on the opposite box edge in a way that is not part of the pre-equilibrated configuration. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="414" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="414" bodyend="489"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1af65b3ad1749f4e133c73f169fd077e5d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void removeSolventOutsideShell</definition>
+        <argsstring>(t_atoms *atoms, std::vector&lt; RVec &gt; *x_solvent, std::vector&lt; RVec &gt; *v_solvent, std::vector&lt; real &gt; *r, const t_pbc &amp;pbc, const std::vector&lt; RVec &gt; &amp;x_solute, real rshell)</argsstring>
+        <name>removeSolventOutsideShell</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x_solvent</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>v_solvent</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; *</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> &amp;</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; RVec &gt; &amp;</type>
+          <declname>x_solute</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rshell</declname>
+        </param>
+        <briefdescription>
+<para>Remove all solvent molecules outside a give radius from the solute. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">atoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">x_solvent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">v_solvent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent velocities. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Atomic exclusion radii. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PBC information. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x_solute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solute positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rshell</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The radius outside the solute molecule. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="502" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="502" bodyend="537"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1ad4104480307f22a6f0c1374c9a7e7870" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void removeSolventOverlappingWithSolute</definition>
+        <argsstring>(t_atoms *atoms, std::vector&lt; RVec &gt; *x, std::vector&lt; RVec &gt; *v, std::vector&lt; real &gt; *r, const t_pbc &amp;pbc, const std::vector&lt; RVec &gt; &amp;x_solute, const std::vector&lt; real &gt; &amp;r_solute)</argsstring>
+        <name>removeSolventOverlappingWithSolute</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; *</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> &amp;</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; RVec &gt; &amp;</type>
+          <declname>x_solute</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &amp;</type>
+          <declname>r_solute</declname>
+        </param>
+        <briefdescription>
+<para>Removes solvent molecules that overlap with the solute. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">atoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent velocities (can be empty). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent exclusion radii. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PBC information. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x_solute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solute positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">r_solute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solute exclusion radii. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="550" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="550" bodyend="595"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1aa09a33d876ff90e57e6f5f80462749f9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void removeExtraSolventMolecules</definition>
+        <argsstring>(t_atoms *atoms, std::vector&lt; RVec &gt; *x, std::vector&lt; RVec &gt; *v, int numberToRemove)</argsstring>
+        <name>removeExtraSolventMolecules</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>numberToRemove</declname>
+        </param>
+        <briefdescription>
+<para>Removes a given number of solvent residues. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">atoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Solvent velocities (can be empty). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numberToRemove</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of residues to remove.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This function is called last in the process of creating the solvent box, so it does not operate on the exclusion radii, as no code after this needs them. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="609" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="609" bodyend="636"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1a0f9c1d820f86711a8d0d60f4bc972e53" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void add_solv</definition>
+        <argsstring>(const char *fn, t_topology *top, std::vector&lt; RVec &gt; *x, std::vector&lt; RVec &gt; *v, int ePBC, matrix box, gmx_atomprop_t aps, real defaultDistance, real scaleFactor, real rshell, int max_sol)</argsstring>
+        <name>add_solv</name>
+        <param>
+          <type>const char *</type>
+          <declname>fn</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__topology" kindref="compound">t_topology</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; RVec &gt; *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__atomprop" kindref="compound">gmx_atomprop_t</ref></type>
+          <declname>aps</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>defaultDistance</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>scaleFactor</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rshell</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_sol</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="638" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="638" bodyend="730"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1a844bdaa41bf23ee7efa8d66b0fd72bf1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void update_top</definition>
+        <argsstring>(t_atoms *atoms, int firstSolventResidueIndex, matrix box, int NFILE, t_filenm fnm[], gmx_atomprop_t aps)</argsstring>
+        <name>update_top</name>
+        <param>
+          <type><ref refid="structt__atoms" kindref="compound">t_atoms</ref> *</type>
+          <declname>atoms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>firstSolventResidueIndex</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>NFILE</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__filenm" kindref="compound">t_filenm</ref></type>
+          <declname>fnm</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structgmx__atomprop" kindref="compound">gmx_atomprop_t</ref></type>
+          <declname>aps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="732" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="732" bodyend="845"/>
+      </memberdef>
+      <memberdef kind="function" id="solvate_8cpp_1a455eb9d4dd00278b9c05c9aaacc81ad6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_solvate</definition>
+        <argsstring>(int argc, char *argv[])</argsstring>
+        <name>gmx_solvate</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" line="847" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp" bodystart="847" bodyend="1023"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxpreprocess/solvate.cpp"/>
+  </compounddef>
+</doxygen>

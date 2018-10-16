@@ -1,0 +1,174 @@
+.. _gmx select:
+
+gmx select
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx select [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+               [:strong:`-os` :emphasis:`[<.xvg>]`] [:strong:`-oc` :emphasis:`[<.xvg>]`] [:strong:`-oi` :emphasis:`[<.dat>]`]
+               [:strong:`-on` :emphasis:`[<.ndx>]`] [:strong:`-om` :emphasis:`[<.xvg>]`] [:strong:`-of` :emphasis:`[<.xvg>]`]
+               [:strong:`-ofpdb` :emphasis:`[<.pdb>]`] [:strong:`-olt` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+               [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-fgroup` :emphasis:`<selection>`]
+               [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]rmpbc`] [:strong:`-[no]pbc`] [:strong:`-sf` :emphasis:`<file>`]
+               [:strong:`-selrpos` :emphasis:`<enum>`] [:strong:`-seltype` :emphasis:`<enum>`] [:strong:`-select` :emphasis:`<selection>`]
+               [:strong:`-[no]norm`] [:strong:`-[no]cfnorm`] [:strong:`-resnr` :emphasis:`<enum>`]
+               [:strong:`-pdbatoms` :emphasis:`<enum>`] [:strong:`-[no]cumlt`]
+
+Description
+-----------
+
+``gmx select`` writes out basic data about dynamic selections.
+It can be used for some simple analyses, or the output can
+be combined with output from other programs and/or external
+analysis programs to calculate more complex things.
+For detailed help on the selection syntax, please use
+``gmx help selections``.
+
+Any combination of the output options is possible, but note
+that ``-om`` only operates on the first selection.
+Also note that if you provide no output options, no output is
+produced.
+
+With ``-os``, calculates the number of positions in each
+selection for each frame. With ``-norm``, the output is
+between 0 and 1 and describes the fraction from the maximum
+number of positions (e.g., for selection 'resname RA and x < 5'
+the maximum number of positions is the number of atoms in
+RA residues). With ``-cfnorm``, the output is divided
+by the fraction covered by the selection.
+``-norm`` and ``-cfnorm`` can be specified independently
+of one another.
+
+With ``-oc``, the fraction covered by each selection is
+written out as a function of time.
+
+With ``-oi``, the selected atoms/residues/molecules are
+written out as a function of time. In the output, the first
+column contains the frame time, the second contains the number
+of positions, followed by the atom/residue/molecule numbers.
+If more than one selection is specified, the size of the second
+group immediately follows the last number of the first group
+and so on.
+
+With ``-on``, the selected atoms are written as a index file
+compatible with ``make_ndx`` and the analyzing tools. Each selection
+is written as a selection group and for dynamic selections a
+group is written for each frame.
+
+For residue numbers, the output of ``-oi`` can be controlled
+with ``-resnr``: ``number`` (default) prints the residue
+numbers as they appear in the input file, while ``index`` prints
+unique numbers assigned to the residues in the order they appear
+in the input file, starting with 1. The former is more intuitive,
+but if the input contains multiple residues with the same number,
+the output can be less useful.
+
+With ``-om``, a mask is printed for the first selection
+as a function of time. Each line in the output corresponds to
+one frame, and contains either 0/1 for each atom/residue/molecule
+possibly selected. 1 stands for the atom/residue/molecule being
+selected for the current frame, 0 for not selected.
+
+With ``-of``, the occupancy fraction of each position (i.e.,
+the fraction of frames where the position is selected) is
+printed.
+
+With ``-ofpdb``, a PDB file is written out where the occupancy
+column is filled with the occupancy fraction of each atom in the
+selection. The coordinates in the PDB file will be those from the
+input topology. ``-pdbatoms`` can be used to control which atoms
+appear in the output PDB file: with ``all`` all atoms are
+present, with ``maxsel`` all atoms possibly selected by the
+selection are present, and with ``selected`` only atoms that are
+selected at least in one frame are present.
+
+With ``-olt``, a histogram is produced that shows the number of
+selected positions as a function of the time the position was
+continuously selected. ``-cumlt`` can be used to control whether
+subintervals of longer intervals are included in the histogram.
+
+``-om``, ``-of``, and ``-olt`` only make sense with
+dynamic selections.
+
+To plot coordinates for selections, use :doc:`gmx trajectory <gmx-trajectory>`.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Input trajectory or single configuration: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr) (Optional)
+    Input structure: :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Extra index groups
+
+Options to specify output files:
+
+``-os`` [<.xvg>] (size.xvg) (Optional)
+    Number of positions in each selection
+``-oc`` [<.xvg>] (cfrac.xvg) (Optional)
+    Covered fraction for each selection
+``-oi`` [<.dat>] (index.dat) (Optional)
+    Indices selected by each selection
+``-on`` [<.ndx>] (index.ndx) (Optional)
+    Index file from the selection
+``-om`` [<.xvg>] (mask.xvg) (Optional)
+    Mask for selected positions
+``-of`` [<.xvg>] (occupancy.xvg) (Optional)
+    Occupied fraction for selected positions
+``-ofpdb`` [<.pdb>] (occupancy.pdb) (Optional)
+    PDB file with occupied fraction for selected positions
+``-olt`` [<.xvg>] (lifetime.xvg) (Optional)
+    Lifetime histogram
+
+Other options:
+
+``-b`` <time> (0)
+    First frame (ps) to read from trajectory
+``-e`` <time> (0)
+    Last frame (ps) to read from trajectory
+``-dt`` <time> (0)
+    Only use frame if t MOD dt == first time (ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-fgroup`` <selection>
+    Atoms stored in the trajectory file (if not set, assume first N atoms)
+``-xvg`` <enum> (xmgrace)
+    Plot formatting: none, xmgrace, xmgr
+``-[no]rmpbc``  (yes)
+    Make molecules whole for each frame
+``-[no]pbc``  (yes)
+    Use periodic boundary conditions for distance calculation
+``-sf`` <file>
+    Provide selections from files
+``-selrpos`` <enum> (atom)
+    Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog
+``-seltype`` <enum> (atom)
+    Default selection output positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog
+``-select`` <selection>
+    Selections to analyze
+``-[no]norm``  (no)
+    Normalize by total number of positions with -os
+``-[no]cfnorm``  (no)
+    Normalize by covered fraction with -os
+``-resnr`` <enum> (number)
+    Residue number output type with -oi and -on: number, index
+``-pdbatoms`` <enum> (all)
+    Atoms to write with -ofpdb: all, maxsel, selected
+``-[no]cumlt``  (yes)
+    Cumulate subintervals of longer intervals in -olt
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

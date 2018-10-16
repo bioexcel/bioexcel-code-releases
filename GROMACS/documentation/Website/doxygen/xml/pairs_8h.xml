@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="pairs_8h" kind="file">
+    <compoundname>pairs.h</compoundname>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="mdtypes_2forcerec_8h" local="yes">gromacs/mdtypes/forcerec.h</includes>
+    <includes refid="mdatom_8h" local="yes">gromacs/mdtypes/mdatom.h</includes>
+    <includes refid="ifunc_8h" local="yes">gromacs/topology/ifunc.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="bonded_8cpp" local="yes">src/gromacs/listed-forces/bonded.cpp</includedby>
+    <includedby refid="listed-forces_8cpp" local="yes">src/gromacs/listed-forces/listed-forces.cpp</includedby>
+    <includedby refid="pairs_8cpp" local="yes">src/gromacs/listed-forces/pairs.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <incdepgraph>
+      <node id="13270">
+        <label>stdint.h</label>
+      </node>
+      <node id="13268">
+        <label>src/gromacs/listed-forces/pairs.h</label>
+        <link refid="pairs.h"/>
+        <childnode refid="13269" relation="include">
+        </childnode>
+        <childnode refid="13272" relation="include">
+        </childnode>
+      </node>
+      <node id="13272">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="13269">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="13270" relation="include">
+        </childnode>
+        <childnode refid="13271" relation="include">
+        </childnode>
+      </node>
+      <node id="13271">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="13273">
+        <label>src/gromacs/listed-forces/pairs.h</label>
+        <link refid="pairs.h"/>
+        <childnode refid="13274" relation="include">
+        </childnode>
+        <childnode refid="13275" relation="include">
+        </childnode>
+        <childnode refid="13276" relation="include">
+        </childnode>
+      </node>
+      <node id="13276">
+        <label>src/gromacs/listed-forces/pairs.cpp</label>
+        <link refid="pairs_8cpp"/>
+      </node>
+      <node id="13274">
+        <label>src/gromacs/listed-forces/bonded.cpp</label>
+        <link refid="bonded_8cpp"/>
+      </node>
+      <node id="13275">
+        <label>src/gromacs/listed-forces/listed-forces.cpp</label>
+        <link refid="listed-forces_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="pairs_8h_1a04c60967351c3261464a138568a4a4ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_pairs</definition>
+        <argsstring>(int ftype, int nbonds, const t_iatom iatoms[], const t_iparams iparams[], const rvec x[], rvec4 f[], rvec fshift[], const struct t_pbc *pbc, const struct t_graph *g, const real *lambda, real *dvdl, const t_mdatoms *md, const t_forcerec *fr, gmx_bool bCalcEnergyAndVirial, gmx_grppairener_t *grppener, int *global_atom_index)</argsstring>
+        <name>do_pairs</name>
+        <param>
+          <type>int</type>
+          <declname>ftype</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbonds</declname>
+        </param>
+        <param>
+          <type>const t_iatom</type>
+          <declname>iatoms</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="uniont__iparams" kindref="compound">t_iparams</ref></type>
+          <declname>iparams</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec4</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fshift</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdl</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bCalcEnergyAndVirial</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__grppairener__t" kindref="compound">gmx_grppairener_t</ref> *</type>
+          <declname>grppener</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>global_atom_index</declname>
+        </param>
+        <briefdescription>
+<para>Calculate VdW/charge listed pair interactions (usually 1-4 interactions). </para>        </briefdescription>
+        <detaileddescription>
+<para>global_atom_index is only passed for printing error messages.</para><para>Calculate VdW/charge listed pair interactions (usually 1-4 interactions). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/pairs.h" line="63" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/pairs.cpp" bodystart="642" bodyend="700"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file declares functions for &quot;pair&quot; interactions (i.e. listed non-bonded interactions, e.g. 1-4 interactions) </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/pairs.h"/>
+  </compounddef>
+</doxygen>

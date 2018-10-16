@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="cpuinfo_8cpp" kind="file">
+    <compoundname>cpuinfo.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="cpuinfo_8h" local="yes">cpuinfo.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">cctype</includes>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">fstream</includes>
+    <includes local="no">map</includes>
+    <includes local="no">set</includes>
+    <includes local="no">sstream</includes>
+    <includes local="no">string</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="architecture_8h" local="yes">architecture.h</includes>
+    <incdepgraph>
+      <node id="12478">
+        <label>stdint.h</label>
+      </node>
+      <node id="12464">
+        <label>src/gromacs/hardware/cpuinfo.cpp</label>
+        <link refid="cpuinfo.cpp"/>
+        <childnode refid="12465" relation="include">
+        </childnode>
+        <childnode refid="12466" relation="include">
+        </childnode>
+        <childnode refid="12471" relation="include">
+        </childnode>
+        <childnode refid="12472" relation="include">
+        </childnode>
+        <childnode refid="12473" relation="include">
+        </childnode>
+        <childnode refid="12474" relation="include">
+        </childnode>
+        <childnode refid="12475" relation="include">
+        </childnode>
+        <childnode refid="12467" relation="include">
+        </childnode>
+        <childnode refid="12468" relation="include">
+        </childnode>
+        <childnode refid="12476" relation="include">
+        </childnode>
+        <childnode refid="12469" relation="include">
+        </childnode>
+        <childnode refid="12477" relation="include">
+        </childnode>
+        <childnode refid="12480" relation="include">
+        </childnode>
+      </node>
+      <node id="12469">
+        <label>string</label>
+      </node>
+      <node id="12467">
+        <label>map</label>
+      </node>
+      <node id="12475">
+        <label>fstream</label>
+      </node>
+      <node id="12480">
+        <label>architecture.h</label>
+        <link refid="architecture_8h"/>
+      </node>
+      <node id="12470">
+        <label>vector</label>
+      </node>
+      <node id="12465">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="12476">
+        <label>sstream</label>
+      </node>
+      <node id="12477">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="12478" relation="include">
+        </childnode>
+        <childnode refid="12479" relation="include">
+        </childnode>
+      </node>
+      <node id="12473">
+        <label>cstdlib</label>
+      </node>
+      <node id="12472">
+        <label>cctype</label>
+      </node>
+      <node id="12466">
+        <label>cpuinfo.h</label>
+        <link refid="cpuinfo_8h"/>
+        <childnode refid="12467" relation="include">
+        </childnode>
+        <childnode refid="12468" relation="include">
+        </childnode>
+        <childnode refid="12469" relation="include">
+        </childnode>
+        <childnode refid="12470" relation="include">
+        </childnode>
+      </node>
+      <node id="12468">
+        <label>set</label>
+      </node>
+      <node id="12471">
+        <label>config.h</label>
+      </node>
+      <node id="12474">
+        <label>algorithm</label>
+      </node>
+      <node id="12479">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structgmx_1_1anonymous__namespace_02cpuinfo_8cpp_03_1_1ApicIdLayout" prot="public">gmx::anonymous_namespace{cpuinfo.cpp}::ApicIdLayout</innerclass>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+    <innernamespace refid="namespacegmx_1_1anonymous__namespace_02cpuinfo_8cpp_03">gmx::anonymous_namespace{cpuinfo.cpp}</innernamespace>
+    <briefdescription>
+<para>Implements <ref refid="classgmx_1_1CpuInfo" kindref="compound">gmx::CpuInfo</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para>We need to be able to compile this file in stand-alone mode to use basic CPU feature detection to set the SIMD acceleration and similar things in CMake, while we still want to use more features that enable topology detection when config.h is present.</para><para>We solve this by skipping the advanced stuff when the preprocessor macro GMX_CPUINFO_STANDALONE is defined. In this case you likely also need to define GMX_X86_GCC_INLINE_ASM if you are on x86; without inline assembly support it is not possible to perform the actual detection on Linux/Mac. Since these macros are specific to this file, they do not use the GMX prefix.</para><para>The remaining defines (GMX_NATIVE_WINDOWS,HAVE_UNISTD_H,HAVE_SCHED_H, HAVE_SYSCONF, HAVE_SCHED_AFFINITY) are only used to determine the topology on 86, and for this we rely on including config.h.</para><para><simplesect kind="author"><para>Erik Lindahl <ulink url="mailto:erik.lindahl@gmail.com">erik.lindahl@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/hardware/cpuinfo.cpp"/>
+  </compounddef>
+</doxygen>

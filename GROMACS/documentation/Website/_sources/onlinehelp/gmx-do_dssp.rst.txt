@@ -1,0 +1,116 @@
+.. _gmx do_dssp:
+
+gmx do_dssp
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx do_dssp [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                [:strong:`-map` :emphasis:`[<.map>]`] [:strong:`-ssdump` :emphasis:`[<.dat>]`] [:strong:`-o` :emphasis:`[<.xpm>]`]
+                [:strong:`-sc` :emphasis:`[<.xvg>]`] [:strong:`-a` :emphasis:`[<.xpm>]`] [:strong:`-ta` :emphasis:`[<.xvg>]`]
+                [:strong:`-aa` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`]
+                [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-sss` :emphasis:`<string>`]
+                [:strong:`-ver` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx do_dssp``
+reads a trajectory file and computes the secondary structure for
+each time frame
+calling the dssp program. If you do not have the dssp program,
+get it from http://swift.cmbi.ru.nl/gv/dssp. ``gmx do_dssp`` assumes
+that the dssp executable is located in
+``/usr/local/bin/dssp``. If this is not the case, then you should
+set an environment variable ``DSSP`` pointing to the dssp
+executable, e.g.:
+
+``setenv DSSP /opt/dssp/bin/dssp``
+
+Since version 2.0.0, dssp is invoked with a syntax that differs
+from earlier versions. If you have an older version of dssp,
+use the ``-ver`` option to direct do_dssp to use the older syntax.
+By default, do_dssp uses the syntax introduced with version 2.0.0.
+Even newer versions (which at the time of writing are not yet released)
+are assumed to have the same syntax as 2.0.0.
+
+The structure assignment for each residue and time is written to an
+:ref:`.xpm <xpm>` matrix file. This file can be visualized with for instance
+``xv`` and can be converted to postscript with ``xpm2ps``.
+Individual chains are separated by light grey lines in the :ref:`.xpm <xpm>` and
+postscript files.
+The number of residues with each secondary structure type and the
+total secondary structure (``-sss``) count as a function of
+time are also written to file (``-sc``).
+
+Solvent accessible surface (SAS) per residue can be calculated, both in
+absolute values (A^2) and in fractions of the maximal accessible
+surface of a residue. The maximal accessible surface is defined as
+the accessible surface of a residue in a chain of glycines.
+**Note** that the program [gmx-sas] can also compute SAS
+and that is more efficient.
+
+Finally, this program can dump the secondary structure in a special file
+``ssdump.dat`` for usage in the program :doc:`gmx chi <gmx-chi>`. Together
+these two programs can be used to analyze dihedral properties as a
+function of secondary structure type.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-map`` [<.map>] (ss.map) (Library)
+    File that maps matrix data to colors
+
+Options to specify output files:
+
+``-ssdump`` [<.dat>] (ssdump.dat) (Optional)
+    Generic data file
+``-o`` [<.xpm>] (ss.xpm)
+    X PixMap compatible matrix file
+``-sc`` [<.xvg>] (scount.xvg)
+    xvgr/xmgr file
+``-a`` [<.xpm>] (area.xpm) (Optional)
+    X PixMap compatible matrix file
+``-ta`` [<.xvg>] (totarea.xvg) (Optional)
+    xvgr/xmgr file
+``-aa`` [<.xvg>] (averarea.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-sss`` <string> (HEBT)
+    Secondary structures for structure count
+``-ver`` <int> (2)
+    DSSP major version. Syntax changed with version 2
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

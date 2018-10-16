@@ -1,0 +1,113 @@
+.. _gmx covar:
+
+gmx covar
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx covar [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+              [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-v` :emphasis:`[<.trr/.cpt/...>]`]
+              [:strong:`-av` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-l` :emphasis:`[<.log>]`] [:strong:`-ascii` :emphasis:`[<.dat>]`]
+              [:strong:`-xpm` :emphasis:`[<.xpm>]`] [:strong:`-xpma` :emphasis:`[<.xpm>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+              [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]fit`]
+              [:strong:`-[no]ref`] [:strong:`-[no]mwa`] [:strong:`-last` :emphasis:`<int>`] [:strong:`-[no]pbc`]
+
+Description
+-----------
+
+``gmx covar`` calculates and diagonalizes the (mass-weighted)
+covariance matrix.
+All structures are fitted to the structure in the structure file.
+When this is not a run input file periodicity will not be taken into
+account. When the fit and analysis groups are identical and the analysis
+is non mass-weighted, the fit will also be non mass-weighted.
+
+The eigenvectors are written to a trajectory file (``-v``).
+When the same atoms are used for the fit and the covariance analysis,
+the reference structure for the fit is written first with t=-1.
+The average (or reference when ``-ref`` is used) structure is
+written with t=0, the eigenvectors
+are written as frames with the eigenvector number and eigenvalue
+as step number and timestamp, respectively.
+
+The eigenvectors can be analyzed with :doc:`gmx anaeig <gmx-anaeig>`.
+
+Option ``-ascii`` writes the whole covariance matrix to
+an ASCII file. The order of the elements is: x1x1, x1y1, x1z1, x1x2, ...
+
+Option ``-xpm`` writes the whole covariance matrix to an :ref:`.xpm <xpm>` file.
+
+Option ``-xpma`` writes the atomic covariance matrix to an :ref:`.xpm <xpm>` file,
+i.e. for each atom pair the sum of the xx, yy and zz covariances is
+written.
+
+Note that the diagonalization of a matrix requires memory and time
+that will increase at least as fast as than the square of the number
+of atoms involved. It is easy to run out of memory, in which
+case this tool will probably exit with a 'Segmentation fault'. You
+should consider carefully whether a reduced set of atoms will meet
+your needs for lower costs.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (eigenval.xvg)
+    xvgr/xmgr file
+``-v`` [<.trr/.cpt/...>] (eigenvec.trr)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+``-av`` [<.gro/.g96/...>] (average.pdb)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+``-l`` [<.log>] (covar.log)
+    Log file
+``-ascii`` [<.dat>] (covar.dat) (Optional)
+    Generic data file
+``-xpm`` [<.xpm>] (covar.xpm) (Optional)
+    X PixMap compatible matrix file
+``-xpma`` [<.xpm>] (covara.xpm) (Optional)
+    X PixMap compatible matrix file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]fit``  (yes)
+    Fit to a reference structure
+``-[no]ref``  (no)
+    Use the deviation from the conformation in the structure file instead of from the average
+``-[no]mwa``  (no)
+    Mass-weighted covariance analysis
+``-last`` <int> (-1)
+    Last eigenvector to write away (-1 is till the last)
+``-[no]pbc``  (yes)
+    Apply corrections for periodic boundary conditions
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

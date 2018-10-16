@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1IOptionsBehavior" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::IOptionsBehavior</compoundname>
+    <derivedcompoundref refid="classgmx_1_1SelectionOptionBehavior" prot="public" virt="non-virtual">gmx::SelectionOptionBehavior</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1TimeUnitBehavior" prot="public" virt="non-virtual">gmx::TimeUnitBehavior</derivedcompoundref>
+    <includes local="no">gromacs/options/ioptionsbehavior.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1IOptionsBehavior_1a2b84dd7db18bb88964bce4cbc2844ae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::IOptionsBehavior::~IOptionsBehavior</definition>
+        <argsstring>()</argsstring>
+        <name>~IOptionsBehavior</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionsbehavior.h" line="72" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/behaviorcollection.cpp" bodystart="51" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IOptionsBehavior_1a533f8459f0d538cdbe665a838f507889" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::IOptionsBehavior::initBehavior</definition>
+        <argsstring>(Options *options)=0</argsstring>
+        <name>initBehavior</name>
+        <reimplementedby refid="classgmx_1_1SelectionOptionBehavior_1abc44919afd1ac88e75a87205962bf497">initBehavior</reimplementedby>
+        <reimplementedby refid="classgmx_1_1TimeUnitBehavior_1ac6f0ea450d88971eb32df5938e06c56d">initBehavior</reimplementedby>
+        <param>
+          <type><ref refid="classgmx_1_1Options" kindref="compound">Options</ref> *</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Called when the behavior is associated with an options object. </para>        </briefdescription>
+        <detaileddescription>
+<para>This method can, e.g., use <ref refid="classgmx_1_1Options_1aec34346be097c2d666ff4434c4bf562e" kindref="member">Options::addManager()</ref> to associate managers with the options object. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionsbehavior.h" line="80" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IOptionsBehavior_1a2d687df65d56514816478fcda042c3b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::IOptionsBehavior::optionsFinishing</definition>
+        <argsstring>(Options *options)=0</argsstring>
+        <name>optionsFinishing</name>
+        <reimplementedby refid="classgmx_1_1SelectionOptionBehavior_1a7b826e000cf51c9006fa685eacffc046">optionsFinishing</reimplementedby>
+        <reimplementedby refid="classgmx_1_1TimeUnitBehavior_1a026ff4296aac7637a8c1ee790d1c6163">optionsFinishing</reimplementedby>
+        <param>
+          <type><ref refid="classgmx_1_1Options" kindref="compound">Options</ref> *</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Called when all option values have been assigned. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is called just before <ref refid="classgmx_1_1Options_1a3316f3681c71daa04098696d4417f2f9" kindref="member">Options::finish()</ref>, and can, e.g., do operations that still influence the option values. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionsbehavior.h" line="87" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IOptionsBehavior_1a0e51c68861417e488fcb2a61b425887a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::IOptionsBehavior::optionsFinished</definition>
+        <argsstring>()=0</argsstring>
+        <name>optionsFinished</name>
+        <reimplementedby refid="classgmx_1_1SelectionOptionBehavior_1a24c264cd4da69046530dfb6c640a6997">optionsFinished</reimplementedby>
+        <reimplementedby refid="classgmx_1_1TimeUnitBehavior_1a225bc90af46724ad25cc7e9e63fa8d9b">optionsFinished</reimplementedby>
+        <briefdescription>
+<para>Called when all option values have been processed. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is called after <ref refid="classgmx_1_1Options_1a3316f3681c71daa04098696d4417f2f9" kindref="member">Options::finish()</ref> (and typically after higher-level <ref refid="classgmx_1_1IOptionsBehavior_1a0e51c68861417e488fcb2a61b425887a" kindref="member">optionsFinished()</ref> methods, such as that in <ref refid="classgmx_1_1ICommandLineOptionsModule" kindref="compound">ICommandLineOptionsModule</ref>). This can add behavior that performs tasks based on the option values provided. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionsbehavior.h" line="96" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to provide extension points for options parsing. </para>    </briefdescription>
+    <detaileddescription>
+<para>Currently, this is only used in the context of <ref refid="classgmx_1_1ICommandLineOptionsModule" kindref="compound">ICommandLineOptionsModule</ref> and some other command-line handling, but it is declared in the options module for the lack of a better place: most implementations of the interface are in modules that do not otherwise depend on the commandline module.</para><para>Any code that wants to support these extension points needs to use <ref refid="classgmx_1_1OptionsBehaviorCollection" kindref="compound">OptionsBehaviorCollection</ref> and call the methods there at appropriate points. This is not (at least, not currently) integrated in any automatic way to the actual <ref refid="classgmx_1_1Options" kindref="compound">Options</ref> object. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="2042">
+        <label>gmx::IOptionsBehavior</label>
+        <link refid="classgmx_1_1IOptionsBehavior"/>
+      </node>
+      <node id="2044">
+        <label>gmx::TimeUnitBehavior</label>
+        <link refid="classgmx_1_1TimeUnitBehavior"/>
+        <childnode refid="2042" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2043">
+        <label>gmx::SelectionOptionBehavior</label>
+        <link refid="classgmx_1_1SelectionOptionBehavior"/>
+        <childnode refid="2042" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionsbehavior.h" line="70" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionsbehavior.h" bodystart="69" bodyend="97"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1IOptionsBehavior_1a533f8459f0d538cdbe665a838f507889" prot="public" virt="pure-virtual"><scope>gmx::IOptionsBehavior</scope><name>initBehavior</name></member>
+      <member refid="classgmx_1_1IOptionsBehavior_1a0e51c68861417e488fcb2a61b425887a" prot="public" virt="pure-virtual"><scope>gmx::IOptionsBehavior</scope><name>optionsFinished</name></member>
+      <member refid="classgmx_1_1IOptionsBehavior_1a2d687df65d56514816478fcda042c3b1" prot="public" virt="pure-virtual"><scope>gmx::IOptionsBehavior</scope><name>optionsFinishing</name></member>
+      <member refid="classgmx_1_1IOptionsBehavior_1a2b84dd7db18bb88964bce4cbc2844ae2" prot="public" virt="virtual"><scope>gmx::IOptionsBehavior</scope><name>~IOptionsBehavior</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

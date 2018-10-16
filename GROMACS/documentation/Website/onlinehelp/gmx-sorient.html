@@ -1,0 +1,215 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx sorient &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx spatial" href="gmx-spatial.html" />
+    <link rel="prev" title="gmx solvate" href="gmx-solvate.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-spatial.html" title="gmx spatial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-solvate.html" title="gmx solvate"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-sorient">
+<span id="id1"></span><h1>gmx sorient<a class="headerlink" href="#gmx-sorient" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx sorient [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+            [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-no</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ro</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-co</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-rc</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+            [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]com</strong>] [<strong>-[no]v23</strong>]
+            [<strong>-rmin</strong> <em>&lt;real&gt;</em>] [<strong>-rmax</strong> <em>&lt;real&gt;</em>] [<strong>-cbin</strong> <em>&lt;real&gt;</em>]
+            [<strong>-rbin</strong> <em>&lt;real&gt;</em>] [<strong>-[no]pbc</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sorient</span></code> analyzes solvent orientation around solutes.
+It calculates two angles between the vector from one or more
+reference positions to the first atom of each solvent molecule:</p>
+<blockquote>
+<div><ul class="simple">
+<li>theta_1: the angle with the vector from the first atom of the solvent
+molecule to the midpoint between atoms 2 and 3.</li>
+<li>theta_2: the angle with the normal of the solvent plane, defined by the
+same three atoms, or, when the option <code class="docutils literal"><span class="pre">-v23</span></code> is set,
+the angle with the vector between atoms 2 and 3.</li>
+</ul>
+</div></blockquote>
+<p>The reference can be a set of atoms or
+the center of mass of a set of atoms. The group of solvent atoms should
+consist of 3 atoms per solvent molecule.
+Only solvent molecules between <code class="docutils literal"><span class="pre">-rmin</span></code> and <code class="docutils literal"><span class="pre">-rmax</span></code> are
+considered for <code class="docutils literal"><span class="pre">-o</span></code> and <code class="docutils literal"><span class="pre">-no</span></code> each frame.</p>
+<p><code class="docutils literal"><span class="pre">-o</span></code>: distribution of cos(theta_1) for rmin&lt;=r&lt;=rmax.</p>
+<p><code class="docutils literal"><span class="pre">-no</span></code>: distribution of cos(theta_2) for rmin&lt;=r&lt;=rmax.</p>
+<p><code class="docutils literal"><span class="pre">-ro</span></code>: &lt;cos(theta_1)&gt; and &lt;3cos(^2theta_2)-1&gt; as a function of the
+distance.</p>
+<p><code class="docutils literal"><span class="pre">-co</span></code>: the sum over all solvent molecules within distance r
+of cos(theta_1) and 3cos(^2(theta_2)-1) as a function of r.</p>
+<p><code class="docutils literal"><span class="pre">-rc</span></code>: the distribution of the solvent molecules as a function of r</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (sori.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-no</span></code> [&lt;.xvg&gt;] (snor.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ro</span></code> [&lt;.xvg&gt;] (sord.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-co</span></code> [&lt;.xvg&gt;] (scum.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-rc</span></code> [&lt;.xvg&gt;] (scount.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]com</span></code>  (no)</dt>
+<dd>Use the center of mass as the reference position</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]v23</span></code>  (no)</dt>
+<dd>Use the vector between atoms 2 and 3</dd>
+<dt><code class="docutils literal"><span class="pre">-rmin</span></code> &lt;real&gt; (0)</dt>
+<dd>Minimum distance (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-rmax</span></code> &lt;real&gt; (0.5)</dt>
+<dd>Maximum distance (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-cbin</span></code> &lt;real&gt; (0.02)</dt>
+<dd>Binwidth for the cosine</dd>
+<dt><code class="docutils literal"><span class="pre">-rbin</span></code> &lt;real&gt; (0.02)</dt>
+<dd>Binwidth for r (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (no)</dt>
+<dd>Check PBC for the center of mass calculation. Only necessary when your reference group consists of several molecules.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx sorient</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-solvate.html"
+                        title="previous chapter">gmx solvate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-spatial.html"
+                        title="next chapter">gmx spatial</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-sorient.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-spatial.html" title="gmx spatial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-solvate.html" title="gmx solvate"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

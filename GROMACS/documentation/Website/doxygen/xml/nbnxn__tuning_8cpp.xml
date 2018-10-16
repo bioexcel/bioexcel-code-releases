@@ -1,0 +1,901 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__tuning_8cpp" kind="file">
+    <compoundname>nbnxn_tuning.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="nbnxn__tuning_8h" local="yes">nbnxn_tuning.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">string</includes>
+    <includes refid="domdec_8h" local="yes">gromacs/domdec/domdec.h</includes>
+    <includes refid="cpuinfo_8h" local="yes">gromacs/hardware/cpuinfo.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="calc__verletbuf_8h" local="yes">gromacs/mdlib/calc_verletbuf.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__search_8h" local="yes">gromacs/mdlib/nbnxn_search.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="interaction__const_8h" local="yes">gromacs/mdtypes/interaction_const.h</includes>
+    <includes refid="state_8h" local="yes">gromacs/mdtypes/state.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="logger_8h" local="yes">gromacs/utility/logger.h</includes>
+    <includes refid="stringutil_8h" local="yes">gromacs/utility/stringutil.h</includes>
+    <incdepgraph>
+      <node id="16753">
+        <label>stdarg.h</label>
+      </node>
+      <node id="16711">
+        <label>nbnxn_tuning.h</label>
+        <link refid="nbnxn__tuning_8h"/>
+        <childnode refid="16712" relation="include">
+        </childnode>
+      </node>
+      <node id="16730">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="16713">
+        <label>assert.h</label>
+      </node>
+      <node id="16723">
+        <label>iterator</label>
+      </node>
+      <node id="16728">
+        <label>stdint.h</label>
+      </node>
+      <node id="16714">
+        <label>stdlib.h</label>
+      </node>
+      <node id="16738">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="16721" relation="include">
+        </childnode>
+        <childnode refid="16736" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+        <childnode refid="16739" relation="include">
+        </childnode>
+        <childnode refid="16742" relation="include">
+        </childnode>
+      </node>
+      <node id="16735">
+        <label>gromacs/mdlib/nb_verlet.h</label>
+        <link refid="nb__verlet_8h"/>
+        <childnode refid="16736" relation="include">
+        </childnode>
+      </node>
+      <node id="16751">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="16712" relation="include">
+        </childnode>
+        <childnode refid="16727" relation="include">
+        </childnode>
+      </node>
+      <node id="16715">
+        <label>cmath</label>
+      </node>
+      <node id="16724">
+        <label>stdexcept</label>
+      </node>
+      <node id="16756">
+        <label>cstdarg</label>
+      </node>
+      <node id="16717">
+        <label>string</label>
+      </node>
+      <node id="16733">
+        <label>map</label>
+      </node>
+      <node id="16739">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="16721" relation="include">
+        </childnode>
+        <childnode refid="16740" relation="include">
+        </childnode>
+      </node>
+      <node id="16748">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="16736" relation="include">
+        </childnode>
+      </node>
+      <node id="16745">
+        <label>exception</label>
+      </node>
+      <node id="16726">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="16727" relation="include">
+        </childnode>
+        <childnode refid="16730" relation="include">
+        </childnode>
+      </node>
+      <node id="16749">
+        <label>gromacs/math/paddedvector.h</label>
+        <link refid="paddedvector_8h"/>
+        <childnode refid="16716" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+        <childnode refid="16739" relation="include">
+        </childnode>
+        <childnode refid="16720" relation="include">
+        </childnode>
+      </node>
+      <node id="16743">
+        <label>cstdio</label>
+      </node>
+      <node id="16731">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="16719">
+        <label>vector</label>
+      </node>
+      <node id="16741">
+        <label>new</label>
+      </node>
+      <node id="16750">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="16727" relation="include">
+        </childnode>
+      </node>
+      <node id="16710">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="16725">
+        <label>utility</label>
+      </node>
+      <node id="16722">
+        <label>array</label>
+      </node>
+      <node id="16737">
+        <label>gromacs/mdtypes/state.h</label>
+        <link refid="state_8h"/>
+        <childnode refid="16722" relation="include">
+        </childnode>
+        <childnode refid="16736" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+        <childnode refid="16738" relation="include">
+        </childnode>
+        <childnode refid="16749" relation="include">
+        </childnode>
+        <childnode refid="16750" relation="include">
+        </childnode>
+        <childnode refid="16720" relation="include">
+        </childnode>
+        <childnode refid="16727" relation="include">
+        </childnode>
+        <childnode refid="16731" relation="include">
+        </childnode>
+      </node>
+      <node id="16755">
+        <label>gromacs/utility/stringutil.h</label>
+        <link refid="stringutil_8h"/>
+        <childnode refid="16756" relation="include">
+        </childnode>
+        <childnode refid="16757" relation="include">
+        </childnode>
+        <childnode refid="16717" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+      </node>
+      <node id="16727">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="16728" relation="include">
+        </childnode>
+        <childnode refid="16729" relation="include">
+        </childnode>
+      </node>
+      <node id="16744">
+        <label>cstdlib</label>
+      </node>
+      <node id="16742">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="16743" relation="include">
+        </childnode>
+        <childnode refid="16744" relation="include">
+        </childnode>
+        <childnode refid="16745" relation="include">
+        </childnode>
+        <childnode refid="16736" relation="include">
+        </childnode>
+        <childnode refid="16717" relation="include">
+        </childnode>
+        <childnode refid="16746" relation="include">
+        </childnode>
+        <childnode refid="16747" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+        <childnode refid="16727" relation="include">
+        </childnode>
+        <childnode refid="16748" relation="include">
+        </childnode>
+        <childnode refid="16730" relation="include">
+        </childnode>
+        <childnode refid="16726" relation="include">
+        </childnode>
+      </node>
+      <node id="16720">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="16721" relation="include">
+        </childnode>
+        <childnode refid="16722" relation="include">
+        </childnode>
+        <childnode refid="16723" relation="include">
+        </childnode>
+        <childnode refid="16724" relation="include">
+        </childnode>
+        <childnode refid="16725" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+        <childnode refid="16726" relation="include">
+        </childnode>
+      </node>
+      <node id="16721">
+        <label>cstddef</label>
+      </node>
+      <node id="16754">
+        <label>gromacs/utility/logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="16717" relation="include">
+        </childnode>
+      </node>
+      <node id="16732">
+        <label>gromacs/hardware/cpuinfo.h</label>
+        <link refid="cpuinfo_8h"/>
+        <childnode refid="16733" relation="include">
+        </childnode>
+        <childnode refid="16734" relation="include">
+        </childnode>
+        <childnode refid="16717" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+      </node>
+      <node id="16740">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="16721" relation="include">
+        </childnode>
+        <childnode refid="16736" relation="include">
+        </childnode>
+        <childnode refid="16741" relation="include">
+        </childnode>
+        <childnode refid="16727" relation="include">
+        </childnode>
+      </node>
+      <node id="16746">
+        <label>type_traits</label>
+      </node>
+      <node id="16734">
+        <label>set</label>
+      </node>
+      <node id="16752">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="16753" relation="include">
+        </childnode>
+        <childnode refid="16712" relation="include">
+        </childnode>
+        <childnode refid="16727" relation="include">
+        </childnode>
+      </node>
+      <node id="16718">
+        <label>gromacs/domdec/domdec.h</label>
+        <link refid="domdec_8h"/>
+        <childnode refid="16712" relation="include">
+        </childnode>
+        <childnode refid="16719" relation="include">
+        </childnode>
+        <childnode refid="16720" relation="include">
+        </childnode>
+        <childnode refid="16727" relation="include">
+        </childnode>
+        <childnode refid="16731" relation="include">
+        </childnode>
+      </node>
+      <node id="16716">
+        <label>algorithm</label>
+      </node>
+      <node id="16712">
+        <label>stdio.h</label>
+      </node>
+      <node id="16709">
+        <label>src/gromacs/mdlib/nbnxn_tuning.cpp</label>
+        <link refid="nbnxn_tuning.cpp"/>
+        <childnode refid="16710" relation="include">
+        </childnode>
+        <childnode refid="16711" relation="include">
+        </childnode>
+        <childnode refid="16713" relation="include">
+        </childnode>
+        <childnode refid="16714" relation="include">
+        </childnode>
+        <childnode refid="16715" relation="include">
+        </childnode>
+        <childnode refid="16716" relation="include">
+        </childnode>
+        <childnode refid="16717" relation="include">
+        </childnode>
+        <childnode refid="16718" relation="include">
+        </childnode>
+        <childnode refid="16732" relation="include">
+        </childnode>
+        <childnode refid="16735" relation="include">
+        </childnode>
+        <childnode refid="16737" relation="include">
+        </childnode>
+        <childnode refid="16751" relation="include">
+        </childnode>
+        <childnode refid="16752" relation="include">
+        </childnode>
+        <childnode refid="16726" relation="include">
+        </childnode>
+        <childnode refid="16754" relation="include">
+        </childnode>
+        <childnode refid="16755" relation="include">
+        </childnode>
+      </node>
+      <node id="16757">
+        <label>cstring</label>
+      </node>
+      <node id="16736">
+        <label>memory</label>
+      </node>
+      <node id="16729">
+        <label>inttypes.h</label>
+      </node>
+      <node id="16747">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__tuning_8cpp_1aa7bb25f96f0e989b4b7c45d407a1b63c" prot="public" static="no">
+        <name>NNSTL</name>
+        <initializer>sizeof(<ref refid="nbnxn__tuning_8cpp_1a9195aab8a873fcea20c8d6922ea60ca0" kindref="member">nstlist_try</ref>)/sizeof(<ref refid="nbnxn__tuning_8cpp_1a9195aab8a873fcea20c8d6922ea60ca0" kindref="member">nstlist_try</ref>[0])</initializer>
+        <briefdescription>
+<para>Number of elements in the neighborsearch list trials. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="96" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1a970ddbb74e9928c5a958532c832d122b" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int nbnxnReferenceNstlist</definition>
+        <argsstring></argsstring>
+        <name>nbnxnReferenceNstlist</name>
+        <initializer>= 10</initializer>
+        <briefdescription>
+<para>Cost of non-bonded kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para>We determine the extra cost of the non-bonded kernels compared to a reference nstlist value of 10 (which is the default in grompp). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="92" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1a9195aab8a873fcea20c8d6922ea60ca0" prot="public" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int nstlist_try[]</definition>
+        <argsstring>[]</argsstring>
+        <name>nstlist_try</name>
+        <initializer>= { 20, 25, 40, 50, 80, 100 }</initializer>
+        <briefdescription>
+<para>The values to try when switching. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="94" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1a3fcbb19cb6689beec04d844cc6c2feb8" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float c_nbnxnListSizeFactorCpu</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnListSizeFactorCpu</name>
+        <initializer>= 1.25</initializer>
+        <briefdescription>
+<para>Target pair-list size increase ratio for CPU. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="115" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1aae87045b170c054f573dcc97066eeecd" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float c_nbnxnListSizeFactorIntelXeonPhi</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnListSizeFactorIntelXeonPhi</name>
+        <initializer>= 1.4</initializer>
+        <briefdescription>
+<para>Target pair-list size increase ratio for Intel KNL. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="118" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1a327a8f12f5167b1f5fedbdcf60410b8a" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float c_nbnxnListSizeFactorGPU</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnListSizeFactorGPU</name>
+        <initializer>= 1.4</initializer>
+        <briefdescription>
+<para>Target pair-list size increase ratio for GPU. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="121" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1a21bf1f047a789ad132b04ba504dd08bf" prot="public" static="yes" mutable="no">
+        <type>const float</type>
+        <definition>const float c_nbnxnListSizeFactorMargin</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnListSizeFactorMargin</name>
+        <initializer>= 0.1</initializer>
+        <briefdescription>
+<para>Never increase the size of the pair-list more than the factor above plus this margin. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="123" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1a34b35efd3187a63732fc903620d3d0c9" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_nbnxnGpuRollingListPruningInterval</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnGpuRollingListPruningInterval</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+<para>The interval in steps at which we perform dynamic, rolling pruning on a GPU. </para>        </briefdescription>
+        <detaileddescription>
+<para>Ideally we should auto-tune this value. Not considering overheads, 1 would be the ideal value. But 2 seems a reasonable compromise that reduces GPU kernel launch overheads and also avoids inefficiency on large GPUs when pruning small lists. Because with domain decomposition we alternate local/non-local pruning at even/odd steps, which gives a period of 2, this value currenly needs to be 2, which is indirectly asserted when the GPU pruning is dispatched during the force evaluation. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="361" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="361" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="nbnxn__tuning_8cpp_1a0535165b90244a194b554e0bb690bd65" prot="public" static="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int c_nbnxnDynamicListPruningMinLifetime</definition>
+        <argsstring></argsstring>
+        <name>c_nbnxnDynamicListPruningMinLifetime</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+<para>The minimum nstlist for dynamic pair list pruning. </para>        </briefdescription>
+        <detaileddescription>
+<para>In most cases going lower than 4 will lead to a too high pruning cost. This value should be a multiple of <computeroutput>c_nbnxnGpuRollingListPruningInterval</computeroutput> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="368" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="368" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__tuning_8cpp_1a923af2ba844a18e0467ce047402698f2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool supportsDynamicPairlistGenerationInterval</definition>
+        <argsstring>(const t_inputrec &amp;ir)</argsstring>
+        <name>supportsDynamicPairlistGenerationInterval</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> &amp;</type>
+          <declname>ir</declname>
+        </param>
+        <briefdescription>
+<para>Returns if we can (heuristically) change nstlist and rlist. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input parameter record </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="78" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="78" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__tuning_8cpp_1a83b38764781d88e811de3437665caf67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void increaseNstlist</definition>
+        <argsstring>(FILE *fp, t_commrec *cr, t_inputrec *ir, int nstlist_cmdline, const gmx_mtop_t *mtop, const matrix box, bool useOrEmulateGpuForNonbondeds, const gmx::CpuInfo &amp;cpuinfo)</argsstring>
+        <name>increaseNstlist</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+          <defname>fp</defname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nstlistOnCmdline</declname>
+          <defname>nstlist_cmdline</defname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>useOrEmulateGpuForNonbondeds</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1CpuInfo" kindref="compound">gmx::CpuInfo</ref> &amp;</type>
+          <declname>cpuinfo</declname>
+        </param>
+        <briefdescription>
+<para>Try to increase nstlist when using the Verlet cut-off scheme. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Log file </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The communication record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input parameter record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nstlistOnCmdline</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of nstlist provided on the command line </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">useOrEmulateGpuForNonbondeds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tells if we are using a GPU for non-bondeds </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cpuinfo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information about the CPU(s) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="125" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="125" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__tuning_8cpp_1a90648f8367c4f781bdbd3a90b98e4adb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void setDynamicPairlistPruningParameters</definition>
+        <argsstring>(const t_inputrec *ir, const gmx_mtop_t *mtop, matrix box, gmx_bool useGpu, const VerletbufListSetup &amp;listSetup, bool userSetNstlistPrune, const interaction_const_t *ic, NbnxnListParameters *listParams)</argsstring>
+        <name>setDynamicPairlistPruningParameters</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>useGpu</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structVerletbufListSetup" kindref="compound">VerletbufListSetup</ref> &amp;</type>
+          <declname>listSetup</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>userSetNstlistPrune</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>NbnxnListParameters *</type>
+          <declname>listParams</declname>
+        </param>
+        <briefdescription>
+<para>Set the dynamic pairlist pruning parameters in <computeroutput>ic</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input parameter record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">useGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tells if we are using a GPU for non-bondeds </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">listSetup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nbnxn pair list setup </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">userSetNstlistPrune</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The user set ic-&gt;nstlistPrune (using an env.var.) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nonbonded interactions constants </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">listParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list setup parameters </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="382" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="382" bodyend="451"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__tuning_8cpp_1ac82376870cb0c4fe23cbcd39cd06737d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string formatListSetup</definition>
+        <argsstring>(const std::string &amp;listName, int nstList, int nstListForSpacing, real rList, real interactionCutoff)</argsstring>
+        <name>formatListSetup</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>listName</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nstList</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nstListForSpacing</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rList</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>interactionCutoff</declname>
+        </param>
+        <briefdescription>
+<para>Returns a string describing the setup of a single pair-list. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">listName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Short name of the list, can be &quot;&quot; </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nstList</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list update interval in steps </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nstListForSpacing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Update interval for setting the number characters for printing <computeroutput>nstList</computeroutput> </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rList</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>List cut-off radius </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interactionCutoff</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interaction cut-off, use for printing the list buffer size </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="461" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="461" bodyend="480"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__tuning_8cpp_1aa0c0b3e79133dfaaa2e81d168bbaa5a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setupDynamicPairlistPruning</definition>
+        <argsstring>(const gmx::MDLogger &amp;mdlog, const t_inputrec *ir, const gmx_mtop_t *mtop, matrix box, int nbnxnKernelType, const interaction_const_t *ic, NbnxnListParameters *listParams)</argsstring>
+        <name>setupDynamicPairlistPruning</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1MDLogger" kindref="compound">gmx::MDLogger</ref> &amp;</type>
+          <declname>mdlog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbnxnKernelType</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>NbnxnListParameters *</type>
+          <declname>listParams</declname>
+        </param>
+        <briefdescription>
+<para>Set up the dynamic pairlist pruning. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">mdlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MD logger </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input parameter record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nbnxnKernelType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of nbnxn kernel used </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nonbonded interactions constants </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">listParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list setup parameters </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" line="482" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="482" bodyend="596"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements functions for tuning adjustable parameters for the nbnxn non-bonded search and interaction kernels. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Berk Hess <ulink url="mailto:hess@kth.se">hess@kth.se</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp"/>
+  </compounddef>
+</doxygen>

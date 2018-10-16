@@ -1,0 +1,76 @@
+.. _gmx genconf:
+
+gmx genconf
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx genconf [:strong:`-f` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-trj` :emphasis:`[<.xtc/.trr/...>]`]
+                [:strong:`-o` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-nbox` :emphasis:`<vector>`] [:strong:`-dist` :emphasis:`<vector>`]
+                [:strong:`-seed` :emphasis:`<int>`] [:strong:`-[no]rot`] [:strong:`-maxrot` :emphasis:`<vector>`]
+                [:strong:`-[no]renumber`]
+
+Description
+-----------
+
+``gmx genconf`` multiplies a given coordinate file by simply stacking them
+on top of each other, like a small child playing with wooden blocks.
+The program makes a grid of *user-defined*
+proportions (``-nbox``),
+and interspaces the grid point with an extra space ``-dist``.
+
+When option ``-rot`` is used the program does not check for overlap
+between molecules on grid points. It is recommended to make the box in
+the input file at least as big as the coordinates +
+van der Waals radius.
+
+If the optional trajectory file is given, conformations are not
+generated, but read from this file and translated appropriately to
+build the grid.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.gro/.g96/...>] (conf.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp :ref:`tpr`
+``-trj`` [<.xtc/.trr/...>] (traj.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+
+Options to specify output files:
+
+``-o`` [<.gro/.g96/...>] (out.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+
+Other options:
+
+``-nbox`` <vector> (1 1 1)
+    Number of boxes
+``-dist`` <vector> (0 0 0)
+    Distance between boxes
+``-seed`` <int> (0)
+    Random generator seed (0 means generate)
+``-[no]rot``  (no)
+    Randomly rotate conformations
+``-maxrot`` <vector> (180 180 180)
+    Maximum random rotation
+``-[no]renumber``  (yes)
+    Renumber residues
+
+Known Issues
+------------
+
+* The program should allow for random displacement of lattice points.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

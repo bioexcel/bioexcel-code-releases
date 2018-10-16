@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="eigensolver_8cpp" kind="file">
+    <compoundname>eigensolver.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="eigensolver_8h" local="yes">eigensolver.h</includes>
+    <includes refid="sparsematrix_8h" local="yes">gromacs/linearalgebra/sparsematrix.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="gmx__arpack_8h" local="yes">gmx_arpack.h</includes>
+    <includes refid="gmx__lapack_8h" local="yes">gmx_lapack.h</includes>
+    <incdepgraph>
+      <node id="12803">
+        <label>stdarg.h</label>
+      </node>
+      <node id="12806">
+        <label>stdint.h</label>
+      </node>
+      <node id="12800">
+        <label>src/gromacs/linearalgebra/eigensolver.cpp</label>
+        <link refid="eigensolver.cpp"/>
+        <childnode refid="12801" relation="include">
+        </childnode>
+        <childnode refid="12802" relation="include">
+        </childnode>
+        <childnode refid="12808" relation="include">
+        </childnode>
+        <childnode refid="12809" relation="include">
+        </childnode>
+        <childnode refid="12811" relation="include">
+        </childnode>
+        <childnode refid="12813" relation="include">
+        </childnode>
+      </node>
+      <node id="12810">
+        <label>stddef.h</label>
+      </node>
+      <node id="12811">
+        <label>gmx_arpack.h</label>
+        <link refid="gmx__arpack_8h"/>
+        <childnode refid="12812" relation="include">
+        </childnode>
+      </node>
+      <node id="12809">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="12810" relation="include">
+        </childnode>
+        <childnode refid="12805" relation="include">
+        </childnode>
+      </node>
+      <node id="12808">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="12801">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="12805">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="12806" relation="include">
+        </childnode>
+        <childnode refid="12807" relation="include">
+        </childnode>
+      </node>
+      <node id="12813">
+        <label>gmx_lapack.h</label>
+        <link refid="gmx__lapack_8h"/>
+      </node>
+      <node id="12812">
+        <label>config.h</label>
+      </node>
+      <node id="12802">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="12803" relation="include">
+        </childnode>
+        <childnode refid="12804" relation="include">
+        </childnode>
+        <childnode refid="12805" relation="include">
+        </childnode>
+      </node>
+      <node id="12804">
+        <label>stdio.h</label>
+      </node>
+      <node id="12807">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="eigensolver_8cpp_1a6656af9e663b4e5d8dff372542c56ab7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void eigensolver</definition>
+        <argsstring>(real *a, int n, int index_lower, int index_upper, real *eigenvalues, real *eigenvectors)</argsstring>
+        <name>eigensolver</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index_lower</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index_upper</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>eigenvalues</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>eigenvec</declname>
+          <defname>eigenvectors</defname>
+        </param>
+        <briefdescription>
+<para>Calculate eigenvalues/vectors a matrix stored in linear memory (not sparse). </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine uses lapack to diagonalize a matrix efficiently, and the eigenvalues/vectors will be sorted in ascending order on output. Gromacs comes with a built-in portable BLAS/LAPACK, but if performance matters it is advisable to link with an optimized vendor-provided library.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to matrix data, total size n*n The input data in the matrix will be destroyed/changed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Side of the matrix to calculate eigenvalues for. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index_lower</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of first eigenvector to determine. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>index_upper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Last eigenvector determined is index_upper-1. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eigenvalues</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of the eigenvalues on return. The length of this array <emphasis>must</emphasis> be n, even if not all eigenvectors are calculated, since all eigenvalues might be needed as an intermediate step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>eigenvec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If this pointer is non-NULL, the eigenvectors specified by the indices are returned as rows of a matrix, i.e. eigenvector j starts at offset j*n, and is of length n. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/eigensolver.cpp" line="50" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/eigensolver.cpp" bodystart="50" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="eigensolver_8cpp_1a422c179fa61a7c831067b68ba01b8a60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void sparse_eigensolver</definition>
+        <argsstring>(gmx_sparsematrix_t *A, int neig, real *eigenvalues, real *eigenvectors, int maxiter)</argsstring>
+        <name>sparse_eigensolver</name>
+        <param>
+          <type><ref refid="structgmx__sparsematrix" kindref="compound">gmx_sparsematrix_t</ref> *</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>neig</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>eigenvalues</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>eigenvectors</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxiter</declname>
+        </param>
+        <briefdescription>
+<para>Sparse matrix eigensolver. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine is intended for large matrices that might not fit in memory.</para><para>It will determine the neig lowest eigenvalues, and if the eigenvectors pointer is non-NULL also the corresponding eigenvectors.</para><para>maxiter=100000 should suffice in most cases! </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/eigensolver.cpp" line="268" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/eigensolver.cpp" bodystart="268" bodyend="391"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/linearalgebra/eigensolver.cpp"/>
+  </compounddef>
+</doxygen>

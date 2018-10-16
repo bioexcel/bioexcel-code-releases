@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1RepeatingOptionSectionHandle" kind="class" prot="public">
+    <compoundname>gmx::RepeatingOptionSectionHandle</compoundname>
+    <basecompoundref refid="classgmx_1_1AbstractOptionSectionHandle" prot="public" virt="non-virtual">gmx::AbstractOptionSectionHandle</basecompoundref>
+    <includes local="no">gromacs/options/repeatingsection.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1RepeatingOptionSectionHandle_1a55748c151b76dc03add4d1cf9bf81a5c" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1RepeatingOptionSectionStorage" kindref="compound">RepeatingOptionSectionStorage</ref>&lt; T &gt; *</type>
+        <definition>RepeatingOptionSectionStorage&lt;T&gt;* gmx::RepeatingOptionSectionHandle&lt; T &gt;::storage_</definition>
+        <argsstring></argsstring>
+        <name>storage_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" line="203" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1RepeatingOptionSectionHandle_1ad5f5954d08d428f57be3e53eadccc037" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::RepeatingOptionSectionHandle&lt; T &gt;::RepeatingOptionSectionHandle</definition>
+        <argsstring>(internal::OptionSectionImpl *section)</argsstring>
+        <name>RepeatingOptionSectionHandle</name>
+        <param>
+          <type><ref refid="classgmx_1_1internal_1_1OptionSectionImpl" kindref="compound">internal::OptionSectionImpl</ref> *</type>
+          <declname>section</declname>
+        </param>
+        <briefdescription>
+<para>Wraps a given section storage object. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" line="186" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" bodystart="186" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1RepeatingOptionSectionHandle_1a917c76c08359439b576968115c50f147" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>T &amp;</type>
+        <definition>T&amp; gmx::RepeatingOptionSectionHandle&lt; T &gt;::bind</definition>
+        <argsstring>()</argsstring>
+        <name>bind</name>
+        <briefdescription>
+<para>Supports storing option values within the per-section data structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>See class documentation for an example. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" line="197" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" bodystart="197" bodyend="200"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Allows adding options to an <ref refid="classgmx_1_1RepeatingOptionSection" kindref="compound">RepeatingOptionSection</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para>An instance of this class is returned from <ref refid="classgmx_1_1IOptionsContainerWithSections_1a5402092251aa241665866c6c6c93dd0e" kindref="member">IOptionsContainerWithSections::addSection()</ref>, and supports adding options and subsections to a section created with <ref refid="classgmx_1_1OptionSection" kindref="compound">OptionSection</ref>.</para><para>Example: <programlisting><codeline><highlight class="keyword">struct<sp/></highlight><highlight class="normal">SectionData<sp/>{<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value;<sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>as<sp/>class<sp/>attribute</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">std::vector&lt;SectionData&gt;<sp/>values;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceanonymous__namespace_02cmdlinerunner_8cpp_03_1a60534e7c72d5738ccd2a45dec4d87882" kindref="member">MyClass::initOptions</ref>(<ref refid="classgmx_1_1IOptionsContainerWithSections" kindref="compound">gmx::IOptionsContainerWithSections</ref><sp/>*options)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>sec<sp/>=<sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainerWithSections_1a5402092251aa241665866c6c6c93dd0e" kindref="member">addSection</ref>(<ref refid="classgmx_1_1RepeatingOptionSection" kindref="compound">gmx::RepeatingOptionSection&lt;SectionData&gt;</ref>(</highlight><highlight class="stringliteral">&quot;sec&quot;</highlight><highlight class="normal">).storeVector(&amp;values));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>sec-&gt;addOption(<ref refid="classgmx_1_1IntegerOption" kindref="compound">gmx::IntegerOption</ref>(</highlight><highlight class="stringliteral">&quot;arg&quot;</highlight><highlight class="normal">).<ref refid="namespacegmx_1a9c1227e97a6084a280a611c2934c8ee1" kindref="member">store</ref>(&amp;sec.bind().value));</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="2398">
+        <label>gmx::IOptionsContainer</label>
+        <link refid="classgmx_1_1IOptionsContainer"/>
+      </node>
+      <node id="2395">
+        <label>gmx::RepeatingOptionSectionHandle&lt; T &gt;</label>
+        <link refid="classgmx_1_1RepeatingOptionSectionHandle"/>
+        <childnode refid="2396" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2397">
+        <label>gmx::IOptionsContainerWithSections</label>
+        <link refid="classgmx_1_1IOptionsContainerWithSections"/>
+        <childnode refid="2398" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2396">
+        <label>gmx::AbstractOptionSectionHandle</label>
+        <link refid="classgmx_1_1AbstractOptionSectionHandle"/>
+        <childnode refid="2397" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2402">
+        <label>gmx::IOptionsContainer</label>
+        <link refid="classgmx_1_1IOptionsContainer"/>
+      </node>
+      <node id="2399">
+        <label>gmx::RepeatingOptionSectionHandle&lt; T &gt;</label>
+        <link refid="classgmx_1_1RepeatingOptionSectionHandle"/>
+        <childnode refid="2400" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2401">
+        <label>gmx::IOptionsContainerWithSections</label>
+        <link refid="classgmx_1_1IOptionsContainerWithSections"/>
+        <childnode refid="2402" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2400">
+        <label>gmx::AbstractOptionSectionHandle</label>
+        <link refid="classgmx_1_1AbstractOptionSectionHandle"/>
+        <childnode refid="2401" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" line="57" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/repeatingsection.h" bodystart="57" bodyend="-1"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1AbstractOptionSectionHandle_1aedf59ea0fde304db447b8a51e698f103" prot="protected" virt="non-virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>AbstractOptionSectionHandle</name></member>
+      <member refid="classgmx_1_1AbstractOptionSectionHandle_1ab0adc452475ddf64759ef0f96142a9ab" prot="public" virt="virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>addGroup</name></member>
+      <member refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" prot="public" virt="non-virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>addOption</name></member>
+      <member refid="classgmx_1_1IOptionsContainerWithSections_1a5402092251aa241665866c6c6c93dd0e" prot="public" virt="non-virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>addSection</name></member>
+      <member refid="classgmx_1_1RepeatingOptionSectionHandle_1a917c76c08359439b576968115c50f147" prot="public" virt="non-virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>bind</name></member>
+      <member refid="classgmx_1_1AbstractOptionSectionHandle_1accfa8aa7fd1be0012e87bda506c75525" prot="protected" virt="non-virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>getStorage</name></member>
+      <member refid="classgmx_1_1RepeatingOptionSectionHandle_1ad5f5954d08d428f57be3e53eadccc037" prot="public" virt="non-virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>RepeatingOptionSectionHandle</name></member>
+      <member refid="classgmx_1_1RepeatingOptionSectionHandle_1a55748c151b76dc03add4d1cf9bf81a5c" prot="private" virt="non-virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>storage_</name></member>
+      <member refid="classgmx_1_1IOptionsContainer_1a378997b47d5a1a94f38fcd78ab8ed653" prot="protected" virt="virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>~IOptionsContainer</name></member>
+      <member refid="classgmx_1_1IOptionsContainerWithSections_1a6adb5ac5a55897a6b77e4ca00697bc2f" prot="protected" virt="virtual"><scope>gmx::RepeatingOptionSectionHandle</scope><name>~IOptionsContainerWithSections</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

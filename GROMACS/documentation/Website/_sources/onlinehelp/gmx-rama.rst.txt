@@ -1,0 +1,57 @@
+.. _gmx rama:
+
+gmx rama
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx rama [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`]
+             [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`]
+
+Description
+-----------
+
+``gmx rama`` selects the phi/psi dihedral combinations from your topology file
+and computes these as a function of time.
+Using simple Unix tools such as *grep* you can select out
+specific residues.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (rama.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

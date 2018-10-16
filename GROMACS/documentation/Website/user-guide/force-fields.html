@@ -1,0 +1,220 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Force fields in GROMACS &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Non-bonded cut-off schemes" href="cutoff-schemes.html" />
+    <link rel="prev" title="Answers to frequently asked questions (FAQs)" href="faq.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cutoff-schemes.html" title="Non-bonded cut-off schemes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Answers to frequently asked questions (FAQs)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="force-fields-in-gromacs">
+<span id="gmx-ff-included"></span><h1>Force fields in GROMACS<a class="headerlink" href="#force-fields-in-gromacs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="amber">
+<span id="gmx-amber-ff"></span><h2>AMBER<a class="headerlink" href="#amber" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://ambermd.org/">AMBER</a> (Assisted Model Building and Energy Refinement) refers both to a set of molecular mechanical
+<a class="reference internal" href="terminology.html#gmx-force-field"><span class="std std-ref">force fields</span></a> for the simulation of biomolecules and a package of molecular simulation programs.</p>
+<p>GROMACS versions higher than 4.5 support the following AMBER force fields natively:</p>
+<ul class="simple">
+<li>AMBER94</li>
+<li>AMBER96</li>
+<li>AMBER99</li>
+<li>AMBER99SB</li>
+<li>AMBER99SB-ILDN</li>
+<li>AMBER03</li>
+<li>AMBERGS</li>
+</ul>
+<p>Information concerning the force field can be found using the following information:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://ambermd.org/#ff">AMBER Force Fields</a> - background about the AMBER force fields</li>
+<li><a class="reference external" href="http://ambermd.org/#code">AMBER Programs</a> - information about the AMBER suite of
+programs for molecular simulation</li>
+<li><a class="reference external" href="http://ambermd.org/antechamber/antechamber.html">ANTECHAMBER/GAFF</a> -
+Generalized Amber Force Field (GAFF) which is supposed to provide parameters
+suitable for small molecules that are compatible with the AMBER protein/nucleic
+acid force fields. It is available either together with AMBER, or through the
+antechamber package, which is also distributed separately. There are scripts
+available for converting AMBER systems (set up, for example, with GAFF) to
+GROMACS (<a class="reference external" href="https://github.com/choderalab/mmtools/blob/master/converters/amb2gmx.pl">amb2gmx.pl</a>,
+or <a class="reference external" href="https://github.com/choderalab/mmtools/blob/master/converters/acpypi.py">acpypi.py</a>),
+but they do require an AMBER installation to work.</li>
+</ul>
+<p>Older GROMACS versions need a separate installation of the ffamber ports:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://chemistry.csulb.edu/ffamber/">Using AMBER Force Field in GROMACS</a>
+- known as the “ffamber ports,” a number of AMBER force fields, complete with documentation.</li>
+<li>Using the ffamber ports with GROMACS requires that the input structure files adhere to
+the AMBER nomenclature for residues.  Problematic residues involve termini (prefixed with
+N and C), lysine (either LYN or LYP), histidine (HID, HIE, or HIS), and cysteine (CYN or CYX).
+Please see the <a class="reference external" href="http://chemistry.csulb.edu/ffamber/#usage">ffamber documentation</a>.</li>
+</ul>
+</div>
+<div class="section" id="charmm">
+<span id="gmx-charmm-ff"></span><h2>CHARMM<a class="headerlink" href="#charmm" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.charmm.org/">CHARMM</a> (Chemistry at HARvard Macromolecular Mechanics) is a both a set of force fields and
+a software package for <a class="reference internal" href="terminology.html#gmx-md"><span class="std std-ref">molecular dynamics</span></a> simulations and analysis. Includes united atom
+(CHARMM19) and all atom (CHARMM22, CHARMM27, CHARMM36) <a class="reference internal" href="terminology.html#gmx-force-field"><span class="std std-ref">force fields</span></a>.  The CHARMM27 force field
+has been ported to GROMACS and is officially supported as of version 4.5.  CHARMM36 force field files can be
+obtained from the <a class="reference external" href="http://mackerell.umaryland.edu/charmm_ff.shtml#gromacs">MacKerell lab website</a>, which regularly produces up-to-date CHARMM force field files in GROMACS format.</p>
+<p>For using CHARMM36 in GROMACS 5.0 and newer, please use the following settings in the <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">constraints</span> <span class="o">=</span> <span class="n">h</span><span class="o">-</span><span class="n">bonds</span>
+<span class="n">cutoff</span><span class="o">-</span><span class="n">scheme</span> <span class="o">=</span> <span class="n">Verlet</span>
+<span class="n">vdwtype</span> <span class="o">=</span> <span class="n">cutoff</span>
+<span class="n">vdw</span><span class="o">-</span><span class="n">modifier</span> <span class="o">=</span> <span class="n">force</span><span class="o">-</span><span class="n">switch</span>
+<span class="n">rlist</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">rvdw</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">rvdw</span><span class="o">-</span><span class="n">switch</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">coulombtype</span> <span class="o">=</span> <span class="n">PME</span>
+<span class="n">rcoulomb</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">DispCorr</span> <span class="o">=</span> <span class="n">no</span>
+</pre></div>
+</div>
+<p>Note that dispersion correction should be applied in the case of lipid monolayers, but not bilayers.</p>
+<p>Please also note that the switching distance is a matter of some debate in lipid bilayer simulations,
+and it is dependent to some extent on the nature of the lipid. Some studies have found that an 0.8-1.0 nm
+switch is appropriate, others argue 0.8-1.2 nm is best, and yet others stand by 1.0-1.2 nm. The user
+is cautioned to thoroughly investigate the force field literature for their chosen lipid(s) before beginning a simulation!</p>
+<p>Anyone using very old versions of GROMACS may find this script useful:</p>
+<blockquote>
+<div>CHARMM to GROMACS - perl scripts intended to facilitate calculations using GROMACS programs and CHARMM forcefields (needed for GROMACS versions &lt; 4.5). (<a class="reference external" href="http://www.gromacs.org/&#64;api/deki/files/76/=charmm_to_gromacs.tgz">link</a>)</div></blockquote>
+</div>
+<div class="section" id="gromos">
+<span id="gmx-gromos-ff"></span><h2>GROMOS<a class="headerlink" href="#gromos" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.igc.ethz.ch/gromos/">GROMOS</a> is is a general-purpose molecular dynamics computer simulation package for the
+study of biomolecular systems. It also incorporates its own force field covering proteins,
+nucleotides, sugars etc. and can be applied to chemical and physical systems ranging from
+glasses and liquid crystals, to polymers and crystals and solutions of biomolecules.</p>
+<p>GROMACS supports the GROMOS force fields, with all parameters provided in the distribution
+for 43a1, 43a2, 45a3, 53a5, 53a6 and 54a7. The GROMOS force fields are <cite>united atom force fields &lt;gmx-force-field&gt;</cite>,
+i.e. without explicit aliphatic (non-polar) hydrogens.</p>
+<ul class="simple">
+<li>GROMOS 53a6 - in GROMACS format (J. Comput. Chem. 2004 vol. 25 (13): 1656-1676).</li>
+<li>GROMOS 53a5 - in GROMACS format (J. Comput. Chem. 2004 vol. 25 (13): 1656-1676).</li>
+<li>GROMOS 43a1p - 43a1 modified to contain SEP (phosphoserine), TPO (phosphothreonine),
+and PTR (phosphotyrosine) (all PO42- forms), and SEPH, TPOH, PTRH (PO4H- forms).</li>
+</ul>
+</div>
+<div class="section" id="opls">
+<span id="gmx-opls"></span><h2>OPLS<a class="headerlink" href="#opls" title="Permalink to this headline">¶</a></h2>
+<p>OPLS (Optimized Potential for Liquid Simulations) is a set of force fields developed by
+Prof. William L. Jorgensen for condensed phase simulations, with the latest version
+being <a class="reference external" href="http://zarbi.chem.yale.edu/oplsaam.html">OPLS-AA/M</a>.</p>
+<p>The standard implementations for those force fields are the <em>BOSS</em> and <em>MCPRO</em>
+programs developed by the <a class="reference external" href="http://zarbi.chem.yale.edu/software.html">Jorgensen group</a></p>
+<p>As there is no central web-page to point to, the user is advised to consult the
+original literature for the <a class="reference external" href="https://doi.org/10.1021%2Fja00214a001">united atom (OPLS-UA)</a>
+and <a class="reference external" href="https://doi.org/10.1021%2Fja9621760">all atom (OPLS-AA)</a> force fields, as well as the
+Jorgensen group <a class="reference external" href="http://zarbi.chem.yale.edu/">page</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Force fields in GROMACS</a><ul>
+<li><a class="reference internal" href="#amber">AMBER</a></li>
+<li><a class="reference internal" href="#charmm">CHARMM</a></li>
+<li><a class="reference internal" href="#gromos">GROMOS</a></li>
+<li><a class="reference internal" href="#opls">OPLS</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="faq.html"
+                        title="previous chapter">Answers to frequently asked questions (FAQs)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cutoff-schemes.html"
+                        title="next chapter">Non-bonded cut-off schemes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/force-fields.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cutoff-schemes.html" title="Non-bonded cut-off schemes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Answers to frequently asked questions (FAQs)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+.. _gmx make_ndx:
+
+gmx make_ndx
+============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx make_ndx [:strong:`-f` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-n` :emphasis:`[<.ndx> [...]]`] [:strong:`-o` :emphasis:`[<.ndx>]`]
+                 [:strong:`-natoms` :emphasis:`<int>`] [:strong:`-[no]twin`]
+
+Description
+-----------
+
+Index groups are necessary for almost every GROMACS program.
+All these programs can generate default index groups. You ONLY
+have to use ``gmx make_ndx`` when you need SPECIAL index groups.
+There is a default index group for the whole system, 9 default
+index groups for proteins, and a default index group
+is generated for every other residue name.
+
+When no index file is supplied, also ``gmx make_ndx`` will generate the
+default groups.
+With the index editor you can select on atom, residue and chain names
+and numbers.
+When a run input file is supplied you can also select on atom type.
+You can use boolean operations, you can split groups
+into chains, residues or atoms. You can delete and rename groups.
+Type 'h' in the editor for more details.
+
+The atom numbering in the editor and the index file starts at 1.
+
+The ``-twin`` switch duplicates all index groups with an offset of
+``-natoms``, which is useful for Computational Electrophysiology
+double-layer membrane setups.
+
+See also :doc:`gmx select <gmx-select>` ``-on``, which provides an alternative way
+for constructing index groups.  It covers nearly all of ``gmx make_ndx``
+functionality, and in many cases much more.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.gro/.g96/...>] (conf.gro) (Optional)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp :ref:`tpr`
+``-n`` [<.ndx> [...]] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.ndx>] (index.ndx)
+    Index file
+
+Other options:
+
+``-natoms`` <int> (0)
+    set number of atoms (default: read from coordinate or index file)
+``-[no]twin``  (no)
+    Duplicate all index groups with an offset of -natoms
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

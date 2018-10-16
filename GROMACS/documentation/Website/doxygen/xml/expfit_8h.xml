@@ -1,0 +1,597 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="expfit_8h" kind="file">
+    <compoundname>expfit.h</compoundname>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="autocorr_8cpp" local="yes">src/gromacs/correlationfunctions/autocorr.cpp</includedby>
+    <includedby refid="expfit_8cpp" local="yes">src/gromacs/correlationfunctions/expfit.cpp</includedby>
+    <includedby refid="tests_2autocorr_8cpp" local="yes">src/gromacs/correlationfunctions/tests/autocorr.cpp</includedby>
+    <includedby refid="tests_2expfit_8cpp" local="yes">src/gromacs/correlationfunctions/tests/expfit.cpp</includedby>
+    <includedby refid="gmx__analyze_8cpp" local="yes">src/gromacs/gmxana/gmx_analyze.cpp</includedby>
+    <includedby refid="gmx__densorder_8cpp" local="yes">src/gromacs/gmxana/gmx_densorder.cpp</includedby>
+    <includedby refid="gmx__dielectric_8cpp" local="yes">src/gromacs/gmxana/gmx_dielectric.cpp</includedby>
+    <includedby refid="gmx__hbond_8cpp" local="yes">src/gromacs/gmxana/gmx_hbond.cpp</includedby>
+    <includedby refid="gmx__tcaf_8cpp" local="yes">src/gromacs/gmxana/gmx_tcaf.cpp</includedby>
+    <incdepgraph>
+      <node id="3764">
+        <label>src/gromacs/correlationfunctions/expfit.h</label>
+        <link refid="expfit.h"/>
+        <childnode refid="3765" relation="include">
+        </childnode>
+        <childnode refid="3768" relation="include">
+        </childnode>
+      </node>
+      <node id="3766">
+        <label>stdint.h</label>
+      </node>
+      <node id="3768">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="3765">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="3766" relation="include">
+        </childnode>
+        <childnode refid="3767" relation="include">
+        </childnode>
+      </node>
+      <node id="3767">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3769">
+        <label>src/gromacs/correlationfunctions/expfit.h</label>
+        <link refid="expfit.h"/>
+        <childnode refid="3770" relation="include">
+        </childnode>
+        <childnode refid="3771" relation="include">
+        </childnode>
+        <childnode refid="3772" relation="include">
+        </childnode>
+        <childnode refid="3773" relation="include">
+        </childnode>
+      </node>
+      <node id="3773">
+        <label>src/gromacs/correlationfunctions/tests/expfit.cpp</label>
+        <link refid="tests_2expfit_8cpp"/>
+      </node>
+      <node id="3772">
+        <label>src/gromacs/correlationfunctions/tests/autocorr.cpp</label>
+        <link refid="tests_2autocorr_8cpp"/>
+      </node>
+      <node id="3771">
+        <label>src/gromacs/correlationfunctions/expfit.cpp</label>
+        <link refid="expfit_8cpp"/>
+      </node>
+      <node id="3770">
+        <label>src/gromacs/correlationfunctions/autocorr.cpp</label>
+        <link refid="autocorr_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04" prot="public" static="no">
+        <name>@3</name>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04a656df973349584e9fdf40e758643a466" prot="public">
+          <name>effnNONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04afa0dba59ea71732e06c45b492b7270a1" prot="public">
+          <name>effnEXP1</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04ab9a405b86ad2aa3750972192902f4df7" prot="public">
+          <name>effnEXP2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04a8a97b3a536a826a085696b5dc35db1ad" prot="public">
+          <name>effnEXPEXP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04a280283b33378731cffcaf71aaa484852" prot="public">
+          <name>effnEXP5</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04ac5828ac49f4f8251ce51e86e76c3e9cb" prot="public">
+          <name>effnEXP7</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04adfac0a64e33e017e4cd943c86488f8b6" prot="public">
+          <name>effnEXP9</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04a765ba0692bd59015bd130792795e0be7" prot="public">
+          <name>effnVAC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04a3a2d30923c4ab72138245d2f3d481591" prot="public">
+          <name>effnERF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04a70bd73375337d89a69585568720b9c09" prot="public">
+          <name>effnERREST</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04a305d916915082162a052aadfbb9eb87f" prot="public">
+          <name>effnPRES</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="expfit_8h_1abc6126af1d45847bc59afa0aa3216b04aee391e1ad0c7080b65a2cfbe1e6d88ad" prot="public">
+          <name>effnNR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum to select fitting functions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="59" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" bodystart="59" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="expfit_8h_1a8c5348612f872710564767a5d1a0332e" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* s_ffn[effnNR+2]</definition>
+        <argsstring>[effnNR+2]</argsstring>
+        <name>s_ffn</name>
+        <briefdescription>
+<para>Short name of each function type. This is exported for now in order to use when calling parse_common_args. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="70" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.cpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="expfit_8h_1ae3f046b3f2286043e6c447498703f126" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* effnDescription</definition>
+        <argsstring>(int effn)</argsstring>
+        <name>effnDescription</name>
+        <param>
+          <type>int</type>
+          <declname>effn</declname>
+        </param>
+        <briefdescription>
+<para>Returns description corresponding to the enum above, or NULL if out of range. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">effn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Description or NULL </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="77" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.cpp" bodystart="110" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="expfit_8h_1a116cccea41845ea588fc00c5dc0f7dce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int effnNparams</definition>
+        <argsstring>(int effn)</argsstring>
+        <name>effnNparams</name>
+        <param>
+          <type>int</type>
+          <declname>effn</declname>
+        </param>
+        <briefdescription>
+<para>Returns number of function parameters associated with a fitting function. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">effn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>number or -1 if index out of range </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="84" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.cpp" bodystart="98" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="expfit_8h_1a7f2f7deddf6696f3eebe0f5605808b63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int sffn2effn</definition>
+        <argsstring>(const char **sffn)</argsstring>
+        <name>sffn2effn</name>
+        <param>
+          <type>const char **</type>
+          <declname>sffn</declname>
+        </param>
+        <briefdescription>
+<para>Returns corresponding to the selected enum option in sffn. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">sffn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Two dimensional string array coming from parse_common_args </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the ffn enum </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="91" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.cpp" bodystart="122" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="expfit_8h_1a22c8e7646cd3811775f2a02a66799964" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double fit_function</definition>
+        <argsstring>(const int eFitFn, const double parm[], const double x)</argsstring>
+        <name>fit_function</name>
+        <param>
+          <type>const int</type>
+          <declname>eFitFn</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>parm</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Returns the value of fit function eFitFn at x. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">eFitFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index to the fitting function (0 .. effnNR) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">parm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of parameters, the length of which depends on eFitFn </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of x </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the value of the fit </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="100" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.cpp" bodystart="408" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="expfit_8h_1a0c46c22dccbf0e6e468166d2b88c69d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real do_lmfit</definition>
+        <argsstring>(int ndata, real c1[], real sig[], real dt, real *x0, real begintimefit, real endtimefit, const gmx_output_env_t *oenv, gmx_bool bVerbose, int eFitFn, double fitparms[], int fix, const char *fn_fitted)</argsstring>
+        <name>do_lmfit</name>
+        <param>
+          <type>int</type>
+          <declname>ndata</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>c1</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>sig</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>begintimefit</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>endtimefit</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>eFitFn</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>fitparms</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>fix</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>fn_fitted</declname>
+        </param>
+        <briefdescription>
+<para>Use Levenberg-Marquardt method to fit to a nfitparm parameter exponential or to a transverse current autocorrelation function. </para>        </briefdescription>
+        <detaileddescription>
+<para>If x == NULL, the timestep dt will be used to create a time axis. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ndata</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of data points </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">c1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data points </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sig</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The standard deviation in the points (can be NULL) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The X-axis (may be NULL, see above) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">begintimefit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Starting time for fitting </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">endtimefit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ending time for fitting </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">oenv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output formatting information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bVerbose</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Should the routine write to console? </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">eFitFn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fitting function (0 .. effnNR) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">fitparms[]</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fitting parameters, see printed manual for a detailed description. Note that in all implemented cases the parameters corresponding to time constants will be generated with increasing values. Such input parameters should therefore be provided in increasing order. If this is not the case or if subsequent time parameters differ by less than a factor of 2, they will be modified to ensure tau_i+1 &gt;= 2 tau_i. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constrains fit parameter i at it&apos;s starting value, when the i&apos;th bit of fix is set. This works only when the N last parameters are fixed but not when a parameter somewhere in the middle needs to be fixed. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fn_fitted</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If not NULL file to print the data and fitted curve to </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>integral. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="129" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.cpp" bodystart="696" bodyend="841"/>
+      </memberdef>
+      <memberdef kind="function" id="expfit_8h_1a560ea7d97277b9e0576776ec695fb9b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real fit_acf</definition>
+        <argsstring>(int ncorr, int fitfn, const gmx_output_env_t *oenv, gmx_bool bVerbose, real tbeginfit, real tendfit, real dt, real c1[], real *fit)</argsstring>
+        <name>fit_acf</name>
+        <param>
+          <type>int</type>
+          <declname>ncorr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>fitfn</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>tbeginfit</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>tendfit</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>c1</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fit</declname>
+        </param>
+        <briefdescription>
+<para>Fit an autocorrelation function to a pre-defined functional form. </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000015"><xreftitle>Todo</xreftitle><xrefdescription><para>check parameters </para></xrefdescription></xrefsect><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ncorr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fitfn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fitting function (0 .. effnNR) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">oenv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output formatting information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bVerbose</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Should the routine write to console? </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tbeginfit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Starting time for fitting </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tendfit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Ending time for fitting </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">c1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data points </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">fit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The fitting parameters </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the integral over the autocorrelation function? </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h" line="149" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.cpp" bodystart="843" bodyend="979"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares routine for fitting a data set to a curve. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>David van der Spoel <ulink url="mailto:david.vanderspoel@icm.uu.se">david.vanderspoel@icm.uu.se</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/correlationfunctions/expfit.h"/>
+  </compounddef>
+</doxygen>

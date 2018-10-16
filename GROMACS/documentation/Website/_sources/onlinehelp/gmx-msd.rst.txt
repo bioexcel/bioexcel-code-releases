@@ -1,0 +1,131 @@
+.. _gmx msd:
+
+gmx msd
+=======
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx msd [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+            [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-mol` :emphasis:`[<.xvg>]`] [:strong:`-pdb` :emphasis:`[<.pdb>]`] [:strong:`-b` :emphasis:`<time>`]
+            [:strong:`-e` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`]
+            [:strong:`-type` :emphasis:`<enum>`] [:strong:`-lateral` :emphasis:`<enum>`] [:strong:`-[no]ten`] [:strong:`-ngroup` :emphasis:`<int>`]
+            [:strong:`-[no]mw`] [:strong:`-[no]rmcomm`] [:strong:`-tpdb` :emphasis:`<time>`] [:strong:`-trestart` :emphasis:`<time>`]
+            [:strong:`-beginfit` :emphasis:`<time>`] [:strong:`-endfit` :emphasis:`<time>`]
+
+Description
+-----------
+
+``gmx msd`` computes the mean square displacement (MSD) of atoms from
+a set of initial positions. This provides an easy way to compute
+the diffusion constant using the Einstein relation.
+The time between the reference points for the MSD calculation
+is set with ``-trestart``.
+The diffusion constant is calculated by least squares fitting a
+straight line (D*t + c) through the MSD(t) from ``-beginfit`` to
+``-endfit`` (note that t is time from the reference positions,
+not simulation time). An error estimate given, which is the difference
+of the diffusion coefficients obtained from fits over the two halves
+of the fit interval.
+
+There are three, mutually exclusive, options to determine different
+types of mean square displacement: ``-type``, ``-lateral``
+and ``-ten``. Option ``-ten`` writes the full MSD tensor for
+each group, the order in the output is: trace xx yy zz yx zx zy.
+
+If ``-mol`` is set, ``gmx msd`` plots the MSD for individual molecules
+(including making molecules whole across periodic boundaries):
+for each individual molecule a diffusion constant is computed for
+its center of mass. The chosen index group will be split into
+molecules.
+
+The default way to calculate a MSD is by using mass-weighted averages.
+This can be turned off with ``-nomw``.
+
+With the option ``-rmcomm``, the center of mass motion of a
+specific group can be removed. For trajectories produced with
+GROMACS this is usually not necessary,
+as :doc:`gmx mdrun <gmx-mdrun>` usually already removes the center of mass motion.
+When you use this option be sure that the whole system is stored
+in the trajectory file.
+
+The diffusion coefficient is determined by linear regression of the MSD,
+where, unlike for the normal output of D, the times are weighted
+according to the number of reference points, i.e. short times have
+a higher weight. Also when ``-beginfit`` is -1, fitting starts at 10%
+and when ``-endfit`` is -1, fitting goes to 90%.
+Using this option one also gets an accurate error estimate
+based on the statistics between individual molecules.
+Note that this diffusion coefficient and error estimate are only
+accurate when the MSD is completely linear between
+``-beginfit`` and ``-endfit``.
+
+Option ``-pdb`` writes a :ref:`.pdb <pdb>` file with the coordinates of the frame
+at time ``-tpdb`` with in the B-factor field the square root of
+the diffusion coefficient of the molecule.
+This option implies option ``-mol``.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (msd.xvg)
+    xvgr/xmgr file
+``-mol`` [<.xvg>] (diff_mol.xvg) (Optional)
+    xvgr/xmgr file
+``-pdb`` [<.pdb>] (diff_mol.pdb) (Optional)
+    Protein data bank file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-type`` <enum> (no)
+    Compute diffusion coefficient in one direction: no, x, y, z
+``-lateral`` <enum> (no)
+    Calculate the lateral diffusion in a plane perpendicular to: no, x, y, z
+``-[no]ten``  (no)
+    Calculate the full tensor
+``-ngroup`` <int> (1)
+    Number of groups to calculate MSD for
+``-[no]mw``  (yes)
+    Mass weighted MSD
+``-[no]rmcomm``  (no)
+    Remove center of mass motion
+``-tpdb`` <time> (0)
+    The frame to use for option ``-pdb`` (ps)
+``-trestart`` <time> (10)
+    Time between restarting points in trajectory (ps)
+``-beginfit`` <time> (-1)
+    Start time for fitting the MSD (ps), -1 is 10%
+``-endfit`` <time> (-1)
+    End time for fitting the MSD (ps), -1 is 90%
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

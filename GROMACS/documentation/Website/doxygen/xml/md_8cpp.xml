@@ -1,0 +1,947 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="md_8cpp" kind="file">
+    <compoundname>md.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="md_8h" local="yes">md.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">memory</includes>
+    <includes local="yes">thread_mpi/threads.h</includes>
+    <includes refid="awh_8h" local="yes">gromacs/awh/awh.h</includes>
+    <includes refid="filenm_8h" local="yes">gromacs/commandline/filenm.h</includes>
+    <includes refid="make__unique_8h" local="yes">gromacs/compat/make_unique.h</includes>
+    <includes refid="domdec_8h" local="yes">gromacs/domdec/domdec.h</includes>
+    <includes refid="domdec__network_8h" local="yes">gromacs/domdec/domdec_network.h</includes>
+    <includes refid="domdec__struct_8h" local="yes">gromacs/domdec/domdec_struct.h</includes>
+    <includes refid="edsam_8h" local="yes">gromacs/essentialdynamics/edsam.h</includes>
+    <includes refid="pme_8h" local="yes">gromacs/ewald/pme.h</includes>
+    <includes refid="pme-load-balancing_8h" local="yes">gromacs/ewald/pme-load-balancing.h</includes>
+    <includes refid="trxio_8h" local="yes">gromacs/fileio/trxio.h</includes>
+    <includes refid="network_8h" local="yes">gromacs/gmxlib/network.h</includes>
+    <includes refid="nrnb_8h" local="yes">gromacs/gmxlib/nrnb.h</includes>
+    <includes refid="gpu__utils_8h" local="yes">gromacs/gpu_utils/gpu_utils.h</includes>
+    <includes refid="imd_8h" local="yes">gromacs/imd/imd.h</includes>
+    <includes refid="manage-threading_8h" local="yes">gromacs/listed-forces/manage-threading.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="utilities_8h" local="yes">gromacs/math/utilities.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="compute__io_8h" local="yes">gromacs/mdlib/compute_io.h</includes>
+    <includes refid="constr_8h" local="yes">gromacs/mdlib/constr.h</includes>
+    <includes refid="ebin_8h" local="yes">gromacs/mdlib/ebin.h</includes>
+    <includes refid="expanded_8h" local="yes">gromacs/mdlib/expanded.h</includes>
+    <includes refid="force_8h" local="yes">gromacs/mdlib/force.h</includes>
+    <includes refid="force__flags_8h" local="yes">gromacs/mdlib/force_flags.h</includes>
+    <includes refid="mdlib_2forcerec_8h" local="yes">gromacs/mdlib/forcerec.h</includes>
+    <includes refid="md__support_8h" local="yes">gromacs/mdlib/md_support.h</includes>
+    <includes refid="mdatoms_8h" local="yes">gromacs/mdlib/mdatoms.h</includes>
+    <includes refid="mdebin_8h" local="yes">gromacs/mdlib/mdebin.h</includes>
+    <includes refid="mdoutf_8h" local="yes">gromacs/mdlib/mdoutf.h</includes>
+    <includes refid="mdrun_8h" local="yes">gromacs/mdlib/mdrun.h</includes>
+    <includes refid="mdsetup_8h" local="yes">gromacs/mdlib/mdsetup.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__gpu__data__mgmt_8h" local="yes">gromacs/mdlib/nbnxn_gpu_data_mgmt.h</includes>
+    <includes refid="ns_8h" local="yes">gromacs/mdlib/ns.h</includes>
+    <includes refid="shellfc_8h" local="yes">gromacs/mdlib/shellfc.h</includes>
+    <includes refid="sighandler_8h" local="yes">gromacs/mdlib/sighandler.h</includes>
+    <includes refid="sim__util_8h" local="yes">gromacs/mdlib/sim_util.h</includes>
+    <includes refid="simulationsignal_8h" local="yes">gromacs/mdlib/simulationsignal.h</includes>
+    <includes refid="tgroup_8h" local="yes">gromacs/mdlib/tgroup.h</includes>
+    <includes refid="trajectory__writing_8h" local="yes">gromacs/mdlib/trajectory_writing.h</includes>
+    <includes refid="update_8h" local="yes">gromacs/mdlib/update.h</includes>
+    <includes refid="vcm_8h" local="yes">gromacs/mdlib/vcm.h</includes>
+    <includes refid="vsite_8h" local="yes">gromacs/mdlib/vsite.h</includes>
+    <includes refid="awh-history_8h" local="yes">gromacs/mdtypes/awh-history.h</includes>
+    <includes refid="awh-params_8h" local="yes">gromacs/mdtypes/awh-params.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="df__history_8h" local="yes">gromacs/mdtypes/df_history.h</includes>
+    <includes refid="energyhistory_8h" local="yes">gromacs/mdtypes/energyhistory.h</includes>
+    <includes refid="fcdata_8h" local="yes">gromacs/mdtypes/fcdata.h</includes>
+    <includes refid="mdtypes_2forcerec_8h" local="yes">gromacs/mdtypes/forcerec.h</includes>
+    <includes refid="group_8h" local="yes">gromacs/mdtypes/group.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="interaction__const_8h" local="yes">gromacs/mdtypes/interaction_const.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="mdatom_8h" local="yes">gromacs/mdtypes/mdatom.h</includes>
+    <includes refid="observableshistory_8h" local="yes">gromacs/mdtypes/observableshistory.h</includes>
+    <includes refid="state_8h" local="yes">gromacs/mdtypes/state.h</includes>
+    <includes refid="mshift_8h" local="yes">gromacs/pbcutil/mshift.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="pull_8h" local="yes">gromacs/pulling/pull.h</includes>
+    <includes refid="swapcoords_8h" local="yes">gromacs/swap/swapcoords.h</includes>
+    <includes refid="wallcycle_8h" local="yes">gromacs/timing/wallcycle.h</includes>
+    <includes refid="walltime__accounting_8h" local="yes">gromacs/timing/walltime_accounting.h</includes>
+    <includes refid="atoms_8h" local="yes">gromacs/topology/atoms.h</includes>
+    <includes refid="idef_8h" local="yes">gromacs/topology/idef.h</includes>
+    <includes refid="mtop__util_8h" local="yes">gromacs/topology/mtop_util.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="trajectoryframe_8h" local="yes">gromacs/trajectory/trajectoryframe.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="logger_8h" local="yes">gromacs/utility/logger.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="deform_8h" local="yes">deform.h</includes>
+    <includes refid="membed_8h" local="yes">membed.h</includes>
+    <includes refid="repl__ex_8h" local="yes">repl_ex.h</includes>
+    <incdepgraph>
+      <node id="33621">
+        <label>stdarg.h</label>
+      </node>
+      <node id="33581">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="33583">
+        <label>gromacs/domdec/domdec_network.h</label>
+        <link refid="domdec__network_8h"/>
+      </node>
+      <node id="33562">
+        <label>thread_mpi/threads.h</label>
+      </node>
+      <node id="33578">
+        <label>iterator</label>
+      </node>
+      <node id="33570">
+        <label>gromacs/commandline/filenm.h</label>
+        <link refid="filenm_8h"/>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33593">
+        <label>cstdint</label>
+      </node>
+      <node id="33568">
+        <label>stdint.h</label>
+      </node>
+      <node id="33558">
+        <label>stdlib.h</label>
+      </node>
+      <node id="33605">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="33572" relation="include">
+        </childnode>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33606" relation="include">
+        </childnode>
+        <childnode refid="33609" relation="include">
+        </childnode>
+      </node>
+      <node id="33598">
+        <label>gromacs/mdtypes/awh-history.h</label>
+        <link refid="awh-history_8h"/>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33599" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33571">
+        <label>gromacs/compat/make_unique.h</label>
+        <link refid="make__unique_8h"/>
+        <childnode refid="33572" relation="include">
+        </childnode>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33573" relation="include">
+        </childnode>
+        <childnode refid="33574" relation="include">
+        </childnode>
+      </node>
+      <node id="33595">
+        <label>gromacs/mdlib/nb_verlet.h</label>
+        <link refid="nb__verlet_8h"/>
+        <childnode refid="33561" relation="include">
+        </childnode>
+      </node>
+      <node id="33587">
+        <label>gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="33565" relation="include">
+        </childnode>
+        <childnode refid="33576" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33589">
+        <label>gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="33564" relation="include">
+        </childnode>
+        <childnode refid="33565" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33619">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="33557" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33563">
+        <label>gromacs/awh/awh.h</label>
+        <link refid="awh_8h"/>
+        <childnode refid="33564" relation="include">
+        </childnode>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33565" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33559">
+        <label>cmath</label>
+      </node>
+      <node id="33586">
+        <label>gromacs/essentialdynamics/edsam.h</label>
+        <link refid="edsam_8h"/>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33579">
+        <label>stdexcept</label>
+      </node>
+      <node id="33555">
+        <label>md.h</label>
+        <link refid="md_8h"/>
+      </node>
+      <node id="33617">
+        <label>gromacs/pulling/pull_internal.h</label>
+        <link refid="pull__internal_8h"/>
+        <childnode refid="33556" relation="include">
+        </childnode>
+        <childnode refid="33616" relation="include">
+        </childnode>
+        <childnode refid="33585" relation="include">
+        </childnode>
+      </node>
+      <node id="33565">
+        <label>string</label>
+      </node>
+      <node id="33553">
+        <label>src/programs/mdrun/md.cpp</label>
+        <link refid="md.cpp"/>
+        <childnode refid="33554" relation="include">
+        </childnode>
+        <childnode refid="33555" relation="include">
+        </childnode>
+        <childnode refid="33556" relation="include">
+        </childnode>
+        <childnode refid="33557" relation="include">
+        </childnode>
+        <childnode refid="33558" relation="include">
+        </childnode>
+        <childnode refid="33559" relation="include">
+        </childnode>
+        <childnode refid="33560" relation="include">
+        </childnode>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33562" relation="include">
+        </childnode>
+        <childnode refid="33563" relation="include">
+        </childnode>
+        <childnode refid="33570" relation="include">
+        </childnode>
+        <childnode refid="33571" relation="include">
+        </childnode>
+        <childnode refid="33575" relation="include">
+        </childnode>
+        <childnode refid="33583" relation="include">
+        </childnode>
+        <childnode refid="33584" relation="include">
+        </childnode>
+        <childnode refid="33586" relation="include">
+        </childnode>
+        <childnode refid="33587" relation="include">
+        </childnode>
+        <childnode refid="33588" relation="include">
+        </childnode>
+        <childnode refid="33589" relation="include">
+        </childnode>
+        <childnode refid="33590" relation="include">
+        </childnode>
+        <childnode refid="33591" relation="include">
+        </childnode>
+        <childnode refid="33592" relation="include">
+        </childnode>
+        <childnode refid="33594" relation="include">
+        </childnode>
+        <childnode refid="33595" relation="include">
+        </childnode>
+        <childnode refid="33596" relation="include">
+        </childnode>
+        <childnode refid="33597" relation="include">
+        </childnode>
+        <childnode refid="33598" relation="include">
+        </childnode>
+        <childnode refid="33600" relation="include">
+        </childnode>
+        <childnode refid="33602" relation="include">
+        </childnode>
+        <childnode refid="33601" relation="include">
+        </childnode>
+        <childnode refid="33603" relation="include">
+        </childnode>
+        <childnode refid="33604" relation="include">
+        </childnode>
+        <childnode refid="33615" relation="include">
+        </childnode>
+        <childnode refid="33618" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33619" relation="include">
+        </childnode>
+        <childnode refid="33620" relation="include">
+        </childnode>
+        <childnode refid="33622" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+        <childnode refid="33623" relation="include">
+        </childnode>
+      </node>
+      <node id="33602">
+        <label>gromacs/mdtypes/energyhistory.h</label>
+        <link refid="energyhistory_8h"/>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33606">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="33572" relation="include">
+        </childnode>
+        <childnode refid="33607" relation="include">
+        </childnode>
+      </node>
+      <node id="33585">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="33556" relation="include">
+        </childnode>
+      </node>
+      <node id="33613">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="33561" relation="include">
+        </childnode>
+      </node>
+      <node id="33611">
+        <label>exception</label>
+      </node>
+      <node id="33624">
+        <label>stddef.h</label>
+      </node>
+      <node id="33603">
+        <label>gromacs/mdtypes/observableshistory.h</label>
+        <link refid="observableshistory_8h"/>
+        <childnode refid="33561" relation="include">
+        </childnode>
+      </node>
+      <node id="33597">
+        <label>gromacs/mdlib/simulationsignal.h</label>
+        <link refid="simulationsignal_8h"/>
+        <childnode refid="33577" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33580">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33581" relation="include">
+        </childnode>
+      </node>
+      <node id="33614">
+        <label>gromacs/math/paddedvector.h</label>
+        <link refid="paddedvector_8h"/>
+        <childnode refid="33560" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33606" relation="include">
+        </childnode>
+        <childnode refid="33576" relation="include">
+        </childnode>
+      </node>
+      <node id="33618">
+        <label>gromacs/swap/swapcoords.h</label>
+        <link refid="swapcoords_8h"/>
+        <childnode refid="33564" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33564">
+        <label>cstdio</label>
+      </node>
+      <node id="33623">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="33624" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33582">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="33566">
+        <label>vector</label>
+      </node>
+      <node id="33594">
+        <label>gromacs/mdlib/mdrun.h</label>
+        <link refid="mdrun_8h"/>
+      </node>
+      <node id="33608">
+        <label>new</label>
+      </node>
+      <node id="33601">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33554">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="33574">
+        <label>utility</label>
+      </node>
+      <node id="33577">
+        <label>array</label>
+      </node>
+      <node id="33604">
+        <label>gromacs/mdtypes/state.h</label>
+        <link refid="state_8h"/>
+        <childnode refid="33577" relation="include">
+        </childnode>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33605" relation="include">
+        </childnode>
+        <childnode refid="33614" relation="include">
+        </childnode>
+        <childnode refid="33601" relation="include">
+        </childnode>
+        <childnode refid="33576" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33615">
+        <label>gromacs/pulling/pull.h</label>
+        <link refid="pull_8h"/>
+        <childnode refid="33564" relation="include">
+        </childnode>
+        <childnode refid="33616" relation="include">
+        </childnode>
+        <childnode refid="33617" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33567">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="33568" relation="include">
+        </childnode>
+        <childnode refid="33569" relation="include">
+        </childnode>
+      </node>
+      <node id="33590">
+        <label>gromacs/imd/imd.h</label>
+        <link refid="imd_8h"/>
+        <childnode refid="33556" relation="include">
+        </childnode>
+        <childnode refid="33564" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33610">
+        <label>cstdlib</label>
+      </node>
+      <node id="33609">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="33564" relation="include">
+        </childnode>
+        <childnode refid="33610" relation="include">
+        </childnode>
+        <childnode refid="33611" relation="include">
+        </childnode>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33565" relation="include">
+        </childnode>
+        <childnode refid="33573" relation="include">
+        </childnode>
+        <childnode refid="33612" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33613" relation="include">
+        </childnode>
+        <childnode refid="33581" relation="include">
+        </childnode>
+        <childnode refid="33580" relation="include">
+        </childnode>
+      </node>
+      <node id="33576">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="33572" relation="include">
+        </childnode>
+        <childnode refid="33577" relation="include">
+        </childnode>
+        <childnode refid="33578" relation="include">
+        </childnode>
+        <childnode refid="33579" relation="include">
+        </childnode>
+        <childnode refid="33574" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33580" relation="include">
+        </childnode>
+      </node>
+      <node id="33572">
+        <label>cstddef</label>
+      </node>
+      <node id="33584">
+        <label>gromacs/domdec/domdec_struct.h</label>
+        <link refid="domdec__struct_8h"/>
+        <childnode refid="33572" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33585" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33622">
+        <label>gromacs/utility/logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="33565" relation="include">
+        </childnode>
+      </node>
+      <node id="33616">
+        <label>gromacs/mdtypes/pull-params.h</label>
+        <link refid="pull-params_8h"/>
+        <childnode refid="33601" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33596">
+        <label>gromacs/mdlib/nbnxn_gpu_data_mgmt.h</label>
+        <link refid="nbnxn__gpu__data__mgmt_8h"/>
+      </node>
+      <node id="33607">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="33572" relation="include">
+        </childnode>
+        <childnode refid="33561" relation="include">
+        </childnode>
+        <childnode refid="33608" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33592">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="33559" relation="include">
+        </childnode>
+        <childnode refid="33593" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33573">
+        <label>type_traits</label>
+      </node>
+      <node id="33556">
+        <label>config.h</label>
+      </node>
+      <node id="33620">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="33621" relation="include">
+        </childnode>
+        <childnode refid="33557" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33575">
+        <label>gromacs/domdec/domdec.h</label>
+        <link refid="domdec_8h"/>
+        <childnode refid="33557" relation="include">
+        </childnode>
+        <childnode refid="33566" relation="include">
+        </childnode>
+        <childnode refid="33576" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+        <childnode refid="33582" relation="include">
+        </childnode>
+      </node>
+      <node id="33599">
+        <label>gromacs/mdtypes/awh-correlation-history.h</label>
+        <link refid="awh-correlation-history_8h"/>
+        <childnode refid="33566" relation="include">
+        </childnode>
+      </node>
+      <node id="33560">
+        <label>algorithm</label>
+      </node>
+      <node id="33557">
+        <label>stdio.h</label>
+      </node>
+      <node id="33588">
+        <label>gromacs/ewald/pme-load-balancing.h</label>
+        <link refid="pme-load-balancing_8h"/>
+      </node>
+      <node id="33561">
+        <label>memory</label>
+      </node>
+      <node id="33600">
+        <label>gromacs/mdtypes/awh-params.h</label>
+        <link refid="awh-params_8h"/>
+        <childnode refid="33601" relation="include">
+        </childnode>
+        <childnode refid="33567" relation="include">
+        </childnode>
+      </node>
+      <node id="33569">
+        <label>inttypes.h</label>
+      </node>
+      <node id="33612">
+        <label>typeindex</label>
+      </node>
+      <node id="33591">
+        <label>gromacs/listed-forces/manage-threading.h</label>
+        <link refid="manage-threading_8h"/>
+        <childnode refid="33564" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="md_8cpp_1a5c96c92976a82d492a45ed71865dc0aa" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void checkNumberOfBondedInteractions</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, int totalNumberOfBondedInteractions, gmx_mtop_t *top_global, gmx_localtop_t *top_local, t_state *state, bool *shouldCheckNumberOfBondedInteractions)</argsstring>
+        <name>checkNumberOfBondedInteractions</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>totalNumberOfBondedInteractions</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top_global</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__localtop__t" kindref="compound">gmx_localtop_t</ref> *</type>
+          <declname>top_local</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool *</type>
+          <declname>shouldCheckNumberOfBondedInteractions</declname>
+        </param>
+        <briefdescription>
+<para>Check whether bonded interactions are missing, if appropriate. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Log file pointer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Communication object </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">totalNumberOfBondedInteractions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Result of the global reduction over the number of bonds treated in each domain </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">top_global</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Global topology for the error message </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">top_local</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Local topology for the error message </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Global state for the error message </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">shouldCheckNumberOfBondedInteractions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether we should do the check.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nothing, except that shouldCheckNumberOfBondedInteractions is always set to false after exit. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/md.cpp" line="152" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/md.cpp" bodystart="152" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="md_8cpp_1aba8d4c1855124ce1e4f60ea5bb2d4ae4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void reset_all_counters</definition>
+        <argsstring>(FILE *fplog, const gmx::MDLogger &amp;mdlog, t_commrec *cr, gmx_int64_t step, gmx_int64_t *step_rel, t_inputrec *ir, gmx_wallcycle_t wcycle, t_nrnb *nrnb, gmx_walltime_accounting_t walltime_accounting, struct nonbonded_verlet_t *nbv, struct gmx_pme_t *pme)</argsstring>
+        <name>reset_all_counters</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1MDLogger" kindref="compound">gmx::MDLogger</ref> &amp;</type>
+          <declname>mdlog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>step_rel</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__walltime__accounting" kindref="compound">gmx_walltime_accounting_t</ref></type>
+          <declname>walltime_accounting</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <param>
+          <type>struct gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/md.cpp" line="166" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/md.cpp" bodystart="166" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="md_8cpp_1a76b03fa80b9fcccfe4d33b1699d63640" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void prepareRerunState</definition>
+        <argsstring>(const t_trxframe &amp;rerunFrame, t_state *globalState, bool constructVsites, const gmx_vsite_t *vsite, const t_idef &amp;idef, double timeStep, const t_forcerec &amp;forceRec, t_graph *graph, gmx_bool *warnWhenNoV)</argsstring>
+        <name>prepareRerunState</name>
+        <param>
+          <type>const <ref refid="structt__trxframe" kindref="compound">t_trxframe</ref> &amp;</type>
+          <declname>rerunFrame</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>globalState</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>constructVsites</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__vsite__t" kindref="compound">gmx_vsite_t</ref> *</type>
+          <declname>vsite</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__idef" kindref="compound">t_idef</ref> &amp;</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>timeStep</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> &amp;</type>
+          <declname>forceRec</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>warnWhenNoV</declname>
+        </param>
+        <briefdescription>
+<para>Copy the state from <computeroutput>rerunFrame</computeroutput> to <computeroutput>globalState</computeroutput> and, if requested, construct vsites. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">rerunFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The trajectory frame to compute energy/forces for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">globalState</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global state container </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">constructVsites</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>When true, vsite coordinates are constructed </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">vsite</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vsite setup, can be nullptr when <computeroutput>constructVsites</computeroutput> = false </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology parameters, used for constructing vsites </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">timeStep</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step, used for constructing vsites </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceRec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force record, used for constructing vsites </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The molecular graph, used for constructing vsites when != nullptr </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">warnWhenNoV</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>When true, issue a warning when no velocities are present in <computeroutput>rerunFrame</computeroutput>; is set to false when a warning was issued </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/md.cpp" line="223" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/md.cpp" bodystart="223" bodyend="281"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/md.cpp"/>
+  </compounddef>
+</doxygen>

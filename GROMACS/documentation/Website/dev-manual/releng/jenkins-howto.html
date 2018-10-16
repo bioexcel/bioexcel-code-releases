@@ -1,0 +1,222 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to do common things with Jenkins builds &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Source tree checker scripts" href="../gmxtree.html" />
+    <link rel="prev" title="Interacting with builds in Jenkins" href="jenkins-ui.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../gmxtree.html" title="Source tree checker scripts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jenkins-ui.html" title="Interacting with builds in Jenkins"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">releng repository</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-do-common-things-with-jenkins-builds">
+<h1>How to do common things with Jenkins builds<a class="headerlink" href="#how-to-do-common-things-with-jenkins-builds" title="Permalink to this headline">¶</a></h1>
+<p>See also <a class="reference internal" href="jenkins-ui.html"><span class="doc">Interacting with builds in Jenkins</span></a>.</p>
+<div class="section" id="add-a-new-configuration-to-a-build">
+<h2>Add a new configuration to a build<a class="headerlink" href="#add-a-new-configuration-to-a-build" title="Permalink to this headline">¶</a></h2>
+<p>To add a new configuration to an existing matrix build, the required steps vary
+a bit depending on how similar your configuration is to existing ones:</p>
+<ol class="arabic simple">
+<li>If the new configuration is just a new combination of existing options, it
+is sufficient to add the configuration to the respective file under
+<code class="file docutils literal"><span class="pre">admin/builds/</span></code>, and test that it works.  Changes to
+<code class="file docutils literal"><span class="pre">pre-submit-matrix.txt</span></code> will automatically get verified when you
+upload your changes to Gerrit.<ol class="loweralpha">
+<li>If your combination requires a specific combination of software that is
+not yet available, you will need to update <code class="file docutils literal"><span class="pre">releng/slaves.py</span></code> in
+the <code class="docutils literal"><span class="pre">releng</span></code> repo, and possibly install that combination of software on
+a slave.</li>
+</ol>
+</li>
+<li>If the new configuration requires new options, but those options do not
+affect where the configuration can be built (i.e., do not require special
+software on the build slaves), you need to update
+<code class="file docutils literal"><span class="pre">admin/builds/gromacs.py</span></code> to specify the options and how they affect
+the build, and then add the configurations to the matrix in
+<code class="file docutils literal"><span class="pre">admin/builds/</span></code>.</li>
+<li>If the new configuration requires new options that affect job placement, you
+need to update<ul>
+<li><code class="file docutils literal"><span class="pre">releng/options.py</span></code> to specify the new option and a label for it,</li>
+<li><code class="file docutils literal"><span class="pre">releng/slaves.py</span></code> to specify which build slaves support the option,</li>
+<li>possibly <code class="file docutils literal"><span class="pre">releng/environment.py</span></code> to specify special CMake options or
+other configuration (e.g., changes to <code class="docutils literal"><span class="pre">PATH</span></code>) that is required for the
+build to work with this option (if you need this, you also need to specify
+in <code class="file docutils literal"><span class="pre">releng/options.py</span></code> that your new function in
+<code class="file docutils literal"><span class="pre">releng/environment.py</span></code> should be called to process your new
+option),</li>
+<li>possibly <code class="file docutils literal"><span class="pre">admin/builds/gromacs.py</span></code> if your new option affects the
+build beyond the changes above, and</li>
+<li>finally add the configuration to the matrix and test it.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="add-a-new-build-slave">
+<h2>Add a new build slave<a class="headerlink" href="#add-a-new-build-slave" title="Permalink to this headline">¶</a></h2>
+<p>To add a new slave to be used for builds, the steps are outlined below:</p>
+<ol class="arabic simple">
+<li>Install the slave so that Jenkins can connect to it and the slave can
+connect to Gerrit (this configuration is currently outside the scope of this
+documentation).</li>
+<li>Install necessary software on the slave to be used in the builds (compilers
+and other tools).
+Please see <code class="file docutils literal"><span class="pre">releng/environment.py</span></code> for how various programs are
+located, and install them on the new slave to be found in the same way
+(if something seems awkward, the approach should be changed on all slaves,
+not by adding more variability).</li>
+<li>Ensure that the slave is listed in <code class="file docutils literal"><span class="pre">releng/slaves.py</span></code> and has the
+correct labels and other constraints defined appropriately.</li>
+<li>Ensure that the slave has relevant labels defined in Jenkins if it needs to
+run builds that rely on them (see <a class="reference internal" href="jenkins-config.html"><span class="doc">Jenkins configuration</span></a>).</li>
+</ol>
+<p>If the slave does not get automatically used, follow steps above for adding a
+new configuration to use the slave if it is intended for building one or more
+matrix configurations.</p>
+</div>
+<div class="section" id="add-builds-for-a-new-release-branch">
+<h2>Add builds for a new release branch<a class="headerlink" href="#add-builds-for-a-new-release-branch" title="Permalink to this headline">¶</a></h2>
+<p>After creating a release branch (in both <code class="docutils literal"><span class="pre">gromacs</span></code> and <code class="docutils literal"><span class="pre">regressiontests</span></code>
+repositories; <code class="docutils literal"><span class="pre">releng</span></code> is only using a single branch (<code class="docutils literal"><span class="pre">master</span></code>)), the
+following steps are needed to have full Jenkins builds running for it:</p>
+<ul>
+<li><p class="first">Clone all per-branch jobs in Jenkins from those for <code class="docutils literal"><span class="pre">master</span></code>.  Currently
+this includes pre- and post-submit matrix jobs, corresponding triggering
+pipelines, a nightly documentation build, and a release pipeline including
+two packaging builds.</p>
+<p>Adjust the Gerrit Trigger and/or SCM configuration and/or job parameter
+defaults for the cloned jobs to trigger from the correct branch.  Also adjust
+the job descriptions if they contain branch-specific information.</p>
+<p>Adjust the pipeline jobs to reference the correct per-branch jobs (the matrix
+jobs are referenced from the triggering pipelines, and the packaging jobs
+from the release pipeline).</p>
+<p>Note that Copy Project link in Jenkins is not visible for pipeline jobs; you
+can achieve the same effect by selecting New Item at the top level and
+copying from an existing item.</p>
+<p>TODO: The number of jobs required here could be reduced.</p>
+</li>
+<li><p class="first">Adjust the Gerrit Trigger configuration for jobs that are not
+branch-specific and add the new branches as appropriate.  Remove obsolete
+release branches from the triggering configuration.  This step impacts
+non-matrix pre-submit verification jobs, and an on-demand pipeline job.
+Note that Releng_PreSubmit is only triggered from <code class="docutils literal"><span class="pre">releng</span></code> and does not
+need to be considered here.</p>
+<p>TODO: Consider either reducing the number of jobs affected, or consider using
+dynamic triggering configuration to be able to specify the supported branches
+in a single location.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How to do common things with Jenkins builds</a><ul>
+<li><a class="reference internal" href="#add-a-new-configuration-to-a-build">Add a new configuration to a build</a></li>
+<li><a class="reference internal" href="#add-a-new-build-slave">Add a new build slave</a></li>
+<li><a class="reference internal" href="#add-builds-for-a-new-release-branch">Add builds for a new release branch</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jenkins-ui.html"
+                        title="previous chapter">Interacting with builds in Jenkins</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../gmxtree.html"
+                        title="next chapter">Source tree checker scripts</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/dev-manual/releng/jenkins-howto.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../gmxtree.html" title="Source tree checker scripts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jenkins-ui.html" title="Interacting with builds in Jenkins"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >releng repository</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

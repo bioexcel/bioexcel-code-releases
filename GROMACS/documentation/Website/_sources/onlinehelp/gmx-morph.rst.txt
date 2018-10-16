@@ -1,0 +1,77 @@
+.. _gmx morph:
+
+gmx morph
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx morph [:strong:`-f1` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-f2` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+              [:strong:`-o` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-or` :emphasis:`[<.xvg>]`] [:strong:`-[no]w`]
+              [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-ninterm` :emphasis:`<int>`] [:strong:`-first` :emphasis:`<real>`]
+              [:strong:`-last` :emphasis:`<real>`] [:strong:`-[no]fit`]
+
+Description
+-----------
+
+``gmx morph`` does a linear interpolation of conformations in order to
+create intermediates. Of course these are completely unphysical, but
+that you may try to justify yourself. Output is in the form of a
+generic trajectory. The number of intermediates can be controlled with
+the ``-ninterm`` flag. The first and last flag correspond to the way of
+interpolating: 0 corresponds to input structure 1 while
+1 corresponds to input structure 2.
+If you specify ``-first`` < 0 or ``-last`` > 1 extrapolation will be
+on the path from input structure x_1 to x_2. In general, the coordinates
+of the intermediate x(i) out of N total intermediates correspond to:
+
+x(i) = x_1 + (first+(i/(N-1))*(last-first))*(x_2-x_1)
+
+Finally the RMSD with respect to both input structures can be computed
+if explicitly selected (``-or`` option). In that case, an index file may be
+read to select the group from which the RMS is computed.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f1`` [<.gro/.g96/...>] (conf1.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp :ref:`tpr`
+``-f2`` [<.gro/.g96/...>] (conf2.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp :ref:`tpr`
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xtc/.trr/...>] (interm.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-or`` [<.xvg>] (rms-interm.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-ninterm`` <int> (11)
+    Number of intermediates
+``-first`` <real> (0)
+    Corresponds to first generated structure (0 is input x_1, see above)
+``-last`` <real> (1)
+    Corresponds to last generated structure (1 is input x_2, see above)
+``-[no]fit``  (yes)
+    Do a least squares fit of the second to the first structure before interpolating
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

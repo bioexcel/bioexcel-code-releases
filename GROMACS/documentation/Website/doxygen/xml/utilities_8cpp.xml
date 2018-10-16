@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="utilities_8cpp" kind="file">
+    <compoundname>utilities.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="utilities_8h" local="yes">utilities.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">limits.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">fenv.h</includes>
+    <incdepgraph>
+      <node id="13600">
+        <label>assert.h</label>
+      </node>
+      <node id="13604">
+        <label>fenv.h</label>
+      </node>
+      <node id="13602">
+        <label>cmath</label>
+      </node>
+      <node id="13597">
+        <label>src/gromacs/math/utilities.cpp</label>
+        <link refid="utilities.cpp"/>
+        <childnode refid="13598" relation="include">
+        </childnode>
+        <childnode refid="13599" relation="include">
+        </childnode>
+        <childnode refid="13600" relation="include">
+        </childnode>
+        <childnode refid="13601" relation="include">
+        </childnode>
+        <childnode refid="13602" relation="include">
+        </childnode>
+        <childnode refid="13603" relation="include">
+        </childnode>
+        <childnode refid="13604" relation="include">
+        </childnode>
+      </node>
+      <node id="13601">
+        <label>limits.h</label>
+      </node>
+      <node id="13598">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="13599">
+        <label>config.h</label>
+      </node>
+      <node id="13603">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="utilities_8cpp_1a3a556426db6de9cdba50259ee1a1a2f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_within_tol</definition>
+        <argsstring>(double f1, double f2, double tol)</argsstring>
+        <name>gmx_within_tol</name>
+        <param>
+          <type>double</type>
+          <declname>f1</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>f2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+        </param>
+        <briefdescription>
+<para>Check if two numbers are within a tolerance. </para>        </briefdescription>
+        <detaileddescription>
+<para>This routine checks if the relative difference between two numbers is approximately within the given tolerance, defined as fabs(f1-f2)&lt;=tolerance*fabs(f1+f2).</para><para>To check if two floating-point numbers are almost identical, use this routine with the tolerance GMX_REAL_EPS, or GMX_DOUBLE_EPS if the check should be done in double regardless of Gromacs precision.</para><para>To check if two algorithms produce similar results you will normally need to relax the tolerance significantly since many operations (e.g. summation) accumulate floating point errors.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First number to compare </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>f2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Second number to compare </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance to use</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>1 if the relative difference is within tolerance, 0 if not. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" line="56" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" bodystart="56" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="utilities_8cpp_1a0b4ddfc353f9df4d2da6d739db8bbf25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_numzero</definition>
+        <argsstring>(double a)</argsstring>
+        <name>gmx_numzero</name>
+        <param>
+          <type>double</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>Check if a number is smaller than some preset safe minimum value, currently defined as GMX_REAL_MIN/GMX_REAL_EPS. </para>        </briefdescription>
+        <detaileddescription>
+<para>If a number is smaller than this value we risk numerical overflow if any number larger than 1.0/GMX_REAL_EPS is divided by it.</para><para><simplesect kind="return"><para>1 if &apos;almost&apos; numerically zero, 0 otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" line="72" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" bodystart="72" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="utilities_8cpp_1ac7c4c2732a31e7a5b019cfbbf236ca29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool check_int_multiply_for_overflow</definition>
+        <argsstring>(gmx_int64_t a, gmx_int64_t b, gmx_int64_t *result)</argsstring>
+        <name>check_int_multiply_for_overflow</name>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+<para>Multiply two large ints. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>False iff overflow occurred </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" line="79" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" bodystart="79" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="utilities_8cpp_1ac2f9834b8be9e0907f8e99ddaf320d55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_greatest_common_divisor</definition>
+        <argsstring>(int p, int q)</argsstring>
+        <name>gmx_greatest_common_divisor</name>
+        <param>
+          <type>int</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+<para>Find greatest common divisor of two numbers. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>GCD of the two inputs </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" line="108" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" bodystart="108" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="utilities_8cpp_1af6675d24ca9e67e919812680ee2d0ea9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_feenableexcept</definition>
+        <argsstring>()</argsstring>
+        <name>gmx_feenableexcept</name>
+        <briefdescription>
+<para>Enable floating-point exceptions if supported on OS. </para>        </briefdescription>
+        <detaileddescription>
+<para>Enables division-by-zero, invalid, and overflow. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" line="120" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" bodystart="120" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="utilities_8cpp_1a693f8cc4705c559802012b150b7f1978" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real max_cutoff</definition>
+        <argsstring>(real cutoff1, real cutoff2)</argsstring>
+        <name>max_cutoff</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>cutoff1</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>cutoff2</declname>
+        </param>
+        <briefdescription>
+<para>Return cut-off to use. </para>        </briefdescription>
+        <detaileddescription>
+<para>Takes the max of two cut-offs. However a cut-off of 0 signifies that the cut-off in fact is infinite, and this requires this special routine. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">cutoff1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first cutoff (e.g. coulomb) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cutoff2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second cutoff (e.g. vdw) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 if either is 0, the normal max of the two otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" line="152" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp" bodystart="152" bodyend="162"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/math/utilities.cpp"/>
+  </compounddef>
+</doxygen>

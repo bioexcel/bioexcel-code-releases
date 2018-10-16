@@ -1,0 +1,1382 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="centerofmass_8cpp" kind="file">
+    <compoundname>centerofmass.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="centerofmass_8h" local="yes">centerofmass.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="block_8h" local="yes">gromacs/topology/block.h</includes>
+    <includes refid="mtop__lookup_8h" local="yes">gromacs/topology/mtop_lookup.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <incdepgraph>
+      <node id="21536">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="21533">
+        <label>stdint.h</label>
+      </node>
+      <node id="21531">
+        <label>gromacs/topology/mtop_lookup.h</label>
+        <link refid="mtop__lookup_8h"/>
+        <childnode refid="21532" relation="include">
+        </childnode>
+        <childnode refid="21535" relation="include">
+        </childnode>
+      </node>
+      <node id="21535">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="21532" relation="include">
+        </childnode>
+        <childnode refid="21536" relation="include">
+        </childnode>
+      </node>
+      <node id="21528">
+        <label>src/gromacs/selection/centerofmass.cpp</label>
+        <link refid="centerofmass.cpp"/>
+        <childnode refid="21529" relation="include">
+        </childnode>
+        <childnode refid="21530" relation="include">
+        </childnode>
+        <childnode refid="21531" relation="include">
+        </childnode>
+        <childnode refid="21535" relation="include">
+        </childnode>
+      </node>
+      <node id="21530">
+        <label>centerofmass.h</label>
+        <link refid="centerofmass_8h"/>
+      </node>
+      <node id="21529">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="21532">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="21533" relation="include">
+        </childnode>
+        <childnode refid="21534" relation="include">
+        </childnode>
+      </node>
+      <node id="21534">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="centerofmass_8cpp_1aff73012f43a5c78e8e7e547c016c3791" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_cog</definition>
+        <argsstring>(const gmx_mtop_t *, rvec x[], int nrefat, const int index[], rvec xout)</argsstring>
+        <name>gmx_calc_cog</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a single center of geometry. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure (unused, can be NULL). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>COG position for the indexed atoms. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="54" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="54" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1ae00798d2d3e5e180f274807e3965dc72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_com</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], int nrefat, const int index[], rvec xout)</argsstring>
+        <name>gmx_calc_com</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a single center of mass. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>COM position for the indexed atoms.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Works exactly as <ref refid="centerofmass_8cpp_1aff73012f43a5c78e8e7e547c016c3791" kindref="member">gmx_calc_cog()</ref> with the exception that a center of mass are calculated, and hence a topology with masses is required. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="78" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="78" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a2f9939db15341a8b875c0c36c118f641" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_cog_f</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec f[], int nrefat, const int index[], rvec fout)</argsstring>
+        <name>gmx_calc_cog_f</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate force on a single center of geometry. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forces on all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force on the COG position for the indexed atoms. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="106" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="106" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a86c4b15fc5c640fa089af2aeccd2cdb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_com_f</definition>
+        <argsstring>(const gmx_mtop_t *, rvec f[], int nrefat, const int index[], rvec fout)</argsstring>
+        <name>gmx_calc_com_f</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate force on a single center of mass. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure (unused, can be NULL). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forces on all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force on the COM position for the indexed atoms. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="127" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="127" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a0386a0983200473e2a1d36d510946276" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_comg</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], int nrefat, const int index[], bool bMass, rvec xout)</argsstring>
+        <name>gmx_calc_comg</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMass</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a single center of mass/geometry. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses (can be NULL if <computeroutput>bMASS==false</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, mass weighting is used. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>COM/COG position for the indexed atoms.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Calls either <ref refid="centerofmass_8cpp_1ae00798d2d3e5e180f274807e3965dc72" kindref="member">gmx_calc_com()</ref> or <ref refid="centerofmass_8cpp_1aff73012f43a5c78e8e7e547c016c3791" kindref="member">gmx_calc_cog()</ref> depending on the value of <computeroutput>bMass</computeroutput>. Other parameters are passed unmodified to these functions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="151" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="151" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a1725521615cb51e6569e81ea141317b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_comg_f</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec f[], int nrefat, const int index[], bool bMass, rvec fout)</argsstring>
+        <name>gmx_calc_comg_f</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMass</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate force on a single center of mass/geometry. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses (can be NULL if <computeroutput>bMASS==true</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forces on all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, force on COM is calculated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force on the COM/COG position for the indexed atoms.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Calls either <ref refid="centerofmass_8cpp_1a2f9939db15341a8b875c0c36c118f641" kindref="member">gmx_calc_cog_f()</ref> or <ref refid="centerofmass_8cpp_1a86c4b15fc5c640fa089af2aeccd2cdb5" kindref="member">gmx_calc_com_f()</ref> depending on the value of <computeroutput>bMass</computeroutput>. Other parameters are passed unmodified to these functions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="178" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="178" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a66f0d7374847fea3b288404197ae8e48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_cog_pbc</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], const t_pbc *pbc, int nrefat, const int index[], rvec xout)</argsstring>
+        <name>gmx_calc_cog_pbc</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a single center of geometry iteratively, taking PBC into account. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure (unused, can be NULL). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Periodic boundary conditions structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>COG position for the indexed atoms.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Works exactly as <ref refid="centerofmass_8cpp_1a697b50b18febe2dbf1cc4ce9cd0acdf0" kindref="member">gmx_calc_com_pbc()</ref>, but calculates the center of geometry. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="203" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="203" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a697b50b18febe2dbf1cc4ce9cd0acdf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_com_pbc</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], const t_pbc *pbc, int nrefat, const int index[], rvec xout)</argsstring>
+        <name>gmx_calc_com_pbc</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a single center of mass iteratively, taking PBC into account. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Periodic boundary conditions structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>COM position for the indexed atoms.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Works as <ref refid="centerofmass_8cpp_1ae00798d2d3e5e180f274807e3965dc72" kindref="member">gmx_calc_com()</ref>, but takes into account periodic boundary conditions: If any atom is more than half the box from the COM, it is wrapped around and a new COM is calculated. This is repeated until no atoms violate the condition.</para><para>Modified from src/tools/gmx_sorient.c in Gromacs distribution. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="258" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="258" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1aa3363a7ed70bae19b4fc36e6258ccabb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_comg_pbc</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], const t_pbc *pbc, int nrefat, const int index[], bool bMass, rvec xout)</argsstring>
+        <name>gmx_calc_comg_pbc</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nrefat</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMass</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+        </param>
+        <briefdescription>
+<para>Calculate a single center of mass/geometry iteratively with PBC. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses (can be NULL if <computeroutput>bMASS==false</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pbc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Periodic boundary conditions structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nrefat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms in the index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, mass weighting is used. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>COM/COG position for the indexed atoms.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Calls either <ref refid="centerofmass_8cpp_1ae00798d2d3e5e180f274807e3965dc72" kindref="member">gmx_calc_com()</ref> or <ref refid="centerofmass_8cpp_1aff73012f43a5c78e8e7e547c016c3791" kindref="member">gmx_calc_cog()</ref> depending on the value of <computeroutput>bMass</computeroutput>. Other parameters are passed unmodified to these functions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="325" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="325" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1aa1e0868ac6364def68e5dddf4fba3a25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_cog_block</definition>
+        <argsstring>(const gmx_mtop_t *, rvec x[], const t_block *block, const int index[], rvec xout[])</argsstring>
+        <name>gmx_calc_cog_block</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__block" kindref="compound">t_block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate centers of geometry for a blocked index. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure (unused, can be NULL). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structt__block" kindref="compound">t_block</ref> structure that divides <computeroutput>index</computeroutput> into blocks. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> COG positions. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="340" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="340" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1ab2b599172ee067f194fa2f349209b5c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_com_block</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], const t_block *block, const int index[], rvec xout[])</argsstring>
+        <name>gmx_calc_com_block</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__block" kindref="compound">t_block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate centers of mass for a blocked index. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structt__block" kindref="compound">t_block</ref> structure that divides <computeroutput>index</computeroutput> into blocks. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> COM positions.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Works exactly as <ref refid="centerofmass_8cpp_1aa1e0868ac6364def68e5dddf4fba3a25" kindref="member">gmx_calc_cog_block()</ref> with the exception that centers of mass are calculated, and hence a topology with masses is required. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="369" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="369" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a8a857e76ad36ef01808b31895c17fdcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_cog_f_block</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec f[], const t_block *block, const int index[], rvec fout[])</argsstring>
+        <name>gmx_calc_cog_f_block</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__block" kindref="compound">t_block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate forces on centers of geometry for a blocked index. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forces on all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structt__block" kindref="compound">t_block</ref> structure that divides <computeroutput>index</computeroutput> into blocks. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> Forces on COG positions. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="402" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="402" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1aa64de8a57f4459818535272c0011eece" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_com_f_block</definition>
+        <argsstring>(const gmx_mtop_t *, rvec f[], const t_block *block, const int index[], rvec fout[])</argsstring>
+        <name>gmx_calc_com_f_block</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__block" kindref="compound">t_block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate forces on centers of mass for a blocked index. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure (unused, can be NULL). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forces on all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structt__block" kindref="compound">t_block</ref> structure that divides <computeroutput>index</computeroutput> into blocks. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> Forces on COM positions. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="428" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="428" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a7d0c2cddce8bd5d6dc9acae3850544e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_comg_block</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], const t_block *block, const int index[], bool bMass, rvec xout[])</argsstring>
+        <name>gmx_calc_comg_block</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__block" kindref="compound">t_block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMass</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate centers of mass/geometry for a blocked index. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses (can be NULL if <computeroutput>bMASS==false</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structt__block" kindref="compound">t_block</ref> structure that divides <computeroutput>index</computeroutput> into blocks. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, mass weighting is used. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> COM/COG positions.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Calls either <ref refid="centerofmass_8cpp_1ab2b599172ee067f194fa2f349209b5c4" kindref="member">gmx_calc_com_block()</ref> or <ref refid="centerofmass_8cpp_1aa1e0868ac6364def68e5dddf4fba3a25" kindref="member">gmx_calc_cog_block()</ref> depending on the value of <computeroutput>bMass</computeroutput>. Other parameters are passed unmodified to these functions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="458" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="458" bodyend="469"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a81f391e5563fae6efa6a7a44e28370ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_comg_f_block</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec f[], const t_block *block, const int index[], bool bMass, rvec fout[])</argsstring>
+        <name>gmx_calc_comg_f_block</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__block" kindref="compound">t_block</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>index</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMass</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate forces on centers of mass/geometry for a blocked index. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses (can be NULL if <computeroutput>bMASS==false</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forces on all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structt__block" kindref="compound">t_block</ref> structure that divides <computeroutput>index</computeroutput> into blocks. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indices of atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, force on COM is calculated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> forces on the COM/COG positions.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Calls either <ref refid="centerofmass_8cpp_1aa64de8a57f4459818535272c0011eece" kindref="member">gmx_calc_com_f_block()</ref> or <ref refid="centerofmass_8cpp_1a8a857e76ad36ef01808b31895c17fdcc" kindref="member">gmx_calc_cog_f_block()</ref> depending on the value of <computeroutput>bMass</computeroutput>. Other parameters are passed unmodified to these functions. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="485" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="485" bodyend="496"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1aab101bd70526536a3481b42d4ec9dfd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_comg_blocka</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec x[], const t_blocka *block, bool bMass, rvec xout[])</argsstring>
+        <name>gmx_calc_comg_blocka</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__blocka" kindref="compound">t_blocka</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMass</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>xout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate centers of mass/geometry for a set of blocks;. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses (can be NULL if <computeroutput>bMASS==false</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Position vectors of all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Blocks for calculation. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, mass weighting is used. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> COM/COG positions.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Calls <ref refid="centerofmass_8cpp_1a7d0c2cddce8bd5d6dc9acae3850544e9" kindref="member">gmx_calc_comg_block()</ref>, converting the <computeroutput><ref refid="structt__blocka" kindref="compound">t_blocka</ref></computeroutput> structure into a <computeroutput><ref refid="structt__block" kindref="compound">t_block</ref></computeroutput> and an index. Other parameters are passed unmodified.</para><para><simplesect kind="attention"><para>This function assumes that a pointer to <computeroutput><ref refid="structt__blocka" kindref="compound">t_blocka</ref></computeroutput> can be safely typecast into <computeroutput><ref refid="structt__block" kindref="compound">t_block</ref></computeroutput> such that the index fields can still be referenced. With the present Gromacs defitions of these types, this is the case, but if the layout of these structures is changed, this may lead to strange crashes. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="517" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="517" bodyend="522"/>
+      </memberdef>
+      <memberdef kind="function" id="centerofmass_8cpp_1a6bda1b9a4e7a384498dc33ae7b543302" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_calc_comg_f_blocka</definition>
+        <argsstring>(const gmx_mtop_t *top, rvec f[], const t_blocka *block, bool bMass, rvec fout[])</argsstring>
+        <name>gmx_calc_comg_f_blocka</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__blocka" kindref="compound">t_blocka</ref> *</type>
+          <declname>block</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bMass</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fout</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Calculate forces on centers of mass/geometry for a set of blocks;. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology structure with masses (can be NULL if <computeroutput>bMASS==true</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Forces on all atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">block</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Blocks for calculation. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, force on COM is calculated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>block-&gt;nr</computeroutput> forces on the COM/COG positions.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Calls <ref refid="centerofmass_8cpp_1a81f391e5563fae6efa6a7a44e28370ac" kindref="member">gmx_calc_comg_f_block()</ref>, converting the <computeroutput><ref refid="structt__blocka" kindref="compound">t_blocka</ref></computeroutput> structure into a <computeroutput><ref refid="structt__block" kindref="compound">t_block</ref></computeroutput> and an index. Other parameters are passed unmodified.</para><para><simplesect kind="attention"><para>This function assumes that a pointer to <computeroutput><ref refid="structt__blocka" kindref="compound">t_blocka</ref></computeroutput> can be safely typecast into <computeroutput><ref refid="structt__block" kindref="compound">t_block</ref></computeroutput> such that the index fields can still be referenced. With the present Gromacs defitions of these types, this is the case, but if the layout of these structures is changed, this may lead to strange crashes. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" line="543" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp" bodystart="543" bodyend="548"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements functions in <ref refid="centerofmass_8h" kindref="compound">centerofmass.h</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Teemu Murtola <ulink url="mailto:teemu.murtola@gmail.com">teemu.murtola@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/centerofmass.cpp"/>
+  </compounddef>
+</doxygen>

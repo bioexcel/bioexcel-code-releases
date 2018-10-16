@@ -1,0 +1,357 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Source tree checker scripts &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Automatic source code formatting" href="uncrustify.html" />
+    <link rel="prev" title="How to do common things with Jenkins builds" href="releng/jenkins-howto.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="uncrustify.html" title="Automatic source code formatting"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="releng/jenkins-howto.html" title="How to do common things with Jenkins builds"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" accesskey="U">Development-time tools</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="source-tree-checker-scripts">
+<h1>Source tree checker scripts<a class="headerlink" href="#source-tree-checker-scripts" title="Permalink to this headline">¶</a></h1>
+<p>There is a set of Python scripts, currently under <code class="docutils literal"><span class="pre">docs/doxygen/</span></code>, that check
+various aspects of the source tree for consistency.  The script is based on
+producing an abstract representation of the source tree from various sources:</p>
+<ul class="simple">
+<li>List of files in the source tree (for overall layout of the source tree)</li>
+<li>List of installed headers (extracted from the generated build system)</li>
+<li>git attributes (to limit the scope of some checks)</li>
+<li>Doxygen XML documentation:<ul>
+<li>For tags about public/private nature of documented headers and other
+constructs</li>
+<li>For actual documented constructs, to check them for consistency</li>
+</ul>
+</li>
+<li>Hard-coded knowledge about the GROMACS source tree layout</li>
+</ul>
+<p>This representation is then used for various purposes:</p>
+<ul class="simple">
+<li>Checking Doxygen documentation elements for common mistakes: missing brief
+descriptions, mismatches in file and class visibility, etc.</li>
+<li>Checking for consistent usage and documentation of headers: e.g., a header
+that is documented as internal to a module should not be used outside that
+module.</li>
+<li>Checking for module-level cyclic dependencies</li>
+<li>Checking for consistent style and order of #include directives
+(see <a class="reference internal" href="includestyle.html"><span class="doc">Guidelines for #include directives</span></a>)</li>
+<li>Actually sorting and reformatting #include directives to adhere to the
+checked style</li>
+<li>Generating dependency graphs between modules and for files within modules</li>
+</ul>
+<p>The checks are run as part of a single <code class="docutils literal"><span class="pre">check-source</span></code> target, but are described
+in separate sections below.  In addition to printing the issues to <code class="docutils literal"><span class="pre">stderr</span></code>,
+the script also writes them into <code class="docutils literal"><span class="pre">docs/doxygen/check-source.log</span></code> for later
+inspection.  Jenkins runs the checks as part of the Documentation job, and the
+build is marked unstable if any issues are found.</p>
+<p>For correct functionality, the scripts depend on correct usage of Doxygen
+annotations described in <a class="reference internal" href="doxygen.html"><span class="doc">Using Doxygen</span></a>, in particular the visibility and
+API definitions in file-level comments.</p>
+<p>For some false positives from the script, the suppression mechanism described
+below is the easiest way to silence the script, but otherwise the goal would be
+to minimize the number of suppressions.</p>
+<p>The scripts require Python 2.7 (other versions may work, but have not been
+tested).</p>
+<p>To understand how the scripts work internally, see comments in the Python
+source files under <code class="docutils literal"><span class="pre">docs/doxygen/</span></code>.</p>
+<div class="section" id="checker-details">
+<h2>Checker details<a class="headerlink" href="#checker-details" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">check-source</span></code> target currently checks for a few different types of issues.
+These are listed in detail below, mainly related to documentation and include
+dependencies.  Note in particular that the include dependency checks are much
+stricter for code in modules/directories that are documented with a
+<code class="docutils literal"><span class="pre">\defgroup</span></code>: all undocumented code is assumed to be internal to such modules.
+The rationale is that such code has gotten some more attention, and some effort
+should also have been put into defining what is the external interface of the
+module and documenting it.</p>
+<ul>
+<li><p class="first">For all Doxygen documentation (currently does not apply for members that do
+not appear in the documentation):</p>
+<ul class="simple">
+<li>If a member has documentation, it should have a brief description.</li>
+<li>A note is issued for in-body documentation for functions, since this is
+ignored by our current settings.</li>
+<li>If a class has documentation, it should have public documentation only if
+it appears in an installed header.</li>
+<li>If a class and its containing file has documentation, the class
+documentation should not be visible if the file documentation is not.</li>
+</ul>
+</li>
+<li><p class="first">For all files:</p>
+<ul>
+<li><p class="first">Consistent usage of</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1">#include &quot;...&quot; // This should be used for GROMACS headers</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1">#include &lt;...&gt; // This should be used for system and external headers</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Installed headers must not include non-installed headers. Headers can be
+marked for install within <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> files of their respective
+modules, using <code class="docutils literal"><span class="pre">gmx_install_headers()</span></code>.</p>
+</li>
+<li><p class="first">All source files must include “gmxpre.h” as the first header.</p>
+</li>
+<li><p class="first">A source/header file should include “config.h,” “gromacs/simd/simd.h”,
+or “gromacs/ewald/pme-simd.h” if and only if it uses a macro declared
+in such files.</p>
+</li>
+<li><p class="first">If the file has a git attribute to identify it as a candidate for include
+sorting, the include sorter described below should not produce any
+changes (i.e., the file should follow <a class="reference internal" href="includestyle.html"><span class="doc">Guidelines for #include directives</span></a>).</p>
+</li>
+</ul>
+</li>
+<li><p class="first">For documented files:</p>
+<ul class="simple">
+<li>Installed headers should have public documentation, and other files should
+not.</li>
+<li>The API level specified for a file should not be higher than where its
+documentation is visible.  For example, only publicly documented headers
+should be specified as part of the public API.</li>
+<li>If an <code class="docutils literal"><span class="pre">\ingroup</span> <span class="pre">module_foo</span></code> exists, it should match the subdirectory
+that the file is actually part of in the file system.</li>
+<li>If a <code class="docutils literal"><span class="pre">\defgroup</span> <span class="pre">module_foo</span></code> exists for the subdirectory where the file
+is, the file should contain <code class="docutils literal"><span class="pre">\ingroup</span> <span class="pre">module_foo</span></code>.</li>
+<li>Files should not include other files whose documentation visibility is
+lower (if the included file is not documented, the check is skipped).</li>
+</ul>
+</li>
+<li><p class="first">For files that are part of documented modules
+(<code class="docutils literal"><span class="pre">\defgroup</span> <span class="pre">module_foo</span></code> exists for the subdirectory), or are explicitly
+documented to be internal or in the library API:</p>
+<ul class="simple">
+<li>Such files should not be included from outside their module if they are
+undocumented (for documented modules) or are not specified as part of
+library or public API.</li>
+</ul>
+</li>
+<li><p class="first">For all modules:</p>
+<ul class="simple">
+<li>There should not be cyclic include dependencies between modules.</li>
+</ul>
+</li>
+</ul>
+<p>As a side effect, the XML extraction makes Doxygen parse all comments in the
+code, even if they do not appear in the documentation.  This can reveal latent
+issues in the comments, like invalid Doxygen syntax.  The messages from the XML
+parsing are stored in <code class="docutils literal"><span class="pre">docs/doxygen/doxygen-xml.log</span></code> in the build tree, similar to
+other Doxygen runs.</p>
+<div class="section" id="suppressing-issues">
+<h3>Suppressing issues<a class="headerlink" href="#suppressing-issues" title="Permalink to this headline">¶</a></h3>
+<p>The script is not currently perfect (either because of unfinished
+implementation, or because Doxygen bugs or incompleteness of the Doxygen XML
+output), and the current code also contains issues that the script detects, but
+the authors have not fixed.  To allow the script to still be used,
+<code class="docutils literal"><span class="pre">doxygen/suppressions.txt</span></code> contains a list of issues that are filtered out from
+the report.  The syntax is simple:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&lt;file&gt;: &lt;text&gt;
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">&lt;file&gt;</span></code> is a path to the file that reports the message, and <code class="docutils literal"><span class="pre">&lt;text&gt;</span></code> is
+the text reported.  Both support <code class="docutils literal"><span class="pre">*</span></code> as a wildcard.  If <code class="docutils literal"><span class="pre">&lt;file&gt;</span></code> is empty, the
+suppression matches only messages that do not have an associated file.
+<code class="docutils literal"><span class="pre">&lt;file&gt;</span></code> is matched against the trailing portion of the file name to make it
+work even though the script reports absolute paths.
+Empty lines and lines starting with <code class="docutils literal"><span class="pre">#</span></code> are ignored.</p>
+<p>To add a suppression for an issue, the line that reports the issue can be
+copied into <code class="docutils literal"><span class="pre">suppressions.txt</span></code>, and the line number (if any) removed.  If the
+issue does not have a file name (or a pseudo-file) associated, a leading <code class="docutils literal"><span class="pre">:</span></code>
+must be added.  To cover many similar issues, parts of the line can then be
+replaced with wildcards.</p>
+<p>A separate suppression mechanism is in place for cyclic dependencies: to
+suppress a cycle between moduleA and moduleB, add a line with format</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>moduleA -&gt; moduleB
+</pre></div>
+</div>
+<p>into <code class="docutils literal"><span class="pre">doxygen/cycle-suppressions.txt</span></code>.  This suppresses all cycles that contain
+the mentioned edge.  Since a cycle contains multiple edges, the suppression
+should be made for the edge that is determined to be an incorrect dependency.
+This also affects the layout of the include dependency graphs (see below): the
+suppressed edge is not considered when determining the dependency order, and is
+shown as invalid in the graph.</p>
+</div>
+</div>
+<div class="section" id="include-order-sorting">
+<span id="dev-include-sorter"></span><h2>Include order sorting<a class="headerlink" href="#include-order-sorting" title="Permalink to this headline">¶</a></h2>
+<p>The script checks include ordering according to <a class="reference internal" href="includestyle.html"><span class="doc">Guidelines for #include directives</span></a>.
+If it is not obvious how the includes should be changed to make the script
+happy, or bulk changes are needed in multiple files, e.g., because of a header
+rename or making a previously public header private, it is possible to run a
+Python script that does the sorting:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docs/doxygen/includesorter.py -S . -B ../build &lt;files&gt;
+</pre></div>
+</div>
+<p>The script needs to know the location of the source tree (given with <code class="docutils literal"><span class="pre">-S</span></code>) and
+the build tree (given with <code class="docutils literal"><span class="pre">-B</span></code>), and sorts the given files.  To sort the whole
+source tree, one can also use:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>admin/reformat_all.sh includesort -B<span class="o">=</span>../build
+</pre></div>
+</div>
+<p>For the sorter to work correctly, the build tree should contain up-to-date list
+of installed files and Doxygen XML documentation.  The former is created
+automatically when <code class="docutils literal"><span class="pre">cmake</span></code> is run, and the latter can be built using the
+<code class="docutils literal"><span class="pre">doxygen-xml</span></code> target.</p>
+<p>Note that currently, the sorter script does not change between angle brackets
+and quotes in include statements.</p>
+</div>
+<div class="section" id="include-dependency-graphs">
+<h2>Include dependency graphs<a class="headerlink" href="#include-dependency-graphs" title="Permalink to this headline">¶</a></h2>
+<p>The same set of Python scripts can also produce include dependency graphs with
+some additional annotations compared to what, e.g., Doxygen produces for a
+directory dependency graph.  Currently, a module-level graph is automatically
+built when the Doxygen documentation is built and embedded in the documentation
+(not in the public API documentation).  The graph, together with a legend, is
+on a separate page: <a class="reference external" href="../doxygen/html-lib/page_modulegraph.xhtml">Module dependency graph</a></p>
+<p>The Python script produces the graphs in a format suitable for <code class="docutils literal"><span class="pre">dot</span></code> (from the
+<code class="docutils literal"><span class="pre">graphviz</span></code> package) to lay them out.  The build system also provides a
+<code class="docutils literal"><span class="pre">dep-graphs</span></code> target that generates PNG files from the intermediate <code class="docutils literal"><span class="pre">dot</span></code> files.
+In addition to the module-level graph, a file-level graph is produced for
+each module, showing the include dependencies within that module.
+The file-level graphs can only be viewed as the PNG files, with some
+explanation of the notation below.  Currently, these are mostly for eye candy,
+but they can also be used for analyzing problematic dependencies to clean up
+the architecture.</p>
+<p>Both the intermediate <code class="docutils literal"><span class="pre">.dot</span></code> files and the final PNG files are put under
+<code class="docutils literal"><span class="pre">docs/doxygen/depgraphs/</span></code> in the build tree.</p>
+<div class="section" id="file-graphs">
+<h3>File graphs<a class="headerlink" href="#file-graphs" title="Permalink to this headline">¶</a></h3>
+<p>The graphs are written to <code class="file docutils literal"><em><span class="pre">module_name</span></em><span class="pre">-deps.dot.png</span></code>.</p>
+<p>Node colors:</p>
+<dl class="docutils">
+<dt>light blue</dt>
+<dd>public API (installed) headers</dd>
+<dt>dark blue</dt>
+<dd>library API headers</dd>
+<dt>gray</dt>
+<dd>source files</dd>
+<dt>light green</dt>
+<dd>test files</dd>
+<dt>white</dt>
+<dd>other files</dd>
+</dl>
+<p>Each edge signifies an include dependency; there is no additional information
+currently included.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Source tree checker scripts</a><ul>
+<li><a class="reference internal" href="#checker-details">Checker details</a><ul>
+<li><a class="reference internal" href="#suppressing-issues">Suppressing issues</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#include-order-sorting">Include order sorting</a></li>
+<li><a class="reference internal" href="#include-dependency-graphs">Include dependency graphs</a><ul>
+<li><a class="reference internal" href="#file-graphs">File graphs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="releng/jenkins-howto.html"
+                        title="previous chapter">How to do common things with Jenkins builds</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="uncrustify.html"
+                        title="next chapter">Automatic source code formatting</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/gmxtree.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="uncrustify.html" title="Automatic source code formatting"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="releng/jenkins-howto.html" title="How to do common things with Jenkins builds"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >Development-time tools</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

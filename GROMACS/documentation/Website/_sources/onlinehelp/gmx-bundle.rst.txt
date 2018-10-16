@@ -1,0 +1,102 @@
+.. _gmx bundle:
+
+gmx bundle
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx bundle [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+               [:strong:`-ol` :emphasis:`[<.xvg>]`] [:strong:`-od` :emphasis:`[<.xvg>]`] [:strong:`-oz` :emphasis:`[<.xvg>]`]
+               [:strong:`-ot` :emphasis:`[<.xvg>]`] [:strong:`-otr` :emphasis:`[<.xvg>]`] [:strong:`-otl` :emphasis:`[<.xvg>]`]
+               [:strong:`-ok` :emphasis:`[<.xvg>]`] [:strong:`-okr` :emphasis:`[<.xvg>]`] [:strong:`-okl` :emphasis:`[<.xvg>]`]
+               [:strong:`-oa` :emphasis:`[<.pdb>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`]
+               [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-na` :emphasis:`<int>`] [:strong:`-[no]z`]
+
+Description
+-----------
+
+``gmx bundle`` analyzes bundles of axes. The axes can be for instance
+helix axes. The program reads two index groups and divides both
+of them in ``-na`` parts. The centers of mass of these parts
+define the tops and bottoms of the axes.
+Several quantities are written to file:
+the axis length, the distance and the z-shift of the axis mid-points
+with respect to the average center of all axes, the total tilt,
+the radial tilt and the lateral tilt with respect to the average axis.
+
+With options ``-ok``, ``-okr`` and ``-okl`` the total,
+radial and lateral kinks of the axes are plotted. An extra index
+group of kink atoms is required, which is also divided into ``-na``
+parts. The kink angle is defined as the angle between the kink-top and
+the bottom-kink vectors.
+
+With option ``-oa`` the top, mid (or kink when ``-ok`` is set)
+and bottom points of each axis
+are written to a :ref:`.pdb <pdb>` file each frame. The residue numbers correspond
+to the axis numbers. When viewing this file with Rasmol, use the
+command line option ``-nmrpdb``, and type ``set axis true`` to
+display the reference axis.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-ol`` [<.xvg>] (bun_len.xvg)
+    xvgr/xmgr file
+``-od`` [<.xvg>] (bun_dist.xvg)
+    xvgr/xmgr file
+``-oz`` [<.xvg>] (bun_z.xvg)
+    xvgr/xmgr file
+``-ot`` [<.xvg>] (bun_tilt.xvg)
+    xvgr/xmgr file
+``-otr`` [<.xvg>] (bun_tiltr.xvg)
+    xvgr/xmgr file
+``-otl`` [<.xvg>] (bun_tiltl.xvg)
+    xvgr/xmgr file
+``-ok`` [<.xvg>] (bun_kink.xvg) (Optional)
+    xvgr/xmgr file
+``-okr`` [<.xvg>] (bun_kinkr.xvg) (Optional)
+    xvgr/xmgr file
+``-okl`` [<.xvg>] (bun_kinkl.xvg) (Optional)
+    xvgr/xmgr file
+``-oa`` [<.pdb>] (axes.pdb) (Optional)
+    Protein data bank file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-na`` <int> (0)
+    Number of axes
+``-[no]z``  (no)
+    Use the *z*-axis as reference instead of the average axis
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structgmx__ana__indexmap__t" kind="struct" prot="public">
+    <compoundname>gmx_ana_indexmap_t</compoundname>
+    <includes local="no">gromacs/selection/indexutil.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structgmx__ana__indexmap__t_1a806f5456c1f90f4bb38c223aa4f81244" prot="public" static="no" mutable="no">
+        <type><ref refid="indexutil_8h_1ad7330829cb93245b9de7ed268cf6ba67" kindref="member">e_index_t</ref></type>
+        <definition>e_index_t gmx_ana_indexmap_t::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>Type of the mapping. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="113" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__indexmap__t_1a36f6687375c680532b55396ac1d2dc5e" prot="public" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* gmx_ana_indexmap_t::refid</definition>
+        <argsstring></argsstring>
+        <name>refid</name>
+        <briefdescription>
+<para>Current reference IDs. </para>        </briefdescription>
+        <detaileddescription>
+<para>This array provides a mapping from the current index group (last given to <ref refid="indexutil_8cpp_1aa100f0522b7c9ad3090ee32fe7ced7ad" kindref="member">gmx_ana_indexmap_update()</ref>) to the blocks in <computeroutput>b</computeroutput>, i.e., the original index group used in <ref refid="indexutil_8cpp_1a74069ed995e7641acfd6671ea3a28f63" kindref="member">gmx_ana_indexmap_init()</ref>. The mapping is zero-based. If <computeroutput>bMaskOnly</computeroutput> is provided to <ref refid="indexutil_8cpp_1aa100f0522b7c9ad3090ee32fe7ced7ad" kindref="member">gmx_ana_indexmap_update()</ref>, the indices for blocks not present in the current group are set to -1, otherwise they are removed completely and the <computeroutput>nr</computeroutput> field updated. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="125" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__indexmap__t_1a2675a18d204f864f94da0d616c115884" prot="public" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* gmx_ana_indexmap_t::mapid</definition>
+        <argsstring></argsstring>
+        <name>mapid</name>
+        <briefdescription>
+<para>Current mapped IDs. </para>        </briefdescription>
+        <detaileddescription>
+<para>This array provides IDs for the current index group. Instead of a zero-based mapping that <computeroutput>refid</computeroutput> provides, the values from the <computeroutput>orgid</computeroutput> array are used, thus allowing the mapping to be customized. In other words, <computeroutput>mapid[i] = orgid[refid[i]]</computeroutput>. If <computeroutput>bMaskOnly</computeroutput> is provided to <ref refid="indexutil_8cpp_1aa100f0522b7c9ad3090ee32fe7ced7ad" kindref="member">gmx_ana_indexmap_update()</ref>, this array equals <computeroutput>orgid</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="136" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__indexmap__t_1aabf74268915bc1a13aaaa95c236d5e08" prot="public" static="no" mutable="no">
+        <type><ref refid="structt__blocka" kindref="compound">t_blocka</ref></type>
+        <definition>t_blocka gmx_ana_indexmap_t::mapb</definition>
+        <argsstring></argsstring>
+        <name>mapb</name>
+        <briefdescription>
+<para>Mapped block structure. </para>        </briefdescription>
+        <detaileddescription>
+<para>A block structure that corresponds to the current index group. <computeroutput>mapb.nra</computeroutput> and <computeroutput>mapb.a</computeroutput> correspond to the last mapped index group. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="143" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__indexmap__t_1a480c734c65ad2a432690b7d27663fb40" prot="public" static="no" mutable="no">
+        <type>int *</type>
+        <definition>int* gmx_ana_indexmap_t::orgid</definition>
+        <argsstring></argsstring>
+        <name>orgid</name>
+        <briefdescription>
+<para>Customizable ID numbers for the original blocks. </para>        </briefdescription>
+        <detaileddescription>
+<para>This array has <computeroutput>b.nr</computeroutput> elements, each defining an original ID number for a block in <computeroutput>b</computeroutput> (i.e., in the original group passed to <ref refid="indexutil_8cpp_1a74069ed995e7641acfd6671ea3a28f63" kindref="member">gmx_ana_indexmap_init()</ref>). These are initialized in <ref refid="indexutil_8cpp_1a74069ed995e7641acfd6671ea3a28f63" kindref="member">gmx_ana_indexmap_init()</ref> based on the type:<itemizedlist>
+<listitem><para><ref refid="indexutil_8h_1ad7330829cb93245b9de7ed268cf6ba67a8270d36cd367d434ccd9fe0dc1b886d8" kindref="member">INDEX_ATOM</ref> : the atom indices</para></listitem><listitem><para><ref refid="indexutil_8h_1ad7330829cb93245b9de7ed268cf6ba67a744bebc713caa98b8bf8b837af07834d" kindref="member">INDEX_RES</ref> : the residue indices</para></listitem><listitem><para><ref refid="indexutil_8h_1ad7330829cb93245b9de7ed268cf6ba67ae082401c42a6fac46f6701a68f822c86" kindref="member">INDEX_MOL</ref> : the molecule indices</para></listitem></itemizedlist>
+</para><para>All the above numbers are zero-based. After <ref refid="indexutil_8cpp_1a74069ed995e7641acfd6671ea3a28f63" kindref="member">gmx_ana_indexmap_init()</ref>, the caller is free to change these values if the above are not appropriate. The mapped values can be read through <computeroutput>mapid</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="161" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__indexmap__t_1aea46d1a0ff405c100ab4466ea7092529" prot="public" static="no" mutable="no">
+        <type><ref refid="structt__blocka" kindref="compound">t_blocka</ref></type>
+        <definition>t_blocka gmx_ana_indexmap_t::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <briefdescription>
+<para>Block data that defines the mapping (internal use only). </para>        </briefdescription>
+        <detaileddescription>
+<para>The data is initialized by <ref refid="indexutil_8cpp_1a74069ed995e7641acfd6671ea3a28f63" kindref="member">gmx_ana_indexmap_init()</ref> and is not changed after that. Hence, it cannot be directly applied to the index group passed to <ref refid="indexutil_8cpp_1aa100f0522b7c9ad3090ee32fe7ced7ad" kindref="member">gmx_ana_indexmap_update()</ref> unless <computeroutput>bMaskOnly</computeroutput> was specified or the index group is identical to the one provided to <ref refid="indexutil_8cpp_1a74069ed995e7641acfd6671ea3a28f63" kindref="member">gmx_ana_indexmap_init()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="172" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgmx__ana__indexmap__t_1a3d74bf1cd72a14099510b2985c3f696b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gmx_ana_indexmap_t::bStatic</definition>
+        <argsstring></argsstring>
+        <name>bStatic</name>
+        <briefdescription>
+<para>true if the current reference IDs are for the whole group (internal use only). </para>        </briefdescription>
+        <detaileddescription>
+<para>This is used internally to optimize the evaluation such that <ref refid="indexutil_8cpp_1aa100f0522b7c9ad3090ee32fe7ced7ad" kindref="member">gmx_ana_indexmap_update()</ref> does not take any time if the group is actually static. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="180" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Data structure for calculating index group mappings. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3534">
+        <label>gmx_ana_indexmap_t</label>
+        <link refid="structgmx__ana__indexmap__t"/>
+        <childnode refid="3535" relation="usage">
+          <edgelabel>mapb</edgelabel>
+          <edgelabel>b</edgelabel>
+        </childnode>
+      </node>
+      <node id="3535">
+        <label>t_blocka</label>
+        <link refid="structt__blocka"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" line="111" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/indexutil.h" bodystart="110" bodyend="181"/>
+    <listofallmembers>
+      <member refid="structgmx__ana__indexmap__t_1aea46d1a0ff405c100ab4466ea7092529" prot="public" virt="non-virtual"><scope>gmx_ana_indexmap_t</scope><name>b</name></member>
+      <member refid="structgmx__ana__indexmap__t_1a3d74bf1cd72a14099510b2985c3f696b" prot="public" virt="non-virtual"><scope>gmx_ana_indexmap_t</scope><name>bStatic</name></member>
+      <member refid="structgmx__ana__indexmap__t_1aabf74268915bc1a13aaaa95c236d5e08" prot="public" virt="non-virtual"><scope>gmx_ana_indexmap_t</scope><name>mapb</name></member>
+      <member refid="structgmx__ana__indexmap__t_1a2675a18d204f864f94da0d616c115884" prot="public" virt="non-virtual"><scope>gmx_ana_indexmap_t</scope><name>mapid</name></member>
+      <member refid="structgmx__ana__indexmap__t_1a480c734c65ad2a432690b7d27663fb40" prot="public" virt="non-virtual"><scope>gmx_ana_indexmap_t</scope><name>orgid</name></member>
+      <member refid="structgmx__ana__indexmap__t_1a36f6687375c680532b55396ac1d2dc5e" prot="public" virt="non-virtual"><scope>gmx_ana_indexmap_t</scope><name>refid</name></member>
+      <member refid="structgmx__ana__indexmap__t_1a806f5456c1f90f4bb38c223aa4f81244" prot="public" virt="non-virtual"><scope>gmx_ana_indexmap_t</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

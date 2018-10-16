@@ -1,0 +1,292 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Performance improvements &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Improvements to GROMACS tools" href="tools.html" />
+    <link rel="prev" title="New and improved features" href="new-features.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tools.html" title="Improvements to GROMACS tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="new-features.html" title="New and improved features"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="performance-improvements">
+<h1>Performance improvements<a class="headerlink" href="#performance-improvements" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="gpu-improvements">
+<h1>GPU improvements<a class="headerlink" href="#gpu-improvements" title="Permalink to this headline">¶</a></h1>
+<p>In addition to those noted below, overall minor improvements contribute
+up to 5% increase in CUDA performance, so depending on parameters and compilers
+an 5-20% GPU kernel performance increase is expected.
+These benefits are seen with CUDA 7.5 (which is now the version we recommend);
+certain older versions (e.g. 7.0) see even larger improvements.</p>
+<p>Even larger improvements in OpenCL performance on AMD devices are
+expected, e.g. can be &gt;50% with RF/plain cut-off and PME with potential shift
+with recent AMD OpenCL compilers.</p>
+<p>Note that due to limitations of the NVIDIA OpenCL compiler CUDA is still superior
+in performance on NVIDIA GPUs. Hence, it is recommended to use CUDA-based GPU acceleration
+on NVIDIA hardware.</p>
+<div class="section" id="improved-support-for-opencl-devices">
+<h2>Improved support for OpenCL devices<a class="headerlink" href="#improved-support-for-opencl-devices" title="Permalink to this headline">¶</a></h2>
+<p>The OpenCL support is now fully compatible with all intra- and
+inter-node parallelization mode, including MPI, thread-MPI, and GPU
+sharing by PP ranks. (The previous limitations were caused by bugs in high-level
+GROMACS code.)</p>
+<p>Additionally some prefetching in the short-ranged kernels (similar to
+that in the CUDA code) that had been disabled was found to be useful
+after all.</p>
+</div>
+<div class="section" id="added-lennard-jones-combination-rule-kernels-for-gpus">
+<h2>Added Lennard-Jones combination-rule kernels for GPUs<a class="headerlink" href="#added-lennard-jones-combination-rule-kernels-for-gpus" title="Permalink to this headline">¶</a></h2>
+<p>Implemented LJ combination-rule parameter lookup in the CUDA and
+OpenCL kernels for both geometric and Lorentz-Berthelot combination
+rules, and enabled it for plain LJ cut-off. This optimization was
+already present in the CPU kernels. This improves performance with
+e.g. OPLS, GROMOS and AMBER force fields by about 10-15% (but does not
+help with CHARMM force fields because they use force-switched kernels).</p>
+</div>
+<div class="section" id="added-support-for-cuda-cc-6-0-6-1">
+<h2>Added support for CUDA CC 6.0/6.1<a class="headerlink" href="#added-support-for-cuda-cc-6-0-6-1" title="Permalink to this headline">¶</a></h2>
+<p>Added build-system and kernel-generator support for the Pascal
+architectures announced so far (GP100: 6.0, GP104: 6.1) and supported
+by the CUDA 8.0 compiler.</p>
+<p>By default we now generate binary as well as PTX code for both sm_60 and
+sm_61 and given the considerable differences between the two, we also
+generate PTX for both virtual arch. For now we don’t add CC 6.2 (GP102)
+compilation support as we know nothing about it.</p>
+<p>On the kernel-generation side, given the increased register file, for
+CC 6.0 the “wider” 128 threads/block kernels are enabled, on 6.1 and
+later the 64 threads/block remains.</p>
+</div>
+<div class="section" id="improved-gpu-pair-list-splitting-to-improve-performance">
+<h2>Improved GPU pair-list splitting to improve performance<a class="headerlink" href="#improved-gpu-pair-list-splitting-to-improve-performance" title="Permalink to this headline">¶</a></h2>
+<p>Instead of splitting the GPU lists (to generate more work units) based
+on a maximum cut-off, we now generate lists as close to the target
+list size as possible. The heuristic estimate for the number of
+cluster pairs is now too high by 0-1% instead of 10%. This results in
+a few percent fewer pair lists, but still slightly more than
+requested.</p>
+</div>
+<div class="section" id="improved-cuda-gpu-memory-configuration">
+<h2>Improved CUDA GPU memory configuration<a class="headerlink" href="#improved-cuda-gpu-memory-configuration" title="Permalink to this headline">¶</a></h2>
+<p>This makes use of the larger amount of L1 cache
+available for global load caching on hardware that supports it (K40,
+K80, Tegra K1, &amp; CC 5.2) by passing the appropriate command line
+option (“-dlcm=ca”).</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1804">Issue 1804</a></p>
+</div>
+<div class="section" id="automatic-nstlist-changes-were-tuned-for-intel-knight-s-landing">
+<h2>Automatic nstlist changes were tuned for Intel Knight’s Landing<a class="headerlink" href="#automatic-nstlist-changes-were-tuned-for-intel-knight-s-landing" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="cpu-improvements">
+<h1>CPU improvements<a class="headerlink" href="#cpu-improvements" title="Permalink to this headline">¶</a></h1>
+<p>These improvements to individual kernels will provide incremental
+improvements to CPU performance for simulations where they are active,
+but their value for simulations using GPU offload are much higher,
+because via the auto-tuning, they permit all kinds of resource
+utilization and throughput to increase.</p>
+<div class="section" id="optimized-the-bonded-thread-force-reduction">
+<h2>Optimized the bonded thread force reduction<a class="headerlink" href="#optimized-the-bonded-thread-force-reduction" title="Permalink to this headline">¶</a></h2>
+<p>The code for multi-threading of bonded interactions has to combine the
+forces afterwards. This reduction now uses fixed-size blocks of 32
+atoms, and instead of dividing reduction of the whole range of blocks
+uniformly over the threads, now only used blocks are divided
+(uniformly) over the threads.  This speeds up the reduction by a
+factor of the number of threads (!) for typical protein+water systems
+when not using domain decomposition. With domain decomposition, the
+speed up is up to a factor of 3.</p>
+</div>
+<div class="section" id="used-simd-transpose-scatter-in-bonded-force-reduction">
+<h2>Used SIMD transpose-scatter in bonded force reduction<a class="headerlink" href="#used-simd-transpose-scatter-in-bonded-force-reduction" title="Permalink to this headline">¶</a></h2>
+<p>The angle and dihedral SIMD functions now use the SIMD transpose
+scatter functions for force reduction. This change gives a massive
+performance improvement for bondeds, mainly because the dihedral
+force update did a lot of vector operations without SIMD that are
+now fully replaced by SIMD operations.</p>
+<p>Added SIMD implementation of Lennard-Jones 1-4 interactions
+“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”“”-
+The gives a few factors speed improvement. The main improvement comes
+from simplified analytical LJ instead of tables; SIMD helps a bit.</p>
+</div>
+<div class="section" id="added-simd-implementation-of-settle">
+<h2>Added SIMD implementation of SETTLE<a class="headerlink" href="#added-simd-implementation-of-settle" title="Permalink to this headline">¶</a></h2>
+<p>On Haswell CPUs, this makes SETTLE a factor 5 faster.</p>
+</div>
+<div class="section" id="added-simd-support-for-routines-that-do-periodic-boundary-coordinate-transformations">
+<h2>Added SIMD support for routines that do periodic boundary coordinate transformations<a class="headerlink" href="#added-simd-support-for-routines-that-do-periodic-boundary-coordinate-transformations" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="threading-improvements">
+<h1>Threading improvements<a class="headerlink" href="#threading-improvements" title="Permalink to this headline">¶</a></h1>
+<p>These improvements enhance the performance of code that runs over
+multiple CPU threads.</p>
+<div class="section" id="improved-verlet-scheme-pair-list-workload-balancing">
+<h2>Improved Verlet-scheme pair-list workload balancing<a class="headerlink" href="#improved-verlet-scheme-pair-list-workload-balancing" title="Permalink to this headline">¶</a></h2>
+<p>Implemented near perfect load-balancing for Verlet-scheme CPU
+pair-lists. This increases the search cost by 3%, but this is
+outweighed by the more balanced non-bonded kernel times, particularly
+for small systems.</p>
+</div>
+<div class="section" id="improved-the-threading-of-virtual-site-code">
+<h2>Improved the threading of virtual-site code<a class="headerlink" href="#improved-the-threading-of-virtual-site-code" title="Permalink to this headline">¶</a></h2>
+<p>On many threads, a significant part of the vsites would end up in
+the separate serial task, thereby limiting scaling. Now two weakly
+dependent tasks are generated for each thread and one of them uses
+a thread-local force buffer, parts of which are reduced by different
+threads that are responsible for those parts.</p>
+<p>Also the setup now runs multi-threaded.</p>
+</div>
+<div class="section" id="add-openmp-support-to-more-loops">
+<h2>Add OpenMP support to more loops<a class="headerlink" href="#add-openmp-support-to-more-loops" title="Permalink to this headline">¶</a></h2>
+<p>Loops over number of atoms cause significant amount of serial time with
+large number of threads, which limits scaling.</p>
+</div>
+<div class="section" id="add-openmp-parallelization-for-the-pull-code">
+<h2>Add OpenMP parallelization for the pull code<a class="headerlink" href="#add-openmp-parallelization-for-the-pull-code" title="Permalink to this headline">¶</a></h2>
+<p>The pull code could take up to a third of the compute time for OpenMP
+parallel simulation with large pull groups.
+Now all pull-code loops over atoms have an OpenMP parallel version.</p>
+</div>
+</div>
+<div class="section" id="other-improvements">
+<h1>Other improvements<a class="headerlink" href="#other-improvements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="multi-simulations-are-coupled-less-frequently">
+<h2>Multi-simulations are coupled less frequently<a class="headerlink" href="#multi-simulations-are-coupled-less-frequently" title="Permalink to this headline">¶</a></h2>
+<p>For example, replica-exchange simulations communicate between simulations
+only at exchange attempts. Plain multi-simulations do not communicate
+between simulations. Overall performance will tend to improve any time
+the progress of one simulation might be faster than others (e.g. it’s
+at a different pressure, or using a quieter part of the network).</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Performance improvements</a></li>
+<li><a class="reference internal" href="#gpu-improvements">GPU improvements</a><ul>
+<li><a class="reference internal" href="#improved-support-for-opencl-devices">Improved support for OpenCL devices</a></li>
+<li><a class="reference internal" href="#added-lennard-jones-combination-rule-kernels-for-gpus">Added Lennard-Jones combination-rule kernels for GPUs</a></li>
+<li><a class="reference internal" href="#added-support-for-cuda-cc-6-0-6-1">Added support for CUDA CC 6.0/6.1</a></li>
+<li><a class="reference internal" href="#improved-gpu-pair-list-splitting-to-improve-performance">Improved GPU pair-list splitting to improve performance</a></li>
+<li><a class="reference internal" href="#improved-cuda-gpu-memory-configuration">Improved CUDA GPU memory configuration</a></li>
+<li><a class="reference internal" href="#automatic-nstlist-changes-were-tuned-for-intel-knight-s-landing">Automatic nstlist changes were tuned for Intel Knight’s Landing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cpu-improvements">CPU improvements</a><ul>
+<li><a class="reference internal" href="#optimized-the-bonded-thread-force-reduction">Optimized the bonded thread force reduction</a></li>
+<li><a class="reference internal" href="#used-simd-transpose-scatter-in-bonded-force-reduction">Used SIMD transpose-scatter in bonded force reduction</a></li>
+<li><a class="reference internal" href="#added-simd-implementation-of-settle">Added SIMD implementation of SETTLE</a></li>
+<li><a class="reference internal" href="#added-simd-support-for-routines-that-do-periodic-boundary-coordinate-transformations">Added SIMD support for routines that do periodic boundary coordinate transformations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#threading-improvements">Threading improvements</a><ul>
+<li><a class="reference internal" href="#improved-verlet-scheme-pair-list-workload-balancing">Improved Verlet-scheme pair-list workload balancing</a></li>
+<li><a class="reference internal" href="#improved-the-threading-of-virtual-site-code">Improved the threading of virtual-site code</a></li>
+<li><a class="reference internal" href="#add-openmp-support-to-more-loops">Add OpenMP support to more loops</a></li>
+<li><a class="reference internal" href="#add-openmp-parallelization-for-the-pull-code">Add OpenMP parallelization for the pull code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#other-improvements">Other improvements</a><ul>
+<li><a class="reference internal" href="#multi-simulations-are-coupled-less-frequently">Multi-simulations are coupled less frequently</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="new-features.html"
+                        title="previous chapter">New and improved features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.html"
+                        title="next chapter">Improvements to GROMACS tools</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/release-notes/2016/major/performance.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tools.html" title="Improvements to GROMACS tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="new-features.html" title="New and improved features"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

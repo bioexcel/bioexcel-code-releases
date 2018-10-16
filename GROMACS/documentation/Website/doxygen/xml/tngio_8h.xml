@@ -1,0 +1,757 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="tngio_8h" kind="file">
+    <compoundname>tngio.h</compoundname>
+    <includes local="no">cstdio</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="tests_2tngio_8cpp" local="yes">src/gromacs/fileio/tests/tngio.cpp</includedby>
+    <includedby refid="tngio_8cpp" local="yes">src/gromacs/fileio/tngio.cpp</includedby>
+    <includedby refid="trxio_8cpp" local="yes">src/gromacs/fileio/trxio.cpp</includedby>
+    <includedby refid="gmx__trjcat_8cpp" local="yes">src/gromacs/gmxana/gmx_trjcat.cpp</includedby>
+    <includedby refid="gmx__trjconv_8cpp" local="yes">src/gromacs/gmxana/gmx_trjconv.cpp</includedby>
+    <includedby refid="mdoutf_8cpp" local="yes">src/gromacs/mdlib/mdoutf.cpp</includedby>
+    <includedby refid="dump_8cpp" local="yes">src/gromacs/tools/dump.cpp</includedby>
+    <incdepgraph>
+      <node id="6855">
+        <label>stdint.h</label>
+      </node>
+      <node id="6853">
+        <label>cstdio</label>
+      </node>
+      <node id="6857">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="6854">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="6855" relation="include">
+        </childnode>
+        <childnode refid="6856" relation="include">
+        </childnode>
+      </node>
+      <node id="6852">
+        <label>src/gromacs/fileio/tngio.h</label>
+        <link refid="tngio.h"/>
+        <childnode refid="6853" relation="include">
+        </childnode>
+        <childnode refid="6854" relation="include">
+        </childnode>
+        <childnode refid="6857" relation="include">
+        </childnode>
+      </node>
+      <node id="6856">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="6859">
+        <label>src/gromacs/fileio/tests/tngio.cpp</label>
+        <link refid="tests_2tngio_8cpp"/>
+      </node>
+      <node id="6858">
+        <label>src/gromacs/fileio/tngio.h</label>
+        <link refid="tngio.h"/>
+        <childnode refid="6859" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="tngio_8h_1aa8040284047b241227c9b700618bd9a7" prot="public" static="no">
+        <type>struct <ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory</ref> *</type>
+        <definition>typedef struct gmx_tng_trajectory* gmx_tng_trajectory_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_tng_trajectory_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="48" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="tngio_8h_1a3f8fa084dce835eec5ea9ffdcc7720fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_tng_open</definition>
+        <argsstring>(const char *filename, char mode, gmx_tng_trajectory_t *tng_data_p)</argsstring>
+        <name>gmx_tng_open</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref> *</type>
+          <declname>tng_data_p</declname>
+        </param>
+        <briefdescription>
+<para>Open a TNG trajectory file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of file to open </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Can be set to &apos;r&apos;, &apos;w&apos; or &apos;a&apos; for reading, writing or appending respectively. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tng_data_p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to an allocated gmx_tng_trajectory_t into which a handle to a TNG trajectory will be stored.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Handles all I/O errors internally via fatal error </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="59" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="115" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1afd7ee9173584bcac012131a0f194d987" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_tng_close</definition>
+        <argsstring>(gmx_tng_trajectory_t *tng)</argsstring>
+        <name>gmx_tng_close</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref> *</type>
+          <declname>tng</declname>
+        </param>
+        <briefdescription>
+<para>Finish writing a TNG trajectory file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="64" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="200" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1addd920a83aeb15e4982d5328ce37fe74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_tng_add_mtop</definition>
+        <argsstring>(gmx_tng_trajectory_t tng, const gmx_mtop_t *mtop)</argsstring>
+        <name>gmx_tng_add_mtop</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+<para>Add molecular topology information to TNG output (if available) </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tng</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid handle to a TNG trajectory </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a topology (can be NULL) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="72" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a4b2983422011cfae204cd16d58b00ef3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_tng_prepare_md_writing</definition>
+        <argsstring>(gmx_tng_trajectory_t tng, const gmx_mtop_t *mtop, const t_inputrec *ir)</argsstring>
+        <name>gmx_tng_prepare_md_writing</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <briefdescription>
+<para>Do all TNG preparation for full-precision whole-system trajectory writing during MD simulations. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tng</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid handle to a TNG trajectory </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Global topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input settings (for writing frequencies) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="82" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="555" bodyend="569"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a33bca2616c8e24965ee1425baa61394f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_tng_set_compression_precision</definition>
+        <argsstring>(gmx_tng_trajectory_t tng, real prec)</argsstring>
+        <name>gmx_tng_set_compression_precision</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>prec</declname>
+        </param>
+        <briefdescription>
+<para>Set the default compression precision for TNG writing. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tng</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid handle to a TNG trajectory </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>prec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>GROMACS-style precision setting (i.e. 1000 for 3 digits of precision) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="90" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="773" bodyend="782"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1aeffc86ba4aa0bdb42983fa1a89e1d0b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_tng_prepare_low_prec_writing</definition>
+        <argsstring>(gmx_tng_trajectory_t tng, const gmx_mtop_t *mtop, const t_inputrec *ir)</argsstring>
+        <name>gmx_tng_prepare_low_prec_writing</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <briefdescription>
+<para>Do all TNG preparation for low-precision selection-based trajectory writing during MD simulations. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tng</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid handle to a TNG trajectory </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Global topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input settings (for writing frequencies) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="100" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="784" bodyend="800"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1aa1c8db306d72ba105a9c41582e08373e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_fwrite_tng</definition>
+        <argsstring>(gmx_tng_trajectory_t tng, const gmx_bool bUseLossyCompression, gmx_int64_t step, real elapsedPicoSeconds, real lambda, const rvec *box, int nAtoms, const rvec *x, const rvec *v, const rvec *f)</argsstring>
+        <name>gmx_fwrite_tng</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <param>
+          <type>const <ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bUseLossyCompression</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>elapsedPicoSeconds</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nAtoms</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Write a frame to a TNG file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tng</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid handle to a TNG trajectory </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bUseLossyCompression</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to use lossy compression </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MD step number </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>elapsedPicoSeconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Elapsed MD time </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Free-energy lambda value </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Simulation box </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nAtoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms (i.e. vector lengths) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of position coordinates </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of elocities </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of forces</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The pointers tng, x, v, f may be NULL, which triggers not writing (that component). box can only be NULL if x is also NULL. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="119" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="802" bodyend="972"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a286dbd5a8c89c0190588c234ee27e010" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fflush_tng</definition>
+        <argsstring>(gmx_tng_trajectory_t tng)</argsstring>
+        <name>fflush_tng</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <briefdescription>
+<para>Write the current frame set to disk. Perform compression etc. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tng</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid handle to a TNG trajectory </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="135" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="974" bodyend="985"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a2310cbde99dd9869d9e597e72de702e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float gmx_tng_get_time_of_final_frame</definition>
+        <argsstring>(gmx_tng_trajectory_t tng)</argsstring>
+        <name>gmx_tng_get_time_of_final_frame</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <briefdescription>
+<para>Get the time (in picoseconds) of the final frame in the trajectory. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tng</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Valid handle to a TNG trajectory </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="142" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="987" bodyend="1004"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a880f945a3110ac8a76e9ab0e0f3674a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_prepare_tng_writing</definition>
+        <argsstring>(const char *filename, char mode, gmx_tng_trajectory_t *in, gmx_tng_trajectory_t *out, int nAtoms, const struct gmx_mtop_t *mtop, const int *index, const char *indexGroupName)</argsstring>
+        <name>gmx_prepare_tng_writing</name>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>char</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref> *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref> *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nAtoms</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>indexGroupName</declname>
+        </param>
+        <briefdescription>
+<para>Prepare to write TNG output from trajectory conversion tools. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="145" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1aa47006ecc33d38ebdd00eebc4df74561" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_write_tng_from_trxframe</definition>
+        <argsstring>(gmx_tng_trajectory_t output, const t_trxframe *frame, int natoms)</argsstring>
+        <name>gmx_write_tng_from_trxframe</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__trxframe" kindref="compound">t_trxframe</ref> *</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <briefdescription>
+<para>Write a trxframe to a TNG file. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>output</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Trajectory to write to </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame data to write </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>natoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of atoms to actually write</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The natoms field in frame is the number of atoms in the system. The parameter natoms supports writing an index-group subset of the atoms. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="164" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="1146" bodyend="1170"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a849f35179a71937d2529e51dc10975c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_tng_setup_atom_subgroup</definition>
+        <argsstring>(gmx_tng_trajectory_t tng, const int nind, const int *ind, const char *name)</argsstring>
+        <name>gmx_tng_setup_atom_subgroup</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>tng</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nind</declname>
+        </param>
+        <param>
+          <type>const int *</type>
+          <declname>ind</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Creates a molecule containing only the indexed atoms and sets the number of all other molecules to 0. Works similar to a selection group. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="171" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="1290" bodyend="1382"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a5d9f402a78d88c336e132ec59c138d16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool gmx_read_next_tng_frame</definition>
+        <argsstring>(gmx_tng_trajectory_t input, struct t_trxframe *fr, gmx_int64_t *requestedIds, int numRequestedIds)</argsstring>
+        <name>gmx_read_next_tng_frame</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__trxframe" kindref="compound">t_trxframe</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>requestedIds</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>numRequestedIds</declname>
+        </param>
+        <briefdescription>
+<para>Read the first/next TNG frame. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="177" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="1388" bodyend="1599"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1a6da7afe201c1bd085a982733268a41e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_print_tng_molecule_system</definition>
+        <argsstring>(gmx_tng_trajectory_t input, FILE *stream)</argsstring>
+        <name>gmx_print_tng_molecule_system</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+<para>Print the molecule system to stream. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="183" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="1601" bodyend="1762"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1aaa84bc99f428058cdc449684a298ce06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool gmx_get_tng_data_block_types_of_next_frame</definition>
+        <argsstring>(gmx_tng_trajectory_t input, int frame, int nRequestedIds, gmx_int64_t *requestedIds, gmx_int64_t *nextFrame, gmx_int64_t *nBlocks, gmx_int64_t **blockIds)</argsstring>
+        <name>gmx_get_tng_data_block_types_of_next_frame</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nRequestedIds</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>requestedIds</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>nextFrame</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>nBlocks</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t **</type>
+          <declname>blockIds</declname>
+        </param>
+        <briefdescription>
+<para>Get a list of block IDs present in the next frame with data. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="187" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="1764" bodyend="1800"/>
+      </memberdef>
+      <memberdef kind="function" id="tngio_8h_1ae09940c9f04605eb9fb8baa5e20e05a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool gmx_get_tng_data_next_frame_of_block_type</definition>
+        <argsstring>(gmx_tng_trajectory_t input, gmx_int64_t blockId, real **values, gmx_int64_t *frameNumber, double *frameTime, gmx_int64_t *nValuesPerFrame, gmx_int64_t *nAtoms, real *prec, char *name, int maxLen, gmx_bool *bOK)</argsstring>
+        <name>gmx_get_tng_data_next_frame_of_block_type</name>
+        <param>
+          <type><ref refid="structgmx__tng__trajectory" kindref="compound">gmx_tng_trajectory_t</ref></type>
+          <declname>input</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>blockId</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> **</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>frameNumber</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>frameTime</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>nValuesPerFrame</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t *</type>
+          <declname>nAtoms</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>prec</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxLen</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bOK</declname>
+        </param>
+        <briefdescription>
+<para>Get data of the next frame with data from the data block with the specified block ID. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h" line="197" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.cpp" bodystart="1802" bodyend="1907"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/tngio.h"/>
+  </compounddef>
+</doxygen>

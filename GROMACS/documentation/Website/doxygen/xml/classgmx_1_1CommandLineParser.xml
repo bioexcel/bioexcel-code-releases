@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1CommandLineParser" kind="class" prot="public">
+    <compoundname>gmx::CommandLineParser</compoundname>
+    <includes local="no">gromacs/commandline/cmdlineparser.h</includes>
+    <innerclass refid="classgmx_1_1CommandLineParser_1_1Impl" prot="public">gmx::CommandLineParser::Impl</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1CommandLineParser_1a01e6166baa82fa84f284dfda8459e4de" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1PrivateImplPointer" kindref="compound">PrivateImplPointer</ref>&lt; <ref refid="classgmx_1_1CommandLineParser_1_1Impl" kindref="compound">Impl</ref> &gt;</type>
+        <definition>PrivateImplPointer&lt;Impl&gt; gmx::CommandLineParser::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" line="145" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1CommandLineParser_1a668cdc094ab0619b30a6f2454243af05" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::CommandLineParser::CommandLineParser</definition>
+        <argsstring>(Options *options)</argsstring>
+        <name>CommandLineParser</name>
+        <param>
+          <type><ref refid="classgmx_1_1Options" kindref="compound">Options</ref> *</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Creates a command-line parser that sets values for options. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Options" kindref="compound">Options</ref> object whose options should be set. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" line="80" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.cpp" bodystart="127" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineParser_1a2726fce60cd7af6d4b865349e7a3a60d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::CommandLineParser::~CommandLineParser</definition>
+        <argsstring>()</argsstring>
+        <name>~CommandLineParser</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" line="81" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.cpp" bodystart="132" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineParser_1a037da4cb844aad405c8020582312ad1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1CommandLineParser" kindref="compound">CommandLineParser</ref> &amp;</type>
+        <definition>CommandLineParser &amp; gmx::CommandLineParser::skipUnknown</definition>
+        <argsstring>(bool bEnabled)</argsstring>
+        <name>skipUnknown</name>
+        <param>
+          <type>bool</type>
+          <declname>bEnabled</declname>
+        </param>
+        <briefdescription>
+<para>Makes the parser skip unknown options and keep them in <computeroutput>argv</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bEnabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to skip and keep unknown options. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>*this</para></simplesect>
+Setting this option to true has dual effect: unknown options are silently skipped, and all recognized options are removed from <computeroutput>argc</computeroutput> and <computeroutput>argv</computeroutput> in <ref refid="classgmx_1_1CommandLineParser_1acac5fae60504d616cf136b9b466f0315" kindref="member">parse()</ref>. These effects should be easy to separate into different flags if there is need for it.</para><para>The default is false: unknown options result in exceptions and <computeroutput>argc</computeroutput> and <computeroutput>argv</computeroutput> are not modified.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" line="99" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.cpp" bodystart="136" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineParser_1ae70f82e7ed7ca501dc7f380cce92f746" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1CommandLineParser" kindref="compound">CommandLineParser</ref> &amp;</type>
+        <definition>CommandLineParser &amp; gmx::CommandLineParser::allowPositionalArguments</definition>
+        <argsstring>(bool bEnabled)</argsstring>
+        <name>allowPositionalArguments</name>
+        <param>
+          <type>bool</type>
+          <declname>bEnabled</declname>
+        </param>
+        <briefdescription>
+<para>Makes the parser accept positional arguments. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bEnabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether to skip and keep positional arguments. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>*this</para></simplesect>
+Arguments that are not options (ie. no leading hyphen), and which come before all options are acceptable if this has been enabled. If so, these arguments are left in <computeroutput>argc</computeroutput> and <computeroutput>argv</computeroutput> in <ref refid="classgmx_1_1CommandLineParser_1acac5fae60504d616cf136b9b466f0315" kindref="member">parse()</ref>.</para><para>The default is false: unknown leading arguments result in exceptions and <computeroutput>argc</computeroutput> and <computeroutput>argv</computeroutput> are not modified.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" line="117" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.cpp" bodystart="142" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CommandLineParser_1acac5fae60504d616cf136b9b466f0315" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::CommandLineParser::parse</definition>
+        <argsstring>(int *argc, char *argv[])</argsstring>
+        <name>parse</name>
+        <param>
+          <type>int *</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Parses the command line. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if any errors were detected in the input.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+All command-line arguments are parsed, and an aggregate exception with all the detected errors (including unknown options, where applicable) is thrown in the end.</para><para>If <ref refid="classgmx_1_1CommandLineParser_1a037da4cb844aad405c8020582312ad1a" kindref="member">skipUnknown()</ref> was not called, or last called with a false value, the input arguments are not modified. If <ref refid="classgmx_1_1CommandLineParser_1a037da4cb844aad405c8020582312ad1a" kindref="member">skipUnknown()</ref> was last called with a true value, only unknown options will be retained in <computeroutput>argc</computeroutput> and <computeroutput>argv</computeroutput>.</para><para>All positional arguments are retained in the argument list, but such arguments must precede all options.</para><para><computeroutput>argv</computeroutput>[0] is never modified. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" line="140" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.cpp" bodystart="148" bodyend="278"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements command-line parsing for <ref refid="classgmx_1_1Options" kindref="compound">Options</ref> objects. </para>    </briefdescription>
+    <detaileddescription>
+<para>Typical usage (without error checking): <programlisting><codeline><highlight class="normal"><sp/><sp/><ref refid="classgmx_1_1Options" kindref="compound">gmx::Options</ref><sp/>options(</highlight><highlight class="stringliteral">&quot;name&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;description&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Fill<sp/>up<sp/>options</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><ref refid="classgmx_1_1CommandLineParser" kindref="compound">gmx::CommandLineParser</ref>(&amp;options).<ref refid="classgmx_1_1CommandLineParser_1acac5fae60504d616cf136b9b466f0315" kindref="member">parse</ref>(&amp;argc,<sp/>argv);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>options.finish();</highlight></codeline>
+<codeline><highlight class="normal">*<sp/></highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" line="72" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineparser.h" bodystart="71" bodyend="146"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1CommandLineParser_1ae70f82e7ed7ca501dc7f380cce92f746" prot="public" virt="non-virtual"><scope>gmx::CommandLineParser</scope><name>allowPositionalArguments</name></member>
+      <member refid="classgmx_1_1CommandLineParser_1a668cdc094ab0619b30a6f2454243af05" prot="public" virt="non-virtual"><scope>gmx::CommandLineParser</scope><name>CommandLineParser</name></member>
+      <member refid="classgmx_1_1CommandLineParser_1a01e6166baa82fa84f284dfda8459e4de" prot="private" virt="non-virtual"><scope>gmx::CommandLineParser</scope><name>impl_</name></member>
+      <member refid="classgmx_1_1CommandLineParser_1acac5fae60504d616cf136b9b466f0315" prot="public" virt="non-virtual"><scope>gmx::CommandLineParser</scope><name>parse</name></member>
+      <member refid="classgmx_1_1CommandLineParser_1a037da4cb844aad405c8020582312ad1a" prot="public" virt="non-virtual"><scope>gmx::CommandLineParser</scope><name>skipUnknown</name></member>
+      <member refid="classgmx_1_1CommandLineParser_1a2726fce60cd7af6d4b865349e7a3a60d" prot="public" virt="non-virtual"><scope>gmx::CommandLineParser</scope><name>~CommandLineParser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

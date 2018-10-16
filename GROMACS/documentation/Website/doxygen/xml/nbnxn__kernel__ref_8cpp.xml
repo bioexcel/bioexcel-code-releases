@@ -1,0 +1,385 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__kernel__ref_8cpp" kind="file">
+    <compoundname>nbnxn_kernel_ref.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="nbnxn__kernel__ref_8h" local="yes">nbnxn_kernel_ref.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="force_8h" local="yes">gromacs/mdlib/force.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__consts_8h" local="yes">gromacs/mdlib/nbnxn_consts.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="ishift_8h" local="yes">gromacs/pbcutil/ishift.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="nbnxn__kernel__ref__includes_8h" local="yes">gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref_includes.h</includes>
+    <incdepgraph>
+      <node id="15696">
+        <label>stdarg.h</label>
+      </node>
+      <node id="15683">
+        <label>assert.h</label>
+      </node>
+      <node id="15687">
+        <label>cstdint</label>
+      </node>
+      <node id="15693">
+        <label>stdint.h</label>
+      </node>
+      <node id="15689">
+        <label>gromacs/mdlib/nb_verlet.h</label>
+        <link refid="nb__verlet_8h"/>
+        <childnode refid="15690" relation="include">
+        </childnode>
+      </node>
+      <node id="15684">
+        <label>cmath</label>
+      </node>
+      <node id="15699">
+        <label>stddef.h</label>
+      </node>
+      <node id="15698">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="15699" relation="include">
+        </childnode>
+        <childnode refid="15692" relation="include">
+        </childnode>
+      </node>
+      <node id="15688">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="15691">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="15692" relation="include">
+        </childnode>
+      </node>
+      <node id="15681">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="15692">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="15693" relation="include">
+        </childnode>
+        <childnode refid="15694" relation="include">
+        </childnode>
+      </node>
+      <node id="15680">
+        <label>src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp</label>
+        <link refid="nbnxn_kernel_ref.cpp"/>
+        <childnode refid="15681" relation="include">
+        </childnode>
+        <childnode refid="15682" relation="include">
+        </childnode>
+        <childnode refid="15683" relation="include">
+        </childnode>
+        <childnode refid="15684" relation="include">
+        </childnode>
+        <childnode refid="15685" relation="include">
+        </childnode>
+        <childnode refid="15686" relation="include">
+        </childnode>
+        <childnode refid="15689" relation="include">
+        </childnode>
+        <childnode refid="15691" relation="include">
+        </childnode>
+        <childnode refid="15695" relation="include">
+        </childnode>
+        <childnode refid="15698" relation="include">
+        </childnode>
+      </node>
+      <node id="15686">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="15684" relation="include">
+        </childnode>
+        <childnode refid="15687" relation="include">
+        </childnode>
+        <childnode refid="15688" relation="include">
+        </childnode>
+      </node>
+      <node id="15682">
+        <label>config.h</label>
+      </node>
+      <node id="15695">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="15696" relation="include">
+        </childnode>
+        <childnode refid="15697" relation="include">
+        </childnode>
+        <childnode refid="15692" relation="include">
+        </childnode>
+      </node>
+      <node id="15685">
+        <label>algorithm</label>
+      </node>
+      <node id="15697">
+        <label>stdio.h</label>
+      </node>
+      <node id="15690">
+        <label>memory</label>
+      </node>
+      <node id="15694">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a0692ae4852b3317ca1c89061cdc5e80c" prot="public" static="no">
+        <name>CALC_COUL_RF</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="60" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="61" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac79c0b18417b519aa844c6a758ca5789" prot="public" static="no">
+        <name>LJ_FORCE_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="64" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a91cd8a0696733938362a6770d64a985a" prot="public" static="no">
+        <name>LJ_POT_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="67" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac68bdc25acce9ea9d30e80e4a41d0956" prot="public" static="no">
+        <name>LJ_EWALD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="70" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="71" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a198066db3bac26ef767f19381e1a79e0" prot="public" static="no">
+        <name>LJ_EWALD_COMB_GEOM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="72" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ade8def97d45d75aafab1ad9cdbed9e0d" prot="public" static="no">
+        <name>LJ_EWALD_COMB_LB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="75" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a70ff6d392dbe17e23255f3a26f1934ab" prot="public" static="no">
+        <name>CALC_COUL_TAB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="84" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="85" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac79c0b18417b519aa844c6a758ca5789" prot="public" static="no">
+        <name>LJ_FORCE_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="88" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a91cd8a0696733938362a6770d64a985a" prot="public" static="no">
+        <name>LJ_POT_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="91" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac68bdc25acce9ea9d30e80e4a41d0956" prot="public" static="no">
+        <name>LJ_EWALD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="94" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="95" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a198066db3bac26ef767f19381e1a79e0" prot="public" static="no">
+        <name>LJ_EWALD_COMB_GEOM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="96" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ade8def97d45d75aafab1ad9cdbed9e0d" prot="public" static="no">
+        <name>LJ_EWALD_COMB_LB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="99" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a49eed4f0952c21ca3618c0ee761efb4b" prot="public" static="no">
+        <name>VDW_CUTOFF_CHECK</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="105" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="106" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac79c0b18417b519aa844c6a758ca5789" prot="public" static="no">
+        <name>LJ_FORCE_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="109" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a91cd8a0696733938362a6770d64a985a" prot="public" static="no">
+        <name>LJ_POT_SWITCH</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="112" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ac68bdc25acce9ea9d30e80e4a41d0956" prot="public" static="no">
+        <name>LJ_EWALD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="115" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ae93f70f468d7d5282ec6772156f0d878" prot="public" static="no">
+        <name>LJ_CUT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="116" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1a198066db3bac26ef767f19381e1a79e0" prot="public" static="no">
+        <name>LJ_EWALD_COMB_GEOM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="117" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="nbnxn__kernel__ref_8cpp_1ade8def97d45d75aafab1ad9cdbed9e0d" prot="public" static="no">
+        <name>LJ_EWALD_COMB_LB</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" line="120" column="11" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.cpp"/>
+  </compounddef>
+</doxygen>

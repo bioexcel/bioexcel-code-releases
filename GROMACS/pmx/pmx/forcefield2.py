@@ -77,10 +77,14 @@ class TopolBase:
     def __init__(self, filename, version = 'old'):
         self.filename = filename
         self.version = version
-        if os.path.splitext( filename )[1] == '.itp':
-            self.is_itp = True
-        else:
-            self.is_itp = False
+        self.is_itp = True
+        if filename!=None:
+            if os.path.splitext( filename )[1] == '.itp':
+                self.is_itp = True
+            else:
+                self.is_itp = False
+        self.has_atomtypes = False
+        self.atomtypes = []
         self.atoms = []
         self.residues = []
         self.name = ''
@@ -98,11 +102,16 @@ class TopolBase:
         self.has_vsites2 = False
         self.has_vsites3 = False
         self.has_vsites4 = False
+	self.has_posre = False
+        self.has_ii = False # intermolecular_interactions
+        self.ii = {} # ii is a dictionary, which containts bonds, angles, dihedrals
+	self.posre = []
         self.molecules = []
         self.system = ''
         self.qA = 0.
         self.qB = 0.
-        self.read()
+        if filename!=None:
+            self.read()
     #===============================================================================
     # read functions
     
@@ -112,7 +121,9 @@ class TopolBase:
         if not self.is_itp:
             self.read_header( lines )
         self.read_footer( lines )
+        posre_sections = self.get_posre_section( lines )
         lines = kickOutComments(lines,'#')
+        self.read_atomtypes(lines)
         self.read_moleculetype(lines)
         if self.name: # atoms, bonds, ... section
             self.read_atoms(lines)
@@ -125,6 +136,8 @@ class TopolBase:
             self.read_vsites2(lines)
             self.read_vsites3(lines)
             self.read_vsites4(lines)
+            if self.has_posre:
+	        self.read_posre(posre_sections)
             self.__make_residues()
         if not self.is_itp:
             self.read_system(lines)
@@ -204,6 +217,23 @@ class TopolBase:
         if l:
             self.name, self.nrexcl =  l[0].split()[0], int(l[0].split()[1])
 
+    def read_atomtypes( self, lines):
+        l = readSection(lines,'[ atomtypes ]','[')
+        lst = []
+        try:
+            lst = parseList('ssffsff',l) # gaff
+        except:
+            try:
+                lst = parseList('sffsff',l) # another gaff or cgenff
+            except:
+                try:
+                    lst = parseList('ssiffsff',l) # opls
+                except:
+                    print 'Could not read atomtype format'
+        if len(lst)>0:
+            self.has_atomtypes = True
+        self.atomtypes = lst
+                    
     def read_header(self, lines):
         ret = []
         for line in lines:
@@ -441,6 +471,44 @@ class TopolBase:
                                             self.atoms[idx[4]-1],\
                                             func,rest])
 
+    def get_posre_section( self, lines ):
+        starts = []
+        bIfDef = False
+        for i, line in enumerate(lines):
+            if line.strip().startswith('#endif'):
+                bIfDef = False
+            if line.strip().startswith('#ifdef'):
+                bIfDef = True
+            if bIfDef:
+                continue
+            if line.strip().startswith('[ position_restraints ]'):
+                starts.append(i)
+        if starts:
+            self.has_posre = True
+
+        lstList = {}
+        counter = 0
+        for s in starts:
+            lst = readSection(lines[s:],'[ position_restraints ]','[')
+            lst = kickOutComments(lst,'#')
+            lstList[counter] = lst
+            counter+=1
+
+        return( lstList )
+
+    def read_posre(self, lstList):
+        for lstKey in lstList:
+            lst = lstList[lstKey]
+            for line in lst:
+                entr = line.split()
+		idx = int(entr[0])
+                
+                func = int(entr[1])
+                try:
+                    rest = ' '.join(entr[2:])
+                except:
+                    rest = ''
+                self.posre.append([self.atoms[idx-1],func,rest])
 
 
     #===============================================================================
@@ -456,6 +524,8 @@ class TopolBase:
         if not self.is_itp:
             self.write_header(fp)
         if self.atoms:
+            if self.has_atomtypes:
+                self.write_atomtypes(fp)
             self.write_moleculetype(fp)
             self.write_atoms(fp, charges = stateQ, atomtypes = stateTypes, dummy_qA = dummy_qA,
                              dummy_qB = dummy_qB, scale_mass = scale_mass,
@@ -473,10 +543,15 @@ class TopolBase:
                 self.write_vsites3(fp)
             if self.has_vsites4:
                 self.write_vsites4(fp)
+	    if self.has_posre:
+		self.write_posre(fp)
         self.write_footer(fp)
         if not self.is_itp:
             self.write_system(fp)
             self.write_molecules(fp)
+        if self.atoms:
+            if self.has_ii:
+                self.write_ii(fp)
         fp.close()
 
 
@@ -496,8 +571,13 @@ class TopolBase:
         print >>fp, '; Name        nrexcl'
         print >>fp, '%s  %d' % (self.name,self.nrexcl)
 
-
-
+    def write_atomtypes(self, fp):
+        fp.write('[ atomtypes ]\n')
+        for atype in self.atomtypes:
+            for x in atype:
+                fp.write(' %s' % x)
+            fp.write('\n')
+        fp.write('\n')
 
     def write_atoms(self, fp, charges = 'AB', atomtypes = 'AB', dummy_qA = 'on',\
                 dummy_qB = 'on',  scale_mass=True, target_qB = [], full_morphe = True):
@@ -805,8 +885,10 @@ class TopolBase:
         print >>fp,'\n [ virtual_sites3 ]'    
         print >>fp,';  ai    aj    ak    al funct            c0            c1'
         for vs in self.virtual_sites3:
-            if len(vs) == 6:
+            if len(vs) == 5:
                 print >>fp, "%6d %6d %6d %6d %4d" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4])
+            elif len(vs) == 6:
+                print >>fp, "%6d %6d %6d %6d %4d %s" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4], vs[5])
             else:
                 sys.stderr.write('EEK! Something went wrong while writing virtual_sites3!!!!\n')
                 print vs
@@ -816,13 +898,55 @@ class TopolBase:
         print >>fp,'\n [ virtual_sites4 ]'    
         print >>fp,';  ai    aj    ak    al    am  funct            c0            c1          c2'
         for vs in self.virtual_sites4:
-            if len(vs) == 7:
+            if len(vs) == 6:
                 print >>fp, "%6d %6d %6d %6d %6d %4d" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4].id, vs[5])
+            elif len(vs) == 7:
+                print >>fp, "%6d %6d %6d %6d %6d %4d %s" % ( vs[0].id, vs[1].id, vs[2].id, vs[3].id, vs[4].id, vs[5], vs[6])
             else:
                 sys.stderr.write('EEK! Something went wrong while writing virtual_sites4!!!!\n')
                 print vs
                 sys.exit(1)
 
+    def write_posre(self, fp):
+        print >>fp,'\n [ position_restraints ]'    
+        print >>fp,';  ai    funct            c0            c1          c2'
+        for pr in self.posre:
+            if len(pr) == 3:
+                print >>fp, "%6d %4d %s" % ( pr[0].id, pr[1], pr[2])
+            else:
+                sys.stderr.write('EEK! Something went wrong while writing position_restraints!!!!\n')
+                print pr
+                sys.exit(1)
+
+    def write_ii(self, fp):
+        fp.write('\n [ intermolecular_interactions ]\n')
+        # bonds
+        if 'bonds' in self.ii.keys():
+           fp.write(' [ bonds ]\n')
+           for b in self.ii['bonds']: 
+               fp.write('%6d %6d %6d' % ( b[0].id, b[1].id, b[2] ))
+               if len(b)>3: 
+                   for x in b[3]:
+                       fp.write(' %14.6f' % x)
+               fp.write('\n')
+        # angles
+        if 'angles' in self.ii.keys():
+           fp.write(' [ angles ]\n')
+           for ang in self.ii['angles']: 
+               fp.write('%6d %6d %6d %6d' % ( ang[0].id, ang[1].id, ang[2].id, ang[3] ))
+               if len(ang)>4: 
+                   for x in ang[4]:
+                       fp.write(' %14.6f' % x)
+               fp.write('\n')
+        # dihedrals
+        if 'dihedrals' in self.ii.keys():
+           fp.write(' [ dihedrals ]\n')
+           for dih in self.ii['dihedrals']: 
+               fp.write('%6d %6d %6d %6d %6d' % ( dih[0].id, dih[1].id, dih[2].id, dih[3].id, dih[4] ))
+               if len(dih)>5: 
+                   for x in dih[5]:
+                       fp.write(' %14.6f' % x)
+               fp.write('\n')
 
     def write_system(self,fp):
         print >>fp, '[ system ]'

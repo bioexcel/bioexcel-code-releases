@@ -1,0 +1,279 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development-time tools &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Understanding Jenkins builds" href="jenkins.html" />
+    <link rel="prev" title="Error handling" href="error-handling.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jenkins.html" title="Understanding Jenkins builds"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="error-handling.html" title="Error handling"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="development-time-tools">
+<h1>Development-time tools<a class="headerlink" href="#development-time-tools" title="Permalink to this headline">¶</a></h1>
+<p>Several tools have their own individual pages and are listed below.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="doxygen.html">Using Doxygen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#documentation-flavors">Documentation flavors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#building-the-documentation">Building the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#general-guidelines-for-doxygen-markup">General guidelines for Doxygen markup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#gromacs-specifics">GROMACS specifics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#documenting-specific-code-constructs">Documenting specific code constructs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doxygen.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jenkins.html">Understanding Jenkins builds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jenkins.html#pre-submit-verification">Pre-submit verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jenkins.html#on-demand-builds">On-demand builds</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="releng/index.html">releng repository</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="releng/releng.html">Jenkins scripts (releng Python module)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/workflow.html">Workflow build overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/releng-api.html">releng Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/jenkins-config.html">Jenkins configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/jenkins-ui.html">Interacting with builds in Jenkins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releng/jenkins-howto.html">How to do common things with Jenkins builds</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gmxtree.html">Source tree checker scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gmxtree.html#checker-details">Checker details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmxtree.html#include-order-sorting">Include order sorting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmxtree.html#include-dependency-graphs">Include dependency graphs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uncrustify.html">Automatic source code formatting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#setting-up-uncrustify">Setting up uncrustify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#what-is-automatically-formatted">What is automatically formatted?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#scripts">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncrustify.html#using-git-filters">Using git filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testutils.html">Unit testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testutils.html#finding-building-and-running">Finding, building and running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testutils.html#unit-testing-framework">Unit testing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testutils.html#getting-started-with-new-tests">Getting started with new tests</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="change-management">
+<h2>Change management<a class="headerlink" href="#change-management" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>git</dt>
+<dd><p class="first">GROMACS uses <cite>git&lt;https://git-scm.com/&gt;</cite> as the version control system.
+Instructions for setting up git for GROMACS, as well as tips and tricks for
+its use, can be found on the wiki: <a class="reference external" href="http://www.gromacs.org/index.php?title=Developer_Zone/Git/Git_Tips_%26_Tricks">Git Tips &amp; Tricks</a></p>
+<p class="last">Other basic tutorial material for <code class="docutils literal"><span class="pre">git</span></code> can be found on the <cite>web&lt;https://git-scm.com/doc/ext&gt;</cite>.</p>
+</dd>
+<dt>Gerrit</dt>
+<dd>All code changes go through a code review system at
+<a class="reference external" href="http://gerrit.gromacs.org">http://gerrit.gromacs.org</a>.</dd>
+<dt>Jenkins</dt>
+<dd>All changes pushed to Gerrit are automatically compiled and otherwise
+checked on various platforms using a continuous integration system at
+<a class="reference external" href="http://jenkins.gromacs.org">http://jenkins.gromacs.org</a>.
+<a class="reference internal" href="jenkins.html"><span class="doc">Understanding Jenkins builds</span></a> documents how Jenkins interacts with the build system,
+providing information on how to replicate the builds Jenkins does (e.g., to
+diagnose issues).
+<a class="reference internal" href="releng/index.html"><span class="doc">releng repository</span></a> provides more information on the technical implementation
+of the builds.</dd>
+<dt>Redmine</dt>
+<dd>Bugs and issues, as well as some random features and discussions,
+are tracked at <a class="reference external" href="http://redmine.gromacs.org">http://redmine.gromacs.org</a>.</dd>
+</dl>
+</div>
+<div class="section" id="build-system">
+<h2>Build system<a class="headerlink" href="#build-system" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>CMake</dt>
+<dd>Main tool used in the build system.</dd>
+</dl>
+<p>packaging for distribution (CPack)</p>
+<dl class="docutils">
+<dt>unit testing (CTest)</dt>
+<dd>GROMACS uses a unit testing framework based on Google C++ Testing
+Framework (gtest) and CTest.  All unit tests are automatically run on Jenkins
+for each commit.
+Details can be found on a separate page on <a class="reference internal" href="testutils.html"><span class="doc">Unit testing</span></a>.</dd>
+</dl>
+<p>regression tests</p>
+<dl class="docutils">
+<dt>cppcheck</dt>
+<dd><a class="reference external" href="http://cppcheck.sourceforge.net">cppcheck</a> is used for static code
+analysis, and is run automatically on Jenkins for each commit.  Different rules
+are used for C and C++ code (with stricter checking for C++ code, as that is
+newer).  The build system provides a <code class="docutils literal"><span class="pre">cppcheck</span></code> target (produced from
+<code class="docutils literal"><span class="pre">tests/CppCheck.cmake</span></code>) to run the tool.  This target is used also by Jenkins.</dd>
+</dl>
+<p>clang static analyzer</p>
+<p>coverage</p>
+</div>
+<div class="section" id="code-formatting-and-style">
+<span id="dev-formatting-tools"></span><h2>Code formatting and style<a class="headerlink" href="#code-formatting-and-style" title="Permalink to this headline">¶</a></h2>
+<p>The tools and scripts listed below are used to automatically check/apply
+formatting that follows GROMACS style guidelines described on a separate page:
+<a class="reference internal" href="style.html"><span class="doc">Style guidelines</span></a>.</p>
+<dl class="docutils">
+<dt>uncrustify</dt>
+<dd><a class="reference external" href="http://uncrustify.sourceforge.net">uncrustify</a> is used for automatic
+indentation and other formatting of the source code to follow
+<a class="reference internal" href="formatting.html"><span class="doc">Guidelines for code formatting</span></a>.  All code must remain invariant under uncrustify
+with the config at <code class="docutils literal"><span class="pre">admin/uncrustify.cfg</span></code>.  A patched version of uncrustify is
+used.  See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/copyright.py</span></code></dt>
+<dd>This Python script adds and formats copyright headers in source files.
+<code class="docutils literal"><span class="pre">uncrustify.sh</span></code> (see below) uses the script to check/update copyright years on
+changed files automatically.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/uncrustify.sh</span></code></dt>
+<dd>This <code class="docutils literal"><span class="pre">bash</span></code> script runs uncrustify and <code class="docutils literal"><span class="pre">copyright.py</span></code> for all
+files that have local changes and checks that they conform to the prescribed
+style.  Optionally, the script can also apply changes to make the files
+conform.
+This script is automatically run by Jenkins to ensure that all commits adhere
+to <a class="reference internal" href="formatting.html"><span class="doc">Guidelines for code formatting</span></a>.  If the uncrustify job does not succeed, it
+means that this script has something to complain.
+See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/git-pre-commit</span></code></dt>
+<dd>This sample git pre-commit hook can be used if one wants to apply
+<code class="docutils literal"><span class="pre">uncrustify.sh</span></code> automatically before every commit to check for formatting
+issues.  See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt><code class="docutils literal"><span class="pre">docs/doxygen/includesorter.py</span></code></dt>
+<dd>This Python script sorts and reformats #include directives according to
+the guidelines at <a class="reference internal" href="includestyle.html"><span class="doc">Guidelines for #include directives</span></a>.  Details are documented on a
+separate page (with the whole suite of Python scripts used for source code
+checks): <a class="reference internal" href="gmxtree.html#dev-include-sorter"><span class="std std-ref">Include order sorting</span></a>.</dd>
+<dt>include directive checker</dt>
+<dd>In its present form, the above include sorter script cannot be conveniently
+applied in <code class="docutils literal"><span class="pre">uncrustify.sh</span></code>.  To check for issues, it is instead integrated into
+a <code class="docutils literal"><span class="pre">check-source</span></code> build target.  When this target is built, it also checks for
+include formatting issues.  Internally, it uses the sorter script.  This check
+is run in Jenkins as part of the Documentation job.
+Details for the checking mechanism are on a separate page (common for several
+checkers): <a class="reference internal" href="gmxtree.html"><span class="doc">Source tree checker scripts</span></a>.</dd>
+<dt><code class="docutils literal"><span class="pre">admin/reformat_all.sh</span></code></dt>
+<dd>This <code class="docutils literal"><span class="pre">bash</span></code> script runs uncrustify/<code class="docutils literal"><span class="pre">copyright.py</span></code>/include sorter
+on all relevant files in the source tree (or in a particular directory).
+The script can also produce the list of files where these scripts are applied,
+for use with other scripts.  See <a class="reference internal" href="uncrustify.html"><span class="doc">Automatic source code formatting</span></a> for details.</dd>
+<dt>git attributes</dt>
+<dd>git attributes (specified in <code class="docutils literal"><span class="pre">.gitattributes</span></code> files) are used to annotate
+which files are subject to automatic formatting checks (and for automatic
+reformatting by the above scripts).  See <code class="docutils literal"><span class="pre">man</span> <span class="pre">gitattributes</span></code> for an overview of
+the mechanism.  We use the <code class="docutils literal"><span class="pre">filter</span></code> attribute to specify the type of automatic
+checking/formatting to apply.  Custom attributes are used for specifying some
+build system dependencies for easier processing in CMake.</dd>
+</dl>
+<p>include-what-you-use</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development-time tools</a><ul>
+<li><a class="reference internal" href="#change-management">Change management</a></li>
+<li><a class="reference internal" href="#build-system">Build system</a></li>
+<li><a class="reference internal" href="#code-formatting-and-style">Code formatting and style</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="error-handling.html"
+                        title="previous chapter">Error handling</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jenkins.html"
+                        title="next chapter">Understanding Jenkins builds</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/tools.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="jenkins.html" title="Understanding Jenkins builds"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="error-handling.html" title="Error handling"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

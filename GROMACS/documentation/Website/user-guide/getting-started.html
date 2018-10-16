@@ -1,0 +1,284 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting started &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flow Chart" href="flow.html" />
+    <link rel="prev" title="User guide" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="flow.html" title="Flow Chart"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="User guide"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>In this chapter we assume the reader is familiar with Molecular Dynamics and
+familiar with Unix, including the use of a text editor such as <code class="docutils literal"><span class="pre">jot</span></code>, <code class="docutils literal"><span class="pre">emacs</span></code>
+or <code class="docutils literal"><span class="pre">vi</span></code>. We furthermore assume the GROMACS software is installed properly on
+your system. When you see a line like</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">-</span><span class="n">l</span>
+</pre></div>
+</div>
+<p>you are supposed to type the contents of that line on your computer terminal.</p>
+<div class="section" id="setting-up-your-environment">
+<h2>Setting up your environment<a class="headerlink" href="#setting-up-your-environment" title="Permalink to this headline">¶</a></h2>
+<p>In order to check whether you have access to GROMACS, please
+start by entering the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span> <span class="o">-</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>This command should print out information about the version of GROMACS
+installed. If this, in contrast, returns the phrase</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gmx</span><span class="p">:</span> <span class="n">command</span> <span class="ow">not</span> <span class="n">found</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>then you have to find where your version of GROMACS is installed. In
+the default case, the binaries are located in
+<code class="docutils literal"><span class="pre">/usr/local/gromacs/bin</span></code>, however, you can ask your local system
+administrator for more information, and then follow the advice for
+<a class="reference internal" href="../install-guide/index.html#getting-access-to-gromacs"><span class="std std-ref">Getting access to GROMACS after installation</span></a>.</p>
+</div>
+<div class="section" id="flowchart-of-typical-simulation">
+<h2>Flowchart of typical simulation<a class="headerlink" href="#flowchart-of-typical-simulation" title="Permalink to this headline">¶</a></h2>
+<p>A typical simulation workflow with GROMACS is <a class="reference internal" href="flow.html"><span class="doc">illustrated here</span></a>.</p>
+</div>
+<div class="section" id="important-files">
+<h2>Important files<a class="headerlink" href="#important-files" title="Permalink to this headline">¶</a></h2>
+<p>Here is an overview of the most important GROMACS file types that you will
+encounter.</p>
+<div class="section" id="molecular-topology-file-top">
+<h3>Molecular Topology file (<code class="docutils literal"><span class="pre">.top</span></code>)<a class="headerlink" href="#molecular-topology-file-top" title="Permalink to this headline">¶</a></h3>
+<p>The molecular topology file is generated by the program <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>.
+<a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> translates a <a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a> structure file of any
+peptide or protein to a molecular topology file. This topology file
+contains a complete description of all the interactions in your
+peptide or protein.</p>
+</div>
+<div class="section" id="topology-include-file-mechanism">
+<span id="gmx-topo-include"></span><h3>Topology #include file mechanism<a class="headerlink" href="#topology-include-file-mechanism" title="Permalink to this headline">¶</a></h3>
+<p>When constructing a system topology in a <a class="reference internal" href="file-formats.html#top"><span class="std std-ref">top</span></a> file for presentation to grompp,
+GROMACS uses a built-in version of the so-called C preprocessor, cpp (in GROMACS 3, it really was cpp). cpp interprets lines like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &quot;ions.itp&quot;</span>
+</pre></div>
+</div>
+<p>by looking for the indicated file in the current directory, the GROMACS share/top directory as indicated
+by the GMXLIB environment variable, and any directory indicated by a <code class="docutils literal"><span class="pre">-I</span></code> flag in the value of the
+include <a class="reference internal" href="mdp-options.html#mdp-include"><code class="xref std std-mdp docutils literal"><span class="pre">run</span> <span class="pre">parameter</span></code></a> in the <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file. It either finds this file or reports
+a warning. (Note that when you supply a directory name, you should use Unix-style forward
+slashes ‘/’, not Windows-style backslashes ‘’ for separators.) When found, it then uses the contents
+exactly as if you had cut and pasted the included file into the main file yourself. Note that you shouldn’t
+go and do this copy-and-paste yourself, since the main purposes of the include file mechanism are to re-use
+previous work, make future changes easier, and prevent typos.</p>
+<p>Further, <code class="docutils literal"><span class="pre">cpp</span></code> interprets code such as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#ifdef POSRES_WATER</span>
+<span class="p">;</span> <span class="n">Position</span> <span class="n">restraint</span> <span class="k">for</span> <span class="n">each</span> <span class="n">water</span> <span class="n">oxygen</span>
+<span class="p">[</span> <span class="n">position_restraints</span> <span class="p">]</span>
+<span class="p">;</span>  <span class="n">i</span> <span class="n">funct</span>       <span class="n">fcx</span>        <span class="n">fcy</span>        <span class="n">fcz</span>
+    <span class="mi">1</span>    <span class="mi">1</span>       <span class="mi">1000</span>       <span class="mi">1000</span>       <span class="mi">1000</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>by testing whether the preprocessor variable <code class="docutils literal"><span class="pre">POSRES_WATER</span></code> was defined somewhere (i.e. “if defined”).
+This could be done with <code class="docutils literal"><span class="pre">#define</span> <span class="pre">POSRES_WATER</span></code> earlier in the <a class="reference internal" href="file-formats.html#top"><span class="std std-ref">top</span></a> file (or its <code class="docutils literal"><span class="pre">#include</span></code> files),
+with a <code class="docutils literal"><span class="pre">-D</span></code> flag in the <code class="docutils literal"><span class="pre">include</span></code> run parameter as above, or on the command line to <code class="docutils literal"><span class="pre">cpp</span></code>.
+The function of the <code class="docutils literal"><span class="pre">-D</span></code> flag is borrowed from the similar usage in <code class="docutils literal"><span class="pre">cpp</span></code>. The string that
+follows <code class="docutils literal"><span class="pre">-D</span></code> must match exactly; using <code class="docutils literal"><span class="pre">-DPOSRES</span></code> will not trigger <code class="docutils literal"><span class="pre">#ifdef</span> <span class="pre">POSRE</span></code> or <code class="docutils literal"><span class="pre">#ifdef</span> <span class="pre">DPOSRES</span></code>.
+This mechanism allows you to change your <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file to choose whether or not you want position
+restraints on your solvent, rather than your <a class="reference internal" href="file-formats.html#top"><span class="std std-ref">top</span></a> file. Note that preprocessor variables
+are not the same as shell environment variables.</p>
+</div>
+<div class="section" id="molecular-structure-file-gro-pdb">
+<span id="gmx-need-for-gro"></span><h3>Molecular Structure file (<code class="docutils literal"><span class="pre">.gro</span></code>, <code class="docutils literal"><span class="pre">.pdb</span></code>)<a class="headerlink" href="#molecular-structure-file-gro-pdb" title="Permalink to this headline">¶</a></h3>
+<p>When <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> is executed to generate a molecular topology, it
+also translates the structure file (<a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a> file) to a GROMOS structure
+file (<a class="reference internal" href="file-formats.html#gro"><span class="std std-ref">gro</span></a> file). The main difference between a <a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a> file and a gromos
+file is their format and that a <a class="reference internal" href="file-formats.html#gro"><span class="std std-ref">gro</span></a> file can also hold
+velocities. However, if you do not need the velocities, you can also
+use a <a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a> file in all programs. To generate a box of solvent
+molecules around the peptide, the program <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">gmx solvate</span></a> is
+used. First the program <a class="reference internal" href="../onlinehelp/gmx-editconf.html#gmx-editconf"><span class="std std-ref">gmx editconf</span></a> should be used to define a box
+of appropriate size around the molecule. <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">gmx solvate</span></a> solvates a
+solute molecule (the peptide) into any solvent (in this case,
+water). The output of <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">gmx solvate</span></a> is a gromos structure file of the
+peptide solvated in water. <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">gmx solvate</span></a> also changes the molecular
+topology file (generated by <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>) to add solvent to the
+topology.</p>
+</div>
+<div class="section" id="molecular-dynamics-parameter-file-mdp">
+<h3>Molecular Dynamics parameter file (<code class="docutils literal"><span class="pre">.mdp</span></code>)<a class="headerlink" href="#molecular-dynamics-parameter-file-mdp" title="Permalink to this headline">¶</a></h3>
+<p>The Molecular Dynamics Parameter (<a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a>) file contains all information
+about the Molecular Dynamics simulation itself e.g. time-step, number
+of steps, temperature, pressure etc. The easiest way of handling such
+a file is by adapting a sample <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file. A <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">sample mdp file</span></a>
+is available.</p>
+</div>
+<div class="section" id="index-file-ndx">
+<h3>Index file (<code class="docutils literal"><span class="pre">.ndx</span></code>)<a class="headerlink" href="#index-file-ndx" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes you may need an index file to specify actions on groups of
+atoms (e.g. temperature coupling, accelerations, freezing). Usually
+the default index groups will be sufficient, so for this demo we will
+not consider the use of index files.</p>
+</div>
+<div class="section" id="run-input-file-tpr">
+<h3>Run input file (<code class="docutils literal"><span class="pre">.tpr</span></code>)<a class="headerlink" href="#run-input-file-tpr" title="Permalink to this headline">¶</a></h3>
+<p>The next step is to combine the molecular structure (<a class="reference internal" href="file-formats.html#gro"><span class="std std-ref">gro</span></a> file),
+topology (<a class="reference internal" href="file-formats.html#top"><span class="std std-ref">top</span></a> file) MD-parameters (<a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file) and (optionally) the
+index file (<a class="reference internal" href="file-formats.html#ndx"><span class="std std-ref">ndx</span></a>) to generate a run input file (<a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> extension). This
+file contains all information needed to start a simulation with
+GROMACS. The <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> program processes all input files and
+generates the run input <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file.</p>
+</div>
+<div class="section" id="trajectory-file-trr-tng-or-xtc">
+<h3>Trajectory file (<code class="docutils literal"><span class="pre">.trr</span></code>, <code class="docutils literal"><span class="pre">.tng</span></code>, or <code class="docutils literal"><span class="pre">.xtc</span></code>)<a class="headerlink" href="#trajectory-file-trr-tng-or-xtc" title="Permalink to this headline">¶</a></h3>
+<p>Once the run input file is available, we can start the simulation. The
+program which starts the simulation is called <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> (or
+sometimes just mdrun, or mdrun_mpi). The only input file of <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>
+that you usually need in order to start a run is the run input
+file (<a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file). The typical output files of <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> are the
+trajectory file (<a class="reference internal" href="file-formats.html#trr"><span class="std std-ref">trr</span></a> file), a logfile (<a class="reference internal" href="file-formats.html#log"><span class="std std-ref">log</span></a> file), and perhaps a
+checkpoint file (<a class="reference internal" href="file-formats.html#cpt"><span class="std std-ref">cpt</span></a> file).</p>
+</div>
+</div>
+<div class="section" id="tutorial-material">
+<h2>Tutorial material<a class="headerlink" href="#tutorial-material" title="Permalink to this headline">¶</a></h2>
+<p>There are many <a class="reference external" href="http://www.gromacs.org/Documentation/Tutorials">tutorials</a> available that cover aspects of using GROMACS.</p>
+</div>
+<div class="section" id="background-reading">
+<h2>Background reading<a class="headerlink" href="#background-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Berendsen, H.J.C., Postma, J.P.M., van Gunsteren, W.F., Hermans, J. (1981)
+Intermolecular Forces, chapter Interaction models for water in relation to
+protein hydration, pp 331-342. Dordrecht: D. Reidel Publishing Company
+Dordrecht</li>
+<li>Kabsch, W., Sander, C. (1983).     Dictionary of protein secondary
+structure: Pattern recognition of hydrogen-bonded and geometrical features.
+Biopolymers <strong>22</strong>, 2577–2637.</li>
+<li>Mierke, D.F., Kessler, H. (1991).     Molecular dynamics with dimethyl
+sulfoxide as a solvent. Conformation of a cyclic hexapeptide. J. Am. Chem.
+Soc. <strong>113</strong>, 9446.</li>
+<li>Stryer, L. (1988).     Biochemistry vol. 1, p. 211. New York: Freeman, 3
+edition.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting started</a><ul>
+<li><a class="reference internal" href="#setting-up-your-environment">Setting up your environment</a></li>
+<li><a class="reference internal" href="#flowchart-of-typical-simulation">Flowchart of typical simulation</a></li>
+<li><a class="reference internal" href="#important-files">Important files</a><ul>
+<li><a class="reference internal" href="#molecular-topology-file-top">Molecular Topology file (<code class="docutils literal"><span class="pre">.top</span></code>)</a></li>
+<li><a class="reference internal" href="#topology-include-file-mechanism">Topology #include file mechanism</a></li>
+<li><a class="reference internal" href="#molecular-structure-file-gro-pdb">Molecular Structure file (<code class="docutils literal"><span class="pre">.gro</span></code>, <code class="docutils literal"><span class="pre">.pdb</span></code>)</a></li>
+<li><a class="reference internal" href="#molecular-dynamics-parameter-file-mdp">Molecular Dynamics parameter file (<code class="docutils literal"><span class="pre">.mdp</span></code>)</a></li>
+<li><a class="reference internal" href="#index-file-ndx">Index file (<code class="docutils literal"><span class="pre">.ndx</span></code>)</a></li>
+<li><a class="reference internal" href="#run-input-file-tpr">Run input file (<code class="docutils literal"><span class="pre">.tpr</span></code>)</a></li>
+<li><a class="reference internal" href="#trajectory-file-trr-tng-or-xtc">Trajectory file (<code class="docutils literal"><span class="pre">.trr</span></code>, <code class="docutils literal"><span class="pre">.tng</span></code>, or <code class="docutils literal"><span class="pre">.xtc</span></code>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial-material">Tutorial material</a></li>
+<li><a class="reference internal" href="#background-reading">Background reading</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">User guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="flow.html"
+                        title="next chapter">Flow Chart</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/getting-started.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="flow.html" title="Flow Chart"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="User guide"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

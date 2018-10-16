@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1IFileInputRedirector" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::IFileInputRedirector</compoundname>
+    <derivedcompoundref refid="classgmx_1_1anonymous__namespace_02fileredirector_8cpp_03_1_1DefaultInputRedirector" prot="public" virt="non-virtual">gmx::anonymous_namespace{fileredirector.cpp}::DefaultInputRedirector</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1TestFileInputRedirector" prot="public" virt="non-virtual">gmx::test::TestFileInputRedirector</derivedcompoundref>
+    <includes local="no">gromacs/utility/fileredirector.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1IFileInputRedirector_1a0048ae5e511da8748e42e12a2fb4d228" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::IFileInputRedirector::~IFileInputRedirector</definition>
+        <argsstring>()</argsstring>
+        <name>~IFileInputRedirector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/fileredirector.h" line="74" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/fileredirector.cpp" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IFileInputRedirector_1a86a5419b2179e878db05bbad2d032a55" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool gmx::IFileInputRedirector::fileExists</definition>
+        <argsstring>(const char *filename, File::NotFoundHandler onNotFound) const =0</argsstring>
+        <name>fileExists</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02fileredirector_8cpp_03_1_1DefaultInputRedirector_1ae54f77acb36750defdc398c5eed79937">fileExists</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1TestFileInputRedirector_1a1bae84a435459aeb48948783528c633b">fileExists</reimplementedby>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>File::NotFoundHandler</type>
+          <declname>onNotFound</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether the provided path exists (and is a file). </para>        </briefdescription>
+        <detaileddescription>
+<para>The <computeroutput>onNotFound</computeroutput> can be used to influence the behavior on error conditions. Functions to pass as this parameter are provided as members of <ref refid="classgmx_1_1File" kindref="compound">gmx::File</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/fileredirector.h" line="83" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IFileInputRedirector_1a6dcfbfde4d7b41e49235bf4e16b0a421" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::IFileInputRedirector::fileExists</definition>
+        <argsstring>(const std::string &amp;filename, File::NotFoundHandler onNotFound) const </argsstring>
+        <name>fileExists</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>File::NotFoundHandler</type>
+          <declname>onNotFound</declname>
+        </param>
+        <briefdescription>
+<para>Convenience method to check file existence using an std::string path. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/fileredirector.h" line="87" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/fileredirector.h" bodystart="87" bodyend="91"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Allows overriding file existence checks from code that supports it. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> The calling code should take in this interface and use the methods in it all file system operations that need to support this redirection.</para><para>This allows tests to override the file existence checks without actually using the file system. See <ref refid="classgmx_1_1IFileOutputRedirector" kindref="compound">IFileOutputRedirector</ref> for notes on a typical usage pattern.</para><para>With some further refactoring of the <ref refid="classgmx_1_1File" kindref="compound">File</ref> class, this could also support redirecting input files from in-memory buffers as well, but for now the current capabilities are sufficient. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1807">
+        <label>gmx::anonymous_namespace{fileredirector.cpp}::DefaultInputRedirector</label>
+        <link refid="classgmx_1_1anonymous__namespace_02fileredirector_8cpp_03_1_1DefaultInputRedirector"/>
+        <childnode refid="1806" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1806">
+        <label>gmx::IFileInputRedirector</label>
+        <link refid="classgmx_1_1IFileInputRedirector"/>
+      </node>
+      <node id="1808">
+        <label>gmx::test::TestFileInputRedirector</label>
+        <link refid="classgmx_1_1test_1_1TestFileInputRedirector"/>
+        <childnode refid="1806" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/fileredirector.h" line="72" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/fileredirector.h" bodystart="71" bodyend="92"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1IFileInputRedirector_1a86a5419b2179e878db05bbad2d032a55" prot="public" virt="pure-virtual"><scope>gmx::IFileInputRedirector</scope><name>fileExists</name></member>
+      <member refid="classgmx_1_1IFileInputRedirector_1a6dcfbfde4d7b41e49235bf4e16b0a421" prot="public" virt="non-virtual"><scope>gmx::IFileInputRedirector</scope><name>fileExists</name></member>
+      <member refid="classgmx_1_1IFileInputRedirector_1a0048ae5e511da8748e42e12a2fb4d228" prot="public" virt="virtual"><scope>gmx::IFileInputRedirector</scope><name>~IFileInputRedirector</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="testoptions_8h" kind="file">
+    <compoundname>testoptions.h</compoundname>
+    <includedby refid="tests_2selectioncollection_8cpp" local="yes">src/gromacs/selection/tests/selectioncollection.cpp</includedby>
+    <includedby refid="base_8cpp" local="yes">src/gromacs/simd/tests/base.cpp</includedby>
+    <includedby refid="splinetable_8cpp" local="yes">src/gromacs/tables/tests/splinetable.cpp</includedby>
+    <includedby refid="programs_2mdrun_2tests_2moduletest_8cpp" local="yes">src/programs/mdrun/tests/moduletest.cpp</includedby>
+    <includedby refid="mpitest_8cpp" local="yes">src/testutils/mpitest.cpp</includedby>
+    <includedby refid="stringtest_8cpp" local="yes">src/testutils/stringtest.cpp</includedby>
+    <includedby refid="testasserts_8cpp" local="yes">src/testutils/testasserts.cpp</includedby>
+    <includedby refid="testfilemanager_8cpp" local="yes">src/testutils/testfilemanager.cpp</includedby>
+    <includedby refid="testinit_8cpp" local="yes">src/testutils/testinit.cpp</includedby>
+    <includedby refid="testoptions_8cpp" local="yes">src/testutils/testoptions.cpp</includedby>
+    <invincdepgraph>
+      <node id="35729">
+        <label>src/testutils/mpitest.cpp</label>
+        <link refid="mpitest_8cpp"/>
+      </node>
+      <node id="35725">
+        <label>src/testutils/testoptions.h</label>
+        <link refid="testoptions.h"/>
+        <childnode refid="35726" relation="include">
+        </childnode>
+        <childnode refid="35727" relation="include">
+        </childnode>
+        <childnode refid="35728" relation="include">
+        </childnode>
+        <childnode refid="35729" relation="include">
+        </childnode>
+        <childnode refid="35730" relation="include">
+        </childnode>
+        <childnode refid="35731" relation="include">
+        </childnode>
+        <childnode refid="35732" relation="include">
+        </childnode>
+        <childnode refid="35733" relation="include">
+        </childnode>
+        <childnode refid="35734" relation="include">
+        </childnode>
+      </node>
+      <node id="35733">
+        <label>src/testutils/testinit.cpp</label>
+        <link refid="testinit_8cpp"/>
+      </node>
+      <node id="35728">
+        <label>src/programs/mdrun/tests/moduletest.cpp</label>
+        <link refid="programs_2mdrun_2tests_2moduletest_8cpp"/>
+      </node>
+      <node id="35734">
+        <label>src/testutils/testoptions.cpp</label>
+        <link refid="testoptions_8cpp"/>
+      </node>
+      <node id="35731">
+        <label>src/testutils/testasserts.cpp</label>
+        <link refid="testasserts_8cpp"/>
+      </node>
+      <node id="35730">
+        <label>src/testutils/stringtest.cpp</label>
+        <link refid="stringtest_8cpp"/>
+      </node>
+      <node id="35727">
+        <label>src/gromacs/tables/tests/splinetable.cpp</label>
+        <link refid="splinetable_8cpp"/>
+      </node>
+      <node id="35732">
+        <label>src/testutils/testfilemanager.cpp</label>
+        <link refid="testfilemanager_8cpp"/>
+      </node>
+      <node id="35726">
+        <label>src/gromacs/selection/tests/selectioncollection.cpp</label>
+        <link refid="tests_2selectioncollection_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgmx_1_1test_1_1TestOptionsProvider" prot="public">gmx::test::TestOptionsProvider</innerclass>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+    <innernamespace refid="namespacegmx_1_1test">gmx::test</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__module__testutils_1gad8c14b8ddce6c8a7852915ac57f3b52a" prot="public" static="no">
+        <name>GMX_TEST_OPTIONS</name>
+        <param><defname>name</defname></param>
+        <param><defname>options</defname></param>
+        <briefdescription>
+<para>Macro to add additional command-line options for the test binary. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unique name for the set of options. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Placeholder name for an <ref refid="classgmx_1_1Options" kindref="compound">gmx::Options</ref> object for adding options.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The macro should be followed by a block that adds the desired command-line options to <computeroutput>options</computeroutput> using <ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">gmx::Options::addOption()</ref>. <ref refid="group__module__options" kindref="compound">Extensible Handling of Options (options)</ref> provides an overview of the options machinery.</para><para><computeroutput>name</computeroutput> must be unique within the executable to which the options are added. If the macro is within an unnamed namespace, then it is sufficient that it is unique within the file.</para><para>Typical usage: <programlisting><codeline><highlight class="preprocessor">#include<sp/>&quot;<ref refid="basicoptions_8h" kindref="compound">gromacs/options/basicoptions.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ioptionscontainer_8h" kindref="compound">gromacs/options/ioptionscontainer.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="testoptions_8h" kindref="compound">testutils/testoptions.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">gmx</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>g_optionValue<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment">//!<sp/>\cond</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"><ref refid="group__module__testutils_1gad8c14b8ddce6c8a7852915ac57f3b52a" kindref="member">GMX_TEST_OPTIONS</ref>(MyTestOptions,<sp/>options)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption</ref>(BooleanOption(</highlight><highlight class="stringliteral">&quot;flag&quot;</highlight><highlight class="normal">).<ref refid="namespacegmx_1a9c1227e97a6084a280a611c2934c8ee1" kindref="member">store</ref>(&amp;g_optionValue)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.description(</highlight><highlight class="stringliteral">&quot;My<sp/>description&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline><highlight class="normal">}</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment">//!<sp/>\endcond</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>gmx</highlight></codeline>
+</programlisting></para><para><computeroutput>\cond</computeroutput> and <computeroutput>\endcond</computeroutput> statements are necessary around the macro to avoid Doxygen warnings.</para><para>One macro invocation per an added option, with more of the implementation details hidden inside the macro, could be nicer. But that requires more elaborate macro machinery, so it is probably not worth the effort and complexity. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testoptions.h" line="165" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testoptions.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Functions for accessing test command-line options. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  Functions in this header allow accessing command-line options passed to the test executable from tests. This can be used to, e.g., enable additional output for debugging purposes.</para><para><simplesect kind="author"><para>Teemu Murtola <ulink url="mailto:teemu.murtola@gmail.com">teemu.murtola@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testoptions.h"/>
+  </compounddef>
+</doxygen>

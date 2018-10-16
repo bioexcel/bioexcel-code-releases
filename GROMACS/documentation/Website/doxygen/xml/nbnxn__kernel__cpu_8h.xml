@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__kernel__cpu_8h" kind="file">
+    <compoundname>nbnxn_kernel_cpu.h</compoundname>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="nbnxn__kernel__cpu_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <incdepgraph>
+      <node id="15637">
+        <label>src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.h</label>
+        <link refid="nbnxn_kernel_cpu.h"/>
+        <childnode refid="15638" relation="include">
+        </childnode>
+      </node>
+      <node id="15638">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__kernel__cpu_8h_1a5fb28c7e416c8b806870fe200a082279" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_kernel_cpu</definition>
+        <argsstring>(nonbonded_verlet_group_t *nbvg, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shiftVectors, int forceFlags, int clearF, real *fshift, real *vCoulomb, real *vVdw)</argsstring>
+        <name>nbnxn_kernel_cpu</name>
+        <param>
+          <type><ref refid="structnonbonded__verlet__group__t" kindref="compound">nonbonded_verlet_group_t</ref> *</type>
+          <declname>nbvg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>shiftVectors</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>forceFlags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>clearF</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fshift</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>vCoulomb</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>vVdw</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches the non-bonded N versus M atom cluster CPU kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para>OpenMP parallelization is performed within this function. Energy reduction, but not force and shift force reduction, is performed within this function.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">nbvg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The group (local/non-local) to compute interaction for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nbat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The atomdata for the interactions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-bonded interaction constants </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shiftVectors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PBC shift vectors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceFlags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags that tell what to compute </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">clearF</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Enum that tells if to clear the force output buffer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fshift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shift force output buffer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">vCoulomb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer for Coulomb energies </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">vVdw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer for Van der Waals energies </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.h" line="71" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" bodystart="136" bodyend="413"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares the nbnxn pair interaction kernel dispatcher. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Berk Hess <ulink url="mailto:hess@kth.se">hess@kth.se</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.h"/>
+  </compounddef>
+</doxygen>

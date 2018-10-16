@@ -1,0 +1,105 @@
+.. _gmx rmsf:
+
+gmx rmsf
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx rmsf [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+             [:strong:`-q` :emphasis:`[<.pdb>]`] [:strong:`-oq` :emphasis:`[<.pdb>]`] [:strong:`-ox` :emphasis:`[<.pdb>]`] [:strong:`-o` :emphasis:`[<.xvg>]`]
+             [:strong:`-od` :emphasis:`[<.xvg>]`] [:strong:`-oc` :emphasis:`[<.xvg>]`] [:strong:`-dir` :emphasis:`[<.log>]`] [:strong:`-b` :emphasis:`<time>`]
+             [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]res`]
+             [:strong:`-[no]aniso`] [:strong:`-[no]fit`]
+
+Description
+-----------
+
+``gmx rmsf`` computes the root mean square fluctuation (RMSF, i.e. standard
+deviation) of atomic positions in the trajectory (supplied with ``-f``)
+after (optionally) fitting to a reference frame (supplied with ``-s``).
+
+With option ``-oq`` the RMSF values are converted to B-factor
+values, which are written to a :ref:`.pdb <pdb>` file. By default, the coordinates
+in this output file are taken from the structure file provided with ``-s``,although you can also use coordinates read from a different :ref:`.pdb <pdb>` fileprovided with ``-q``. There is very little error checking, so in this caseit is your responsibility to make sure all atoms in the structure fileand :ref:`.pdb <pdb>` file correspond exactly to each other.
+
+Option ``-ox`` writes the B-factors to a file with the average
+coordinates in the trajectory.
+
+With the option ``-od`` the root mean square deviation with
+respect to the reference structure is calculated.
+
+With the option ``-aniso``, ``gmx rmsf`` will compute anisotropic
+temperature factors and then it will also output average coordinates
+and a :ref:`.pdb <pdb>` file with ANISOU records (corresonding to the ``-oq``
+or ``-ox`` option). Please note that the U values
+are orientation-dependent, so before comparison with experimental data
+you should verify that you fit to the experimental coordinates.
+
+When a :ref:`.pdb <pdb>` input file is passed to the program and the ``-aniso``
+flag is set
+a correlation plot of the Uij will be created, if any anisotropic
+temperature factors are present in the :ref:`.pdb <pdb>` file.
+
+With option ``-dir`` the average MSF (3x3) matrix is diagonalized.
+This shows the directions in which the atoms fluctuate the most and
+the least.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-q`` [<.pdb>] (eiwit.pdb) (Optional)
+    Protein data bank file
+
+Options to specify output files:
+
+``-oq`` [<.pdb>] (bfac.pdb) (Optional)
+    Protein data bank file
+``-ox`` [<.pdb>] (xaver.pdb) (Optional)
+    Protein data bank file
+``-o`` [<.xvg>] (rmsf.xvg)
+    xvgr/xmgr file
+``-od`` [<.xvg>] (rmsdev.xvg) (Optional)
+    xvgr/xmgr file
+``-oc`` [<.xvg>] (correl.xvg) (Optional)
+    xvgr/xmgr file
+``-dir`` [<.log>] (rmsf.log) (Optional)
+    Log file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]res``  (no)
+    Calculate averages for each residue
+``-[no]aniso``  (no)
+    Compute anisotropic termperature factors
+``-[no]fit``  (yes)
+    Do a least squares superposition before computing RMSF. Without this you must make sure that the reference structure and the trajectory match.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

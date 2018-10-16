@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1DataFileFinder" kind="class" prot="public">
+    <compoundname>gmx::DataFileFinder</compoundname>
+    <includes local="no">gromacs/utility/datafilefinder.h</includes>
+    <innerclass refid="classgmx_1_1DataFileFinder_1_1Impl" prot="public">gmx::DataFileFinder::Impl</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1DataFileFinder_1aaf88b7531e4a579c02fe977c270eb19d" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1PrivateImplPointer" kindref="compound">PrivateImplPointer</ref>&lt; <ref refid="classgmx_1_1DataFileFinder_1_1Impl" kindref="compound">Impl</ref> &gt;</type>
+        <definition>PrivateImplPointer&lt;Impl&gt; gmx::DataFileFinder::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="253" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1DataFileFinder_1aec24f0e27f5732e2f0ead7d3ff81fe85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::DataFileFinder::DataFileFinder</definition>
+        <argsstring>()</argsstring>
+        <name>DataFileFinder</name>
+        <briefdescription>
+<para>Constructs a default data file finder. </para>        </briefdescription>
+        <detaileddescription>
+<para>The constructed finder searches only in the directory specified by the global program context (see <ref refid="classgmx_1_1IProgramContext" kindref="compound">IProgramContext</ref>), and optionally in the current directory.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="179" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.cpp" bodystart="96" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1DataFileFinder_1aebc07518edf3cc4ea74914e535fd22fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::DataFileFinder::~DataFileFinder</definition>
+        <argsstring>()</argsstring>
+        <name>~DataFileFinder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="180" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.cpp" bodystart="101" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1DataFileFinder_1a5a0a0f26836e80e9eb4198b4e8b38b61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::DataFileFinder::setSearchPathFromEnv</definition>
+        <argsstring>(const char *envVarName)</argsstring>
+        <name>setSearchPathFromEnv</name>
+        <param>
+          <type>const char *</type>
+          <declname>envVarName</declname>
+        </param>
+        <briefdescription>
+<para>Adds search path from an environment variable. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">envVarName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the environment variable to use. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If the specified environment variable is set, it is interpreted like a <computeroutput>PATH</computeroutput> environment variable on the platform (split at appropriate separators), and each path found is added to the search path this finder searches. The added paths take precedence over the default directory specified by the global program context, but the current directory is searched first. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="195" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.cpp" bodystart="105" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1DataFileFinder_1ac590f0f39fc197fb50b9f0405f1ebe13" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>FILE *</type>
+        <definition>FILE * gmx::DataFileFinder::openFile</definition>
+        <argsstring>(const DataFileOptions &amp;options) const </argsstring>
+        <name>openFile</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1DataFileOptions" kindref="compound">DataFileOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Opens a data file if found. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Identifies the file to be searched for. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The opened file handle, or <computeroutput>NULL</computeroutput> if the file could not be found and exceptions were turned off. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if<itemizedlist>
+<listitem><para>no such file can be found, and <computeroutput>options</computeroutput> specifies that an exception should be thrown, or</para></listitem><listitem><para>there is an error opening the file (note that a file is skipped during the search if the user does not have rights to open the file at all).</para></listitem></itemizedlist>
+</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+See <ref refid="classgmx_1_1DataFileFinder_1a2bf5c32b430412382c8dc20b0440cce2" kindref="member">findFile()</ref> for more details. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="213" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.cpp" bodystart="133" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1DataFileFinder_1a2bf5c32b430412382c8dc20b0440cce2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string gmx::DataFileFinder::findFile</definition>
+        <argsstring>(const DataFileOptions &amp;options) const </argsstring>
+        <name>findFile</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1DataFileOptions" kindref="compound">DataFileOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Finds a full path to a data file if found. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Identifies the file to be searched for. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Full path to the data file, or an empty string if the file could not be found and exceptions were turned off. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no such file can be found, and <computeroutput>options</computeroutput> specifies that an exception should be thrown.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Searches for a data file in the search paths configured for the finder, as well as in the current directory if so required. Returns the full path to the first file found. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="228" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.cpp" bodystart="153" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1DataFileFinder_1a45d2ecd3b688a1432fb94d9632de232a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="structgmx_1_1DataFileInfo" kindref="compound">DataFileInfo</ref> &gt;</type>
+        <definition>std::vector&lt; DataFileInfo &gt; gmx::DataFileFinder::enumerateFiles</definition>
+        <argsstring>(const DataFileOptions &amp;options) const </argsstring>
+        <name>enumerateFiles</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1DataFileOptions" kindref="compound">DataFileOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>Enumerates files in the data directories. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Idenfies files to be searched for. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Information about each found file. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1FileIOError" kindref="compound">FileIOError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if no such file can be found, and <computeroutput>options</computeroutput> specifies that an exception should be thrown.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Enumerates all files in the data directories that have the extension/suffix specified by the file name in <computeroutput>options</computeroutput>. Unlike <ref refid="classgmx_1_1DataFileFinder_1a2bf5c32b430412382c8dc20b0440cce2" kindref="member">findFile()</ref> and <ref refid="classgmx_1_1DataFileFinder_1ac590f0f39fc197fb50b9f0405f1ebe13" kindref="member">openFile()</ref>, this only works on files that are in the actual data directories, not for any entry within subdirectories of those. See <ref refid="structgmx_1_1DataFileInfo" kindref="compound">DataFileInfo</ref> for details on what is returned for each found file. Files from the same directory will be returned as a continuous block in the returned vector. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="248" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.cpp" bodystart="230" bodyend="282"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Searches data files from a set of paths. </para>    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" line="168" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/datafilefinder.h" bodystart="167" bodyend="254"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1DataFileFinder_1aec24f0e27f5732e2f0ead7d3ff81fe85" prot="public" virt="non-virtual"><scope>gmx::DataFileFinder</scope><name>DataFileFinder</name></member>
+      <member refid="classgmx_1_1DataFileFinder_1a45d2ecd3b688a1432fb94d9632de232a" prot="public" virt="non-virtual"><scope>gmx::DataFileFinder</scope><name>enumerateFiles</name></member>
+      <member refid="classgmx_1_1DataFileFinder_1a2bf5c32b430412382c8dc20b0440cce2" prot="public" virt="non-virtual"><scope>gmx::DataFileFinder</scope><name>findFile</name></member>
+      <member refid="classgmx_1_1DataFileFinder_1aaf88b7531e4a579c02fe977c270eb19d" prot="private" virt="non-virtual"><scope>gmx::DataFileFinder</scope><name>impl_</name></member>
+      <member refid="classgmx_1_1DataFileFinder_1ac590f0f39fc197fb50b9f0405f1ebe13" prot="public" virt="non-virtual"><scope>gmx::DataFileFinder</scope><name>openFile</name></member>
+      <member refid="classgmx_1_1DataFileFinder_1a5a0a0f26836e80e9eb4198b4e8b38b61" prot="public" virt="non-virtual"><scope>gmx::DataFileFinder</scope><name>setSearchPathFromEnv</name></member>
+      <member refid="classgmx_1_1DataFileFinder_1aebc07518edf3cc4ea74914e535fd22fc" prot="public" virt="non-virtual"><scope>gmx::DataFileFinder</scope><name>~DataFileFinder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

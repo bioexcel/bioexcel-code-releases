@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1IForceProvider" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::IForceProvider</compoundname>
+    <derivedcompoundref refid="classgmx_1_1anonymous__namespace_02electricfield_8cpp_03_1_1ElectricField" prot="public" virt="non-virtual">gmx::anonymous_namespace{electricfield.cpp}::ElectricField</derivedcompoundref>
+    <includes local="no">gromacs/mdtypes/iforceprovider.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1IForceProvider_1a10a494b516486a24f065a0694558299b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::IForceProvider::calculateForces</definition>
+        <argsstring>(const t_commrec *cr, const t_mdatoms *mdatoms, const matrix box, double t, const rvec *x, gmx::ForceWithVirial *forceWithVirial)=0</argsstring>
+        <name>calculateForces</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02electricfield_8cpp_03_1_1ElectricField_1a68e364d813d26ea04734efa247070a08">calculateForces</reimplementedby>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">gmx::ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <briefdescription>
+<para>Computes forces. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Communication record for parallel operations </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mdatoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Atom information </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The box </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The actual time in the simulation (ps) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">forceWithVirial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The forces and virial </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/iforceprovider.h" line="93" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgmx_1_1IForceProvider_1aa5f0c059c4ae56f5d851c38fdaceb95b" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::IForceProvider::~IForceProvider</definition>
+        <argsstring>()</argsstring>
+        <name>~IForceProvider</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/iforceprovider.h" line="101" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/iforceprovider.h" bodystart="101" bodyend="101"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface for a component that provides forces during MD. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> Modules implementing <ref refid="classgmx_1_1IMDModule" kindref="compound">IMDModule</ref> generally implement this internally, and use <ref refid="classgmx_1_1IMDModule_1a3f7c49b16958e7dcf005675e0db044f4" kindref="member">IMDModule::initForceProviders()</ref> to register their implementation in <ref refid="structForceProviders" kindref="compound">ForceProviders</ref>.</para><para>The interface most likely requires additional generalization for use in other modules than the current electric field implementation.</para><para>The forces that are produced by force providers are not taken into account in the calculation of the virial. When applicable, the provider should compute its own virial contribution. <xrefsect id="todo_1_todo000057"><xreftitle>Todo</xreftitle><xrefdescription><para>Extend this interface with a virial container and flag if the virial is needed here</para></xrefdescription></xrefsect></para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1815">
+        <label>gmx::IForceProvider</label>
+        <link refid="classgmx_1_1IForceProvider"/>
+      </node>
+      <node id="1816">
+        <label>gmx::anonymous_namespace{electricfield.cpp}::ElectricField</label>
+        <link refid="classgmx_1_1anonymous__namespace_02electricfield_8cpp_03_1_1ElectricField"/>
+        <childnode refid="1815" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/iforceprovider.h" line="81" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/iforceprovider.h" bodystart="80" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1IForceProvider_1a10a494b516486a24f065a0694558299b" prot="public" virt="pure-virtual"><scope>gmx::IForceProvider</scope><name>calculateForces</name></member>
+      <member refid="classgmx_1_1IForceProvider_1aa5f0c059c4ae56f5d851c38fdaceb95b" prot="protected" virt="non-virtual"><scope>gmx::IForceProvider</scope><name>~IForceProvider</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

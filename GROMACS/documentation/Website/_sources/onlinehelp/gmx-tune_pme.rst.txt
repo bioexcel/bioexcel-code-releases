@@ -1,0 +1,281 @@
+.. _gmx tune_pme:
+
+gmx tune_pme
+============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx tune_pme [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-cpi` :emphasis:`[<.cpt>]`] [:strong:`-table` :emphasis:`[<.xvg>]`]
+                 [:strong:`-tablep` :emphasis:`[<.xvg>]`] [:strong:`-tableb` :emphasis:`[<.xvg>]`]
+                 [:strong:`-rerun` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-ei` :emphasis:`[<.edi>]`] [:strong:`-p` :emphasis:`[<.out>]`]
+                 [:strong:`-err` :emphasis:`[<.log>]`] [:strong:`-so` :emphasis:`[<.tpr>]`] [:strong:`-o` :emphasis:`[<.trr/.cpt/...>]`]
+                 [:strong:`-x` :emphasis:`[<.xtc/.tng>]`] [:strong:`-cpo` :emphasis:`[<.cpt>]`]
+                 [:strong:`-c` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-e` :emphasis:`[<.edr>]`] [:strong:`-g` :emphasis:`[<.log>]`]
+                 [:strong:`-dhdl` :emphasis:`[<.xvg>]`] [:strong:`-field` :emphasis:`[<.xvg>]`] [:strong:`-tpi` :emphasis:`[<.xvg>]`]
+                 [:strong:`-tpid` :emphasis:`[<.xvg>]`] [:strong:`-eo` :emphasis:`[<.xvg>]`] [:strong:`-devout` :emphasis:`[<.xvg>]`]
+                 [:strong:`-runav` :emphasis:`[<.xvg>]`] [:strong:`-px` :emphasis:`[<.xvg>]`] [:strong:`-pf` :emphasis:`[<.xvg>]`]
+                 [:strong:`-ro` :emphasis:`[<.xvg>]`] [:strong:`-ra` :emphasis:`[<.log>]`] [:strong:`-rs` :emphasis:`[<.log>]`]
+                 [:strong:`-rt` :emphasis:`[<.log>]`] [:strong:`-mtx` :emphasis:`[<.mtx>]`] [:strong:`-swap` :emphasis:`[<.xvg>]`]
+                 [:strong:`-bo` :emphasis:`[<.trr/.cpt/...>]`] [:strong:`-bx` :emphasis:`[<.xtc>]`] [:strong:`-bcpo` :emphasis:`[<.cpt>]`]
+                 [:strong:`-bc` :emphasis:`[<.gro/.g96/...>]`] [:strong:`-be` :emphasis:`[<.edr>]`] [:strong:`-bg` :emphasis:`[<.log>]`]
+                 [:strong:`-beo` :emphasis:`[<.xvg>]`] [:strong:`-bdhdl` :emphasis:`[<.xvg>]`] [:strong:`-bfield` :emphasis:`[<.xvg>]`]
+                 [:strong:`-btpi` :emphasis:`[<.xvg>]`] [:strong:`-btpid` :emphasis:`[<.xvg>]`] [:strong:`-bdevout` :emphasis:`[<.xvg>]`]
+                 [:strong:`-brunav` :emphasis:`[<.xvg>]`] [:strong:`-bpx` :emphasis:`[<.xvg>]`] [:strong:`-bpf` :emphasis:`[<.xvg>]`]
+                 [:strong:`-bro` :emphasis:`[<.xvg>]`] [:strong:`-bra` :emphasis:`[<.log>]`] [:strong:`-brs` :emphasis:`[<.log>]`]
+                 [:strong:`-brt` :emphasis:`[<.log>]`] [:strong:`-bmtx` :emphasis:`[<.mtx>]`] [:strong:`-bdn` :emphasis:`[<.ndx>]`]
+                 [:strong:`-bswap` :emphasis:`[<.xvg>]`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-mdrun` :emphasis:`<string>`]
+                 [:strong:`-np` :emphasis:`<int>`] [:strong:`-npstring` :emphasis:`<enum>`] [:strong:`-ntmpi` :emphasis:`<int>`] [:strong:`-r` :emphasis:`<int>`]
+                 [:strong:`-max` :emphasis:`<real>`] [:strong:`-min` :emphasis:`<real>`] [:strong:`-npme` :emphasis:`<enum>`] [:strong:`-fix` :emphasis:`<int>`]
+                 [:strong:`-rmax` :emphasis:`<real>`] [:strong:`-rmin` :emphasis:`<real>`] [:strong:`-[no]scalevdw`]
+                 [:strong:`-ntpr` :emphasis:`<int>`] [:strong:`-steps` :emphasis:`<int>`] [:strong:`-resetstep` :emphasis:`<int>`]
+                 [:strong:`-nsteps` :emphasis:`<int>`] [:strong:`-[no]launch`] [:strong:`-[no]bench`] [:strong:`-[no]check`]
+                 [:strong:`-gpu_id` :emphasis:`<string>`] [:strong:`-[no]append`] [:strong:`-[no]cpnum`]
+                 [:strong:`-deffnm` :emphasis:`<string>`]
+
+Description
+-----------
+
+For a given number ``-np`` or ``-ntmpi`` of ranks, ``gmx tune_pme`` systematically
+times :doc:`gmx mdrun <gmx-mdrun>` with various numbers of PME-only ranks and determines
+which setting is fastest. It will also test whether performance can
+be enhanced by shifting load from the reciprocal to the real space
+part of the Ewald sum.
+Simply pass your :ref:`.tpr <tpr>` file to ``gmx tune_pme`` together with other options
+for :doc:`gmx mdrun <gmx-mdrun>` as needed.
+
+``gmx tune_pme`` needs to call :doc:`gmx mdrun <gmx-mdrun>` and so requires that you
+specify how to call mdrun with the argument to the ``-mdrun``
+parameter. Depending how you have built GROMACS, values such as
+'gmx mdrun', 'gmx_d mdrun', or 'mdrun_mpi' might be needed.
+
+The program that runs MPI programs can be set in the environment variable
+MPIRUN (defaults to 'mpirun'). Note that for certain MPI frameworks,
+you need to provide a machine- or hostfile. This can also be passed
+via the MPIRUN variable, e.g.
+
+``export MPIRUN="/usr/local/mpirun -machinefile hosts"``
+Note that in such cases it is normally necessary to compile
+and/or run ``gmx tune_pme`` without MPI support, so that it can call
+the MPIRUN program.
+
+Before doing the actual benchmark runs, ``gmx tune_pme`` will do a quick
+check whether :doc:`gmx mdrun <gmx-mdrun>` works as expected with the provided parallel settings
+if the ``-check`` option is activated (the default).
+Please call ``gmx tune_pme`` with the normal options you would pass to
+:doc:`gmx mdrun <gmx-mdrun>` and add ``-np`` for the number of ranks to perform the
+tests on, or ``-ntmpi`` for the number of threads. You can also add ``-r``
+to repeat each test several times to get better statistics.
+
+``gmx tune_pme`` can test various real space / reciprocal space workloads
+for you. With ``-ntpr`` you control how many extra :ref:`.tpr <tpr>` files will be
+written with enlarged cutoffs and smaller Fourier grids respectively.
+Typically, the first test (number 0) will be with the settings from the input
+:ref:`.tpr <tpr>` file; the last test (number ``ntpr``) will have the Coulomb cutoff
+specified by ``-rmax`` with a somewhat smaller PME grid at the same time.
+In this last test, the Fourier spacing is multiplied with ``rmax``/rcoulomb.
+The remaining :ref:`.tpr <tpr>` files will have equally-spaced Coulomb radii (and Fourier spacings) between these extremes. **Note** that you can set ``-ntpr`` to 1
+if you just seek the optimal number of PME-only ranks; in that case
+your input :ref:`.tpr <tpr>` file will remain unchanged.
+
+For the benchmark runs, the default of 1000 time steps should suffice for most
+MD systems. The dynamic load balancing needs about 100 time steps
+to adapt to local load imbalances, therefore the time step counters
+are by default reset after 100 steps. For large systems (>1M atoms), as well as
+for a higher accuracy of the measurements, you should set ``-resetstep`` to a higher value.
+From the 'DD' load imbalance entries in the md.log output file you
+can tell after how many steps the load is sufficiently balanced. Example call:
+
+``gmx tune_pme -np 64 -s protein.tpr -launch``
+
+After calling :doc:`gmx mdrun <gmx-mdrun>` several times, detailed performance information
+is available in the output file ``perf.out``.
+**Note** that during the benchmarks, a couple of temporary files are written
+(options ``-b*``), these will be automatically deleted after each test.
+
+If you want the simulation to be started automatically with the
+optimized parameters, use the command line option ``-launch``.
+
+Basic support for GPU-enabled ``mdrun`` exists. Give a string containing the IDs
+of the GPUs that you wish to use in the optimization in the ``-gpu_id``
+command-line argument. This works exactly like ``mdrun -gpu_id``, does not imply a mapping,
+and merely declares the eligible set of GPU devices. ``gmx-tune_pme`` will construct calls to
+mdrun that use this set appropriately. ``gmx-tune_pme`` does not support
+``-gputasks``.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-cpi`` [<.cpt>] (state.cpt) (Optional)
+    Checkpoint file
+``-table`` [<.xvg>] (table.xvg) (Optional)
+    xvgr/xmgr file
+``-tablep`` [<.xvg>] (tablep.xvg) (Optional)
+    xvgr/xmgr file
+``-tableb`` [<.xvg>] (table.xvg) (Optional)
+    xvgr/xmgr file
+``-rerun`` [<.xtc/.trr/...>] (rerun.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-ei`` [<.edi>] (sam.edi) (Optional)
+    ED sampling input
+
+Options to specify output files:
+
+``-p`` [<.out>] (perf.out)
+    Generic output file
+``-err`` [<.log>] (bencherr.log)
+    Log file
+``-so`` [<.tpr>] (tuned.tpr)
+    Portable xdr run input file
+``-o`` [<.trr/.cpt/...>] (traj.trr)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+``-x`` [<.xtc/.tng>] (traj_comp.xtc) (Optional)
+    Compressed trajectory (tng format or portable xdr format)
+``-cpo`` [<.cpt>] (state.cpt) (Optional)
+    Checkpoint file
+``-c`` [<.gro/.g96/...>] (confout.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+``-e`` [<.edr>] (ener.edr)
+    Energy file
+``-g`` [<.log>] (md.log)
+    Log file
+``-dhdl`` [<.xvg>] (dhdl.xvg) (Optional)
+    xvgr/xmgr file
+``-field`` [<.xvg>] (field.xvg) (Optional)
+    xvgr/xmgr file
+``-tpi`` [<.xvg>] (tpi.xvg) (Optional)
+    xvgr/xmgr file
+``-tpid`` [<.xvg>] (tpidist.xvg) (Optional)
+    xvgr/xmgr file
+``-eo`` [<.xvg>] (edsam.xvg) (Optional)
+    xvgr/xmgr file
+``-devout`` [<.xvg>] (deviatie.xvg) (Optional)
+    xvgr/xmgr file
+``-runav`` [<.xvg>] (runaver.xvg) (Optional)
+    xvgr/xmgr file
+``-px`` [<.xvg>] (pullx.xvg) (Optional)
+    xvgr/xmgr file
+``-pf`` [<.xvg>] (pullf.xvg) (Optional)
+    xvgr/xmgr file
+``-ro`` [<.xvg>] (rotation.xvg) (Optional)
+    xvgr/xmgr file
+``-ra`` [<.log>] (rotangles.log) (Optional)
+    Log file
+``-rs`` [<.log>] (rotslabs.log) (Optional)
+    Log file
+``-rt`` [<.log>] (rottorque.log) (Optional)
+    Log file
+``-mtx`` [<.mtx>] (nm.mtx) (Optional)
+    Hessian matrix
+``-swap`` [<.xvg>] (swapions.xvg) (Optional)
+    xvgr/xmgr file
+``-bo`` [<.trr/.cpt/...>] (bench.trr)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+``-bx`` [<.xtc>] (bench.xtc)
+    Compressed trajectory (portable xdr format): xtc
+``-bcpo`` [<.cpt>] (bench.cpt)
+    Checkpoint file
+``-bc`` [<.gro/.g96/...>] (bench.gro)
+    Structure file: :ref:`gro` :ref:`g96` :ref:`pdb` brk ent esp
+``-be`` [<.edr>] (bench.edr)
+    Energy file
+``-bg`` [<.log>] (bench.log)
+    Log file
+``-beo`` [<.xvg>] (benchedo.xvg) (Optional)
+    xvgr/xmgr file
+``-bdhdl`` [<.xvg>] (benchdhdl.xvg) (Optional)
+    xvgr/xmgr file
+``-bfield`` [<.xvg>] (benchfld.xvg) (Optional)
+    xvgr/xmgr file
+``-btpi`` [<.xvg>] (benchtpi.xvg) (Optional)
+    xvgr/xmgr file
+``-btpid`` [<.xvg>] (benchtpid.xvg) (Optional)
+    xvgr/xmgr file
+``-bdevout`` [<.xvg>] (benchdev.xvg) (Optional)
+    xvgr/xmgr file
+``-brunav`` [<.xvg>] (benchrnav.xvg) (Optional)
+    xvgr/xmgr file
+``-bpx`` [<.xvg>] (benchpx.xvg) (Optional)
+    xvgr/xmgr file
+``-bpf`` [<.xvg>] (benchpf.xvg) (Optional)
+    xvgr/xmgr file
+``-bro`` [<.xvg>] (benchrot.xvg) (Optional)
+    xvgr/xmgr file
+``-bra`` [<.log>] (benchrota.log) (Optional)
+    Log file
+``-brs`` [<.log>] (benchrots.log) (Optional)
+    Log file
+``-brt`` [<.log>] (benchrott.log) (Optional)
+    Log file
+``-bmtx`` [<.mtx>] (benchn.mtx) (Optional)
+    Hessian matrix
+``-bdn`` [<.ndx>] (bench.ndx) (Optional)
+    Index file
+``-bswap`` [<.xvg>] (benchswp.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-mdrun`` <string>
+    Command line to run a simulation, e.g. 'gmx mdrun' or 'mdrun_mpi'
+``-np`` <int> (1)
+    Number of ranks to run the tests on (must be > 2 for separate PME ranks)
+``-npstring`` <enum> (np)
+    Name of the ``$MPIRUN`` option that specifies the number of ranks to use ('np', or 'n'; use 'none' if there is no such option): np, n, none
+``-ntmpi`` <int> (1)
+    Number of MPI-threads to run the tests on (turns MPI & mpirun off)
+``-r`` <int> (2)
+    Repeat each test this often
+``-max`` <real> (0.5)
+    Max fraction of PME ranks to test with
+``-min`` <real> (0.25)
+    Min fraction of PME ranks to test with
+``-npme`` <enum> (auto)
+    Within -min and -max, benchmark all possible values for ``-npme``, or just a reasonable subset. Auto neglects -min and -max and chooses reasonable values around a guess for npme derived from the .tpr: auto, all, subset
+``-fix`` <int> (-2)
+    If >= -1, do not vary the number of PME-only ranks, instead use this fixed value and only vary rcoulomb and the PME grid spacing.
+``-rmax`` <real> (0)
+    If >0, maximal rcoulomb for -ntpr>1 (rcoulomb upscaling results in fourier grid downscaling)
+``-rmin`` <real> (0)
+    If >0, minimal rcoulomb for -ntpr>1
+``-[no]scalevdw``  (yes)
+    Scale rvdw along with rcoulomb
+``-ntpr`` <int> (0)
+    Number of :ref:`.tpr <tpr>` files to benchmark. Create this many files with different rcoulomb scaling factors depending on -rmin and -rmax. If < 1, automatically choose the number of :ref:`.tpr <tpr>` files to test
+``-steps`` <int> (1000)
+    Take timings for this many steps in the benchmark runs
+``-resetstep`` <int> (1500)
+    Let dlb equilibrate this many steps before timings are taken (reset cycle counters after this many steps)
+``-nsteps`` <int> (-1)
+    If non-negative, perform this many steps in the real run (overwrites nsteps from :ref:`.tpr <tpr>`, add :ref:`.cpt <cpt>` steps)
+``-[no]launch``  (no)
+    Launch the real simulation after optimization
+``-[no]bench``  (yes)
+    Run the benchmarks or just create the input :ref:`.tpr <tpr>` files?
+``-[no]check``  (yes)
+    Before the benchmark runs, check whether mdrun works in parallel
+``-gpu_id`` <string>
+    List of unique GPU device IDs that are eligible for use
+``-[no]append``  (yes)
+    Append to previous output files when continuing from checkpoint instead of adding the simulation part number to all file names (for launch only)
+``-[no]cpnum``  (no)
+    Keep and number checkpoint files (launch only)
+``-deffnm`` <string>
+    Set the default filenames (launch only)
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

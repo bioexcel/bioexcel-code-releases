@@ -1,0 +1,196 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx genrestr &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx grompp" href="gmx-grompp.html" />
+    <link rel="prev" title="gmx genion" href="gmx-genion.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-grompp.html" title="gmx grompp"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-genion.html" title="gmx genion"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-genrestr">
+<span id="id1"></span><h1>gmx genrestr<a class="headerlink" href="#gmx-genrestr" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx genrestr [<strong>-f</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-o</strong> <em>[&lt;.itp&gt;]</em>]
+             [<strong>-of</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-fc</strong> <em>&lt;vector&gt;</em>] [<strong>-freeze</strong> <em>&lt;real&gt;</em>]
+             [<strong>-[no]disre</strong>] [<strong>-disre_dist</strong> <em>&lt;real&gt;</em>] [<strong>-disre_frac</strong> <em>&lt;real&gt;</em>]
+             [<strong>-disre_up2</strong> <em>&lt;real&gt;</em>] [<strong>-cutoff</strong> <em>&lt;real&gt;</em>] [<strong>-[no]constr</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genrestr</span></code> produces an #include file for a topology containing
+a list of atom numbers and three force constants for the
+<em>x</em>-, <em>y</em>-, and <em>z</em>-direction based on
+the contents of the <code class="docutils literal"><span class="pre">-f</span></code> file. A single isotropic force constant may
+be given on the command line instead of three components.</p>
+<p>WARNING: Position restraints are interactions within molecules, therefore
+they must be included within the correct <code class="docutils literal"><span class="pre">[</span> <span class="pre">moleculetype</span> <span class="pre">]</span></code>
+block in the topology. The atom indices within the
+<code class="docutils literal"><span class="pre">[</span> <span class="pre">position_restraints</span> <span class="pre">]</span></code> block must be within the range of the
+atom indices for that molecule type. Since the atom numbers in every
+moleculetype in the topology start at 1 and the numbers in the input file
+for <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genrestr</span></code> number consecutively from 1, <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genrestr</span></code> will only
+produce a useful file for the first molecule. You may wish to
+edit the resulting index file to remove the lines for later atoms,
+or construct a suitable index group to provide
+as input to <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genrestr</span></code>.</p>
+<p>The <code class="docutils literal"><span class="pre">-of</span></code> option produces an index file that can be used for
+freezing atoms. In this case, the input file must be a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file.</p>
+<p>With the <code class="docutils literal"><span class="pre">-disre</span></code> option, half a matrix of distance restraints
+is generated instead of position restraints. With this matrix, that
+one typically would apply to Calpha atoms in a protein, one can
+maintain the overall conformation of a protein without tieing it to
+a specific position (as with position restraints).</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.gro/.g96/…&gt;] (conf.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.itp&gt;] (posre.itp)</dt>
+<dd>Include file for topology</dd>
+<dt><code class="docutils literal"><span class="pre">-of</span></code> [&lt;.ndx&gt;] (freeze.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-fc</span></code> &lt;vector&gt; (1000 1000 1000)</dt>
+<dd>Force constants (kJ/mol nm^2)</dd>
+<dt><code class="docutils literal"><span class="pre">-freeze</span></code> &lt;real&gt; (0)</dt>
+<dd>If the <code class="docutils literal"><span class="pre">-of</span></code> option or this one is given an index file will be written containing atom numbers of all atoms that have a B-factor less than the level given here</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]disre</span></code>  (no)</dt>
+<dd>Generate a distance restraint matrix for all the atoms in index</dd>
+<dt><code class="docutils literal"><span class="pre">-disre_dist</span></code> &lt;real&gt; (0.1)</dt>
+<dd>Distance range around the actual distance for generating distance restraints</dd>
+<dt><code class="docutils literal"><span class="pre">-disre_frac</span></code> &lt;real&gt; (0)</dt>
+<dd>Fraction of distance to be used as interval rather than a fixed distance. If the fraction of the distance that you specify here is less than the distance given in the previous option, that one is used instead.</dd>
+<dt><code class="docutils literal"><span class="pre">-disre_up2</span></code> &lt;real&gt; (1)</dt>
+<dd>Distance between upper bound for distance restraints, and the distance at which the force becomes constant (see manual)</dd>
+<dt><code class="docutils literal"><span class="pre">-cutoff</span></code> &lt;real&gt; (-1)</dt>
+<dd>Only generate distance restraints for atoms pairs within cutoff (nm)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]constr</span></code>  (no)</dt>
+<dd>Generate a constraint matrix rather than distance restraints. Constraints of type 2 will be generated that do generate exclusions.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx genrestr</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-genion.html"
+                        title="previous chapter">gmx genion</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-grompp.html"
+                        title="next chapter">gmx grompp</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-genrestr.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-grompp.html" title="gmx grompp"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-genion.html" title="gmx genion"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

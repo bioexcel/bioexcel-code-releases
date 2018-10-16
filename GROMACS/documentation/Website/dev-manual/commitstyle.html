@@ -1,0 +1,171 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guidelines for formatting of git commits &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Error handling" href="error-handling.html" />
+    <link rel="prev" title="Guidelines for creating meaningful redmine issue reports" href="reportstyle.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="error-handling.html" title="Error handling"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="reportstyle.html" title="Guidelines for creating meaningful redmine issue reports"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" accesskey="U">Style guidelines</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="guidelines-for-formatting-of-git-commits">
+<span id="code-commitstyle"></span><h1>Guidelines for formatting of git commits<a class="headerlink" href="#guidelines-for-formatting-of-git-commits" title="Permalink to this headline">¶</a></h1>
+<p>While there is no true correct way on how to submit new commits for
+code review for GROMACS, following these guidelines will help the
+review process go smoothly.</p>
+<div class="section" id="general-rules-for-newly-submitted-code">
+<h2>General rules for newly submitted code<a class="headerlink" href="#general-rules-for-newly-submitted-code" title="Permalink to this headline">¶</a></h2>
+<p>New code should follow the other <a class="reference internal" href="style.html#id1"><span class="std std-ref">style rules</span></a>
+outlined above before submitting. This will make it less likely that your change
+will be rejected due to that. If your change modifies some existing
+code that does not yet conform to the style, then a preliminary
+patch that cleans up the surrounding area is a good idea. We like
+to slowly improve the quality while we add or change functionality.</p>
+</div>
+<div class="section" id="guidelines-for-git-commit-messages">
+<h2>Guidelines for git commit messages<a class="headerlink" href="#guidelines-for-git-commit-messages" title="Permalink to this headline">¶</a></h2>
+<p>Commit messages should contain a quick explanation in verb form on what has been
+changed or what has been the purpose of the change. If available, the final
+part of the message before the ChangeId should be a short section like
+<strong>Fixes #redmine-id</strong> to link the change to a possibly previously
+posted issue, or <strong>Refs #redmine-id</strong> if the present patch is somehow
+related to that work without necessarily fixing the whole issue.</p>
+</div>
+<div class="section" id="concerning-inline-code-comments">
+<h2>Concerning inline code comments<a class="headerlink" href="#concerning-inline-code-comments" title="Permalink to this headline">¶</a></h2>
+<p>New code should be sufficiently commented so that other people will be able to
+understand the purpose of the code, and less about the current operation.
+Preferably the variable naming and code structure clarify the mechanics, and
+comments should only refer to higher-level things, such as choice of algorithm,
+or the desire to be consistent with some other part of the code.</p>
+<p>For example, the following comment would be insufficient to explain the
+(made up example) of iteration over a list of interactions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">Code</span> <span class="n">takes</span> <span class="n">each</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">iterates</span> <span class="n">over</span> <span class="n">them</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">loop</span>
+ <span class="o">*</span> <span class="n">to</span> <span class="n">store</span> <span class="n">them</span><span class="o">.</span>
+ <span class="o">*/</span>
+</pre></div>
+</div>
+<p>A much better example would be explaining why the iteration takes place:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">We</span> <span class="n">iterate</span> <span class="n">over</span> <span class="n">the</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">list</span> <span class="n">to</span> <span class="n">get</span>
+ <span class="o">*</span> <span class="n">the</span> <span class="n">specific</span> <span class="n">interaction</span> <span class="nb">type</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">of</span> <span class="n">them</span>
+ <span class="o">*</span> <span class="ow">and</span> <span class="n">store</span> <span class="n">them</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">new</span> <span class="n">data</span> <span class="nb">type</span> <span class="k">for</span> <span class="n">future</span>
+ <span class="o">*</span> <span class="n">use</span> <span class="ow">in</span> <span class="n">function</span> <span class="n">foo</span>
+ <span class="o">*/</span>
+</pre></div>
+</div>
+<p>From the second example, someone debugging might be able to deduce better
+if an error observed in <em>foo</em> is actually caused by the previous assignment.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Guidelines for formatting of git commits</a><ul>
+<li><a class="reference internal" href="#general-rules-for-newly-submitted-code">General rules for newly submitted code</a></li>
+<li><a class="reference internal" href="#guidelines-for-git-commit-messages">Guidelines for git commit messages</a></li>
+<li><a class="reference internal" href="#concerning-inline-code-comments">Concerning inline code comments</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="reportstyle.html"
+                        title="previous chapter">Guidelines for creating meaningful redmine issue reports</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="error-handling.html"
+                        title="next chapter">Error handling</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/dev-manual/commitstyle.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="error-handling.html" title="Error handling"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="reportstyle.html" title="Guidelines for creating meaningful redmine issue reports"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="style.html" >Style guidelines</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

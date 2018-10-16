@@ -1,0 +1,951 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="gmx__pme__error_8cpp" kind="file">
+    <compoundname>gmx_pme_error.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="pargs_8h" local="yes">gromacs/commandline/pargs.h</includes>
+    <includes refid="ewald-utils_8h" local="yes">gromacs/ewald/ewald-utils.h</includes>
+    <includes refid="pme_8h" local="yes">gromacs/ewald/pme.h</includes>
+    <includes refid="calcgrid_8h" local="yes">gromacs/fft/calcgrid.h</includes>
+    <includes refid="checkpoint_8h" local="yes">gromacs/fileio/checkpoint.h</includes>
+    <includes refid="tpxio_8h" local="yes">gromacs/fileio/tpxio.h</includes>
+    <includes refid="gmx__ana_8h" local="yes">gromacs/gmxana/gmx_ana.h</includes>
+    <includes refid="network_8h" local="yes">gromacs/gmxlib/network.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="broadcaststructs_8h" local="yes">gromacs/mdlib/broadcaststructs.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="state_8h" local="yes">gromacs/mdtypes/state.h</includes>
+    <includes refid="threefry_8h" local="yes">gromacs/random/threefry.h</includes>
+    <includes refid="uniformintdistribution_8h" local="yes">gromacs/random/uniformintdistribution.h</includes>
+    <includes refid="mtop__util_8h" local="yes">gromacs/topology/mtop_util.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="arraysize_8h" local="yes">gromacs/utility/arraysize.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="pleasecite_8h" local="yes">gromacs/utility/pleasecite.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <incdepgraph>
+      <node id="8622">
+        <label>stdarg.h</label>
+      </node>
+      <node id="8585">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="8616">
+        <label>limits</label>
+      </node>
+      <node id="8591">
+        <label>iterator</label>
+      </node>
+      <node id="8578">
+        <label>gromacs/commandline/filenm.h</label>
+        <link refid="filenm_8h"/>
+        <childnode refid="8579" relation="include">
+        </childnode>
+      </node>
+      <node id="8596">
+        <label>cstdint</label>
+      </node>
+      <node id="8615">
+        <label>gromacs/random/threefry.h</label>
+        <link refid="threefry_8h"/>
+        <childnode refid="8590" relation="include">
+        </childnode>
+        <childnode refid="8616" relation="include">
+        </childnode>
+        <childnode refid="8595" relation="include">
+        </childnode>
+        <childnode refid="8617" relation="include">
+        </childnode>
+        <childnode refid="8613" relation="include">
+        </childnode>
+        <childnode refid="8607" relation="include">
+        </childnode>
+      </node>
+      <node id="8580">
+        <label>stdint.h</label>
+      </node>
+      <node id="8603">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="8589" relation="include">
+        </childnode>
+        <childnode refid="8602" relation="include">
+        </childnode>
+        <childnode refid="8594" relation="include">
+        </childnode>
+        <childnode refid="8604" relation="include">
+        </childnode>
+        <childnode refid="8607" relation="include">
+        </childnode>
+      </node>
+      <node id="8619">
+        <label>gromacs/random/uniformintdistribution.h</label>
+        <link refid="uniformintdistribution_8h"/>
+        <childnode refid="8616" relation="include">
+        </childnode>
+        <childnode refid="8595" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+        <childnode refid="8613" relation="include">
+        </childnode>
+        <childnode refid="8584" relation="include">
+        </childnode>
+      </node>
+      <node id="8620">
+        <label>gromacs/utility/arraysize.h</label>
+        <link refid="arraysize_8h"/>
+      </node>
+      <node id="8617">
+        <label>gromacs/random/seed.h</label>
+        <link refid="seed_8h"/>
+        <childnode refid="8618" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+      </node>
+      <node id="8586">
+        <label>gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="8587" relation="include">
+        </childnode>
+        <childnode refid="8588" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+        <childnode refid="8582" relation="include">
+        </childnode>
+      </node>
+      <node id="8575">
+        <label>cmath</label>
+      </node>
+      <node id="8592">
+        <label>stdexcept</label>
+      </node>
+      <node id="8597">
+        <label>gromacs/mdlib/broadcaststructs.h</label>
+        <link refid="broadcaststructs_8h"/>
+        <childnode refid="8594" relation="include">
+        </childnode>
+        <childnode refid="8598" relation="include">
+        </childnode>
+      </node>
+      <node id="8587">
+        <label>string</label>
+      </node>
+      <node id="8604">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="8589" relation="include">
+        </childnode>
+        <childnode refid="8605" relation="include">
+        </childnode>
+      </node>
+      <node id="8572">
+        <label>src/gromacs/gmxana/gmx_pme_error.cpp</label>
+        <link refid="gmx_pme_error.cpp"/>
+        <childnode refid="8573" relation="include">
+        </childnode>
+        <childnode refid="8574" relation="include">
+        </childnode>
+        <childnode refid="8575" relation="include">
+        </childnode>
+        <childnode refid="8576" relation="include">
+        </childnode>
+        <childnode refid="8577" relation="include">
+        </childnode>
+        <childnode refid="8583" relation="include">
+        </childnode>
+        <childnode refid="8586" relation="include">
+        </childnode>
+        <childnode refid="8595" relation="include">
+        </childnode>
+        <childnode refid="8597" relation="include">
+        </childnode>
+        <childnode refid="8600" relation="include">
+        </childnode>
+        <childnode refid="8601" relation="include">
+        </childnode>
+        <childnode refid="8615" relation="include">
+        </childnode>
+        <childnode refid="8619" relation="include">
+        </childnode>
+        <childnode refid="8620" relation="include">
+        </childnode>
+        <childnode refid="8621" relation="include">
+        </childnode>
+        <childnode refid="8624" relation="include">
+        </childnode>
+        <childnode refid="8598" relation="include">
+        </childnode>
+      </node>
+      <node id="8613">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="8602" relation="include">
+        </childnode>
+      </node>
+      <node id="8610">
+        <label>exception</label>
+      </node>
+      <node id="8599">
+        <label>stddef.h</label>
+      </node>
+      <node id="8577">
+        <label>gromacs/commandline/pargs.h</label>
+        <link refid="pargs_8h"/>
+        <childnode refid="8578" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+        <childnode refid="8582" relation="include">
+        </childnode>
+      </node>
+      <node id="8584">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="8579" relation="include">
+        </childnode>
+        <childnode refid="8585" relation="include">
+        </childnode>
+      </node>
+      <node id="8614">
+        <label>gromacs/math/paddedvector.h</label>
+        <link refid="paddedvector_8h"/>
+        <childnode refid="8576" relation="include">
+        </childnode>
+        <childnode refid="8594" relation="include">
+        </childnode>
+        <childnode refid="8604" relation="include">
+        </childnode>
+        <childnode refid="8588" relation="include">
+        </childnode>
+      </node>
+      <node id="8618">
+        <label>random</label>
+      </node>
+      <node id="8583">
+        <label>gromacs/ewald/ewald-utils.h</label>
+        <link refid="ewald-utils_8h"/>
+        <childnode refid="8584" relation="include">
+        </childnode>
+        <childnode refid="8582" relation="include">
+        </childnode>
+      </node>
+      <node id="8608">
+        <label>cstdio</label>
+      </node>
+      <node id="8598">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="8599" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+      </node>
+      <node id="8582">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="8594">
+        <label>vector</label>
+      </node>
+      <node id="8606">
+        <label>new</label>
+      </node>
+      <node id="8600">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="8579" relation="include">
+        </childnode>
+      </node>
+      <node id="8573">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="8593">
+        <label>utility</label>
+      </node>
+      <node id="8590">
+        <label>array</label>
+      </node>
+      <node id="8601">
+        <label>gromacs/mdtypes/state.h</label>
+        <link refid="state_8h"/>
+        <childnode refid="8590" relation="include">
+        </childnode>
+        <childnode refid="8602" relation="include">
+        </childnode>
+        <childnode refid="8594" relation="include">
+        </childnode>
+        <childnode refid="8603" relation="include">
+        </childnode>
+        <childnode refid="8614" relation="include">
+        </childnode>
+        <childnode refid="8600" relation="include">
+        </childnode>
+        <childnode refid="8588" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+        <childnode refid="8582" relation="include">
+        </childnode>
+      </node>
+      <node id="8579">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="8580" relation="include">
+        </childnode>
+        <childnode refid="8581" relation="include">
+        </childnode>
+      </node>
+      <node id="8609">
+        <label>cstdlib</label>
+      </node>
+      <node id="8607">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="8608" relation="include">
+        </childnode>
+        <childnode refid="8609" relation="include">
+        </childnode>
+        <childnode refid="8610" relation="include">
+        </childnode>
+        <childnode refid="8602" relation="include">
+        </childnode>
+        <childnode refid="8587" relation="include">
+        </childnode>
+        <childnode refid="8611" relation="include">
+        </childnode>
+        <childnode refid="8612" relation="include">
+        </childnode>
+        <childnode refid="8594" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+        <childnode refid="8613" relation="include">
+        </childnode>
+        <childnode refid="8585" relation="include">
+        </childnode>
+        <childnode refid="8584" relation="include">
+        </childnode>
+      </node>
+      <node id="8588">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="8589" relation="include">
+        </childnode>
+        <childnode refid="8590" relation="include">
+        </childnode>
+        <childnode refid="8591" relation="include">
+        </childnode>
+        <childnode refid="8592" relation="include">
+        </childnode>
+        <childnode refid="8593" relation="include">
+        </childnode>
+        <childnode refid="8594" relation="include">
+        </childnode>
+        <childnode refid="8584" relation="include">
+        </childnode>
+      </node>
+      <node id="8589">
+        <label>cstddef</label>
+      </node>
+      <node id="8624">
+        <label>gromacs/utility/pleasecite.h</label>
+        <link refid="pleasecite_8h"/>
+        <childnode refid="8608" relation="include">
+        </childnode>
+      </node>
+      <node id="8605">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="8589" relation="include">
+        </childnode>
+        <childnode refid="8602" relation="include">
+        </childnode>
+        <childnode refid="8606" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+      </node>
+      <node id="8595">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="8575" relation="include">
+        </childnode>
+        <childnode refid="8596" relation="include">
+        </childnode>
+        <childnode refid="8582" relation="include">
+        </childnode>
+      </node>
+      <node id="8611">
+        <label>type_traits</label>
+      </node>
+      <node id="8574">
+        <label>config.h</label>
+      </node>
+      <node id="8621">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="8622" relation="include">
+        </childnode>
+        <childnode refid="8623" relation="include">
+        </childnode>
+        <childnode refid="8579" relation="include">
+        </childnode>
+      </node>
+      <node id="8576">
+        <label>algorithm</label>
+      </node>
+      <node id="8623">
+        <label>stdio.h</label>
+      </node>
+      <node id="8602">
+        <label>memory</label>
+      </node>
+      <node id="8581">
+        <label>inttypes.h</label>
+      </node>
+      <node id="8612">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structt__inputinfo" prot="public">t_inputinfo</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="gmx__pme__error_8cpp_1a35d7eb3c8b109d7dfa85d99560753f1e" prot="public" static="no">
+        <name>SUMORDER</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="189" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="gmx__pme__error_8cpp_1a8485f4e81de2537e6a0935626167a775" prot="public" static="no">
+        <name>NFILE</name>
+        <initializer><ref refid="group__module__utility_1ga0883345a58f8f63aefa249a4f127f707" kindref="member">asize</ref>(fnm)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="1127" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="gmx__pme__error_8cpp_1ab48899087cc647f0f791ed0c459adc53" prot="public" static="no">
+        <name>@35</name>
+        <enumvalue id="gmx__pme__error_8cpp_1ab48899087cc647f0f791ed0c459adc53a290d205d3adcfed76d1b6a5a95ffeb63" prot="public">
+          <name>eParselogOK</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="gmx__pme__error_8cpp_1ab48899087cc647f0f791ed0c459adc53a92d490983224174f522773a07fd21f68" prot="public">
+          <name>eParselogNotFound</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="gmx__pme__error_8cpp_1ab48899087cc647f0f791ed0c459adc53a8efed75c74aecd8e6c4cc11d0024dd73" prot="public">
+          <name>eParselogNoPerfData</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="gmx__pme__error_8cpp_1ab48899087cc647f0f791ed0c459adc53aa7fe9673129947584c10b15288eb9c06" prot="public">
+          <name>eParselogTerm</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="gmx__pme__error_8cpp_1ab48899087cc647f0f791ed0c459adc53acc40bf33b34e9afe8822916783cb8940" prot="public">
+          <name>eParselogResetProblem</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="gmx__pme__error_8cpp_1ab48899087cc647f0f791ed0c459adc53ad6510b49006b3d53d646655a83c26215" prot="public">
+          <name>eParselogNr</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="72" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="72" bodyend="79"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1afd1f4d733cde64c65d95d5e6c116d5c2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>static gmx_bool is_charge</definition>
+        <argsstring>(real charge)</argsstring>
+        <name>is_charge</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>charge</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="109" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="109" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1ace33ddc93b8dd3c9472d0f20c87f0501" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_q2all</definition>
+        <argsstring>(const gmx_mtop_t *mtop, real *q2all, real *q2allnr)</argsstring>
+        <name>calc_q2all</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>q2all</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>q2allnr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="123" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="123" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1aa3039e31369835303d3cdae846763b6f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real estimate_direct</definition>
+        <argsstring>(t_inputinfo *info)</argsstring>
+        <name>estimate_direct</name>
+        <param>
+          <type><ref refid="structt__inputinfo" kindref="compound">t_inputinfo</ref> *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="171" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="171" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1addb547206e5bcf770be59211e0f2f3f3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real eps_poly1</definition>
+        <argsstring>(real m, real K, real n)</argsstring>
+        <name>eps_poly1</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="193" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="193" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1a1e9deb3f6cc395285717af16b58cf3ef" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real eps_poly2</definition>
+        <argsstring>(real m, real K, real n)</argsstring>
+        <name>eps_poly2</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="230" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="230" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1ac588e827081c771d4ca74c4fba804b85" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real eps_poly3</definition>
+        <argsstring>(real m, real K, real n)</argsstring>
+        <name>eps_poly3</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="270" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="270" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1ab00a07bb3702f995bba2c15b8a6353b3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real eps_poly4</definition>
+        <argsstring>(real m, real K, real n)</argsstring>
+        <name>eps_poly4</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="310" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="310" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1a2b5de6c4a6d4c26adfbd084d35f7d72b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real eps_self</definition>
+        <argsstring>(real m, real K, rvec rboxv, real n, rvec x)</argsstring>
+        <name>eps_self</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>K</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>rboxv</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="350" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="350" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1a6f0d65a8329b8899fa410faa6bbe1417" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_recipbox</definition>
+        <argsstring>(matrix box, matrix recipbox)</argsstring>
+        <name>calc_recipbox</name>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>recipbox</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="405" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="405" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1adb063e4f52c23fbb8b8b9abcf8c152e3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real estimate_reciprocal</definition>
+        <argsstring>(t_inputinfo *info, rvec x[], real q[], int nr, FILE *fp_out, gmx_bool bVerbose, int seed, int *nsamples, t_commrec *cr)</argsstring>
+        <name>estimate_reciprocal</name>
+        <param>
+          <type><ref refid="structt__inputinfo" kindref="compound">t_inputinfo</ref> *</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>q</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp_out</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>seed</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nsamples</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="424" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="424" bodyend="788"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1a39e61f8da94ac18c181a7a8b7c6ab27f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void create_info</definition>
+        <argsstring>(t_inputinfo *info)</argsstring>
+        <name>create_info</name>
+        <param>
+          <type><ref refid="structt__inputinfo" kindref="compound">t_inputinfo</ref> *</type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="792" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="792" bodyend="807"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1ac2f3a47138e39181988d337a95b5b016" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int prepare_x_q</definition>
+        <argsstring>(real *q[], rvec *x[], const gmx_mtop_t *mtop, const rvec x_orig[], t_commrec *cr)</argsstring>
+        <name>prepare_x_q</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>q</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x_orig</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="813" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="813" bodyend="855"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1ace90270060cc80396c47b505562a862e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void read_tpr_file</definition>
+        <argsstring>(const char *fn_sim_tpr, t_inputinfo *info, t_state *state, gmx_mtop_t *mtop, t_inputrec *ir, real user_beta, real fracself)</argsstring>
+        <name>read_tpr_file</name>
+        <param>
+          <type>const char *</type>
+          <declname>fn_sim_tpr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputinfo" kindref="compound">t_inputinfo</ref> *</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>user_beta</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>fracself</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="860" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="860" bodyend="895"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1af679e646bd5af712eb46b008a2702ad7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void bcast_info</definition>
+        <argsstring>(t_inputinfo *info, t_commrec *cr)</argsstring>
+        <name>bcast_info</name>
+        <param>
+          <type><ref refid="structt__inputinfo" kindref="compound">t_inputinfo</ref> *</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="899" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="899" bodyend="915"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1a67c4d2db837c011f87525ab709cf1312" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void estimate_PME_error</definition>
+        <argsstring>(t_inputinfo *info, const t_state *state, const gmx_mtop_t *mtop, FILE *fp_out, gmx_bool bVerbose, unsigned int seed, t_commrec *cr)</argsstring>
+        <name>estimate_PME_error</name>
+        <param>
+          <type><ref refid="structt__inputinfo" kindref="compound">t_inputinfo</ref> *</type>
+          <declname>info</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp_out</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bVerbose</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>seed</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="922" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="922" bodyend="1074"/>
+      </memberdef>
+      <memberdef kind="function" id="gmx__pme__error_8cpp_1a42920a62354c32b1fb15a43415ae13c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx_pme_error</definition>
+        <argsstring>(int argc, char *argv[])</argsstring>
+        <name>gmx_pme_error</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" line="1077" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp" bodystart="1077" bodyend="1204"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gmxana/gmx_pme_error.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1MappedUnionFinder" kind="class" prot="public">
+    <compoundname>gmx::MappedUnionFinder</compoundname>
+    <includes local="no">gromacs/trajectoryanalysis/modules/unionfind.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1MappedUnionFinder_1abe105192664e19d7be2a669ae8d7a479" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1UnionFinder" kindref="compound">UnionFinder</ref></type>
+        <definition>UnionFinder gmx::MappedUnionFinder::finder_</definition>
+        <argsstring></argsstring>
+        <name>finder_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="266" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1MappedUnionFinder_1ad4abaa92ff7f7c87131d1287f909e5a1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; gmx::MappedUnionFinder::mapping_</definition>
+        <argsstring></argsstring>
+        <name>mapping_</name>
+        <briefdescription>
+<para>Mapping from input indices to zero-based indices used by finder_. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="268" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1MappedUnionFinder_1aa7f67781edc87da1b42e25ab3aefd858" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::MappedUnionFinder::initWithGroupIndices</definition>
+        <argsstring>(ArrayRef&lt; const int &gt; indices)</argsstring>
+        <name>initWithGroupIndices</name>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const int &gt;</type>
+          <declname>indices</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the finder with indices. </para>        </briefdescription>
+        <detaileddescription>
+<para>The size of <computeroutput>indices</computeroutput> sets the number of input items, and each unique value in <computeroutput>indices</computeroutput> maps to a single internal item. If multiple indices are the same, then these items are considered equivalent. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="194" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="194" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1MappedUnionFinder_1afc17a3cff4f2dd84c9bff478fcb4340d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::MappedUnionFinder::representativeValue</definition>
+        <argsstring>(int group)</argsstring>
+        <name>representativeValue</name>
+        <param>
+          <type>int</type>
+          <declname>group</declname>
+        </param>
+        <briefdescription>
+<para>Returns a reprensetative value for an item that is unique for each set. </para>        </briefdescription>
+        <detaileddescription>
+<para><computeroutput>group</computeroutput> should be one of the values that were passed in as an index to <ref refid="classgmx_1_1MappedUnionFinder_1aa7f67781edc87da1b42e25ab3aefd858" kindref="member">initWithGroupIndices()</ref>. The return value is an internal index that has no simple relation to the input indices. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="224" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="224" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1MappedUnionFinder_1a38088c05fda2b626937a0f836cd2cabe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::MappedUnionFinder::mergeGroups</definition>
+        <argsstring>(int group1, int group2)</argsstring>
+        <name>mergeGroups</name>
+        <param>
+          <type>int</type>
+          <declname>group1</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>group2</declname>
+        </param>
+        <briefdescription>
+<para>Merges sets that contain two given items. </para>        </briefdescription>
+        <detaileddescription>
+<para>If the items are already in the same set, nothing happens. Each input value should be one of the values that were passed in as an index to <ref refid="classgmx_1_1MappedUnionFinder_1aa7f67781edc87da1b42e25ab3aefd858" kindref="member">initWithGroupIndices()</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="239" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="239" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1MappedUnionFinder_1aa666413cd0ca0b5948e775f4b62ffb87" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; gmx::MappedUnionFinder::allSizes</definition>
+        <argsstring>()</argsstring>
+        <name>allSizes</name>
+        <briefdescription>
+<para>Returns the sizes of all sets (in arbitrary order). </para>        </briefdescription>
+        <detaileddescription>
+<para>If there were multiple identical indices passed to <ref refid="classgmx_1_1MappedUnionFinder_1aa7f67781edc87da1b42e25ab3aefd858" kindref="member">initWithGroupIndices()</ref>, these are only counted as one when computing the sizes. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="258" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="258" bodyend="261"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgmx_1_1MappedUnionFinder_1aa82957ef0d93bfe6015c546e80c4a440" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::MappedUnionFinder::maxGroupNumber</definition>
+        <argsstring>() const </argsstring>
+        <name>maxGroupNumber</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="264" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="264" bodyend="264"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Extension of UnionFind that supports non-consecutive integer indices as items. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> Sometimes, it is more convenient to operate on a set of integers that do not start at zero and are not consecutive as UnionFind expects. This class implements a mapping on top of UnionFind such that this is possible.</para><para>The current implementation assumes that the indices are bounded between zero and some reasonably small integer, i.e., the memory usage depends on the largest index number, not just on the number of items. </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" line="184" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/trajectoryanalysis/modules/unionfind.h" bodystart="183" bodyend="269"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1MappedUnionFinder_1aa666413cd0ca0b5948e775f4b62ffb87" prot="public" virt="non-virtual"><scope>gmx::MappedUnionFinder</scope><name>allSizes</name></member>
+      <member refid="classgmx_1_1MappedUnionFinder_1abe105192664e19d7be2a669ae8d7a479" prot="private" virt="non-virtual"><scope>gmx::MappedUnionFinder</scope><name>finder_</name></member>
+      <member refid="classgmx_1_1MappedUnionFinder_1aa7f67781edc87da1b42e25ab3aefd858" prot="public" virt="non-virtual"><scope>gmx::MappedUnionFinder</scope><name>initWithGroupIndices</name></member>
+      <member refid="classgmx_1_1MappedUnionFinder_1ad4abaa92ff7f7c87131d1287f909e5a1" prot="private" virt="non-virtual"><scope>gmx::MappedUnionFinder</scope><name>mapping_</name></member>
+      <member refid="classgmx_1_1MappedUnionFinder_1aa82957ef0d93bfe6015c546e80c4a440" prot="private" virt="non-virtual"><scope>gmx::MappedUnionFinder</scope><name>maxGroupNumber</name></member>
+      <member refid="classgmx_1_1MappedUnionFinder_1a38088c05fda2b626937a0f836cd2cabe" prot="public" virt="non-virtual"><scope>gmx::MappedUnionFinder</scope><name>mergeGroups</name></member>
+      <member refid="classgmx_1_1MappedUnionFinder_1afc17a3cff4f2dd84c9bff478fcb4340d" prot="public" virt="non-virtual"><scope>gmx::MappedUnionFinder</scope><name>representativeValue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

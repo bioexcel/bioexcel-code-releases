@@ -281,9 +281,9 @@ standard_dna_3term_pair_list_charmm = [
     ]
 
 use_standard_pair_list = {
-    'PHE': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
-    'TYR': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISH','HISE'],
-    'TRP': [ 'PHE','TYR','HIP','HID','HSE','HSP','HSD','HSE','HIS1','HISH','HISE','HIE'],
+    'PHE': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISD','HISH','HISE'],
+    'TYR': [ 'TRP','HIP','HID','HIE','HSP','HSD','HSE','HIS1','HISD','HISH','HISE'],
+    'TRP': [ 'PHE','TYR','HIP','HID','HSE','HSP','HSD','HSE','HIS1','HISD','HISH','HISE','HIE'],
     'HID': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','TRP','HIE'],
     'HIE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
     'HIP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
@@ -291,6 +291,7 @@ use_standard_pair_list = {
     'HSE': [ 'PHE','TYR','TRP'], #[ 'PHE','TYR','HIP','HID','TRP'],
     'HSP': [ 'PHE','TYR','TRP'], #,'HID','HIE'],
     'HIS1': [ 'TRP','PHE','TYR'],
+    'HISD': [ 'TRP','PHE','TYR'],
     'HISE': [ 'TRP','PHE','TYR'],
     'HISH': [ 'TRP','PHE','TYR']
     }
@@ -337,7 +338,7 @@ use_standard_dna_3term_pair_list = {
     'DT3': [ 'DA3','DG3'],
     }
 
-res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HSE','HSD','HSP',
+res_with_rings = [ 'HIS','HID','HIE','HIP','HISE','HISH','HIS1','HISD','HSE','HSD','HSP',
 		   'PHE','TYR','TRP','PRO' ]
 
 res_diff_Cb = [ 'THR', 'ALA', 'VAL', 'ILE' ]
@@ -354,8 +355,9 @@ merge_by_name_list = {
     'HSE':['HSP','HSD'],
     'HSP':['HSD','HSE'],
     'HIS1':['HISE','HISH'],
-    'HISE':['HIS1','HISH'],
-    'HISH':['HIS1','HISE']
+    'HISD':['HISE','HISH'],
+    'HISE':['HIS1','HISD','HISH'],
+    'HISH':['HIS1','HISD','HISE']
 }
     
 
@@ -373,6 +375,7 @@ mol_branch = {
     'TRP':2,
     'HIS':2,
     'HIS1':2,
+    'HISD':2,
     'HISE':2,
     'HISH':2,
     'THR':2,
@@ -384,7 +387,16 @@ mol_branch = {
     'ARG':5,
     'LYS':5,
     'LYN':5,
+    'SP1':3,
+    'SP2':3,
     }
+
+noncanonical_aa = {
+    'S2SP1':'SSP1', # serine to pSer1
+    'S2SP2':'SSP2', # serine to pSer2
+    'SP12S':'SP1S', # pSer1 to serine
+    'SP22S':'SP2S', # pSer2 to setine
+}
 
 dna_names = {
     'DA5_DT5':'D5K',
@@ -549,6 +561,7 @@ def assign_rtp_entries( mol, rtp):
         atom_type = atom_entry[1]
         atom_q    = atom_entry[2]
         atom_cgnr = atom_entry[3]
+        print "foo ",atom_name
         atom = mol.fetch( atom_name )[0]
         atom.atomtype = atom_type
         atom.q = atom_q
@@ -1181,7 +1194,9 @@ def make_rotations( r, resn1_dih, resn2_dih ):
         atoms_to_rotate =  find_higher_atoms(atom2,  r, oo+1, bb ) 
         for atom in atoms_to_rotate:
             rot_list.append( atom )
+#            print atom.name
         rotations.append( rot_list )
+#    sys.exit(0)
     return rotations
 
 def parse_ffnonbonded_charmm(ffnonbonded,f):
@@ -1491,6 +1506,8 @@ if bDNA:
     rr_name = dna_mutation_naming(aa1,aa2)
 elif bRNA:
     rr_name = rna_mutation_naming(aa1,aa2)
+elif rr_name in noncanonical_aa.keys():
+    rr_name = noncanonical_aa[rr_name]
 
 m1.get_symbol()
 m2.get_symbol()

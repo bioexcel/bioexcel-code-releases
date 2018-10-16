@@ -1,0 +1,108 @@
+.. _gmx nmr:
+
+gmx nmr
+=======
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx nmr [:strong:`-f` :emphasis:`[<.edr>]`] [:strong:`-f2` :emphasis:`[<.edr>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-viol` :emphasis:`[<.xvg>]`]
+            [:strong:`-pairs` :emphasis:`[<.xvg>]`] [:strong:`-ora` :emphasis:`[<.xvg>]`] [:strong:`-ort` :emphasis:`[<.xvg>]`]
+            [:strong:`-oda` :emphasis:`[<.xvg>]`] [:strong:`-odr` :emphasis:`[<.xvg>]`] [:strong:`-odt` :emphasis:`[<.xvg>]`]
+            [:strong:`-oten` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-[no]w`]
+            [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]dp`] [:strong:`-skip` :emphasis:`<int>`] [:strong:`-[no]aver`]
+            [:strong:`-[no]orinst`] [:strong:`-[no]ovec`]
+
+Description
+-----------
+
+``gmx nmr`` extracts distance or orientation restraint
+data from an energy file. The user is prompted to interactively
+select the desired terms.
+
+When the ``-viol`` option is set, the time averaged
+violations are plotted and the running time-averaged and
+instantaneous sum of violations are recalculated. Additionally
+running time-averaged and instantaneous distances between
+selected pairs can be plotted with the ``-pairs`` option.
+
+Options ``-ora``, ``-ort``, ``-oda``, ``-odr`` and
+``-odt`` are used for analyzing orientation restraint data.
+The first two options plot the orientation, the last three the
+deviations of the orientations from the experimental values.
+The options that end on an 'a' plot the average over time
+as a function of restraint. The options that end on a 't'
+prompt the user for restraint label numbers and plot the data
+as a function of time. Option ``-odr`` plots the RMS
+deviation as a function of restraint.
+When the run used time or ensemble averaged orientation restraints,
+option ``-orinst`` can be used to analyse the instantaneous,
+not ensemble-averaged orientations and deviations instead of
+the time and ensemble averages.
+
+Option ``-oten`` plots the eigenvalues of the molecular order
+tensor for each orientation restraint experiment. With option
+``-ovec`` also the eigenvectors are plotted.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.edr>] (ener.edr)
+    Energy file
+``-f2`` [<.edr>] (ener.edr) (Optional)
+    Energy file
+``-s`` [<.tpr>] (topol.tpr) (Optional)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-viol`` [<.xvg>] (violaver.xvg) (Optional)
+    xvgr/xmgr file
+``-pairs`` [<.xvg>] (pairs.xvg) (Optional)
+    xvgr/xmgr file
+``-ora`` [<.xvg>] (orienta.xvg) (Optional)
+    xvgr/xmgr file
+``-ort`` [<.xvg>] (orientt.xvg) (Optional)
+    xvgr/xmgr file
+``-oda`` [<.xvg>] (orideva.xvg) (Optional)
+    xvgr/xmgr file
+``-odr`` [<.xvg>] (oridevr.xvg) (Optional)
+    xvgr/xmgr file
+``-odt`` [<.xvg>] (oridevt.xvg) (Optional)
+    xvgr/xmgr file
+``-oten`` [<.xvg>] (oriten.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]dp``  (no)
+    Print energies in high precision
+``-skip`` <int> (0)
+    Skip number of frames between data points
+``-[no]aver``  (no)
+    Also print the exact average and rmsd stored in the energy frames (only when 1 term is requested)
+``-[no]orinst``  (no)
+    Analyse instantaneous orientation data
+``-[no]ovec``  (no)
+    Also plot the eigenvectors with ``-oten``
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

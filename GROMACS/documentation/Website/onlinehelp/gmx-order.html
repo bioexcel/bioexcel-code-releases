@@ -1,0 +1,218 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx order &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx pairdist" href="gmx-pairdist.html" />
+    <link rel="prev" title="gmx nmtraj" href="gmx-nmtraj.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-pairdist.html" title="gmx pairdist"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-nmtraj.html" title="gmx nmtraj"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-order">
+<span id="id1"></span><h1>gmx order<a class="headerlink" href="#gmx-order" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx order [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-nr</strong> <em>[&lt;.ndx&gt;]</em>]
+          [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-od</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ob</strong> <em>[&lt;.pdb&gt;]</em>]
+          [<strong>-os</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-Sg</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-Sk</strong> <em>[&lt;.xvg&gt;]</em>]
+          [<strong>-Sgsl</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-Sksl</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+          [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-d</strong> <em>&lt;enum&gt;</em>] [<strong>-sl</strong> <em>&lt;int&gt;</em>]
+          [<strong>-[no]szonly</strong>] [<strong>-[no]unsat</strong>] [<strong>-[no]permolecule</strong>] [<strong>-[no]radial</strong>]
+          [<strong>-[no]calcdist</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">order</span></code> computes the order parameter per atom for carbon tails. For atom i the
+vector i-1, i+1 is used together with an axis.
+The index file should contain only the groups to be used for calculations,
+with each group of equivalent carbons along the relevant acyl chain in its own
+group. There should not be any generic groups (like System, Protein) in the index
+file to avoid confusing the program (this is not relevant to tetrahedral order
+parameters however, which only work for water anyway).</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">order</span></code> can also give all
+diagonal elements of the order tensor and even calculate the deuterium
+order parameter Scd (default). If the option <code class="docutils literal"><span class="pre">-szonly</span></code> is given, only one
+order tensor component (specified by the <code class="docutils literal"><span class="pre">-d</span></code> option) is given and the
+order parameter per slice is calculated as well. If <code class="docutils literal"><span class="pre">-szonly</span></code> is not
+selected, all diagonal elements and the deuterium order parameter is
+given.</p>
+<p>The tetrahedrality order parameters can be determined
+around an atom. Both angle an distance order parameters are calculated. See
+P.-L. Chau and A.J. Hardwick, Mol. Phys., 93, (1998), 511-518.
+for more details.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-nr</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (order.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-od</span></code> [&lt;.xvg&gt;] (deuter.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ob</span></code> [&lt;.pdb&gt;] (eiwit.pdb) (Optional)</dt>
+<dd>Protein data bank file</dd>
+<dt><code class="docutils literal"><span class="pre">-os</span></code> [&lt;.xvg&gt;] (sliced.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-Sg</span></code> [&lt;.xvg&gt;] (sg-ang.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-Sk</span></code> [&lt;.xvg&gt;] (sk-dist.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-Sgsl</span></code> [&lt;.xvg&gt;] (sg-ang-slice.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-Sksl</span></code> [&lt;.xvg&gt;] (sk-dist-slice.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-d</span></code> &lt;enum&gt; (z)</dt>
+<dd>Direction of the normal on the membrane: z, x, y</dd>
+<dt><code class="docutils literal"><span class="pre">-sl</span></code> &lt;int&gt; (1)</dt>
+<dd>Calculate order parameter as function of box length, dividing the box into this number of slices.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]szonly</span></code>  (no)</dt>
+<dd>Only give Sz element of order tensor. (axis can be specified with <code class="docutils literal"><span class="pre">-d</span></code>)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]unsat</span></code>  (no)</dt>
+<dd>Calculate order parameters for unsaturated carbons. Note that this cannot be mixed with normal order parameters.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]permolecule</span></code>  (no)</dt>
+<dd>Compute per-molecule Scd order parameters</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]radial</span></code>  (no)</dt>
+<dd>Compute a radial membrane normal</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]calcdist</span></code>  (no)</dt>
+<dd>Compute distance from a reference</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx order</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-nmtraj.html"
+                        title="previous chapter">gmx nmtraj</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-pairdist.html"
+                        title="next chapter">gmx pairdist</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-order.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-pairdist.html" title="gmx pairdist"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-nmtraj.html" title="gmx nmtraj"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

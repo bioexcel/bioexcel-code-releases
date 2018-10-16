@@ -1,0 +1,944 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="pme-gpu_8cpp" kind="file">
+    <compoundname>pme-gpu.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">list</includes>
+    <includes refid="ewald-utils_8h" local="yes">gromacs/ewald/ewald-utils.h</includes>
+    <includes refid="pme_8h" local="yes">gromacs/ewald/pme.h</includes>
+    <includes refid="parallel__3dfft_8h" local="yes">gromacs/fft/parallel_3dfft.h</includes>
+    <includes refid="invertmatrix_8h" local="yes">gromacs/math/invertmatrix.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="exceptions_8h" local="yes">gromacs/utility/exceptions.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="stringutil_8h" local="yes">gromacs/utility/stringutil.h</includes>
+    <includes refid="pme-gpu-internal_8h" local="yes">pme-gpu-internal.h</includes>
+    <includes refid="pme-grid_8h" local="yes">pme-grid.h</includes>
+    <includes refid="pme-internal_8h" local="yes">pme-internal.h</includes>
+    <includes refid="pme-solve_8h" local="yes">pme-solve.h</includes>
+    <incdepgraph>
+      <node id="4861">
+        <label>list</label>
+      </node>
+      <node id="4888">
+        <label>stdarg.h</label>
+      </node>
+      <node id="4867">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="4874">
+        <label>iterator</label>
+      </node>
+      <node id="4865">
+        <label>stdint.h</label>
+      </node>
+      <node id="4897">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="4872" relation="include">
+        </childnode>
+        <childnode refid="4883" relation="include">
+        </childnode>
+        <childnode refid="4877" relation="include">
+        </childnode>
+        <childnode refid="4898" relation="include">
+        </childnode>
+        <childnode refid="4879" relation="include">
+        </childnode>
+      </node>
+      <node id="4878">
+        <label>gromacs/math/invertmatrix.h</label>
+        <link refid="invertmatrix_8h"/>
+        <childnode refid="4864" relation="include">
+        </childnode>
+      </node>
+      <node id="4869">
+        <label>gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="4870" relation="include">
+        </childnode>
+        <childnode refid="4871" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+        <childnode refid="4868" relation="include">
+        </childnode>
+      </node>
+      <node id="4896">
+        <label>gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="4880" relation="include">
+        </childnode>
+        <childnode refid="4870" relation="include">
+        </childnode>
+        <childnode refid="4877" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+      </node>
+      <node id="4875">
+        <label>stdexcept</label>
+      </node>
+      <node id="4891">
+        <label>cstdarg</label>
+      </node>
+      <node id="4870">
+        <label>string</label>
+      </node>
+      <node id="4898">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="4872" relation="include">
+        </childnode>
+        <childnode refid="4899" relation="include">
+        </childnode>
+      </node>
+      <node id="4901">
+        <label>pme-internal.h</label>
+        <link refid="pme-internal_8h"/>
+        <childnode refid="4860" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+        <childnode refid="4902" relation="include">
+        </childnode>
+        <childnode refid="4895" relation="include">
+        </childnode>
+      </node>
+      <node id="4902">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="4860" relation="include">
+        </childnode>
+      </node>
+      <node id="4886">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="4883" relation="include">
+        </childnode>
+      </node>
+      <node id="4882">
+        <label>exception</label>
+      </node>
+      <node id="4863">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="4864" relation="include">
+        </childnode>
+        <childnode refid="4867" relation="include">
+        </childnode>
+      </node>
+      <node id="4862">
+        <label>gromacs/ewald/ewald-utils.h</label>
+        <link refid="ewald-utils_8h"/>
+        <childnode refid="4863" relation="include">
+        </childnode>
+        <childnode refid="4868" relation="include">
+        </childnode>
+      </node>
+      <node id="4880">
+        <label>cstdio</label>
+      </node>
+      <node id="4868">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="4893">
+        <label>pme-gpu-internal.h</label>
+        <link refid="pme-gpu-internal_8h"/>
+        <childnode refid="4894" relation="include">
+        </childnode>
+        <childnode refid="4871" relation="include">
+        </childnode>
+        <childnode refid="4895" relation="include">
+        </childnode>
+      </node>
+      <node id="4877">
+        <label>vector</label>
+      </node>
+      <node id="4858">
+        <label>src/gromacs/ewald/pme-gpu.cpp</label>
+        <link refid="pme-gpu.cpp"/>
+        <childnode refid="4859" relation="include">
+        </childnode>
+        <childnode refid="4860" relation="include">
+        </childnode>
+        <childnode refid="4861" relation="include">
+        </childnode>
+        <childnode refid="4862" relation="include">
+        </childnode>
+        <childnode refid="4869" relation="include">
+        </childnode>
+        <childnode refid="4878" relation="include">
+        </childnode>
+        <childnode refid="4879" relation="include">
+        </childnode>
+        <childnode refid="4887" relation="include">
+        </childnode>
+        <childnode refid="4863" relation="include">
+        </childnode>
+        <childnode refid="4890" relation="include">
+        </childnode>
+        <childnode refid="4893" relation="include">
+        </childnode>
+        <childnode refid="4901" relation="include">
+        </childnode>
+      </node>
+      <node id="4900">
+        <label>new</label>
+      </node>
+      <node id="4859">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="4876">
+        <label>utility</label>
+      </node>
+      <node id="4873">
+        <label>array</label>
+      </node>
+      <node id="4890">
+        <label>gromacs/utility/stringutil.h</label>
+        <link refid="stringutil_8h"/>
+        <childnode refid="4891" relation="include">
+        </childnode>
+        <childnode refid="4892" relation="include">
+        </childnode>
+        <childnode refid="4870" relation="include">
+        </childnode>
+        <childnode refid="4877" relation="include">
+        </childnode>
+      </node>
+      <node id="4864">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="4865" relation="include">
+        </childnode>
+        <childnode refid="4866" relation="include">
+        </childnode>
+      </node>
+      <node id="4881">
+        <label>cstdlib</label>
+      </node>
+      <node id="4879">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="4880" relation="include">
+        </childnode>
+        <childnode refid="4881" relation="include">
+        </childnode>
+        <childnode refid="4882" relation="include">
+        </childnode>
+        <childnode refid="4883" relation="include">
+        </childnode>
+        <childnode refid="4870" relation="include">
+        </childnode>
+        <childnode refid="4884" relation="include">
+        </childnode>
+        <childnode refid="4885" relation="include">
+        </childnode>
+        <childnode refid="4877" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+        <childnode refid="4886" relation="include">
+        </childnode>
+        <childnode refid="4867" relation="include">
+        </childnode>
+        <childnode refid="4863" relation="include">
+        </childnode>
+      </node>
+      <node id="4871">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="4872" relation="include">
+        </childnode>
+        <childnode refid="4873" relation="include">
+        </childnode>
+        <childnode refid="4874" relation="include">
+        </childnode>
+        <childnode refid="4875" relation="include">
+        </childnode>
+        <childnode refid="4876" relation="include">
+        </childnode>
+        <childnode refid="4877" relation="include">
+        </childnode>
+        <childnode refid="4863" relation="include">
+        </childnode>
+      </node>
+      <node id="4872">
+        <label>cstddef</label>
+      </node>
+      <node id="4894">
+        <label>gromacs/fft/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="4889" relation="include">
+        </childnode>
+        <childnode refid="4868" relation="include">
+        </childnode>
+      </node>
+      <node id="4899">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="4872" relation="include">
+        </childnode>
+        <childnode refid="4883" relation="include">
+        </childnode>
+        <childnode refid="4900" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+      </node>
+      <node id="4895">
+        <label>pme-gpu-types.h</label>
+        <link refid="pme-gpu-types_8h"/>
+        <childnode refid="4860" relation="include">
+        </childnode>
+        <childnode refid="4883" relation="include">
+        </childnode>
+        <childnode refid="4877" relation="include">
+        </childnode>
+        <childnode refid="4869" relation="include">
+        </childnode>
+        <childnode refid="4896" relation="include">
+        </childnode>
+        <childnode refid="4897" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+      </node>
+      <node id="4884">
+        <label>type_traits</label>
+      </node>
+      <node id="4860">
+        <label>config.h</label>
+      </node>
+      <node id="4887">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="4888" relation="include">
+        </childnode>
+        <childnode refid="4889" relation="include">
+        </childnode>
+        <childnode refid="4864" relation="include">
+        </childnode>
+      </node>
+      <node id="4889">
+        <label>stdio.h</label>
+      </node>
+      <node id="4892">
+        <label>cstring</label>
+      </node>
+      <node id="4883">
+        <label>memory</label>
+      </node>
+      <node id="4866">
+        <label>inttypes.h</label>
+      </node>
+      <node id="4885">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="pme-gpu_8cpp_1a9cfbe9fa691aabaf1a9e10fa06858c96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="pme_8h_1adc082ed1af9a4868af13352373ed3791" kindref="member">PmeRunMode</ref></type>
+        <definition>PmeRunMode pme_run_mode</definition>
+        <argsstring>(const gmx_pme_t *pme)</argsstring>
+        <name>pme_run_mode</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <briefdescription>
+<para>Returns the active PME codepath (CPU, GPU, mixed). </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000025"><xreftitle>Todo</xreftitle><xrefdescription><para>This is a rather static data that should be managed by the higher level task scheduler.</para></xrefdescription></xrefsect></para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>active PME codepath. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="64" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="64" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a877779523026740bee18ecc68ca9ab42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool pme_gpu_supports_input</definition>
+        <argsstring>(const t_inputrec *ir, std::string *error)</argsstring>
+        <name>pme_gpu_supports_input</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>std::string *</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>Checks whether the input system allows to run PME on GPU. TODO: this mostly duplicates an internal PME assert function <ref refid="pme-gpu-internal_8cpp_1a30f29ab01f4617cea28a55ee8552ee6a" kindref="member">pme_gpu_check_restrictions()</ref>, except that works with a formed gmx_pme_t structure. Should that one go away/work with inputrec? </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input system. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The error message if the input is not supported on GPU.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if PME can run on GPU with this input, false otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="70" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="70" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a9e82dc29271032072ff9ffb1418a1954" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_reset_timings</definition>
+        <argsstring>(const gmx_pme_t *pme)</argsstring>
+        <name>pme_gpu_reset_timings</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <briefdescription>
+<para>Resets the PME GPU timings. To be called at the reset step. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="118" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="118" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1aadcdbd368ce25a9899c3cab4ec895cba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_get_timings</definition>
+        <argsstring>(const gmx_pme_t *pme, gmx_wallclock_gpu_pme_t *timings)</argsstring>
+        <name>pme_gpu_get_timings</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallclock__gpu__pme__t" kindref="compound">gmx_wallclock_gpu_pme_t</ref> *</type>
+          <declname>timings</declname>
+        </param>
+        <briefdescription>
+<para>Copies the PME GPU timings to the <ref refid="structgmx__wallclock__gpu__pme__t" kindref="compound">gmx_wallclock_gpu_pme_t</ref> structure (for log output). To be called at the run end. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">timings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structgmx__wallclock__gpu__pme__t" kindref="compound">gmx_wallclock_gpu_pme_t</ref> structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="126" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="126" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1af407346691cc3bb7fe4f5599d88fc7fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void parallel_3dfft_execute_gpu_wrapper</definition>
+        <argsstring>(gmx_pme_t *pme, const int gridIndex, enum gmx_fft_direction dir, gmx_wallcycle_t wcycle)</argsstring>
+        <name>parallel_3dfft_execute_gpu_wrapper</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>gridIndex</declname>
+        </param>
+        <param>
+          <type>enum <ref refid="fft_8h_1af2aa0b3a5f3a4339ecb2bd67cb8f8302" kindref="member">gmx_fft_direction</ref></type>
+          <declname>dir</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>A convenience wrapper for launching either the GPU or CPU FFT. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gridIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The grid index - should currently always be 0. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The FFT direction enum. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallclock counter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="142" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="142" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a2db9507955e1908ed647984a9c62f641" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_prepare_computation</definition>
+        <argsstring>(gmx_pme_t *pme, bool needToUpdateBox, const matrix box, gmx_wallcycle_t wcycle, int flags)</argsstring>
+        <name>pme_gpu_prepare_computation</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>needToUpdateBox</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Prepares PME on GPU computation (updating the box if needed) </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">needToUpdateBox</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tells if the stored unit cell parameters should be updated from <computeroutput>box</computeroutput>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallclock counter. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The combination of flags to affect this PME computation. The flags are the GMX_PME_ flags from <ref refid="pme_8h" kindref="compound">pme.h</ref>. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="170" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="170" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1afa0375d05b42903aa5fa89ecca162848" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_launch_spread</definition>
+        <argsstring>(gmx_pme_t *pme, const rvec *x, gmx_wallcycle_t wcycle)</argsstring>
+        <name>pme_gpu_launch_spread</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>Launches first stage of PME on GPU - H2D input transfers, spreading kernel, and D2H grid transfer if needed. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The array of local atoms&apos; coordinates. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallclock counter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="214" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="214" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a2efd4cd94bfa8f861b22936d2655b148" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_launch_complex_transforms</definition>
+        <argsstring>(gmx_pme_t *pme, gmx_wallcycle_t wcycle)</argsstring>
+        <name>pme_gpu_launch_complex_transforms</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>Launches middle stages of PME (FFT R2C, solving, FFT C2R) either on GPU or on CPU, depending on the run mode. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallclock counter. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="244" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="244" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a48278ccbf705df4307a2e9cc984a6b3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_launch_gather</definition>
+        <argsstring>(const gmx_pme_t *pme, gmx_wallcycle_t wcycle, PmeForceOutputHandling forceTreatment)</argsstring>
+        <name>pme_gpu_launch_gather</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="pme_8h_1acbcd1495b351f6a99fa2bf5b10aca640" kindref="member">PmeForceOutputHandling</ref></type>
+          <declname>forceTreatment</declname>
+        </param>
+        <briefdescription>
+<para>Launches last stage of PME on GPU - force gathering and D2H force transfer. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallclock counter. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceTreatment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tells how data should be treated. The gathering kernel either stores the output reciprocal forces into the host array, or copies its contents to the GPU first and accumulates. The reduction is non-atomic. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="300" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="300" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a4b4dee276a6df89faed721da9567e963" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pme_gpu_get_staged_results</definition>
+        <argsstring>(const gmx_pme_t *pme, gmx::ArrayRef&lt; const gmx::RVec &gt; *forces, matrix virial, real *energy)</argsstring>
+        <name>pme_gpu_get_staged_results</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; const <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt; *</type>
+          <declname>forces</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>virial</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>energy</declname>
+        </param>
+        <briefdescription>
+<para>Reduce staged virial and energy outputs. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">forces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output forces pointer, the internal ArrayRef pointers gets assigned to it. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">virial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output virial matrix. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">energy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output energy. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="327" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="327" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a3f34e80606d5e1fbc6f825e3e9d6cffc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool pme_gpu_try_finish_task</definition>
+        <argsstring>(const gmx_pme_t *pme, gmx_wallcycle_t wcycle, gmx::ArrayRef&lt; const gmx::RVec &gt; *forces, matrix virial, real *energy, GpuTaskCompletion completionKind)</argsstring>
+        <name>pme_gpu_try_finish_task</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; const <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt; *</type>
+          <declname>forces</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>virial</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>energy</declname>
+        </param>
+        <param>
+          <type><ref refid="gpu__utils_8h_1aab3d31c4bd3fcb89aa5d554b125b403e" kindref="member">GpuTaskCompletion</ref></type>
+          <declname>completionKind</declname>
+        </param>
+        <briefdescription>
+<para>Attempts to complete PME GPU tasks. </para>        </briefdescription>
+        <detaileddescription>
+<para>The <computeroutput>completionKind</computeroutput> argument controls whether the function blocks until all PME GPU tasks enqueued completed (as <ref refid="pme-gpu_8cpp_1a6675ff9b6502c7f5e4a9b43eb0103da3" kindref="member">pme_gpu_wait_finish_task()</ref> does) or only checks and returns immediately if they did not. When blocking or the tasks have completed it also gets the output forces by assigning the ArrayRef to the <computeroutput>forces</computeroutput> pointer passed in. Virial/energy are also outputs if they were to be computed.</para><para>Note: also launches the reinitalization of the PME output buffers. TODO: this should be moved out to avoid miscounting its wall-time (as wait iso launch).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallclock counter. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">forces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output forces. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">virial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output virial matrix. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">energy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output energy. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">completionKind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Indicates whether PME task completion should only be checked rather than waited for </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the PME GPU tasks have completed </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="348" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="348" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu_8cpp_1a6675ff9b6502c7f5e4a9b43eb0103da3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_wait_finish_task</definition>
+        <argsstring>(const gmx_pme_t *pme, gmx_wallcycle_t wcycle, gmx::ArrayRef&lt; const gmx::RVec &gt; *forces, matrix virial, real *energy)</argsstring>
+        <name>pme_gpu_wait_finish_task</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; const <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt; *</type>
+          <declname>forces</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>virial</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>energy</declname>
+        </param>
+        <briefdescription>
+<para>Blocks until PME GPU tasks are completed, and gets the output forces and virial/energy (if they were to be computed). </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallclock counter. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">forces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output forces. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">virial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output virial matrix. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">energy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output energy. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" line="393" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp" bodystart="393" bodyend="400"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implements high-level PME GPU functions which do not require GPU framework-specific code. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Aleksei Iupinov <ulink url="mailto:a.yupinov@gmail.com">a.yupinov@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1TextOutputStream" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::TextOutputStream</compoundname>
+    <derivedcompoundref refid="classgmx_1_1anonymous__namespace_02cmdlinehelpmodule_8cpp_03_1_1ModificationCheckingFileOutputStream" prot="public" virt="non-virtual">gmx::anonymous_namespace{cmdlinehelpmodule.cpp}::ModificationCheckingFileOutputStream</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1StringOutputStream" prot="public" virt="non-virtual">gmx::StringOutputStream</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1MockTextOutputStream" prot="public" virt="non-virtual">gmx::test::MockTextOutputStream</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1TextOutputFile" prot="public" virt="non-virtual">gmx::TextOutputFile</derivedcompoundref>
+    <includes local="no">gromacs/utility/textstream.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1TextOutputStream_1a261f767dff54df115f13107b1a2479d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual gmx::TextOutputStream::~TextOutputStream</definition>
+        <argsstring>()</argsstring>
+        <name>~TextOutputStream</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/textstream.h" line="121" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/textstream.h" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1TextOutputStream_1a66128af9ca6f3eb947c93f5127c88689" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::TextOutputStream::write</definition>
+        <argsstring>(const char *text)=0</argsstring>
+        <name>write</name>
+        <reimplementedby refid="classgmx_1_1StringOutputStream_1a43d545ea45d9b35e5736e5253028de14">write</reimplementedby>
+        <reimplementedby refid="classgmx_1_1TextOutputFile_1a13497c5ea8797cb42af224efd1f80a91">write</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02cmdlinehelpmodule_8cpp_03_1_1ModificationCheckingFileOutputStream_1a9d6a3e375ce5213440aeea27be19fe9d">write</reimplementedby>
+        <param>
+          <type>const char *</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Writes a given string to the stream. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/textstream.h" line="126" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1TextOutputStream_1a8c624ae9199c3bfd37bc35a1beb7852f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::TextOutputStream::close</definition>
+        <argsstring>()=0</argsstring>
+        <name>close</name>
+        <reimplementedby refid="classgmx_1_1StringOutputStream_1a6ffbf88cf13a30d630378821eaeb096d">close</reimplementedby>
+        <reimplementedby refid="classgmx_1_1TextOutputFile_1a7666d7379f5f9386549f82ae61c6f26d">close</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02cmdlinehelpmodule_8cpp_03_1_1ModificationCheckingFileOutputStream_1a510b1f647c7f4dee6e5c64a8d5eb9110">close</reimplementedby>
+        <briefdescription>
+<para>Closes the stream. </para>        </briefdescription>
+        <detaileddescription>
+<para>It is not allowed to write to a stream after it has been closed. A method separate from the destructor is provided such that errors that occur while closing the stream (e.g., when closing the file) can be handled using exceptions. The destructor is not allowed to throw, so code that wants to observe such errors needs to call <ref refid="classgmx_1_1TextOutputStream_1a8c624ae9199c3bfd37bc35a1beb7852f" kindref="member">close()</ref> after it has finished writing to the stream. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/textstream.h" line="138" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface for writing text. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> Concrete implementations can write the text to, e.g., a file or an in-memory string. The main use is to allow unit tests to inject in-memory buffers instead of reading in files produced by the code under test, but there are also use cases outside the tests where it is useful to abstract out whether the output is into a real file or something else.</para><para>To use more advanced formatting than writing plain strings, use <ref refid="classgmx_1_1TextWriter" kindref="compound">TextWriter</ref>.</para><para>The current implementation assumes text-only output in several places, but this interface could possibly be generalized also for binary files. However, since all binary files currently written by GROMACS are either XDR- or TNG-based, they may require a different approach. Also, it is worth keeping the distinction between text and binary files clear, since Windows does transparent <computeroutput>LF</computeroutput>-<computeroutput>CRLF</computeroutput> newline translation for text files, so mixing modes when reading and/or writing the same file can cause subtle issues.</para><para>Both methods in the interface can throw std::bad_alloc or other exceptions that indicate failures to write to the stream. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="3389">
+        <label>gmx::anonymous_namespace{cmdlinehelpmodule.cpp}::ModificationCheckingFileOutputStream</label>
+        <link refid="classgmx_1_1anonymous__namespace_02cmdlinehelpmodule_8cpp_03_1_1ModificationCheckingFileOutputStream"/>
+        <childnode refid="3388" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3392">
+        <label>gmx::TextOutputFile</label>
+        <link refid="classgmx_1_1TextOutputFile"/>
+        <childnode refid="3388" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3388">
+        <label>gmx::TextOutputStream</label>
+        <link refid="classgmx_1_1TextOutputStream"/>
+      </node>
+      <node id="3391">
+        <label>gmx::test::MockTextOutputStream</label>
+        <link refid="classgmx_1_1test_1_1MockTextOutputStream"/>
+        <childnode refid="3388" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3390">
+        <label>gmx::StringOutputStream</label>
+        <link refid="classgmx_1_1StringOutputStream"/>
+        <childnode refid="3388" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/textstream.h" line="119" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/textstream.h" bodystart="118" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1TextOutputStream_1a8c624ae9199c3bfd37bc35a1beb7852f" prot="public" virt="pure-virtual"><scope>gmx::TextOutputStream</scope><name>close</name></member>
+      <member refid="classgmx_1_1TextOutputStream_1a66128af9ca6f3eb947c93f5127c88689" prot="public" virt="pure-virtual"><scope>gmx::TextOutputStream</scope><name>write</name></member>
+      <member refid="classgmx_1_1TextOutputStream_1a261f767dff54df115f13107b1a2479d1" prot="public" virt="virtual"><scope>gmx::TextOutputStream</scope><name>~TextOutputStream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

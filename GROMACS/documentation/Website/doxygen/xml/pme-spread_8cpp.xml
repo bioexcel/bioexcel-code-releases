@@ -1,0 +1,902 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="pme-spread_8cpp" kind="file">
+    <compoundname>pme-spread.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="pme-spread_8h" local="yes">pme-spread.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">assert.h</includes>
+    <includes local="no">algorithm</includes>
+    <includes refid="pme_8h" local="yes">gromacs/ewald/pme.h</includes>
+    <includes refid="parallel__3dfft_8h" local="yes">gromacs/fft/parallel_3dfft.h</includes>
+    <includes refid="simd_8h" local="yes">gromacs/simd/simd.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="exceptions_8h" local="yes">gromacs/utility/exceptions.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="pme-grid_8h" local="yes">pme-grid.h</includes>
+    <includes refid="pme-internal_8h" local="yes">pme-internal.h</includes>
+    <includes refid="pme-simd_8h" local="yes">pme-simd.h</includes>
+    <includes refid="pme-spline-work_8h" local="yes">pme-spline-work.h</includes>
+    <includes refid="pme-simd4_8h" local="yes">pme-simd4.h</includes>
+    <incdepgraph>
+      <node id="5471">
+        <label>impl_reference_util_double.h</label>
+        <link refid="impl__reference__util__double_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5463" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5460" relation="include">
+        </childnode>
+        <childnode refid="5466" relation="include">
+        </childnode>
+      </node>
+      <node id="5468">
+        <label>stdarg.h</label>
+      </node>
+      <node id="5453">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="5473">
+        <label>gromacs/simd/scalar/scalar.h</label>
+        <link refid="scalar_8h"/>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5474" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+      </node>
+      <node id="5438">
+        <label>assert.h</label>
+      </node>
+      <node id="5445">
+        <label>iterator</label>
+      </node>
+      <node id="5456">
+        <label>cstdint</label>
+      </node>
+      <node id="5455">
+        <label>gromacs/simd/simd.h</label>
+        <link refid="simd_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5457" relation="include">
+        </childnode>
+        <childnode refid="5454" relation="include">
+        </childnode>
+        <childnode refid="5459" relation="include">
+        </childnode>
+        <childnode refid="5473" relation="include">
+        </childnode>
+        <childnode refid="5475" relation="include">
+        </childnode>
+        <childnode refid="5477" relation="include">
+        </childnode>
+        <childnode refid="5478" relation="include">
+        </childnode>
+      </node>
+      <node id="5451">
+        <label>stdint.h</label>
+      </node>
+      <node id="5490">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5458" relation="include">
+        </childnode>
+        <childnode refid="5448" relation="include">
+        </childnode>
+        <childnode refid="5491" relation="include">
+        </childnode>
+        <childnode refid="5479" relation="include">
+        </childnode>
+      </node>
+      <node id="5472">
+        <label>impl_reference_util_float.h</label>
+        <link refid="impl__reference__util__float_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5463" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5460" relation="include">
+        </childnode>
+        <childnode refid="5470" relation="include">
+        </childnode>
+      </node>
+      <node id="5440">
+        <label>gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="5441" relation="include">
+        </childnode>
+        <childnode refid="5442" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+        <childnode refid="5454" relation="include">
+        </childnode>
+      </node>
+      <node id="5489">
+        <label>gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="5480" relation="include">
+        </childnode>
+        <childnode refid="5441" relation="include">
+        </childnode>
+        <childnode refid="5448" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5464">
+        <label>cmath</label>
+      </node>
+      <node id="5463">
+        <label>cassert</label>
+      </node>
+      <node id="5446">
+        <label>stdexcept</label>
+      </node>
+      <node id="5435">
+        <label>src/gromacs/ewald/pme-spread.cpp</label>
+        <link refid="pme-spread.cpp"/>
+        <childnode refid="5436" relation="include">
+        </childnode>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5438" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5440" relation="include">
+        </childnode>
+        <childnode refid="5455" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+        <childnode refid="5479" relation="include">
+        </childnode>
+        <childnode refid="5467" relation="include">
+        </childnode>
+        <childnode refid="5484" relation="include">
+        </childnode>
+        <childnode refid="5486" relation="include">
+        </childnode>
+      </node>
+      <node id="5441">
+        <label>string</label>
+      </node>
+      <node id="5491">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5492" relation="include">
+        </childnode>
+      </node>
+      <node id="5477">
+        <label>gromacs/simd/scalar/scalar_util.h</label>
+        <link refid="scalar__util_8h"/>
+        <childnode refid="5464" relation="include">
+        </childnode>
+      </node>
+      <node id="5486">
+        <label>pme-internal.h</label>
+        <link refid="pme-internal_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+        <childnode refid="5487" relation="include">
+        </childnode>
+        <childnode refid="5488" relation="include">
+        </childnode>
+      </node>
+      <node id="5487">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+      </node>
+      <node id="5457">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="5458" relation="include">
+        </childnode>
+      </node>
+      <node id="5481">
+        <label>exception</label>
+      </node>
+      <node id="5485">
+        <label>stddef.h</label>
+      </node>
+      <node id="5459">
+        <label>impl_reference/impl_reference.h</label>
+        <link refid="impl__reference_8h"/>
+        <childnode refid="5460" relation="include">
+        </childnode>
+        <childnode refid="5461" relation="include">
+        </childnode>
+        <childnode refid="5462" relation="include">
+        </childnode>
+        <childnode refid="5465" relation="include">
+        </childnode>
+        <childnode refid="5466" relation="include">
+        </childnode>
+        <childnode refid="5470" relation="include">
+        </childnode>
+        <childnode refid="5471" relation="include">
+        </childnode>
+        <childnode refid="5472" relation="include">
+        </childnode>
+      </node>
+      <node id="5461">
+        <label>impl_reference_general.h</label>
+        <link refid="impl__reference__general_8h"/>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5470">
+        <label>impl_reference_simd_float.h</label>
+        <link refid="impl__reference__simd__float_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5463" relation="include">
+        </childnode>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5460" relation="include">
+        </childnode>
+      </node>
+      <node id="5449">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="5450" relation="include">
+        </childnode>
+        <childnode refid="5453" relation="include">
+        </childnode>
+      </node>
+      <node id="5480">
+        <label>cstdio</label>
+      </node>
+      <node id="5484">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="5485" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5454">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="5448">
+        <label>vector</label>
+      </node>
+      <node id="5493">
+        <label>new</label>
+      </node>
+      <node id="5460">
+        <label>impl_reference_definitions.h</label>
+        <link refid="impl__reference__definitions_8h"/>
+      </node>
+      <node id="5436">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="5447">
+        <label>utility</label>
+      </node>
+      <node id="5444">
+        <label>array</label>
+      </node>
+      <node id="5466">
+        <label>impl_reference_simd_double.h</label>
+        <link refid="impl__reference__simd__double_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5463" relation="include">
+        </childnode>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5467" relation="include">
+        </childnode>
+        <childnode refid="5460" relation="include">
+        </childnode>
+        <childnode refid="5470" relation="include">
+        </childnode>
+      </node>
+      <node id="5450">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="5451" relation="include">
+        </childnode>
+        <childnode refid="5452" relation="include">
+        </childnode>
+      </node>
+      <node id="5474">
+        <label>cstdlib</label>
+      </node>
+      <node id="5479">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="5480" relation="include">
+        </childnode>
+        <childnode refid="5474" relation="include">
+        </childnode>
+        <childnode refid="5481" relation="include">
+        </childnode>
+        <childnode refid="5458" relation="include">
+        </childnode>
+        <childnode refid="5441" relation="include">
+        </childnode>
+        <childnode refid="5482" relation="include">
+        </childnode>
+        <childnode refid="5483" relation="include">
+        </childnode>
+        <childnode refid="5448" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+        <childnode refid="5457" relation="include">
+        </childnode>
+        <childnode refid="5453" relation="include">
+        </childnode>
+        <childnode refid="5449" relation="include">
+        </childnode>
+      </node>
+      <node id="5465">
+        <label>impl_reference_simd4_float.h</label>
+        <link refid="impl__reference__simd4__float_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5463" relation="include">
+        </childnode>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5460" relation="include">
+        </childnode>
+      </node>
+      <node id="5442">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5445" relation="include">
+        </childnode>
+        <childnode refid="5446" relation="include">
+        </childnode>
+        <childnode refid="5447" relation="include">
+        </childnode>
+        <childnode refid="5448" relation="include">
+        </childnode>
+        <childnode refid="5449" relation="include">
+        </childnode>
+      </node>
+      <node id="5443">
+        <label>cstddef</label>
+      </node>
+      <node id="5475">
+        <label>gromacs/simd/scalar/scalar_math.h</label>
+        <link refid="scalar__math_8h"/>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5476" relation="include">
+        </childnode>
+        <childnode refid="5473" relation="include">
+        </childnode>
+      </node>
+      <node id="5492">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5458" relation="include">
+        </childnode>
+        <childnode refid="5493" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5488">
+        <label>pme-gpu-types.h</label>
+        <link refid="pme-gpu-types_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5458" relation="include">
+        </childnode>
+        <childnode refid="5448" relation="include">
+        </childnode>
+        <childnode refid="5440" relation="include">
+        </childnode>
+        <childnode refid="5489" relation="include">
+        </childnode>
+        <childnode refid="5490" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5476">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5454" relation="include">
+        </childnode>
+      </node>
+      <node id="5482">
+        <label>type_traits</label>
+      </node>
+      <node id="5437">
+        <label>config.h</label>
+      </node>
+      <node id="5467">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="5468" relation="include">
+        </childnode>
+        <childnode refid="5469" relation="include">
+        </childnode>
+        <childnode refid="5450" relation="include">
+        </childnode>
+      </node>
+      <node id="5439">
+        <label>algorithm</label>
+      </node>
+      <node id="5462">
+        <label>impl_reference_simd4_double.h</label>
+        <link refid="impl__reference__simd4__double_8h"/>
+        <childnode refid="5437" relation="include">
+        </childnode>
+        <childnode refid="5463" relation="include">
+        </childnode>
+        <childnode refid="5464" relation="include">
+        </childnode>
+        <childnode refid="5443" relation="include">
+        </childnode>
+        <childnode refid="5456" relation="include">
+        </childnode>
+        <childnode refid="5439" relation="include">
+        </childnode>
+        <childnode refid="5444" relation="include">
+        </childnode>
+        <childnode refid="5460" relation="include">
+        </childnode>
+      </node>
+      <node id="5469">
+        <label>stdio.h</label>
+      </node>
+      <node id="5458">
+        <label>memory</label>
+      </node>
+      <node id="5452">
+        <label>inttypes.h</label>
+      </node>
+      <node id="5483">
+        <label>typeindex</label>
+      </node>
+      <node id="5478">
+        <label>gromacs/simd/simd_memory.h</label>
+        <link refid="simd__memory_8h"/>
+        <childnode refid="5442" relation="include">
+        </childnode>
+        <childnode refid="5449" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="pme-spread_8cpp_1abda07a4f2dc68b29d7506a2ead85ecb8" prot="public" static="no">
+        <name>CALC_SPLINE</name>
+        <param><defname>order</defname></param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="217" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="pme-spread_8cpp_1af6c8569771d692e3eb3e252ebf68e49d" prot="public" static="no">
+        <name>DO_BSPLINE</name>
+        <param><defname>order</defname></param>
+        <initializer>for (ithx = 0; (ithx &lt; order); ithx++)                    \
+    {                                                    \
+        index_x = (i0+ithx)*pny*pnz;                     \
+        valx    = coefficient*thx[ithx];                          \
+                                                     \
+        for (ithy = 0; (ithy &lt; order); ithy++)                \
+        {                                                \
+            valxy    = valx*thy[ithy];                   \
+            index_xy = index_x+(j0+ithy)*pnz;            \
+                                                     \
+            for (ithz = 0; (ithz &lt; order); ithz++)            \
+            {                                            \
+                index_xyz        = index_xy+(k0+ithz);   \
+                grid[index_xyz] += valxy*thz[ithz];      \
+            }                                            \
+        }                                                \
+    }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="295" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="295" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="pme-spread_8cpp_1af02b2e7261b894683cb3d75eb308a786" prot="public" static="no">
+        <name>PME_SPREAD_SIMD4_ORDER4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="375" column="9"/>
+      </memberdef>
+      <memberdef kind="define" id="pme-spread_8cpp_1a44d53a29ce56b3d687999a64de12f83c" prot="public" static="no">
+        <name>PME_SPREAD_SIMD4_ALIGNED</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="387" column="9"/>
+      </memberdef>
+      <memberdef kind="define" id="pme-spread_8cpp_1a4692be1586c135d85f0a362d85e8afab" prot="public" static="no">
+        <name>PME_ORDER</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="388" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="pme-spread_8cpp_1a6fc767bd87e4eda460c0475f5fb74330" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_interpolation_idx</definition>
+        <argsstring>(const gmx_pme_t *pme, const pme_atomcomm_t *atc, int start, int grid_index, int end, int thread)</argsstring>
+        <name>calc_interpolation_idx</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>const pme_atomcomm_t *</type>
+          <declname>atc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>grid_index</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>end</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="62" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="62" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-spread_8cpp_1ae5f6e3485a96c26b249579dcbe969907" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void make_thread_local_ind</definition>
+        <argsstring>(const pme_atomcomm_t *atc, int thread, splinedata_t *spline)</argsstring>
+        <name>make_thread_local_ind</name>
+        <param>
+          <type>const pme_atomcomm_t *</type>
+          <declname>atc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <param>
+          <type>splinedata_t *</type>
+          <declname>spline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="186" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="186" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-spread_8cpp_1a63cbab9fd76828673cd7fdc47186628f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void make_bsplines</definition>
+        <argsstring>(splinevec theta, splinevec dtheta, int order, rvec fractx[], int nr, int ind[], real coefficient[], gmx_bool bDoSplines)</argsstring>
+        <name>make_bsplines</name>
+        <param>
+          <type>splinevec</type>
+          <declname>theta</declname>
+        </param>
+        <param>
+          <type>splinevec</type>
+          <declname>dtheta</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>order</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fractx</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>coefficient</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDoSplines</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="265" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="265" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-spread_8cpp_1a23118dff28f624f605544c074228501b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void spread_coefficients_bsplines_thread</definition>
+        <argsstring>(const pmegrid_t *pmegrid, const pme_atomcomm_t *atc, splinedata_t *spline, struct pme_spline_work *work)</argsstring>
+        <name>spread_coefficients_bsplines_thread</name>
+        <param>
+          <type>const pmegrid_t *</type>
+          <declname>pmegrid</declname>
+        </param>
+        <param>
+          <type>const pme_atomcomm_t *</type>
+          <declname>atc</declname>
+        </param>
+        <param>
+          <type>splinedata_t *</type>
+          <declname>spline</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structpme__spline__work" kindref="compound">pme_spline_work</ref> *</type>
+          <declname>work</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="315" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="315" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-spread_8cpp_1a35e605988e2a7b402af8b33bae65776c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void copy_local_grid</definition>
+        <argsstring>(const gmx_pme_t *pme, const pmegrids_t *pmegrids, int grid_index, int thread, real *fftgrid)</argsstring>
+        <name>copy_local_grid</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>const pmegrids_t *</type>
+          <declname>pmegrids</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>grid_index</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fftgrid</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="402" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="402" bodyend="451"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-spread_8cpp_1ac0edb932b6ece88d26ddfb0c42ab4369" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void reduce_threadgrid_overlap</definition>
+        <argsstring>(const gmx_pme_t *pme, const pmegrids_t *pmegrids, int thread, real *fftgrid, real *commbuf_x, real *commbuf_y, int grid_index)</argsstring>
+        <name>reduce_threadgrid_overlap</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>const pmegrids_t *</type>
+          <declname>pmegrids</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fftgrid</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>commbuf_x</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>commbuf_y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>grid_index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="454" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="454" bodyend="701"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-spread_8cpp_1a9be287228e1618c724ee5fdabe037f57" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sum_fftgrid_dd</definition>
+        <argsstring>(const gmx_pme_t *pme, real *fftgrid, int grid_index)</argsstring>
+        <name>sum_fftgrid_dd</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fftgrid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>grid_index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="704" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="704" bodyend="858"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-spread_8cpp_1afa15de22f648ff3f669f54e13bb1af13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void spread_on_grid</definition>
+        <argsstring>(const gmx_pme_t *pme, const pme_atomcomm_t *atc, const pmegrids_t *grids, gmx_bool bCalcSplines, gmx_bool bSpread, real *fftgrid, gmx_bool bDoSplines, int grid_index)</argsstring>
+        <name>spread_on_grid</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>const pme_atomcomm_t *</type>
+          <declname>atc</declname>
+        </param>
+        <param>
+          <type>const pmegrids_t *</type>
+          <declname>grids</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bCalcSplines</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bSpread</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fftgrid</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDoSplines</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>grid_index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" line="860" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp" bodystart="860" bodyend="1018"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-spread.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,60 @@
+.. _gmx pme_error:
+
+gmx pme_error
+=============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx pme_error [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-o` :emphasis:`[<.out>]`] [:strong:`-so` :emphasis:`[<.tpr>]`] [:strong:`-beta` :emphasis:`<real>`]
+                 [:strong:`-[no]tune`] [:strong:`-self` :emphasis:`<real>`] [:strong:`-seed` :emphasis:`<int>`] [:strong:`-[no]v`]
+
+Description
+-----------
+
+``gmx pme_error`` estimates the error of the electrostatic forces
+if using the sPME algorithm. The flag ``-tune`` will determine
+the splitting parameter such that the error is equally
+distributed over the real and reciprocal space part.
+The part of the error that stems from self interaction of the particles is computationally demanding. However, a good a approximation is to
+just use a fraction of the particles for this term which can be
+indicated by the flag ``-self``.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-o`` [<.out>] (error.out)
+    Generic output file
+``-so`` [<.tpr>] (tuned.tpr) (Optional)
+    Portable xdr run input file
+
+Other options:
+
+``-beta`` <real> (-1)
+    If positive, overwrite ewald_beta from :ref:`.tpr <tpr>` file with this value
+``-[no]tune``  (no)
+    Tune the splitting parameter such that the error is equally distributed between real and reciprocal space
+``-self`` <real> (1)
+    If between 0.0 and 1.0, determine self interaction error from just this fraction of the charged particles
+``-seed`` <int> (0)
+    Random number seed used for Monte Carlo algorithm when ``-self`` is set to a value between 0.0 and 1.0
+``-[no]v``  (no)
+    Be loud and noisy
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

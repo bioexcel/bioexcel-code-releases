@@ -1,0 +1,605 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="groupcoord_8h" kind="file">
+    <compoundname>groupcoord.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="edsam_8cpp" local="yes">src/gromacs/essentialdynamics/edsam.cpp</includedby>
+    <includedby refid="imd_8cpp" local="yes">src/gromacs/imd/imd.cpp</includedby>
+    <includedby refid="groupcoord_8cpp" local="yes">src/gromacs/mdlib/groupcoord.cpp</includedby>
+    <includedby refid="pull__rotation_8cpp" local="yes">src/gromacs/pulling/pull_rotation.cpp</includedby>
+    <includedby refid="gromacs_2swap_2swapcoords_8cpp" local="yes">src/gromacs/swap/swapcoords.cpp</includedby>
+    <incdepgraph>
+      <node id="14766">
+        <label>src/gromacs/mdlib/groupcoord.h</label>
+        <link refid="groupcoord.h"/>
+        <childnode refid="14767" relation="include">
+        </childnode>
+        <childnode refid="14768" relation="include">
+        </childnode>
+      </node>
+      <node id="14769">
+        <label>stdint.h</label>
+      </node>
+      <node id="14768">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="14769" relation="include">
+        </childnode>
+        <childnode refid="14770" relation="include">
+        </childnode>
+      </node>
+      <node id="14767">
+        <label>stdio.h</label>
+      </node>
+      <node id="14770">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="14771">
+        <label>src/gromacs/mdlib/groupcoord.h</label>
+        <link refid="groupcoord.h"/>
+        <childnode refid="14772" relation="include">
+        </childnode>
+        <childnode refid="14773" relation="include">
+        </childnode>
+      </node>
+      <node id="14773">
+        <label>src/gromacs/swap/swapcoords.cpp</label>
+        <link refid="gromacs_2swap_2swapcoords_8cpp"/>
+      </node>
+      <node id="14772">
+        <label>src/gromacs/imd/imd.cpp</label>
+        <link refid="imd_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="groupcoord_8h_1a5bad081bbb4ca7796308f7a9843926e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_make_local_group_indices</definition>
+        <argsstring>(gmx_ga2la_t *ga2la, const int nr, int anrs[], int *nr_loc, int *anrs_loc[], int *nalloc_loc, int coll_ind[])</argsstring>
+        <name>dd_make_local_group_indices</name>
+        <param>
+          <type><ref refid="structgmx__ga2la__t" kindref="compound">gmx_ga2la_t</ref> *</type>
+          <declname>ga2la</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>anrs</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nr_loc</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>anrs_loc</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nalloc_loc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>coll_ind</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Select local atoms of a group. </para>        </briefdescription>
+        <detaileddescription>
+<para>Selects the indices of local atoms of a group and stores them in anrs_loc[0..nr_loc]. If you need the positions of the group&apos;s atoms on all nodes, provide a coll_ind[0..nr] array and pass it on to communicate_group_positions. Thus the collective array will always have the same atom order (ascending indices).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ga2la</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Global to local atom index conversion data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The total number of atoms that the group contains. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">anrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global atom number of the group&apos;s atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">nr_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of group atoms present on the local node. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">anrs_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The local atom numbers of the group. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">nalloc_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Local allocation size of anrs_loc array. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">coll_ind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If not NULL this array must be of size nr. It stores for each local atom where it belongs in the global (collective) array such that it can be gmx_summed in the communicate_group_positions routine. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h" line="81" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.cpp" bodystart="56" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="groupcoord_8h_1a20467c38340aadf3f059e16f12670109" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void communicate_group_positions</definition>
+        <argsstring>(t_commrec *cr, rvec *xcoll, ivec *shifts, ivec *extra_shifts, const gmx_bool bNS, rvec *x_loc, const int nr, const int nr_loc, int *anrs_loc, int *coll_ind, rvec *xcoll_old, matrix box)</argsstring>
+        <name>communicate_group_positions</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>xcoll</declname>
+        </param>
+        <param>
+          <type>ivec *</type>
+          <declname>shifts</declname>
+        </param>
+        <param>
+          <type>ivec *</type>
+          <declname>extra_shifts</declname>
+        </param>
+        <param>
+          <type>const <ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNS</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x_loc</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nr_loc</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>anrs_loc</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>coll_ind</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>xcoll_old</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Assemble local positions into a collective array present on all nodes. </para>        </briefdescription>
+        <detaileddescription>
+<para>Communicate the positions of the group&apos;s atoms such that every node has all of them. Unless running on huge number of cores, this is not a big performance impact as long as the collective subset [0..nr] is kept small. The atom indices are retrieved from anrs_loc[0..nr_loc]. If you call the routine for the serial case, provide an array coll_ind[i] = i for i in 1..nr.</para><para>If shifts != NULL, the PBC representation of each atom is chosen such that a continuous trajectory results. Therefore, if the group is whole at the start of the simulation, it will always stay whole. If shifts = NULL, the group positions are not made whole again, but assembled and distributed to all nodes. The variables marked &quot;optional&quot; are not used in that case.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to MPI communication data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">xcoll</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collective array of positions, identical on all nodes after this routine has been called. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">shifts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Collective array of shifts for xcoll, needed to make the group whole. This array remembers the shifts since the start of the simulation (where the group is whole) and must therefore not be changed outside of this routine! If NULL, the group will not be made whole and the optional variables are ignored. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">extra_shifts</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Extra shifts since last time step, only needed as buffer variable [0..nr] (optional). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bNS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Neighbor searching / domain re-decomposition has been performed at the begin of this time step such that the shifts have changed and need to be updated (optional). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the local atom positions this node has. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Total number of atoms in the group. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of group atoms on the local node. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">anrs_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of the local atom indices. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coll_ind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>This array of size nr stores for each local atom where it belongs in the collective array so that the local contributions can be gmx_summed. It is provided by dd_make_local_group_indices. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">xcoll_old</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Positions from the last time step, used to make the group whole (optional). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Simulation box matrix, needed to shift xcoll such that the group becomes whole (optional). </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h" line="130" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.cpp" bodystart="196" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="groupcoord_8h_1ade257f0bec734eec877f8dde10926aba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void get_center</definition>
+        <argsstring>(rvec x[], real weight[], const int nr, rvec center)</argsstring>
+        <name>get_center</name>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>weight</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>center</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the center of the positions x locally. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calculates the center of mass (if masses are given in the weight array) or the geometrical center (if NULL is passed as weight).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Can be NULL or an array of weights. If masses are given as weights, the COM is calculated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of positions and weights if present. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">center</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The (weighted) center of the positions. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h" line="148" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.cpp" bodystart="308" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="groupcoord_8h_1aa094e1b1d1067fc15558e2aa169f99a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double get_sum_of_positions</definition>
+        <argsstring>(rvec x[], real weight[], const int nr, dvec dsumvec)</argsstring>
+        <name>get_sum_of_positions</name>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>weight</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>dvec</type>
+          <declname>dsumvec</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the sum of the positions x locally. </para>        </briefdescription>
+        <detaileddescription>
+<para>Calculates the (weighted) sum of position vectors and returns the sum of weights, which is needed when local contributions shall be summed to a global weighted center.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Can be NULL or an array of weights. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of positions and weights if present. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">dsumvec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The (weighted) sum of the positions. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Sum of weights. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h" line="164" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.cpp" bodystart="272" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="groupcoord_8h_1a05a0f3b223b46ce34e8470d5e13a4e5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void get_center_comm</definition>
+        <argsstring>(t_commrec *cr, rvec x_loc[], real weight_loc[], int nr_loc, int nr_group, rvec center)</argsstring>
+        <name>get_center_comm</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x_loc</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>weight_loc</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nr_loc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nr_group</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>center</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the global center of all local arrays x. </para>        </briefdescription>
+        <detaileddescription>
+<para>Get the center from local positions [0..nr_loc], this involves communication. Not that the positions must already have the correct PBC representation. Use this routine if no collective coordinates are assembled from which the center could be calculated without communication.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to MPI communication data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of local positions [0..nr_loc]. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weight_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of local weights, these are the masses if the center of mass is to be calculated. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr_loc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of positions on the local node. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr_group</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of positions in the whole group. Since this is known anyway, we do not need to communicate and sum nr_loc if we pass it over. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">center</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The (weighted) center of all x_loc from all the nodes. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h" line="185" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.cpp" bodystart="335" bodyend="381"/>
+      </memberdef>
+      <memberdef kind="function" id="groupcoord_8h_1aa739dbdc71986caa8bcbcda9009778ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void translate_x</definition>
+        <argsstring>(rvec x[], const int nr, const rvec transvec)</argsstring>
+        <name>translate_x</name>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>transvec</declname>
+        </param>
+        <briefdescription>
+<para>Translate positions. </para>        </briefdescription>
+        <detaileddescription>
+<para>Add a translation vector to the positions x.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of entries in the position array. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">transvec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Translation vector to be added to all positions. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h" line="198" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.cpp" bodystart="385" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="groupcoord_8h_1a918543f4782aca4196ce2a5cc6a3272a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void rotate_x</definition>
+        <argsstring>(rvec x[], const int nr, matrix rmat)</argsstring>
+        <name>rotate_x</name>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nr</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>rmat</declname>
+        </param>
+        <briefdescription>
+<para>Rotate positions. </para>        </briefdescription>
+        <detaileddescription>
+<para>Rotate the positions with the rotation matrix.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of positions. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of entries in the position array. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rmat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Rotation matrix to operate on all positions. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h" line="210" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.cpp" bodystart="397" bodyend="419"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Assemble atomic positions of a (small) subset of atoms and distribute to all nodes. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  This file contains functions to assemble the positions of a subset of the atoms and to do operations on it like determining the center of mass, or doing translations and rotations. These functions are useful when a subset of the positions needs to be compared to some set of reference positions, as e.g. done for essential dynamics. </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/groupcoord.h"/>
+  </compounddef>
+</doxygen>

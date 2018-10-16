@@ -1,0 +1,233 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>System preparation &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Managing long simulations" href="managing-simulations.html" />
+    <link rel="prev" title="Flow Chart" href="flow.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="managing-simulations.html" title="Managing long simulations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="flow.html" title="Flow Chart"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="system-preparation">
+<h1>System preparation<a class="headerlink" href="#system-preparation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>There are many ways to prepare a simulation system to run with
+GROMACS. These often vary with the kind of scientific question being
+considered, or the model physics involved. A protein-ligand atomistic
+free-energy simulation might need a multi-state topology, while a
+coarse-grained simulation might need to manage defaults that suit
+systems with higher density.</p>
+<div class="section" id="steps-to-consider">
+<h2>Steps to consider<a class="headerlink" href="#steps-to-consider" title="Permalink to this headline">¶</a></h2>
+<p>The following general guidance should help with planning successful
+simulations. Some stages are optional for some kinds of simulations.</p>
+<ol class="arabic simple">
+<li>Clearly identify the property or phenomena of interest to be
+studied by performing the simulation. Do not continue further until
+you are clear on this! Do not run your simulation and then seek to
+work out how to use it to test your hypothesis, because it may be
+unsuitable, or the required information was not saved.</li>
+<li>Select the appropriate tools to be able to perform the simulation
+and observe the property or phenomena of interest. It is important
+to read and familiarize yourself with publications by other
+researchers on similar systems. Choices of tools include:<ul>
+<li>software with which to perform the simulation (consideration of
+force field may influence this decision)</li>
+<li>the force field, which describes how the particles within the
+system interact with each other. Select one that is appropriate
+for the system being studied and the property or phenomena of
+interest. This is a very important and non-trivial step! Consider
+now how you will analyze your simulation data to make your
+observations.</li>
+</ul>
+</li>
+<li>Obtain or generate the initial coordinate file for each molecule to
+be placed within the system. Many different software packages are
+able to build molecular structures and assemble them into suitable
+configurations.</li>
+<li>Generate the raw starting structure for the system by placing the
+molecules within the coordinate file as appropriate. Molecules may
+be specifically placed or arranged randomly. Several non-GROMACS
+tools are useful here; within GROMACS <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">gmx solvate</span></a>,
+<a class="reference internal" href="../onlinehelp/gmx-insert-molecules.html#gmx-insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a> and <a class="reference internal" href="../onlinehelp/gmx-genconf.html#gmx-genconf"><span class="std std-ref">gmx genconf</span></a> solve frequent
+problems.</li>
+<li>Obtain or generate the topology file for the system, using (for
+example) <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>, <a class="reference internal" href="../onlinehelp/gmx-x2top.html#gmx-x2top"><span class="std std-ref">gmx x2top</span></a>, <a class="reference external" href="http://swissparam.ch/">SwissParam</a> (for CHARMM forcefield), <a class="reference external" href="http://davapc1.bioch.dundee.ac.uk/cgi-bin/prodrg">PRODRG</a> (for GROMOS96
+43A1), <a class="reference external" href="http://compbio.biosci.uq.edu.au/atb/">Automated Topology Builder</a> (for GROMOS96 53A6),
+<a class="reference external" href="http://www.aribeiro.net.br/mktop">MKTOP</a> (for OPLS/AA) or your
+favourite text editor in concert with chapter 5 of the GROMACS
+<a class="reference external" href="../manual-2018.3.pdf">Reference Manual</a>. For the AMBER force fields, <a class="reference external" href="http://amber.scripps.edu/antechamber/antechamber.html">antechamber</a> or
+<a class="reference external" href="https://github.com/choderalab/mmtools/blob/master/converters/acpype.py">acpype</a>
+might be appropriate.</li>
+<li>Describe a simulation box (e.g. using <a class="reference internal" href="../onlinehelp/gmx-editconf.html#gmx-editconf"><span class="std std-ref">gmx editconf</span></a>) whose
+size is appropriate for the eventual density you would like, fill
+it with solvent (e.g. using <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">gmx solvate</span></a>), and add any
+counter-ions needed to neutralize the system (e.g. using <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> and <a class="reference internal" href="../onlinehelp/gmx-insert-molecules.html#gmx-insert-molecules"><span class="std std-ref">gmx insert-molecules</span></a>). In these steps you may
+need to edit your topology file to stay current with your
+coordinate file.</li>
+<li>Run an energy minimization
+on the system (using <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a>
+and <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>). This is required to sort out any bad
+starting structures caused during generation of the system, which
+may cause the production simulation to crash. It may be necessary
+also to minimize your solute structure in vacuo before introducing
+solvent molecules (or your lipid bilayer or whatever else). You
+should consider using flexible water models and not using bond
+constraints or frozen groups. The use of position restraints and/or
+distance restraints should be evaluated carefully.</li>
+<li>Select the appropriate simulation parameters for the equilibration
+simulation (defined in <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file). You need to choose simulation
+parameters that are consistent with how force field was
+derived. You may need to simulate at NVT with position restraints
+on your solvent and/or solute to get the temperature almost right,
+then relax to NPT to fix the density (which should be done with
+Berendsen until after the density is stabilized, before a further
+switch to a barostat that produces the correct ensemble), then move
+further (if needed) to reach your production simulation ensemble
+(e.g. NVT, NVE). If you have problems here with the system <a class="reference internal" href="terminology.html#blowing-up"><span class="std std-ref">blowing
+up</span></a>,
+consider using the suggestions on that page, e.g. position
+restraints on solutes, or not using bond constraints, or using
+smaller integration timesteps, or several gentler heating stage(s).</li>
+<li>Run the equilibration simulation for sufficient time so that the
+system relaxes sufficiently in the target ensemble to allow the
+production run to be commenced (using <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> and
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>, then <a class="reference internal" href="../onlinehelp/gmx-energy.html#gmx-energy"><span class="std std-ref">gmx energy</span></a> and <a class="reference external" href="http://www.gromacs.org/Documentation/How-tos/Trajectory_Visualization">trajectory
+visualization tools</a>).</li>
+<li>Select the appropriate simulation parameters for the production
+simulation (defined in <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file). In particular, be careful not
+to re-generate the velocities. You still need to be consistent
+with how the force field was derived and how to measure the
+property or phenomena of interest.</li>
+</ol>
+</div>
+<div class="section" id="tips-and-tricks">
+<h2>Tips and tricks<a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="database-files">
+<h3>Database files<a class="headerlink" href="#database-files" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">share/top</span></code> directory of a GROMACS installation contains
+numerous plain-text helper files with the <code class="docutils literal"><span class="pre">.dat</span></code> file extension.
+Some of the command-line tools (see <a class="reference internal" href="cmdline.html"><span class="doc">Command-line reference</span></a>) refer to these,
+and each tool documents which files it uses, and how they are used.</p>
+<p>If you need to modify these files (e.g. to introduce new atom types
+with VDW radii into <code class="docutils literal"><span class="pre">vdwradii.dat</span></code>), you can copy the file from your
+installation directory into your working directory, and the GROMACS
+tools will automatically load the copy from your working directory
+rather than the standard one. To suppress all the standard
+definitions, use an empty file in the working directory.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">System preparation</a><ul>
+<li><a class="reference internal" href="#steps-to-consider">Steps to consider</a></li>
+<li><a class="reference internal" href="#tips-and-tricks">Tips and tricks</a><ul>
+<li><a class="reference internal" href="#database-files">Database files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="flow.html"
+                        title="previous chapter">Flow Chart</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="managing-simulations.html"
+                        title="next chapter">Managing long simulations</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/system-preparation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="managing-simulations.html" title="Managing long simulations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="flow.html" title="Flow Chart"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

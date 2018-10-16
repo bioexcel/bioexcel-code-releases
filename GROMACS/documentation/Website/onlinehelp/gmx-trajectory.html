@@ -1,0 +1,202 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx trajectory &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx trjcat" href="gmx-trjcat.html" />
+    <link rel="prev" title="gmx traj" href="gmx-traj.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-trjcat.html" title="gmx trjcat"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-traj.html" title="gmx traj"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-trajectory">
+<span id="id1"></span><h1>gmx trajectory<a class="headerlink" href="#gmx-trajectory" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx trajectory [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>]
+             [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-ox</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ov</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-of</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>]
+             [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-fgroup</strong> <em>&lt;selection&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+             [<strong>-[no]rmpbc</strong>] [<strong>-[no]pbc</strong>] [<strong>-sf</strong> <em>&lt;file&gt;</em>] [<strong>-selrpos</strong> <em>&lt;enum&gt;</em>]
+             [<strong>-seltype</strong> <em>&lt;enum&gt;</em>] [<strong>-select</strong> <em>&lt;selection&gt;</em>] [<strong>-[no]x</strong>]
+             [<strong>-[no]y</strong>] [<strong>-[no]z</strong>] [<strong>-[no]len</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trajectory</span></code> plots coordinates, velocities, and/or forces for
+provided selections. By default, the X, Y, and Z components for
+the requested vectors are plotted, but specifying one or more of
+<code class="docutils literal"><span class="pre">-len</span></code>, <code class="docutils literal"><span class="pre">-x</span></code>, <code class="docutils literal"><span class="pre">-y</span></code>, and <code class="docutils literal"><span class="pre">-z</span></code> overrides this.</p>
+<p>For dynamic selections, currently the values are written out for
+all positions that the selection could select.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Input trajectory or single configuration: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Input structure: <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Extra index groups</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-ox</span></code> [&lt;.xvg&gt;] (coord.xvg) (Optional)</dt>
+<dd>Coordinates for each position as a function of time</dd>
+<dt><code class="docutils literal"><span class="pre">-ov</span></code> [&lt;.xvg&gt;] (veloc.xvg) (Optional)</dt>
+<dd>Velocities for each position as a function of time</dd>
+<dt><code class="docutils literal"><span class="pre">-of</span></code> [&lt;.xvg&gt;] (force.xvg) (Optional)</dt>
+<dd>Forces for each position as a function of time</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame if t MOD dt == first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-fgroup</span></code> &lt;selection&gt;</dt>
+<dd>Atoms stored in the trajectory file (if not set, assume first N atoms)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>Plot formatting: none, xmgrace, xmgr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmpbc</span></code>  (yes)</dt>
+<dd>Make molecules whole for each frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions for distance calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-sf</span></code> &lt;file&gt;</dt>
+<dd>Provide selections from files</dd>
+<dt><code class="docutils literal"><span class="pre">-selrpos</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-seltype</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Default selection output positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-select</span></code> &lt;selection&gt;</dt>
+<dd>Selections to analyze</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]x</span></code>  (yes)</dt>
+<dd>Plot X component</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]y</span></code>  (yes)</dt>
+<dd>Plot Y component</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]z</span></code>  (yes)</dt>
+<dd>Plot Z component</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]len</span></code>  (no)</dt>
+<dd>Plot vector length</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx trajectory</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-traj.html"
+                        title="previous chapter">gmx traj</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-trjcat.html"
+                        title="next chapter">gmx trjcat</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-trajectory.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-trjcat.html" title="gmx trjcat"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-traj.html" title="gmx traj"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1IOptionsContainer" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::IOptionsContainer</compoundname>
+    <derivedcompoundref refid="classgmx_1_1internal_1_1OptionSectionImpl_1_1Group" prot="public" virt="non-virtual">gmx::internal::OptionSectionImpl::Group</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1IOptionsContainerWithSections" prot="public" virt="non-virtual">gmx::IOptionsContainerWithSections</derivedcompoundref>
+    <includes local="no">gromacs/options/ioptionscontainer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1IOptionsContainer_1a549dc1d6be411e9717960e0577a5b506" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classgmx_1_1IOptionsContainer" kindref="compound">IOptionsContainer</ref> &amp;</type>
+        <definition>virtual IOptionsContainer&amp; gmx::IOptionsContainer::addGroup</definition>
+        <argsstring>()=0</argsstring>
+        <name>addGroup</name>
+        <reimplementedby refid="classgmx_1_1internal_1_1OptionSectionImpl_1_1Group_1aba8f3343b8ece7972962255ff9ebc2aa">addGroup</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AbstractOptionSectionHandle_1ab0adc452475ddf64759ef0f96142a9ab">addGroup</reimplementedby>
+        <reimplementedby refid="classgmx_1_1Options_1a9244e7acb4e31fa96099bcd73537349a">addGroup</reimplementedby>
+        <reimplementedby refid="classgmx_1_1internal_1_1OptionSectionImpl_1ae85d501668427cd90c131ad400b607b4">addGroup</reimplementedby>
+        <briefdescription>
+<para>Creates a subgroup of options within the current options. </para>        </briefdescription>
+        <detaileddescription>
+<para>To add options to the group, use the returned interface.</para><para>Currently, this is only used to influence the order of options: all options in a group appear before options in a group added after it, no matter in which order the options are added to the groups. In the future, the groups could also be used to influence the help output. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionscontainer.h" line="94" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class OptionType</type>
+          </param>
+        </templateparamlist>
+        <type>OptionType::InfoType *</type>
+        <definition>OptionType::InfoType* gmx::IOptionsContainer::addOption</definition>
+        <argsstring>(const OptionType &amp;settings)</argsstring>
+        <name>addOption</name>
+        <param>
+          <type>const OptionType &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+<para>Adds a recognized option. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>OptionType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of the options description object. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Option description. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classgmx_1_1OptionInfo" kindref="compound">OptionInfo</ref> object for the created option (never NULL). </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if invalid option settings are provided.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The return value is a pointer for more convenient use in callers: often callers need to declare the variable that will hold the return value in wider scope than would be achieved by declaring it at the site where <ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption()</ref> is called. The returned pointer must not be freed.</para><para>See <ref refid="classgmx_1_1Options" kindref="compound">class documentation </ref> for example usage.</para><para> <libinternal />  <computeroutput>OptionType::InfoType</computeroutput> must specify a type that derives from <ref refid="classgmx_1_1OptionInfo" kindref="compound">OptionInfo</ref> and matches the type that is returned by <ref refid="classgmx_1_1AbstractOptionStorage_1a43e2b0b2040bba6ffb81ad242bcf0bf8" kindref="member">AbstractOptionStorage::optionInfo()</ref> for the storage object that corresponds to <computeroutput>OptionType</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionscontainer.h" line="118" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionscontainer.h" bodystart="118" bodyend="125"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgmx_1_1IOptionsContainer_1a378997b47d5a1a94f38fcd78ab8ed653" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::IOptionsContainer::~IOptionsContainer</definition>
+        <argsstring>()</argsstring>
+        <name>~IOptionsContainer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionscontainer.h" line="130" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/options.cpp" bodystart="73" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IOptionsContainer_1a1becacd81454bafc8c9c0256037ae3c3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classgmx_1_1OptionInfo" kindref="compound">OptionInfo</ref> *</type>
+        <definition>virtual OptionInfo* gmx::IOptionsContainer::addOptionImpl</definition>
+        <argsstring>(const AbstractOption &amp;settings)=0</argsstring>
+        <name>addOptionImpl</name>
+        <reimplementedby refid="classgmx_1_1internal_1_1OptionSectionImpl_1_1Group_1abe4f2cea25bcdb9fb4def0f11560ff98">addOptionImpl</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AbstractOptionSectionHandle_1aed754b40cdd4441544d5c389dd4b5c8a">addOptionImpl</reimplementedby>
+        <reimplementedby refid="classgmx_1_1internal_1_1OptionSectionImpl_1a228907ec0ac9a5186db55820207b5185">addOptionImpl</reimplementedby>
+        <reimplementedby refid="classgmx_1_1Options_1a42f028604a7ef7da6f0a3e09857ba805">addOptionImpl</reimplementedby>
+        <param>
+          <type>const <ref refid="classgmx_1_1AbstractOption" kindref="compound">AbstractOption</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+<para>Adds a recognized option. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Option description. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classgmx_1_1OptionInfo" kindref="compound">OptionInfo</ref> object for the created option (never NULL). </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if invalid option settings are provided.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method provides the internal implementation, but the templated method is called from user code. See the templated method for more details. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionscontainer.h" line="143" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface for adding input options. </para>    </briefdescription>
+    <detaileddescription>
+<para>This interface provides methods to add new options. Standard usage is for code to receive this interface and populate it with supported options: <programlisting><codeline><highlight class="comment">//<sp/>&lt;as<sp/>class<sp/>attributes&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">std::string<sp/><sp/>arg1;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>arg2;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceanonymous__namespace_02cmdlinerunner_8cpp_03_1a60534e7c72d5738ccd2a45dec4d87882" kindref="member">MyClass::initOptions</ref>(<ref refid="classgmx_1_1IOptionsContainer" kindref="compound">gmx::IOptionsContainer</ref><sp/>*options)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption</ref>(<ref refid="classgmx_1_1StringOption" kindref="compound">gmx::StringOption</ref>(</highlight><highlight class="stringliteral">&quot;arg1&quot;</highlight><highlight class="normal">).<ref refid="namespacegmx_1a9c1227e97a6084a280a611c2934c8ee1" kindref="member">store</ref>(&amp;arg1));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption</ref>(<ref refid="classgmx_1_1IntegerOption" kindref="compound">gmx::IntegerOption</ref>(</highlight><highlight class="stringliteral">&quot;arg2&quot;</highlight><highlight class="normal">).<ref refid="namespacegmx_1a9c1227e97a6084a280a611c2934c8ee1" kindref="member">store</ref>(&amp;arg2));</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> The caller can collect options from multiple sources into a single container (a <ref refid="classgmx_1_1Options" kindref="compound">gmx::Options</ref>), and use a parser implementation such as <ref refid="classgmx_1_1CommandLineParser" kindref="compound">CommandLineParser</ref> to provide values for the options.</para><para>Header <ref refid="basicoptions_8h" kindref="compound">basicoptions.h</ref> provides declarations of several standard option types for use with <ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption()</ref>. Documentation of those classes also give more examples of how to define options. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="2050">
+        <label>gmx::OptionSectionHandle</label>
+        <link refid="classgmx_1_1OptionSectionHandle"/>
+        <childnode refid="2049" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2053">
+        <label>gmx::Options</label>
+        <link refid="classgmx_1_1Options"/>
+        <childnode refid="2048" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2046">
+        <label>gmx::IOptionsContainer</label>
+        <link refid="classgmx_1_1IOptionsContainer"/>
+      </node>
+      <node id="2051">
+        <label>gmx::RepeatingOptionSectionHandle&lt; T &gt;</label>
+        <link refid="classgmx_1_1RepeatingOptionSectionHandle"/>
+        <childnode refid="2049" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2048">
+        <label>gmx::IOptionsContainerWithSections</label>
+        <link refid="classgmx_1_1IOptionsContainerWithSections"/>
+        <childnode refid="2046" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2052">
+        <label>gmx::internal::OptionSectionImpl</label>
+        <link refid="classgmx_1_1internal_1_1OptionSectionImpl"/>
+        <childnode refid="2048" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2047">
+        <label>gmx::internal::OptionSectionImpl::Group</label>
+        <link refid="classgmx_1_1internal_1_1OptionSectionImpl_1_1Group"/>
+        <childnode refid="2046" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2049">
+        <label>gmx::AbstractOptionSectionHandle</label>
+        <link refid="classgmx_1_1AbstractOptionSectionHandle"/>
+        <childnode refid="2048" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionscontainer.h" line="81" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/ioptionscontainer.h" bodystart="80" bodyend="146"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1IOptionsContainer_1a549dc1d6be411e9717960e0577a5b506" prot="public" virt="pure-virtual"><scope>gmx::IOptionsContainer</scope><name>addGroup</name></member>
+      <member refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" prot="public" virt="non-virtual"><scope>gmx::IOptionsContainer</scope><name>addOption</name></member>
+      <member refid="classgmx_1_1IOptionsContainer_1a1becacd81454bafc8c9c0256037ae3c3" prot="protected" virt="pure-virtual"><scope>gmx::IOptionsContainer</scope><name>addOptionImpl</name></member>
+      <member refid="classgmx_1_1IOptionsContainer_1a378997b47d5a1a94f38fcd78ab8ed653" prot="protected" virt="virtual"><scope>gmx::IOptionsContainer</scope><name>~IOptionsContainer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

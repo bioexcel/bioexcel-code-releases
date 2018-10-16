@@ -1,0 +1,174 @@
+.. _gmx dipoles:
+
+gmx dipoles
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx dipoles [:strong:`-en` :emphasis:`[<.edr>]`] [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr>]`]
+                [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-eps` :emphasis:`[<.xvg>]`] [:strong:`-a` :emphasis:`[<.xvg>]`]
+                [:strong:`-d` :emphasis:`[<.xvg>]`] [:strong:`-c` :emphasis:`[<.xvg>]`] [:strong:`-g` :emphasis:`[<.xvg>]`]
+                [:strong:`-adip` :emphasis:`[<.xvg>]`] [:strong:`-dip3d` :emphasis:`[<.xvg>]`] [:strong:`-cos` :emphasis:`[<.xvg>]`]
+                [:strong:`-cmap` :emphasis:`[<.xpm>]`] [:strong:`-slab` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+                [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-mu` :emphasis:`<real>`]
+                [:strong:`-mumax` :emphasis:`<real>`] [:strong:`-epsilonRF` :emphasis:`<real>`] [:strong:`-skip` :emphasis:`<int>`]
+                [:strong:`-temp` :emphasis:`<real>`] [:strong:`-corr` :emphasis:`<enum>`] [:strong:`-[no]pairs`] [:strong:`-[no]quad`]
+                [:strong:`-ncos` :emphasis:`<int>`] [:strong:`-axis` :emphasis:`<string>`] [:strong:`-sl` :emphasis:`<int>`]
+                [:strong:`-gkratom` :emphasis:`<int>`] [:strong:`-gkratom2` :emphasis:`<int>`] [:strong:`-rcmax` :emphasis:`<real>`]
+                [:strong:`-[no]phi`] [:strong:`-nlevels` :emphasis:`<int>`] [:strong:`-ndegrees` :emphasis:`<int>`]
+                [:strong:`-acflen` :emphasis:`<int>`] [:strong:`-[no]normalize`] [:strong:`-P` :emphasis:`<enum>`]
+                [:strong:`-fitfn` :emphasis:`<enum>`] [:strong:`-beginfit` :emphasis:`<real>`] [:strong:`-endfit` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx dipoles`` computes the total dipole plus fluctuations of a simulation
+system. From this you can compute e.g. the dielectric constant for
+low-dielectric media.
+For molecules with a net charge, the net charge is subtracted at
+center of mass of the molecule.
+
+The file ``Mtot.xvg`` contains the total dipole moment of a frame, the
+components as well as the norm of the vector.
+The file ``aver.xvg`` contains <\|mu\|^2> and \|<mu>\|^2 during the
+simulation.
+The file ``dipdist.xvg`` contains the distribution of dipole moments during
+the simulation
+The value of ``-mumax`` is used as the highest value in the distribution graph.
+
+Furthermore, the dipole autocorrelation function will be computed when
+option ``-corr`` is used. The output file name is given with the ``-c``
+option.
+The correlation functions can be averaged over all molecules
+(``mol``), plotted per molecule separately (``molsep``)
+or it can be computed over the total dipole moment of the simulation box
+(``total``).
+
+Option ``-g`` produces a plot of the distance dependent Kirkwood
+G-factor, as well as the average cosine of the angle between the dipoles
+as a function of the distance. The plot also includes gOO and hOO
+according to Nymand & Linse, J. Chem. Phys. 112 (2000) pp 6386-6395. In the same plot,
+we also include the energy per scale computed by taking the inner product of
+the dipoles divided by the distance to the third power.
+
+EXAMPLES
+
+``gmx dipoles -corr mol -P 1 -o dip_sqr -mu 2.273 -mumax 5.0``
+
+This will calculate the autocorrelation function of the molecular
+dipoles using a first order Legendre polynomial of the angle of the
+dipole vector and itself a time t later. For this calculation 1001
+frames will be used. Further, the dielectric constant will be calculated
+using an ``-epsilonRF`` of infinity (default), temperature of 300 K (default) and
+an average dipole moment of the molecule of 2.273 (SPC). For the
+distribution function a maximum of 5.0 will be used.
+
+Options
+-------
+
+Options to specify input files:
+
+``-en`` [<.edr>] (ener.edr) (Optional)
+    Energy file
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (Mtot.xvg)
+    xvgr/xmgr file
+``-eps`` [<.xvg>] (epsilon.xvg)
+    xvgr/xmgr file
+``-a`` [<.xvg>] (aver.xvg)
+    xvgr/xmgr file
+``-d`` [<.xvg>] (dipdist.xvg)
+    xvgr/xmgr file
+``-c`` [<.xvg>] (dipcorr.xvg) (Optional)
+    xvgr/xmgr file
+``-g`` [<.xvg>] (gkr.xvg) (Optional)
+    xvgr/xmgr file
+``-adip`` [<.xvg>] (adip.xvg) (Optional)
+    xvgr/xmgr file
+``-dip3d`` [<.xvg>] (dip3d.xvg) (Optional)
+    xvgr/xmgr file
+``-cos`` [<.xvg>] (cosaver.xvg) (Optional)
+    xvgr/xmgr file
+``-cmap`` [<.xpm>] (cmap.xpm) (Optional)
+    X PixMap compatible matrix file
+``-slab`` [<.xvg>] (slab.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-mu`` <real> (-1)
+    dipole of a single molecule (in Debye)
+``-mumax`` <real> (5)
+    max dipole in Debye (for histogram)
+``-epsilonRF`` <real> (0)
+    epsilon of the reaction field used during the simulation, needed for dielectric constant calculation. WARNING: 0.0 means infinity (default)
+``-skip`` <int> (0)
+    Skip steps in the output (but not in the computations)
+``-temp`` <real> (300)
+    Average temperature of the simulation (needed for dielectric constant calculation)
+``-corr`` <enum> (none)
+    Correlation function to calculate: none, mol, molsep, total
+``-[no]pairs``  (yes)
+    Calculate \|cos(theta)\| between all pairs of molecules. May be slow
+``-[no]quad``  (no)
+    Take quadrupole into account
+``-ncos`` <int> (1)
+    Must be 1 or 2. Determines whether the <cos(theta)> is computed between all molecules in one group, or between molecules in two different groups. This turns on the ``-g`` flag.
+``-axis`` <string> (Z)
+    Take the normal on the computational box in direction X, Y or Z.
+``-sl`` <int> (10)
+    Divide the box into this number of slices.
+``-gkratom`` <int> (0)
+    Use the n-th atom of a molecule (starting from 1) to calculate the distance between molecules rather than the center of charge (when 0) in the calculation of distance dependent Kirkwood factors
+``-gkratom2`` <int> (0)
+    Same as previous option in case ncos = 2, i.e. dipole interaction between two groups of molecules
+``-rcmax`` <real> (0)
+    Maximum distance to use in the dipole orientation distribution (with ncos == 2). If zero, a criterion based on the box length will be used.
+``-[no]phi``  (no)
+    Plot the 'torsion angle' defined as the rotation of the two dipole vectors around the distance vector between the two molecules in the :ref:`.xpm <xpm>` file from the ``-cmap`` option. By default the cosine of the angle between the dipoles is plotted.
+``-nlevels`` <int> (20)
+    Number of colors in the cmap output
+``-ndegrees`` <int> (90)
+    Number of divisions on the *y*-axis in the cmap output (for 180 degrees)
+``-acflen`` <int> (-1)
+    Length of the ACF, default is half the number of frames
+``-[no]normalize``  (yes)
+    Normalize ACF
+``-P`` <enum> (0)
+    Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3
+``-fitfn`` <enum> (none)
+    Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9
+``-beginfit`` <real> (0)
+    Time where to begin the exponential fit of the correlation function
+``-endfit`` <real> (-1)
+    Time where to end the exponential fit of the correlation function, -1 is until the end
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

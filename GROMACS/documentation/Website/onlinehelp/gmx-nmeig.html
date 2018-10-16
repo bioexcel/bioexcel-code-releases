@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx nmeig &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx nmens" href="gmx-nmens.html" />
+    <link rel="prev" title="gmx msd" href="gmx-msd.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-nmens.html" title="gmx nmens"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-msd.html" title="gmx msd"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-nmeig">
+<span id="id1"></span><h1>gmx nmeig<a class="headerlink" href="#gmx-nmeig" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx nmeig [<strong>-f</strong> <em>[&lt;.mtx&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-of</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ol</strong> <em>[&lt;.xvg&gt;]</em>]
+          [<strong>-os</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-qc</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-v</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>]
+          [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]m</strong>] [<strong>-first</strong> <em>&lt;int&gt;</em>] [<strong>-last</strong> <em>&lt;int&gt;</em>]
+          [<strong>-maxspec</strong> <em>&lt;int&gt;</em>] [<strong>-T</strong> <em>&lt;real&gt;</em>] [<strong>-[no]constr</strong>] [<strong>-width</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">nmeig</span></code> calculates the eigenvectors/values of a (Hessian) matrix,
+which can be calculated with <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a>.
+The eigenvectors are written to a trajectory file (<code class="docutils literal"><span class="pre">-v</span></code>).
+The structure is written first with t=0. The eigenvectors
+are written as frames with the eigenvector number and eigenvalue
+written as step number and timestamp, respectively.
+The eigenvectors can be analyzed with <a class="reference internal" href="gmx-anaeig.html"><span class="doc">gmx anaeig</span></a>.
+An ensemble of structures can be generated from the eigenvectors with
+<a class="reference internal" href="gmx-nmens.html"><span class="doc">gmx nmens</span></a>. When mass weighting is used, the generated eigenvectors
+will be scaled back to plain Cartesian coordinates before generating the
+output. In this case, they will no longer be exactly orthogonal in the
+standard Cartesian norm, but in the mass-weighted norm they would be.</p>
+<p>This program can be optionally used to compute quantum corrections to heat capacity
+and enthalpy by providing an extra file argument <code class="docutils literal"><span class="pre">-qcorr</span></code>. See the GROMACS
+manual, Chapter 1, for details. The result includes subtracting a harmonic
+degree of freedom at the given temperature.
+The total correction is printed on the terminal screen.
+The recommended way of getting the corrections out is:</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">nmeig</span> <span class="pre">-s</span> <span class="pre">topol.tpr</span> <span class="pre">-f</span> <span class="pre">nm.mtx</span> <span class="pre">-first</span> <span class="pre">7</span> <span class="pre">-last</span> <span class="pre">10000</span> <span class="pre">-T</span> <span class="pre">300</span> <span class="pre">-qc</span> <span class="pre">[-constr]</span></code></p>
+<p>The <code class="docutils literal"><span class="pre">-constr</span></code> option should be used when bond constraints were used during the
+simulation <strong>for all the covalent bonds</strong>. If this is not the case,
+you need to analyze the <code class="docutils literal"><span class="pre">quant_corr.xvg</span></code> file yourself.</p>
+<p>To make things more flexible, the program can also take virtual sites into account
+when computing quantum corrections. When selecting <code class="docutils literal"><span class="pre">-constr</span></code> and
+<code class="docutils literal"><span class="pre">-qc</span></code>, the <code class="docutils literal"><span class="pre">-begin</span></code> and <code class="docutils literal"><span class="pre">-end</span></code> options will be set automatically as well.
+Again, if you think you know it better, please check the <code class="docutils literal"><span class="pre">eigenfreq.xvg</span></code>
+output.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.mtx&gt;] (hessian.mtx)</dt>
+<dd>Hessian matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-of</span></code> [&lt;.xvg&gt;] (eigenfreq.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ol</span></code> [&lt;.xvg&gt;] (eigenval.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-os</span></code> [&lt;.xvg&gt;] (spectrum.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-qc</span></code> [&lt;.xvg&gt;] (quant_corr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-v</span></code> [&lt;.trr/.cpt/…&gt;] (eigenvec.trr)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]m</span></code>  (yes)</dt>
+<dd>Divide elements of Hessian by product of sqrt(mass) of involved atoms prior to diagonalization. This should be used for ‘Normal Modes’ analysis</dd>
+<dt><code class="docutils literal"><span class="pre">-first</span></code> &lt;int&gt; (1)</dt>
+<dd>First eigenvector to write away</dd>
+<dt><code class="docutils literal"><span class="pre">-last</span></code> &lt;int&gt; (50)</dt>
+<dd>Last eigenvector to write away</dd>
+<dt><code class="docutils literal"><span class="pre">-maxspec</span></code> &lt;int&gt; (4000)</dt>
+<dd>Highest frequency (1/cm) to consider in the spectrum</dd>
+<dt><code class="docutils literal"><span class="pre">-T</span></code> &lt;real&gt; (298.15)</dt>
+<dd>Temperature for computing quantum heat capacity and enthalpy when using normal mode calculations to correct classical simulations</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]constr</span></code>  (no)</dt>
+<dd>If constraints were used in the simulation but not in the normal mode analysis (this is the recommended way of doing it) you will need to set this for computing the quantum corrections.</dd>
+<dt><code class="docutils literal"><span class="pre">-width</span></code> &lt;real&gt; (1)</dt>
+<dd>Width (sigma) of the gaussian peaks (1/cm) when generating a spectrum</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx nmeig</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-msd.html"
+                        title="previous chapter">gmx msd</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-nmens.html"
+                        title="next chapter">gmx nmens</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-nmeig.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-nmens.html" title="gmx nmens"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-msd.html" title="gmx msd"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

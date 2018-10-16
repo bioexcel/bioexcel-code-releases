@@ -1,0 +1,215 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx x2top &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx xpm2ps" href="gmx-xpm2ps.html" />
+    <link rel="prev" title="gmx wheel" href="gmx-wheel.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-xpm2ps.html" title="gmx xpm2ps"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-wheel.html" title="gmx wheel"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-x2top">
+<span id="id1"></span><h1>gmx x2top<a class="headerlink" href="#gmx-x2top" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx x2top [<strong>-f</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-o</strong> <em>[&lt;.top&gt;]</em>] [<strong>-r</strong> <em>[&lt;.rtp&gt;]</em>]
+          [<strong>-ff</strong> <em>&lt;string&gt;</em>] [<strong>-[no]v</strong>] [<strong>-nexcl</strong> <em>&lt;int&gt;</em>] [<strong>-[no]H14</strong>]
+          [<strong>-[no]alldih</strong>] [<strong>-[no]remdih</strong>] [<strong>-[no]pairs</strong>] [<strong>-name</strong> <em>&lt;string&gt;</em>]
+          [<strong>-[no]pbc</strong>] [<strong>-[no]pdbq</strong>] [<strong>-[no]param</strong>] [<strong>-[no]round</strong>]
+          [<strong>-kb</strong> <em>&lt;real&gt;</em>] [<strong>-kt</strong> <em>&lt;real&gt;</em>] [<strong>-kp</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">x2top</span></code> generates a primitive topology from a coordinate file.
+The program assumes all hydrogens are present when defining
+the hybridization from the atom name and the number of bonds.
+The program can also make an <a class="reference internal" href="../user-guide/file-formats.html#rtp"><span class="std std-ref">.rtp</span></a> entry, which you can then add
+to the <a class="reference internal" href="../user-guide/file-formats.html#rtp"><span class="std std-ref">.rtp</span></a> database.</p>
+<p>When <code class="docutils literal"><span class="pre">-param</span></code> is set, equilibrium distances and angles
+and force constants will be printed in the topology for all
+interactions. The equilibrium distances and angles are taken
+from the input coordinates, the force constant are set with
+command line options.
+The force fields somewhat supported currently are:</p>
+<p>G53a5  GROMOS96 53a5 Forcefield (official distribution)</p>
+<p>oplsaa OPLS-AA/L all-atom force field (2001 aminoacid dihedrals)</p>
+<p>The corresponding data files can be found in the library directory
+with name <code class="docutils literal"><span class="pre">atomname2type.n2t</span></code>. Check Chapter 5 of the manual for more
+information about file formats. By default, the force field selection
+is interactive, but you can use the <code class="docutils literal"><span class="pre">-ff</span></code> option to specify
+one of the short names above on the command line instead. In that
+case <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">x2top</span></code> just looks for the corresponding file.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.gro/.g96/…&gt;] (conf.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.top&gt;] (out.top) (Optional)</dt>
+<dd>Topology file</dd>
+<dt><code class="docutils literal"><span class="pre">-r</span></code> [&lt;.rtp&gt;] (out.rtp) (Optional)</dt>
+<dd>Residue Type file used by pdb2gmx</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-ff</span></code> &lt;string&gt; (oplsaa)</dt>
+<dd>Force field for your simulation. Type “select” for interactive selection.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]v</span></code>  (no)</dt>
+<dd>Generate verbose output in the top file.</dd>
+<dt><code class="docutils literal"><span class="pre">-nexcl</span></code> &lt;int&gt; (3)</dt>
+<dd>Number of exclusions</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]H14</span></code>  (yes)</dt>
+<dd>Use 3rd neighbour interactions for hydrogen atoms</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]alldih</span></code>  (no)</dt>
+<dd>Generate all proper dihedrals</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]remdih</span></code>  (no)</dt>
+<dd>Remove dihedrals on the same bond as an improper</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pairs</span></code>  (yes)</dt>
+<dd>Output 1-4 interactions (pairs) in topology file</dd>
+<dt><code class="docutils literal"><span class="pre">-name</span></code> &lt;string&gt; (ICE)</dt>
+<dd>Name of your molecule</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pdbq</span></code>  (no)</dt>
+<dd>Use the B-factor supplied in a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file for the atomic charges</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]param</span></code>  (yes)</dt>
+<dd>Print parameters in the output</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]round</span></code>  (yes)</dt>
+<dd>Round off measured values</dd>
+<dt><code class="docutils literal"><span class="pre">-kb</span></code> &lt;real&gt; (400000)</dt>
+<dd>Bonded force constant (kJ/mol/nm^2)</dd>
+<dt><code class="docutils literal"><span class="pre">-kt</span></code> &lt;real&gt; (400)</dt>
+<dd>Angle force constant (kJ/mol/rad^2)</dd>
+<dt><code class="docutils literal"><span class="pre">-kp</span></code> &lt;real&gt; (5)</dt>
+<dd>Dihedral angle force constant (kJ/mol/rad^2)</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The atom type selection is primitive. Virtually no chemical knowledge is used</li>
+<li>Periodic boundary conditions screw up the bonding</li>
+<li>No improper dihedrals are generated</li>
+<li>The atoms to atomtype translation table is incomplete (<code class="docutils literal"><span class="pre">atomname2type.n2t</span></code> file in the data directory). Please extend it and send the results back to the GROMACS crew.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx x2top</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-wheel.html"
+                        title="previous chapter">gmx wheel</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-xpm2ps.html"
+                        title="next chapter">gmx xpm2ps</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-x2top.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-xpm2ps.html" title="gmx xpm2ps"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-wheel.html" title="gmx wheel"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

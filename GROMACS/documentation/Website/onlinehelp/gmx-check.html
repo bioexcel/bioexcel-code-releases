@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx check &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx chi" href="gmx-chi.html" />
+    <link rel="prev" title="gmx bundle" href="gmx-bundle.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-chi.html" title="gmx chi"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-bundle.html" title="gmx bundle"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-check">
+<span id="id1"></span><h1>gmx check<a class="headerlink" href="#gmx-check" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx check [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-f2</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s1</strong> <em>[&lt;.tpr&gt;]</em>]
+          [<strong>-s2</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-c</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-e</strong> <em>[&lt;.edr&gt;]</em>]
+          [<strong>-e2</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-m</strong> <em>[&lt;.tex&gt;]</em>] [<strong>-vdwfac</strong> <em>&lt;real&gt;</em>]
+          [<strong>-bonlo</strong> <em>&lt;real&gt;</em>] [<strong>-bonhi</strong> <em>&lt;real&gt;</em>] [<strong>-[no]rmsd</strong>] [<strong>-tol</strong> <em>&lt;real&gt;</em>]
+          [<strong>-abstol</strong> <em>&lt;real&gt;</em>] [<strong>-[no]ab</strong>] [<strong>-lastener</strong> <em>&lt;string&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">check</span></code> reads a trajectory (<a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">.tng</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">.trr</span></a> or
+<a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">.xtc</span></a>), an energy file (<a class="reference internal" href="../user-guide/file-formats.html#edr"><span class="std std-ref">.edr</span></a>)
+or an index file (<a class="reference internal" href="../user-guide/file-formats.html#ndx"><span class="std std-ref">.ndx</span></a>)
+and prints out useful information about them.</p>
+<p>Option <code class="docutils literal"><span class="pre">-c</span></code> checks for presence of coordinates,
+velocities and box in the file, for close contacts (smaller than
+<code class="docutils literal"><span class="pre">-vdwfac</span></code> and not bonded, i.e. not between <code class="docutils literal"><span class="pre">-bonlo</span></code>
+and <code class="docutils literal"><span class="pre">-bonhi</span></code>, all relative to the sum of both Van der Waals
+radii) and atoms outside the box (these may occur often and are
+no problem). If velocities are present, an estimated temperature
+will be calculated from them.</p>
+<p>If an index file, is given its contents will be summarized.</p>
+<p>If both a trajectory and a <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file are given (with <code class="docutils literal"><span class="pre">-s1</span></code>)
+the program will check whether the bond lengths defined in the tpr
+file are indeed correct in the trajectory. If not you may have
+non-matching files due to e.g. deshuffling or due to problems with
+virtual sites. With these flags, <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">check</span></code> provides a quick check for such problems.</p>
+<p>The program can compare two run input (<a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a>)
+files
+when both <code class="docutils literal"><span class="pre">-s1</span></code> and <code class="docutils literal"><span class="pre">-s2</span></code> are supplied. When comparing
+run input files this way, the default relative tolerance is reduced
+to 0.000001 and the absolute tolerance set to zero to find any differences
+not due to minor compiler optimization differences, although you can
+of course still set any other tolerances through the options.Similarly a pair of trajectory files can be compared (using the <code class="docutils literal"><span class="pre">-f2</span></code>
+option), or a pair of energy files (using the <code class="docutils literal"><span class="pre">-e2</span></code> option).</p>
+<p>For free energy simulations the A and B state topology from one
+run input file can be compared with options <code class="docutils literal"><span class="pre">-s1</span></code> and <code class="docutils literal"><span class="pre">-ab</span></code>.</p>
+<p>In case the <code class="docutils literal"><span class="pre">-m</span></code> flag is given a LaTeX file will be written
+consisting of a rough outline for a methods section for a paper.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-f2</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s1</span></code> [&lt;.tpr&gt;] (top1.tpr) (Optional)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-s2</span></code> [&lt;.tpr&gt;] (top2.tpr) (Optional)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-c</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> [&lt;.edr&gt;] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-e2</span></code> [&lt;.edr&gt;] (ener2.edr) (Optional)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-m</span></code> [&lt;.tex&gt;] (doc.tex) (Optional)</dt>
+<dd>LaTeX file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-vdwfac</span></code> &lt;real&gt; (0.8)</dt>
+<dd>Fraction of sum of VdW radii used as warning cutoff</dd>
+<dt><code class="docutils literal"><span class="pre">-bonlo</span></code> &lt;real&gt; (0.4)</dt>
+<dd>Min. fract. of sum of VdW radii for bonded atoms</dd>
+<dt><code class="docutils literal"><span class="pre">-bonhi</span></code> &lt;real&gt; (0.7)</dt>
+<dd>Max. fract. of sum of VdW radii for bonded atoms</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmsd</span></code>  (no)</dt>
+<dd>Print RMSD for x, v and f</dd>
+<dt><code class="docutils literal"><span class="pre">-tol</span></code> &lt;real&gt; (0.001)</dt>
+<dd>Relative tolerance for comparing real values defined as 2*(a-b)/(|a|+|b|)</dd>
+<dt><code class="docutils literal"><span class="pre">-abstol</span></code> &lt;real&gt; (0.001)</dt>
+<dd>Absolute tolerance, useful when sums are close to zero.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ab</span></code>  (no)</dt>
+<dd>Compare the A and B topology from one file</dd>
+<dt><code class="docutils literal"><span class="pre">-lastener</span></code> &lt;string&gt;</dt>
+<dd>Last energy term to compare (if not given all are tested). It makes sense to go up until the Pressure.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx check</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-bundle.html"
+                        title="previous chapter">gmx bundle</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-chi.html"
+                        title="next chapter">gmx chi</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-check.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-chi.html" title="gmx chi"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-bundle.html" title="gmx bundle"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

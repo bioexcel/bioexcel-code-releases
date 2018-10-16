@@ -1,0 +1,210 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx helix &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx helixorient" href="gmx-helixorient.html" />
+    <link rel="prev" title="gmx hbond" href="gmx-hbond.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-helixorient.html" title="gmx helixorient"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-hbond.html" title="gmx hbond"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-helix">
+<span id="id1"></span><h1>gmx helix<a class="headerlink" href="#gmx-helix" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx helix [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>]
+          [<strong>-cz</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+          [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-r0</strong> <em>&lt;int&gt;</em>] [<strong>-[no]q</strong>] [<strong>-[no]F</strong>]
+          [<strong>-[no]db</strong>] [<strong>-[no]ev</strong>] [<strong>-ahxstart</strong> <em>&lt;int&gt;</em>] [<strong>-ahxend</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">helix</span></code> computes all kinds of helix properties. First, the peptide
+is checked to find the longest helical part, as determined by
+hydrogen bonds and phi/psi angles.
+That bit is fitted
+to an ideal helix around the <em>z</em>-axis and centered around the origin.
+Then the following properties are computed:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Helix radius (file <code class="docutils literal"><span class="pre">radius.xvg</span></code>). This is merely the
+RMS deviation in two dimensions for all Calpha atoms.
+it is calculated as sqrt((sum_i (x^2(i)+y^2(i)))/N) where N is the number
+of backbone atoms. For an ideal helix the radius is 0.23 nm.</li>
+<li>Twist (file <code class="docutils literal"><span class="pre">twist.xvg</span></code>). The average helical angle per
+residue is calculated. For an alpha-helix it is 100 degrees,
+for 3-10 helices it will be smaller, and
+for 5-helices it will be larger.</li>
+<li>Rise per residue (file <code class="docutils literal"><span class="pre">rise.xvg</span></code>). The helical rise per
+residue is plotted as the difference in <em>z</em>-coordinate between Calpha
+atoms. For an ideal helix, this is 0.15 nm.</li>
+<li>Total helix length (file <code class="docutils literal"><span class="pre">len-ahx.xvg</span></code>). The total length
+of the
+helix in nm. This is simply the average rise (see above) times the
+number of helical residues (see below).</li>
+<li>Helix dipole, backbone only (file <code class="docutils literal"><span class="pre">dip-ahx.xvg</span></code>).</li>
+<li>RMS deviation from ideal helix, calculated for the Calpha
+atoms only (file <code class="docutils literal"><span class="pre">rms-ahx.xvg</span></code>).</li>
+<li>Average Calpha - Calpha dihedral angle (file <code class="docutils literal"><span class="pre">phi-ahx.xvg</span></code>).</li>
+<li>Average phi and psi angles (file <code class="docutils literal"><span class="pre">phipsi.xvg</span></code>).</li>
+<li>Ellipticity at 222 nm according to Hirst and Brooks.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-cz</span></code> [&lt;.gro/.g96/…&gt;] (zconf.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-r0</span></code> &lt;int&gt; (1)</dt>
+<dd>The first residue number in the sequence</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]q</span></code>  (no)</dt>
+<dd>Check at every step which part of the sequence is helical</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]F</span></code>  (yes)</dt>
+<dd>Toggle fit to a perfect helix</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]db</span></code>  (no)</dt>
+<dd>Print debug info</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ev</span></code>  (no)</dt>
+<dd>Write a new ‘trajectory’ file for ED</dd>
+<dt><code class="docutils literal"><span class="pre">-ahxstart</span></code> &lt;int&gt; (0)</dt>
+<dd>First residue in helix</dd>
+<dt><code class="docutils literal"><span class="pre">-ahxend</span></code> &lt;int&gt; (0)</dt>
+<dd>Last residue in helix</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx helix</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-hbond.html"
+                        title="previous chapter">gmx hbond</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-helixorient.html"
+                        title="next chapter">gmx helixorient</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-helix.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-helixorient.html" title="gmx helixorient"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-hbond.html" title="gmx hbond"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structPmeGpuKernelParamsBase" kind="struct" prot="public">
+    <compoundname>PmeGpuKernelParamsBase</compoundname>
+    <includes local="no">gromacs/ewald/pme-gpu-types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structPmeGpuKernelParamsBase_1ad039f5e0f9a5b5e3c79b5a4f19beb0bb" prot="public" static="no" mutable="no">
+        <type><ref refid="structPmeGpuConstParams" kindref="compound">PmeGpuConstParams</ref></type>
+        <definition>PmeGpuConstParams PmeGpuKernelParamsBase::constants</definition>
+        <argsstring></argsstring>
+        <name>constants</name>
+        <briefdescription>
+<para>Constant data that is set once. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="216" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpuKernelParamsBase_1aebec2cb2f200b73d8aa2e3f92926d9bd" prot="public" static="no" mutable="no">
+        <type><ref refid="structPmeGpuGridParams" kindref="compound">PmeGpuGridParams</ref></type>
+        <definition>PmeGpuGridParams PmeGpuKernelParamsBase::grid</definition>
+        <argsstring></argsstring>
+        <name>grid</name>
+        <briefdescription>
+<para>Data dependent on the grid size/cutoff. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="218" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpuKernelParamsBase_1a3b74099ade16fd0e7324ceabca8e9ac4" prot="public" static="no" mutable="no">
+        <type><ref refid="structPmeGpuAtomParams" kindref="compound">PmeGpuAtomParams</ref></type>
+        <definition>PmeGpuAtomParams PmeGpuKernelParamsBase::atoms</definition>
+        <argsstring></argsstring>
+        <name>atoms</name>
+        <briefdescription>
+<para>Data dependent on the DD and local atoms. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="220" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpuKernelParamsBase_1a2480f07b2096788e8907f4751f30930f" prot="public" static="no" mutable="no">
+        <type><ref refid="structPmeGpuDynamicParams" kindref="compound">PmeGpuDynamicParams</ref></type>
+        <definition>PmeGpuDynamicParams PmeGpuKernelParamsBase::current</definition>
+        <argsstring></argsstring>
+        <name>current</name>
+        <briefdescription>
+<para>Data that possibly changes for every new PME computation. This should be kept up-to-date by calling pme_gpu_prepare_computation(...) before launching spreading. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="225" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A single structure encompassing almost all the PME data used in GPU kernels on device. This is inherited by the GPU framework-specific structure (PmeGpuCudaKernelParams in pme.cuh). This way, most code preparing the kernel parameters can be GPU-agnostic by casting the kernel parameter data pointer to <ref refid="structPmeGpuKernelParamsBase" kindref="compound">PmeGpuKernelParamsBase</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<internal></internal>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4428">
+        <label>PmeGpuGridParams</label>
+        <link refid="structPmeGpuGridParams"/>
+      </node>
+      <node id="4430">
+        <label>PmeGpuDynamicParams</label>
+        <link refid="structPmeGpuDynamicParams"/>
+      </node>
+      <node id="4427">
+        <label>PmeGpuKernelParamsBase</label>
+        <link refid="structPmeGpuKernelParamsBase"/>
+        <childnode refid="4428" relation="usage">
+          <edgelabel>grid</edgelabel>
+        </childnode>
+        <childnode refid="4429" relation="usage">
+          <edgelabel>constants</edgelabel>
+        </childnode>
+        <childnode refid="4430" relation="usage">
+          <edgelabel>current</edgelabel>
+        </childnode>
+        <childnode refid="4431" relation="usage">
+          <edgelabel>atoms</edgelabel>
+        </childnode>
+      </node>
+      <node id="4429">
+        <label>PmeGpuConstParams</label>
+        <link refid="structPmeGpuConstParams"/>
+      </node>
+      <node id="4431">
+        <label>PmeGpuAtomParams</label>
+        <link refid="structPmeGpuAtomParams"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="214" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="213" bodyend="226"/>
+    <listofallmembers>
+      <member refid="structPmeGpuKernelParamsBase_1a3b74099ade16fd0e7324ceabca8e9ac4" prot="public" virt="non-virtual"><scope>PmeGpuKernelParamsBase</scope><name>atoms</name></member>
+      <member refid="structPmeGpuKernelParamsBase_1ad039f5e0f9a5b5e3c79b5a4f19beb0bb" prot="public" virt="non-virtual"><scope>PmeGpuKernelParamsBase</scope><name>constants</name></member>
+      <member refid="structPmeGpuKernelParamsBase_1a2480f07b2096788e8907f4751f30930f" prot="public" virt="non-virtual"><scope>PmeGpuKernelParamsBase</scope><name>current</name></member>
+      <member refid="structPmeGpuKernelParamsBase_1aebec2cb2f200b73d8aa2e3f92926d9bd" prot="public" virt="non-virtual"><scope>PmeGpuKernelParamsBase</scope><name>grid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,108 @@
+.. _gmx sorient:
+
+gmx sorient
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx sorient [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-no` :emphasis:`[<.xvg>]`] [:strong:`-ro` :emphasis:`[<.xvg>]`]
+                [:strong:`-co` :emphasis:`[<.xvg>]`] [:strong:`-rc` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+                [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]com`] [:strong:`-[no]v23`]
+                [:strong:`-rmin` :emphasis:`<real>`] [:strong:`-rmax` :emphasis:`<real>`] [:strong:`-cbin` :emphasis:`<real>`]
+                [:strong:`-rbin` :emphasis:`<real>`] [:strong:`-[no]pbc`]
+
+Description
+-----------
+
+``gmx sorient`` analyzes solvent orientation around solutes.
+It calculates two angles between the vector from one or more
+reference positions to the first atom of each solvent molecule:
+
+ * theta_1: the angle with the vector from the first atom of the solvent
+   molecule to the midpoint between atoms 2 and 3.
+ * theta_2: the angle with the normal of the solvent plane, defined by the
+   same three atoms, or, when the option ``-v23`` is set,
+   the angle with the vector between atoms 2 and 3.
+
+The reference can be a set of atoms or
+the center of mass of a set of atoms. The group of solvent atoms should
+consist of 3 atoms per solvent molecule.
+Only solvent molecules between ``-rmin`` and ``-rmax`` are
+considered for ``-o`` and ``-no`` each frame.
+
+``-o``: distribution of cos(theta_1) for rmin<=r<=rmax.
+
+``-no``: distribution of cos(theta_2) for rmin<=r<=rmax.
+
+``-ro``: <cos(theta_1)> and <3cos(^2theta_2)-1> as a function of the
+distance.
+
+``-co``: the sum over all solvent molecules within distance r
+of cos(theta_1) and 3cos(^2(theta_2)-1) as a function of r.
+
+``-rc``: the distribution of the solvent molecules as a function of r
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (sori.xvg)
+    xvgr/xmgr file
+``-no`` [<.xvg>] (snor.xvg)
+    xvgr/xmgr file
+``-ro`` [<.xvg>] (sord.xvg)
+    xvgr/xmgr file
+``-co`` [<.xvg>] (scum.xvg)
+    xvgr/xmgr file
+``-rc`` [<.xvg>] (scount.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]com``  (no)
+    Use the center of mass as the reference position
+``-[no]v23``  (no)
+    Use the vector between atoms 2 and 3
+``-rmin`` <real> (0)
+    Minimum distance (nm)
+``-rmax`` <real> (0.5)
+    Maximum distance (nm)
+``-cbin`` <real> (0.02)
+    Binwidth for the cosine
+``-rbin`` <real> (0.02)
+    Binwidth for r (nm)
+``-[no]pbc``  (no)
+    Check PBC for the center of mass calculation. Only necessary when your reference group consists of several molecules.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

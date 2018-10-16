@@ -1,0 +1,210 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx bundle &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx check" href="gmx-check.html" />
+    <link rel="prev" title="gmx bar" href="gmx-bar.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-check.html" title="gmx check"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-bar.html" title="gmx bar"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-bundle">
+<span id="id1"></span><h1>gmx bundle<a class="headerlink" href="#gmx-bundle" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx bundle [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+           [<strong>-ol</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-od</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oz</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-ot</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-otr</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-otl</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-ok</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-okr</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-okl</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-oa</strong> <em>[&lt;.pdb&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>]
+           [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-na</strong> <em>&lt;int&gt;</em>] [<strong>-[no]z</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">bundle</span></code> analyzes bundles of axes. The axes can be for instance
+helix axes. The program reads two index groups and divides both
+of them in <code class="docutils literal"><span class="pre">-na</span></code> parts. The centers of mass of these parts
+define the tops and bottoms of the axes.
+Several quantities are written to file:
+the axis length, the distance and the z-shift of the axis mid-points
+with respect to the average center of all axes, the total tilt,
+the radial tilt and the lateral tilt with respect to the average axis.</p>
+<p>With options <code class="docutils literal"><span class="pre">-ok</span></code>, <code class="docutils literal"><span class="pre">-okr</span></code> and <code class="docutils literal"><span class="pre">-okl</span></code> the total,
+radial and lateral kinks of the axes are plotted. An extra index
+group of kink atoms is required, which is also divided into <code class="docutils literal"><span class="pre">-na</span></code>
+parts. The kink angle is defined as the angle between the kink-top and
+the bottom-kink vectors.</p>
+<p>With option <code class="docutils literal"><span class="pre">-oa</span></code> the top, mid (or kink when <code class="docutils literal"><span class="pre">-ok</span></code> is set)
+and bottom points of each axis
+are written to a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file each frame. The residue numbers correspond
+to the axis numbers. When viewing this file with Rasmol, use the
+command line option <code class="docutils literal"><span class="pre">-nmrpdb</span></code>, and type <code class="docutils literal"><span class="pre">set</span> <span class="pre">axis</span> <span class="pre">true</span></code> to
+display the reference axis.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-ol</span></code> [&lt;.xvg&gt;] (bun_len.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-od</span></code> [&lt;.xvg&gt;] (bun_dist.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oz</span></code> [&lt;.xvg&gt;] (bun_z.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ot</span></code> [&lt;.xvg&gt;] (bun_tilt.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-otr</span></code> [&lt;.xvg&gt;] (bun_tiltr.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-otl</span></code> [&lt;.xvg&gt;] (bun_tiltl.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ok</span></code> [&lt;.xvg&gt;] (bun_kink.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-okr</span></code> [&lt;.xvg&gt;] (bun_kinkr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-okl</span></code> [&lt;.xvg&gt;] (bun_kinkl.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oa</span></code> [&lt;.pdb&gt;] (axes.pdb) (Optional)</dt>
+<dd>Protein data bank file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-na</span></code> &lt;int&gt; (0)</dt>
+<dd>Number of axes</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]z</span></code>  (no)</dt>
+<dd>Use the <em>z</em>-axis as reference instead of the average axis</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx bundle</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-bar.html"
+                        title="previous chapter">gmx bar</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-check.html"
+                        title="next chapter">gmx check</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-bundle.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-check.html" title="gmx check"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-bar.html" title="gmx bar"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

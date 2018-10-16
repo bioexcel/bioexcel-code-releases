@@ -1,0 +1,280 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx grompp &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx gyrate" href="gmx-gyrate.html" />
+    <link rel="prev" title="gmx genrestr" href="gmx-genrestr.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-gyrate.html" title="gmx gyrate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-genrestr.html" title="gmx genrestr"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-grompp">
+<span id="id1"></span><h1>gmx grompp<a class="headerlink" href="#gmx-grompp" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx grompp [<strong>-f</strong> <em>[&lt;.mdp&gt;]</em>] [<strong>-c</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-r</strong> <em>[&lt;.gro/.g96/...&gt;]</em>]
+           [<strong>-rb</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-p</strong> <em>[&lt;.top&gt;]</em>]
+           [<strong>-t</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>] [<strong>-e</strong> <em>[&lt;.edr&gt;]</em>]
+           [<strong>-ref</strong> <em>[&lt;.trr/.cpt/...&gt;]</em>] [<strong>-po</strong> <em>[&lt;.mdp&gt;]</em>] [<strong>-pp</strong> <em>[&lt;.top&gt;]</em>]
+           [<strong>-o</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-imd</strong> <em>[&lt;.gro&gt;]</em>] [<strong>-[no]v</strong>] [<strong>-time</strong> <em>&lt;real&gt;</em>]
+           [<strong>-[no]rmvsbds</strong>] [<strong>-maxwarn</strong> <em>&lt;int&gt;</em>] [<strong>-[no]zero</strong>] [<strong>-[no]renum</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> (the gromacs preprocessor)
+reads a molecular topology file, checks the validity of the
+file, expands the topology from a molecular description to an atomic
+description. The topology file contains information about
+molecule types and the number of molecules, the preprocessor
+copies each molecule as needed.
+There is no limitation on the number of molecule types.
+Bonds and bond-angles can be converted into constraints, separately
+for hydrogens and heavy atoms.
+Then a coordinate file is read and velocities can be generated
+from a Maxwellian distribution if requested.
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> also reads parameters for <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a>
+(eg. number of MD steps, time step, cut-off), and others such as
+NEMD parameters, which are corrected so that the net acceleration
+is zero.
+Eventually a binary file is produced that can serve as the sole input
+file for the MD program.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> uses the atom names from the topology file. The atom names
+in the coordinate file (option <code class="docutils literal"><span class="pre">-c</span></code>) are only read to generate
+warnings when they do not match the atom names in the topology.
+Note that the atom names are irrelevant for the simulation as
+only the atom types are used for generating interaction parameters.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> uses a built-in preprocessor to resolve includes, macros,
+etc. The preprocessor supports the following keywords:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#ifdef VARIABLE</span>
+<span class="c1">#ifndef VARIABLE</span>
+<span class="c1">#else</span>
+<span class="c1">#endif</span>
+<span class="c1">#define VARIABLE</span>
+<span class="c1">#undef VARIABLE</span>
+<span class="c1">#include &quot;filename&quot;</span>
+<span class="c1">#include &lt;filename&gt;</span>
+</pre></div>
+</div>
+<p>The functioning of these statements in your topology may be modulated by
+using the following two flags in your <a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">define</span> <span class="o">=</span> <span class="o">-</span><span class="n">DVARIABLE1</span> <span class="o">-</span><span class="n">DVARIABLE2</span>
+<span class="n">include</span> <span class="o">=</span> <span class="o">-</span><span class="n">I</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">john</span><span class="o">/</span><span class="n">doe</span>
+</pre></div>
+</div>
+<p>For further information a C-programming textbook may help you out.
+Specifying the <code class="docutils literal"><span class="pre">-pp</span></code> flag will get the pre-processed
+topology file written out so that you can verify its contents.</p>
+<p>When using position restraints, a file with restraint coordinates
+must be supplied with <code class="docutils literal"><span class="pre">-r</span></code> (can be the same file as supplied
+for <code class="docutils literal"><span class="pre">-c</span></code>). For free energy calculations, separate reference
+coordinates for the B topology can be supplied with <code class="docutils literal"><span class="pre">-rb</span></code>,
+otherwise they will be equal to those of the A topology.</p>
+<p>Starting coordinates can be read from trajectory with <code class="docutils literal"><span class="pre">-t</span></code>.
+The last frame with coordinates and velocities will be read,
+unless the <code class="docutils literal"><span class="pre">-time</span></code> option is used. Only if this information
+is absent will the coordinates in the <code class="docutils literal"><span class="pre">-c</span></code> file be used.
+Note that these velocities will not be used when <code class="docutils literal"><span class="pre">gen_vel</span> <span class="pre">=</span> <span class="pre">yes</span></code>
+in your <a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> file. An energy file can be supplied with
+<code class="docutils literal"><span class="pre">-e</span></code> to read Nose-Hoover and/or Parrinello-Rahman coupling
+variables.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> can be used to restart simulations (preserving
+continuity) by supplying just a checkpoint file with <code class="docutils literal"><span class="pre">-t</span></code>.
+However, for simply changing the number of run steps to extend
+a run, using <a class="reference internal" href="gmx-convert-tpr.html"><span class="doc">gmx convert-tpr</span></a> is more convenient than <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code>.
+You then supply the old checkpoint file directly to <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a>
+with <code class="docutils literal"><span class="pre">-cpi</span></code>. If you wish to change the ensemble or things
+like output frequency, then supplying the checkpoint file to
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> with <code class="docutils literal"><span class="pre">-t</span></code> along with a new <a class="reference internal" href="../user-guide/file-formats.html#mdp"><span class="std std-ref">.mdp</span></a> file
+with <code class="docutils literal"><span class="pre">-f</span></code> is the recommended procedure. Actually preserving
+the ensemble (if possible) still requires passing the checkpoint
+file to <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> <code class="docutils literal"><span class="pre">-cpi</span></code>.</p>
+<p>By default, all bonded interactions which have constant energy due to
+virtual site constructions will be removed. If this constant energy is
+not zero, this will result in a shift in the total energy. All bonded
+interactions can be kept by turning off <code class="docutils literal"><span class="pre">-rmvsbds</span></code>. Additionally,
+all constraints for distances which will be constant anyway because
+of virtual site constructions will be removed. If any constraints remain
+which involve virtual sites, a fatal error will result.</p>
+<p>To verify your run input file, please take note of all warnings
+on the screen, and correct where necessary. Do also look at the contents
+of the <code class="docutils literal"><span class="pre">mdout.mdp</span></code> file; this contains comment lines, as well as
+the input that <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> has read. If in doubt, you can start <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code>
+with the <code class="docutils literal"><span class="pre">-debug</span></code> option which will give you more information
+in a file called <code class="docutils literal"><span class="pre">grompp.log</span></code> (along with real debug info). You
+can see the contents of the run input file with the <a class="reference internal" href="gmx-dump.html"><span class="doc">gmx dump</span></a>
+program. <a class="reference internal" href="gmx-check.html"><span class="doc">gmx check</span></a> can be used to compare the contents of two
+run input files.</p>
+<p>The <code class="docutils literal"><span class="pre">-maxwarn</span></code> option can be used to override warnings printed
+by <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> that otherwise halt output. In some cases, warnings are
+harmless, but usually they are not. The user is advised to carefully
+interpret the output messages before attempting to bypass them with
+this option.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.mdp&gt;] (grompp.mdp)</dt>
+<dd>grompp input file with MD parameters</dd>
+<dt><code class="docutils literal"><span class="pre">-c</span></code> [&lt;.gro/.g96/…&gt;] (conf.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-r</span></code> [&lt;.gro/.g96/…&gt;] (restraint.gro) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-rb</span></code> [&lt;.gro/.g96/…&gt;] (restraint.gro) (Optional)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-p</span></code> [&lt;.top&gt;] (topol.top)</dt>
+<dd>Topology file</dd>
+<dt><code class="docutils literal"><span class="pre">-t</span></code> [&lt;.trr/.cpt/…&gt;] (traj.trr) (Optional)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> [&lt;.edr&gt;] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+</dl>
+<p>Options to specify input/output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-ref</span></code> [&lt;.trr/.cpt/…&gt;] (rotref.trr) (Optional)</dt>
+<dd>Full precision trajectory: <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-po</span></code> [&lt;.mdp&gt;] (mdout.mdp)</dt>
+<dd>grompp input file with MD parameters</dd>
+<dt><code class="docutils literal"><span class="pre">-pp</span></code> [&lt;.top&gt;] (processed.top) (Optional)</dt>
+<dd>Topology file</dd>
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-imd</span></code> [&lt;.gro&gt;] (imdgroup.gro) (Optional)</dt>
+<dd>Coordinate file in Gromos-87 format</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-[no]v</span></code>  (no)</dt>
+<dd>Be loud and noisy</dd>
+<dt><code class="docutils literal"><span class="pre">-time</span></code> &lt;real&gt; (-1)</dt>
+<dd>Take frame at or first after this time.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmvsbds</span></code>  (yes)</dt>
+<dd>Remove constant bonded interactions with virtual sites</dd>
+<dt><code class="docutils literal"><span class="pre">-maxwarn</span></code> &lt;int&gt; (0)</dt>
+<dd>Number of allowed warnings during input processing. Not for normal use and may generate unstable systems</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]zero</span></code>  (no)</dt>
+<dd>Set parameters for bonded interactions without defaults to zero instead of generating an error</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]renum</span></code>  (yes)</dt>
+<dd>Renumber atomtypes and minimize number of atomtypes</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx grompp</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-genrestr.html"
+                        title="previous chapter">gmx genrestr</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-gyrate.html"
+                        title="next chapter">gmx gyrate</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-grompp.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-gyrate.html" title="gmx gyrate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-genrestr.html" title="gmx genrestr"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

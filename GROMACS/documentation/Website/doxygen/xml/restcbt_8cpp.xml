@@ -1,0 +1,585 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="restcbt_8cpp" kind="file">
+    <compoundname>restcbt.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="restcbt_8h" local="yes">restcbt.h</includes>
+    <includes local="no">cmath</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="utilities_8h" local="yes">gromacs/math/utilities.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="idef_8h" local="yes">gromacs/topology/idef.h</includes>
+    <incdepgraph>
+      <node id="13315">
+        <label>cstdint</label>
+      </node>
+      <node id="13313">
+        <label>cmath</label>
+      </node>
+      <node id="13311">
+        <label>restcbt.h</label>
+        <link refid="restcbt_8h"/>
+        <childnode refid="13312" relation="include">
+        </childnode>
+      </node>
+      <node id="13312">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="13310">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="13309">
+        <label>src/gromacs/listed-forces/restcbt.cpp</label>
+        <link refid="restcbt.cpp"/>
+        <childnode refid="13310" relation="include">
+        </childnode>
+        <childnode refid="13311" relation="include">
+        </childnode>
+        <childnode refid="13313" relation="include">
+        </childnode>
+        <childnode refid="13314" relation="include">
+        </childnode>
+      </node>
+      <node id="13314">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="13313" relation="include">
+        </childnode>
+        <childnode refid="13315" relation="include">
+        </childnode>
+        <childnode refid="13312" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="restcbt_8cpp_1a20e5ee0973cac6c90a639dece12c5495" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void compute_factors_restangles</definition>
+        <argsstring>(int type, const t_iparams forceparams[], rvec delta_ante, rvec delta_post, real *prefactor, real *ratio_ante, real *ratio_post, real *v)</argsstring>
+        <name>compute_factors_restangles</name>
+        <param>
+          <type>int</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="uniont__iparams" kindref="compound">t_iparams</ref></type>
+          <declname>forceparams</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_ante</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_post</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>prefactor</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>ratio_ante</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>ratio_post</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>This function computes factors needed for restricted angle potentials. </para>        </briefdescription>
+        <detaileddescription>
+<para>The restricted angle potential is used in coarse-grained simulations to avoid singularities when three particles align and the dihedral angle and dihedral potential cannot be calculated. This potential is calculated using the formula: <formula id="2">\[V_{\rm ReB}(\theta_i) = \frac{1}{2} k_{\theta} \frac{(\cos\theta_i - \cos\theta_0)^2}{\sin^2\theta_i}\]</formula> (see section &quot;Restricted Bending Potential&quot; from the manual). The derivative of the restricted angle potential is calculated as: <formula id="3">\[\frac{\partial V_{\rm ReB}(\theta_i)} {\partial \vec r_{k}} = \frac{dV_{\rm ReB}(\theta_i)}{dcos\theta_i} \frac{\partial cos\theta_i}{\partial \vec r_{k}}\]</formula> where all the derivatives of the bending angle with respect to Cartesian coordinates are calculated as in Allen &amp; Tildesley (pp. 330-332)</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of force parameters </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceparams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array of parameters for force computations </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the first two particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the last two particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">prefactor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>common term that comes in front of each force </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">ratio_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ratio of scalar products of delta_ante with delta_post and delta_ante with delta_ante </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">ratio_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ratio of scalar products of delta_ante with delta_post and delta_post with delta_ante </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>contribution to energy (see formula above) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/restcbt.cpp" line="61" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/restcbt.cpp" bodystart="61" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="restcbt_8cpp_1ae1ede5f31d34b57fc752545a08939c37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void compute_factors_restrdihs</definition>
+        <argsstring>(int type, const t_iparams forceparams[], rvec delta_ante, rvec delta_crnt, rvec delta_post, real *factor_phi_ai_ante, real *factor_phi_ai_crnt, real *factor_phi_ai_post, real *factor_phi_aj_ante, real *factor_phi_aj_crnt, real *factor_phi_aj_post, real *factor_phi_ak_ante, real *factor_phi_ak_crnt, real *factor_phi_ak_post, real *factor_phi_al_ante, real *factor_phi_al_crnt, real *factor_phi_al_post, real *prefactor_phi, real *v)</argsstring>
+        <name>compute_factors_restrdihs</name>
+        <param>
+          <type>int</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="uniont__iparams" kindref="compound">t_iparams</ref></type>
+          <declname>forceparams</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_ante</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_crnt</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_post</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_ai_ante</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_ai_crnt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_ai_post</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_aj_ante</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_aj_crnt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_aj_post</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_ak_ante</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_ak_crnt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_ak_post</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_al_ante</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_al_crnt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>factor_phi_al_post</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>prefactor_phi</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Compute factors for restricted dihedral potentials. </para>        </briefdescription>
+        <detaileddescription>
+<para>The restricted dihedral potential is the equivalent of the restricted bending potential for the dihedral angle. It imposes the dihedral angle to have only one equilibrium value. This potential is calculated using the formula: <formula id="4">\[V_{\rm ReT}(\phi_i) = \frac{1}{2} k_{\phi} \frac{(\cos\phi_i - \cos\phi_0)^2}{\sin^2\phi_i}\]</formula> (see section &quot;Proper dihedrals: Restricted torsion potential&quot; from the manual). The derivative of the restricted dihedral potential is calculated as: <formula id="5">\[\frac{\partial V_{\rm ReT}(\phi_i)} {\partial \vec r_{k}} = \frac{dV_{\rm ReT}(\phi_i)}{dcos\phi_i} \frac{\partial cos\phi_i}{\partial \vec r_{k}}\]</formula> where all the derivatives of the dihedral angle with respect to Cartesian coordinates are calculated as in Allen &amp; Tildesley (pp. 330-332). Factors factor_phi_* are coming from the derivatives of the torsion angle (phi) with respect to the beads ai, aj, ak, al, (four) coordinates and they are multiplied in the force computations with the particle distance stored in parameters delta_ante, delta_crnt, delta_post.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of force parameters </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceparams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array of parameters for force computations </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the first two particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_crnt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the middle pair of particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the last two particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_ai_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle ai multiplied with delta_ante </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_ai_crnt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle ai multiplied with delta_crnt </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_ai_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle ai multiplied with delta_post </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_aj_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle aj multiplied with delta_ante </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_aj_crnt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle aj multiplied with delta_crnt </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_aj_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle aj multiplied with delta_post </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_ak_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle ak multiplied with delta_ante </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_ak_crnt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle ak multiplied with delta_crnt </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_ak_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle ak multiplied with delta_post </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_al_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle al multiplied with delta_ante </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_al_crnt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle al multiplied with delta_crnt </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">factor_phi_al_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force factor for particle al multiplied with delta_post </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">prefactor_phi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>multiplication constant of the torsion force </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>contribution to energy (see formula above) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/restcbt.cpp" line="100" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/restcbt.cpp" bodystart="100" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="restcbt_8cpp_1a96465d7ce23b11c49d9ae466eb68b179" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void compute_factors_cbtdihs</definition>
+        <argsstring>(int type, const t_iparams forceparams[], rvec delta_ante, rvec delta_crnt, rvec delta_post, rvec f_phi_ai, rvec f_phi_aj, rvec f_phi_ak, rvec f_phi_al, rvec f_theta_ante_ai, rvec f_theta_ante_aj, rvec f_theta_ante_ak, rvec f_theta_post_aj, rvec f_theta_post_ak, rvec f_theta_post_al, real *v)</argsstring>
+        <name>compute_factors_cbtdihs</name>
+        <param>
+          <type>int</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="uniont__iparams" kindref="compound">t_iparams</ref></type>
+          <declname>forceparams</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_ante</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_crnt</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>delta_post</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_phi_ai</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_phi_aj</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_phi_ak</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_phi_al</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_theta_ante_ai</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_theta_ante_aj</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_theta_ante_ak</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_theta_post_aj</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_theta_post_ak</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f_theta_post_al</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Compute factors for combined bending-torsion (CBT) potentials. </para>        </briefdescription>
+        <detaileddescription>
+<para>The combined bending-torsion potential goes to zero in a very smooth manner, eliminating the numerical instabilities, when three coarse-grained particles align and the dihedral angle and standard dihedral potentials cannot be calculated. The CBT potential is calculated using the formula: <formula id="6">\[V_{\rm CBT}(\theta_{i-1}, \theta_i, \phi_i) = k_{\phi} \sin^3\theta_{i-1} \sin^3\theta_{i} \sum_{n=0}^4 { a_n \cos^n\phi_i}\]</formula> (see section &quot;Proper dihedrals: Combined bending-torsion potential&quot; from the manual). It contains in its expression not only the dihedral angle <formula id="7">$\phi$</formula> but also <formula id="8">$\theta_{i-1}$</formula> (denoted as theta_ante below) and <formula id="9">$\theta_{i}$</formula> (denoted as theta_post below) <mdash/> the adjacent bending angles. The derivative of the CBT potential is calculated as: <formula id="10">\[\frac{\partial V_{\rm CBT}(\theta_{i-1},\theta_i,\phi_i)} {\partial \vec r_{l}} = \frac{\partial V_ {\rm CBT}}{\partial \theta_{i-1}} \frac{\partial \theta_{i-1}}{\partial \vec r_{l}} + \frac{\partial V_{\rm CBT}}{\partial \phi_{i }} \frac{\partial \phi_{i }}{\partial \vec r_{l}}\]</formula> where all the derivatives of the angles with respect to Cartesian coordinates are calculated as in Allen &amp; Tildesley (pp. 330-332). Factors f_phi_* come from the derivatives of the torsion angle with respect to the beads ai, aj, ak, al (four) coordinates; f_theta_ante_* come from the derivatives of the bending angle theta_ante (theta_{i-1} in formula above) with respect to the beads ai, aj, ak (three particles) coordinates and f_theta_post_* come from the derivatives of the bending angle theta_post (theta_{i} in formula above) with respect to the beads aj, ak, al (three particles) coordinates.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of force parameters </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceparams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array of parameters for force computations </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_ante</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the first two particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_crnt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the middle pair of particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delta_post</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>distance between the last two particles </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_phi_ai</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle ai due to derivative in phi angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_phi_aj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle aj due to derivative in phi angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_phi_ak</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle ak due to derivative in phi angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_phi_al</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle al due to derivative in phi angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_theta_ante_ai</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle ai due to derivative in theta_ante angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_theta_ante_aj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle aj due to derivative in theta_ante angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_theta_ante_ak</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle ak due to derivative in theta_ante angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_theta_post_aj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle aj due to derivative in theta_post angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_theta_post_ak</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle ak due to derivative in theta_post angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">f_theta_post_al</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>force for particle al due to derivative in theta_psot angle </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>contribution to energy (see formula above) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/restcbt.cpp" line="202" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/restcbt.cpp" bodystart="202" bodyend="394"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains function definitions necessary for computations of forces due to restricted angle, restricted dihedral and combined bending-torsion potentials. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Nicolae Goga </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/restcbt.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,354 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx trjconv &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx trjorder" href="gmx-trjorder.html" />
+    <link rel="prev" title="gmx trjcat" href="gmx-trjcat.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-trjorder.html" title="gmx trjorder"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-trjcat.html" title="gmx trjcat"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-trjconv">
+<span id="id1"></span><h1>gmx trjconv<a class="headerlink" href="#gmx-trjconv" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx trjconv [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+            [<strong>-fr</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-sub</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-drop</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-o</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+            [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-skip</strong> <em>&lt;int&gt;</em>]
+            [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]round</strong>] [<strong>-dump</strong> <em>&lt;time&gt;</em>] [<strong>-t0</strong> <em>&lt;time&gt;</em>]
+            [<strong>-timestep</strong> <em>&lt;time&gt;</em>] [<strong>-pbc</strong> <em>&lt;enum&gt;</em>] [<strong>-ur</strong> <em>&lt;enum&gt;</em>]
+            [<strong>-[no]center</strong>] [<strong>-boxcenter</strong> <em>&lt;enum&gt;</em>] [<strong>-box</strong> <em>&lt;vector&gt;</em>]
+            [<strong>-trans</strong> <em>&lt;vector&gt;</em>] [<strong>-shift</strong> <em>&lt;vector&gt;</em>] [<strong>-fit</strong> <em>&lt;enum&gt;</em>]
+            [<strong>-ndec</strong> <em>&lt;int&gt;</em>] [<strong>-[no]vel</strong>] [<strong>-[no]force</strong>] [<strong>-trunc</strong> <em>&lt;time&gt;</em>]
+            [<strong>-exec</strong> <em>&lt;string&gt;</em>] [<strong>-split</strong> <em>&lt;time&gt;</em>] [<strong>-[no]sep</strong>]
+            [<strong>-nzero</strong> <em>&lt;int&gt;</em>] [<strong>-dropunder</strong> <em>&lt;real&gt;</em>] [<strong>-dropover</strong> <em>&lt;real&gt;</em>]
+            [<strong>-[no]conect</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span></code> can convert trajectory files in many ways:</p>
+<ul class="simple">
+<li>from one format to another</li>
+<li>select a subset of atoms</li>
+<li>change the periodicity representation</li>
+<li>keep multimeric molecules together</li>
+<li>center atoms in the box</li>
+<li>fit atoms to reference structure</li>
+<li>reduce the number of frames</li>
+<li>change the timestamps of the frames (<code class="docutils literal"><span class="pre">-t0</span></code> and <code class="docutils literal"><span class="pre">-timestep</span></code>)</li>
+<li>cut the trajectory in small subtrajectories according
+to information in an index file. This allows subsequent analysis of
+the subtrajectories that could, for example, be the result of a
+cluster analysis. Use option <code class="docutils literal"><span class="pre">-sub</span></code>.
+This assumes that the entries in the index file are frame numbers and
+dumps each group in the index file to a separate trajectory file.</li>
+<li>select frames within a certain range of a quantity given
+in an <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> file.</li>
+</ul>
+<p><a class="reference internal" href="gmx-trjcat.html"><span class="doc">gmx trjcat</span></a> is better suited for concatenating multiple trajectory files.</p>
+<p>The following formats are supported for input and output:
+<a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">.xtc</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">.trr</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">.gro</span></a>, <code class="docutils literal"><span class="pre">.g96</span></code>
+and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a>.
+The file formats are detected from the file extension.
+The precision of the <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">.xtc</span></a> output is taken from the
+input file for <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">.xtc</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">.gro</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a>,
+and from the <code class="docutils literal"><span class="pre">-ndec</span></code> option for other input formats. The precision
+is always taken from <code class="docutils literal"><span class="pre">-ndec</span></code>, when this option is set.
+All other formats have fixed precision. <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">.trr</span></a>
+output can be single or double precision, depending on the precision
+of the <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span></code> binary.
+Note that velocities are only supported in
+<a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">.trr</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">.gro</span></a> and <code class="docutils literal"><span class="pre">.g96</span></code> files.</p>
+<p>Option <code class="docutils literal"><span class="pre">-sep</span></code> can be used to write every frame to a separate
+<code class="docutils literal"><span class="pre">.gro,</span> <span class="pre">.g96</span></code> or <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file. By default, all frames all written to one file.
+<a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files with all frames concatenated can be viewed with
+<code class="docutils literal"><span class="pre">rasmol</span> <span class="pre">-nmrpdb</span></code>.</p>
+<p>It is possible to select part of your trajectory and write it out
+to a new trajectory file in order to save disk space, e.g. for leaving
+out the water from a trajectory of a protein in water.
+<strong>ALWAYS</strong> put the original trajectory on tape!
+We recommend to use the portable <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">.xtc</span></a> format for your analysis
+to save disk space and to have portable files.</p>
+<p>There are two options for fitting the trajectory to a reference
+either for essential dynamics analysis, etc.
+The first option is just plain fitting to a reference structure
+in the structure file. The second option is a progressive fit
+in which the first timeframe is fitted to the reference structure
+in the structure file to obtain and each subsequent timeframe is
+fitted to the previously fitted structure. This way a continuous
+trajectory is generated, which might not be the case when using the
+regular fit method, e.g. when your protein undergoes large
+conformational transitions.</p>
+<p>Option <code class="docutils literal"><span class="pre">-pbc</span></code> sets the type of periodic boundary condition
+treatment:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">mol</span></code> puts the center of mass of molecules in the box,
+and requires a run input file to be supplied with <code class="docutils literal"><span class="pre">-s</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">res</span></code> puts the center of mass of residues in the box.</li>
+<li><code class="docutils literal"><span class="pre">atom</span></code> puts all the atoms in the box.</li>
+<li><code class="docutils literal"><span class="pre">nojump</span></code> checks if atoms jump across the box and then puts
+them back. This has the effect that all molecules
+will remain whole (provided they were whole in the initial
+conformation). <strong>Note</strong> that this ensures a continuous trajectory but
+molecules may diffuse out of the box. The starting configuration
+for this procedure is taken from the structure file, if one is
+supplied, otherwise it is the first frame.</li>
+<li><code class="docutils literal"><span class="pre">cluster</span></code> clusters all the atoms in the selected index
+such that they are all closest to the center of mass of the cluster,
+which is iteratively updated. <strong>Note</strong> that this will only give meaningful
+results if you in fact have a cluster. Luckily that can be checked
+afterwards using a trajectory viewer. Note also that if your molecules
+are broken this will not work either.</li>
+<li><code class="docutils literal"><span class="pre">whole</span></code> only makes broken molecules whole.</li>
+</ul>
+</div></blockquote>
+<p>Option <code class="docutils literal"><span class="pre">-ur</span></code> sets the unit cell representation for options
+<code class="docutils literal"><span class="pre">mol</span></code>, <code class="docutils literal"><span class="pre">res</span></code> and <code class="docutils literal"><span class="pre">atom</span></code> of <code class="docutils literal"><span class="pre">-pbc</span></code>.
+All three options give different results for triclinic boxes and
+identical results for rectangular boxes.
+<code class="docutils literal"><span class="pre">rect</span></code> is the ordinary brick shape.
+<code class="docutils literal"><span class="pre">tric</span></code> is the triclinic unit cell.
+<code class="docutils literal"><span class="pre">compact</span></code> puts all atoms at the closest distance from the center
+of the box. This can be useful for visualizing e.g. truncated octahedra
+or rhombic dodecahedra. The center for options <code class="docutils literal"><span class="pre">tric</span></code> and <code class="docutils literal"><span class="pre">compact</span></code>
+is <code class="docutils literal"><span class="pre">tric</span></code> (see below), unless the option <code class="docutils literal"><span class="pre">-boxcenter</span></code>
+is set differently.</p>
+<p>Option <code class="docutils literal"><span class="pre">-center</span></code> centers the system in the box. The user can
+select the group which is used to determine the geometrical center.
+Option <code class="docutils literal"><span class="pre">-boxcenter</span></code> sets the location of the center of the box
+for options <code class="docutils literal"><span class="pre">-pbc</span></code> and <code class="docutils literal"><span class="pre">-center</span></code>. The center options are:
+<code class="docutils literal"><span class="pre">tric</span></code>: half of the sum of the box vectors,
+<code class="docutils literal"><span class="pre">rect</span></code>: half of the box diagonal,
+<code class="docutils literal"><span class="pre">zero</span></code>: zero.
+Use option <code class="docutils literal"><span class="pre">-pbc</span> <span class="pre">mol</span></code> in addition to <code class="docutils literal"><span class="pre">-center</span></code> when you
+want all molecules in the box after the centering.</p>
+<p>Option <code class="docutils literal"><span class="pre">-box</span></code> sets the size of the new box. This option only works
+for leading dimensions and is thus generally only useful for rectangular boxes.
+If you want to modify only some of the dimensions, e.g. when reading from
+a trajectory, you can use -1 for those dimensions that should stay the same
+It is not always possible to use combinations of <code class="docutils literal"><span class="pre">-pbc</span></code>,
+<code class="docutils literal"><span class="pre">-fit</span></code>, <code class="docutils literal"><span class="pre">-ur</span></code> and <code class="docutils literal"><span class="pre">-center</span></code> to do exactly what
+you want in one call to <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span></code>. Consider using multiple
+calls, and check out the GROMACS website for suggestions.</p>
+<p>With <code class="docutils literal"><span class="pre">-dt</span></code>, it is possible to reduce the number of
+frames in the output. This option relies on the accuracy of the times
+in your input trajectory, so if these are inaccurate use the
+<code class="docutils literal"><span class="pre">-timestep</span></code> option to modify the time (this can be done
+simultaneously). For making smooth movies, the program <a class="reference internal" href="gmx-filter.html"><span class="doc">gmx filter</span></a>
+can reduce the number of frames while using low-pass frequency
+filtering, this reduces aliasing of high frequency motions.</p>
+<p>Using <code class="docutils literal"><span class="pre">-trunc</span></code> <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span></code> can truncate <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">.trr</span></a> in place, i.e.
+without copying the file. This is useful when a run has crashed
+during disk I/O (i.e. full disk), or when two contiguous
+trajectories must be concatenated without having double frames.</p>
+<p>Option <code class="docutils literal"><span class="pre">-dump</span></code> can be used to extract a frame at or near
+one specific time from your trajectory, but only works reliably
+if the time interval between frames is uniform.</p>
+<p>Option <code class="docutils literal"><span class="pre">-drop</span></code> reads an <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> file with times and values.
+When options <code class="docutils literal"><span class="pre">-dropunder</span></code> and/or <code class="docutils literal"><span class="pre">-dropover</span></code> are set,
+frames with a value below and above the value of the respective options
+will not be written.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-fr</span></code> [&lt;.ndx&gt;] (frames.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-sub</span></code> [&lt;.ndx&gt;] (cluster.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-drop</span></code> [&lt;.xvg&gt;] (drop.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xtc/.trr/…&gt;] (trajout.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (1)</dt>
+<dd>Only write every nr-th frame</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only write frame when t MOD dt = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]round</span></code>  (no)</dt>
+<dd>Round measurements to nearest picosecond</dd>
+<dt><code class="docutils literal"><span class="pre">-dump</span></code> &lt;time&gt; (-1)</dt>
+<dd>Dump frame nearest specified time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-t0</span></code> &lt;time&gt; (0)</dt>
+<dd>Starting time (ps) (default: don’t change)</dd>
+<dt><code class="docutils literal"><span class="pre">-timestep</span></code> &lt;time&gt; (0)</dt>
+<dd>Change time step between input frames (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-pbc</span></code> &lt;enum&gt; (none)</dt>
+<dd>PBC treatment (see help text for full description): none, mol, res, atom, nojump, cluster, whole</dd>
+<dt><code class="docutils literal"><span class="pre">-ur</span></code> &lt;enum&gt; (rect)</dt>
+<dd>Unit-cell representation: rect, tric, compact</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]center</span></code>  (no)</dt>
+<dd>Center atoms in box</dd>
+<dt><code class="docutils literal"><span class="pre">-boxcenter</span></code> &lt;enum&gt; (tric)</dt>
+<dd>Center for -pbc and -center: tric, rect, zero</dd>
+<dt><code class="docutils literal"><span class="pre">-box</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>Size for new cubic box (default: read from input)</dd>
+<dt><code class="docutils literal"><span class="pre">-trans</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>All coordinates will be translated by trans. This can advantageously be combined with -pbc mol -ur compact.</dd>
+<dt><code class="docutils literal"><span class="pre">-shift</span></code> &lt;vector&gt; (0 0 0)</dt>
+<dd>All coordinates will be shifted by framenr*shift</dd>
+<dt><code class="docutils literal"><span class="pre">-fit</span></code> &lt;enum&gt; (none)</dt>
+<dd>Fit molecule to ref structure in the structure file: none, rot+trans, rotxy+transxy, translation, transxy, progressive</dd>
+<dt><code class="docutils literal"><span class="pre">-ndec</span></code> &lt;int&gt; (3)</dt>
+<dd>Precision for .xtc and .gro writing in number of decimal places</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]vel</span></code>  (yes)</dt>
+<dd>Read and write velocities if possible</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]force</span></code>  (no)</dt>
+<dd>Read and write forces if possible</dd>
+<dt><code class="docutils literal"><span class="pre">-trunc</span></code> &lt;time&gt; (-1)</dt>
+<dd>Truncate input trajectory file after this time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-exec</span></code> &lt;string&gt;</dt>
+<dd>Execute command for every output frame with the frame number as argument</dd>
+<dt><code class="docutils literal"><span class="pre">-split</span></code> &lt;time&gt; (0)</dt>
+<dd>Start writing new file when t MOD split = first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]sep</span></code>  (no)</dt>
+<dd>Write each frame to a separate .gro, .g96 or .pdb file</dd>
+<dt><code class="docutils literal"><span class="pre">-nzero</span></code> &lt;int&gt; (0)</dt>
+<dd>If the -sep flag is set, use these many digits for the file numbers and prepend zeros as needed</dd>
+<dt><code class="docutils literal"><span class="pre">-dropunder</span></code> &lt;real&gt; (0)</dt>
+<dd>Drop all frames below this value</dd>
+<dt><code class="docutils literal"><span class="pre">-dropover</span></code> &lt;real&gt; (0)</dt>
+<dd>Drop all frames above this value</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]conect</span></code>  (no)</dt>
+<dd>Add conect records when writing <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files. Useful for visualization of non-standard molecules, e.g. coarse grained ones</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx trjconv</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-trjcat.html"
+                        title="previous chapter">gmx trjcat</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-trjorder.html"
+                        title="next chapter">gmx trjorder</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-trjconv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-trjorder.html" title="gmx trjorder"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-trjcat.html" title="gmx trjcat"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

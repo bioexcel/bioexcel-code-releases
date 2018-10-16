@@ -1,0 +1,252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx rms &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx rmsdist" href="gmx-rmsdist.html" />
+    <link rel="prev" title="gmx rdf" href="gmx-rdf.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-rmsdist.html" title="gmx rmsdist"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-rdf.html" title="gmx rdf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-rms">
+<span id="id1"></span><h1>gmx rms<a class="headerlink" href="#gmx-rms" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx rms [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>]
+        [<strong>-f2</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-mir</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-a</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-dist</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-m</strong> <em>[&lt;.xpm&gt;]</em>]
+        [<strong>-bin</strong> <em>[&lt;.dat&gt;]</em>] [<strong>-bm</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+        [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+        [<strong>-what</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]pbc</strong>] [<strong>-fit</strong> <em>&lt;enum&gt;</em>] [<strong>-prev</strong> <em>&lt;int&gt;</em>]
+        [<strong>-[no]split</strong>] [<strong>-skip</strong> <em>&lt;int&gt;</em>] [<strong>-skip2</strong> <em>&lt;int&gt;</em>] [<strong>-max</strong> <em>&lt;real&gt;</em>]
+        [<strong>-min</strong> <em>&lt;real&gt;</em>] [<strong>-bmax</strong> <em>&lt;real&gt;</em>] [<strong>-bmin</strong> <em>&lt;real&gt;</em>] [<strong>-[no]mw</strong>]
+        [<strong>-nlevels</strong> <em>&lt;int&gt;</em>] [<strong>-ng</strong> <em>&lt;int&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">rms</span></code> compares two structures by computing the root mean square
+deviation (RMSD), the size-independent rho similarity parameter
+(<code class="docutils literal"><span class="pre">rho</span></code>) or the scaled rho (<code class="docutils literal"><span class="pre">rhosc</span></code>),
+see Maiorov &amp; Crippen, Proteins <strong>22</strong>, 273 (1995).
+This is selected by <code class="docutils literal"><span class="pre">-what</span></code>.</p>
+<p>Each structure from a trajectory (<code class="docutils literal"><span class="pre">-f</span></code>) is compared to a
+reference structure. The reference structure
+is taken from the structure file (<code class="docutils literal"><span class="pre">-s</span></code>).</p>
+<p>With option <code class="docutils literal"><span class="pre">-mir</span></code> also a comparison with the mirror image of
+the reference structure is calculated.
+This is useful as a reference for ‘significant’ values, see
+Maiorov &amp; Crippen, Proteins <strong>22</strong>, 273 (1995).</p>
+<p>Option <code class="docutils literal"><span class="pre">-prev</span></code> produces the comparison with a previous frame
+the specified number of frames ago.</p>
+<p>Option <code class="docutils literal"><span class="pre">-m</span></code> produces a matrix in <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> format of
+comparison values of each structure in the trajectory with respect to
+each other structure. This file can be visualized with for instance
+<code class="docutils literal"><span class="pre">xv</span></code> and can be converted to postscript with <a class="reference internal" href="gmx-xpm2ps.html"><span class="doc">gmx xpm2ps</span></a>.</p>
+<p>Option <code class="docutils literal"><span class="pre">-fit</span></code> controls the least-squares fitting of
+the structures on top of each other: complete fit (rotation and
+translation), translation only, or no fitting at all.</p>
+<p>Option <code class="docutils literal"><span class="pre">-mw</span></code> controls whether mass weighting is done or not.
+If you select the option (default) and
+supply a valid <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file masses will be taken from there,
+otherwise the masses will be deduced from the <code class="docutils literal"><span class="pre">atommass.dat</span></code> file in
+<code class="docutils literal"><span class="pre">GMXLIB</span></code>. This is fine for proteins, but not
+necessarily for other molecules. A default mass of 12.011 amu (carbon)
+is assigned to unknown atoms. You can check whether this happened by
+turning on the <code class="docutils literal"><span class="pre">-debug</span></code> flag and inspecting the log file.</p>
+<p>With <code class="docutils literal"><span class="pre">-f2</span></code>, the ‘other structures’ are taken from a second
+trajectory, this generates a comparison matrix of one trajectory
+versus the other.</p>
+<p>Option <code class="docutils literal"><span class="pre">-bin</span></code> does a binary dump of the comparison matrix.</p>
+<p>Option <code class="docutils literal"><span class="pre">-bm</span></code> produces a matrix of average bond angle deviations
+analogously to the <code class="docutils literal"><span class="pre">-m</span></code> option. Only bonds between atoms in the
+comparison group are considered.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-f2</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (rmsd.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-mir</span></code> [&lt;.xvg&gt;] (rmsdmir.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-a</span></code> [&lt;.xvg&gt;] (avgrp.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-dist</span></code> [&lt;.xvg&gt;] (rmsd-dist.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-m</span></code> [&lt;.xpm&gt;] (rmsd.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-bin</span></code> [&lt;.dat&gt;] (rmsd.dat) (Optional)</dt>
+<dd>Generic data file</dd>
+<dt><code class="docutils literal"><span class="pre">-bm</span></code> [&lt;.xpm&gt;] (bond.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-what</span></code> &lt;enum&gt; (rmsd)</dt>
+<dd>Structural difference measure: rmsd, rho, rhosc</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>PBC check</dd>
+<dt><code class="docutils literal"><span class="pre">-fit</span></code> &lt;enum&gt; (rot+trans)</dt>
+<dd>Fit to reference structure: rot+trans, translation, none</dd>
+<dt><code class="docutils literal"><span class="pre">-prev</span></code> &lt;int&gt; (0)</dt>
+<dd>Compare with previous frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]split</span></code>  (no)</dt>
+<dd>Split graph where time is zero</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (1)</dt>
+<dd>Only write every nr-th frame to matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-skip2</span></code> &lt;int&gt; (1)</dt>
+<dd>Only write every nr-th frame to matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-max</span></code> &lt;real&gt; (-1)</dt>
+<dd>Maximum level in comparison matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-min</span></code> &lt;real&gt; (-1)</dt>
+<dd>Minimum level in comparison matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-bmax</span></code> &lt;real&gt; (-1)</dt>
+<dd>Maximum level in bond angle matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-bmin</span></code> &lt;real&gt; (-1)</dt>
+<dd>Minimum level in bond angle matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]mw</span></code>  (yes)</dt>
+<dd>Use mass weighting for superposition</dd>
+<dt><code class="docutils literal"><span class="pre">-nlevels</span></code> &lt;int&gt; (80)</dt>
+<dd>Number of levels in the matrices</dd>
+<dt><code class="docutils literal"><span class="pre">-ng</span></code> &lt;int&gt; (1)</dt>
+<dd>Number of groups to compute RMS between</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx rms</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-rdf.html"
+                        title="previous chapter">gmx rdf</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-rmsdist.html"
+                        title="next chapter">gmx rmsdist</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-rms.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-rmsdist.html" title="gmx rmsdist"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-rdf.html" title="gmx rdf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

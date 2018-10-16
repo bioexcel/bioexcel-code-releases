@@ -1,0 +1,68 @@
+.. _gmx view:
+
+gmx view
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx view [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-b` :emphasis:`<time>`]
+             [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`]
+
+Description
+-----------
+
+``gmx view`` is the GROMACS trajectory viewer. This program reads a
+trajectory file, a run input file and an index file and plots a
+3D structure of your molecule on your standard X Window
+screen. No need for a high end graphics workstation, it even
+works on Monochrome screens.
+
+The following features have been implemented:
+3D view, rotation, translation and scaling of your molecule(s),
+labels on atoms, animation of trajectories,
+hardcopy in PostScript format, user defined atom-filters
+runs on MIT-X (real X), open windows and motif,
+user friendly menus, option to remove periodicity, option to
+show computational box.
+
+Some of the more common X command line options can be used:
+``-bg``, ``-fg`` change colors, ``-font fontname`` changes the font.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+
+Known Issues
+------------
+
+* Balls option does not work
+* Some times dumps core without a good reason
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

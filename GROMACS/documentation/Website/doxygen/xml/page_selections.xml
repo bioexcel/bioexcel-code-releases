@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="page_selections" kind="page">
+    <compoundname>page_selections</compoundname>
+    <title>Dynamic selections</title>
+    <innerpage refid="page_module_selection_custom">Custom selection methods</innerpage>
+    <innerpage refid="page_module_selection_parser">Selection parsing</innerpage>
+    <innerpage refid="page_module_selection_compiler">Selection compilation</innerpage>
+    <innerpage refid="page_module_selection_insolidangle">Selection method: insolidangle</innerpage>
+    <detaileddescription>
+<para>The <ref refid="group__module__selection" kindref="compound">Parsing and Evaluation of Analysis Selections (selection)</ref> module provides a mechanism that allows selections specified as text, and the engine evaluates them to atoms, or more generally to a set of positions, for one or more sets of coordinates. The selected atoms can depend on the trajectory frame. This allows writing general-purpose analysis tools that only operate on positions, and get a lot of flexibility for free from the selection engine. For example, such tools can readily operate on centers of mass of groups in addition to individual atoms as long as they do not require access to atomic properties.</para><para>For people familiar with VMD, the selection syntax is quite familiar, but there are some differences. Not all the keywords supported by VMD are there, and there are some extensions related to the support to evaluate to center-of-mass positions in addition to individual atoms. For old-time GROMACS users, tools that support selections do not generally need <computeroutput>make_ndx</computeroutput>.</para><para><heading level="1">Structural overview </heading>
+</para><para>Central concepts useful for understanding the selection engine are explained below. A graph represents the relations between the different parts, and a textual description of the user-visible components and other concepts follows. The graph also includes an overview of how the selection engine integrates into the <ref refid="page_analysisframework" kindref="compound">Framework for trajectory analysis</ref>. When using selections from the analysis framework, the parts in gray are managed by the framework. When using selections outside the framework, it is either possible to use only the core components (shown in the graph as a box), or to also use the selection option mechanisms. In both cases, the caller is responsible of managing all the objects owned by the framework in the graph.</para><para><dot> 
+    digraph selection_overview {
+        subgraph cluster_framework {
+            label = &quot;analysis framework&quot;
+            analysisframework [label=&quot;framework&quot;, fillcolor=grey75, style=filled]
+            options [label=&quot;options collection&quot;, fillcolor=grey75, style=filled]
+            analysistool [label=&quot;analysis tool&quot;]
+        }
+        subgraph cluster_core {
+            label = &quot;core engine&quot;
+            labelloc = b
+            selectioncollection [label=&quot;selection collection&quot;, fillcolor=grey75, style=filled]
+            selectiondata [label=&quot;internal selection data&quot;, fillcolor=grey75, style=filled]
+            selection [label=&quot;selection object&quot;]
+        }
+        selectionoption [label=&quot;selection option&quot;]
+        selectionoptionmanager [label=&quot;selection option manager&quot;, fillcolor=grey75, style=filled]
+
+        selectioncollection -&gt; selection [label=&quot;creates&quot;]
+        selectioncollection -&gt; selectiondata [label=&quot;owns and updates&quot;]
+        selectionoption -&gt; selection [label=&quot;returns&quot;]
+        selection -&gt; selectiondata [label=&quot;reads data&quot;, constraint=false]
+        selectionoptionmanager -&gt; selectionoption [label=&quot;provides values to&quot;]
+        selectionoptionmanager -&gt; selectioncollection [label=&quot;gets selection objects&quot;]
+        analysistool -&gt; selectionoption [label=&quot;declares&quot;]
+        analysistool -&gt; selection [label=&quot;reads data from&quot;]
+        analysistool -&gt; options [label=&quot;declares options&quot;]
+        analysisframework -&gt; selectionoptionmanager [label=&quot;owns&quot;]
+        analysisframework -&gt; selectioncollection [label=&quot;owns&quot;]
+        analysisframework -&gt; options [label=&quot;owns&quot;]
+        options -&gt; selectionoption [label=&quot;contains&quot;]
+    }
+</dot></para><para><itemizedlist>
+<listitem><para><emphasis>selection</emphasis>: Evaluates to a single list of <emphasis>selection positions</emphasis>. Note in particular that the output is positions, not a list of atoms. A tool can accept one or more selections, and expect different semantics for different selections.</para></listitem><listitem><para><emphasis>dynamic selection</emphasis>: The word <emphasis>dynamic</emphasis> refers to selections for which the set of positions (instead of only the positions themselves) depends on the input coordinates.</para></listitem><listitem><para><emphasis>selection position</emphasis>: A single coordinate as returned by a selection. This can correspond to an individual atom, but also to a collective coordinate such as a center of mass of a group of atoms. In addition to the output coordinates, the position provides information about the atoms that constitute it, and metadata that allows one to associate positions between different frames if different positions are returned at the same time.</para></listitem><listitem><para><emphasis>selection collection</emphasis>: Group of selections that are processed as a unit against the same topology and sets of coordinates. In the analysis framework, there is always a single selection collection managed by the framework.</para></listitem><listitem><para><emphasis>selection variable</emphasis>: When providing selections through text, it is possible to create variables and use them as part of selections. This makes it easier to write repetitive selections by making complex common subexpressions into variables. This also provides optimization opportunities for the selection engine: the variable value is not repeatedly evaluated. Variables always exist in the context of a selection collection.</para></listitem><listitem><para><emphasis>selection object</emphasis>: When a selection is <emphasis>parsed</emphasis> (see below), the selection collection gives a handle to the selection as a <emphasis>selection object</emphasis>. This handle is valid for the lifetime of the selection collection, and can be used to access information about the selection. Operations on the selection collection (<emphasis>compilation</emphasis> and <emphasis>evaluation</emphasis>, see below) alter the values returned by the selection objects.</para></listitem><listitem><para><emphasis>selection option</emphasis>: A special type of command-line option that directly returns selection objects. This higher-level construct is used by the analysis framework to provide a convenient interface for analysis tools: they can simply declare one or more selection options, and get a list of <emphasis>selection objects</emphasis> as a return value for each of these. Other parts of the selection engine are managed by the framework.</para></listitem></itemizedlist>
+</para><para><heading level="1">Core selection engine </heading>
+</para><para>The core of the selection engine is the <emphasis>selection collection</emphasis> object. The graph below shows how it handles selections. The operations that the collection object supports and their sequence is shown in the boxes in the middle. Inputs are shown at top, and outputs at the bottom.</para><para><dot> 
+    digraph selection_process {
+        subgraph cluster_collection {
+            label = &quot;selection collection&quot;
+            subgraph actions {
+                rank = same
+                create [shape=box]
+                parse [shape=box]
+                compile [shape=box]
+                evaluate [shape=box]
+                evaluatefinal [label=&quot;finish evaluation&quot;,shape=box]
+
+                create -&gt; parse
+                parse:ne -&gt; parse:nw
+                parse -&gt; compile
+                compile -&gt; evaluate
+                evaluate:ne -&gt; evaluate:nw
+                evaluate -&gt; evaluatefinal
+            }
+            selectiondata [label=&quot;internal selection data&quot;]
+        }
+
+        selectiontext [label=&quot;selection text&quot;]
+        topology [label=&quot;topology/\natom count&quot;]
+        frame [label=&quot;frame coordinates&quot;]
+
+        selection [label=&quot;selection object&quot;]
+
+        selectiontext -&gt; parse
+        parse:s -&gt; selection:nw [label=&quot;returns&quot;]
+        parse -&gt; selectiondata [label=&quot;creates&quot;]
+        topology -&gt; compile
+        compile -&gt; selectiondata [label=&quot;initializes\npositions&quot;]
+        frame -&gt; evaluate
+        evaluate -&gt; selectiondata [label=&quot;sets\npositions&quot;]
+        evaluatefinal -&gt; selectiondata [label=&quot;resets to\npost-compilation\nstate&quot;]
+        selectiondata -&gt; selection [label=&quot;reads data&quot;, dir=back]
+    }
+</dot></para><para><itemizedlist>
+<listitem><para><emphasis>parsing</emphasis>: after creating an empty selection collection, selections need to be parsed from text. As a result, the selection collection initializes an internal data object to hold some basic information about the selections, and returns <emphasis>selection objects</emphasis> as a handle to this data. It is possible to parse more than one set of selections into the same collection by calling the parsing methods more than once. The input string to parsing can also contain variable declarations, which get added into the collection and can be used in later calls to the parser.</para></listitem><listitem><para><emphasis>compilation</emphasis>: when all selections are parsed, the whole selection collection is compiled. This analyzes the provided selections, and evaluates all parts that do not depend on atom coordinates (e.g., (sub)selections based on atom or residue names). After compilation, the coordinates in the output positions are not initialized, but all other information is initialized as if all atoms satisfied any dynamic conditions. This means that any subsequent evaluation will return a subset of the positions returned at this point. The caller can use this information to check the selections for validity and allocate memory for its own processing. Compilation also allocates all the memory necessary to do the evaluation.</para><para>In the figure, topology is shown as input to the compilation, but generally it can be set at any point before the compilation. If the selection text does not require any information from the topology for evaluation, it is sufficient to set only the atom count.</para></listitem><listitem><para><emphasis>evaluation</emphasis>: after the selections are compiled, they can be evaluated for one or more sets of atom coordinates. This updates the set of positions accessible through the selection objects. For dynamic selections, the group of positions can change; for static selections, only the coordinates of the positions are updated.</para></listitem><listitem><para><emphasis>final evaluation</emphasis>: This returns the selections to the state they were after compilation, i.e., to the maximum possible set of positions. The coordinates of the positions are again uninitialized, but other information is available. The caller can use this information to do post-processing and, e.g., produce labels in its output based on the selection positions.</para></listitem></itemizedlist>
+</para><para><heading level="1">Internal implementation </heading>
+</para><para>Implementation details of different parts of the module are discussed on separate pages.</para><para><itemizedlist>
+<listitem><para><ref refid="page_module_selection_custom" kindref="compound">Custom selection methods</ref></para></listitem><listitem><para><ref refid="page_module_selection_parser" kindref="compound">Selection parsing</ref></para></listitem><listitem><para><ref refid="page_module_selection_compiler" kindref="compound">Selection compilation</ref></para></listitem><listitem><para><ref refid="page_module_selection_insolidangle" kindref="compound">Selection method: insolidangle</ref> </para></listitem></itemizedlist>
+</para>    </detaileddescription>
+  </compounddef>
+</doxygen>

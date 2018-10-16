@@ -1,0 +1,272 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx select &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx sham" href="gmx-sham.html" />
+    <link rel="prev" title="gmx saxs" href="gmx-saxs.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-sham.html" title="gmx sham"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-saxs.html" title="gmx saxs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-select">
+<span id="id1"></span><h1>gmx select<a class="headerlink" href="#gmx-select" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx select [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+           [<strong>-os</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oc</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oi</strong> <em>[&lt;.dat&gt;]</em>]
+           [<strong>-on</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-om</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-of</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-ofpdb</strong> <em>[&lt;.pdb&gt;]</em>] [<strong>-olt</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+           [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-fgroup</strong> <em>&lt;selection&gt;</em>]
+           [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]rmpbc</strong>] [<strong>-[no]pbc</strong>] [<strong>-sf</strong> <em>&lt;file&gt;</em>]
+           [<strong>-selrpos</strong> <em>&lt;enum&gt;</em>] [<strong>-seltype</strong> <em>&lt;enum&gt;</em>] [<strong>-select</strong> <em>&lt;selection&gt;</em>]
+           [<strong>-[no]norm</strong>] [<strong>-[no]cfnorm</strong>] [<strong>-resnr</strong> <em>&lt;enum&gt;</em>]
+           [<strong>-pdbatoms</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]cumlt</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">select</span></code> writes out basic data about dynamic selections.
+It can be used for some simple analyses, or the output can
+be combined with output from other programs and/or external
+analysis programs to calculate more complex things.
+For detailed help on the selection syntax, please use
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">help</span> <span class="pre">selections</span></code>.</p>
+<p>Any combination of the output options is possible, but note
+that <code class="docutils literal"><span class="pre">-om</span></code> only operates on the first selection.
+Also note that if you provide no output options, no output is
+produced.</p>
+<p>With <code class="docutils literal"><span class="pre">-os</span></code>, calculates the number of positions in each
+selection for each frame. With <code class="docutils literal"><span class="pre">-norm</span></code>, the output is
+between 0 and 1 and describes the fraction from the maximum
+number of positions (e.g., for selection ‘resname RA and x &lt; 5’
+the maximum number of positions is the number of atoms in
+RA residues). With <code class="docutils literal"><span class="pre">-cfnorm</span></code>, the output is divided
+by the fraction covered by the selection.
+<code class="docutils literal"><span class="pre">-norm</span></code> and <code class="docutils literal"><span class="pre">-cfnorm</span></code> can be specified independently
+of one another.</p>
+<p>With <code class="docutils literal"><span class="pre">-oc</span></code>, the fraction covered by each selection is
+written out as a function of time.</p>
+<p>With <code class="docutils literal"><span class="pre">-oi</span></code>, the selected atoms/residues/molecules are
+written out as a function of time. In the output, the first
+column contains the frame time, the second contains the number
+of positions, followed by the atom/residue/molecule numbers.
+If more than one selection is specified, the size of the second
+group immediately follows the last number of the first group
+and so on.</p>
+<p>With <code class="docutils literal"><span class="pre">-on</span></code>, the selected atoms are written as a index file
+compatible with <code class="docutils literal"><span class="pre">make_ndx</span></code> and the analyzing tools. Each selection
+is written as a selection group and for dynamic selections a
+group is written for each frame.</p>
+<p>For residue numbers, the output of <code class="docutils literal"><span class="pre">-oi</span></code> can be controlled
+with <code class="docutils literal"><span class="pre">-resnr</span></code>: <code class="docutils literal"><span class="pre">number</span></code> (default) prints the residue
+numbers as they appear in the input file, while <code class="docutils literal"><span class="pre">index</span></code> prints
+unique numbers assigned to the residues in the order they appear
+in the input file, starting with 1. The former is more intuitive,
+but if the input contains multiple residues with the same number,
+the output can be less useful.</p>
+<p>With <code class="docutils literal"><span class="pre">-om</span></code>, a mask is printed for the first selection
+as a function of time. Each line in the output corresponds to
+one frame, and contains either 0/1 for each atom/residue/molecule
+possibly selected. 1 stands for the atom/residue/molecule being
+selected for the current frame, 0 for not selected.</p>
+<p>With <code class="docutils literal"><span class="pre">-of</span></code>, the occupancy fraction of each position (i.e.,
+the fraction of frames where the position is selected) is
+printed.</p>
+<p>With <code class="docutils literal"><span class="pre">-ofpdb</span></code>, a PDB file is written out where the occupancy
+column is filled with the occupancy fraction of each atom in the
+selection. The coordinates in the PDB file will be those from the
+input topology. <code class="docutils literal"><span class="pre">-pdbatoms</span></code> can be used to control which atoms
+appear in the output PDB file: with <code class="docutils literal"><span class="pre">all</span></code> all atoms are
+present, with <code class="docutils literal"><span class="pre">maxsel</span></code> all atoms possibly selected by the
+selection are present, and with <code class="docutils literal"><span class="pre">selected</span></code> only atoms that are
+selected at least in one frame are present.</p>
+<p>With <code class="docutils literal"><span class="pre">-olt</span></code>, a histogram is produced that shows the number of
+selected positions as a function of the time the position was
+continuously selected. <code class="docutils literal"><span class="pre">-cumlt</span></code> can be used to control whether
+subintervals of longer intervals are included in the histogram.</p>
+<p><code class="docutils literal"><span class="pre">-om</span></code>, <code class="docutils literal"><span class="pre">-of</span></code>, and <code class="docutils literal"><span class="pre">-olt</span></code> only make sense with
+dynamic selections.</p>
+<p>To plot coordinates for selections, use <a class="reference internal" href="gmx-trajectory.html"><span class="doc">gmx trajectory</span></a>.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Input trajectory or single configuration: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Input structure: <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Extra index groups</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-os</span></code> [&lt;.xvg&gt;] (size.xvg) (Optional)</dt>
+<dd>Number of positions in each selection</dd>
+<dt><code class="docutils literal"><span class="pre">-oc</span></code> [&lt;.xvg&gt;] (cfrac.xvg) (Optional)</dt>
+<dd>Covered fraction for each selection</dd>
+<dt><code class="docutils literal"><span class="pre">-oi</span></code> [&lt;.dat&gt;] (index.dat) (Optional)</dt>
+<dd>Indices selected by each selection</dd>
+<dt><code class="docutils literal"><span class="pre">-on</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file from the selection</dd>
+<dt><code class="docutils literal"><span class="pre">-om</span></code> [&lt;.xvg&gt;] (mask.xvg) (Optional)</dt>
+<dd>Mask for selected positions</dd>
+<dt><code class="docutils literal"><span class="pre">-of</span></code> [&lt;.xvg&gt;] (occupancy.xvg) (Optional)</dt>
+<dd>Occupied fraction for selected positions</dd>
+<dt><code class="docutils literal"><span class="pre">-ofpdb</span></code> [&lt;.pdb&gt;] (occupancy.pdb) (Optional)</dt>
+<dd>PDB file with occupied fraction for selected positions</dd>
+<dt><code class="docutils literal"><span class="pre">-olt</span></code> [&lt;.xvg&gt;] (lifetime.xvg) (Optional)</dt>
+<dd>Lifetime histogram</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame if t MOD dt == first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-fgroup</span></code> &lt;selection&gt;</dt>
+<dd>Atoms stored in the trajectory file (if not set, assume first N atoms)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>Plot formatting: none, xmgrace, xmgr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmpbc</span></code>  (yes)</dt>
+<dd>Make molecules whole for each frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions for distance calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-sf</span></code> &lt;file&gt;</dt>
+<dd>Provide selections from files</dd>
+<dt><code class="docutils literal"><span class="pre">-selrpos</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-seltype</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Default selection output positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-select</span></code> &lt;selection&gt;</dt>
+<dd>Selections to analyze</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]norm</span></code>  (no)</dt>
+<dd>Normalize by total number of positions with -os</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]cfnorm</span></code>  (no)</dt>
+<dd>Normalize by covered fraction with -os</dd>
+<dt><code class="docutils literal"><span class="pre">-resnr</span></code> &lt;enum&gt; (number)</dt>
+<dd>Residue number output type with -oi and -on: number, index</dd>
+<dt><code class="docutils literal"><span class="pre">-pdbatoms</span></code> &lt;enum&gt; (all)</dt>
+<dd>Atoms to write with -ofpdb: all, maxsel, selected</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]cumlt</span></code>  (yes)</dt>
+<dd>Cumulate subintervals of longer intervals in -olt</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx select</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-saxs.html"
+                        title="previous chapter">gmx saxs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-sham.html"
+                        title="next chapter">gmx sham</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-select.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-sham.html" title="gmx sham"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-saxs.html" title="gmx saxs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,2681 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="sim__util_8cpp" kind="file">
+    <compoundname>sim_util.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="sim__util_8h" local="yes">sim_util.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">array</includes>
+    <includes refid="awh_8h" local="yes">gromacs/awh/awh.h</includes>
+    <includes refid="dlbtiming_8h" local="yes">gromacs/domdec/dlbtiming.h</includes>
+    <includes refid="domdec_8h" local="yes">gromacs/domdec/domdec.h</includes>
+    <includes refid="domdec__struct_8h" local="yes">gromacs/domdec/domdec_struct.h</includes>
+    <includes refid="edsam_8h" local="yes">gromacs/essentialdynamics/edsam.h</includes>
+    <includes refid="pme_8h" local="yes">gromacs/ewald/pme.h</includes>
+    <includes refid="chargegroup_8h" local="yes">gromacs/gmxlib/chargegroup.h</includes>
+    <includes refid="network_8h" local="yes">gromacs/gmxlib/network.h</includes>
+    <includes refid="nrnb_8h" local="yes">gromacs/gmxlib/nrnb.h</includes>
+    <includes refid="nb__free__energy_8h" local="yes">gromacs/gmxlib/nonbonded/nb_free_energy.h</includes>
+    <includes refid="nb__kernel_8h" local="yes">gromacs/gmxlib/nonbonded/nb_kernel.h</includes>
+    <includes refid="nonbonded_8h" local="yes">gromacs/gmxlib/nonbonded/nonbonded.h</includes>
+    <includes refid="gpu__utils_8h" local="yes">gromacs/gpu_utils/gpu_utils.h</includes>
+    <includes refid="imd_8h" local="yes">gromacs/imd/imd.h</includes>
+    <includes refid="bonded_8h" local="yes">gromacs/listed-forces/bonded.h</includes>
+    <includes refid="disre_8h" local="yes">gromacs/listed-forces/disre.h</includes>
+    <includes refid="orires_8h" local="yes">gromacs/listed-forces/orires.h</includes>
+    <includes refid="functions_8h" local="yes">gromacs/math/functions.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="vec_8h" local="yes">gromacs/math/vec.h</includes>
+    <includes refid="vecdump_8h" local="yes">gromacs/math/vecdump.h</includes>
+    <includes refid="calcmu_8h" local="yes">gromacs/mdlib/calcmu.h</includes>
+    <includes refid="constr_8h" local="yes">gromacs/mdlib/constr.h</includes>
+    <includes refid="force_8h" local="yes">gromacs/mdlib/force.h</includes>
+    <includes refid="mdlib_2forcerec_8h" local="yes">gromacs/mdlib/forcerec.h</includes>
+    <includes refid="genborn_8h" local="yes">gromacs/mdlib/genborn.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="mdrun_8h" local="yes">gromacs/mdlib/mdrun.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__atomdata_8h" local="yes">gromacs/mdlib/nbnxn_atomdata.h</includes>
+    <includes refid="nbnxn__gpu__data__mgmt_8h" local="yes">gromacs/mdlib/nbnxn_gpu_data_mgmt.h</includes>
+    <includes refid="nbnxn__grid_8h" local="yes">gromacs/mdlib/nbnxn_grid.h</includes>
+    <includes refid="nbnxn__search_8h" local="yes">gromacs/mdlib/nbnxn_search.h</includes>
+    <includes refid="qmmm_8h" local="yes">gromacs/mdlib/qmmm.h</includes>
+    <includes refid="update_8h" local="yes">gromacs/mdlib/update.h</includes>
+    <includes refid="nbnxn__kernel__gpu__ref_8h" local="yes">gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_gpu_ref.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="forceoutput_8h" local="yes">gromacs/mdtypes/forceoutput.h</includes>
+    <includes refid="iforceprovider_8h" local="yes">gromacs/mdtypes/iforceprovider.h</includes>
+    <includes refid="inputrec_8h" local="yes">gromacs/mdtypes/inputrec.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="state_8h" local="yes">gromacs/mdtypes/state.h</includes>
+    <includes refid="ishift_8h" local="yes">gromacs/pbcutil/ishift.h</includes>
+    <includes refid="mshift_8h" local="yes">gromacs/pbcutil/mshift.h</includes>
+    <includes refid="pbc_8h" local="yes">gromacs/pbcutil/pbc.h</includes>
+    <includes refid="pull_8h" local="yes">gromacs/pulling/pull.h</includes>
+    <includes refid="pull__rotation_8h" local="yes">gromacs/pulling/pull_rotation.h</includes>
+    <includes refid="cyclecounter_8h" local="yes">gromacs/timing/cyclecounter.h</includes>
+    <includes refid="gpu__timing_8h" local="yes">gromacs/timing/gpu_timing.h</includes>
+    <includes refid="wallcycle_8h" local="yes">gromacs/timing/wallcycle.h</includes>
+    <includes refid="wallcyclereporting_8h" local="yes">gromacs/timing/wallcyclereporting.h</includes>
+    <includes refid="walltime__accounting_8h" local="yes">gromacs/timing/walltime_accounting.h</includes>
+    <includes refid="arrayref_8h" local="yes">gromacs/utility/arrayref.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="cstringutil_8h" local="yes">gromacs/utility/cstringutil.h</includes>
+    <includes refid="exceptions_8h" local="yes">gromacs/utility/exceptions.h</includes>
+    <includes refid="fatalerror_8h" local="yes">gromacs/utility/fatalerror.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="gmxmpi_8h" local="yes">gromacs/utility/gmxmpi.h</includes>
+    <includes refid="logger_8h" local="yes">gromacs/utility/logger.h</includes>
+    <includes refid="pleasecite_8h" local="yes">gromacs/utility/pleasecite.h</includes>
+    <includes refid="smalloc_8h" local="yes">gromacs/utility/smalloc.h</includes>
+    <includes refid="sysinfo_8h" local="yes">gromacs/utility/sysinfo.h</includes>
+    <includes refid="nbnxn__gpu_8h" local="yes">nbnxn_gpu.h</includes>
+    <includes refid="nbnxn__kernel__cpu_8h" local="yes">nbnxn_kernels/nbnxn_kernel_cpu.h</includes>
+    <includes refid="nbnxn__kernel__prune_8h" local="yes">nbnxn_kernels/nbnxn_kernel_prune.h</includes>
+    <incdepgraph>
+      <node id="17187">
+        <label>stdarg.h</label>
+      </node>
+      <node id="17184">
+        <label>gromacs/timing/gpu_timing.h</label>
+        <link refid="gpu__timing_8h"/>
+      </node>
+      <node id="17148">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="17144">
+        <label>iterator</label>
+      </node>
+      <node id="17140">
+        <label>gromacs/domdec/dlbtiming.h</label>
+        <link refid="dlbtiming_8h"/>
+      </node>
+      <node id="17158">
+        <label>gromacs/listed-forces/orires.h</label>
+        <link refid="orires_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+      </node>
+      <node id="17183">
+        <label>gromacs/timing/cyclecounter.h</label>
+        <link refid="cyclecounter_8h"/>
+        <childnode refid="17126" relation="include">
+        </childnode>
+      </node>
+      <node id="17130">
+        <label>cstdint</label>
+      </node>
+      <node id="17192">
+        <label>gromacs/utility/sysinfo.h</label>
+        <link refid="sysinfo_8h"/>
+        <childnode refid="17191" relation="include">
+        </childnode>
+        <childnode refid="17193" relation="include">
+        </childnode>
+      </node>
+      <node id="17138">
+        <label>stdint.h</label>
+      </node>
+      <node id="17168">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="17143" relation="include">
+        </childnode>
+        <childnode refid="17134" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17169" relation="include">
+        </childnode>
+        <childnode refid="17172" relation="include">
+        </childnode>
+      </node>
+      <node id="17161">
+        <label>gromacs/mdlib/nb_verlet.h</label>
+        <link refid="nb__verlet_8h"/>
+        <childnode refid="17134" relation="include">
+        </childnode>
+      </node>
+      <node id="17164">
+        <label>gromacs/mdtypes/iforceprovider.h</label>
+        <link refid="iforceprovider_8h"/>
+        <childnode refid="17165" relation="include">
+        </childnode>
+      </node>
+      <node id="17153">
+        <label>gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="17135" relation="include">
+        </childnode>
+        <childnode refid="17142" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17154">
+        <label>gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+        <childnode refid="17135" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17185">
+        <label>gromacs/utility/cstringutil.h</label>
+        <link refid="cstringutil_8h"/>
+        <childnode refid="17127" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17132">
+        <label>gromacs/awh/awh.h</label>
+        <link refid="awh_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+        <childnode refid="17134" relation="include">
+        </childnode>
+        <childnode refid="17135" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17129">
+        <label>cmath</label>
+      </node>
+      <node id="17196">
+        <label>nbnxn_kernels/nbnxn_kernel_prune.h</label>
+        <link refid="nbnxn__kernel__prune_8h"/>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17152">
+        <label>gromacs/essentialdynamics/edsam.h</label>
+        <link refid="edsam_8h"/>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17145">
+        <label>stdexcept</label>
+      </node>
+      <node id="17181">
+        <label>gromacs/pulling/pull_internal.h</label>
+        <link refid="pull__internal_8h"/>
+        <childnode refid="17126" relation="include">
+        </childnode>
+        <childnode refid="17180" relation="include">
+        </childnode>
+        <childnode refid="17151" relation="include">
+        </childnode>
+      </node>
+      <node id="17135">
+        <label>string</label>
+      </node>
+      <node id="17157">
+        <label>gromacs/listed-forces/disre.h</label>
+        <link refid="disre_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17169">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="17143" relation="include">
+        </childnode>
+        <childnode refid="17170" relation="include">
+        </childnode>
+      </node>
+      <node id="17151">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="17126" relation="include">
+        </childnode>
+      </node>
+      <node id="17165">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="17134" relation="include">
+        </childnode>
+      </node>
+      <node id="17174">
+        <label>exception</label>
+      </node>
+      <node id="17191">
+        <label>stddef.h</label>
+      </node>
+      <node id="17195">
+        <label>nbnxn_kernels/nbnxn_kernel_cpu.h</label>
+        <link refid="nbnxn__kernel__cpu_8h"/>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17147">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17148" relation="include">
+        </childnode>
+      </node>
+      <node id="17177">
+        <label>gromacs/math/paddedvector.h</label>
+        <link refid="paddedvector_8h"/>
+        <childnode refid="17178" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17169" relation="include">
+        </childnode>
+        <childnode refid="17142" relation="include">
+        </childnode>
+      </node>
+      <node id="17128">
+        <label>string.h</label>
+      </node>
+      <node id="17133">
+        <label>cstdio</label>
+      </node>
+      <node id="17190">
+        <label>gromacs/utility/smalloc.h</label>
+        <link refid="smalloc_8h"/>
+        <childnode refid="17191" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17149">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="17136">
+        <label>vector</label>
+      </node>
+      <node id="17124">
+        <label>src/gromacs/mdlib/sim_util.cpp</label>
+        <link refid="sim_util.cpp"/>
+        <childnode refid="17125" relation="include">
+        </childnode>
+        <childnode refid="17126" relation="include">
+        </childnode>
+        <childnode refid="17127" relation="include">
+        </childnode>
+        <childnode refid="17128" relation="include">
+        </childnode>
+        <childnode refid="17129" relation="include">
+        </childnode>
+        <childnode refid="17130" relation="include">
+        </childnode>
+        <childnode refid="17131" relation="include">
+        </childnode>
+        <childnode refid="17132" relation="include">
+        </childnode>
+        <childnode refid="17140" relation="include">
+        </childnode>
+        <childnode refid="17141" relation="include">
+        </childnode>
+        <childnode refid="17150" relation="include">
+        </childnode>
+        <childnode refid="17152" relation="include">
+        </childnode>
+        <childnode refid="17153" relation="include">
+        </childnode>
+        <childnode refid="17154" relation="include">
+        </childnode>
+        <childnode refid="17155" relation="include">
+        </childnode>
+        <childnode refid="17156" relation="include">
+        </childnode>
+        <childnode refid="17157" relation="include">
+        </childnode>
+        <childnode refid="17158" relation="include">
+        </childnode>
+        <childnode refid="17159" relation="include">
+        </childnode>
+        <childnode refid="17160" relation="include">
+        </childnode>
+        <childnode refid="17161" relation="include">
+        </childnode>
+        <childnode refid="17162" relation="include">
+        </childnode>
+        <childnode refid="17163" relation="include">
+        </childnode>
+        <childnode refid="17164" relation="include">
+        </childnode>
+        <childnode refid="17166" relation="include">
+        </childnode>
+        <childnode refid="17167" relation="include">
+        </childnode>
+        <childnode refid="17179" relation="include">
+        </childnode>
+        <childnode refid="17182" relation="include">
+        </childnode>
+        <childnode refid="17183" relation="include">
+        </childnode>
+        <childnode refid="17184" relation="include">
+        </childnode>
+        <childnode refid="17142" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17185" relation="include">
+        </childnode>
+        <childnode refid="17172" relation="include">
+        </childnode>
+        <childnode refid="17186" relation="include">
+        </childnode>
+        <childnode refid="17147" relation="include">
+        </childnode>
+        <childnode refid="17151" relation="include">
+        </childnode>
+        <childnode refid="17188" relation="include">
+        </childnode>
+        <childnode refid="17189" relation="include">
+        </childnode>
+        <childnode refid="17190" relation="include">
+        </childnode>
+        <childnode refid="17192" relation="include">
+        </childnode>
+        <childnode refid="17194" relation="include">
+        </childnode>
+        <childnode refid="17195" relation="include">
+        </childnode>
+        <childnode refid="17196" relation="include">
+        </childnode>
+      </node>
+      <node id="17160">
+        <label>gromacs/mdlib/mdrun.h</label>
+        <link refid="mdrun_8h"/>
+      </node>
+      <node id="17171">
+        <label>new</label>
+      </node>
+      <node id="17166">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17125">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="17146">
+        <label>utility</label>
+      </node>
+      <node id="17131">
+        <label>array</label>
+      </node>
+      <node id="17182">
+        <label>gromacs/pulling/pull_rotation.h</label>
+        <link refid="pull__rotation_8h"/>
+        <childnode refid="17127" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17167">
+        <label>gromacs/mdtypes/state.h</label>
+        <link refid="state_8h"/>
+        <childnode refid="17131" relation="include">
+        </childnode>
+        <childnode refid="17134" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17168" relation="include">
+        </childnode>
+        <childnode refid="17177" relation="include">
+        </childnode>
+        <childnode refid="17166" relation="include">
+        </childnode>
+        <childnode refid="17142" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17163">
+        <label>gromacs/mdtypes/forceoutput.h</label>
+        <link refid="forceoutput_8h"/>
+        <childnode refid="17142" relation="include">
+        </childnode>
+      </node>
+      <node id="17179">
+        <label>gromacs/pulling/pull.h</label>
+        <link refid="pull_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+        <childnode refid="17180" relation="include">
+        </childnode>
+        <childnode refid="17181" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17137">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="17138" relation="include">
+        </childnode>
+        <childnode refid="17139" relation="include">
+        </childnode>
+      </node>
+      <node id="17193">
+        <label>time.h</label>
+      </node>
+      <node id="17155">
+        <label>gromacs/imd/imd.h</label>
+        <link refid="imd_8h"/>
+        <childnode refid="17126" relation="include">
+        </childnode>
+        <childnode refid="17133" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17173">
+        <label>cstdlib</label>
+      </node>
+      <node id="17172">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+        <childnode refid="17173" relation="include">
+        </childnode>
+        <childnode refid="17174" relation="include">
+        </childnode>
+        <childnode refid="17134" relation="include">
+        </childnode>
+        <childnode refid="17135" relation="include">
+        </childnode>
+        <childnode refid="17175" relation="include">
+        </childnode>
+        <childnode refid="17176" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17165" relation="include">
+        </childnode>
+        <childnode refid="17148" relation="include">
+        </childnode>
+        <childnode refid="17147" relation="include">
+        </childnode>
+      </node>
+      <node id="17142">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="17143" relation="include">
+        </childnode>
+        <childnode refid="17131" relation="include">
+        </childnode>
+        <childnode refid="17144" relation="include">
+        </childnode>
+        <childnode refid="17145" relation="include">
+        </childnode>
+        <childnode refid="17146" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17147" relation="include">
+        </childnode>
+      </node>
+      <node id="17143">
+        <label>cstddef</label>
+      </node>
+      <node id="17150">
+        <label>gromacs/domdec/domdec_struct.h</label>
+        <link refid="domdec__struct_8h"/>
+        <childnode refid="17143" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17151" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17188">
+        <label>gromacs/utility/logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="17135" relation="include">
+        </childnode>
+      </node>
+      <node id="17189">
+        <label>gromacs/utility/pleasecite.h</label>
+        <link refid="pleasecite_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+      </node>
+      <node id="17156">
+        <label>gromacs/listed-forces/bonded.h</label>
+        <link refid="bonded_8h"/>
+        <childnode refid="17133" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17180">
+        <label>gromacs/mdtypes/pull-params.h</label>
+        <link refid="pull-params_8h"/>
+        <childnode refid="17166" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17162">
+        <label>gromacs/mdlib/nbnxn_gpu_data_mgmt.h</label>
+        <link refid="nbnxn__gpu__data__mgmt_8h"/>
+      </node>
+      <node id="17170">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="17143" relation="include">
+        </childnode>
+        <childnode refid="17134" relation="include">
+        </childnode>
+        <childnode refid="17171" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17159">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="17129" relation="include">
+        </childnode>
+        <childnode refid="17130" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17175">
+        <label>type_traits</label>
+      </node>
+      <node id="17126">
+        <label>config.h</label>
+      </node>
+      <node id="17186">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="17187" relation="include">
+        </childnode>
+        <childnode refid="17127" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+      </node>
+      <node id="17141">
+        <label>gromacs/domdec/domdec.h</label>
+        <link refid="domdec_8h"/>
+        <childnode refid="17127" relation="include">
+        </childnode>
+        <childnode refid="17136" relation="include">
+        </childnode>
+        <childnode refid="17142" relation="include">
+        </childnode>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+      <node id="17178">
+        <label>algorithm</label>
+      </node>
+      <node id="17127">
+        <label>stdio.h</label>
+      </node>
+      <node id="17134">
+        <label>memory</label>
+      </node>
+      <node id="17139">
+        <label>inttypes.h</label>
+      </node>
+      <node id="17176">
+        <label>typeindex</label>
+      </node>
+      <node id="17194">
+        <label>nbnxn_gpu.h</label>
+        <link refid="nbnxn__gpu_8h"/>
+        <childnode refid="17137" relation="include">
+        </childnode>
+        <childnode refid="17149" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="sim__util_8cpp_1ab6cb723ee059f8f783f04de3f69bc896" prot="public" static="yes" mutable="no">
+        <type>const bool</type>
+        <definition>const bool c_disableAlternatingWait</definition>
+        <argsstring></argsstring>
+        <name>c_disableAlternatingWait</name>
+        <initializer>= (getenv(&quot;GMX_DISABLE_ALTERNATING_GPU_WAIT&quot;) != nullptr)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="123" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="sim__util_8cpp_1acec1ec9b7648b4b993246b523f8d81f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_time</definition>
+        <argsstring>(FILE *out, gmx_walltime_accounting_t walltime_accounting, gmx_int64_t step, t_inputrec *ir, t_commrec *cr)</argsstring>
+        <name>print_time</name>
+        <param>
+          <type>FILE *</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__walltime__accounting" kindref="compound">gmx_walltime_accounting_t</ref></type>
+          <declname>walltime_accounting</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="126" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="126" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ad907295c8b5069a28e6fb029db0f2c47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_date_and_time</definition>
+        <argsstring>(FILE *fplog, int nodeid, const char *title, double the_time)</argsstring>
+        <name>print_date_and_time</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+          <defname>fplog</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rank</declname>
+          <defname>nodeid</defname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>the_time</declname>
+        </param>
+        <briefdescription>
+<para>Print date, time, MPI rank and a description of this point in time. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">log</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>logfile, or NULL to suppress output </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rank</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MPI rank to include in the output </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">title</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Description to include in the output </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">the_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Seconds since the epoch, e.g. as reported by gmx_gettime </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="184" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="184" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a9663af041e82f84599ac8a93ba768b9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_start</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, gmx_walltime_accounting_t walltime_accounting, const char *name)</argsstring>
+        <name>print_start</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__walltime__accounting" kindref="compound">gmx_walltime_accounting_t</ref></type>
+          <declname>walltime_accounting</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="210" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="210" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a7b9318d8e084d72f36dc9f91ef690e45" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void sum_forces</definition>
+        <argsstring>(rvec f[], gmx::ArrayRef&lt; const gmx::RVec &gt; forceToAdd)</argsstring>
+        <name>sum_forces</name>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; const <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>forceToAdd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="221" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="221" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ad695804d3e9a2cbe200aa44d9b6386f0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pme_gpu_reduce_outputs</definition>
+        <argsstring>(gmx_wallcycle_t wcycle, ForceWithVirial *forceWithVirial, ArrayRef&lt; const gmx::RVec &gt; pmeForces, gmx_enerdata_t *enerd, const tensor vir_Q, real Vlr_q)</argsstring>
+        <name>pme_gpu_reduce_outputs</name>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>pmeForces</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type>const tensor</type>
+          <declname>vir_Q</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>Vlr_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="234" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="234" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ae9ebda97aae3ed2f060d8e46434018f2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void calc_virial</definition>
+        <argsstring>(int start, int homenr, rvec x[], rvec f[], tensor vir_part, t_graph *graph, matrix box, t_nrnb *nrnb, const t_forcerec *fr, int ePBC)</argsstring>
+        <name>calc_virial</name>
+        <param>
+          <type>int</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>homenr</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_part</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="249" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="249" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ab7ebcad7c59e2010cf240aa38c106518" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pull_potential_wrapper</definition>
+        <argsstring>(t_commrec *cr, t_inputrec *ir, matrix box, rvec x[], ForceWithVirial *force, t_mdatoms *mdatoms, gmx_enerdata_t *enerd, real *lambda, double t, gmx_wallcycle_t wcycle)</argsstring>
+        <name>pull_potential_wrapper</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">ForceWithVirial</ref> *</type>
+          <declname>force</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="277" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="277" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a5284c15af2ae660cbd3730ab4f3cb980" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pme_receive_force_ener</definition>
+        <argsstring>(t_commrec *cr, ForceWithVirial *forceWithVirial, gmx_enerdata_t *enerd, gmx_wallcycle_t wcycle)</argsstring>
+        <name>pme_receive_force_ener</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="303" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="303" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a2fa8b74d796f6342349f9b6be3b2e954" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void print_large_forces</definition>
+        <argsstring>(FILE *fp, t_mdatoms *md, t_commrec *cr, gmx_int64_t step, real forceTolerance, const rvec *x, const rvec *f)</argsstring>
+        <name>print_large_forces</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>forceTolerance</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="334" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="334" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a2b0b69d0982b7b4d6dd395fdcaec2d83" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void post_process_forces</definition>
+        <argsstring>(t_commrec *cr, gmx_int64_t step, t_nrnb *nrnb, gmx_wallcycle_t wcycle, gmx_localtop_t *top, matrix box, rvec x[], rvec f[], ForceWithVirial *forceWithVirial, tensor vir_force, t_mdatoms *mdatoms, t_graph *graph, t_forcerec *fr, gmx_vsite_t *vsite, int flags)</argsstring>
+        <name>post_process_forces</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__localtop__t" kindref="compound">gmx_localtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_force</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__vsite__t" kindref="compound">gmx_vsite_t</ref> *</type>
+          <declname>vsite</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="365" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="365" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1aa7a5252093628e7004193d933dfe9309" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void do_nb_verlet</definition>
+        <argsstring>(t_forcerec *fr, interaction_const_t *ic, gmx_enerdata_t *enerd, int flags, int ilocality, int clearF, gmx_int64_t step, t_nrnb *nrnb, gmx_wallcycle_t wcycle)</argsstring>
+        <name>do_nb_verlet</name>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ilocality</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>clearF</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="420" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="420" bodyend="558"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ad005a9a4039da2d3cc44d26719d121dc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void do_nb_verlet_fep</definition>
+        <argsstring>(nbnxn_pairlist_set_t *nbl_lists, t_forcerec *fr, rvec x[], rvec f[], t_mdatoms *mdatoms, t_lambda *fepvals, real *lambda, gmx_enerdata_t *enerd, int flags, t_nrnb *nrnb, gmx_wallcycle_t wcycle)</argsstring>
+        <name>do_nb_verlet_fep</name>
+        <param>
+          <type><ref refid="structnbnxn__pairlist__set__t" kindref="compound">nbnxn_pairlist_set_t</ref> *</type>
+          <declname>nbl_lists</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__lambda" kindref="compound">t_lambda</ref> *</type>
+          <declname>fepvals</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="560" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="560" bodyend="670"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1abffc5180f2af2399e68287b8d7ba37bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool use_GPU</definition>
+        <argsstring>(const nonbonded_verlet_t *nbv)</argsstring>
+        <name>use_GPU</name>
+        <param>
+          <type>const <ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="672" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="672" bodyend="675"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1aa7b2478492dff20956be44c42d9a09a2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void clear_rvecs_omp</definition>
+        <argsstring>(int n, rvec v[])</argsstring>
+        <name>clear_rvecs_omp</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>v</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="677" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="677" bodyend="700"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ae912cc8e76adbbf99c7e9fc001ca6685" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>static real averageKineticEnergyEstimate</definition>
+        <argsstring>(const t_grpopts &amp;groupOptions)</argsstring>
+        <name>averageKineticEnergyEstimate</name>
+        <param>
+          <type>const <ref refid="structt__grpopts" kindref="compound">t_grpopts</ref> &amp;</type>
+          <declname>groupOptions</declname>
+        </param>
+        <briefdescription>
+<para>Return an estimate of the average kinetic energy or 0 when unreliable. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>groupOptions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Group options, containing T-coupling options </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="706" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="706" bodyend="733"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1af1afbfd387e7e84d13901160470d97f1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void checkPotentialEnergyValidity</definition>
+        <argsstring>(gmx_int64_t step, const gmx_enerdata_t &amp;enerd, const t_inputrec &amp;inputrec)</argsstring>
+        <name>checkPotentialEnergyValidity</name>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> &amp;</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> &amp;</type>
+          <declname>inputrec</declname>
+        </param>
+        <briefdescription>
+<para>This routine checks that the potential energy is finite. </para>        </briefdescription>
+        <detaileddescription>
+<para>Always checks that the potential energy is finite. If step equals inputrec.init_step also checks that the magnitude of the potential energy is reasonable. Terminates with a fatal error when a check fails. Note that passing this check does not guarantee finite forces, since those use slightly different arithmetics. But in most cases there is just a narrow coordinate range where forces are not finite and energies are finite.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The step number, used for checking and printing </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">enerd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The energy data; the non-bonded group energies need to be added to enerd.term[F_EPOT] before calling this routine </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inputrec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input record </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="749" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="749" bodyend="785"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a4db057e0cd8541b2f1a486a1a49708af" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void computeSpecialForces</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, t_inputrec *inputrec, gmx_int64_t step, double t, gmx_wallcycle_t wcycle, ForceProviders *forceProviders, matrix box, rvec *x, t_mdatoms *mdatoms, real *lambda, int forceFlags, ForceWithVirial *forceWithVirial, gmx_enerdata_t *enerd, gmx_edsam_t ed, gmx_bool bNS)</argsstring>
+        <name>computeSpecialForces</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>inputrec</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="structForceProviders" kindref="compound">ForceProviders</ref> *</type>
+          <declname>forceProviders</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>forceFlags</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNS</declname>
+        </param>
+        <briefdescription>
+<para>Compute forces and/or energies for special algorithms. </para>        </briefdescription>
+        <detaileddescription>
+<para>The intention is to collect all calls to algorithms that compute forces on local atoms only and that do not contribute to the local virial sum (but add their virial contribution separately). Eventually these should likely all become <ref refid="structForceProviders" kindref="compound">ForceProviders</ref>. Within this function the intention is to have algorithms that do global communication at the end, so global barriers within the MD loop are as close together as possible.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The log file </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The communication record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inputrec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current MD step </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current time </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Wallcycle accounting struct </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">forceProviders</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to a list of force providers </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mdatoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Per atom properties </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of free-energy lambda values </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceFlags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags that tell whether we should compute forces/energies/virial </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">forceWithVirial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force and virial buffers </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">enerd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Energy buffer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">ed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Essential dynamics pointer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bNS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tells if we did neighbor searching this step, used for ED sampling</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<xrefsect id="todo_1_todo000048"><xreftitle>Todo</xreftitle><xrefdescription><para>Remove bNS, which is used incorrectly. </para><para>Convert all other algorithms called here to <ref refid="structForceProviders" kindref="compound">ForceProviders</ref>. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="818" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="818" bodyend="888"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a010ee90b12b042b7db980ad7b78eb8b3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void launchPmeGpuSpread</definition>
+        <argsstring>(gmx_pme_t *pmedata, matrix box, rvec x[], int flags, gmx_wallcycle_t wcycle)</argsstring>
+        <name>launchPmeGpuSpread</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pmedata</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>Launch the prepare_step and spread stages of PME GPU. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmedata</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The box matrix </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coordinate array </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force flags </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallcycle structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="898" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="898" bodyend="910"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1afac91db37d1292835ec3272d35047b50" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void launchPmeGpuFftAndGather</definition>
+        <argsstring>(gmx_pme_t *pmedata, gmx_wallcycle_t wcycle)</argsstring>
+        <name>launchPmeGpuFftAndGather</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pmedata</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>Launch the FFT and gather stages of PME GPU. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function only implements setting the output forces (no accumulation).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmedata</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallcycle structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="919" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="919" bodyend="924"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a6d98809a6df72a42c08cadb9aca09eac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void alternatePmeNbGpuWaitReduce</definition>
+        <argsstring>(nonbonded_verlet_t *nbv, const gmx_pme_t *pmedata, gmx::PaddedArrayRef&lt; gmx::RVec &gt; *force, ForceWithVirial *forceWithVirial, rvec fshift[], gmx_enerdata_t *enerd, int flags, gmx_wallcycle_t wcycle)</argsstring>
+        <name>alternatePmeNbGpuWaitReduce</name>
+        <param>
+          <type><ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pmedata</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a7ed9d94613445e3a616e7116786ed534" kindref="member">gmx::PaddedArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt; *</type>
+          <declname>force</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>fshift</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>Polling wait for either of the PME or nonbonded GPU tasks. </para>        </briefdescription>
+        <detaileddescription>
+<para>Instead of a static order in waiting for GPU tasks, this function polls checking which of the two tasks completes first, and does the associated force buffer reduction overlapped with the other task. By doing that, unlike static scheduling order, it can always overlap one of the reductions, regardless of the GPU task completion order.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nbv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nonbonded verlet structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pmedata</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PME module data </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">force</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force array to reduce task outputs into. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">forceWithVirial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force and virial buffers </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">fshift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shift force output vector results are reduced into </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">enerd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Energy data structure results are reduced into </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">flags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Force flags </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The wallcycle structure </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="944" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="944" bodyend="1004"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ae6e11a05711b06af8ccad68bf6447497" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void launchGpuRollingPruning</definition>
+        <argsstring>(const t_commrec *cr, const nonbonded_verlet_t *nbv, const t_inputrec *inputrec, const gmx_int64_t step)</argsstring>
+        <name>launchGpuRollingPruning</name>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>inputrec</declname>
+        </param>
+        <param>
+          <type>const gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <briefdescription>
+<para>Launch the dynamic rolling pruning GPU task. </para>        </briefdescription>
+        <detaileddescription>
+<para>We currently alternate local/non-local list pruning in odd-even steps (only pruning every second step without DD).</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The communication record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nbv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Nonbonded verlet structure </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">inputrec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current MD step </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="1017" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="1017" bodyend="1040"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a66ca39c8128e4965a03f99a47cf2aa4e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void do_force_cutsVERLET</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, t_inputrec *inputrec, gmx_int64_t step, t_nrnb *nrnb, gmx_wallcycle_t wcycle, gmx_localtop_t *top, gmx_groups_t *groups, matrix box, gmx::PaddedArrayRef&lt; gmx::RVec &gt; x, history_t *hist, gmx::PaddedArrayRef&lt; gmx::RVec &gt; force, tensor vir_force, t_mdatoms *mdatoms, gmx_enerdata_t *enerd, t_fcdata *fcd, real *lambda, t_graph *graph, t_forcerec *fr, interaction_const_t *ic, gmx_vsite_t *vsite, rvec mu_tot, double t, gmx_edsam_t ed, gmx_bool bBornRadii, int flags, DdOpenBalanceRegionBeforeForceComputation ddOpenBalanceRegion, DdCloseBalanceRegionAfterForceComputation ddCloseBalanceRegion)</argsstring>
+        <name>do_force_cutsVERLET</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>inputrec</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__localtop__t" kindref="compound">gmx_localtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__groups__t" kindref="compound">gmx_groups_t</ref> *</type>
+          <declname>groups</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a7ed9d94613445e3a616e7116786ed534" kindref="member">gmx::PaddedArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classhistory__t" kindref="compound">history_t</ref> *</type>
+          <declname>hist</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a7ed9d94613445e3a616e7116786ed534" kindref="member">gmx::PaddedArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>force</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_force</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__vsite__t" kindref="compound">gmx_vsite_t</ref> *</type>
+          <declname>vsite</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>mu_tot</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bBornRadii</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="dlbtiming_8h_1a555d67b2a20d20a7583b593957cdead9" kindref="member">DdOpenBalanceRegionBeforeForceComputation</ref></type>
+          <declname>ddOpenBalanceRegion</declname>
+        </param>
+        <param>
+          <type><ref refid="dlbtiming_8h_1aaa52baf672aa152180f7777fb64c1f86" kindref="member">DdCloseBalanceRegionAfterForceComputation</ref></type>
+          <declname>ddCloseBalanceRegion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="1042" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="1042" bodyend="1750"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a392bf3b7764e1907dc5878a1f7a114e8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void do_force_cutsGROUP</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, t_inputrec *inputrec, gmx_int64_t step, t_nrnb *nrnb, gmx_wallcycle_t wcycle, gmx_localtop_t *top, gmx_groups_t *groups, matrix box, gmx::PaddedArrayRef&lt; gmx::RVec &gt; x, history_t *hist, gmx::PaddedArrayRef&lt; gmx::RVec &gt; force, tensor vir_force, t_mdatoms *mdatoms, gmx_enerdata_t *enerd, t_fcdata *fcd, real *lambda, t_graph *graph, t_forcerec *fr, gmx_vsite_t *vsite, rvec mu_tot, double t, gmx_edsam_t ed, gmx_bool bBornRadii, int flags, DdOpenBalanceRegionBeforeForceComputation ddOpenBalanceRegion, DdCloseBalanceRegionAfterForceComputation ddCloseBalanceRegion)</argsstring>
+        <name>do_force_cutsGROUP</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>inputrec</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__localtop__t" kindref="compound">gmx_localtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__groups__t" kindref="compound">gmx_groups_t</ref> *</type>
+          <declname>groups</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a7ed9d94613445e3a616e7116786ed534" kindref="member">gmx::PaddedArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classhistory__t" kindref="compound">history_t</ref> *</type>
+          <declname>hist</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a7ed9d94613445e3a616e7116786ed534" kindref="member">gmx::PaddedArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>force</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_force</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__vsite__t" kindref="compound">gmx_vsite_t</ref> *</type>
+          <declname>vsite</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>mu_tot</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bBornRadii</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="dlbtiming_8h_1a555d67b2a20d20a7583b593957cdead9" kindref="member">DdOpenBalanceRegionBeforeForceComputation</ref></type>
+          <declname>ddOpenBalanceRegion</declname>
+        </param>
+        <param>
+          <type><ref refid="dlbtiming_8h_1aaa52baf672aa152180f7777fb64c1f86" kindref="member">DdCloseBalanceRegionAfterForceComputation</ref></type>
+          <declname>ddCloseBalanceRegion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="1752" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="1752" bodyend="2087"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a26380b2cce7475a62b20a1fb97b24b17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_force</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, t_inputrec *inputrec, gmx_int64_t step, t_nrnb *nrnb, gmx_wallcycle_t wcycle, gmx_localtop_t *top, gmx_groups_t *groups, matrix box, gmx::PaddedArrayRef&lt; gmx::RVec &gt; x, history_t *hist, gmx::PaddedArrayRef&lt; gmx::RVec &gt; force, tensor vir_force, t_mdatoms *mdatoms, gmx_enerdata_t *enerd, t_fcdata *fcd, gmx::ArrayRef&lt; real &gt; lambda, t_graph *graph, t_forcerec *fr, gmx_vsite_t *vsite, rvec mu_tot, double t, gmx_edsam_t ed, gmx_bool bBornRadii, int flags, DdOpenBalanceRegionBeforeForceComputation ddOpenBalanceRegion, DdCloseBalanceRegionAfterForceComputation ddCloseBalanceRegion)</argsstring>
+        <name>do_force</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>inputrec</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__localtop__t" kindref="compound">gmx_localtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__groups__t" kindref="compound">gmx_groups_t</ref> *</type>
+          <declname>groups</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a7ed9d94613445e3a616e7116786ed534" kindref="member">gmx::PaddedArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classhistory__t" kindref="compound">history_t</ref> *</type>
+          <declname>hist</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a7ed9d94613445e3a616e7116786ed534" kindref="member">gmx::PaddedArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>force</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_force</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__vsite__t" kindref="compound">gmx_vsite_t</ref> *</type>
+          <declname>vsite</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>mu_tot</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="edsam_8h_1a0fa9ace476add5ee1fd6cd76c870f32e" kindref="member">gmx_edsam_t</ref></type>
+          <declname>ed</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bBornRadii</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="dlbtiming_8h_1a555d67b2a20d20a7583b593957cdead9" kindref="member">DdOpenBalanceRegionBeforeForceComputation</ref></type>
+          <declname>ddOpenBalanceRegion</declname>
+        </param>
+        <param>
+          <type><ref refid="dlbtiming_8h_1aaa52baf672aa152180f7777fb64c1f86" kindref="member">DdCloseBalanceRegionAfterForceComputation</ref></type>
+          <declname>ddCloseBalanceRegion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2089" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2089" bodyend="2168"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a0e8991d4ddf03f8b8a43d1fd11bbacae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_constrain_first</definition>
+        <argsstring>(FILE *fplog, gmx_constr_t constr, t_inputrec *ir, t_mdatoms *md, t_state *state, t_commrec *cr, t_nrnb *nrnb, t_forcerec *fr, gmx_localtop_t *top)</argsstring>
+        <name>do_constrain_first</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__localtop__t" kindref="compound">gmx_localtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2171" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2171" bodyend="2263"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1aa8735f8aad9bc9603a0b2f212a6fbaa8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void integrate_table</definition>
+        <argsstring>(real vdwtab[], real scale, int offstart, int rstart, int rend, double *enerout, double *virout)</argsstring>
+        <name>integrate_table</name>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>vdwtab</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>offstart</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rstart</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>rend</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>enerout</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>virout</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2267" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2267" bodyend="2332"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a8471c78331678a1d847d50cd865d3693" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calc_enervirdiff</definition>
+        <argsstring>(FILE *fplog, int eDispCorr, t_forcerec *fr)</argsstring>
+        <name>calc_enervirdiff</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>eDispCorr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2334" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2334" bodyend="2514"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1ac12d36d7d385ccfba4ad7e1dd7db8522" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calc_dispcorr</definition>
+        <argsstring>(t_inputrec *ir, t_forcerec *fr, matrix box, real lambda, tensor pres, tensor virial, real *prescorr, real *enercorr, real *dvdlcorr)</argsstring>
+        <name>calc_dispcorr</name>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>pres</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>virial</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>prescorr</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>enercorr</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlcorr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2516" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2516" bodyend="2622"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1acdffb4005475c903398f46c482bdfa60" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void low_do_pbc_mtop</definition>
+        <argsstring>(FILE *fplog, int ePBC, const matrix box, const gmx_mtop_t *mtop, rvec x[], gmx_bool bFirst)</argsstring>
+        <name>low_do_pbc_mtop</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bFirst</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2624" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2624" bodyend="2670"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a0bd834f21f1d48cc5c7a7c06afa71b4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_pbc_first_mtop</definition>
+        <argsstring>(FILE *fplog, int ePBC, const matrix box, const gmx_mtop_t *mtop, rvec x[])</argsstring>
+        <name>do_pbc_first_mtop</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2672" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2672" bodyend="2676"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1aad7bfafc80eb824a67e0290aa445711c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_pbc_mtop</definition>
+        <argsstring>(FILE *fplog, int ePBC, const matrix box, const gmx_mtop_t *mtop, rvec x[])</argsstring>
+        <name>do_pbc_mtop</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2678" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2678" bodyend="2682"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a7b96e5651b78fd54aaa044d005e5cbc4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void put_atoms_in_box_omp</definition>
+        <argsstring>(int ePBC, const matrix box, gmx::ArrayRef&lt; gmx::RVec &gt; x)</argsstring>
+        <name>put_atoms_in_box_omp</name>
+        <param>
+          <type>int</type>
+          <declname>ePBC</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Parallellizes <ref refid="pbc_8cpp_1a815b809d1ff95cafb0fdcf74029fd229" kindref="member">put_atoms_in_box()</ref> </para>        </briefdescription>
+        <detaileddescription>
+<para>This wrapper function around <ref refid="pbc_8cpp_1a815b809d1ff95cafb0fdcf74029fd229" kindref="member">put_atoms_in_box()</ref> with the ugly manual workload splitting is needed to avoid silently introducing multithreading in tools. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ePBC</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pbc type </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates of the atoms </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2684" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2684" bodyend="2701"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1aaed84031092ba8fb8ce2272b9461dc6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void finish_run</definition>
+        <argsstring>(FILE *fplog, const gmx::MDLogger &amp;mdlog, t_commrec *cr, const t_inputrec *inputrec, t_nrnb nrnb[], gmx_wallcycle_t wcycle, gmx_walltime_accounting_t walltime_accounting, nonbonded_verlet_t *nbv, gmx_pme_t *pme, gmx_bool bWriteStat)</argsstring>
+        <name>finish_run</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1MDLogger" kindref="compound">gmx::MDLogger</ref> &amp;</type>
+          <declname>mdlog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>inputrec</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref></type>
+          <declname>nrnb</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__walltime__accounting" kindref="compound">gmx_walltime_accounting_t</ref></type>
+          <declname>walltime_accounting</declname>
+        </param>
+        <param>
+          <type><ref refid="structnonbonded__verlet__t" kindref="compound">nonbonded_verlet_t</ref> *</type>
+          <declname>nbv</declname>
+        </param>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bWriteStat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2704" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2704" bodyend="2832"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1aa53f050517d736ddd168ee3a6338e0c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initialize_lambdas</definition>
+        <argsstring>(FILE *fplog, t_inputrec *ir, int *fep_state, gmx::ArrayRef&lt; real &gt; lambda, double *lam0)</argsstring>
+        <name>initialize_lambdas</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>fep_state</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>lam0</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2834" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2834" bodyend="2892"/>
+      </memberdef>
+      <memberdef kind="function" id="sim__util_8cpp_1a2a491956f8ab58c6937b191adece1b93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_md</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, gmx::IMDOutputProvider *outputProvider, t_inputrec *ir, const gmx_output_env_t *oenv, const MdrunOptions &amp;mdrunOptions, double *t, double *t0, t_state *globalState, double *lam0, t_nrnb *nrnb, gmx_mtop_t *mtop, gmx_update_t **upd, int nfile, const t_filenm fnm[], gmx_mdoutf_t *outf, t_mdebin **mdebin, tensor force_vir, tensor shake_vir, rvec mu_tot, gmx_bool *bSimAnn, t_vcm **vcm, gmx_wallcycle_t wcycle)</argsstring>
+        <name>init_md</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1IMDOutputProvider" kindref="compound">gmx::IMDOutputProvider</ref> *</type>
+          <declname>outputProvider</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structMdrunOptions" kindref="compound">MdrunOptions</ref> &amp;</type>
+          <declname>mdrunOptions</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>t0</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>globalState</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>lam0</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__update__t" kindref="compound">gmx_update_t</ref> **</type>
+          <declname>upd</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfile</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__filenm" kindref="compound">t_filenm</ref></type>
+          <declname>fnm</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mdoutf" kindref="compound">gmx_mdoutf_t</ref> *</type>
+          <declname>outf</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdebin" kindref="compound">t_mdebin</ref> **</type>
+          <declname>mdebin</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>force_vir</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>shake_vir</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>mu_tot</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref> *</type>
+          <declname>bSimAnn</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__vcm" kindref="compound">t_vcm</ref> **</type>
+          <declname>vcm</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" line="2895" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp" bodystart="2895" bodyend="2984"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/sim_util.cpp"/>
+  </compounddef>
+</doxygen>

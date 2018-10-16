@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="mpitest_8h" kind="file">
+    <compoundname>mpitest.h</compoundname>
+    <includes local="yes">config.h</includes>
+    <includes local="no">functional</includes>
+    <includes local="no">type_traits</includes>
+    <includes refid="basenetwork_8h" local="yes">gromacs/utility/basenetwork.h</includes>
+    <includedby refid="threadaffinity-mpi_8cpp" local="yes">src/gromacs/mdrunutility/tests/threadaffinity-mpi.cpp</includedby>
+    <includedby refid="programs_2mdrun_2tests_2moduletest_8cpp" local="yes">src/programs/mdrun/tests/moduletest.cpp</includedby>
+    <includedby refid="pmetest_8cpp" local="yes">src/programs/mdrun/tests/pmetest.cpp</includedby>
+    <includedby refid="mpitest_8cpp" local="yes">src/testutils/mpitest.cpp</includedby>
+    <includedby refid="tests_2mpitest_8cpp" local="yes">src/testutils/tests/mpitest.cpp</includedby>
+    <incdepgraph>
+      <node id="35118">
+        <label>functional</label>
+      </node>
+      <node id="35120">
+        <label>gromacs/utility/basenetwork.h</label>
+        <link refid="basenetwork_8h"/>
+      </node>
+      <node id="35119">
+        <label>type_traits</label>
+      </node>
+      <node id="35117">
+        <label>config.h</label>
+      </node>
+      <node id="35116">
+        <label>src/testutils/mpitest.h</label>
+        <link refid="mpitest.h"/>
+        <childnode refid="35117" relation="include">
+        </childnode>
+        <childnode refid="35118" relation="include">
+        </childnode>
+        <childnode refid="35119" relation="include">
+        </childnode>
+        <childnode refid="35120" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="35124">
+        <label>src/testutils/mpitest.cpp</label>
+        <link refid="mpitest_8cpp"/>
+      </node>
+      <node id="35123">
+        <label>src/programs/mdrun/tests/pmetest.cpp</label>
+        <link refid="pmetest_8cpp"/>
+      </node>
+      <node id="35122">
+        <label>src/programs/mdrun/tests/moduletest.cpp</label>
+        <link refid="programs_2mdrun_2tests_2moduletest_8cpp"/>
+      </node>
+      <node id="35125">
+        <label>src/testutils/tests/mpitest.cpp</label>
+        <link refid="tests_2mpitest_8cpp"/>
+      </node>
+      <node id="35121">
+        <label>src/testutils/mpitest.h</label>
+        <link refid="mpitest.h"/>
+        <childnode refid="35122" relation="include">
+        </childnode>
+        <childnode refid="35123" relation="include">
+        </childnode>
+        <childnode refid="35124" relation="include">
+        </childnode>
+        <childnode refid="35125" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+    <innernamespace refid="namespacegmx_1_1test">gmx::test</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__module__testutils_1ga0ef86f5a07972af5127b0d54c183d40b" prot="public" static="no">
+        <name>GMX_MPI_TEST</name>
+        <param><defname>expectedRankCount</defname></param>
+        <initializer>ASSERT_EQ(expectedRankCount, ::<ref refid="group__module__testutils_1gaba05f898b13924fdf611804f1c8ad52b" kindref="member">gmx::test::getNumberOfTestMpiRanks</ref>())</initializer>
+        <briefdescription>
+<para>Declares that this test is an MPI-enabled unit test. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">expectedRankCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Expected number of ranks for this test. The test will fail if run with unsupported number of ranks.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+To write unit tests that run under MPI, you need to do a few things:<itemizedlist>
+<listitem><para>Put <ref refid="group__module__testutils_1ga0ef86f5a07972af5127b0d54c183d40b" kindref="member">GMX_MPI_TEST()</ref> as the first statement in your test body and specify the number of ranks this test expects.</para></listitem><listitem><para>Declare your unit test in CMake with gmx_add_mpi_unit_test(). Note that all tests in the binary should fulfill the conditions above, and work with the same number of ranks. TODO: Figure out a mechanism for mixing tests with different rank counts in the same binary (possibly, also MPI and non-MPI tests).</para></listitem></itemizedlist>
+</para><para>When you do the above, the following will happen:<itemizedlist>
+<listitem><para>The test will get compiled only if thread-MPI or real MPI is enabled.</para></listitem><listitem><para>The test will get executed on the number of ranks specified. If you are using real MPI, the whole test binary is run under MPI and test execution across the processes is synchronized (<ref refid="group__module__testutils_1ga0ef86f5a07972af5127b0d54c183d40b" kindref="member">GMX_MPI_TEST()</ref> actually has no effect in this case, the synchronization is handled at a higher level). If you are using thread-MPI, <ref refid="group__module__testutils_1ga0ef86f5a07972af5127b0d54c183d40b" kindref="member">GMX_MPI_TEST()</ref> is required and it initializes thread-MPI with the specified number of threads and runs the rest of the test on each of the threads.</para></listitem></itemizedlist>
+</para><para>You need to be extra careful for variables in the test fixture, if you use one: when run under thread-MPI, these will be shared across all the ranks, while under real MPI, these are naturally different for each process. Local variables in the test body are private to each rank in both cases.</para><para>Currently, it is not possible to specify the number of ranks as one, because that will lead to problems with (at least) thread-MPI, but such tests can be written as serial tests anyways. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/mpitest.h" line="124" column="10" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/mpitest.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper functions for MPI tests to make thread-MPI look like real MPI. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  <simplesect kind="author"><para>Teemu Murtola <ulink url="mailto:teemu.murtola@gmail.com">teemu.murtola@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/mpitest.h"/>
+  </compounddef>
+</doxygen>

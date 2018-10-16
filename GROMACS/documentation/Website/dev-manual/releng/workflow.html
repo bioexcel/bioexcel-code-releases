@@ -1,0 +1,265 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Workflow build overview &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="releng Python API" href="releng-api.html" />
+    <link rel="prev" title="Jenkins scripts (releng Python module)" href="releng.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="releng-api.html" title="releng Python API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="releng.html" title="Jenkins scripts (releng Python module)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">releng repository</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="workflow-build-overview">
+<h1>Workflow build overview<a class="headerlink" href="#workflow-build-overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="matrix-build-launcher">
+<span id="releng-workflow-matrix-launcher"></span><h2>Matrix build launcher<a class="headerlink" href="#matrix-build-launcher" title="Permalink to this headline">¶</a></h2>
+<p>The workflow build in <code class="file docutils literal"><span class="pre">matrix-launcher.groovy</span></code> is a relatively simple
+workflow where the actual build is performed by a normal matrix build.  The
+workflow does these things:</p>
+<ol class="arabic simple">
+<li>The workflow does a normal git checkout to show Changes and other git data
+on the build page.  This happens in the initial node context where the
+workflow script is loaded.</li>
+<li>Also in the initial node context, the Jenkins job calls
+<code class="docutils literal"><span class="pre">loadMatrixConfigs()</span></code> and passes the name of the matrix to use.  The
+workflow build calls <code class="docutils literal"><span class="pre">prepare_multi_configuration_build()</span></code> Python
+function, and reads the build axis into a local variable.</li>
+<li>The Jenkins job calls <code class="docutils literal"><span class="pre">doBuild()</span></code> with the name of the matrix build to
+trigger.  The workflow triggers the matrix job, forwarding all relevant build
+parameters to it, and adding the build configuration axis as an additional
+parameter.</li>
+<li>After the matrix build finishes, the workflow calls
+<code class="docutils literal"><span class="pre">process_multi_configuration_build_results()</span></code>, which uses the Jenkins REST
+API to verify that all configurations were actually built.
+If not, the build is marked failed.</li>
+<li>The workflow also adds a link to the matrix build to the build summary page
+(while the build is running, the link can be found from the console log).
+The build status of the matrix build is also propagated to the status of the
+workflow job.</li>
+<li>Also, as the last step in the workflow, it sets the URL to post back to
+Gerrit to point to the matrix build.  This means that the presence of this
+launcher job is mostly invisible during normal usage.  Only if the workflow
+itself fails before reaching this step, you actually see a link to the
+launcher job in Gerrit.</li>
+</ol>
+</div>
+<div class="section" id="clang-static-analysis">
+<h2>Clang static analysis<a class="headerlink" href="#clang-static-analysis" title="Permalink to this headline">¶</a></h2>
+<p>The workflow build in <code class="file docutils literal"><span class="pre">clang-analyzer.groovy</span></code> is a simple workflow that
+performs static analysis using Clang.  The main reason for using a workflow
+build instead of a freestyle job is to make it easy to dynamically decide the
+node where the analysis runs, depending on which version of the analyzer should
+be used.  The workflow sequence is this:</p>
+<ol class="arabic simple">
+<li>The workflow does a normal git checkout to show Changes and other git data
+on the build page.  This happens in the initial node context where the
+workflow script is loaded.</li>
+<li>Also in the initial node context, the workflow calls
+<code class="docutils literal"><span class="pre">read_build_script_config()</span></code> Python function to get the build options
+defined in the <code class="file docutils literal"><span class="pre">clang-analyzer.py</span></code> build script in the source repo.
+This is stored in a local variable.</li>
+<li>The Jenkins job calls <code class="docutils literal"><span class="pre">doBuild()</span></code> without parameters.
+The workflow allocates a node based on the build options, and
+runs the <code class="file docutils literal"><span class="pre">clang-analyzer.py</span></code> build script there with releng.</li>
+<li>After the releng script finishes, the workflow publishes a HTML report
+produced by the analyzer (if it exists), and scans for compiler warnings
+from the console log to show them on the build page.</li>
+</ol>
+</div>
+<div class="section" id="build-test-release-tarballs">
+<span id="releng-workflow-release"></span><h2>Build &amp; test release tarballs<a class="headerlink" href="#build-test-release-tarballs" title="Permalink to this headline">¶</a></h2>
+<p>The workflow build in <code class="file docutils literal"><span class="pre">release.groovy</span></code> is a more complex worflow that
+coordinates the building and testing of the tarballs for a release.
+The packaging of the tarballs is handled by two separate, non-workflow Jenkins
+jobs, one for the source code and one for the regressiontests.
+The general sequence is this:</p>
+<ol class="arabic simple">
+<li>The workflow reads the refspecs to use for the build from build parameters,
+and does some preparatory steps.  It also reads a set of configurations to
+test from <code class="file docutils literal"><span class="pre">release-matrix.txt</span></code> in the source repo, using
+<code class="docutils literal"><span class="pre">prepare_multi_configuration_build()</span></code> Python function, and reads the
+configuration into a data structure.  It also extracts version information
+from the source repository (using <code class="file docutils literal"><span class="pre">get-version-info.py</span></code> build script),
+since the regressiontests repository does not contain this.</li>
+<li>The workflow checks the latest successful builds in the packaging builds,
+and if these are not built from the correct commit, it triggers new builds
+for them.  The regressiontests tarball is built first, and its MD5 sum is
+checked against the one specified in the source tarball.  For a <cite>RELEASE</cite>
+build, a mismatch fails the build, otherwise it only produces a note in the
+console output.
+The packaging builds also compute MD5 sums for the tarballs, and these are
+accessible from Jenkins.</li>
+<li>After the tarballs are available, the workflow runs each configuration
+from the test matrix in parallel, using <code class="docutils literal"><span class="pre">run_build()</span></code>, and the standard
+<code class="file docutils literal"><span class="pre">gromacs.py</span></code> build script from the source tarball.
+A summary is posted to the build summary page (for each configuration, on
+which host it was built and whether it was successful, unstable, or failed),
+but compiler warnings etc.  are currently only available from the console
+log (available for a single configuration with some browsing under “Pipeline
+Steps”).</li>
+<li>If all tests passed, the workflow then does a final documentation build from
+the source tarball, which will produce the HTML pages for the documentation
+website.  The generated pages are available from the Jenkins project page,
+as well as from a link on the build summary page.
+If the <cite>RELEASE</cite> build parameter is set, a tarball containing all the
+documentation is also archived as an artifact.</li>
+</ol>
+<p>In addition to the refspecs to build, the workflow uses two additional build
+parameters:</p>
+<dl class="docutils">
+<dt>RELEASE</dt>
+<dd>If set, the <code class="docutils literal"><span class="pre">-dev</span></code> suffix is stripped from all the tarballs, and from
+content within them.
+Note that currently, the <code class="docutils literal"><span class="pre">-dev</span></code> suffixes never appear in the generated
+website, irrespective of this</dd>
+<dt>FORCE_REPACKAGING</dt>
+<dd>If set, the tarballs are rebuilt, even if ones built from the correct
+refspecs and with the same value of <code class="docutils literal"><span class="pre">RELEASE</span></code> is available.
+This is useful if only releng or Jenkins configuration has changed in a way
+that influences the tarballs.</dd>
+</dl>
+<p>The workflow and the level of testing is still a work-in-progress, but it
+already covers most of what the earlier builds did, and remaining content
+should not be too hard to add.  Missing functionality is indicated with TODOs
+in the workflow script or in the build scripts in the source repo.</p>
+</div>
+<div class="section" id="on-demand-launcher">
+<h2>On-demand launcher<a class="headerlink" href="#on-demand-launcher" title="Permalink to this headline">¶</a></h2>
+<p>The workflow build in <code class="file docutils literal"><span class="pre">ondemand.groovy</span></code> handles builds that are triggered
+with a <code class="docutils literal"><span class="pre">[JENKINS]</span></code> comment from Gerrit.  The actual builds are done using
+separate, non-workflow jobs triggered from the workflow.
+The general sequence is:</p>
+<ol class="arabic simple">
+<li>In the context of the initial checkout, the workflow uses
+<code class="docutils literal"><span class="pre">get_actions_from_triggering_comment()</span></code> to parse the comment from Gerrit.
+This function will also read information from the <code class="docutils literal"><span class="pre">gromacs</span></code> repository,
+e.g., to fill out the matrix options into the returned data structure.</li>
+<li>In the same context, the workflow does a normal git checkout to show Changes
+and other git data on the build page.</li>
+<li>The Jenkins job calls <code class="docutils literal"><span class="pre">doBuild()</span></code> without parameters.  The workflow runs
+the requested builds in parallel, based on the data structure it got in
+step 1.  All relevant build parameters are forwarded.  Some actions are
+handled directly within the workflow instead of triggering a separate build.</li>
+<li>After the builds finish, the workflow adds links to the triggered builds
+to the build summary page (while the build is running, the link can be found
+from the console log).  The workflow then uses <code class="docutils literal"><span class="pre">do_ondemand_post_build()</span></code>
+to construct the message to post back to Gerrit, as well as to perform other
+actions such as posting cross-verify messages.  The combined build status of
+the builds is also propagated to the status of the workflow job.</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Workflow build overview</a><ul>
+<li><a class="reference internal" href="#matrix-build-launcher">Matrix build launcher</a></li>
+<li><a class="reference internal" href="#clang-static-analysis">Clang static analysis</a></li>
+<li><a class="reference internal" href="#build-test-release-tarballs">Build &amp; test release tarballs</a></li>
+<li><a class="reference internal" href="#on-demand-launcher">On-demand launcher</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="releng.html"
+                        title="previous chapter">Jenkins scripts (releng Python module)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="releng-api.html"
+                        title="next chapter">releng Python API</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/dev-manual/releng/workflow.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="releng-api.html" title="releng Python API"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="releng.html" title="Jenkins scripts (releng Python module)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >releng repository</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

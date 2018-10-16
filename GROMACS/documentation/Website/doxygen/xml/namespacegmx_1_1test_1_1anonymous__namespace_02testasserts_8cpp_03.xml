@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacegmx_1_1test_1_1anonymous__namespace_02testasserts_8cpp_03" kind="namespace">
+    <compoundname>gmx::test::anonymous_namespace{testasserts.cpp}</compoundname>
+      <sectiondef kind="user-defined">
+      <header>Helper functions for computing floating-point differences</header>
+      <description><para>These routines are used to initialize <ref refid="classgmx_1_1test_1_1FloatingPointDifference" kindref="compound">FloatingPointDifference</ref>. They peek into some internal types from Google Test (gtest-internal.h), and duplicate some other functionality from there, but that is likely a better alternative than just copying all that code here. </para></description>
+      <memberdef kind="function" id="group__module__testutils_1gaa4f52fad8b5f296790f25f67d66b56c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FloatType</type>
+          </param>
+        </templateparamlist>
+        <type>FloatingPoint&lt; FloatType &gt;::Bits</type>
+        <definition>FloatingPoint&lt;FloatType&gt;::Bits gmx::test::anonymous_namespace{testasserts.cpp}::floatingPointToBiasedInteger</definition>
+        <argsstring>(const FloatingPoint&lt; FloatType &gt; &amp;value)</argsstring>
+        <name>floatingPointToBiasedInteger</name>
+        <param>
+          <type>const FloatingPoint&lt; FloatType &gt; &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Computes biased integer representation for a floating-point value. </para>        </briefdescription>
+        <detaileddescription>
+<para>This moves the integer representation from a sign-and-magnitude representation to a biased representation where the 0x8000... represents zero, and the order of the integer values matches the order of the floating-point values. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" line="127" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" bodystart="127" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="group__module__testutils_1ga2be2fba2cf97cfc6c04864a0d568c996" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FloatType</type>
+          </param>
+        </templateparamlist>
+        <type>gmx_uint64_t</type>
+        <definition>gmx_uint64_t gmx::test::anonymous_namespace{testasserts.cpp}::calculateUlpDifference</definition>
+        <argsstring>(const FloatingPoint&lt; FloatType &gt; &amp;value1, const FloatingPoint&lt; FloatType &gt; &amp;value2)</argsstring>
+        <name>calculateUlpDifference</name>
+        <param>
+          <type>const FloatingPoint&lt; FloatType &gt; &amp;</type>
+          <declname>value1</declname>
+        </param>
+        <param>
+          <type>const FloatingPoint&lt; FloatType &gt; &amp;</type>
+          <declname>value2</declname>
+        </param>
+        <briefdescription>
+<para>Computes the magnitude of the difference in ULPs between two numbers, treating also values of different sign. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" line="144" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" bodystart="144" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="group__module__testutils_1gab1c5bf65f975bc8e0572b6ba2b94b2a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FloatType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::test::anonymous_namespace{testasserts.cpp}::initDifference</definition>
+        <argsstring>(FloatType raw1, FloatType raw2, double *absoluteDifference, gmx_uint64_t *ulpDifference, bool *bSignDifference)</argsstring>
+        <name>initDifference</name>
+        <param>
+          <type>FloatType</type>
+          <declname>raw1</declname>
+        </param>
+        <param>
+          <type>FloatType</type>
+          <declname>raw2</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>absoluteDifference</declname>
+        </param>
+        <param>
+          <type>gmx_uint64_t *</type>
+          <declname>ulpDifference</declname>
+        </param>
+        <param>
+          <type>bool *</type>
+          <declname>bSignDifference</declname>
+        </param>
+        <briefdescription>
+<para>Helper to implement the constructors for <ref refid="classgmx_1_1test_1_1FloatingPointDifference" kindref="compound">FloatingPointDifference</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" line="158" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" bodystart="158" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="group__module__testutils_1gac6b6c825872baad5c13b7f073d6778cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename FloatType</type>
+          </param>
+        </templateparamlist>
+        <type>gmx_uint64_t</type>
+        <definition>gmx_uint64_t gmx::test::anonymous_namespace{testasserts.cpp}::relativeToleranceToUlp</definition>
+        <argsstring>(FloatType tolerance)</argsstring>
+        <name>relativeToleranceToUlp</name>
+        <param>
+          <type>FloatType</type>
+          <declname>tolerance</declname>
+        </param>
+        <briefdescription>
+<para>Converts a relative tolerance into an ULP difference. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" line="180" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" bodystart="180" bodyend="185"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacegmx_1_1test_1_1anonymous__namespace_02testasserts_8cpp_03_1ada2917a4f44937b67f991883bcc6728e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool gmx::test::anonymous_namespace{testasserts.cpp}::g_showExpectedExceptions</definition>
+        <argsstring></argsstring>
+        <name>g_showExpectedExceptions</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Whether to print the message from expected exceptions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" line="71" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/testutils/testasserts.cpp" line="68" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,478 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Terminology &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Environment Variables" href="environment-variables.html" />
+    <link rel="prev" title="File formats" href="file-formats.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="environment-variables.html" title="Environment Variables"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="file-formats.html" title="File formats"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="terminology">
+<h1>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pressure">
+<h2>Pressure<a class="headerlink" href="#pressure" title="Permalink to this headline">¶</a></h2>
+<p>The pressure in molecular dynamics can be computed from the kinetic energy and
+the virial.</p>
+<div class="section" id="fluctuation">
+<h3>Fluctuation<a class="headerlink" href="#fluctuation" title="Permalink to this headline">¶</a></h3>
+<p>Whether or not pressure coupling is used within a simulation, the pressure
+value for the simulation box will oscillate significantly. Instantaneous
+pressure is meaningless, and not well-defined. Over a picosecond time scale it
+usually will not be a good indicator of the true pressure. This variation is
+entirely normal due to the fact that pressure is a macroscopic property and can
+only be measured properly as time average, while it is being measured and/or
+adjusted with pressure coupling on the microscopic scale. How much it varies
+and the speed at which it does depends on the number of atoms in the system,
+the type of pressure coupling used and the value of the coupling constants.
+Fluctuations of the order of hundreds of bar are typical. For a box of 216
+waters, fluctuations of 500-600 bar are standard. Since the fluctuations go
+down with the square root of the number of particles, a system of 21600 water
+molecules (100 times larger) will still have pressure fluctuations of 50-60 bar.</p>
+</div>
+</div>
+<div class="section" id="periodic-boundary-conditions">
+<span id="gmx-pbc"></span><h2>Periodic boundary conditions<a class="headerlink" href="#periodic-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Periodic boundary conditions (PBC) are used in molecular dynamics simulations
+to avoid problems with boundary effects caused by finite size, and make the
+system more like an infinite one, at the cost of possible periodicity effects.</p>
+<p>Beginners visualizing a trajectory sometimes think they are observing a problem
+when</p>
+<ul class="simple">
+<li>the molecule(s) does not stay in the centre of the box, or</li>
+<li>it appears that (parts of) the molecule(s) diffuse out of the box, or</li>
+<li>holes are created, or</li>
+<li>broken molecules appear, or</li>
+<li>their unit cell was a rhombic dodecahedron or cubic octahedron but it looks
+like a slanted cube after the simulation, or</li>
+<li>crazy bonds all across the simulation cell appear.</li>
+</ul>
+<p>This is not a problem or error that is occuring, it is what you should expect.</p>
+<p>The existence of PBC means that any atom that leaves a simulation box by, say,
+the right-hand face, then enters the simulation box by the left-hand face. In
+the example of a large protein, if you look at the face of the simulation box
+that is opposite to the one from which the protein is protruding, then a hole
+in the solvent will be visible. The reason that the molecule(s) move from where
+they were initially located within the box is (for the vast majority of
+simulations) they are free to diffuse around. And so they do. They are not held
+in a magic location of the box. The box is not centered around anything while
+performing the simulation. Molecules are not made whole as a matter of course.
+Moreover, any periodic cell shape can be expressed as a parallelepiped (a.k.a.
+triclinic cell), and GROMACS does so internally regardless of the initial
+shape of the box.</p>
+<p>These visual issues can be fixed after the conclusion of the simulation by
+judicious use of the optional inputs to <a class="reference internal" href="../onlinehelp/gmx-trjconv.html#gmx-trjconv"><span class="std std-ref">gmx trjconv</span></a> to process the
+trajectory files. Similarly, analyses such as RMSD of atomic positions can be
+flawed when a reference structure is compared with a structure that needs
+adjusting for periodicity effects, and the solution with <a class="reference internal" href="../onlinehelp/gmx-trjconv.html#gmx-trjconv"><span class="std std-ref">gmx trjconv</span></a>
+follows the same lines. Some complex cases needing more than one operation will
+require more than one invocation of <a class="reference internal" href="../onlinehelp/gmx-trjconv.html#gmx-trjconv"><span class="std std-ref">gmx trjconv</span></a> in order to work.</p>
+<p>For further information, see <a class="reference external" href="../manual-2018.3.pdf">Reference Manual</a>.</p>
+<div class="section" id="suggested-workflow">
+<h3>Suggested workflow<a class="headerlink" href="#suggested-workflow" title="Permalink to this headline">¶</a></h3>
+<p>Fixing periodicity effects with <a class="reference internal" href="../onlinehelp/gmx-trjconv.html#gmx-trjconv"><span class="std std-ref">gmx trjconv</span></a> to suit visualization or
+analysis can be tricky. Multiple invocations can be necessary. You may need to
+create custom index groups (e.g. to keep your ligand with your protein)
+Following the steps below in order (omitting those not required) should help
+get a pleasant result. You will need to consult <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">trjconv</span> <span class="pre">-h</span></code> to find out
+the details for each step. That’s deliberate – there is no magic “do what I
+want” recipe. You have to decide what you want, first. :-)</p>
+<ol class="arabic simple">
+<li>First make your molecules whole if you want them whole.</li>
+<li>Cluster your molecules/particles if you want them clustered.</li>
+<li>If you want jumps removed, extract the first frame from the trajectory to
+use as the reference, and then use <code class="docutils literal"><span class="pre">-pbc</span> <span class="pre">nojump</span></code> with that first
+frame as reference.</li>
+<li>Center your system using some criterion. Doing so shifts the system, so
+don’t use <code class="docutils literal"><span class="pre">-pbc</span> <span class="pre">nojump</span></code> after this step.</li>
+<li>Perhaps put everything in some box with the other <code class="docutils literal"><span class="pre">-pbc</span></code> or <code class="docutils literal"><span class="pre">-ur</span></code>
+options.</li>
+<li>Fit the resulting trajectory to some (other) reference structure (if
+desired), and don’t use any PBC related option afterwards.</li>
+</ol>
+<p>With point three, the issue is that <a class="reference internal" href="../onlinehelp/gmx-trjconv.html#gmx-trjconv"><span class="std std-ref">gmx trjconv</span></a> removes the jumps from
+the first frame using the reference structure provided with -s. If the reference
+structure (run input file) is not clustered/whole, using <code class="docutils literal"><span class="pre">-pbc</span> <span class="pre">nojump</span></code>
+will undo steps 1 and 2.</p>
+</div>
+</div>
+<div class="section" id="thermostats">
+<span id="gmx-thermostats"></span><h2>Thermostats<a class="headerlink" href="#thermostats" title="Permalink to this headline">¶</a></h2>
+<p>Thermostats are designed to help a simulation sample from the correct ensemble
+(i.e. NVT or NPT) by modulating the temperature of the system in some fashion.
+First, we need to establish what we mean by temperature. In simulations, the
+“instantaneous (kinetic) temperature” is usually computed from the kinetic
+energy of the system using the equipartition theorem. In other words, the
+temperature is computed from the system’s total kinetic energy.</p>
+<p>So, what’s the goal of a thermostat? Actually, it turns out the goal is not to
+keep the temperature constant, as that would mean fixing the total kinetic
+energy, which would be silly and not the aim of NVT or NPT. Rather, it’s to
+ensure that the average temperature of a system be correct.</p>
+<p>To see why this is the case, imagine a glass of water sitting in a room.
+Suppose you can look very closely at a few molecules in some small region of
+the glass, and measure their kinetic energies. You would not expect the kinetic
+energy of this small number of particles to remain precisely constant; rather,
+you’d expect fluctuations in the kinetic energy due to the small number of
+particles. As you average over larger and larger numbers of particles, the
+fluctuations in the average get smaller and smaller, so finally by the time you
+look at the whole glass, you say it has “constant temperature”.</p>
+<p>Molecular dynamics simulations are often fairly small compared to a glass of
+water, so we have bigger fluctuations. So it’s really more appropriate here to
+think of the role of a thermostat as ensuring that we have</p>
+<ol class="loweralpha simple">
+<li>the correct average temperature, and</li>
+<li>the fluctuations of the correct size.</li>
+</ol>
+<p>See <a class="reference external" href="../manual-2018.3.pdf">Reference Manual</a> for details on how temperature coupling is applied and
+the types currently available.</p>
+<div class="section" id="what-to-do">
+<span id="gmx-thermostats-do"></span><h3>What to do<a class="headerlink" href="#what-to-do" title="Permalink to this headline">¶</a></h3>
+<p>Some hints on practices that generally are a good idea:</p>
+<ul class="simple">
+<li>Preferably, use a thermostat that samples the correct distribution of
+temperatures (for examples, see the corresponding manual section), in addition
+to giving you the correct average temperature.</li>
+<li>At least: use a thermostat that gives you the correct average temperature,
+and apply it to components of your system for which they are justified (see
+the first bullet in <a class="reference internal" href="#what-not-to-do">What not to do</a>). In some cases, using
+<code class="docutils literal"><span class="pre">tc-grps</span> <span class="pre">=</span> <span class="pre">System</span></code> may lead to the “hot solvent/cold solute” problem
+described in the 3rd reference in <a class="reference internal" href="#further-reading">Further reading</a>.</li>
+</ul>
+</div>
+<div class="section" id="what-not-to-do">
+<span id="gmx-thermostats-dont"></span><h3>What not to do<a class="headerlink" href="#what-not-to-do" title="Permalink to this headline">¶</a></h3>
+<p>Some hints on practices that generally not a good idea to use:</p>
+<ul class="simple">
+<li>Do not use separate thermostats for every component of your system. Some
+molecular dynamics thermostats only work well in the thermodynamic limit. A
+group must be of sufficient size to justify its own thermostat. If you use one
+thermostat for, say, a small molecule, another for protein, and another for
+water, you are likely introducing errors and artifacts that are hard to
+predict. In particular, do not couple ions in aqueous solvent in a separate
+group from that solvent. For a protein simulation, using <code class="docutils literal"><span class="pre">tc-grps</span> <span class="pre">=</span> <span class="pre">Protein</span>
+<span class="pre">Non-Protein</span></code> is usually best.</li>
+<li>Do not use thermostats that work well only in the limit of a large number of
+degrees of freedom for systems with few degrees of freedom. For example, do
+not use Nosé-Hoover or Berendsen thermostats for types of free energy
+calculations where you will have a component of the system with very few
+degrees of freedom in an end state (i.e. a noninteracting small molecule).</li>
+</ul>
+</div>
+<div class="section" id="further-reading">
+<h3>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://pubs.acs.org/doi/abs/10.1021/jp951968y">Cheng, A. &amp; Merz, K. M. Application of the nosé- hoover chain algorithm to
+the study of protein dynamics. *J. Phys. Chem.* **100** (5), 1927–1937
+(1996).</a></li>
+<li><a class="reference external" href="http://dx.doi.org/10.1002/jcc.20951">Mor, A., Ziv, G. &amp; Levy, Y. Simulations of proteins with inhomogeneous
+degrees of freedom: the effect of thermostats. *J. Comput. Chem.* **29**
+(12), 1992–1998 (2008).</a></li>
+<li><a class="reference external" href="http://pubs.acs.org/doi/abs/10.1021/ct8000365">Lingenheil, M., Denschlag, R., Reichold, R. &amp; Tavan, P. The
+“hot-solvent/cold-solute” problem revisited. *J. Chem. Theory Comput.* **4**
+(8), 1293–1306 (2008).</a></li>
+</ol>
+</div>
+</div>
+<div class="section" id="energy-conservation">
+<h2>Energy conservation<a class="headerlink" href="#energy-conservation" title="Permalink to this headline">¶</a></h2>
+<p>In principle, a molecular dynamics simulation should conserve the total energy,
+the total momentum and (in a non-periodic system) the total angular momentum. A
+number of algorithmic and numerical issues make that this is not always the
+case:</p>
+<ul class="simple">
+<li>Cut-off treatment and/or long-range electrostatics treatment (see Van Der
+Spoel, D. &amp; van Maaren, P. J. The origin of layer structure artifacts in
+simulations of liquid water. <em>J. Chem. Theor. Comp.</em> <strong>2</strong>, 1–11 (2006).)</li>
+<li>Treatment of pair lists,</li>
+<li>Constraint algorithms (see e.g. Hess, B. P-LINCS: A parallel linear constraint
+solver for molecular simulation. <em>J. Chem. Theor. Comp.</em> <strong>4</strong>, 116–122
+(2008).)</li>
+<li>The integration timestep,</li>
+<li>Temperature coupling and pressure coupling,</li>
+<li>Round-off error (in particular in single precision), for example subtracting
+large numbers (Lippert, R. A. et al. A common, avoidable source of error in
+molecular dynamics integrators. <em>J. Chem. Phys.</em> <strong>126</strong>, 046101 (2007).)</li>
+<li>The choice of the integration algorithm (in GROMACS this is normally
+leap-frog),</li>
+<li>Removal of center of mass motion: when doing this in more than one group the
+conservation of energy will be violated.</li>
+</ul>
+</div>
+<div class="section" id="average-structure">
+<h2>Average structure<a class="headerlink" href="#average-structure" title="Permalink to this headline">¶</a></h2>
+<p>Various GROMACS utilities can compute average structures. Presumably the idea
+for this comes from something like an ensemble-average NMR structure. In some
+cases, it makes sense to calculate an average structure (as a step on the way
+to calculating root-mean-squared fluctuations (RMSF), for example, one needs
+the average position of all of the atoms).</p>
+<p>However, it’s important to remember that an average structure isn’t necessarily
+meaningful. By way of analogy, suppose I alternate holding a ball in my left
+hand, then in my right hand. What’s the average position of the ball? Halfway
+in between – even though I always have it either in my left hand or my right
+hand. Similarly, for structures, averages will tend to be meaningless anytime
+there are separate metastable conformational states. This can happen on a
+sidechain level, or for some regions of backbone, or even whole helices or
+components of the secondary structure.</p>
+<p>Thus, if you derive an average structure from a molecular dynamics simulation,
+and find artifacts like unphysical bond lengths, weird structures, etc., this
+doesn’t necessarily mean something is wrong. It just shows the above: an
+average structure from a simulation is not necessarily a physically meaningful
+structure.</p>
+</div>
+<div class="section" id="blowing-up">
+<span id="id1"></span><h2>Blowing up<a class="headerlink" href="#blowing-up" title="Permalink to this headline">¶</a></h2>
+<p><em>Blowing up</em> is a highly technical term used to describe a common sort of
+simulation failure. In brief, it describes a failure typically due to an
+unacceptably large force that ends up resulting in a failure of the integrator.</p>
+<p>To give a bit more background, it’s important to remember that molecular
+dynamics numerically integrates Newton’s equations of motion by taking small,
+discrete timesteps, and using these timesteps to determine new velocities and
+positions from velocities, positions, and forces at the previous timestep. If
+forces become too large at one timestep, this can result in extremely large
+changes in velocity/position when going to the next timestep. Typically, this
+will result in a cascade of errors: one atom experiences a very large force one
+timestep, and thus goes shooting across the system in an uncontrolled way in
+the next timestep, overshooting its preferred location or landing on top of
+another atom or something similar. This then results in even larger forces the
+next timestep, more uncontrolled motions, and so on. Ultimately, this will
+cause the simulation package to crash in some way, since it can’t cope with
+such situations. In simulations with constraints, the first symptom of this
+will usually be some LINCS or SHAKE warning or error – not because the
+constraints are the source of the problem, but just because they’re the first
+thing to crash. Similarly, in simulations with domain decomposition, you may
+see messages about particles being more than a cell length out of the domain
+decomposition cell of their charge group, which are symptomatic of your
+underlying problem, and not the domain decomposition algorithm itself. Likewise
+for warnings about tabulated or 1-4 interactions being outside the distance
+supported by the table. This can happen on one computer system while another
+resulted in a stable simulation because of the impossibility of numerical
+reproducibility of these calculations on different computer systems.</p>
+<p>Possible causes include:</p>
+<ul class="simple">
+<li>you didn’t minimize well enough,</li>
+<li>you have a bad starting structure, perhaps with steric clashes,</li>
+<li>you are using too large a timestep (particularly given your choice of
+constraints),</li>
+<li>you are doing particle insertion in free energy calculations without using
+soft core,</li>
+<li>you are using inappropriate pressure coupling (e.g. when you are not in
+equilibrium, Berendsen can be best while relaxing the volume, but you will
+need to switch to a more accurate pressure-coupling algorithm later),</li>
+<li>you are using inappropriate temperature coupling, perhaps on inappropriate
+groups, or</li>
+<li>your position restraints are to coordinates too different from those present
+in the system, or</li>
+<li>you have a single water molecule somewhere within the system that is
+isolated from the other water molecules, or</li>
+<li>you are experiencing a bug in <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>.</li>
+</ul>
+<p>Because blowing up is due, typically, to forces that are too large for a
+particular timestep size, there are a couple of basic solutions:</p>
+<ul class="simple">
+<li>make sure the forces don’t get that large, or</li>
+<li>use a smaller timestep.</li>
+</ul>
+<p>Better system preparation is a way to make sure that forces don’t get large, if
+the problems are occurring near the beginning of a simulation.</p>
+</div>
+<div class="section" id="diagnosing-an-unstable-system">
+<span id="system-diagnosis"></span><h2>Diagnosing an unstable system<a class="headerlink" href="#diagnosing-an-unstable-system" title="Permalink to this headline">¶</a></h2>
+<p>Troubleshooting a system that is blowing up can be challenging, especially for
+an inexperienced user. Here are a few general tips that one may find useful
+when addressing such a scenario:</p>
+<ol class="arabic simple">
+<li>If the crash is happening relatively early (within a few steps), set
+<code class="docutils literal"><span class="pre">nstxout</span></code> (or <code class="docutils literal"><span class="pre">nstxout-compressed</span></code>) to 1, capturing all possible frames.
+Watch the resulting trajectory to see which atoms/residues/molecules become
+unstable first.</li>
+<li>Simplify the problem to try to establish a cause:<ul>
+<li>If you have a new box of solvent, try minimizing and simulating a single
+molecule to see if the instability is due to some inherent problem with
+the molecule’s topology or if instead there are clashes in your starting
+configuration.</li>
+<li>If you have a protein-ligand system, try simulating the protein alone in
+the desired solvent. If it is stable, simulate the ligand in vacuo to see
+if its topology gives stable configurations, energies, etc.</li>
+<li>Remove the use of fancy algorithms, particularly if you haven’t
+equilibrated thoroughly first</li>
+</ul>
+</li>
+<li>Monitor various components of the system’s energy using <a class="reference internal" href="../onlinehelp/gmx-energy.html#gmx-energy"><span class="std std-ref">gmx energy</span></a>.
+If an intramolecular term is spiking, that may indicate improper bonded
+parameters, for example.</li>
+<li>Make sure you haven’t been ignoring error messages (missing atoms when
+running <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>, mismatching names when running <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a>,
+etc.) or using work-arounds (like using <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span> <span class="pre">-maxwarn</span></code> when you
+shouldn’t be) to make sure your topology is intact and being interpreted
+correctly.</li>
+<li>Make sure you are using appropriate settings in your <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file for the
+force field you have chosen and the type of system you have. Particularly
+important settings are treatment of cutoffs, proper neighbor searching
+interval (<code class="docutils literal"><span class="pre">nstlist</span></code>), and temperature coupling. Improper settings can lead
+to a breakdown in the model physics, even if the starting configuration of
+the system is reasonable.</li>
+</ol>
+<p>If using implicit solvation, starting your equilibration with a smaller time
+step than your production run can help energy equipartition more stably.</p>
+<p>There are several common situations in which instability frequently arises,
+usually in the introduction of new species (ligands or other molecules) into
+the system. To determine the source of the problem, simplify the system (e.g.
+the case of a protein-ligand complex) in the following way.</p>
+<ol class="arabic simple">
+<li>Does the protein (in water) minimize adequately by itself? This is a test of
+the integrity of the coordinates and system preparation. If this fails,
+something probably went wrong when running <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a> (see below), or
+maybe <a class="reference internal" href="../onlinehelp/gmx-genion.html#gmx-genion"><span class="std std-ref">gmx genion</span></a> placed an ion very close to the protein (it is
+random, after all).</li>
+<li>Does the ligand minimize in vacuo? This is a test of the topology. If it
+does not, check your parameterization of the ligand and any implementation of
+new parameters in force field files.</li>
+<li>(If previous item is successful) Does the ligand minimize in water, and/or
+does a short simulation of the ligand in water succeed?</li>
+</ol>
+<p>Other sources of possible problems are in the biomolecule topology itself.</p>
+<ol class="arabic simple">
+<li>Did you use <code class="docutils literal"><span class="pre">-missing</span></code> when running <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">gmx pdb2gmx</span></a>? If so, don’t.
+Reconstruct missing coordinates rather than ignoring them.</li>
+<li>Did you override long/short bond warnings by changing the lengths? If so,
+don’t. You probably have missing atoms or some terrible input geometry.</li>
+</ol>
+</div>
+<div class="section" id="molecular-dynamics">
+<span id="gmx-md"></span><h2>Molecular dynamics<a class="headerlink" href="#molecular-dynamics" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="force-field">
+<span id="gmx-force-field"></span><h2>Force field<a class="headerlink" href="#force-field" title="Permalink to this headline">¶</a></h2>
+<p>Force fields are sets of potential functions and parametrized interactions that can be used to study
+physical systems. A general introduction to their history, function and use is beyond the scope of this
+guide, and the user is asked to consult either the relevant literature or
+try to start at the relevant <a class="reference external" href="https://en.wikipedia.org/wiki/Force_field_(chemistry)">Wikipedia page</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Terminology</a><ul>
+<li><a class="reference internal" href="#pressure">Pressure</a><ul>
+<li><a class="reference internal" href="#fluctuation">Fluctuation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#periodic-boundary-conditions">Periodic boundary conditions</a><ul>
+<li><a class="reference internal" href="#suggested-workflow">Suggested workflow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#thermostats">Thermostats</a><ul>
+<li><a class="reference internal" href="#what-to-do">What to do</a></li>
+<li><a class="reference internal" href="#what-not-to-do">What not to do</a></li>
+<li><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#energy-conservation">Energy conservation</a></li>
+<li><a class="reference internal" href="#average-structure">Average structure</a></li>
+<li><a class="reference internal" href="#blowing-up">Blowing up</a></li>
+<li><a class="reference internal" href="#diagnosing-an-unstable-system">Diagnosing an unstable system</a></li>
+<li><a class="reference internal" href="#molecular-dynamics">Molecular dynamics</a></li>
+<li><a class="reference internal" href="#force-field">Force field</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="file-formats.html"
+                        title="previous chapter">File formats</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="environment-variables.html"
+                        title="next chapter">Environment Variables</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/terminology.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="environment-variables.html" title="Environment Variables"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="file-formats.html" title="File formats"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

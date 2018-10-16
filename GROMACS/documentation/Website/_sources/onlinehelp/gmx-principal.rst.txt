@@ -1,0 +1,74 @@
+.. _gmx principal:
+
+gmx principal
+=============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx principal [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`]
+                 [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-a1` :emphasis:`[<.xvg>]`] [:strong:`-a2` :emphasis:`[<.xvg>]`]
+                 [:strong:`-a3` :emphasis:`[<.xvg>]`] [:strong:`-om` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+                 [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`]
+                 [:strong:`-[no]foo`]
+
+Description
+-----------
+
+``gmx principal`` calculates the three principal axes of inertia for a group
+of atoms. NOTE: Old versions of GROMACS wrote the output data in a
+strange transposed way. As of GROMACS 5.0, the output file paxis1.dat
+contains the x/y/z components of the first (major) principal axis for
+each frame, and similarly for the middle and minor axes in paxis2.dat
+and paxis3.dat.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-a1`` [<.xvg>] (paxis1.xvg)
+    xvgr/xmgr file
+``-a2`` [<.xvg>] (paxis2.xvg)
+    xvgr/xmgr file
+``-a3`` [<.xvg>] (paxis3.xvg)
+    xvgr/xmgr file
+``-om`` [<.xvg>] (moi.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]foo``  (no)
+    Dummy option to avoid empty array
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4" kind="class" prot="public">
+    <compoundname>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</compoundname>
+    <includes local="no">gromacs/gpu_utils/gpuregiontimer_ocl.h</includes>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ae74b96663e55e3da5c88bf0f815ec39b" prot="private" static="no">
+        <type>typename <ref refid="structGpuTraits" kindref="compound">GpuTraits</ref>&lt; GpuFramework::OpenCL &gt;::CommandStream</type>
+        <definition>using GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::CommandStream =  typename GpuTraits&lt;GpuFramework::OpenCL&gt;::CommandStream</definition>
+        <argsstring></argsstring>
+        <name>CommandStream</name>
+        <briefdescription>
+<para>Short-hands. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="76" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1aaaddcb97dd4e98362714e6531797da0d" prot="private" static="no">
+        <type>typename <ref refid="structGpuTraits" kindref="compound">GpuTraits</ref>&lt; GpuFramework::OpenCL &gt;::CommandEvent</type>
+        <definition>using GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::CommandEvent =  typename GpuTraits&lt;GpuFramework::OpenCL&gt;::CommandEvent</definition>
+        <argsstring></argsstring>
+        <name>CommandEvent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="77" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1a09fcb98505a9ffb489bec84cdedb7f22" prot="private" static="no" mutable="no">
+        <type>std::array&lt; cl_event, 10 &gt;</type>
+        <definition>std::array&lt;cl_event, 10&gt; GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::events_</definition>
+        <argsstring></argsstring>
+        <name>events_</name>
+        <initializer>= {{nullptr}}</initializer>
+        <briefdescription>
+<para>The underlying individual timing events array. The maximum size is chosen arbitrarily to work with current code, and can be changed. There is simply no need for run-time resizing, and it&apos;s unlikely we&apos;ll ever need more than 10. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="83" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1a2ae887bf850bb47a5c1939c1d81fa163" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::currentEvent_</definition>
+        <argsstring></argsstring>
+        <name>currentEvent_</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Index of the active event. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="85" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ab2b8ca2ebb397993b0c04da16befa1d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::openTimingRegion</definition>
+        <argsstring>(CommandStream)</argsstring>
+        <name>openTimingRegion</name>
+        <param>
+          <type>CommandStream</type>
+        </param>
+        <briefdescription>
+<para>Should be called before the region start. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="90" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ab63b30a384af078deb22d2caddab0201" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::closeTimingRegion</definition>
+        <argsstring>(CommandStream)</argsstring>
+        <name>closeTimingRegion</name>
+        <param>
+          <type>CommandStream</type>
+        </param>
+        <briefdescription>
+<para>Should be called after the region end. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="92" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1acf69500bd1689000b1f912cfde95a8a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::getLastRangeTime</definition>
+        <argsstring>()</argsstring>
+        <name>getLastRangeTime</name>
+        <briefdescription>
+<para>Returns the last measured region timespan (in milliseconds) and calls <ref refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ad90abfebd65ecfa9bd687bba6865b347" kindref="member">reset()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="94" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="94" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ad90abfebd65ecfa9bd687bba6865b347" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <briefdescription>
+<para>Resets the internal state, releasing the used cl_events. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="117" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="117" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1aac68670d866a4d4ebcf531034396e204" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>CommandEvent *</type>
+        <definition>CommandEvent* GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;::fetchNextEvent</definition>
+        <argsstring>()</argsstring>
+        <name>fetchNextEvent</name>
+        <briefdescription>
+<para>Provides next unused cl_event for OpenCL API consumption. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="132" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="132" bodyend="138"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The OpenCL implementation of the GPU code region timing. With OpenCL, one has to use cl_event handle for each API call that has to be timed, and accumulate the timing afterwards. As we would like to avoid overhead on API calls, we only query and accumulate cl_event timing at the end of time steps, not after the API calls. Thus, this implementation does not reuse a single cl_event for multiple calls, but instead maintains an array of cl_events to be used within any single code region. The array size is fixed at a small but sufficiently large value for the number of cl_events that might contribute to a timer region, currently 10. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" line="74" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer_ocl.h" bodystart="73" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ab63b30a384af078deb22d2caddab0201" prot="public" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>closeTimingRegion</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1aaaddcb97dd4e98362714e6531797da0d" prot="private" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>CommandEvent</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ae74b96663e55e3da5c88bf0f815ec39b" prot="private" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>CommandStream</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1a2ae887bf850bb47a5c1939c1d81fa163" prot="private" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>currentEvent_</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1a09fcb98505a9ffb489bec84cdedb7f22" prot="private" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>events_</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1aac68670d866a4d4ebcf531034396e204" prot="public" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>fetchNextEvent</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1acf69500bd1689000b1f912cfde95a8a1" prot="public" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>getLastRangeTime</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ab2b8ca2ebb397993b0c04da16befa1d2" prot="public" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>openTimingRegion</name></member>
+      <member refid="classGpuRegionTimerImpl_3_01GpuFramework_1_1OpenCL_01_4_1ad90abfebd65ecfa9bd687bba6865b347" prot="public" virt="non-virtual"><scope>GpuRegionTimerImpl&lt; GpuFramework::OpenCL &gt;</scope><name>reset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

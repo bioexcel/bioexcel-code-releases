@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="structPmeGpu" kind="struct" prot="public">
+    <compoundname>PmeGpu</compoundname>
+    <includes local="no">gromacs/ewald/pme-gpu-types.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structPmeGpu_1aa2e6430e917b3d57a906632afd6c7371" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="structPmeShared" kindref="compound">PmeShared</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;PmeShared&gt; PmeGpu::common</definition>
+        <argsstring></argsstring>
+        <name>common</name>
+        <briefdescription>
+<para>The information copied once per reinit from the CPU structure. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="324" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="324" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1a7c8b55d63a1ecb7f87328e9ca45043bf" prot="public" static="no" mutable="no">
+        <type><ref refid="structPmeGpuSettings" kindref="compound">PmeGpuSettings</ref></type>
+        <definition>PmeGpuSettings PmeGpu::settings</definition>
+        <argsstring></argsstring>
+        <name>settings</name>
+        <briefdescription>
+<para>The settings. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="327" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="327" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1a135281d559c1ab01c55b7c7fd526a8b7" prot="public" static="no" mutable="no">
+        <type><ref refid="structPmeGpuStaging" kindref="compound">PmeGpuStaging</ref></type>
+        <definition>PmeGpuStaging PmeGpu::staging</definition>
+        <argsstring></argsstring>
+        <name>staging</name>
+        <briefdescription>
+<para>The host-side buffers. The device-side buffers are buried in kernelParams, but that will have to change. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="332" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="332" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1a0814f2297400be82b6cc6eadf05286cb" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int PmeGpu::nAtomsPadded</definition>
+        <argsstring></argsstring>
+        <name>nAtomsPadded</name>
+        <briefdescription>
+<para>Number of local atoms, padded to be divisible by PME_ATOM_DATA_ALIGNMENT. Used for kernel scheduling. kernelParams.atoms.nAtoms is the actual atom count to be used for data copying. TODO: this and the next member represent a memory allocation/padding properties - what a container type should do ideally. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="340" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="340" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1a07d2ee6e6f5689485ea29c9b09db47ce" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int PmeGpu::nAtomsAlloc</definition>
+        <argsstring></argsstring>
+        <name>nAtomsAlloc</name>
+        <briefdescription>
+<para>Number of local atoms, padded to be divisible by PME_ATOM_DATA_ALIGNMENT if c_usePadding is true. Used only as a basic size for almost all the atom data allocations (spline parameter data is also aligned by PME_SPREADGATHER_PARTICLES_PER_WARP). This should be the same as (c_usePadding ? nAtomsPadded : kernelParams.atoms.nAtoms). kernelParams.atoms.nAtoms is the actual atom count to be used for most data copying. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="348" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="348" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1ab730eec449f2c1537f23f01f4c57ab85" prot="public" static="no" mutable="no">
+        <type><ref refid="structgmx__device__info__t" kindref="compound">gmx_device_info_t</ref> *</type>
+        <definition>gmx_device_info_t* PmeGpu::deviceInfo</definition>
+        <argsstring></argsstring>
+        <name>deviceInfo</name>
+        <briefdescription>
+<para>A pointer to the device used during the execution. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="351" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1afa7f1d8b54af6ddd0c2983fc8b22cd5b" prot="public" static="no" mutable="no">
+        <type>std::intmax_t</type>
+        <definition>std::intmax_t PmeGpu::maxGridWidthX</definition>
+        <argsstring></argsstring>
+        <name>maxGridWidthX</name>
+        <briefdescription>
+<para>Kernel scheduling grid width limit in X - derived from deviceinfo compute capability in CUDA. Declared as very large int to make it useful in computations with type promotion, to avoid overflows. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="356" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="356" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1a592a545094c1ba0847e5e5223c981cc9" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="pme-gpu-types_8h_1abcfd068fea03365d4974a24c4df2ba56" kindref="member">PmeGpuKernelParams</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;PmeGpuKernelParams&gt; PmeGpu::kernelParams</definition>
+        <argsstring></argsstring>
+        <name>kernelParams</name>
+        <briefdescription>
+<para>A single structure encompassing all the PME data used on GPU. Its value is the only argument to all the PME GPU kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000023"><xreftitle>Todo</xreftitle><xrefdescription><para>Test whether this should be copied to the constant GPU memory once for each computation (or even less often with no box updates) instead of being an argument. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="363" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="363" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structPmeGpu_1a2f957ce8094d07fddeb61ae07e18e998" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="pme-gpu-types_8h_1a24d0bc2587245f415e5fb8a7f7924d1c" kindref="member">PmeGpuSpecific</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;PmeGpuSpecific&gt; PmeGpu::archSpecific</definition>
+        <argsstring></argsstring>
+        <name>archSpecific</name>
+        <briefdescription>
+<para>The pointer to GPU-framework specific host-side data, such as CUDA streams and events. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="366" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="366" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The main PME GPU host structure, included in the PME CPU structure by pointer. </para>    </briefdescription>
+    <detaileddescription>
+<internal></internal>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4415">
+        <label>ocl_gpu_id_t</label>
+        <link refid="structocl__gpu__id__t"/>
+      </node>
+      <node id="4417">
+        <label>PmeGpuSettings</label>
+        <link refid="structPmeGpuSettings"/>
+      </node>
+      <node id="4416">
+        <label>PmeGpuStaging</label>
+        <link refid="structPmeGpuStaging"/>
+      </node>
+      <node id="4414">
+        <label>gmx_device_info_t</label>
+        <link refid="structgmx__device__info__t"/>
+        <childnode refid="4415" relation="usage">
+          <edgelabel>ocl_gpu_id</edgelabel>
+        </childnode>
+      </node>
+      <node id="4413">
+        <label>PmeGpu</label>
+        <link refid="structPmeGpu"/>
+        <childnode refid="4414" relation="usage">
+          <edgelabel>deviceInfo</edgelabel>
+        </childnode>
+        <childnode refid="4416" relation="usage">
+          <edgelabel>staging</edgelabel>
+        </childnode>
+        <childnode refid="4417" relation="usage">
+          <edgelabel>settings</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" line="322" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-types.h" bodystart="321" bodyend="367"/>
+    <listofallmembers>
+      <member refid="structPmeGpu_1a2f957ce8094d07fddeb61ae07e18e998" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>archSpecific</name></member>
+      <member refid="structPmeGpu_1aa2e6430e917b3d57a906632afd6c7371" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>common</name></member>
+      <member refid="structPmeGpu_1ab730eec449f2c1537f23f01f4c57ab85" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>deviceInfo</name></member>
+      <member refid="structPmeGpu_1a592a545094c1ba0847e5e5223c981cc9" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>kernelParams</name></member>
+      <member refid="structPmeGpu_1afa7f1d8b54af6ddd0c2983fc8b22cd5b" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>maxGridWidthX</name></member>
+      <member refid="structPmeGpu_1a07d2ee6e6f5689485ea29c9b09db47ce" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>nAtomsAlloc</name></member>
+      <member refid="structPmeGpu_1a0814f2297400be82b6cc6eadf05286cb" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>nAtomsPadded</name></member>
+      <member refid="structPmeGpu_1a7c8b55d63a1ecb7f87328e9ca45043bf" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>settings</name></member>
+      <member refid="structPmeGpu_1a135281d559c1ab01c55b7c7fd526a8b7" prot="public" virt="non-virtual"><scope>PmeGpu</scope><name>staging</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

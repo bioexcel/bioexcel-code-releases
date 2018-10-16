@@ -1,0 +1,308 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx cluster &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx clustsize" href="gmx-clustsize.html" />
+    <link rel="prev" title="gmx chi" href="gmx-chi.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-clustsize.html" title="gmx clustsize"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-chi.html" title="gmx chi"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-cluster">
+<span id="id1"></span><h1>gmx cluster<a class="headerlink" href="#gmx-cluster" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx cluster [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+            [<strong>-dm</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-om</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-g</strong> <em>[&lt;.log&gt;]</em>]
+            [<strong>-dist</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ev</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-conv</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-sz</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-tr</strong> <em>[&lt;.xpm&gt;]</em>] [<strong>-ntr</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-clid</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-cl</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>]
+            [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]w</strong>]
+            [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]dista</strong>] [<strong>-nlevels</strong> <em>&lt;int&gt;</em>]
+            [<strong>-cutoff</strong> <em>&lt;real&gt;</em>] [<strong>-[no]fit</strong>] [<strong>-max</strong> <em>&lt;real&gt;</em>] [<strong>-skip</strong> <em>&lt;int&gt;</em>]
+            [<strong>-[no]av</strong>] [<strong>-wcl</strong> <em>&lt;int&gt;</em>] [<strong>-nst</strong> <em>&lt;int&gt;</em>] [<strong>-rmsmin</strong> <em>&lt;real&gt;</em>]
+            [<strong>-method</strong> <em>&lt;enum&gt;</em>] [<strong>-minstruct</strong> <em>&lt;int&gt;</em>] [<strong>-[no]binary</strong>]
+            [<strong>-M</strong> <em>&lt;int&gt;</em>] [<strong>-P</strong> <em>&lt;int&gt;</em>] [<strong>-seed</strong> <em>&lt;int&gt;</em>] [<strong>-niter</strong> <em>&lt;int&gt;</em>]
+            [<strong>-nrandom</strong> <em>&lt;int&gt;</em>] [<strong>-kT</strong> <em>&lt;real&gt;</em>] [<strong>-[no]pbc</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">cluster</span></code> can cluster structures using several different methods.
+Distances between structures can be determined from a trajectory
+or read from an <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> matrix file with the <code class="docutils literal"><span class="pre">-dm</span></code> option.
+RMS deviation after fitting or RMS deviation of atom-pair distances
+can be used to define the distance between structures.</p>
+<p>single linkage: add a structure to a cluster when its distance to any
+element of the cluster is less than <code class="docutils literal"><span class="pre">cutoff</span></code>.</p>
+<p>Jarvis Patrick: add a structure to a cluster when this structure
+and a structure in the cluster have each other as neighbors and
+they have a least <code class="docutils literal"><span class="pre">P</span></code> neighbors in common. The neighbors
+of a structure are the M closest structures or all structures within
+<code class="docutils literal"><span class="pre">cutoff</span></code>.</p>
+<p>Monte Carlo: reorder the RMSD matrix using Monte Carlo such that
+the order of the frames is using the smallest possible increments.
+With this it is possible to make a smooth animation going from one
+structure to another with the largest possible (e.g.) RMSD between
+them, however the intermediate steps should be as small as possible.
+Applications could be to visualize a potential of mean force
+ensemble of simulations or a pulling simulation. Obviously the user
+has to prepare the trajectory well (e.g. by not superimposing frames).
+The final result can be inspect visually by looking at the matrix
+<a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> file, which should vary smoothly from bottom to top.</p>
+<p>diagonalization: diagonalize the RMSD matrix.</p>
+<p>gromos: use algorithm as described in Daura <em>et al.</em>
+(<em>Angew. Chem. Int. Ed.</em> <strong>1999</strong>, <em>38</em>, pp 236-240).
+Count number of neighbors using cut-off, take structure with
+largest number of neighbors with all its neighbors as cluster
+and eliminate it from the pool of clusters. Repeat for remaining
+structures in pool.</p>
+<p>When the clustering algorithm assigns each structure to exactly one
+cluster (single linkage, Jarvis Patrick and gromos) and a trajectory
+file is supplied, the structure with
+the smallest average distance to the others or the average structure
+or all structures for each cluster will be written to a trajectory
+file. When writing all structures, separate numbered files are made
+for each cluster.</p>
+<p>Two output files are always written:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">-o</span></code> writes the RMSD values in the upper left half of the matrix
+and a graphical depiction of the clusters in the lower right half
+When <code class="docutils literal"><span class="pre">-minstruct</span></code> = 1 the graphical depiction is black
+when two structures are in the same cluster.
+When <code class="docutils literal"><span class="pre">-minstruct</span></code> &gt; 1 different colors will be used for each
+cluster.</li>
+<li><code class="docutils literal"><span class="pre">-g</span></code> writes information on the options used and a detailed list
+of all clusters and their members.</li>
+</ul>
+</div></blockquote>
+<p>Additionally, a number of optional output files can be written:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">-dist</span></code> writes the RMSD distribution.</li>
+<li><code class="docutils literal"><span class="pre">-ev</span></code> writes the eigenvectors of the RMSD matrix
+diagonalization.</li>
+<li><code class="docutils literal"><span class="pre">-sz</span></code> writes the cluster sizes.</li>
+<li><code class="docutils literal"><span class="pre">-tr</span></code> writes a matrix of the number transitions between
+cluster pairs.</li>
+<li><code class="docutils literal"><span class="pre">-ntr</span></code> writes the total number of transitions to or from
+each cluster.</li>
+<li><code class="docutils literal"><span class="pre">-clid</span></code> writes the cluster number as a function of time.</li>
+<li><code class="docutils literal"><span class="pre">-cl</span></code> writes average (with option <code class="docutils literal"><span class="pre">-av</span></code>) or central
+structure of each cluster or writes numbered files with cluster members
+for a selected set of clusters (with option <code class="docutils literal"><span class="pre">-wcl</span></code>, depends on
+<code class="docutils literal"><span class="pre">-nst</span></code> and <code class="docutils literal"><span class="pre">-rmsmin</span></code>). The center of a cluster is the
+structure with the smallest average RMSD from all other structures
+of the cluster.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-dm</span></code> [&lt;.xpm&gt;] (rmsd.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-om</span></code> [&lt;.xpm&gt;] (rmsd-raw.xpm)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xpm&gt;] (rmsd-clust.xpm)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.log&gt;] (cluster.log)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-dist</span></code> [&lt;.xvg&gt;] (rmsd-dist.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ev</span></code> [&lt;.xvg&gt;] (rmsd-eig.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-conv</span></code> [&lt;.xvg&gt;] (mc-conv.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-sz</span></code> [&lt;.xvg&gt;] (clust-size.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-tr</span></code> [&lt;.xpm&gt;] (clust-trans.xpm) (Optional)</dt>
+<dd>X PixMap compatible matrix file</dd>
+<dt><code class="docutils literal"><span class="pre">-ntr</span></code> [&lt;.xvg&gt;] (clust-trans.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-clid</span></code> [&lt;.xvg&gt;] (clust-id.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-cl</span></code> [&lt;.xtc/.trr/…&gt;] (clusters.pdb) (Optional)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]dista</span></code>  (no)</dt>
+<dd>Use RMSD of distances instead of RMS deviation</dd>
+<dt><code class="docutils literal"><span class="pre">-nlevels</span></code> &lt;int&gt; (40)</dt>
+<dd>Discretize RMSD matrix in this number of levels</dd>
+<dt><code class="docutils literal"><span class="pre">-cutoff</span></code> &lt;real&gt; (0.1)</dt>
+<dd>RMSD cut-off (nm) for two structures to be neighbor</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]fit</span></code>  (yes)</dt>
+<dd>Use least squares fitting before RMSD calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-max</span></code> &lt;real&gt; (-1)</dt>
+<dd>Maximum level in RMSD matrix</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (1)</dt>
+<dd>Only analyze every nr-th frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]av</span></code>  (no)</dt>
+<dd>Write average instead of middle structure for each cluster</dd>
+<dt><code class="docutils literal"><span class="pre">-wcl</span></code> &lt;int&gt; (0)</dt>
+<dd>Write the structures for this number of clusters to numbered files</dd>
+<dt><code class="docutils literal"><span class="pre">-nst</span></code> &lt;int&gt; (1)</dt>
+<dd>Only write all structures if more than this number of structures per cluster</dd>
+<dt><code class="docutils literal"><span class="pre">-rmsmin</span></code> &lt;real&gt; (0)</dt>
+<dd>minimum rms difference with rest of cluster for writing structures</dd>
+<dt><code class="docutils literal"><span class="pre">-method</span></code> &lt;enum&gt; (linkage)</dt>
+<dd>Method for cluster determination: linkage, jarvis-patrick, monte-carlo, diagonalization, gromos</dd>
+<dt><code class="docutils literal"><span class="pre">-minstruct</span></code> &lt;int&gt; (1)</dt>
+<dd>Minimum number of structures in cluster for coloring in the <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> file</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]binary</span></code>  (no)</dt>
+<dd>Treat the RMSD matrix as consisting of 0 and 1, where the cut-off is given by <code class="docutils literal"><span class="pre">-cutoff</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">-M</span></code> &lt;int&gt; (10)</dt>
+<dd>Number of nearest neighbors considered for Jarvis-Patrick algorithm, 0 is use cutoff</dd>
+<dt><code class="docutils literal"><span class="pre">-P</span></code> &lt;int&gt; (3)</dt>
+<dd>Number of identical nearest neighbors required to form a cluster</dd>
+<dt><code class="docutils literal"><span class="pre">-seed</span></code> &lt;int&gt; (0)</dt>
+<dd>Random number seed for Monte Carlo clustering algorithm (0 means generate)</dd>
+<dt><code class="docutils literal"><span class="pre">-niter</span></code> &lt;int&gt; (10000)</dt>
+<dd>Number of iterations for MC</dd>
+<dt><code class="docutils literal"><span class="pre">-nrandom</span></code> &lt;int&gt; (0)</dt>
+<dd>The first iterations for MC may be done complete random, to shuffle the frames</dd>
+<dt><code class="docutils literal"><span class="pre">-kT</span></code> &lt;real&gt; (0.001)</dt>
+<dd>Boltzmann weighting factor for Monte Carlo optimization (zero turns off uphill steps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>PBC check</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx cluster</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-chi.html"
+                        title="previous chapter">gmx chi</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-clustsize.html"
+                        title="next chapter">gmx clustsize</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-cluster.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-clustsize.html" title="gmx clustsize"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-chi.html" title="gmx chi"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

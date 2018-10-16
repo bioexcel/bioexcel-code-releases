@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1IProgramContext" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::IProgramContext</compoundname>
+    <derivedcompoundref refid="classgmx_1_1anonymous__namespace_02programcontext_8cpp_03_1_1DefaultProgramContext" prot="public" virt="non-virtual">gmx::anonymous_namespace{programcontext.cpp}::DefaultProgramContext</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1CommandLineProgramContext" prot="public" virt="non-virtual">gmx::CommandLineProgramContext</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1anonymous__namespace_02testinit_8cpp_03_1_1TestProgramContext" prot="public" virt="non-virtual">gmx::test::anonymous_namespace{testinit.cpp}::TestProgramContext</derivedcompoundref>
+    <includes local="no">gromacs/utility/programcontext.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1IProgramContext_1a26af3ba471321756753297d624c21d0d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const char *</type>
+        <definition>virtual const char* gmx::IProgramContext::programName</definition>
+        <argsstring>() const =0</argsstring>
+        <name>programName</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02programcontext_8cpp_03_1_1DefaultProgramContext_1a0bb81d77e772f5286a8d0bc3c0efacf8">programName</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02testinit_8cpp_03_1_1TestProgramContext_1a822088e5e1df12f90828d947a52e57ae">programName</reimplementedby>
+        <reimplementedby refid="group__module__commandline_1gaeab3d8df1129225a277449eae8fe3340">programName</reimplementedby>
+        <briefdescription>
+<para>Returns the name of the binary as it was invoked without any path. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is typically <computeroutput>argv[0]</computeroutput> with any leading directory stripped. Currently, this should be a valid file name. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" line="121" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IProgramContext_1a66ba95d75a6eefd4cc76b677130a48eb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const char *</type>
+        <definition>virtual const char* gmx::IProgramContext::displayName</definition>
+        <argsstring>() const =0</argsstring>
+        <name>displayName</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02programcontext_8cpp_03_1_1DefaultProgramContext_1a8918f85697f6b15ab30da11bfa601a4e">displayName</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02testinit_8cpp_03_1_1TestProgramContext_1a8aa372f60d09ab6528fc59d284d21cb2">displayName</reimplementedby>
+        <reimplementedby refid="group__module__commandline_1gad4a598a1052ae416d05ce25e516dfd2e">displayName</reimplementedby>
+        <briefdescription>
+<para>Returns a display name for the program. </para>        </briefdescription>
+        <detaileddescription>
+<para>For simple programs, this can equal <ref refid="classgmx_1_1IProgramContext_1a26af3ba471321756753297d624c21d0d" kindref="member">programName()</ref>. For the GROMACS <computeroutput>gmx</computeroutput> wrapper binary, this includes the name of the module (e.g., <computeroutput>gmx angle</computeroutput>). This is used only for informational purposes, and there are no constraints on contents, except that it should not be <computeroutput>NULL</computeroutput>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" line="131" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IProgramContext_1afaca282ab5e0bc99c6da555c0c7f4434" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const char *</type>
+        <definition>virtual const char* gmx::IProgramContext::fullBinaryPath</definition>
+        <argsstring>() const =0</argsstring>
+        <name>fullBinaryPath</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02programcontext_8cpp_03_1_1DefaultProgramContext_1a96d741536882ca360b89a40e91fb086e">fullBinaryPath</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02testinit_8cpp_03_1_1TestProgramContext_1a99dd828839adaa701fd6eadfe4ee46d8">fullBinaryPath</reimplementedby>
+        <reimplementedby refid="group__module__commandline_1ga5957348c4bc5a91748e16a84625d5c84">fullBinaryPath</reimplementedby>
+        <briefdescription>
+<para>Returns the full path of the running binary. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is mainly used for informational purposes. There are no constraints on contents, except that it should not be <computeroutput>NULL</computeroutput>. Currently, this is also used for sanity checks in checkpointing.</para><para>The implementation can provide an empty string if the path to the binary is not available. In such a case, the information is not shown. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" line="143" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IProgramContext_1ada732144a05c8faa224b5ad0d904df6f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structgmx_1_1InstallationPrefixInfo" kindref="compound">InstallationPrefixInfo</ref></type>
+        <definition>virtual InstallationPrefixInfo gmx::IProgramContext::installationPrefix</definition>
+        <argsstring>() const =0</argsstring>
+        <name>installationPrefix</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02programcontext_8cpp_03_1_1DefaultProgramContext_1a582409ab43bd99a6f0f2688c2d5a880a">installationPrefix</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02testinit_8cpp_03_1_1TestProgramContext_1a449de0dbcfc4c1103c1c89b086061bec">installationPrefix</reimplementedby>
+        <reimplementedby refid="group__module__commandline_1ga04d4684f9c807f5f191a53477a85646d">installationPrefix</reimplementedby>
+        <briefdescription>
+<para>Returns the installation prefix for GROMACS. </para>        </briefdescription>
+        <detaileddescription>
+<para>This path is used to locate the data files that are in <computeroutput>share/top/</computeroutput> in the source directory. The implementation can provide an empty string if the path is not available; in such a case, functions that require data files may fail.</para><para>The returned structure also contains a flag to indicate whether the prefix actually points to the source tree. This is used for tests and to support running binaries directly from the build tree. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" line="157" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1IProgramContext_1a2512c75e34337df80e3a1e994d17a8cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const char *</type>
+        <definition>virtual const char* gmx::IProgramContext::commandLine</definition>
+        <argsstring>() const =0</argsstring>
+        <name>commandLine</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02programcontext_8cpp_03_1_1DefaultProgramContext_1a24b51a2183e761b5d7678633dc29fec0">commandLine</reimplementedby>
+        <reimplementedby refid="classgmx_1_1test_1_1anonymous__namespace_02testinit_8cpp_03_1_1TestProgramContext_1ae4ffade4d9d27df3873969b34685cb7c">commandLine</reimplementedby>
+        <reimplementedby refid="group__module__commandline_1gaf923ae4442dffcada736934cb5c73dbb">commandLine</reimplementedby>
+        <briefdescription>
+<para>Returns the full command line used to invoke the binary. </para>        </briefdescription>
+        <detaileddescription>
+<para>The implementation can provide an empty string if no command line is available. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" line="164" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgmx_1_1IProgramContext_1a02fc3daccda7f50deaef42c6fa2c3523" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual gmx::IProgramContext::~IProgramContext</definition>
+        <argsstring>()</argsstring>
+        <name>~IProgramContext</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" line="167" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" bodystart="167" bodyend="167"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides context information about the program that is calling the library. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class provides access to information about the program that is currently running. This information is used to provide better information to the user, and to locate the GROMACS data files.</para><para><ref refid="group__module__utility_1ga2cf34635c815cc712b6291c2c8da2555" kindref="member">setProgramContext()</ref> should be called before any other GROMACS calls in a program (except for <ref refid="group__module__utility_1gae00d174a8ddd5325460d74dc663711c0" kindref="member">gmx::init()</ref>). This avoids thread safety issues, and allows nicely formatted error messages.</para><para>For thread safety, the implementations of the interface should ensure that the returned strings remain valid until the end of the program (see <ref refid="group__module__utility_1ga5ac09bdfd662fa49b0426432744f57be" kindref="member">getProgramContext()</ref> for discussion on deinitialization). Callers of the interface within GROMACS are prepared for exceptions, but generally terminate the program on any exception. Implementations should avoid exception except for truly fatal conditions.</para><para>The destructor is protected to signify that the context is never destroyed through the interface.</para><para><simplesect kind="see"><para><ref refid="group__module__utility_1ga5ac09bdfd662fa49b0426432744f57be" kindref="member">getProgramContext()</ref> </para><simplesectsep/><para><ref refid="group__module__utility_1ga2cf34635c815cc712b6291c2c8da2555" kindref="member">setProgramContext()</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="2073">
+        <label>gmx::IProgramContext</label>
+        <link refid="classgmx_1_1IProgramContext"/>
+      </node>
+      <node id="2074">
+        <label>gmx::anonymous_namespace{programcontext.cpp}::DefaultProgramContext</label>
+        <link refid="classgmx_1_1anonymous__namespace_02programcontext_8cpp_03_1_1DefaultProgramContext"/>
+        <childnode refid="2073" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2076">
+        <label>gmx::test::anonymous_namespace{testinit.cpp}::TestProgramContext</label>
+        <link refid="classgmx_1_1test_1_1anonymous__namespace_02testinit_8cpp_03_1_1TestProgramContext"/>
+        <childnode refid="2073" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2075">
+        <label>gmx::CommandLineProgramContext</label>
+        <link refid="classgmx_1_1CommandLineProgramContext"/>
+        <childnode refid="2073" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" line="113" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/programcontext.h" bodystart="112" bodyend="168"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1IProgramContext_1a2512c75e34337df80e3a1e994d17a8cc" prot="public" virt="pure-virtual"><scope>gmx::IProgramContext</scope><name>commandLine</name></member>
+      <member refid="classgmx_1_1IProgramContext_1a66ba95d75a6eefd4cc76b677130a48eb" prot="public" virt="pure-virtual"><scope>gmx::IProgramContext</scope><name>displayName</name></member>
+      <member refid="classgmx_1_1IProgramContext_1afaca282ab5e0bc99c6da555c0c7f4434" prot="public" virt="pure-virtual"><scope>gmx::IProgramContext</scope><name>fullBinaryPath</name></member>
+      <member refid="classgmx_1_1IProgramContext_1ada732144a05c8faa224b5ad0d904df6f" prot="public" virt="pure-virtual"><scope>gmx::IProgramContext</scope><name>installationPrefix</name></member>
+      <member refid="classgmx_1_1IProgramContext_1a26af3ba471321756753297d624c21d0d" prot="public" virt="pure-virtual"><scope>gmx::IProgramContext</scope><name>programName</name></member>
+      <member refid="classgmx_1_1IProgramContext_1a02fc3daccda7f50deaef42c6fa2c3523" prot="protected" virt="virtual"><scope>gmx::IProgramContext</scope><name>~IProgramContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

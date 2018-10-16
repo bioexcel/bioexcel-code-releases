@@ -1,0 +1,1867 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="exceptions_8h" kind="file">
+    <compoundname>exceptions.h</compoundname>
+    <includes local="no">cstdio</includes>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">exception</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includes local="no">type_traits</includes>
+    <includes local="no">typeindex</includes>
+    <includes local="no">vector</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="classhelpers_8h" local="yes">gromacs/utility/classhelpers.h</includes>
+    <includes refid="current__function_8h" local="yes">gromacs/utility/current_function.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includedby refid="abstractdata_8cpp" local="yes">src/gromacs/analysisdata/abstractdata.cpp</includedby>
+    <includedby refid="analysisdata_8cpp" local="yes">src/gromacs/analysisdata/analysisdata.cpp</includedby>
+    <includedby refid="arraydata_8cpp" local="yes">src/gromacs/analysisdata/arraydata.cpp</includedby>
+    <includedby refid="datamodulemanager_8cpp" local="yes">src/gromacs/analysisdata/datamodulemanager.cpp</includedby>
+    <includedby refid="datastorage_8cpp" local="yes">src/gromacs/analysisdata/datastorage.cpp</includedby>
+    <includedby refid="displacement_8cpp" local="yes">src/gromacs/analysisdata/modules/displacement.cpp</includedby>
+    <includedby refid="modules_2histogram_8cpp" local="yes">src/gromacs/analysisdata/modules/histogram.cpp</includedby>
+    <includedby refid="plot_8cpp" local="yes">src/gromacs/analysisdata/modules/plot.cpp</includedby>
+    <includedby refid="tests_2analysisdata_8cpp" local="yes">src/gromacs/analysisdata/tests/analysisdata.cpp</includedby>
+    <includedby refid="testasserts_8h" local="yes">src/testutils/testasserts.h</includedby>
+    <includedby refid="electricfield_8cpp" local="yes">src/gromacs/applied-forces/electricfield.cpp</includedby>
+    <includedby refid="hostallocator_8h" local="yes">src/gromacs/gpu_utils/hostallocator.h</includedby>
+    <includedby refid="awh_8cpp" local="yes">src/gromacs/awh/awh.cpp</includedby>
+    <includedby refid="bias_8cpp" local="yes">src/gromacs/awh/bias.cpp</includedby>
+    <includedby refid="biasparams_8cpp" local="yes">src/gromacs/awh/biasparams.cpp</includedby>
+    <includedby refid="biassharing_8cpp" local="yes">src/gromacs/awh/biassharing.cpp</includedby>
+    <includedby refid="biasstate_8cpp" local="yes">src/gromacs/awh/biasstate.cpp</includedby>
+    <includedby refid="threefry_8h" local="yes">src/gromacs/random/threefry.h</includedby>
+    <includedby refid="coordstate_8cpp" local="yes">src/gromacs/awh/coordstate.cpp</includedby>
+    <includedby refid="correlationhistory_8cpp" local="yes">src/gromacs/awh/correlationhistory.cpp</includedby>
+    <includedby refid="grid_8cpp" local="yes">src/gromacs/awh/grid.cpp</includedby>
+    <includedby refid="cmdlinehelpmodule_8cpp" local="yes">src/gromacs/commandline/cmdlinehelpmodule.cpp</includedby>
+    <includedby refid="cmdlinehelpwriter_8cpp" local="yes">src/gromacs/commandline/cmdlinehelpwriter.cpp</includedby>
+    <includedby refid="cmdlineinit_8cpp" local="yes">src/gromacs/commandline/cmdlineinit.cpp</includedby>
+    <includedby refid="cmdlinemodulemanager_8cpp" local="yes">src/gromacs/commandline/cmdlinemodulemanager.cpp</includedby>
+    <includedby refid="cmdlineparser_8cpp" local="yes">src/gromacs/commandline/cmdlineparser.cpp</includedby>
+    <includedby refid="cmdlineprogramcontext_8cpp" local="yes">src/gromacs/commandline/cmdlineprogramcontext.cpp</includedby>
+    <includedby refid="pargs_8cpp" local="yes">src/gromacs/commandline/pargs.cpp</includedby>
+    <includedby refid="shellcompletions_8cpp" local="yes">src/gromacs/commandline/shellcompletions.cpp</includedby>
+    <includedby refid="crosscorr_8cpp" local="yes">src/gromacs/correlationfunctions/crosscorr.cpp</includedby>
+    <includedby refid="manyautocorrelation_8cpp" local="yes">src/gromacs/correlationfunctions/manyautocorrelation.cpp</includedby>
+    <includedby refid="tests_2manyautocorrelation_8cpp" local="yes">src/gromacs/correlationfunctions/tests/manyautocorrelation.cpp</includedby>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="domdec__constraints_8cpp" local="yes">src/gromacs/domdec/domdec_constraints.cpp</includedby>
+    <includedby refid="domdec__topology_8cpp" local="yes">src/gromacs/domdec/domdec_topology.cpp</includedby>
+    <includedby refid="calculate-spline-moduli_8cpp" local="yes">src/gromacs/ewald/calculate-spline-moduli.cpp</includedby>
+    <includedby refid="pme-gpu-internal_8cpp" local="yes">src/gromacs/ewald/pme-gpu-internal.cpp</includedby>
+    <includedby refid="pme-gpu_8cpp" local="yes">src/gromacs/ewald/pme-gpu.cpp</includedby>
+    <includedby refid="pme-redistribute_8cpp" local="yes">src/gromacs/ewald/pme-redistribute.cpp</includedby>
+    <includedby refid="pme-solve_8cpp" local="yes">src/gromacs/ewald/pme-solve.cpp</includedby>
+    <includedby refid="pme-spread_8cpp" local="yes">src/gromacs/ewald/pme-spread.cpp</includedby>
+    <includedby refid="pme_8cpp" local="yes">src/gromacs/ewald/pme.cpp</includedby>
+    <includedby refid="pmetestcommon_8cpp" local="yes">src/gromacs/ewald/tests/pmetestcommon.cpp</includedby>
+    <includedby refid="testhardwarecontexts_8cpp" local="yes">src/gromacs/ewald/tests/testhardwarecontexts.cpp</includedby>
+    <includedby refid="fft5d_8cpp" local="yes">src/gromacs/fft/fft5d.cpp</includedby>
+    <includedby refid="fft__fftw3_8cpp" local="yes">src/gromacs/fft/fft_fftw3.cpp</includedby>
+    <includedby refid="matio_8cpp" local="yes">src/gromacs/fileio/matio.cpp</includedby>
+    <includedby refid="oenv_8cpp" local="yes">src/gromacs/fileio/oenv.cpp</includedby>
+    <includedby refid="readinp_8cpp" local="yes">src/gromacs/fileio/readinp.cpp</includedby>
+    <includedby refid="xvgr_8cpp" local="yes">src/gromacs/fileio/xvgr.cpp</includedby>
+    <includedby refid="gmx__densorder_8cpp" local="yes">src/gromacs/gmxana/gmx_densorder.cpp</includedby>
+    <includedby refid="gmx__dipoles_8cpp" local="yes">src/gromacs/gmxana/gmx_dipoles.cpp</includedby>
+    <includedby refid="gmx__hbond_8cpp" local="yes">src/gromacs/gmxana/gmx_hbond.cpp</includedby>
+    <includedby refid="gmx__wham_8cpp" local="yes">src/gromacs/gmxana/gmx_wham.cpp</includedby>
+    <includedby refid="gmx__xpm2ps_8cpp" local="yes">src/gromacs/gmxana/gmx_xpm2ps.cpp</includedby>
+    <includedby refid="nsfactor_8cpp" local="yes">src/gromacs/gmxana/nsfactor.cpp</includedby>
+    <includedby refid="fflibutil_8cpp" local="yes">src/gromacs/gmxpreprocess/fflibutil.cpp</includedby>
+    <includedby refid="gromacs_2gmxpreprocess_2grompp_8cpp" local="yes">src/gromacs/gmxpreprocess/grompp.cpp</includedby>
+    <includedby refid="insert-molecules_8cpp" local="yes">src/gromacs/gmxpreprocess/insert-molecules.cpp</includedby>
+    <includedby refid="pdb2top_8cpp" local="yes">src/gromacs/gmxpreprocess/pdb2top.cpp</includedby>
+    <includedby refid="readir_8cpp" local="yes">src/gromacs/gmxpreprocess/readir.cpp</includedby>
+    <includedby refid="gpu__utils__ocl_8cpp" local="yes">src/gromacs/gpu_utils/gpu_utils_ocl.cpp</includedby>
+    <includedby refid="ocl__caching_8cpp" local="yes">src/gromacs/gpu_utils/ocl_caching.cpp</includedby>
+    <includedby refid="ocl__compiler_8cpp" local="yes">src/gromacs/gpu_utils/ocl_compiler.cpp</includedby>
+    <includedby refid="devicetransfers__ocl_8cpp" local="yes">src/gromacs/gpu_utils/tests/devicetransfers_ocl.cpp</includedby>
+    <includedby refid="detecthardware_8cpp" local="yes">src/gromacs/hardware/detecthardware.cpp</includedby>
+    <includedby refid="listed-forces_8cpp" local="yes">src/gromacs/listed-forces/listed-forces.cpp</includedby>
+    <includedby refid="manage-threading_8cpp" local="yes">src/gromacs/listed-forces/manage-threading.cpp</includedby>
+    <includedby refid="clincs_8cpp" local="yes">src/gromacs/mdlib/clincs.cpp</includedby>
+    <includedby refid="constr_8cpp" local="yes">src/gromacs/mdlib/constr.cpp</includedby>
+    <includedby refid="force_8cpp" local="yes">src/gromacs/mdlib/force.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <includedby refid="main_8cpp" local="yes">src/gromacs/mdlib/main.cpp</includedby>
+    <includedby refid="mdatoms_8cpp" local="yes">src/gromacs/mdlib/mdatoms.cpp</includedby>
+    <includedby refid="minimize_8cpp" local="yes">src/gromacs/mdlib/minimize.cpp</includedby>
+    <includedby refid="nbnxn__atomdata_8cpp" local="yes">src/gromacs/mdlib/nbnxn_atomdata.cpp</includedby>
+    <includedby refid="nbnxn__grid_8cpp" local="yes">src/gromacs/mdlib/nbnxn_grid.cpp</includedby>
+    <includedby refid="nbnxn__ocl__jit__support_8cpp" local="yes">src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_jit_support.cpp</includedby>
+    <includedby refid="nbnxn__search_8cpp" local="yes">src/gromacs/mdlib/nbnxn_search.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="tgroup_8cpp" local="yes">src/gromacs/mdlib/tgroup.cpp</includedby>
+    <includedby refid="update_8cpp" local="yes">src/gromacs/mdlib/update.cpp</includedby>
+    <includedby refid="vsite_8cpp" local="yes">src/gromacs/mdlib/vsite.cpp</includedby>
+    <includedby refid="threadaffinity_8cpp" local="yes">src/gromacs/mdrunutility/threadaffinity.cpp</includedby>
+    <includedby refid="helpmanager_8cpp" local="yes">src/gromacs/onlinehelp/helpmanager.cpp</includedby>
+    <includedby refid="helptopic_8cpp" local="yes">src/gromacs/onlinehelp/helptopic.cpp</includedby>
+    <includedby refid="helpwritercontext_8cpp" local="yes">src/gromacs/onlinehelp/helpwritercontext.cpp</includedby>
+    <includedby refid="tests_2helpmanager_8cpp" local="yes">src/gromacs/onlinehelp/tests/helpmanager.cpp</includedby>
+    <includedby refid="abstractoption_8cpp" local="yes">src/gromacs/options/abstractoption.cpp</includedby>
+    <includedby refid="optionstoragetemplate_8h" local="yes">src/gromacs/options/optionstoragetemplate.h</includedby>
+    <includedby refid="valueconverter_8h" local="yes">src/gromacs/options/valueconverter.h</includedby>
+    <includedby refid="basicoptions_8cpp" local="yes">src/gromacs/options/basicoptions.cpp</includedby>
+    <includedby refid="filenameoption_8cpp" local="yes">src/gromacs/options/filenameoption.cpp</includedby>
+    <includedby refid="filenameoptionmanager_8cpp" local="yes">src/gromacs/options/filenameoptionmanager.cpp</includedby>
+    <includedby refid="options_8cpp" local="yes">src/gromacs/options/options.cpp</includedby>
+    <includedby refid="optionsassigner_8cpp" local="yes">src/gromacs/options/optionsassigner.cpp</includedby>
+    <includedby refid="abstractoptionstorage_8cpp" local="yes">src/gromacs/options/tests/abstractoptionstorage.cpp</includedby>
+    <includedby refid="testexceptions_8h" local="yes">src/testutils/testexceptions.h</includedby>
+    <includedby refid="tests_2filenameoption_8cpp" local="yes">src/gromacs/options/tests/filenameoption.cpp</includedby>
+    <includedby refid="tests_2filenameoptionmanager_8cpp" local="yes">src/gromacs/options/tests/filenameoptionmanager.cpp</includedby>
+    <includedby refid="option_8cpp" local="yes">src/gromacs/options/tests/option.cpp</includedby>
+    <includedby refid="tests_2optionsassigner_8cpp" local="yes">src/gromacs/options/tests/optionsassigner.cpp</includedby>
+    <includedby refid="tests_2treesupport_8cpp" local="yes">src/gromacs/options/tests/treesupport.cpp</includedby>
+    <includedby refid="timeunitmanager_8cpp" local="yes">src/gromacs/options/timeunitmanager.cpp</includedby>
+    <includedby refid="treesupport_8cpp" local="yes">src/gromacs/options/treesupport.cpp</includedby>
+    <includedby refid="pbc_8cpp" local="yes">src/gromacs/pbcutil/pbc.cpp</includedby>
+    <includedby refid="pull_8cpp" local="yes">src/gromacs/pulling/pull.cpp</includedby>
+    <includedby refid="threefry_8cpp" local="yes">src/gromacs/random/tests/threefry.cpp</includedby>
+    <includedby refid="compiler_8cpp" local="yes">src/gromacs/selection/compiler.cpp</includedby>
+    <includedby refid="evaluate_8cpp" local="yes">src/gromacs/selection/evaluate.cpp</includedby>
+    <includedby refid="indexutil_8cpp" local="yes">src/gromacs/selection/indexutil.cpp</includedby>
+    <includedby refid="mempool_8cpp" local="yes">src/gromacs/selection/mempool.cpp</includedby>
+    <includedby refid="nbsearch_8cpp" local="yes">src/gromacs/selection/nbsearch.cpp</includedby>
+    <includedby refid="params_8cpp" local="yes">src/gromacs/selection/params.cpp</includedby>
+    <includedby refid="parser__internal_8h" local="yes">src/gromacs/selection/parser_internal.h</includedby>
+    <includedby refid="parsetree_8cpp" local="yes">src/gromacs/selection/parsetree.cpp</includedby>
+    <includedby refid="poscalc_8cpp" local="yes">src/gromacs/selection/poscalc.cpp</includedby>
+    <includedby refid="scanner__internal_8cpp" local="yes">src/gromacs/selection/scanner_internal.cpp</includedby>
+    <includedby refid="selection_8cpp" local="yes">src/gromacs/selection/selection.cpp</includedby>
+    <includedby refid="selectioncollection_8cpp" local="yes">src/gromacs/selection/selectioncollection.cpp</includedby>
+    <includedby refid="selectionoption_8cpp" local="yes">src/gromacs/selection/selectionoption.cpp</includedby>
+    <includedby refid="selectionoptionbehavior_8cpp" local="yes">src/gromacs/selection/selectionoptionbehavior.cpp</includedby>
+    <includedby refid="selectionoptionmanager_8cpp" local="yes">src/gromacs/selection/selectionoptionmanager.cpp</includedby>
+    <includedby refid="selelem_8cpp" local="yes">src/gromacs/selection/selelem.cpp</includedby>
+    <includedby refid="selhelp_8cpp" local="yes">src/gromacs/selection/selhelp.cpp</includedby>
+    <includedby refid="selmethod_8cpp" local="yes">src/gromacs/selection/selmethod.cpp</includedby>
+    <includedby refid="sm__compare_8cpp" local="yes">src/gromacs/selection/sm_compare.cpp</includedby>
+    <includedby refid="sm__distance_8cpp" local="yes">src/gromacs/selection/sm_distance.cpp</includedby>
+    <includedby refid="sm__insolidangle_8cpp" local="yes">src/gromacs/selection/sm_insolidangle.cpp</includedby>
+    <includedby refid="sm__keywords_8cpp" local="yes">src/gromacs/selection/sm_keywords.cpp</includedby>
+    <includedby refid="sm__merge_8cpp" local="yes">src/gromacs/selection/sm_merge.cpp</includedby>
+    <includedby refid="sm__permute_8cpp" local="yes">src/gromacs/selection/sm_permute.cpp</includedby>
+    <includedby refid="sm__same_8cpp" local="yes">src/gromacs/selection/sm_same.cpp</includedby>
+    <includedby refid="sm__simple_8cpp" local="yes">src/gromacs/selection/sm_simple.cpp</includedby>
+    <includedby refid="symrec_8cpp" local="yes">src/gromacs/selection/symrec.cpp</includedby>
+    <includedby refid="tests_2selectioncollection_8cpp" local="yes">src/gromacs/selection/tests/selectioncollection.cpp</includedby>
+    <includedby refid="tests_2selectionoption_8cpp" local="yes">src/gromacs/selection/tests/selectionoption.cpp</includedby>
+    <includedby refid="cubicsplinetable_8h" local="yes">src/gromacs/tables/cubicsplinetable.h</includedby>
+    <includedby refid="cubicsplinetable_8cpp" local="yes">src/gromacs/tables/cubicsplinetable.cpp</includedby>
+    <includedby refid="quadraticsplinetable_8h" local="yes">src/gromacs/tables/quadraticsplinetable.h</includedby>
+    <includedby refid="quadraticsplinetable_8cpp" local="yes">src/gromacs/tables/quadraticsplinetable.cpp</includedby>
+    <includedby refid="splineutil_8cpp" local="yes">src/gromacs/tables/splineutil.cpp</includedby>
+    <includedby refid="decidegpuusage_8cpp" local="yes">src/gromacs/taskassignment/decidegpuusage.cpp</includedby>
+    <includedby refid="findallgputasks_8cpp" local="yes">src/gromacs/taskassignment/findallgputasks.cpp</includedby>
+    <includedby refid="taskassignment_8cpp" local="yes">src/gromacs/taskassignment/taskassignment.cpp</includedby>
+    <includedby refid="tests_2usergpuids_8cpp" local="yes">src/gromacs/taskassignment/tests/usergpuids.cpp</includedby>
+    <includedby refid="usergpuids_8cpp" local="yes">src/gromacs/taskassignment/usergpuids.cpp</includedby>
+    <includedby refid="analysismodule_8cpp" local="yes">src/gromacs/trajectoryanalysis/analysismodule.cpp</includedby>
+    <includedby refid="analysissettings_8cpp" local="yes">src/gromacs/trajectoryanalysis/analysissettings.cpp</includedby>
+    <includedby refid="cmdlinerunner_8cpp" local="yes">src/gromacs/trajectoryanalysis/cmdlinerunner.cpp</includedby>
+    <includedby refid="modules_2angle_8cpp" local="yes">src/gromacs/trajectoryanalysis/modules/angle.cpp</includedby>
+    <includedby refid="modules_2distance_8cpp" local="yes">src/gromacs/trajectoryanalysis/modules/distance.cpp</includedby>
+    <includedby refid="modules_2freevolume_8cpp" local="yes">src/gromacs/trajectoryanalysis/modules/freevolume.cpp</includedby>
+    <includedby refid="modules_2pairdist_8cpp" local="yes">src/gromacs/trajectoryanalysis/modules/pairdist.cpp</includedby>
+    <includedby refid="modules_2rdf_8cpp" local="yes">src/gromacs/trajectoryanalysis/modules/rdf.cpp</includedby>
+    <includedby refid="modules_2sasa_8cpp" local="yes">src/gromacs/trajectoryanalysis/modules/sasa.cpp</includedby>
+    <includedby refid="modules_2select_8cpp" local="yes">src/gromacs/trajectoryanalysis/modules/select.cpp</includedby>
+    <includedby refid="runnercommon_8cpp" local="yes">src/gromacs/trajectoryanalysis/runnercommon.cpp</includedby>
+    <includedby refid="tests_2cmdlinerunner_8cpp" local="yes">src/gromacs/trajectoryanalysis/tests/cmdlinerunner.cpp</includedby>
+    <includedby refid="test__selection_8cpp" local="yes">src/gromacs/trajectoryanalysis/tests/test_selection.cpp</includedby>
+    <includedby refid="trajectoryanalysis_8h" local="yes">src/gromacs/trajectoryanalysis.h</includedby>
+    <includedby refid="binaryinformation_8cpp" local="yes">src/gromacs/utility/binaryinformation.cpp</includedby>
+    <includedby refid="datafilefinder_8cpp" local="yes">src/gromacs/utility/datafilefinder.cpp</includedby>
+    <includedby refid="directoryenumerator_8cpp" local="yes">src/gromacs/utility/directoryenumerator.cpp</includedby>
+    <includedby refid="exceptions_8cpp" local="yes">src/gromacs/utility/exceptions.cpp</includedby>
+    <includedby refid="filestream_8cpp" local="yes">src/gromacs/utility/filestream.cpp</includedby>
+    <includedby refid="futil_8cpp" local="yes">src/gromacs/utility/futil.cpp</includedby>
+    <includedby refid="gmxomp_8cpp" local="yes">src/gromacs/utility/gmxomp.cpp</includedby>
+    <includedby refid="gmxregex_8cpp" local="yes">src/gromacs/utility/gmxregex.cpp</includedby>
+    <includedby refid="ikeyvaluetreeerror_8cpp" local="yes">src/gromacs/utility/ikeyvaluetreeerror.cpp</includedby>
+    <includedby refid="keyvaluetreetransform_8cpp" local="yes">src/gromacs/utility/keyvaluetreetransform.cpp</includedby>
+    <includedby refid="path_8cpp" local="yes">src/gromacs/utility/path.cpp</includedby>
+    <includedby refid="strconvert_8cpp" local="yes">src/gromacs/utility/strconvert.cpp</includedby>
+    <includedby refid="stringutil_8cpp" local="yes">src/gromacs/utility/stringutil.cpp</includedby>
+    <includedby refid="tests_2keyvaluetreetransform_8cpp" local="yes">src/gromacs/utility/tests/keyvaluetreetransform.cpp</includedby>
+    <includedby refid="tests_2stringutil_8cpp" local="yes">src/gromacs/utility/tests/stringutil.cpp</includedby>
+    <includedby refid="utility_8h" local="yes">src/gromacs/utility.h</includedby>
+    <includedby refid="gmx_8cpp" local="yes">src/programs/gmx.cpp</includedby>
+    <includedby refid="membed_8cpp" local="yes">src/programs/mdrun/membed.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <includedby refid="energyreader_8cpp" local="yes">src/programs/mdrun/tests/energyreader.cpp</includedby>
+    <includedby refid="trajectoryreader_8cpp" local="yes">src/programs/mdrun/tests/trajectoryreader.cpp</includedby>
+    <includedby refid="mpitest_8cpp" local="yes">src/testutils/mpitest.cpp</includedby>
+    <includedby refid="refdata-checkers_8h" local="yes">src/testutils/refdata-checkers.h</includedby>
+    <includedby refid="refdata-xml_8cpp" local="yes">src/testutils/refdata-xml.cpp</includedby>
+    <includedby refid="refdata_8cpp" local="yes">src/testutils/refdata.cpp</includedby>
+    <includedby refid="stdiohelper_8cpp" local="yes">src/testutils/stdiohelper.cpp</includedby>
+    <includedby refid="testasserts_8cpp" local="yes">src/testutils/testasserts.cpp</includedby>
+    <includedby refid="testinit_8cpp" local="yes">src/testutils/testinit.cpp</includedby>
+    <incdepgraph>
+      <node id="30675">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="30672">
+        <label>stdint.h</label>
+      </node>
+      <node id="30667">
+        <label>string</label>
+      </node>
+      <node id="30674">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="30666" relation="include">
+        </childnode>
+      </node>
+      <node id="30665">
+        <label>exception</label>
+      </node>
+      <node id="30676">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="30671" relation="include">
+        </childnode>
+        <childnode refid="30675" relation="include">
+        </childnode>
+      </node>
+      <node id="30663">
+        <label>cstdio</label>
+      </node>
+      <node id="30670">
+        <label>vector</label>
+      </node>
+      <node id="30671">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="30672" relation="include">
+        </childnode>
+        <childnode refid="30673" relation="include">
+        </childnode>
+      </node>
+      <node id="30664">
+        <label>cstdlib</label>
+      </node>
+      <node id="30662">
+        <label>src/gromacs/utility/exceptions.h</label>
+        <link refid="exceptions.h"/>
+        <childnode refid="30663" relation="include">
+        </childnode>
+        <childnode refid="30664" relation="include">
+        </childnode>
+        <childnode refid="30665" relation="include">
+        </childnode>
+        <childnode refid="30666" relation="include">
+        </childnode>
+        <childnode refid="30667" relation="include">
+        </childnode>
+        <childnode refid="30668" relation="include">
+        </childnode>
+        <childnode refid="30669" relation="include">
+        </childnode>
+        <childnode refid="30670" relation="include">
+        </childnode>
+        <childnode refid="30671" relation="include">
+        </childnode>
+        <childnode refid="30674" relation="include">
+        </childnode>
+        <childnode refid="30675" relation="include">
+        </childnode>
+        <childnode refid="30676" relation="include">
+        </childnode>
+      </node>
+      <node id="30668">
+        <label>type_traits</label>
+      </node>
+      <node id="30666">
+        <label>memory</label>
+      </node>
+      <node id="30673">
+        <label>inttypes.h</label>
+      </node>
+      <node id="30669">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="30823">
+        <label>src/gromacs/options/valueconverter.h</label>
+        <link refid="valueconverter_8h"/>
+        <childnode refid="30815" relation="include">
+        </childnode>
+      </node>
+      <node id="30817">
+        <label>src/gromacs/options/basicoptions.cpp</label>
+        <link refid="basicoptions_8cpp"/>
+      </node>
+      <node id="30806">
+        <label>src/gromacs/gpu_utils/ocl_compiler.cpp</label>
+        <link refid="ocl__compiler_8cpp"/>
+      </node>
+      <node id="30873">
+        <label>src/gromacs/trajectoryanalysis/modules/rdf.cpp</label>
+        <link refid="modules_2rdf_8cpp"/>
+      </node>
+      <node id="30776">
+        <label>src/gromacs/ewald/pme-pp.cpp</label>
+        <link refid="pme-pp_8cpp"/>
+      </node>
+      <node id="30837">
+        <label>src/gromacs/selection/params.cpp</label>
+        <link refid="params_8cpp"/>
+      </node>
+      <node id="30733">
+        <label>src/gromacs/random/tests/normaldistribution.cpp</label>
+        <link refid="normaldistribution_8cpp"/>
+      </node>
+      <node id="30799">
+        <label>src/gromacs/commandline/shellcompletions.cpp</label>
+        <link refid="shellcompletions_8cpp"/>
+      </node>
+      <node id="30681">
+        <label>src/gromacs/analysisdata/datamodulemanager.cpp</label>
+        <link refid="datamodulemanager_8cpp"/>
+      </node>
+      <node id="30694">
+        <label>src/gromacs/applied-forces/tests/electricfield.cpp</label>
+        <link refid="tests_2electricfield_8cpp"/>
+      </node>
+      <node id="30728">
+        <label>src/gromacs/options/tests/timeunitmanager.cpp</label>
+        <link refid="tests_2timeunitmanager_8cpp"/>
+      </node>
+      <node id="30819">
+        <label>src/gromacs/options/filenameoption.cpp</label>
+        <link refid="filenameoption_8cpp"/>
+      </node>
+      <node id="30700">
+        <label>src/gromacs/correlationfunctions/tests/expfit.cpp</label>
+        <link refid="tests_2expfit_8cpp"/>
+      </node>
+      <node id="30800">
+        <label>src/gromacs/correlationfunctions/crosscorr.cpp</label>
+        <link refid="crosscorr_8cpp"/>
+      </node>
+      <node id="30878">
+        <label>src/gromacs/trajectoryanalysis.h</label>
+        <link refid="trajectoryanalysis_8h"/>
+        <childnode refid="30879" relation="include">
+        </childnode>
+      </node>
+      <node id="30856">
+        <label>src/gromacs/selection/symrec.cpp</label>
+        <link refid="symrec_8cpp"/>
+      </node>
+      <node id="30782">
+        <label>src/gromacs/gpu_utils/tests/pinnedmemorychecker.cpp</label>
+        <link refid="pinnedmemorychecker_8cpp"/>
+      </node>
+      <node id="30887">
+        <label>src/gromacs/utility/path.cpp</label>
+        <link refid="path_8cpp"/>
+      </node>
+      <node id="30689">
+        <label>src/gromacs/analysisdata/tests/average.cpp</label>
+        <link refid="tests_2average_8cpp"/>
+      </node>
+      <node id="30784">
+        <label>src/gromacs/awh/biasparams.cpp</label>
+        <link refid="biasparams_8cpp"/>
+      </node>
+      <node id="30892">
+        <label>src/testutils/mpitest.cpp</label>
+        <link refid="mpitest_8cpp"/>
+      </node>
+      <node id="30770">
+        <label>src/gromacs/swap/swapcoords.cpp</label>
+        <link refid="gromacs_2swap_2swapcoords_8cpp"/>
+      </node>
+      <node id="30710">
+        <label>src/gromacs/ewald/tests/pmesolvetest.cpp</label>
+        <link refid="pmesolvetest_8cpp"/>
+      </node>
+      <node id="30883">
+        <label>src/gromacs/utility/exceptions.cpp</label>
+        <link refid="exceptions_8cpp"/>
+      </node>
+      <node id="30827">
+        <label>src/testutils/testexceptions.h</label>
+        <link refid="testexceptions_8h"/>
+        <childnode refid="30722" relation="include">
+        </childnode>
+        <childnode refid="30754" relation="include">
+        </childnode>
+        <childnode refid="30828" relation="include">
+        </childnode>
+        <childnode refid="30755" relation="include">
+        </childnode>
+        <childnode refid="30757" relation="include">
+        </childnode>
+      </node>
+      <node id="30793">
+        <label>src/gromacs/commandline/cmdlinehelpmodule.cpp</label>
+        <link refid="cmdlinehelpmodule_8cpp"/>
+      </node>
+      <node id="30735">
+        <label>src/gromacs/random/tests/threefry.cpp</label>
+        <link refid="threefry_8cpp"/>
+      </node>
+      <node id="30847">
+        <label>src/gromacs/selection/selmethod.cpp</label>
+        <link refid="selmethod_8cpp"/>
+      </node>
+      <node id="30684">
+        <label>src/gromacs/analysisdata/modules/histogram.cpp</label>
+        <link refid="modules_2histogram_8cpp"/>
+      </node>
+      <node id="30849">
+        <label>src/gromacs/selection/sm_distance.cpp</label>
+        <link refid="sm__distance_8cpp"/>
+      </node>
+      <node id="30706">
+        <label>src/testutils/tests/xvgtest_tests.cpp</label>
+        <link refid="xvgtest__tests_8cpp"/>
+      </node>
+      <node id="30876">
+        <label>src/gromacs/trajectoryanalysis/runnercommon.cpp</label>
+        <link refid="runnercommon_8cpp"/>
+      </node>
+      <node id="30787">
+        <label>src/gromacs/random/threefry.h</label>
+        <link refid="threefry_8h"/>
+        <childnode refid="30788" relation="include">
+        </childnode>
+        <childnode refid="30765" relation="include">
+        </childnode>
+        <childnode refid="30769" relation="include">
+        </childnode>
+        <childnode refid="30731" relation="include">
+        </childnode>
+        <childnode refid="30732" relation="include">
+        </childnode>
+        <childnode refid="30733" relation="include">
+        </childnode>
+        <childnode refid="30734" relation="include">
+        </childnode>
+        <childnode refid="30735" relation="include">
+        </childnode>
+        <childnode refid="30736" relation="include">
+        </childnode>
+        <childnode refid="30737" relation="include">
+        </childnode>
+        <childnode refid="30789" relation="include">
+        </childnode>
+        <childnode refid="30738" relation="include">
+        </childnode>
+        <childnode refid="30790" relation="include">
+        </childnode>
+        <childnode refid="30746" relation="include">
+        </childnode>
+      </node>
+      <node id="30832">
+        <label>src/gromacs/selection/compiler.cpp</label>
+        <link refid="compiler_8cpp"/>
+      </node>
+      <node id="30825">
+        <label>src/gromacs/options/options.cpp</label>
+        <link refid="options_8cpp"/>
+      </node>
+      <node id="30701">
+        <label>src/gromacs/correlationfunctions/tests/manyautocorrelation.cpp</label>
+        <link refid="tests_2manyautocorrelation_8cpp"/>
+      </node>
+      <node id="30688">
+        <label>src/gromacs/analysisdata/tests/arraydata.cpp</label>
+        <link refid="tests_2arraydata_8cpp"/>
+      </node>
+      <node id="30816">
+        <label>src/gromacs/options/basicoptionstorage.h</label>
+        <link refid="basicoptionstorage_8h"/>
+        <childnode refid="30814" relation="include">
+        </childnode>
+        <childnode refid="30817" relation="include">
+        </childnode>
+      </node>
+      <node id="30824">
+        <label>src/gromacs/options/filenameoptionmanager.cpp</label>
+        <link refid="filenameoptionmanager_8cpp"/>
+      </node>
+      <node id="30712">
+        <label>src/gromacs/ewald/tests/pmetestcommon.cpp</label>
+        <link refid="pmetestcommon_8cpp"/>
+      </node>
+      <node id="30801">
+        <label>src/gromacs/correlationfunctions/manyautocorrelation.cpp</label>
+        <link refid="manyautocorrelation_8cpp"/>
+      </node>
+      <node id="30839">
+        <label>src/gromacs/selection/parsetree.cpp</label>
+        <link refid="parsetree_8cpp"/>
+      </node>
+      <node id="30786">
+        <label>src/gromacs/awh/biasstate.cpp</label>
+        <link refid="biasstate_8cpp"/>
+      </node>
+      <node id="30760">
+        <label>src/gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="30761" relation="include">
+        </childnode>
+        <childnode refid="30772" relation="include">
+        </childnode>
+        <childnode refid="30780" relation="include">
+        </childnode>
+        <childnode refid="30781" relation="include">
+        </childnode>
+        <childnode refid="30782" relation="include">
+        </childnode>
+      </node>
+      <node id="30729">
+        <label>src/gromacs/options/tests/treesupport.cpp</label>
+        <link refid="tests_2treesupport_8cpp"/>
+      </node>
+      <node id="30774">
+        <label>src/gromacs/ewald/pme-gpu-internal.cpp</label>
+        <link refid="pme-gpu-internal_8cpp"/>
+      </node>
+      <node id="30780">
+        <label>src/gromacs/gpu_utils/hostallocator.cpp</label>
+        <link refid="hostallocator_8cpp"/>
+      </node>
+      <node id="30695">
+        <label>src/gromacs/commandline/tests/cmdlinehelpmodule.cpp</label>
+        <link refid="tests_2cmdlinehelpmodule_8cpp"/>
+      </node>
+      <node id="30777">
+        <label>src/gromacs/ewald/pme.cpp</label>
+        <link refid="pme_8cpp"/>
+      </node>
+      <node id="30727">
+        <label>src/gromacs/options/tests/repeatingsection.cpp</label>
+        <link refid="repeatingsection_8cpp"/>
+      </node>
+      <node id="30841">
+        <label>src/gromacs/selection/scanner_internal.cpp</label>
+        <link refid="scanner__internal_8cpp"/>
+      </node>
+      <node id="30696">
+        <label>src/gromacs/commandline/tests/cmdlinemodulemanager.cpp</label>
+        <link refid="tests_2cmdlinemodulemanager_8cpp"/>
+      </node>
+      <node id="30685">
+        <label>src/gromacs/analysisdata/modules/plot.cpp</label>
+        <link refid="plot_8cpp"/>
+      </node>
+      <node id="30859">
+        <label>src/gromacs/tables/quadraticsplinetable.h</label>
+        <link refid="quadraticsplinetable_8h"/>
+        <childnode refid="30860" relation="include">
+        </childnode>
+        <childnode refid="30741" relation="include">
+        </childnode>
+      </node>
+      <node id="30753">
+        <label>src/programs/mdrun/tests/trajectoryreader.cpp</label>
+        <link refid="trajectoryreader_8cpp"/>
+      </node>
+      <node id="30737">
+        <label>src/gromacs/random/tests/uniformrealdistribution.cpp</label>
+        <link refid="uniformrealdistribution_8cpp"/>
+      </node>
+      <node id="30742">
+        <label>src/gromacs/trajectoryanalysis/tests/cmdlinerunner.cpp</label>
+        <link refid="tests_2cmdlinerunner_8cpp"/>
+      </node>
+      <node id="30697">
+        <label>src/gromacs/commandline/tests/cmdlineparser.cpp</label>
+        <link refid="tests_2cmdlineparser_8cpp"/>
+      </node>
+      <node id="30747">
+        <label>src/programs/mdrun/tests/energyreader.h</label>
+        <link refid="energyreader_8h"/>
+        <childnode refid="30748" relation="include">
+        </childnode>
+        <childnode refid="30749" relation="include">
+        </childnode>
+        <childnode refid="30750" relation="include">
+        </childnode>
+      </node>
+      <node id="30716">
+        <label>src/testutils/conftest.cpp</label>
+        <link refid="conftest_8cpp"/>
+      </node>
+      <node id="30852">
+        <label>src/gromacs/selection/sm_merge.cpp</label>
+        <link refid="sm__merge_8cpp"/>
+      </node>
+      <node id="30765">
+        <label>src/gromacs/gmxana/gmx_wham.cpp</label>
+        <link refid="gmx__wham_8cpp"/>
+      </node>
+      <node id="30868">
+        <label>src/gromacs/trajectoryanalysis/analysissettings.cpp</label>
+        <link refid="analysissettings_8cpp"/>
+      </node>
+      <node id="30692">
+        <label>src/gromacs/analysisdata/tests/lifetime.cpp</label>
+        <link refid="tests_2lifetime_8cpp"/>
+      </node>
+      <node id="30797">
+        <label>src/gromacs/commandline/cmdlineparser.cpp</label>
+        <link refid="cmdlineparser_8cpp"/>
+      </node>
+      <node id="30718">
+        <label>src/gromacs/math/tests/functions.cpp</label>
+        <link refid="tests_2functions_8cpp"/>
+      </node>
+      <node id="30890">
+        <label>src/gromacs/utility/tests/stringutil.cpp</label>
+        <link refid="tests_2stringutil_8cpp"/>
+      </node>
+      <node id="30703">
+        <label>src/testutils/xvgtest.h</label>
+        <link refid="xvgtest_8h"/>
+        <childnode refid="30702" relation="include">
+        </childnode>
+        <childnode refid="30704" relation="include">
+        </childnode>
+        <childnode refid="30705" relation="include">
+        </childnode>
+        <childnode refid="30706" relation="include">
+        </childnode>
+        <childnode refid="30707" relation="include">
+        </childnode>
+      </node>
+      <node id="30721">
+        <label>src/gromacs/onlinehelp/tests/helpmanager.cpp</label>
+        <link refid="tests_2helpmanager_8cpp"/>
+      </node>
+      <node id="30862">
+        <label>src/gromacs/taskassignment/decidegpuusage.cpp</label>
+        <link refid="decidegpuusage_8cpp"/>
+      </node>
+      <node id="30755">
+        <label>src/testutils/refdata.cpp</label>
+        <link refid="refdata_8cpp"/>
+      </node>
+      <node id="30828">
+        <label>src/testutils/refdata-xml.cpp</label>
+        <link refid="refdata-xml_8cpp"/>
+      </node>
+      <node id="30679">
+        <label>src/gromacs/analysisdata/analysisdata.cpp</label>
+        <link refid="analysisdata_8cpp"/>
+      </node>
+      <node id="30840">
+        <label>src/gromacs/selection/poscalc.cpp</label>
+        <link refid="poscalc_8cpp"/>
+      </node>
+      <node id="30853">
+        <label>src/gromacs/selection/sm_permute.cpp</label>
+        <link refid="sm__permute_8cpp"/>
+      </node>
+      <node id="30802">
+        <label>src/gromacs/domdec/domdec_constraints.cpp</label>
+        <link refid="domdec__constraints_8cpp"/>
+      </node>
+      <node id="30855">
+        <label>src/gromacs/selection/sm_simple.cpp</label>
+        <link refid="sm__simple_8cpp"/>
+      </node>
+      <node id="30842">
+        <label>src/gromacs/selection/selection.cpp</label>
+        <link refid="selection_8cpp"/>
+      </node>
+      <node id="30807">
+        <label>src/gromacs/gpu_utils/tests/devicetransfers_ocl.cpp</label>
+        <link refid="devicetransfers__ocl_8cpp"/>
+      </node>
+      <node id="30870">
+        <label>src/gromacs/trajectoryanalysis/modules/angle.cpp</label>
+        <link refid="modules_2angle_8cpp"/>
+      </node>
+      <node id="30861">
+        <label>src/gromacs/tables/splineutil.cpp</label>
+        <link refid="splineutil_8cpp"/>
+      </node>
+      <node id="30881">
+        <label>src/gromacs/utility/datafilefinder.cpp</label>
+        <link refid="datafilefinder_8cpp"/>
+      </node>
+      <node id="30744">
+        <label>src/gromacs/trajectoryanalysis/tests/pairdist.cpp</label>
+        <link refid="tests_2pairdist_8cpp"/>
+      </node>
+      <node id="30699">
+        <label>src/gromacs/correlationfunctions/tests/autocorr.cpp</label>
+        <link refid="tests_2autocorr_8cpp"/>
+      </node>
+      <node id="30746">
+        <label>src/gromacs/trajectoryanalysis/tests/surfacearea.cpp</label>
+        <link refid="tests_2surfacearea_8cpp"/>
+      </node>
+      <node id="30740">
+        <label>src/gromacs/selection/tests/selectionoption.cpp</label>
+        <link refid="tests_2selectionoption_8cpp"/>
+      </node>
+      <node id="30796">
+        <label>src/gromacs/commandline/cmdlinemodulemanager.cpp</label>
+        <link refid="cmdlinemodulemanager_8cpp"/>
+      </node>
+      <node id="30704">
+        <label>src/gromacs/trajectoryanalysis/tests/clustsize.cpp</label>
+        <link refid="clustsize_8cpp"/>
+      </node>
+      <node id="30833">
+        <label>src/gromacs/selection/evaluate.cpp</label>
+        <link refid="evaluate_8cpp"/>
+      </node>
+      <node id="30815">
+        <label>src/gromacs/options/optionstoragetemplate.h</label>
+        <link refid="optionstoragetemplate_8h"/>
+        <childnode refid="30816" relation="include">
+        </childnode>
+        <childnode refid="30818" relation="include">
+        </childnode>
+        <childnode refid="30722" relation="include">
+        </childnode>
+        <childnode refid="30820" relation="include">
+        </childnode>
+      </node>
+      <node id="30773">
+        <label>src/gromacs/ewald/pme-internal.h</label>
+        <link refid="pme-internal_8h"/>
+        <childnode refid="30774" relation="include">
+        </childnode>
+        <childnode refid="30775" relation="include">
+        </childnode>
+        <childnode refid="30764" relation="include">
+        </childnode>
+        <childnode refid="30776" relation="include">
+        </childnode>
+        <childnode refid="30777" relation="include">
+        </childnode>
+        <childnode refid="30708" relation="include">
+        </childnode>
+        <childnode refid="30712" relation="include">
+        </childnode>
+      </node>
+      <node id="30844">
+        <label>src/gromacs/selection/selectionoptionbehavior.cpp</label>
+        <link refid="selectionoptionbehavior_8cpp"/>
+      </node>
+      <node id="30894">
+        <label>src/testutils/testinit.cpp</label>
+        <link refid="testinit_8cpp"/>
+      </node>
+      <node id="30822">
+        <label>src/gromacs/selection/selectionoptionmanager.cpp</label>
+        <link refid="selectionoptionmanager_8cpp"/>
+      </node>
+      <node id="30743">
+        <label>src/gromacs/trajectoryanalysis/tests/moduletest.cpp</label>
+        <link refid="gromacs_2trajectoryanalysis_2tests_2moduletest_8cpp"/>
+      </node>
+      <node id="30767">
+        <label>src/gromacs/mdlib/minimize.cpp</label>
+        <link refid="minimize_8cpp"/>
+      </node>
+      <node id="30885">
+        <label>src/gromacs/utility/gmxomp.cpp</label>
+        <link refid="gmxomp_8cpp"/>
+      </node>
+      <node id="30757">
+        <label>src/testutils/tests/refdata_tests.cpp</label>
+        <link refid="refdata__tests_8cpp"/>
+      </node>
+      <node id="30893">
+        <label>src/testutils/stdiohelper.cpp</label>
+        <link refid="stdiohelper_8cpp"/>
+      </node>
+      <node id="30829">
+        <label>src/gromacs/options/timeunitmanager.cpp</label>
+        <link refid="timeunitmanager_8cpp"/>
+      </node>
+      <node id="30698">
+        <label>src/gromacs/commandline/tests/pargs.cpp</label>
+        <link refid="tests_2pargs_8cpp"/>
+      </node>
+      <node id="30788">
+        <label>src/gromacs/awh/coordstate.cpp</label>
+        <link refid="coordstate_8cpp"/>
+      </node>
+      <node id="30732">
+        <label>src/gromacs/random/tests/gammadistribution.cpp</label>
+        <link refid="gammadistribution_8cpp"/>
+      </node>
+      <node id="30708">
+        <label>src/gromacs/ewald/tests/pmebsplinetest.cpp</label>
+        <link refid="pmebsplinetest_8cpp"/>
+      </node>
+      <node id="30826">
+        <label>src/gromacs/options/optionsassigner.cpp</label>
+        <link refid="optionsassigner_8cpp"/>
+      </node>
+      <node id="30783">
+        <label>src/gromacs/awh/bias.cpp</label>
+        <link refid="bias_8cpp"/>
+      </node>
+      <node id="30860">
+        <label>src/gromacs/tables/quadraticsplinetable.cpp</label>
+        <link refid="quadraticsplinetable_8cpp"/>
+      </node>
+      <node id="30723">
+        <label>src/gromacs/options/tests/filenameoption.cpp</label>
+        <link refid="tests_2filenameoption_8cpp"/>
+      </node>
+      <node id="30690">
+        <label>src/gromacs/analysisdata/tests/datatest.cpp</label>
+        <link refid="datatest_8cpp"/>
+      </node>
+      <node id="30845">
+        <label>src/gromacs/selection/selelem.cpp</label>
+        <link refid="selelem_8cpp"/>
+      </node>
+      <node id="30687">
+        <label>src/testutils/testasserts.h</label>
+        <link refid="testasserts_8h"/>
+        <childnode refid="30686" relation="include">
+        </childnode>
+        <childnode refid="30688" relation="include">
+        </childnode>
+        <childnode refid="30689" relation="include">
+        </childnode>
+        <childnode refid="30690" relation="include">
+        </childnode>
+        <childnode refid="30691" relation="include">
+        </childnode>
+        <childnode refid="30692" relation="include">
+        </childnode>
+        <childnode refid="30693" relation="include">
+        </childnode>
+        <childnode refid="30694" relation="include">
+        </childnode>
+        <childnode refid="30695" relation="include">
+        </childnode>
+        <childnode refid="30696" relation="include">
+        </childnode>
+        <childnode refid="30697" relation="include">
+        </childnode>
+        <childnode refid="30698" relation="include">
+        </childnode>
+        <childnode refid="30699" relation="include">
+        </childnode>
+        <childnode refid="30700" relation="include">
+        </childnode>
+        <childnode refid="30701" relation="include">
+        </childnode>
+        <childnode refid="30702" relation="include">
+        </childnode>
+        <childnode refid="30703" relation="include">
+        </childnode>
+        <childnode refid="30708" relation="include">
+        </childnode>
+        <childnode refid="30709" relation="include">
+        </childnode>
+        <childnode refid="30710" relation="include">
+        </childnode>
+        <childnode refid="30711" relation="include">
+        </childnode>
+        <childnode refid="30712" relation="include">
+        </childnode>
+        <childnode refid="30713" relation="include">
+        </childnode>
+        <childnode refid="30714" relation="include">
+        </childnode>
+        <childnode refid="30717" relation="include">
+        </childnode>
+        <childnode refid="30718" relation="include">
+        </childnode>
+        <childnode refid="30719" relation="include">
+        </childnode>
+        <childnode refid="30720" relation="include">
+        </childnode>
+        <childnode refid="30721" relation="include">
+        </childnode>
+        <childnode refid="30722" relation="include">
+        </childnode>
+        <childnode refid="30723" relation="include">
+        </childnode>
+        <childnode refid="30724" relation="include">
+        </childnode>
+        <childnode refid="30725" relation="include">
+        </childnode>
+        <childnode refid="30726" relation="include">
+        </childnode>
+        <childnode refid="30727" relation="include">
+        </childnode>
+        <childnode refid="30728" relation="include">
+        </childnode>
+        <childnode refid="30729" relation="include">
+        </childnode>
+        <childnode refid="30730" relation="include">
+        </childnode>
+        <childnode refid="30731" relation="include">
+        </childnode>
+        <childnode refid="30732" relation="include">
+        </childnode>
+        <childnode refid="30733" relation="include">
+        </childnode>
+        <childnode refid="30734" relation="include">
+        </childnode>
+        <childnode refid="30735" relation="include">
+        </childnode>
+        <childnode refid="30736" relation="include">
+        </childnode>
+        <childnode refid="30737" relation="include">
+        </childnode>
+        <childnode refid="30738" relation="include">
+        </childnode>
+        <childnode refid="30739" relation="include">
+        </childnode>
+        <childnode refid="30740" relation="include">
+        </childnode>
+        <childnode refid="30741" relation="include">
+        </childnode>
+        <childnode refid="30704" relation="include">
+        </childnode>
+        <childnode refid="30742" relation="include">
+        </childnode>
+        <childnode refid="30743" relation="include">
+        </childnode>
+        <childnode refid="30744" relation="include">
+        </childnode>
+        <childnode refid="30745" relation="include">
+        </childnode>
+        <childnode refid="30705" relation="include">
+        </childnode>
+        <childnode refid="30746" relation="include">
+        </childnode>
+        <childnode refid="30747" relation="include">
+        </childnode>
+        <childnode refid="30748" relation="include">
+        </childnode>
+        <childnode refid="30751" relation="include">
+        </childnode>
+        <childnode refid="30752" relation="include">
+        </childnode>
+        <childnode refid="30753" relation="include">
+        </childnode>
+        <childnode refid="30716" relation="include">
+        </childnode>
+        <childnode refid="30754" relation="include">
+        </childnode>
+        <childnode refid="30755" relation="include">
+        </childnode>
+        <childnode refid="30756" relation="include">
+        </childnode>
+        <childnode refid="30757" relation="include">
+        </childnode>
+        <childnode refid="30758" relation="include">
+        </childnode>
+        <childnode refid="30706" relation="include">
+        </childnode>
+        <childnode refid="30707" relation="include">
+        </childnode>
+      </node>
+      <node id="30875">
+        <label>src/gromacs/trajectoryanalysis/modules/select.cpp</label>
+        <link refid="modules_2select_8cpp"/>
+      </node>
+      <node id="30866">
+        <label>src/gromacs/taskassignment/usergpuids.cpp</label>
+        <link refid="usergpuids_8cpp"/>
+      </node>
+      <node id="30725">
+        <label>src/gromacs/options/tests/option.cpp</label>
+        <link refid="option_8cpp"/>
+      </node>
+      <node id="30766">
+        <label>src/gromacs/imd/imd.cpp</label>
+        <link refid="imd_8cpp"/>
+      </node>
+      <node id="30750">
+        <label>src/programs/mdrun/tests/pmetest.cpp</label>
+        <link refid="pmetest_8cpp"/>
+      </node>
+      <node id="30872">
+        <label>src/gromacs/trajectoryanalysis/modules/pairdist.cpp</label>
+        <link refid="modules_2pairdist_8cpp"/>
+      </node>
+      <node id="30812">
+        <label>src/gromacs/onlinehelp/helptopic.cpp</label>
+        <link refid="helptopic_8cpp"/>
+      </node>
+      <node id="30882">
+        <label>src/gromacs/utility/directoryenumerator.cpp</label>
+        <link refid="directoryenumerator_8cpp"/>
+      </node>
+      <node id="30680">
+        <label>src/gromacs/analysisdata/arraydata.cpp</label>
+        <link refid="arraydata_8cpp"/>
+      </node>
+      <node id="30857">
+        <label>src/gromacs/tables/cubicsplinetable.h</label>
+        <link refid="cubicsplinetable_8h"/>
+        <childnode refid="30858" relation="include">
+        </childnode>
+        <childnode refid="30741" relation="include">
+        </childnode>
+      </node>
+      <node id="30886">
+        <label>src/gromacs/utility/gmxregex.cpp</label>
+        <link refid="gmxregex_8cpp"/>
+      </node>
+      <node id="30848">
+        <label>src/gromacs/selection/sm_compare.cpp</label>
+        <link refid="sm__compare_8cpp"/>
+      </node>
+      <node id="30705">
+        <label>src/gromacs/trajectoryanalysis/tests/sasa.cpp</label>
+        <link refid="tests_2sasa_8cpp"/>
+      </node>
+      <node id="30836">
+        <label>src/gromacs/selection/nbsearch.cpp</label>
+        <link refid="nbsearch_8cpp"/>
+      </node>
+      <node id="30715">
+        <label>src/gromacs/gmxpreprocess/tests/solvate.cpp</label>
+        <link refid="tests_2solvate_8cpp"/>
+      </node>
+      <node id="30858">
+        <label>src/gromacs/tables/cubicsplinetable.cpp</label>
+        <link refid="cubicsplinetable_8cpp"/>
+      </node>
+      <node id="30830">
+        <label>src/gromacs/options/treesupport.cpp</label>
+        <link refid="treesupport_8cpp"/>
+      </node>
+      <node id="30764">
+        <label>src/gromacs/ewald/pme-load-balancing.cpp</label>
+        <link refid="pme-load-balancing_8cpp"/>
+      </node>
+      <node id="30714">
+        <label>src/testutils/conftest.h</label>
+        <link refid="conftest_8h"/>
+        <childnode refid="30715" relation="include">
+        </childnode>
+        <childnode refid="30716" relation="include">
+        </childnode>
+      </node>
+      <node id="30818">
+        <label>src/gromacs/options/filenameoptionstorage.h</label>
+        <link refid="filenameoptionstorage_8h"/>
+        <childnode refid="30819" relation="include">
+        </childnode>
+      </node>
+      <node id="30745">
+        <label>src/gromacs/trajectoryanalysis/tests/rdf.cpp</label>
+        <link refid="tests_2rdf_8cpp"/>
+      </node>
+      <node id="30738">
+        <label>src/gromacs/selection/tests/nbsearch.cpp</label>
+        <link refid="tests_2nbsearch_8cpp"/>
+      </node>
+      <node id="30850">
+        <label>src/gromacs/selection/sm_insolidangle.cpp</label>
+        <link refid="sm__insolidangle_8cpp"/>
+      </node>
+      <node id="30711">
+        <label>src/gromacs/ewald/tests/pmesplinespreadtest.cpp</label>
+        <link refid="pmesplinespreadtest_8cpp"/>
+      </node>
+      <node id="30748">
+        <label>src/programs/mdrun/tests/energyreader.cpp</label>
+        <link refid="energyreader_8cpp"/>
+      </node>
+      <node id="30888">
+        <label>src/gromacs/utility/strconvert.cpp</label>
+        <link refid="strconvert_8cpp"/>
+      </node>
+      <node id="30778">
+        <label>src/gromacs/ewald/pme-gpu-internal.h</label>
+        <link refid="pme-gpu-internal_8h"/>
+        <childnode refid="30774" relation="include">
+        </childnode>
+        <childnode refid="30775" relation="include">
+        </childnode>
+        <childnode refid="30777" relation="include">
+        </childnode>
+        <childnode refid="30779" relation="include">
+        </childnode>
+        <childnode refid="30712" relation="include">
+        </childnode>
+      </node>
+      <node id="30820">
+        <label>src/gromacs/selection/selectionoptionstorage.h</label>
+        <link refid="selectionoptionstorage_8h"/>
+        <childnode refid="30821" relation="include">
+        </childnode>
+        <childnode refid="30822" relation="include">
+        </childnode>
+      </node>
+      <node id="30726">
+        <label>src/gromacs/options/tests/optionsassigner.cpp</label>
+        <link refid="tests_2optionsassigner_8cpp"/>
+      </node>
+      <node id="30808">
+        <label>src/gromacs/listed-forces/listed-forces.cpp</label>
+        <link refid="listed-forces_8cpp"/>
+      </node>
+      <node id="30775">
+        <label>src/gromacs/ewald/pme-gpu.cpp</label>
+        <link refid="pme-gpu_8cpp"/>
+      </node>
+      <node id="30877">
+        <label>src/gromacs/trajectoryanalysis/tests/test_selection.cpp</label>
+        <link refid="test__selection_8cpp"/>
+      </node>
+      <node id="30867">
+        <label>src/gromacs/trajectoryanalysis/analysismodule.cpp</label>
+        <link refid="analysismodule_8cpp"/>
+      </node>
+      <node id="30835">
+        <label>src/gromacs/selection/mempool.cpp</label>
+        <link refid="mempool_8cpp"/>
+      </node>
+      <node id="30814">
+        <label>src/gromacs/options/abstractoption.cpp</label>
+        <link refid="abstractoption_8cpp"/>
+      </node>
+      <node id="30891">
+        <label>src/gromacs/utility.h</label>
+        <link refid="utility_8h"/>
+      </node>
+      <node id="30785">
+        <label>src/gromacs/awh/biassharing.cpp</label>
+        <link refid="biassharing_8cpp"/>
+      </node>
+      <node id="30798">
+        <label>src/gromacs/commandline/cmdlineprogramcontext.cpp</label>
+        <link refid="cmdlineprogramcontext_8cpp"/>
+      </node>
+      <node id="30682">
+        <label>src/gromacs/analysisdata/datastorage.cpp</label>
+        <link refid="datastorage_8cpp"/>
+      </node>
+      <node id="30810">
+        <label>src/gromacs/mdlib/nbnxn_ocl/nbnxn_ocl_jit_support.cpp</label>
+        <link refid="nbnxn__ocl__jit__support_8cpp"/>
+      </node>
+      <node id="30889">
+        <label>src/gromacs/utility/stringutil.cpp</label>
+        <link refid="stringutil_8cpp"/>
+      </node>
+      <node id="30761">
+        <label>src/gromacs/mdtypes/state.h</label>
+        <link refid="state_8h"/>
+        <childnode refid="30762" relation="include">
+        </childnode>
+        <childnode refid="30763" relation="include">
+        </childnode>
+        <childnode refid="30764" relation="include">
+        </childnode>
+        <childnode refid="30765" relation="include">
+        </childnode>
+        <childnode refid="30766" relation="include">
+        </childnode>
+        <childnode refid="30767" relation="include">
+        </childnode>
+        <childnode refid="30768" relation="include">
+        </childnode>
+        <childnode refid="30769" relation="include">
+        </childnode>
+        <childnode refid="30770" relation="include">
+        </childnode>
+        <childnode refid="30771" relation="include">
+        </childnode>
+      </node>
+      <node id="30686">
+        <label>src/gromacs/analysisdata/tests/analysisdata.cpp</label>
+        <link refid="tests_2analysisdata_8cpp"/>
+      </node>
+      <node id="30751">
+        <label>src/programs/mdrun/tests/mdruncomparisonfixture.cpp</label>
+        <link refid="mdruncomparisonfixture_8cpp"/>
+      </node>
+      <node id="30756">
+        <label>src/testutils/testasserts.cpp</label>
+        <link refid="testasserts_8cpp"/>
+      </node>
+      <node id="30863">
+        <label>src/gromacs/taskassignment/findallgputasks.cpp</label>
+        <link refid="findallgputasks_8cpp"/>
+      </node>
+      <node id="30719">
+        <label>src/gromacs/math/tests/invertmatrix.cpp</label>
+        <link refid="tests_2invertmatrix_8cpp"/>
+      </node>
+      <node id="30717">
+        <label>src/gromacs/listed-forces/tests/bonded.cpp</label>
+        <link refid="tests_2bonded_8cpp"/>
+      </node>
+      <node id="30758">
+        <label>src/testutils/tests/testasserts_tests.cpp</label>
+        <link refid="testasserts__tests_8cpp"/>
+      </node>
+      <node id="30789">
+        <label>src/gromacs/random.h</label>
+        <link refid="random_8h"/>
+      </node>
+      <node id="30677">
+        <label>src/gromacs/utility/exceptions.h</label>
+        <link refid="exceptions.h"/>
+        <childnode refid="30678" relation="include">
+        </childnode>
+        <childnode refid="30679" relation="include">
+        </childnode>
+        <childnode refid="30680" relation="include">
+        </childnode>
+        <childnode refid="30681" relation="include">
+        </childnode>
+        <childnode refid="30682" relation="include">
+        </childnode>
+        <childnode refid="30683" relation="include">
+        </childnode>
+        <childnode refid="30684" relation="include">
+        </childnode>
+        <childnode refid="30685" relation="include">
+        </childnode>
+        <childnode refid="30686" relation="include">
+        </childnode>
+        <childnode refid="30687" relation="include">
+        </childnode>
+        <childnode refid="30759" relation="include">
+        </childnode>
+        <childnode refid="30760" relation="include">
+        </childnode>
+        <childnode refid="30762" relation="include">
+        </childnode>
+        <childnode refid="30783" relation="include">
+        </childnode>
+        <childnode refid="30784" relation="include">
+        </childnode>
+        <childnode refid="30785" relation="include">
+        </childnode>
+        <childnode refid="30786" relation="include">
+        </childnode>
+        <childnode refid="30787" relation="include">
+        </childnode>
+        <childnode refid="30788" relation="include">
+        </childnode>
+        <childnode refid="30791" relation="include">
+        </childnode>
+        <childnode refid="30792" relation="include">
+        </childnode>
+        <childnode refid="30793" relation="include">
+        </childnode>
+        <childnode refid="30794" relation="include">
+        </childnode>
+        <childnode refid="30795" relation="include">
+        </childnode>
+        <childnode refid="30796" relation="include">
+        </childnode>
+        <childnode refid="30797" relation="include">
+        </childnode>
+        <childnode refid="30798" relation="include">
+        </childnode>
+        <childnode refid="30799" relation="include">
+        </childnode>
+        <childnode refid="30800" relation="include">
+        </childnode>
+        <childnode refid="30801" relation="include">
+        </childnode>
+        <childnode refid="30701" relation="include">
+        </childnode>
+        <childnode refid="30802" relation="include">
+        </childnode>
+        <childnode refid="30763" relation="include">
+        </childnode>
+        <childnode refid="30774" relation="include">
+        </childnode>
+        <childnode refid="30775" relation="include">
+        </childnode>
+        <childnode refid="30777" relation="include">
+        </childnode>
+        <childnode refid="30712" relation="include">
+        </childnode>
+        <childnode refid="30803" relation="include">
+        </childnode>
+        <childnode refid="30765" relation="include">
+        </childnode>
+        <childnode refid="30804" relation="include">
+        </childnode>
+        <childnode refid="30805" relation="include">
+        </childnode>
+        <childnode refid="30806" relation="include">
+        </childnode>
+        <childnode refid="30807" relation="include">
+        </childnode>
+        <childnode refid="30808" relation="include">
+        </childnode>
+        <childnode refid="30809" relation="include">
+        </childnode>
+        <childnode refid="30767" relation="include">
+        </childnode>
+        <childnode refid="30810" relation="include">
+        </childnode>
+        <childnode refid="30811" relation="include">
+        </childnode>
+        <childnode refid="30812" relation="include">
+        </childnode>
+        <childnode refid="30813" relation="include">
+        </childnode>
+        <childnode refid="30721" relation="include">
+        </childnode>
+        <childnode refid="30814" relation="include">
+        </childnode>
+        <childnode refid="30815" relation="include">
+        </childnode>
+        <childnode refid="30823" relation="include">
+        </childnode>
+        <childnode refid="30817" relation="include">
+        </childnode>
+        <childnode refid="30819" relation="include">
+        </childnode>
+        <childnode refid="30824" relation="include">
+        </childnode>
+        <childnode refid="30825" relation="include">
+        </childnode>
+        <childnode refid="30826" relation="include">
+        </childnode>
+        <childnode refid="30722" relation="include">
+        </childnode>
+        <childnode refid="30827" relation="include">
+        </childnode>
+        <childnode refid="30723" relation="include">
+        </childnode>
+        <childnode refid="30724" relation="include">
+        </childnode>
+        <childnode refid="30725" relation="include">
+        </childnode>
+        <childnode refid="30726" relation="include">
+        </childnode>
+        <childnode refid="30729" relation="include">
+        </childnode>
+        <childnode refid="30829" relation="include">
+        </childnode>
+        <childnode refid="30830" relation="include">
+        </childnode>
+        <childnode refid="30831" relation="include">
+        </childnode>
+        <childnode refid="30735" relation="include">
+        </childnode>
+        <childnode refid="30832" relation="include">
+        </childnode>
+        <childnode refid="30833" relation="include">
+        </childnode>
+        <childnode refid="30834" relation="include">
+        </childnode>
+        <childnode refid="30835" relation="include">
+        </childnode>
+        <childnode refid="30836" relation="include">
+        </childnode>
+        <childnode refid="30837" relation="include">
+        </childnode>
+        <childnode refid="30838" relation="include">
+        </childnode>
+        <childnode refid="30839" relation="include">
+        </childnode>
+        <childnode refid="30840" relation="include">
+        </childnode>
+        <childnode refid="30841" relation="include">
+        </childnode>
+        <childnode refid="30842" relation="include">
+        </childnode>
+        <childnode refid="30843" relation="include">
+        </childnode>
+        <childnode refid="30821" relation="include">
+        </childnode>
+        <childnode refid="30844" relation="include">
+        </childnode>
+        <childnode refid="30822" relation="include">
+        </childnode>
+        <childnode refid="30845" relation="include">
+        </childnode>
+        <childnode refid="30846" relation="include">
+        </childnode>
+        <childnode refid="30847" relation="include">
+        </childnode>
+        <childnode refid="30848" relation="include">
+        </childnode>
+        <childnode refid="30849" relation="include">
+        </childnode>
+        <childnode refid="30850" relation="include">
+        </childnode>
+        <childnode refid="30851" relation="include">
+        </childnode>
+        <childnode refid="30852" relation="include">
+        </childnode>
+        <childnode refid="30853" relation="include">
+        </childnode>
+        <childnode refid="30854" relation="include">
+        </childnode>
+        <childnode refid="30855" relation="include">
+        </childnode>
+        <childnode refid="30856" relation="include">
+        </childnode>
+        <childnode refid="30739" relation="include">
+        </childnode>
+        <childnode refid="30740" relation="include">
+        </childnode>
+        <childnode refid="30857" relation="include">
+        </childnode>
+        <childnode refid="30858" relation="include">
+        </childnode>
+        <childnode refid="30859" relation="include">
+        </childnode>
+        <childnode refid="30860" relation="include">
+        </childnode>
+        <childnode refid="30861" relation="include">
+        </childnode>
+        <childnode refid="30862" relation="include">
+        </childnode>
+        <childnode refid="30863" relation="include">
+        </childnode>
+        <childnode refid="30864" relation="include">
+        </childnode>
+        <childnode refid="30865" relation="include">
+        </childnode>
+        <childnode refid="30866" relation="include">
+        </childnode>
+        <childnode refid="30867" relation="include">
+        </childnode>
+        <childnode refid="30868" relation="include">
+        </childnode>
+        <childnode refid="30869" relation="include">
+        </childnode>
+        <childnode refid="30870" relation="include">
+        </childnode>
+        <childnode refid="30871" relation="include">
+        </childnode>
+        <childnode refid="30790" relation="include">
+        </childnode>
+        <childnode refid="30872" relation="include">
+        </childnode>
+        <childnode refid="30873" relation="include">
+        </childnode>
+        <childnode refid="30874" relation="include">
+        </childnode>
+        <childnode refid="30875" relation="include">
+        </childnode>
+        <childnode refid="30876" relation="include">
+        </childnode>
+        <childnode refid="30742" relation="include">
+        </childnode>
+        <childnode refid="30877" relation="include">
+        </childnode>
+        <childnode refid="30878" relation="include">
+        </childnode>
+        <childnode refid="30880" relation="include">
+        </childnode>
+        <childnode refid="30881" relation="include">
+        </childnode>
+        <childnode refid="30882" relation="include">
+        </childnode>
+        <childnode refid="30883" relation="include">
+        </childnode>
+        <childnode refid="30884" relation="include">
+        </childnode>
+        <childnode refid="30885" relation="include">
+        </childnode>
+        <childnode refid="30886" relation="include">
+        </childnode>
+        <childnode refid="30887" relation="include">
+        </childnode>
+        <childnode refid="30888" relation="include">
+        </childnode>
+        <childnode refid="30889" relation="include">
+        </childnode>
+        <childnode refid="30890" relation="include">
+        </childnode>
+        <childnode refid="30891" relation="include">
+        </childnode>
+        <childnode refid="30771" relation="include">
+        </childnode>
+        <childnode refid="30748" relation="include">
+        </childnode>
+        <childnode refid="30753" relation="include">
+        </childnode>
+        <childnode refid="30892" relation="include">
+        </childnode>
+        <childnode refid="30754" relation="include">
+        </childnode>
+        <childnode refid="30828" relation="include">
+        </childnode>
+        <childnode refid="30755" relation="include">
+        </childnode>
+        <childnode refid="30893" relation="include">
+        </childnode>
+        <childnode refid="30756" relation="include">
+        </childnode>
+        <childnode refid="30894" relation="include">
+        </childnode>
+      </node>
+      <node id="30763">
+        <label>src/gromacs/domdec/domdec_topology.cpp</label>
+        <link refid="domdec__topology_8cpp"/>
+      </node>
+      <node id="30749">
+        <label>src/programs/mdrun/tests/initialconstraints.cpp</label>
+        <link refid="initialconstraints_8cpp"/>
+      </node>
+      <node id="30880">
+        <label>src/gromacs/utility/binaryinformation.cpp</label>
+        <link refid="binaryinformation_8cpp"/>
+      </node>
+      <node id="30865">
+        <label>src/gromacs/taskassignment/tests/usergpuids.cpp</label>
+        <link refid="tests_2usergpuids_8cpp"/>
+      </node>
+      <node id="30843">
+        <label>src/gromacs/selection/selectioncollection.cpp</label>
+        <link refid="selectioncollection_8cpp"/>
+      </node>
+      <node id="30834">
+        <label>src/gromacs/selection/indexutil.cpp</label>
+        <link refid="indexutil_8cpp"/>
+      </node>
+      <node id="30809">
+        <label>src/gromacs/listed-forces/manage-threading.cpp</label>
+        <link refid="manage-threading_8cpp"/>
+      </node>
+      <node id="30795">
+        <label>src/gromacs/commandline/cmdlineinit.cpp</label>
+        <link refid="cmdlineinit_8cpp"/>
+      </node>
+      <node id="30781">
+        <label>src/gromacs/gpu_utils/tests/hostallocator.cpp</label>
+        <link refid="tests_2hostallocator_8cpp"/>
+      </node>
+      <node id="30683">
+        <label>src/gromacs/analysisdata/modules/displacement.cpp</label>
+        <link refid="displacement_8cpp"/>
+      </node>
+      <node id="30846">
+        <label>src/gromacs/selection/selhelp.cpp</label>
+        <link refid="selhelp_8cpp"/>
+      </node>
+      <node id="30804">
+        <label>src/gromacs/gpu_utils/gpu_utils_ocl.cpp</label>
+        <link refid="gpu__utils__ocl_8cpp"/>
+      </node>
+      <node id="30879">
+        <label>share/template/template.cpp</label>
+        <link refid="template_8cpp"/>
+      </node>
+      <node id="30759">
+        <label>src/gromacs/applied-forces/electricfield.cpp</label>
+        <link refid="electricfield_8cpp"/>
+      </node>
+      <node id="30709">
+        <label>src/gromacs/ewald/tests/pmegathertest.cpp</label>
+        <link refid="pmegathertest_8cpp"/>
+      </node>
+      <node id="30811">
+        <label>src/gromacs/onlinehelp/helpmanager.cpp</label>
+        <link refid="helpmanager_8cpp"/>
+      </node>
+      <node id="30771">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="30871">
+        <label>src/gromacs/trajectoryanalysis/modules/distance.cpp</label>
+        <link refid="modules_2distance_8cpp"/>
+      </node>
+      <node id="30772">
+        <label>src/gromacs/ewald/pme-gpu-types.h</label>
+        <link refid="pme-gpu-types_8h"/>
+        <childnode refid="30773" relation="include">
+        </childnode>
+        <childnode refid="30778" relation="include">
+        </childnode>
+      </node>
+      <node id="30803">
+        <label>src/gromacs/ewald/tests/testhardwarecontexts.cpp</label>
+        <link refid="testhardwarecontexts_8cpp"/>
+      </node>
+      <node id="30838">
+        <label>src/gromacs/selection/parser_internal.h</label>
+        <link refid="parser__internal_8h"/>
+      </node>
+      <node id="30769">
+        <label>src/gromacs/mdlib/tpi.cpp</label>
+        <link refid="tpi_8cpp"/>
+      </node>
+      <node id="30790">
+        <label>src/gromacs/trajectoryanalysis/modules/freevolume.cpp</label>
+        <link refid="modules_2freevolume_8cpp"/>
+      </node>
+      <node id="30794">
+        <label>src/gromacs/commandline/cmdlinehelpwriter.cpp</label>
+        <link refid="cmdlinehelpwriter_8cpp"/>
+      </node>
+      <node id="30791">
+        <label>src/gromacs/awh/correlationhistory.cpp</label>
+        <link refid="correlationhistory_8cpp"/>
+      </node>
+      <node id="30779">
+        <label>src/gromacs/ewald/tests/pmetestcommon.h</label>
+        <link refid="pmetestcommon_8h"/>
+        <childnode refid="30708" relation="include">
+        </childnode>
+        <childnode refid="30709" relation="include">
+        </childnode>
+        <childnode refid="30710" relation="include">
+        </childnode>
+        <childnode refid="30711" relation="include">
+        </childnode>
+        <childnode refid="30712" relation="include">
+        </childnode>
+      </node>
+      <node id="30713">
+        <label>src/gromacs/fft/tests/fft.cpp</label>
+        <link refid="tests_2fft_8cpp"/>
+      </node>
+      <node id="30792">
+        <label>src/gromacs/awh/grid.cpp</label>
+        <link refid="grid_8cpp"/>
+      </node>
+      <node id="30854">
+        <label>src/gromacs/selection/sm_same.cpp</label>
+        <link refid="sm__same_8cpp"/>
+      </node>
+      <node id="30730">
+        <label>src/gromacs/pulling/tests/pull.cpp</label>
+        <link refid="tests_2pull_8cpp"/>
+      </node>
+      <node id="30724">
+        <label>src/gromacs/options/tests/filenameoptionmanager.cpp</label>
+        <link refid="tests_2filenameoptionmanager_8cpp"/>
+      </node>
+      <node id="30722">
+        <label>src/gromacs/options/tests/abstractoptionstorage.cpp</label>
+        <link refid="abstractoptionstorage_8cpp"/>
+      </node>
+      <node id="30762">
+        <label>src/gromacs/awh/awh.cpp</label>
+        <link refid="awh_8cpp"/>
+      </node>
+      <node id="30720">
+        <label>src/gromacs/mdlib/tests/calc_verletbuf.cpp</label>
+        <link refid="tests_2calc__verletbuf_8cpp"/>
+      </node>
+      <node id="30813">
+        <label>src/gromacs/onlinehelp/helpwritercontext.cpp</label>
+        <link refid="helpwritercontext_8cpp"/>
+      </node>
+      <node id="30741">
+        <label>src/gromacs/tables/tests/splinetable.cpp</label>
+        <link refid="splinetable_8cpp"/>
+      </node>
+      <node id="30731">
+        <label>src/gromacs/random/tests/exponentialdistribution.cpp</label>
+        <link refid="exponentialdistribution_8cpp"/>
+      </node>
+      <node id="30884">
+        <label>src/gromacs/utility/filestream.cpp</label>
+        <link refid="filestream_8cpp"/>
+      </node>
+      <node id="30851">
+        <label>src/gromacs/selection/sm_keywords.cpp</label>
+        <link refid="sm__keywords_8cpp"/>
+      </node>
+      <node id="30874">
+        <label>src/gromacs/trajectoryanalysis/modules/sasa.cpp</label>
+        <link refid="modules_2sasa_8cpp"/>
+      </node>
+      <node id="30734">
+        <label>src/gromacs/random/tests/tabulatednormaldistribution.cpp</label>
+        <link refid="tests_2tabulatednormaldistribution_8cpp"/>
+      </node>
+      <node id="30691">
+        <label>src/gromacs/analysisdata/tests/histogram.cpp</label>
+        <link refid="tests_2histogram_8cpp"/>
+      </node>
+      <node id="30702">
+        <label>src/gromacs/energyanalysis/tests/legacyenergy.cpp</label>
+        <link refid="legacyenergy_8cpp"/>
+      </node>
+      <node id="30736">
+        <label>src/gromacs/random/tests/uniformintdistribution.cpp</label>
+        <link refid="uniformintdistribution_8cpp"/>
+      </node>
+      <node id="30752">
+        <label>src/programs/mdrun/tests/trajectoryreader.h</label>
+        <link refid="trajectoryreader_8h"/>
+        <childnode refid="30753" relation="include">
+        </childnode>
+      </node>
+      <node id="30768">
+        <label>src/gromacs/mdlib/nbnxn_tuning.cpp</label>
+        <link refid="nbnxn__tuning_8cpp"/>
+      </node>
+      <node id="30739">
+        <label>src/gromacs/selection/tests/selectioncollection.cpp</label>
+        <link refid="tests_2selectioncollection_8cpp"/>
+      </node>
+      <node id="30805">
+        <label>src/gromacs/gpu_utils/ocl_caching.cpp</label>
+        <link refid="ocl__caching_8cpp"/>
+      </node>
+      <node id="30693">
+        <label>src/gromacs/analysisdata/tests/mock_datamodule.cpp</label>
+        <link refid="mock__datamodule_8cpp"/>
+      </node>
+      <node id="30831">
+        <label>src/gromacs/pbcutil/pbc.cpp</label>
+        <link refid="pbc_8cpp"/>
+      </node>
+      <node id="30707">
+        <label>src/testutils/xvgtest.cpp</label>
+        <link refid="xvgtest_8cpp"/>
+      </node>
+      <node id="30869">
+        <label>src/gromacs/trajectoryanalysis/cmdlinerunner.cpp</label>
+        <link refid="cmdlinerunner_8cpp"/>
+      </node>
+      <node id="30821">
+        <label>src/gromacs/selection/selectionoption.cpp</label>
+        <link refid="selectionoption_8cpp"/>
+      </node>
+      <node id="30864">
+        <label>src/gromacs/taskassignment/taskassignment.cpp</label>
+        <link refid="taskassignment_8cpp"/>
+      </node>
+      <node id="30754">
+        <label>src/testutils/refdata-checkers.h</label>
+        <link refid="refdata-checkers_8h"/>
+        <childnode refid="30755" relation="include">
+        </childnode>
+      </node>
+      <node id="30678">
+        <label>src/gromacs/analysisdata/abstractdata.cpp</label>
+        <link refid="abstractdata_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgmx_1_1internal_1_1IExceptionInfo" prot="public">gmx::internal::IExceptionInfo</innerclass>
+    <innerclass refid="classgmx_1_1ExceptionInfo" prot="public">gmx::ExceptionInfo</innerclass>
+    <innerclass refid="structgmx_1_1ThrowLocation" prot="public">gmx::ThrowLocation</innerclass>
+    <innerclass refid="classgmx_1_1ExceptionInitializer" prot="public">gmx::ExceptionInitializer</innerclass>
+    <innerclass refid="classgmx_1_1GromacsException" prot="public">gmx::GromacsException</innerclass>
+    <innerclass refid="classgmx_1_1FileIOError" prot="public">gmx::FileIOError</innerclass>
+    <innerclass refid="classgmx_1_1UserInputError" prot="public">gmx::UserInputError</innerclass>
+    <innerclass refid="classgmx_1_1InvalidInputError" prot="public">gmx::InvalidInputError</innerclass>
+    <innerclass refid="classgmx_1_1InconsistentInputError" prot="public">gmx::InconsistentInputError</innerclass>
+    <innerclass refid="classgmx_1_1ToleranceError" prot="public">gmx::ToleranceError</innerclass>
+    <innerclass refid="classgmx_1_1SimulationInstabilityError" prot="public">gmx::SimulationInstabilityError</innerclass>
+    <innerclass refid="classgmx_1_1InternalError" prot="public">gmx::InternalError</innerclass>
+    <innerclass refid="classgmx_1_1APIError" prot="public">gmx::APIError</innerclass>
+    <innerclass refid="classgmx_1_1RangeError" prot="public">gmx::RangeError</innerclass>
+    <innerclass refid="classgmx_1_1NotImplementedError" prot="public">gmx::NotImplementedError</innerclass>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+    <innernamespace refid="namespacegmx_1_1internal">gmx::internal</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__module__utility_1gaed2c1af17dbda0e02e8cfd2c3d7e7096" prot="public" static="no">
+        <name>GMX_THROW</name>
+        <param><defname>e</defname></param>
+        <initializer>throw (e) &lt;&lt; <ref refid="group__module__utility_1gab5d3ee620090581599c5762270314897" kindref="member">gmx::ExceptionInfoLocation</ref>(<ref refid="structgmx_1_1ThrowLocation" kindref="compound">gmx::ThrowLocation</ref>(<ref refid="group__module__utility_1gae874dfbf621e3e04133619aec5d466e5" kindref="member">GMX_CURRENT_FUNCTION</ref>, __FILE__, __LINE__))</initializer>
+        <briefdescription>
+<para>Macro for throwing an exception. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Exception object to throw.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Using this macro instead of <computeroutput>throw</computeroutput> directly makes it possible to uniformly attach information into the exception objects. <computeroutput>e</computeroutput> should evaluate to an instance of an object derived from GromacsException.</para><para>Basic usage: <programlisting><codeline><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(value<sp/>&lt;<sp/>0)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__module__utility_1gaed2c1af17dbda0e02e8cfd2c3d7e7096" kindref="member">GMX_THROW</ref>(InconsistentUserInput(</highlight><highlight class="stringliteral">&quot;Negative<sp/>values<sp/>not<sp/>allowed<sp/>for<sp/>value&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/exceptions.h" line="582" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/exceptions.h" bodystart="582" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__utility_1ga02415d7db680dcec8185c3d4af0d09fc" prot="public" static="no">
+        <name>GMX_THROW_WITH_ERRNO</name>
+        <param><defname>e</defname></param>
+        <param><defname>syscall</defname></param>
+        <param><defname>err</defname></param>
+        <initializer>do { \
+        int stored_errno_ = (err); \
+        <ref refid="group__module__utility_1gaed2c1af17dbda0e02e8cfd2c3d7e7096" kindref="member">GMX_THROW</ref>((e) &lt;&lt; <ref refid="group__module__utility_1ga590b36651977793730ea2413906302cf" kindref="member">gmx::ExceptionInfoErrno</ref>(stored_errno_) \
+                  &lt;&lt; <ref refid="group__module__utility_1ga3c8f9c19c0ed36c16770317afc7c69bb" kindref="member">gmx::ExceptionInfoApiFunction</ref>(syscall)); \
+    } while (0)</initializer>
+        <briefdescription>
+<para>Macro for throwing an exception based on errno. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Exception object to throw. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">syscall</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name of the syscall that returned the error. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">err</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>errno value returned by the syscall.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This macro provides a convenience interface for throwing an exception to report an error based on a errno value. In addition to adding the necessary information to the exception object, the macro also ensures that <computeroutput>errno</computeroutput> is evaluated before, e.g., the constructor of <computeroutput>e</computeroutput> may call other functions that could overwrite the errno value. <computeroutput>e</computeroutput> should evaluate to an instance of an object derived from GromacsException.</para><para>Typical usage (note that <ref refid="classgmx_1_1File" kindref="compound">gmx::File</ref> wraps this particular case): <programlisting><codeline><highlight class="normal">FILE<sp/>*fp<sp/>=<sp/>fopen(</highlight><highlight class="stringliteral">&quot;filename.txt&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;r&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fp<sp/>==<sp/>NULL)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__module__utility_1gaed2c1af17dbda0e02e8cfd2c3d7e7096" kindref="member">GMX_THROW</ref>(FileIOError(</highlight><highlight class="stringliteral">&quot;Could<sp/>not<sp/>open<sp/>file&quot;</highlight><highlight class="normal">),<sp/></highlight><highlight class="stringliteral">&quot;fopen&quot;</highlight><highlight class="normal">,<sp/>errno);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/exceptions.h" line="609" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/exceptions.h" bodystart="609" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__utility_1ga5e77eb0451e9294f07e04bdc8ded0d96" prot="public" static="no">
+        <name>GMX_CATCH_ALL_AND_EXIT_WITH_FATAL_ERROR</name>
+        <initializer>catch (const std::exception &amp;ex) { \
+        ::<ref refid="group__module__utility_1ga13076c5bb17dd3bf90f683af835b8b62" kindref="member">gmx::processExceptionAsFatalError</ref>(ex); \
+    }</initializer>
+        <briefdescription>
+<para>Macro for catching exceptions at C++ -&gt; C boundary. </para>        </briefdescription>
+        <detaileddescription>
+<para>This macro is intended for uniform handling of exceptions when C++ code is called from C code within Gromacs. Since most existing code is written using the assumption that fatal errors terminate the program, this macro implements this behavior for exceptions. It should only be used in cases where the error cannot be propagated upwards using return values or such.</para><para>Having this as a macro instead of having the same code in each place makes it easy to 1) find all such locations in the code, and 2) change the exact behavior if needed.</para><para>Usage: <programlisting><codeline><highlight class="keywordflow">try</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>C++<sp/>code</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"><ref refid="group__module__utility_1ga5e77eb0451e9294f07e04bdc8ded0d96" kindref="member">GMX_CATCH_ALL_AND_EXIT_WITH_FATAL_ERROR</ref>;</highlight></codeline>
+</programlisting> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/exceptions.h" line="718" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/exceptions.h" bodystart="718" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares common exception classes and macros for fatal error handling. </para>    </briefdescription>
+    <detaileddescription>
+<para>The basic approach is the same as in boost::exception for storing additional context information to exceptions, but since that functionality is a very small and simple part of boost::exception, the code is duplicated here.</para><para><simplesect kind="author"><para>Teemu Murtola <ulink url="mailto:teemu.murtola@gmail.com">teemu.murtola@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/exceptions.h"/>
+  </compounddef>
+</doxygen>

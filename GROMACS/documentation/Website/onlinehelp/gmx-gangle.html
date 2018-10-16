@@ -1,0 +1,242 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx gangle &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx genconf" href="gmx-genconf.html" />
+    <link rel="prev" title="gmx freevolume" href="gmx-freevolume.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-genconf.html" title="gmx genconf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-freevolume.html" title="gmx freevolume"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-gangle">
+<span id="id1"></span><h1>gmx gangle<a class="headerlink" href="#gmx-gangle" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx gangle [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+           [<strong>-oav</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oall</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oh</strong> <em>[&lt;.xvg&gt;]</em>]
+           [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>]
+           [<strong>-fgroup</strong> <em>&lt;selection&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]rmpbc</strong>]
+           [<strong>-[no]pbc</strong>] [<strong>-sf</strong> <em>&lt;file&gt;</em>] [<strong>-selrpos</strong> <em>&lt;enum&gt;</em>]
+           [<strong>-seltype</strong> <em>&lt;enum&gt;</em>] [<strong>-g1</strong> <em>&lt;enum&gt;</em>] [<strong>-g2</strong> <em>&lt;enum&gt;</em>] [<strong>-binw</strong> <em>&lt;real&gt;</em>]
+           [<strong>-group1</strong> <em>&lt;selection&gt;</em>] [<strong>-group2</strong> <em>&lt;selection&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">gangle</span></code> computes different types of angles between vectors.
+It supports both vectors defined by two positions and normals of
+planes defined by three positions.
+The z axis or the local normal of a sphere can also be used as
+one of the vectors.
+There are also convenience options ‘angle’ and ‘dihedral’ for
+calculating bond angles and dihedrals defined by three/four
+positions.</p>
+<p>The type of the angle is specified with <code class="docutils literal"><span class="pre">-g1</span></code> and <code class="docutils literal"><span class="pre">-g2</span></code>.
+If <code class="docutils literal"><span class="pre">-g1</span></code> is <code class="docutils literal"><span class="pre">angle</span></code> or <code class="docutils literal"><span class="pre">dihedral</span></code>, <code class="docutils literal"><span class="pre">-g2</span></code>
+should not be specified.
+In this case, <code class="docutils literal"><span class="pre">-group1</span></code> should specify one or more selections,
+and each should contain triplets or quartets of positions that define
+the angles to be calculated.</p>
+<p>If <code class="docutils literal"><span class="pre">-g1</span></code> is <code class="docutils literal"><span class="pre">vector</span></code> or <code class="docutils literal"><span class="pre">plane</span></code>, <code class="docutils literal"><span class="pre">-group1</span></code>
+should specify selections that contain either pairs (<code class="docutils literal"><span class="pre">vector</span></code>)
+or triplets (<code class="docutils literal"><span class="pre">plane</span></code>) of positions. For vectors, the positions
+set the endpoints of the vector, and for planes, the three positions
+are used to calculate the normal of the plane. In both cases,
+<code class="docutils literal"><span class="pre">-g2</span></code> specifies the other vector to use (see below).</p>
+<p>With <code class="docutils literal"><span class="pre">-g2</span> <span class="pre">vector</span></code> or <code class="docutils literal"><span class="pre">-g2</span> <span class="pre">plane</span></code>, <code class="docutils literal"><span class="pre">-group2</span></code> should
+specify another set of vectors. <code class="docutils literal"><span class="pre">-group1</span></code> and <code class="docutils literal"><span class="pre">-group2</span></code>
+should specify the same number of selections. It is also allowed to
+only have a single selection for one of the options, in which case
+the same selection is used with each selection in the other group.
+Similarly, for each selection in <code class="docutils literal"><span class="pre">-group1</span></code>, the corresponding
+selection in <code class="docutils literal"><span class="pre">-group2</span></code> should specify the same number of
+vectors or a single vector. In the latter case, the angle is
+calculated between that single vector and each vector from the other
+selection.</p>
+<p>With <code class="docutils literal"><span class="pre">-g2</span> <span class="pre">sphnorm</span></code>, each selection in <code class="docutils literal"><span class="pre">-group2</span></code> should
+specify a single position that is the center of the sphere.
+The second vector is calculated as the vector from the center to the
+midpoint of the positions specified by <code class="docutils literal"><span class="pre">-group1</span></code>.</p>
+<p>With <code class="docutils literal"><span class="pre">-g2</span> <span class="pre">z</span></code>, <code class="docutils literal"><span class="pre">-group2</span></code> is not necessary, and angles
+between the first vectors and the positive Z axis are calculated.</p>
+<p>With <code class="docutils literal"><span class="pre">-g2</span> <span class="pre">t0</span></code>, <code class="docutils literal"><span class="pre">-group2</span></code> is not necessary, and angles
+are calculated from the vectors as they are in the first frame.</p>
+<p>There are three options for output:
+<code class="docutils literal"><span class="pre">-oav</span></code> writes an xvg file with the time and the average angle
+for each frame.
+<code class="docutils literal"><span class="pre">-oall</span></code> writes all the individual angles.
+<code class="docutils literal"><span class="pre">-oh</span></code> writes a histogram of the angles. The bin width can be
+set with <code class="docutils literal"><span class="pre">-binw</span></code>.
+For <code class="docutils literal"><span class="pre">-oav</span></code> and <code class="docutils literal"><span class="pre">-oh</span></code>, separate average/histogram is
+computed for each selection in <code class="docutils literal"><span class="pre">-group1</span></code>.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Input trajectory or single configuration: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Input structure: <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Extra index groups</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-oav</span></code> [&lt;.xvg&gt;] (angaver.xvg) (Optional)</dt>
+<dd>Average angles as a function of time</dd>
+<dt><code class="docutils literal"><span class="pre">-oall</span></code> [&lt;.xvg&gt;] (angles.xvg) (Optional)</dt>
+<dd>All angles as a function of time</dd>
+<dt><code class="docutils literal"><span class="pre">-oh</span></code> [&lt;.xvg&gt;] (anghist.xvg) (Optional)</dt>
+<dd>Histogram of the angles</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame if t MOD dt == first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-fgroup</span></code> &lt;selection&gt;</dt>
+<dd>Atoms stored in the trajectory file (if not set, assume first N atoms)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>Plot formatting: none, xmgrace, xmgr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmpbc</span></code>  (yes)</dt>
+<dd>Make molecules whole for each frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions for distance calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-sf</span></code> &lt;file&gt;</dt>
+<dd>Provide selections from files</dd>
+<dt><code class="docutils literal"><span class="pre">-selrpos</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-seltype</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Default selection output positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-g1</span></code> &lt;enum&gt; (angle)</dt>
+<dd>Type of analysis/first vector group: angle, dihedral, vector, plane</dd>
+<dt><code class="docutils literal"><span class="pre">-g2</span></code> &lt;enum&gt; (none)</dt>
+<dd>Type of second vector group: none, vector, plane, t0, z, sphnorm</dd>
+<dt><code class="docutils literal"><span class="pre">-binw</span></code> &lt;real&gt; (1)</dt>
+<dd>Binwidth for -oh in degrees</dd>
+<dt><code class="docutils literal"><span class="pre">-group1</span></code> &lt;selection&gt;</dt>
+<dd>First analysis/vector selection</dd>
+<dt><code class="docutils literal"><span class="pre">-group2</span></code> &lt;selection&gt;</dt>
+<dd>Second analysis/vector selection</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx gangle</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-freevolume.html"
+                        title="previous chapter">gmx freevolume</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-genconf.html"
+                        title="next chapter">gmx genconf</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-gangle.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-genconf.html" title="gmx genconf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-freevolume.html" title="gmx freevolume"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

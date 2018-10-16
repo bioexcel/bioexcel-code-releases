@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1OptionValueConverterSimple" kind="class" prot="public">
+    <compoundname>gmx::OptionValueConverterSimple</compoundname>
+    <includes local="no">gromacs/options/valueconverter.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+        <declname>OutType</declname>
+        <defname>OutType</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classgmx_1_1OptionValueConverterSimple_1ae7405a599d865342bd4e98dc5441c120" prot="private" static="no">
+        <type>std::function&lt; OutType(const <ref refid="classgmx_1_1Variant" kindref="compound">Variant</ref> &amp;value)&gt;</type>
+        <definition>typedef std::function&lt;OutType(const Variant &amp;value)&gt; gmx::OptionValueConverterSimple&lt; OutType &gt;::ConversionFunction</definition>
+        <argsstring></argsstring>
+        <name>ConversionFunction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" line="126" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1OptionValueConverterSimple_1a137c3e90901d2cae203d1be58fa18eab" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::type_index, ConversionFunction &gt;</type>
+        <definition>std::map&lt;std::type_index, ConversionFunction&gt; gmx::OptionValueConverterSimple&lt; OutType &gt;::converters_</definition>
+        <argsstring></argsstring>
+        <name>converters_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" line="128" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1OptionValueConverterSimple_1a729ecf70c6cd304f0899e962ffea93ef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>OutType</type>
+        <definition>OutType gmx::OptionValueConverterSimple&lt; OutType &gt;::convert</definition>
+        <argsstring>(const Variant &amp;value) const </argsstring>
+        <name>convert</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Variant" kindref="compound">Variant</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Converts a <ref refid="classgmx_1_1Variant" kindref="compound">Variant</ref> value to the output type. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Converted value. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InvalidInputError" kindref="compound">InvalidInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If the input <ref refid="classgmx_1_1Variant" kindref="compound">Variant</ref> has a type that is not recognized by any conversion. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" line="80" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" bodystart="80" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionValueConverterSimple_1a5ddf85637c05a5233250d6dec16b5b17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::OptionValueConverterSimple&lt; OutType &gt;::addConverter</definition>
+        <argsstring>(std::function&lt; OutType(const InType &amp;)&gt; func)</argsstring>
+        <name>addConverter</name>
+        <param>
+          <type>std::function&lt; OutType(const InType &amp;)&gt;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Adds a supported conversion. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>InType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type to convert from. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function to convert from <computeroutput>InType</computeroutput> to <computeroutput>OutType</computeroutput>. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" line="102" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" bodystart="102" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1OptionValueConverterSimple_1ac3010d91f202faa33c629627863dba16" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::OptionValueConverterSimple&lt; OutType &gt;::addCastConversion</definition>
+        <argsstring>()</argsstring>
+        <name>addCastConversion</name>
+        <briefdescription>
+<para>Adds a supported conversion from a type that can be directly cast. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>InType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type to convert from with a simple cast. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" line="116" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" bodystart="116" bodyend="123"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper for converting from <ref refid="classgmx_1_1Variant" kindref="compound">Variant</ref> to a given type. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>OutType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type this converter converts to.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Default-constructed converter only supports identity mapping from the a <ref refid="classgmx_1_1Variant" kindref="compound">Variant</ref> holding <computeroutput>OutType</computeroutput>. To add support for additional input types, provide conversion functions with <ref refid="classgmx_1_1OptionValueConverterSimple_1a5ddf85637c05a5233250d6dec16b5b17" kindref="member">addConverter()</ref>. To use a non-identity mapping for an <computeroutput>OutType</computeroutput> -&gt; <computeroutput>OutType</computeroutput> conversion, provide an alternative conversion from <computeroutput>OutType</computeroutput> with <ref refid="classgmx_1_1OptionValueConverterSimple_1a5ddf85637c05a5233250d6dec16b5b17" kindref="member">addConverter()</ref>. </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" line="71" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/options/valueconverter.h" bodystart="70" bodyend="129"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1OptionValueConverterSimple_1ac3010d91f202faa33c629627863dba16" prot="public" virt="non-virtual"><scope>gmx::OptionValueConverterSimple</scope><name>addCastConversion</name></member>
+      <member refid="classgmx_1_1OptionValueConverterSimple_1a5ddf85637c05a5233250d6dec16b5b17" prot="public" virt="non-virtual"><scope>gmx::OptionValueConverterSimple</scope><name>addConverter</name></member>
+      <member refid="classgmx_1_1OptionValueConverterSimple_1ae7405a599d865342bd4e98dc5441c120" prot="private" virt="non-virtual"><scope>gmx::OptionValueConverterSimple</scope><name>ConversionFunction</name></member>
+      <member refid="classgmx_1_1OptionValueConverterSimple_1a729ecf70c6cd304f0899e962ffea93ef" prot="public" virt="non-virtual"><scope>gmx::OptionValueConverterSimple</scope><name>convert</name></member>
+      <member refid="classgmx_1_1OptionValueConverterSimple_1a137c3e90901d2cae203d1be58fa18eab" prot="private" virt="non-virtual"><scope>gmx::OptionValueConverterSimple</scope><name>converters_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,292 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Answers to frequently asked questions (FAQs) &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Force fields in GROMACS" href="force-fields.html" />
+    <link rel="prev" title="Managing long simulations" href="managing-simulations.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="force-fields.html" title="Force fields in GROMACS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="managing-simulations.html" title="Managing long simulations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="answers-to-frequently-asked-questions-faqs">
+<h1>Answers to frequently asked questions (FAQs)<a class="headerlink" href="#answers-to-frequently-asked-questions-faqs" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="questions-regarding-gromacs-installation">
+<h2>Questions regarding GROMACS installation<a class="headerlink" href="#questions-regarding-gromacs-installation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Do I need to compile all utilities with MPI?</p>
+<p>With one rarely-used exception (<a class="reference internal" href="../onlinehelp/gmx-pme_error.html#gmx-pme-error"><span class="std std-ref">pme_error</span></a>), only the
+<a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">mdrun</span></a> binary is able to use the <a class="reference internal" href="../install-guide/index.html#mpi-support"><span class="std std-ref">MPI</span></a>
+parallelism. So you only need to use the <code class="docutils literal"><span class="pre">-DGMX_MPI=on</span></code> flag
+when <a class="reference internal" href="../install-guide/index.html#configure-cmake"><span class="std std-ref">configuring</span></a> for a build intended to run
+the main simulation engine <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">mdrun</span></a>.</p>
+</li>
+<li><p class="first">Should my version be compiled using double precision?</p>
+<p>In general, GROMACS only needs to be build in its default mixed-precision mode.
+For more details, see the discussion in Chapter 2 of the <a class="reference external" href="../manual-2018.3.pdf">reference manual</a>.
+Sometimes, usage may also depend on your target system, and should be decided
+upon according to the <a class="reference internal" href="../install-guide/index.html#gmx-special-build"><span class="std std-ref">individual instructions</span></a>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="questions-concerning-system-preparation-and-preprocessing">
+<h2>Questions concerning system preparation and preprocessing<a class="headerlink" href="#questions-concerning-system-preparation-and-preprocessing" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Where can I find a solvent <a class="reference internal" href="file-formats.html#gmx-structure-files"><span class="std std-ref">coordinate file</span></a> for use with <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">solvate</span></a>?</p>
+<p>Suitable equilibrated boxes of solvent <a class="reference internal" href="file-formats.html#gmx-structure-files"><span class="std std-ref">structure files</span></a> can be found
+in the <code class="docutils literal"><span class="pre">$GMXDIR/share/gromacs/top</span></code> directory. That location will be searched by default
+by <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">solvate</span></a>, for example by using <code class="docutils literal"><span class="pre">-cs</span> <span class="pre">spc216.gro</span></code> as an argument.
+Other solvent boxes can be prepared by the user as described
+on the manual page for <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">solvate</span></a> and elsewhere.
+Note that suitable topology files will be needed for the solvent boxes to be useful in
+<a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">grompp</span></a>. These are available for some force fields, and may be
+found in the respective subfolder of <code class="docutils literal"><span class="pre">$GMXDIR/share/gromacs/top</span></code>.</p>
+</li>
+<li><p class="first">How to prevent <a class="reference internal" href="../onlinehelp/gmx-solvate.html#gmx-solvate"><span class="std std-ref">solvate</span></a> from placing waters in undesired places?</p>
+<p>Water placement is generally well behaved when solvating proteins, but can be difficult when setting up
+membrane or micelle simulations. In those cases, waters may be placed in between the
+alkyl chains of the lipids, leading to problems later <a class="reference internal" href="terminology.html#blowing-up"><span class="std std-ref">during the simulation</span></a>.
+You can either remove those waters by hand (and do the accounting for molecule types in the
+<a class="reference internal" href="file-formats.html#top"><span class="std std-ref">topology</span></a> file), or set up a local copy of the <code class="docutils literal"><span class="pre">vdwradii.dat</span></code> file from the <code class="docutils literal"><span class="pre">$GMXLIB</span></code>
+directory, specific for your project and located in your working directory. In it, you can
+increase the vdW radius of the atoms, to suppress such interstitial insertions.
+Recommended e.g. at a common <a class="reference external" href="http://www.bevanlab.biochem.vt.edu/Pages/Personal/justin/gmx-tutorials/membrane_protein/03_solvate.html">tutorial</a> is the use of 0.375 instead of 0.15.</p>
+</li>
+</ol>
+<ol class="arabic">
+<li><p class="first">How do I provide multiple definitions of bonds / dihedrals in a topology?</p>
+<p>You can add additional bonded terms beyond those that are normally defined for a residue (e.g. when defining
+a special ligand) by including additional copies of the respective lines under the
+<code class="docutils literal"><span class="pre">[</span> <span class="pre">bonds</span> <span class="pre">]</span></code>, <code class="docutils literal"><span class="pre">[</span> <span class="pre">pairs</span> <span class="pre">]</span></code>, <code class="docutils literal"><span class="pre">[</span> <span class="pre">angles</span> <span class="pre">]</span></code> and <code class="docutils literal"><span class="pre">[</span> <span class="pre">dihedrals</span> <span class="pre">]</span></code> sections in the <code class="docutils literal"><span class="pre">[</span> <span class="pre">moleculetype</span> <span class="pre">]</span></code>
+section for your molecule, found either in the <a class="reference internal" href="file-formats.html#itp"><span class="std std-ref">itp</span></a> file
+or the <a class="reference internal" href="file-formats.html#top"><span class="std std-ref">topology</span></a> file. This will <strong>add</strong> those extra terms to the potential energy evaluation,
+but <strong>will not</strong> remove the previous ones. So be careful with duplicate entries. Also keep in mind that this <strong>does not</strong>
+apply to duplicated entries for <code class="docutils literal"><span class="pre">[</span> <span class="pre">bondtypes</span> <span class="pre">]</span></code>, <code class="docutils literal"><span class="pre">[</span> <span class="pre">angletypes</span> <span class="pre">]</span></code>, or <code class="docutils literal"><span class="pre">[</span> <span class="pre">dihedraltypes</span> <span class="pre">]</span></code>, in force-field
+definition files, where duplicates overwrite the previous values.</p>
+</li>
+<li><p class="first">Do I really need a <a class="reference internal" href="file-formats.html#gro"><span class="std std-ref">gro</span></a> file?</p>
+<p>The <a class="reference internal" href="file-formats.html#gro"><span class="std std-ref">gro</span></a> file is used in GROMACS as a unified <a class="reference internal" href="file-formats.html#gmx-structure-files"><span class="std std-ref">structure file</span></a> format
+that can be read by all utilities. The large majority of GROMACS routines can also use other file
+types such as <a class="reference internal" href="file-formats.html#pdb"><span class="std std-ref">pdb</span></a>, with the limitations that no velocities are available in <a class="reference internal" href="getting-started.html#gmx-need-for-gro"><span class="std std-ref">this case</span></a>.
+If you need a text-based format with more digits of precision, the <a class="reference internal" href="file-formats.html#g96"><span class="std std-ref">g96</span></a> format is suitable and supported.</p>
+</li>
+<li><p class="first">Do I always need to run <a class="reference internal" href="../onlinehelp/gmx-pdb2gmx.html#gmx-pdb2gmx"><span class="std std-ref">pdb2gmx</span></a> when I already produced an <a class="reference internal" href="file-formats.html#itp"><span class="std std-ref">itp</span></a> file elsewhere?</p>
+<p>You don’t need to prepare additional files if you already have all <a class="reference internal" href="file-formats.html#itp"><span class="std std-ref">itp</span></a> and <a class="reference internal" href="file-formats.html#top"><span class="std std-ref">top</span></a> files prepared through other tools.</p>
+<p>Examples for those are <a class="reference external" href="http://www.charmm-gui.org/">CHARMM-GUI</a>, <a class="reference external" href="https://atb.uq.edu.au/">ATB (Automated Topology Builder</a>,
+<a class="reference external" href="http://pmx.mpibpc.mpg.de/instructions.html">pmx</a>. and <a class="reference external" href="http://davapc1.bioch.dundee.ac.uk/cgi-bin/prodrg">PRODRG</a>.</p>
+</li>
+<li><p class="first">How can I build in missing atoms?</p>
+<p>GROMACS has no support for building coordinates of missing non-hydrogen atoms. If your system is missing some part,
+you will have to add the missing pieces using external programs to avoid the <a class="reference internal" href="run-time-errors.html#gmx-atom-missing"><span class="std std-ref">missing atom</span></a>
+error. This can be done using programs such as <a class="reference external" href="https://www.cgl.ucsf.edu/chimera/">Chimera</a> in combination
+with <a class="reference external" href="https://salilab.org/modeller/">Modeller</a>, <a class="reference external" href="https://spdbv.vital-it.ch/">Swiss PDB Viewer</a>,
+<a class="reference external" href="https://www.schrodinger.com/maestro">Maestro</a>. <strong>Do not run</strong> a simulation that had missing atoms unless
+you know exactly why it will be stable.</p>
+</li>
+<li><p class="first">Why is the total charge of my system not an integer like it should be?</p>
+<p>In <a class="reference internal" href="floating-point.html#gmx-floating-point"><span class="std std-ref">floating point</span></a> math, real numbers can not be displayed to arbitrary precision
+(for more on this, see e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic">Wikipedia</a>). This means
+that very small differences to the final integer value will persist, and GROMACS will not lie to you and
+round those values up or down. If your charge differs from the integer value by a larger amount, e.g. at least
+0.01, this usually means that something went wrong during your system preparation</p>
+</li>
+</ol>
+</div>
+<div class="section" id="questions-regarding-simulation-methodology">
+<h2>Questions regarding simulation methodology<a class="headerlink" href="#questions-regarding-simulation-methodology" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Should I couple a handful of ions to their own temperature-coupling bath?</p>
+<p><strong>No</strong>. You need to consider the minimal size of your
+temperature coupling groups, as explained in <a class="reference internal" href="terminology.html#gmx-thermostats"><span class="std std-ref">Thermostats</span></a> and more
+specifically in <a class="reference internal" href="terminology.html#gmx-thermostats-dont"><span class="std std-ref">What not to do</span></a>, as well as the implementation
+of your chosen thermostat as described in the <a class="reference external" href="../manual-2018.3.pdf">reference manual</a>.</p>
+</li>
+<li><p class="first">Why do my grompp restarts always start from time zero?</p>
+<p>You can choose different values for <a class="reference internal" href="mdp-options.html#mdp-tinit"><code class="xref std std-mdp docutils literal"><span class="pre">tinit</span></code></a> and <a class="reference internal" href="mdp-options.html#mdp-init-step"><code class="xref std std-mdp docutils literal"><span class="pre">init-step</span></code></a>.</p>
+</li>
+<li><p class="first">Why can’t I do conjugate gradient minimization with constraints?</p>
+<p>Minimization with the conjugate gradient scheme can not be performed with constraints
+as described in the <a class="reference external" href="../manual-2018.3.pdf">reference manual</a>, and some additional information
+on <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">Wikipedia</a>.</p>
+</li>
+<li><p class="first">How do I hold atoms in place in my energy minimization or simulation?</p>
+<p>Groups may be frozen in place using <code class="docutils literal"><span class="pre">freeze</span> <span class="pre">groups</span></code> (see the <a class="reference external" href="../manual-2018.3.pdf">reference manual</a>).
+It is more common to use a set of position
+restraints, to place penalties on movement of the atoms. Files that control this
+kind of behaviour can be created using <a class="reference internal" href="../onlinehelp/gmx-genrestr.html#gmx-genrestr"><span class="std std-ref">genrestr</span></a>.</p>
+</li>
+<li><p class="first">How do I extend a completed a simulation to longer times?</p>
+<p>Please see the section on <cite>managing long simulations</cite>.
+You can either prepare a new <a class="reference internal" href="file-formats.html#mdp"><span class="std std-ref">mdp</span></a> file, or extend the simulation time
+in the original <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file using <a class="reference internal" href="../onlinehelp/gmx-convert-tpr.html#gmx-convert-tpr"><span class="std std-ref">convert-tpr`</span></a>.</p>
+</li>
+<li><p class="first">How should I compute a single-point energy?</p>
+<p>This is best achieved with the <code class="docutils literal"><span class="pre">-rerun</span></code> option to <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">mdrun</span></a>.
+See the <a class="reference internal" href="mdrun-features.html#single-point-energy"><span class="std std-ref">Re-running a simulation</span></a> section.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="parameterization-and-force-fields">
+<h2>Parameterization and Force Fields<a class="headerlink" href="#parameterization-and-force-fields" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">I want to simulate a molecule (protein, DNA, etc.) which complexes with
+various transition metal ions, iron-sulfur clusters, or other exotic species.
+Parameters for these exotic species aren’t available in force field X.
+What should I do?</p>
+<p>First, you should consider on how well <a class="reference internal" href="terminology.html#gmx-md"><span class="std std-ref">MD</span></a> will actually describe your
+system (e.g. see some of the <a class="reference external" href="https://dx.doi.org/10.1021%2Facs.chemrev.6b00440">recent literature</a>).
+Many species are infeasible to model without either atomic polarizability, or QM treatments.
+Then you need to prepare your own set of parameters and add a new residue
+to your <a class="reference internal" href="terminology.html#gmx-force-field"><span class="std std-ref">force field</span></a> of choice. Then you will have to validate that
+your system behaves in a physical way, before continuing your simulation studies. You could
+also try to build a more simplified model that does not rely on the complicated additions,
+as long as it still represents the correct <em>real</em> object in the laboratory.</p>
+</li>
+<li><p class="first">Should I take parameters from one force field and apply them inside another that is missing them?</p>
+<p><strong>NO</strong>. Molecules parametrized for a given
+<a class="reference internal" href="terminology.html#gmx-force-field"><span class="std std-ref">force field</span></a> will not behave in a physical manner when interacting with
+other molecules that have been parametrized according to different standards. If your
+required molecule is not included in the force field you need to use, you will
+have to parametrize it yourself according to the methodology of this force field.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="analysis-and-visualization">
+<h2>Analysis and Visualization<a class="headerlink" href="#analysis-and-visualization" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div></div></blockquote>
+<ol class="arabic">
+<li><p class="first">Why am I seeing bonds being created when I watch the trajectory?</p>
+<p>Most visualization software determines the bond status of atoms depending
+on a set of predefined distances. So the bonding pattern created by them
+might not be the one defined in your <a class="reference internal" href="file-formats.html#top"><span class="std std-ref">topology</span></a> file. What
+matters is the information encoded in there. If the software has read
+a <a class="reference internal" href="file-formats.html#tpr"><span class="std std-ref">tpr</span></a> file, then the information is in reliable agreement
+with the topology you supplied to <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">grompp</span></a>.</p>
+</li>
+<li><p class="first">When visualizing a trajectory from a simulation using PBC, why are there holes or my peptide leaving the simulation box?</p>
+<p>Those holes and molecules moving around are just a result of molecules
+ranging over the <a class="reference internal" href="terminology.html#gmx-pbc"><span class="std std-ref">box boundaries and wrapping around</span></a>,
+and are not a reason for concern. You can fix the visualization using <a class="reference internal" href="../onlinehelp/gmx-trjconv.html#gmx-trjconv"><span class="std std-ref">trjconv</span></a>
+to prepare the structure for analysis.</p>
+</li>
+<li><p class="first">Why is my total simulation time not an integer like it should be?</p>
+<p>As the simulation time is calculated using <a class="reference internal" href="floating-point.html#gmx-floating-point"><span class="std std-ref">floating point arithmetic</span></a>,
+rounding errors can occur but are not of concern.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Answers to frequently asked questions (FAQs)</a><ul>
+<li><a class="reference internal" href="#questions-regarding-gromacs-installation">Questions regarding GROMACS installation</a></li>
+<li><a class="reference internal" href="#questions-concerning-system-preparation-and-preprocessing">Questions concerning system preparation and preprocessing</a></li>
+<li><a class="reference internal" href="#questions-regarding-simulation-methodology">Questions regarding simulation methodology</a></li>
+<li><a class="reference internal" href="#parameterization-and-force-fields">Parameterization and Force Fields</a></li>
+<li><a class="reference internal" href="#analysis-and-visualization">Analysis and Visualization</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="managing-simulations.html"
+                        title="previous chapter">Managing long simulations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="force-fields.html"
+                        title="next chapter">Force fields in GROMACS</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/faq.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="force-fields.html" title="Force fields in GROMACS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="managing-simulations.html" title="Managing long simulations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

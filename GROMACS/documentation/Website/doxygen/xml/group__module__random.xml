@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="group__module__random" kind="group">
+    <compoundname>module_random</compoundname>
+    <title>Random engines and distributions (random)</title>
+    <innerfile refid="exponentialdistribution_8h">exponentialdistribution.h</innerfile>
+    <innerfile refid="gammadistribution_8h">gammadistribution.h</innerfile>
+    <innerfile refid="normaldistribution_8h">normaldistribution.h</innerfile>
+    <innerfile refid="seed_8h">seed.h</innerfile>
+    <innerfile refid="tabulatednormaldistribution_8h">tabulatednormaldistribution.h</innerfile>
+    <innerfile refid="exponentialdistribution_8cpp">exponentialdistribution.cpp</innerfile>
+    <innerfile refid="gammadistribution_8cpp">gammadistribution.cpp</innerfile>
+    <innerfile refid="normaldistribution_8cpp">normaldistribution.cpp</innerfile>
+    <innerfile refid="tests_2seed_8cpp">seed.cpp</innerfile>
+    <innerfile refid="tests_2tabulatednormaldistribution_8cpp">tabulatednormaldistribution.cpp</innerfile>
+    <innerfile refid="threefry_8cpp">threefry.cpp</innerfile>
+    <innerfile refid="uniformintdistribution_8cpp">uniformintdistribution.cpp</innerfile>
+    <innerfile refid="uniformrealdistribution_8cpp">uniformrealdistribution.cpp</innerfile>
+    <innerfile refid="threefry_8h">threefry.h</innerfile>
+    <innerfile refid="uniformintdistribution_8h">uniformintdistribution.h</innerfile>
+    <innerfile refid="uniformrealdistribution_8h">uniformrealdistribution.h</innerfile>
+    <innerfile refid="random_8h">random.h</innerfile>
+    <briefdescription>
+<para>Provides efficient and portable random generators and distributions. </para>    </briefdescription>
+    <detaileddescription>
+<para><heading level="3">Basic Use</heading>
+</para><para>GROMACS relies on random numbers in several different modules, and in particular for methods that influence the integration we both require the generation to be very fast and the resulting numbers of high quality. In addition, it is highly desirable that we generate the same trajectories in parallel as for a single-core run.</para><para>To realize this, we have implemented the ThreeFry2x64 counter-based random engine. In contrast to a normal random engine that is seeded and then keeps an internal state, ThreeFry2x64 is derived from cryptographic applications where we use a key to turn a highly regular counter int a stream of random numbers. This makes it possible to quickly set the counter in the random engine based e.g. on the timestep and atom index, and get the same random numbers regardless of parallelization.</para><para>The TreeFry2x64 engine has been implemented to be fully compatible with standard C++11 random engines. There is a <ref refid="classgmx_1_1ThreeFry2x64General" kindref="compound">gmx::ThreeFry2x64General</ref> class that allows full control over the accuracy (more iterations means higher quality), and <ref refid="classgmx_1_1ThreeFry2x64" kindref="compound">gmx::ThreeFry2x64</ref> and <ref refid="classgmx_1_1ThreeFry2x64Fast" kindref="compound">gmx::ThreeFry2x64Fast</ref> that are specialized to 20 and 13 iterations, respectively. With 20 iterations this engine passes all tests in the standard BigCrush test, and with 13 iterations only a single test fails (in comparision, Mersenne Twister fails two).</para><para>All these engines take a template parameter that specifies the number of bits to reserve for an internal counter. This is based on an idea of John Salmon, and it makes it possible to set your external counter based on two simple values (usually timestep and particle index), but then it is still possible to draw more than one value for this external counter since the internal counter increments. If you run out of internal counter space the class will throw an exception to make sure you don&apos;t silently end up with corrupted/overlapping random data.</para><para><heading level="3">But what if I just want a vanilla random number generator?</heading>
+</para><para>We&apos;ve thought about that. Just use the <ref refid="namespacegmx_1a7ea21974bdd8acdfa1c344b0945cff1b" kindref="member">gmx::DefaultRandomEngine</ref> class and forget everything about counters. Initialize the class with a single value for the seed (up to 64 bits), and you are good to go.</para><para><heading level="3">Random number distributions</heading>
+</para><para>The ThreeFry random engine is fully compatible with all distributions from the C++11 standard library, but unfortunately implementation differences (and bugs) mean you will typically not get the same sequence of numbers from two different library implementations. Since this causes problems for our unit tests, we prefer to use our own implementations - they should work exactly like the corresponding C++11 versions.</para><para>The normal distribution is frequently used in integration, and it can be a performance bottleneck. To avoid this, we use a special tabulated distribution <ref refid="classgmx_1_1TabulatedNormalDistribution" kindref="compound">gmx::TabulatedNormalDistribution</ref> that provides very high performance at the cost of slightly discretized values; the default 14-bit table gives us 16,384 unique values, but this has been thoroughly tested to be sufficient for all integration usage.</para><para><simplesect kind="author"><para>Erik Lindahl <ulink url="mailto:erik.lindahl@gmail.com">erik.lindahl@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+  </compounddef>
+</doxygen>

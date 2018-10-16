@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="namespacegmx_1_1anonymous__namespace_02alignedallocator_8cpp_03" kind="namespace">
+    <compoundname>gmx::anonymous_namespace{alignedallocator.cpp}</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02alignedallocator_8cpp_03_1ad0d56cb5a37ddd8c7cd0f6453ce8ad3c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>static void* gmx::anonymous_namespace{alignedallocator.cpp}::alignedMallocGeneric</definition>
+        <argsstring>(std::size_t bytes, std::size_t alignment)</argsstring>
+        <name>alignedMallocGeneric</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>bytes</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+<para>Allocate aligned memory in a fully portable way. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Amount of memory (bytes) to allocate. The routine will return nullptr if the allocation fails. However, note that asking for zero bytes will return a pointer that is non-null and properly aligned (but obviously you cannot use it, since you promised not to access data beyond the 0 bytes you asked for).</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alignment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Alignment specification in bytes, must be a power of 2.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Nonzero pointer if the allocation worked, otherwise nullptr. This routine should only be called from alignedMalloc(), which also does the checking for valid values. This particular function is used for platforms where we have no control of the alignment of memory returned by the system. Instead, we increase the amount of memory requested internally such that we both can create a pointer inside this memory that fulfills the memory alignment requested, and that we have room to store the original pointer just before this area.</para></simplesect>
+<simplesect kind="note"><para>This is an internal routine that should only be called from gmx::alignedMalloc(). Just like system-provided routines, it provides memory that is aligned - but not padded. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" line="102" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" bodystart="102" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02alignedallocator_8cpp_03_1a96474ba7edf3ce189ccd677484e15e51" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx::anonymous_namespace{alignedallocator.cpp}::alignedFreeGeneric</definition>
+        <argsstring>(void *p)</argsstring>
+        <name>alignedFreeGeneric</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Free aligned memory. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Memory pointer previously returned from gmx::internal::alignedFreePortable().</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Since this routine relies on the original pointer being stored just before the memory area p points to, bad things will happen if you call this routine with a pointer obtained any other way, or if you call the system free() with a pointer obtained from std::alignedMalloc().</para><para><simplesect kind="note"><para>This is an internal routine that should only be called from gmx::alignedFree(). </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" line="142" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" bodystart="142" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02alignedallocator_8cpp_03_1a33994423fc58ba609d196a811b56f54b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>static void* gmx::anonymous_namespace{alignedallocator.cpp}::mallocImpl</definition>
+        <argsstring>(std::size_t bytes, std::size_t alignment)</argsstring>
+        <name>mallocImpl</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>bytes</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>alignment</declname>
+        </param>
+        <briefdescription>
+<para>Implement malloc of <computeroutput>bytes</computeroutput> of memory, aligned to <computeroutput>alignment</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" line="152" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" bodystart="152" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacegmx_1_1anonymous__namespace_02alignedallocator_8cpp_03_1a158c7a9d69eeb06fb97389d8a6963bce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void gmx::anonymous_namespace{alignedallocator.cpp}::freeImpl</definition>
+        <argsstring>(void *p)</argsstring>
+        <name>freeImpl</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Free aligned memory allocated with <ref refid="namespacegmx_1_1anonymous__namespace_02alignedallocator_8cpp_03_1a33994423fc58ba609d196a811b56f54b" kindref="member">mallocImpl()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" line="175" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" bodystart="175" bodyend="189"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/alignedallocator.cpp" line="76" column="1"/>
+  </compounddef>
+</doxygen>

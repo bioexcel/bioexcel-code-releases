@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="gpu__utils_8cpp" kind="file">
+    <compoundname>gpu_utils.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="gpu__utils_8h" local="yes">gpu_utils.h</includes>
+    <includes refid="gpu__hw__info_8h" local="yes">gromacs/hardware/gpu_hw_info.h</includes>
+    <incdepgraph>
+      <node id="11943">
+        <label>src/gromacs/gpu_utils/gpu_utils.cpp</label>
+        <link refid="gpu_utils.cpp"/>
+        <childnode refid="11944" relation="include">
+        </childnode>
+        <childnode refid="11945" relation="include">
+        </childnode>
+      </node>
+      <node id="11950">
+        <label>stdint.h</label>
+      </node>
+      <node id="11945">
+        <label>gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="11946" relation="include">
+        </childnode>
+        <childnode refid="11947" relation="include">
+        </childnode>
+        <childnode refid="11948" relation="include">
+        </childnode>
+        <childnode refid="11949" relation="include">
+        </childnode>
+      </node>
+      <node id="11947">
+        <label>string</label>
+      </node>
+      <node id="11946">
+        <label>cstdio</label>
+      </node>
+      <node id="11948">
+        <label>vector</label>
+      </node>
+      <node id="11944">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="11949">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="11950" relation="include">
+        </childnode>
+        <childnode refid="11951" relation="include">
+        </childnode>
+      </node>
+      <node id="11951">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="gpu__utils_8cpp_1a66c5ce09d07ab42d9811d187ecd52ae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gpu_set_host_malloc_and_free</definition>
+        <argsstring>(bool, gmx_host_alloc_t **nb_alloc, gmx_host_free_t **nb_free)</argsstring>
+        <name>gpu_set_host_malloc_and_free</name>
+        <param>
+          <type>bool</type>
+        </param>
+        <param>
+          <type><ref refid="gpu__utils_8h_1a4a5340aac0cf9145eaae8a5ac5d6b0dc" kindref="member">gmx_host_alloc_t</ref> **</type>
+          <declname>nb_alloc</declname>
+        </param>
+        <param>
+          <type><ref refid="gpu__utils_8h_1aff7e0f62ae0592b0aefadcf9071d0435" kindref="member">gmx_host_free_t</ref> **</type>
+          <declname>nb_free</declname>
+        </param>
+        <briefdescription>
+<para>Set allocation functions used by the GPU host. </para>        </briefdescription>
+        <detaileddescription>
+<para>Set page-locked memory allocation functions used by the GPU host.</para><para>Since GPU support is not configured, there is no host memory to allocate. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpu_utils.cpp" line="50" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpu_utils.cpp" bodystart="50" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8cpp_1ad33989eb338307eee7775667e3696126" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; getCompatibleGpus</definition>
+        <argsstring>(const gmx_gpu_info_t &amp;)</argsstring>
+        <name>getCompatibleGpus</name>
+        <param>
+          <type>const <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>This function is documented in the header file. </para>        </briefdescription>
+        <detaileddescription>
+<para>Return a container of the detected GPUs that are compatible. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpu_utils.cpp" line="59" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpu_utils.cpp" bodystart="59" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="gpu__utils_8cpp_1a73d1f09ddb9e7b73a8a832093452d83c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* getGpuCompatibilityDescription</definition>
+        <argsstring>(const gmx_gpu_info_t &amp;, int)</argsstring>
+        <name>getGpuCompatibilityDescription</name>
+        <param>
+          <type>const <ref refid="structgmx__gpu__info__t" kindref="compound">gmx_gpu_info_t</ref> &amp;</type>
+          <declname>gpu_info</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Return a string describing how compatible the GPU with given <computeroutput>index</computeroutput> is. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gpu_info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information about detected GPUs </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of GPU to ask about </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A null-terminated C string describing the compatibility status, useful for error messages. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpu_utils.cpp" line="65" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpu_utils.cpp" bodystart="65" bodyend="69"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Function definitions for non-GPU builds. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpu_utils.cpp"/>
+  </compounddef>
+</doxygen>

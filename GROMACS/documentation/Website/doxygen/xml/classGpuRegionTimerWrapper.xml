@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classGpuRegionTimerWrapper" kind="class" prot="public">
+    <compoundname>GpuRegionTimerWrapper</compoundname>
+    <includes local="no">gromacs/gpu_utils/gpuregiontimer.h</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="gpuregiontimer_8h_1a4f8e3bfb11af73c5e9c702d844004f2c" kindref="member">GpuFramework</ref></type>
+        <declname>framework</declname>
+        <defname>framework</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classGpuRegionTimerWrapper_1a5191b22cb68cd9dde683056137fa00f8" prot="private" static="no">
+        <name>TimerState</name>
+        <enumvalue id="classGpuRegionTimerWrapper_1a5191b22cb68cd9dde683056137fa00f8ae599161956d626eda4cb0a5ffb85271c" prot="public">
+          <name>Idle</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classGpuRegionTimerWrapper_1a5191b22cb68cd9dde683056137fa00f8ac5564d2e8b8e0ae08bf4363f2b947166" prot="public">
+          <name>Recording</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classGpuRegionTimerWrapper_1a5191b22cb68cd9dde683056137fa00f8ac23e2b09ebe6bf4cb5e2a9abe85c0be2" prot="public">
+          <name>Stopped</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>The timer state used for debug-only assertions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="128" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="127" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGpuRegionTimerWrapper_1a58eaf07dd477b04e68b180b7c8298178" prot="private" static="no">
+        <type>typename <ref refid="structGpuTraits" kindref="compound">GpuTraits</ref>&lt; framework &gt;::CommandStream</type>
+        <definition>using GpuRegionTimerWrapper&lt; framework &gt;::CommandStream =  typename GpuTraits&lt;framework&gt;::CommandStream</definition>
+        <argsstring></argsstring>
+        <name>CommandStream</name>
+        <briefdescription>
+<para>Short-hands. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="124" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGpuRegionTimerWrapper_1adc3b3c714b941a2c5277aca36c769101" prot="private" static="no">
+        <type>typename <ref refid="structGpuTraits" kindref="compound">GpuTraits</ref>&lt; framework &gt;::CommandEvent</type>
+        <definition>using GpuRegionTimerWrapper&lt; framework &gt;::CommandEvent =  typename GpuTraits&lt;framework&gt;::CommandEvent</definition>
+        <argsstring></argsstring>
+        <name>CommandEvent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="125" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGpuRegionTimerWrapper_1a4c90c6eab51db81b53e075081ac93a24" prot="private" static="no" mutable="no">
+        <type>enum GpuRegionTimerWrapper::TimerState</type>
+        <definition>enum GpuRegionTimerWrapper::TimerState  GpuRegionTimerWrapper&lt; framework &gt;::debugState_</definition>
+        <argsstring></argsstring>
+        <name>debugState_</name>
+        <initializer>= TimerState::Idle</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="132" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGpuRegionTimerWrapper_1aa4cbc4c3ece51ddfbf75e16e9d146d70" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int GpuRegionTimerWrapper&lt; framework &gt;::callCount_</definition>
+        <argsstring></argsstring>
+        <name>callCount_</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The number of times the timespan has been measured. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="135" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGpuRegionTimerWrapper_1a6c4ce4fddecaf9a163c86609a796270e" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double GpuRegionTimerWrapper&lt; framework &gt;::totalMilliseconds_</definition>
+        <argsstring></argsstring>
+        <name>totalMilliseconds_</name>
+        <initializer>= 0.0</initializer>
+        <briefdescription>
+<para>The accumulated duration of the timespans measured (milliseconds) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="137" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGpuRegionTimerWrapper_1a0edb4e76f3d719bfadc7257394c6f51e" prot="private" static="no" mutable="no">
+        <type><ref refid="classGpuRegionTimerImpl" kindref="compound">GpuRegionTimerImpl</ref>&lt; framework &gt;</type>
+        <definition>GpuRegionTimerImpl&lt;framework&gt; GpuRegionTimerWrapper&lt; framework &gt;::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <briefdescription>
+<para>The underlying region timer implementation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="139" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGpuRegionTimerWrapper_1ad02014dfb38847883c55ae2b96b1ed79" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GpuRegionTimerWrapper&lt; framework &gt;::openTimingRegion</definition>
+        <argsstring>(CommandStream s)</argsstring>
+        <name>openTimingRegion</name>
+        <param>
+          <type>CommandStream</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>To be called before the region start. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GPU command stream where the event being measured takes place. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="148" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="148" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerWrapper_1a0bed5ae5034ac52a7af3429d640a63af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GpuRegionTimerWrapper&lt; framework &gt;::closeTimingRegion</definition>
+        <argsstring>(CommandStream s)</argsstring>
+        <name>closeTimingRegion</name>
+        <param>
+          <type>CommandStream</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>To be called after the region end. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GPU command stream where the event being measured takes place. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="163" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="163" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerWrapper_1ae41e3366a0864560e324eb076c30e07e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double GpuRegionTimerWrapper&lt; framework &gt;::getLastRangeTime</definition>
+        <argsstring>()</argsstring>
+        <name>getLastRangeTime</name>
+        <briefdescription>
+<para>Accumulates the last timespan of all the events used into the the total duration, and resets the internal timer state. To be called after <ref refid="classGpuRegionTimerWrapper_1a0bed5ae5034ac52a7af3429d640a63af" kindref="member">closeTimingRegion()</ref> and the command stream of the event having been synchronized. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The last timespan (in milliseconds). </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="180" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="180" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerWrapper_1a647be789c58881636e02f0a91c554838" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GpuRegionTimerWrapper&lt; framework &gt;::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <briefdescription>
+<para>Resets the implementation and total time/call count to zeroes. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="203" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="203" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerWrapper_1a5e31b7fa2ff770c2f4bf3ef13176c9ab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double GpuRegionTimerWrapper&lt; framework &gt;::getTotalTime</definition>
+        <argsstring>() const </argsstring>
+        <name>getTotalTime</name>
+        <briefdescription>
+<para>Gets total time recorded (in milliseconds). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="214" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="214" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerWrapper_1a60f3b1ada5e93eb9a0edf56b9efb1d8b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int GpuRegionTimerWrapper&lt; framework &gt;::getCallCount</definition>
+        <argsstring>() const </argsstring>
+        <name>getCallCount</name>
+        <briefdescription>
+<para>Gets total call count recorded. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="219" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="219" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="classGpuRegionTimerWrapper_1ad4bbbeac5bca3b81f6e5d45ab031e539" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>CommandEvent *</type>
+        <definition>CommandEvent* GpuRegionTimerWrapper&lt; framework &gt;::fetchNextEvent</definition>
+        <argsstring>()</argsstring>
+        <name>fetchNextEvent</name>
+        <briefdescription>
+<para>Gets a pointer to a new timing event for passing into individual GPU API calls within the region if they require it (e.g. on OpenCL). </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The pointer to the underlying single command timing event. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="228" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="228" bodyend="236"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This is a GPU region timing wrapper class. It allows for host-side tracking of the accumulated execution timespans in GPU code (measuring kernel or transfers duration). It also partially tracks the correctness of the timer state transitions, as far as current implementation allows (see TODO in <ref refid="classGpuRegionTimerWrapper_1ae41e3366a0864560e324eb076c30e07e" kindref="member">getLastRangeTime()</ref> for a disabled check). Internally it uses <ref refid="classGpuRegionTimerImpl" kindref="compound">GpuRegionTimerImpl</ref> for measuring regions. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" line="122" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/gpu_utils/gpuregiontimer.h" bodystart="121" bodyend="237"/>
+    <listofallmembers>
+      <member refid="classGpuRegionTimerWrapper_1aa4cbc4c3ece51ddfbf75e16e9d146d70" prot="private" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>callCount_</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a0bed5ae5034ac52a7af3429d640a63af" prot="public" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>closeTimingRegion</name></member>
+      <member refid="classGpuRegionTimerWrapper_1adc3b3c714b941a2c5277aca36c769101" prot="private" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>CommandEvent</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a58eaf07dd477b04e68b180b7c8298178" prot="private" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>CommandStream</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a4c90c6eab51db81b53e075081ac93a24" prot="private" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>debugState_</name></member>
+      <member refid="classGpuRegionTimerWrapper_1ad4bbbeac5bca3b81f6e5d45ab031e539" prot="public" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>fetchNextEvent</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a60f3b1ada5e93eb9a0edf56b9efb1d8b" prot="public" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>getCallCount</name></member>
+      <member refid="classGpuRegionTimerWrapper_1ae41e3366a0864560e324eb076c30e07e" prot="public" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>getLastRangeTime</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a5e31b7fa2ff770c2f4bf3ef13176c9ab" prot="public" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>getTotalTime</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a0edb4e76f3d719bfadc7257394c6f51e" prot="private" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>impl_</name></member>
+      <member refid="classGpuRegionTimerWrapper_1ad02014dfb38847883c55ae2b96b1ed79" prot="public" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>openTimingRegion</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a647be789c58881636e02f0a91c554838" prot="public" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>reset</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a5191b22cb68cd9dde683056137fa00f8" prot="private" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>TimerState</name></member>
+      <member refid="classGpuRegionTimerWrapper_1a6c4ce4fddecaf9a163c86609a796270e" prot="private" virt="non-virtual"><scope>GpuRegionTimerWrapper</scope><name>totalMilliseconds_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

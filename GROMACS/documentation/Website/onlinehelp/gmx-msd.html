@@ -1,0 +1,235 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx msd &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx nmeig" href="gmx-nmeig.html" />
+    <link rel="prev" title="gmx morph" href="gmx-morph.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-nmeig.html" title="gmx nmeig"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-morph.html" title="gmx morph"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-msd">
+<span id="id1"></span><h1>gmx msd<a class="headerlink" href="#gmx-msd" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx msd [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+        [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-mol</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-pdb</strong> <em>[&lt;.pdb&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>]
+        [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+        [<strong>-type</strong> <em>&lt;enum&gt;</em>] [<strong>-lateral</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]ten</strong>] [<strong>-ngroup</strong> <em>&lt;int&gt;</em>]
+        [<strong>-[no]mw</strong>] [<strong>-[no]rmcomm</strong>] [<strong>-tpdb</strong> <em>&lt;time&gt;</em>] [<strong>-trestart</strong> <em>&lt;time&gt;</em>]
+        [<strong>-beginfit</strong> <em>&lt;time&gt;</em>] [<strong>-endfit</strong> <em>&lt;time&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">msd</span></code> computes the mean square displacement (MSD) of atoms from
+a set of initial positions. This provides an easy way to compute
+the diffusion constant using the Einstein relation.
+The time between the reference points for the MSD calculation
+is set with <code class="docutils literal"><span class="pre">-trestart</span></code>.
+The diffusion constant is calculated by least squares fitting a
+straight line (D*t + c) through the MSD(t) from <code class="docutils literal"><span class="pre">-beginfit</span></code> to
+<code class="docutils literal"><span class="pre">-endfit</span></code> (note that t is time from the reference positions,
+not simulation time). An error estimate given, which is the difference
+of the diffusion coefficients obtained from fits over the two halves
+of the fit interval.</p>
+<p>There are three, mutually exclusive, options to determine different
+types of mean square displacement: <code class="docutils literal"><span class="pre">-type</span></code>, <code class="docutils literal"><span class="pre">-lateral</span></code>
+and <code class="docutils literal"><span class="pre">-ten</span></code>. Option <code class="docutils literal"><span class="pre">-ten</span></code> writes the full MSD tensor for
+each group, the order in the output is: trace xx yy zz yx zx zy.</p>
+<p>If <code class="docutils literal"><span class="pre">-mol</span></code> is set, <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">msd</span></code> plots the MSD for individual molecules
+(including making molecules whole across periodic boundaries):
+for each individual molecule a diffusion constant is computed for
+its center of mass. The chosen index group will be split into
+molecules.</p>
+<p>The default way to calculate a MSD is by using mass-weighted averages.
+This can be turned off with <code class="docutils literal"><span class="pre">-nomw</span></code>.</p>
+<p>With the option <code class="docutils literal"><span class="pre">-rmcomm</span></code>, the center of mass motion of a
+specific group can be removed. For trajectories produced with
+GROMACS this is usually not necessary,
+as <a class="reference internal" href="gmx-mdrun.html"><span class="doc">gmx mdrun</span></a> usually already removes the center of mass motion.
+When you use this option be sure that the whole system is stored
+in the trajectory file.</p>
+<p>The diffusion coefficient is determined by linear regression of the MSD,
+where, unlike for the normal output of D, the times are weighted
+according to the number of reference points, i.e. short times have
+a higher weight. Also when <code class="docutils literal"><span class="pre">-beginfit</span></code> is -1, fitting starts at 10%
+and when <code class="docutils literal"><span class="pre">-endfit</span></code> is -1, fitting goes to 90%.
+Using this option one also gets an accurate error estimate
+based on the statistics between individual molecules.
+Note that this diffusion coefficient and error estimate are only
+accurate when the MSD is completely linear between
+<code class="docutils literal"><span class="pre">-beginfit</span></code> and <code class="docutils literal"><span class="pre">-endfit</span></code>.</p>
+<p>Option <code class="docutils literal"><span class="pre">-pdb</span></code> writes a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file with the coordinates of the frame
+at time <code class="docutils literal"><span class="pre">-tpdb</span></code> with in the B-factor field the square root of
+the diffusion coefficient of the molecule.
+This option implies option <code class="docutils literal"><span class="pre">-mol</span></code>.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr)</dt>
+<dd>Structure+mass(db): <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (msd.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-mol</span></code> [&lt;.xvg&gt;] (diff_mol.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-pdb</span></code> [&lt;.pdb&gt;] (diff_mol.pdb) (Optional)</dt>
+<dd>Protein data bank file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-type</span></code> &lt;enum&gt; (no)</dt>
+<dd>Compute diffusion coefficient in one direction: no, x, y, z</dd>
+<dt><code class="docutils literal"><span class="pre">-lateral</span></code> &lt;enum&gt; (no)</dt>
+<dd>Calculate the lateral diffusion in a plane perpendicular to: no, x, y, z</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ten</span></code>  (no)</dt>
+<dd>Calculate the full tensor</dd>
+<dt><code class="docutils literal"><span class="pre">-ngroup</span></code> &lt;int&gt; (1)</dt>
+<dd>Number of groups to calculate MSD for</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]mw</span></code>  (yes)</dt>
+<dd>Mass weighted MSD</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmcomm</span></code>  (no)</dt>
+<dd>Remove center of mass motion</dd>
+<dt><code class="docutils literal"><span class="pre">-tpdb</span></code> &lt;time&gt; (0)</dt>
+<dd>The frame to use for option <code class="docutils literal"><span class="pre">-pdb</span></code> (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-trestart</span></code> &lt;time&gt; (10)</dt>
+<dd>Time between restarting points in trajectory (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-beginfit</span></code> &lt;time&gt; (-1)</dt>
+<dd>Start time for fitting the MSD (ps), -1 is 10%</dd>
+<dt><code class="docutils literal"><span class="pre">-endfit</span></code> &lt;time&gt; (-1)</dt>
+<dd>End time for fitting the MSD (ps), -1 is 90%</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx msd</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-morph.html"
+                        title="previous chapter">gmx morph</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-nmeig.html"
+                        title="next chapter">gmx nmeig</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-msd.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-nmeig.html" title="gmx nmeig"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-morph.html" title="gmx morph"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

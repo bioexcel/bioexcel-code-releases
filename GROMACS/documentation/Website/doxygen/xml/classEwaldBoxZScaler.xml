@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classEwaldBoxZScaler" kind="class" prot="public">
+    <compoundname>EwaldBoxZScaler</compoundname>
+    <includes local="no">gromacs/ewald/ewald-utils.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classEwaldBoxZScaler_1ad52bfdfbbac983bc446d97a1007b7b63" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool EwaldBoxZScaler::scaleWithWalls_</definition>
+        <argsstring></argsstring>
+        <name>scaleWithWalls_</name>
+        <briefdescription>
+<para>True if the simulation uses two walls and the box needs to be scaled in PME. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" line="98" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classEwaldBoxZScaler_1a719eabaded9c22724fd20ce2a4f9484e" prot="private" static="no" mutable="no">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real EwaldBoxZScaler::scalingFactor_</definition>
+        <argsstring></argsstring>
+        <name>scalingFactor_</name>
+        <briefdescription>
+<para>Box The scaling factor PME uses with walls. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" line="99" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classEwaldBoxZScaler_1af04397d1cc92d02e09eb93dadb3d7791" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>EwaldBoxZScaler::EwaldBoxZScaler</definition>
+        <argsstring>()=delete</argsstring>
+        <name>EwaldBoxZScaler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" line="102" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwaldBoxZScaler_1af1abadfa1e33aade41af1c6999fd24e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>EwaldBoxZScaler::EwaldBoxZScaler</definition>
+        <argsstring>(const t_inputrec &amp;ir)</argsstring>
+        <name>EwaldBoxZScaler</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> &amp;</type>
+          <declname>ir</declname>
+        </param>
+        <briefdescription>
+<para>Constructor that takes the input record to initialize Ewald box scaling appropriately. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" line="105" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" bodystart="105" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classEwaldBoxZScaler_1a031c5f8da41872a54bde3917fab091b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void EwaldBoxZScaler::scaleBox</definition>
+        <argsstring>(const matrix box, matrix scaledBox)</argsstring>
+        <name>scaleBox</name>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>scaledBox</declname>
+        </param>
+        <briefdescription>
+<para>Copy and scale the box for PME. </para>        </briefdescription>
+        <detaileddescription>
+<para>When PME is used with 2D periodicity and two walls, the copy of the <computeroutput>box</computeroutput> passed is scaled with the Z scaling factor.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current box matrix </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">scaledBox</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scaled copy of the box matrix. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" line="127" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" bodystart="127" bodyend="138"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class to handle box scaling for Ewald and PME. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> At construction contents of inputrec determine whether scaling is necessary as well as the scaling factor used. Later, the scaleBox method can be used to apply the appropriate scaling (if needed) for Ewald-based methods. </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" line="95" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald-utils.h" bodystart="94" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classEwaldBoxZScaler_1af04397d1cc92d02e09eb93dadb3d7791" prot="public" virt="non-virtual"><scope>EwaldBoxZScaler</scope><name>EwaldBoxZScaler</name></member>
+      <member refid="classEwaldBoxZScaler_1af1abadfa1e33aade41af1c6999fd24e4" prot="public" virt="non-virtual"><scope>EwaldBoxZScaler</scope><name>EwaldBoxZScaler</name></member>
+      <member refid="classEwaldBoxZScaler_1a031c5f8da41872a54bde3917fab091b5" prot="public" virt="non-virtual"><scope>EwaldBoxZScaler</scope><name>scaleBox</name></member>
+      <member refid="classEwaldBoxZScaler_1ad52bfdfbbac983bc446d97a1007b7b63" prot="private" virt="non-virtual"><scope>EwaldBoxZScaler</scope><name>scaleWithWalls_</name></member>
+      <member refid="classEwaldBoxZScaler_1a719eabaded9c22724fd20ce2a4f9484e" prot="private" virt="non-virtual"><scope>EwaldBoxZScaler</scope><name>scalingFactor_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

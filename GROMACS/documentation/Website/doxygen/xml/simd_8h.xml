@@ -1,0 +1,766 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="simd_8h" kind="file">
+    <compoundname>simd.h</compoundname>
+    <includes local="yes">config.h</includes>
+    <includes local="no">cstddef</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">array</includes>
+    <includes refid="classhelpers_8h" local="yes">gromacs/utility/classhelpers.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includes refid="impl__reference_8h" local="yes">impl_reference/impl_reference.h</includes>
+    <includes refid="scalar_8h" local="yes">gromacs/simd/scalar/scalar.h</includes>
+    <includes refid="scalar__math_8h" local="yes">gromacs/simd/scalar/scalar_math.h</includes>
+    <includes refid="scalar__util_8h" local="yes">gromacs/simd/scalar/scalar_util.h</includes>
+    <includes refid="simd__memory_8h" local="yes">gromacs/simd/simd_memory.h</includes>
+    <includedby refid="biasstate_8cpp" local="yes">src/gromacs/awh/biasstate.cpp</includedby>
+    <includedby refid="simd__math_8h" local="yes">src/gromacs/simd/simd_math.h</includedby>
+    <includedby refid="nbnxn__internal_8h" local="yes">src/gromacs/mdlib/nbnxn_internal.h</includedby>
+    <includedby refid="pme-gather_8cpp" local="yes">src/gromacs/ewald/pme-gather.cpp</includedby>
+    <includedby refid="pme-simd_8h" local="yes">src/gromacs/ewald/pme-simd.h</includedby>
+    <includedby refid="pme-spline-work_8h" local="yes">src/gromacs/ewald/pme-spline-work.h</includedby>
+    <includedby refid="pme-solve_8cpp" local="yes">src/gromacs/ewald/pme-solve.cpp</includedby>
+    <includedby refid="pme-spline-work_8cpp" local="yes">src/gromacs/ewald/pme-spline-work.cpp</includedby>
+    <includedby refid="pme-spread_8cpp" local="yes">src/gromacs/ewald/pme-spread.cpp</includedby>
+    <includedby refid="pbc-simd_8h" local="yes">src/gromacs/pbcutil/pbc-simd.h</includedby>
+    <includedby refid="bonded_8cpp" local="yes">src/gromacs/listed-forces/bonded.cpp</includedby>
+    <includedby refid="vector__operations_8h" local="yes">src/gromacs/simd/vector_operations.h</includedby>
+    <includedby refid="listed-forces_8cpp" local="yes">src/gromacs/listed-forces/listed-forces.cpp</includedby>
+    <includedby refid="pairs_8cpp" local="yes">src/gromacs/listed-forces/pairs.cpp</includedby>
+    <includedby refid="nbnxn__simd_8h" local="yes">src/gromacs/mdlib/nbnxn_simd.h</includedby>
+    <includedby refid="nbnxn__util_8h" local="yes">src/gromacs/mdlib/nbnxn_util.h</includedby>
+    <includedby refid="clincs_8cpp" local="yes">src/gromacs/mdlib/clincs.cpp</includedby>
+    <includedby refid="csettle_8cpp" local="yes">src/gromacs/mdlib/csettle.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <includedby refid="nbnxn__atomdata_8cpp" local="yes">src/gromacs/mdlib/nbnxn_atomdata.cpp</includedby>
+    <includedby refid="nbnxn__grid_8cpp" local="yes">src/gromacs/mdlib/nbnxn_grid.cpp</includedby>
+    <includedby refid="nbnxn__kernel__cpu_8cpp" local="yes">src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp</includedby>
+    <includedby refid="nbnxn__kernel__simd__2xnn__common_8h" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_2xnn/nbnxn_kernel_simd_2xnn_common.h</includedby>
+    <includedby refid="nbnxn__kernel__simd__4xn__common_8h" local="yes">src/gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn_common.h</includedby>
+    <includedby refid="nbnxn__search_8cpp" local="yes">src/gromacs/mdlib/nbnxn_search.cpp</includedby>
+    <includedby refid="perf__est_8cpp" local="yes">src/gromacs/mdlib/perf_est.cpp</includedby>
+    <includedby refid="update_8cpp" local="yes">src/gromacs/mdlib/update.cpp</includedby>
+    <includedby refid="pbc-simd_8cpp" local="yes">src/gromacs/pbcutil/pbc-simd.cpp</includedby>
+    <includedby refid="bootstrap__loadstore_8cpp" local="yes">src/gromacs/simd/tests/bootstrap_loadstore.cpp</includedby>
+    <includedby refid="scalar_8cpp" local="yes">src/gromacs/simd/tests/scalar.cpp</includedby>
+    <includedby refid="scalar__math_8cpp" local="yes">src/gromacs/simd/tests/scalar_math.cpp</includedby>
+    <includedby refid="scalar__util_8cpp" local="yes">src/gromacs/simd/tests/scalar_util.cpp</includedby>
+    <includedby refid="tests_2simd_8h" local="yes">src/gromacs/simd/tests/simd.h</includedby>
+    <includedby refid="simd_8cpp" local="yes">src/gromacs/simd/tests/simd.cpp</includedby>
+    <includedby refid="simd4_8h" local="yes">src/gromacs/simd/tests/simd4.h</includedby>
+    <includedby refid="simd4_8cpp" local="yes">src/gromacs/simd/tests/simd4.cpp</includedby>
+    <includedby refid="simd4__floatingpoint_8cpp" local="yes">src/gromacs/simd/tests/simd4_floatingpoint.cpp</includedby>
+    <includedby refid="simd4__math_8cpp" local="yes">src/gromacs/simd/tests/simd4_math.cpp</includedby>
+    <includedby refid="simd4__vector__operations_8cpp" local="yes">src/gromacs/simd/tests/simd4_vector_operations.cpp</includedby>
+    <includedby refid="simd__floatingpoint_8cpp" local="yes">src/gromacs/simd/tests/simd_floatingpoint.cpp</includedby>
+    <includedby refid="simd__floatingpoint__util_8cpp" local="yes">src/gromacs/simd/tests/simd_floatingpoint_util.cpp</includedby>
+    <includedby refid="simd__integer_8cpp" local="yes">src/gromacs/simd/tests/simd_integer.cpp</includedby>
+    <includedby refid="simd__math_8cpp" local="yes">src/gromacs/simd/tests/simd_math.cpp</includedby>
+    <includedby refid="simd__memory_8cpp" local="yes">src/gromacs/simd/tests/simd_memory.cpp</includedby>
+    <includedby refid="simd__vector__operations_8cpp" local="yes">src/gromacs/simd/tests/simd_vector_operations.cpp</includedby>
+    <includedby refid="cubicsplinetable_8h" local="yes">src/gromacs/tables/cubicsplinetable.h</includedby>
+    <includedby refid="quadraticsplinetable_8h" local="yes">src/gromacs/tables/quadraticsplinetable.h</includedby>
+    <includedby refid="splinetable_8cpp" local="yes">src/gromacs/tables/tests/splinetable.cpp</includedby>
+    <incdepgraph>
+      <node id="24071">
+        <label>impl_reference_util_double.h</label>
+        <link refid="impl__reference__util__double_8h"/>
+        <childnode refid="24048" relation="include">
+        </childnode>
+        <childnode refid="24062" relation="include">
+        </childnode>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24064" relation="include">
+        </childnode>
+        <childnode refid="24056" relation="include">
+        </childnode>
+        <childnode refid="24066" relation="include">
+        </childnode>
+      </node>
+      <node id="24068">
+        <label>stdarg.h</label>
+      </node>
+      <node id="24085">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="24073">
+        <label>gromacs/simd/scalar/scalar.h</label>
+        <link refid="scalar_8h"/>
+        <childnode refid="24063" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24074" relation="include">
+        </childnode>
+        <childnode refid="24064" relation="include">
+        </childnode>
+      </node>
+      <node id="24080">
+        <label>iterator</label>
+      </node>
+      <node id="24050">
+        <label>cstdint</label>
+      </node>
+      <node id="24047">
+        <label>src/gromacs/simd/simd.h</label>
+        <link refid="simd.h"/>
+        <childnode refid="24048" relation="include">
+        </childnode>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24051" relation="include">
+        </childnode>
+        <childnode refid="24052" relation="include">
+        </childnode>
+        <childnode refid="24054" relation="include">
+        </childnode>
+        <childnode refid="24055" relation="include">
+        </childnode>
+        <childnode refid="24073" relation="include">
+        </childnode>
+        <childnode refid="24075" relation="include">
+        </childnode>
+        <childnode refid="24077" relation="include">
+        </childnode>
+        <childnode refid="24078" relation="include">
+        </childnode>
+      </node>
+      <node id="24059">
+        <label>stdint.h</label>
+      </node>
+      <node id="24072">
+        <label>impl_reference_util_float.h</label>
+        <link refid="impl__reference__util__float_8h"/>
+        <childnode refid="24048" relation="include">
+        </childnode>
+        <childnode refid="24062" relation="include">
+        </childnode>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24064" relation="include">
+        </childnode>
+        <childnode refid="24056" relation="include">
+        </childnode>
+        <childnode refid="24070" relation="include">
+        </childnode>
+      </node>
+      <node id="24063">
+        <label>cmath</label>
+      </node>
+      <node id="24062">
+        <label>cassert</label>
+      </node>
+      <node id="24081">
+        <label>stdexcept</label>
+      </node>
+      <node id="24077">
+        <label>gromacs/simd/scalar/scalar_util.h</label>
+        <link refid="scalar__util_8h"/>
+        <childnode refid="24063" relation="include">
+        </childnode>
+      </node>
+      <node id="24052">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="24053" relation="include">
+        </childnode>
+      </node>
+      <node id="24055">
+        <label>impl_reference/impl_reference.h</label>
+        <link refid="impl__reference_8h"/>
+        <childnode refid="24056" relation="include">
+        </childnode>
+        <childnode refid="24057" relation="include">
+        </childnode>
+        <childnode refid="24061" relation="include">
+        </childnode>
+        <childnode refid="24065" relation="include">
+        </childnode>
+        <childnode refid="24066" relation="include">
+        </childnode>
+        <childnode refid="24070" relation="include">
+        </childnode>
+        <childnode refid="24071" relation="include">
+        </childnode>
+        <childnode refid="24072" relation="include">
+        </childnode>
+      </node>
+      <node id="24057">
+        <label>impl_reference_general.h</label>
+        <link refid="impl__reference__general_8h"/>
+        <childnode refid="24058" relation="include">
+        </childnode>
+      </node>
+      <node id="24070">
+        <label>impl_reference_simd_float.h</label>
+        <link refid="impl__reference__simd__float_8h"/>
+        <childnode refid="24048" relation="include">
+        </childnode>
+        <childnode refid="24062" relation="include">
+        </childnode>
+        <childnode refid="24063" relation="include">
+        </childnode>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24064" relation="include">
+        </childnode>
+        <childnode refid="24051" relation="include">
+        </childnode>
+        <childnode refid="24056" relation="include">
+        </childnode>
+      </node>
+      <node id="24084">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="24058" relation="include">
+        </childnode>
+        <childnode refid="24085" relation="include">
+        </childnode>
+      </node>
+      <node id="24054">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="24083">
+        <label>vector</label>
+      </node>
+      <node id="24056">
+        <label>impl_reference_definitions.h</label>
+        <link refid="impl__reference__definitions_8h"/>
+      </node>
+      <node id="24082">
+        <label>utility</label>
+      </node>
+      <node id="24051">
+        <label>array</label>
+      </node>
+      <node id="24066">
+        <label>impl_reference_simd_double.h</label>
+        <link refid="impl__reference__simd__double_8h"/>
+        <childnode refid="24048" relation="include">
+        </childnode>
+        <childnode refid="24062" relation="include">
+        </childnode>
+        <childnode refid="24063" relation="include">
+        </childnode>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24064" relation="include">
+        </childnode>
+        <childnode refid="24051" relation="include">
+        </childnode>
+        <childnode refid="24067" relation="include">
+        </childnode>
+        <childnode refid="24056" relation="include">
+        </childnode>
+        <childnode refid="24070" relation="include">
+        </childnode>
+      </node>
+      <node id="24058">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="24059" relation="include">
+        </childnode>
+        <childnode refid="24060" relation="include">
+        </childnode>
+      </node>
+      <node id="24074">
+        <label>cstdlib</label>
+      </node>
+      <node id="24065">
+        <label>impl_reference_simd4_float.h</label>
+        <link refid="impl__reference__simd4__float_8h"/>
+        <childnode refid="24048" relation="include">
+        </childnode>
+        <childnode refid="24062" relation="include">
+        </childnode>
+        <childnode refid="24063" relation="include">
+        </childnode>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24064" relation="include">
+        </childnode>
+        <childnode refid="24051" relation="include">
+        </childnode>
+        <childnode refid="24056" relation="include">
+        </childnode>
+      </node>
+      <node id="24079">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24051" relation="include">
+        </childnode>
+        <childnode refid="24080" relation="include">
+        </childnode>
+        <childnode refid="24081" relation="include">
+        </childnode>
+        <childnode refid="24082" relation="include">
+        </childnode>
+        <childnode refid="24083" relation="include">
+        </childnode>
+        <childnode refid="24084" relation="include">
+        </childnode>
+      </node>
+      <node id="24049">
+        <label>cstddef</label>
+      </node>
+      <node id="24075">
+        <label>gromacs/simd/scalar/scalar_math.h</label>
+        <link refid="scalar__math_8h"/>
+        <childnode refid="24063" relation="include">
+        </childnode>
+        <childnode refid="24076" relation="include">
+        </childnode>
+        <childnode refid="24073" relation="include">
+        </childnode>
+      </node>
+      <node id="24076">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="24063" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24054" relation="include">
+        </childnode>
+      </node>
+      <node id="24048">
+        <label>config.h</label>
+      </node>
+      <node id="24067">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="24068" relation="include">
+        </childnode>
+        <childnode refid="24069" relation="include">
+        </childnode>
+        <childnode refid="24058" relation="include">
+        </childnode>
+      </node>
+      <node id="24064">
+        <label>algorithm</label>
+      </node>
+      <node id="24061">
+        <label>impl_reference_simd4_double.h</label>
+        <link refid="impl__reference__simd4__double_8h"/>
+        <childnode refid="24048" relation="include">
+        </childnode>
+        <childnode refid="24062" relation="include">
+        </childnode>
+        <childnode refid="24063" relation="include">
+        </childnode>
+        <childnode refid="24049" relation="include">
+        </childnode>
+        <childnode refid="24050" relation="include">
+        </childnode>
+        <childnode refid="24064" relation="include">
+        </childnode>
+        <childnode refid="24051" relation="include">
+        </childnode>
+        <childnode refid="24056" relation="include">
+        </childnode>
+      </node>
+      <node id="24069">
+        <label>stdio.h</label>
+      </node>
+      <node id="24053">
+        <label>memory</label>
+      </node>
+      <node id="24060">
+        <label>inttypes.h</label>
+      </node>
+      <node id="24078">
+        <label>gromacs/simd/simd_memory.h</label>
+        <link refid="simd__memory_8h"/>
+        <childnode refid="24079" relation="include">
+        </childnode>
+        <childnode refid="24084" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="24093">
+        <label>src/gromacs/simd/vector_operations.h</label>
+        <link refid="vector__operations_8h"/>
+        <childnode refid="24089" relation="include">
+        </childnode>
+        <childnode refid="24090" relation="include">
+        </childnode>
+      </node>
+      <node id="24095">
+        <label>src/gromacs/simd/tests/bootstrap_loadstore.cpp</label>
+        <link refid="bootstrap__loadstore_8cpp"/>
+      </node>
+      <node id="24086">
+        <label>src/gromacs/simd/simd.h</label>
+        <link refid="simd.h"/>
+        <childnode refid="24087" relation="include">
+        </childnode>
+        <childnode refid="24088" relation="include">
+        </childnode>
+        <childnode refid="24091" relation="include">
+        </childnode>
+        <childnode refid="24089" relation="include">
+        </childnode>
+        <childnode refid="24093" relation="include">
+        </childnode>
+        <childnode refid="24094" relation="include">
+        </childnode>
+        <childnode refid="24090" relation="include">
+        </childnode>
+        <childnode refid="24092" relation="include">
+        </childnode>
+        <childnode refid="24095" relation="include">
+        </childnode>
+        <childnode refid="24096" relation="include">
+        </childnode>
+        <childnode refid="24098" relation="include">
+        </childnode>
+        <childnode refid="24097" relation="include">
+        </childnode>
+        <childnode refid="24099" relation="include">
+        </childnode>
+        <childnode refid="24102" relation="include">
+        </childnode>
+        <childnode refid="24101" relation="include">
+        </childnode>
+      </node>
+      <node id="24087">
+        <label>src/gromacs/awh/biasstate.cpp</label>
+        <link refid="biasstate_8cpp"/>
+      </node>
+      <node id="24091">
+        <label>src/gromacs/pbcutil/pbc-simd.h</label>
+        <link refid="pbc-simd_8h"/>
+        <childnode refid="24089" relation="include">
+        </childnode>
+        <childnode refid="24090" relation="include">
+        </childnode>
+        <childnode refid="24092" relation="include">
+        </childnode>
+      </node>
+      <node id="24102">
+        <label>src/gromacs/tables/quadraticsplinetable.h</label>
+        <link refid="quadraticsplinetable_8h"/>
+        <childnode refid="24103" relation="include">
+        </childnode>
+        <childnode refid="24101" relation="include">
+        </childnode>
+      </node>
+      <node id="24090">
+        <label>src/gromacs/listed-forces/pairs.cpp</label>
+        <link refid="pairs_8cpp"/>
+      </node>
+      <node id="24089">
+        <label>src/gromacs/listed-forces/bonded.cpp</label>
+        <link refid="bonded_8cpp"/>
+      </node>
+      <node id="24103">
+        <label>src/gromacs/tables/quadraticsplinetable.cpp</label>
+        <link refid="quadraticsplinetable_8cpp"/>
+      </node>
+      <node id="24088">
+        <label>src/gromacs/simd/simd_math.h</label>
+        <link refid="simd__math_8h"/>
+        <childnode refid="24087" relation="include">
+        </childnode>
+        <childnode refid="24089" relation="include">
+        </childnode>
+        <childnode refid="24090" relation="include">
+        </childnode>
+      </node>
+      <node id="24099">
+        <label>src/gromacs/tables/cubicsplinetable.h</label>
+        <link refid="cubicsplinetable_8h"/>
+        <childnode refid="24100" relation="include">
+        </childnode>
+        <childnode refid="24101" relation="include">
+        </childnode>
+      </node>
+      <node id="24100">
+        <label>src/gromacs/tables/cubicsplinetable.cpp</label>
+        <link refid="cubicsplinetable_8cpp"/>
+      </node>
+      <node id="24094">
+        <label>src/gromacs/listed-forces/listed-forces.cpp</label>
+        <link refid="listed-forces_8cpp"/>
+      </node>
+      <node id="24096">
+        <label>src/gromacs/simd/tests/simd.h</label>
+        <link refid="tests_2simd_8h"/>
+        <childnode refid="24097" relation="include">
+        </childnode>
+      </node>
+      <node id="24092">
+        <label>src/gromacs/pbcutil/pbc-simd.cpp</label>
+        <link refid="pbc-simd_8cpp"/>
+      </node>
+      <node id="24097">
+        <label>src/gromacs/simd/tests/simd_memory.cpp</label>
+        <link refid="simd__memory_8cpp"/>
+      </node>
+      <node id="24101">
+        <label>src/gromacs/tables/tests/splinetable.cpp</label>
+        <link refid="splinetable_8cpp"/>
+      </node>
+      <node id="24098">
+        <label>src/gromacs/simd/tests/simd4.h</label>
+        <link refid="simd4_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structgmx_1_1SimdFloatTag" prot="public">gmx::SimdFloatTag</innerclass>
+    <innerclass refid="structgmx_1_1SimdDoubleTag" prot="public">gmx::SimdDoubleTag</innerclass>
+    <innerclass refid="structgmx_1_1SimdFInt32Tag" prot="public">gmx::SimdFInt32Tag</innerclass>
+    <innerclass refid="structgmx_1_1SimdDInt32Tag" prot="public">gmx::SimdDInt32Tag</innerclass>
+    <innerclass refid="structgmx_1_1AlignedArray" prot="public">gmx::AlignedArray</innerclass>
+    <innerclass refid="structgmx_1_1AlignedArray_3_01float_00_01N_01_4" prot="public">gmx::AlignedArray&lt; float, N &gt;</innerclass>
+    <innerclass refid="structgmx_1_1AlignedArray_3_01double_00_01N_01_4" prot="public">gmx::AlignedArray&lt; double, N &gt;</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1SimdTraits" prot="public">gmx::internal::SimdTraits</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1SimdTraits_3_01SimdFloat_01_4" prot="public">gmx::internal::SimdTraits&lt; SimdFloat &gt;</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1SimdTraits_3_01SimdDouble_01_4" prot="public">gmx::internal::SimdTraits&lt; SimdDouble &gt;</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1SimdTraits_3_01SimdFInt32_01_4" prot="public">gmx::internal::SimdTraits&lt; SimdFInt32 &gt;</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1SimdTraits_3_01SimdDInt32_01_4" prot="public">gmx::internal::SimdTraits&lt; SimdDInt32 &gt;</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1SimdTraits_3_01const_01T_01_4" prot="public">gmx::internal::SimdTraits&lt; const T &gt;</innerclass>
+    <innerclass refid="classgmx_1_1SimdSetZeroProxyInternal" prot="public">gmx::SimdSetZeroProxyInternal</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1Simd4Traits" prot="public">gmx::internal::Simd4Traits</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1Simd4Traits_3_01Simd4Float_01_4" prot="public">gmx::internal::Simd4Traits&lt; Simd4Float &gt;</innerclass>
+    <innerclass refid="structgmx_1_1internal_1_1Simd4Traits_3_01Simd4Double_01_4" prot="public">gmx::internal::Simd4Traits&lt; Simd4Double &gt;</innerclass>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+    <innernamespace refid="namespacegmx_1_1internal">gmx::internal</innernamespace>
+      <sectiondef kind="user-defined">
+      <header>SIMD predefined macros to describe high-level capabilities</header>
+      <description><para>These macros are used to describe the features available in default Gromacs real precision. They are set from the lower-level implementation files that have macros describing single and double precision individually, as well as the implementation details. </para></description>
+      <memberdef kind="define" id="group__module__simd_1ga1578fccdb327f36a2bea338457cbf883" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_REAL</name>
+        <initializer><ref refid="group__module__simd_1ga8d093280bad2b3ebecbcd426bdddb73b" kindref="member">GMX_SIMD_HAVE_FLOAT</ref></initializer>
+        <briefdescription>
+<para>1 if SimdReal is available, otherwise 0. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1gaf5545c033bb4a28657239e4c9739cefe" kindref="member">GMX_SIMD_HAVE_DOUBLE</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1ga8d093280bad2b3ebecbcd426bdddb73b" kindref="member">GMX_SIMD_HAVE_FLOAT</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="167" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__simd_1ga586ccc19c21a1d5e9c97e15b70822fba" prot="public" static="no">
+        <name>GMX_SIMD_REAL_WIDTH</name>
+        <initializer><ref refid="group__module__simd_1gafdbf804a40bfa3dcb15bc50055e58e74" kindref="member">GMX_SIMD_FLOAT_WIDTH</ref></initializer>
+        <briefdescription>
+<para>Width of SimdReal. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1ga417e9d28b6310876bb2c69eb528c0a86" kindref="member">GMX_SIMD_DOUBLE_WIDTH</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1gafdbf804a40bfa3dcb15bc50055e58e74" kindref="member">GMX_SIMD_FLOAT_WIDTH</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="173" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__simd_1ga036e9a3893a355aa51267fef7b5d4cae" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_INT32_EXTRACT</name>
+        <initializer><ref refid="group__module__simd_1ga23ac53a0050467ac215f146f6afc6380" kindref="member">GMX_SIMD_HAVE_FINT32_EXTRACT</ref></initializer>
+        <briefdescription>
+<para>1 if support is available for extracting elements from SimdInt32, otherwise 0 </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1gabae2f56a4d87b8e52b5df066888a4c07" kindref="member">GMX_SIMD_HAVE_DINT32_EXTRACT</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1ga23ac53a0050467ac215f146f6afc6380" kindref="member">GMX_SIMD_HAVE_FINT32_EXTRACT</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="180" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__simd_1ga69de9b6e1473a9dc3ab6a5588d00192a" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_INT32_LOGICAL</name>
+        <initializer><ref refid="group__module__simd_1ga354867d2570fecb6b341047947bee0d1" kindref="member">GMX_SIMD_HAVE_FINT32_LOGICAL</ref></initializer>
+        <briefdescription>
+<para>1 if logical ops are supported on SimdInt32, otherwise 0. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1ga0ccbae145ecb27cee3c98ec7bded1d45" kindref="member">GMX_SIMD_HAVE_DINT32_LOGICAL</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1ga354867d2570fecb6b341047947bee0d1" kindref="member">GMX_SIMD_HAVE_FINT32_LOGICAL</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="187" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__simd_1ga8a9534860edf5a3f2b9cd1bc60529b39" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_INT32_ARITHMETICS</name>
+        <initializer><ref refid="group__module__simd_1ga9febc62e1abd58eb8a035b8b81f93292" kindref="member">GMX_SIMD_HAVE_FINT32_ARITHMETICS</ref></initializer>
+        <briefdescription>
+<para>1 if arithmetic ops are supported on SimdInt32, otherwise 0. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1gab8469202af6999f95405779355d89c30" kindref="member">GMX_SIMD_HAVE_DINT32_ARITHMETICS</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1ga9febc62e1abd58eb8a035b8b81f93292" kindref="member">GMX_SIMD_HAVE_FINT32_ARITHMETICS</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="194" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__simd_1gad1350cf295aeed5d4fce461ca2048c56" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_GATHER_LOADU_BYSIMDINT_TRANSPOSE_REAL</name>
+        <initializer><ref refid="group__module__simd_1ga5ba6c684641af238fb2a5a7d4c6e0237" kindref="member">GMX_SIMD_HAVE_GATHER_LOADU_BYSIMDINT_TRANSPOSE_FLOAT</ref></initializer>
+        <briefdescription>
+<para>1 if gmx::simdGatherLoadUBySimdIntTranspose is present, otherwise 0 </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1ga5f609eec37d8c92163def72ec28bb435" kindref="member">GMX_SIMD_HAVE_GATHER_LOADU_BYSIMDINT_TRANSPOSE_DOUBLE</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1ga5ba6c684641af238fb2a5a7d4c6e0237" kindref="member">GMX_SIMD_HAVE_GATHER_LOADU_BYSIMDINT_TRANSPOSE_FLOAT</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="201" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__simd_1ga0d9f8d6284ecbbd135b89f2ad8999839" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_HSIMD_UTIL_REAL</name>
+        <initializer><ref refid="group__module__simd_1gac40bf3261e36fb7ff022e8ab37b04fcf" kindref="member">GMX_SIMD_HAVE_HSIMD_UTIL_FLOAT</ref></initializer>
+        <briefdescription>
+<para>1 if real half-register load/store/reduce utils present, otherwise 0 </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1gadef533340f8e648dfb550cbd8cfd9fc7" kindref="member">GMX_SIMD_HAVE_HSIMD_UTIL_DOUBLE</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1gac40bf3261e36fb7ff022e8ab37b04fcf" kindref="member">GMX_SIMD_HAVE_HSIMD_UTIL_FLOAT</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="208" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group__module__simd_1ga6c015b9c619e63324df85f91e25191c5" prot="public" static="no">
+        <name>GMX_SIMD4_HAVE_REAL</name>
+        <initializer><ref refid="group__module__simd_1ga86b316f5c5de088d4cb073300198f4d3" kindref="member">GMX_SIMD4_HAVE_FLOAT</ref></initializer>
+        <briefdescription>
+<para>1 if Simd4Real is available, otherwise 0. </para>        </briefdescription>
+        <detaileddescription>
+<para><ref refid="group__module__simd_1ga5a245d615fbc175986d8bd51d816e46d" kindref="member">GMX_SIMD4_HAVE_DOUBLE</ref> if GMX_DOUBLE is 1, otherwise <ref refid="group__module__simd_1ga86b316f5c5de088d4cb073300198f4d3" kindref="member">GMX_SIMD4_HAVE_FLOAT</ref>. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="214" column="13" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>High-level SIMD proxy objects to disambiguate load/set operations</header>
+      <memberdef kind="define" id="simd_8h_1a5a32ff26e38f94fdffdc253d1a871ca4" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_4NSIMD_UTIL_FLOAT</name>
+        <initializer><ref refid="group__module__simd_1gacf774b2a886d1ed4149f825c50c8fec2" kindref="member">GMX_SIMD_HAVE_LOADU</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="630" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="630" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="simd_8h_1ac5152f217d6a08cecee7f44b011865d7" prot="public" static="no">
+        <name>GMX_SIMD4N_FLOAT_WIDTH</name>
+        <initializer><ref refid="group__module__simd_1gafdbf804a40bfa3dcb15bc50055e58e74" kindref="member">GMX_SIMD_FLOAT_WIDTH</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="641" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="641" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="simd_8h_1ad27c7840e17aec417f07c73362efb87d" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_4NSIMD_UTIL_DOUBLE</name>
+        <initializer><ref refid="group__module__simd_1gacf774b2a886d1ed4149f825c50c8fec2" kindref="member">GMX_SIMD_HAVE_LOADU</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="681" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="681" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="simd_8h_1a3995bdc818f73733dbcd4f5b5f71d37a" prot="public" static="no">
+        <name>GMX_SIMD4N_DOUBLE_WIDTH</name>
+        <initializer><ref refid="group__module__simd_1ga417e9d28b6310876bb2c69eb528c0a86" kindref="member">GMX_SIMD_DOUBLE_WIDTH</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="692" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="692" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="simd_8h_1a8a4e00d8bf8551a9f61c5f68656f1270" prot="public" static="no">
+        <name>GMX_SIMD_HAVE_4NSIMD_UTIL_REAL</name>
+        <initializer><ref refid="group__module__simd_1ga5a32ff26e38f94fdffdc253d1a871ca4" kindref="member">GMX_SIMD_HAVE_4NSIMD_UTIL_FLOAT</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="731" column="10" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="731" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="simd_8h_1a189844f1c8b104833734513c2ae480a9" prot="public" static="no">
+        <name>GMX_SIMD4N_REAL_WIDTH</name>
+        <initializer>GMX_SIMD4N_FLOAT_WIDTH</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="740" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="740" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="simd_8h_1a9f58ab34a077d84e7cef974919e2d01f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool isSimdAligned</definition>
+        <argsstring>(const float *ptr)</argsstring>
+        <name>isSimdAligned</name>
+        <param>
+          <type>const float *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>end of condition libapi </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns whether a pointer to float is aligned to a SIMD boundary</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a float </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="759" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="759" bodyend="762"/>
+      </memberdef>
+      <memberdef kind="function" id="simd_8h_1a664965c682fd4510b51f33b2528fe272" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool isSimdAligned</definition>
+        <argsstring>(const double *ptr)</argsstring>
+        <name>isSimdAligned</name>
+        <param>
+          <type>const double *</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>Returns whether a pointer to double is aligned to a SIMD boundary. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A pointer to a double </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" line="772" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h" bodystart="772" bodyend="775"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Definitions, capabilities, and wrappers for SIMD module. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para>The macros in this file are intended to be used for writing architecture-independent SIMD intrinsics code. To support a new architecture, adding a new sub-include with macros here should be (nearly) all that is needed.</para><para>The defines in this top-level file will set default Gromacs real precision operations to either single or double precision based on whether GMX_DOUBLE is 1. The actual implementation - including e.g. conversion operations specifically between single and double - is documented in <ref refid="impl__reference_8h" kindref="compound">impl_reference.h</ref>.</para><para><simplesect kind="author"><para>Erik Lindahl <ulink url="mailto:erik.lindahl@scilifelab.se">erik.lindahl@scilifelab.se</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/simd/simd.h"/>
+  </compounddef>
+</doxygen>

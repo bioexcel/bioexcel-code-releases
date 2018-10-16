@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="listed-forces_8h" kind="file">
+    <compoundname>listed-forces.h</compoundname>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="listed-forces_8cpp" local="yes">src/gromacs/listed-forces/listed-forces.cpp</includedby>
+    <includedby refid="manage-threading_8cpp" local="yes">src/gromacs/listed-forces/manage-threading.cpp</includedby>
+    <includedby refid="force_8cpp" local="yes">src/gromacs/mdlib/force.cpp</includedby>
+    <incdepgraph>
+      <node id="13096">
+        <label>stdint.h</label>
+      </node>
+      <node id="13094">
+        <label>src/gromacs/listed-forces/listed-forces.h</label>
+        <link refid="listed-forces.h"/>
+        <childnode refid="13095" relation="include">
+        </childnode>
+      </node>
+      <node id="13095">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="13096" relation="include">
+        </childnode>
+        <childnode refid="13097" relation="include">
+        </childnode>
+      </node>
+      <node id="13097">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="13098">
+        <label>src/gromacs/listed-forces/listed-forces.h</label>
+        <link refid="listed-forces.h"/>
+        <childnode refid="13099" relation="include">
+        </childnode>
+        <childnode refid="13100" relation="include">
+        </childnode>
+      </node>
+      <node id="13099">
+        <label>src/gromacs/listed-forces/listed-forces.cpp</label>
+        <link refid="listed-forces_8cpp"/>
+      </node>
+      <node id="13100">
+        <label>src/gromacs/listed-forces/manage-threading.cpp</label>
+        <link refid="manage-threading_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="listed-forces_8h_1af9092de62680856f5250dbef08056f74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool ftype_is_bonded_potential</definition>
+        <argsstring>(int ftype)</argsstring>
+        <name>ftype_is_bonded_potential</name>
+        <param>
+          <type>int</type>
+          <declname>ftype</declname>
+        </param>
+        <briefdescription>
+<para>Return whether this is an interaction that actually calculates a potential and works on multiple atoms (not e.g. a connection or a position restraint). </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000039"><xreftitle>Todo</xreftitle><xrefdescription><para>This function could go away when idef is not a big bucket of everything. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.h" line="97" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.cpp" bodystart="404" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="listed-forces_8h_1ad53d77d2c0f4d3247570169a8cf583e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calc_listed</definition>
+        <argsstring>(const t_commrec *cr, struct gmx_wallcycle *wcycle, const t_idef *idef, const rvec x[], history_t *hist, rvec f[], gmx::ForceWithVirial *forceWithVirial, const t_forcerec *fr, const struct t_pbc *pbc, const struct t_pbc *pbc_full, const struct t_graph *g, gmx_enerdata_t *enerd, t_nrnb *nrnb, const real *lambda, const t_mdatoms *md, struct t_fcdata *fcd, int *ddgatindex, int force_flags)</argsstring>
+        <name>calc_listed</name>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle</ref> *</type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__idef" kindref="compound">t_idef</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classhistory__t" kindref="compound">history_t</ref> *</type>
+          <declname>hist</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">gmx::ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc_full</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>ddgatindex</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>force_flags</declname>
+        </param>
+        <briefdescription>
+<para>Calculates all listed force interactions. </para>        </briefdescription>
+        <detaileddescription>
+<para>Note that pbc_full is used only for position restraints, and is not initialized if there are none. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.h" line="103" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.cpp" bodystart="480" bodyend="599"/>
+      </memberdef>
+      <memberdef kind="function" id="listed-forces_8h_1a93c788aa6ea2565e3d7c13f55cfdb83c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calc_listed_lambda</definition>
+        <argsstring>(const t_idef *idef, const rvec x[], const t_forcerec *fr, const struct t_pbc *pbc, const struct t_graph *g, gmx_grppairener_t *grpp, real *epot, t_nrnb *nrnb, const real *lambda, const t_mdatoms *md, struct t_fcdata *fcd, int *global_atom_index)</argsstring>
+        <name>calc_listed_lambda</name>
+        <param>
+          <type>const <ref refid="structt__idef" kindref="compound">t_idef</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__grppairener__t" kindref="compound">gmx_grppairener_t</ref> *</type>
+          <declname>grpp</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>epot</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>global_atom_index</declname>
+        </param>
+        <briefdescription>
+<para>As <ref refid="listed-forces_8cpp_1af1d68d7d616dc680b743e60986906ef6" kindref="member">calc_listed()</ref>, but only determines the potential energy for the perturbed interactions. </para>        </briefdescription>
+        <detaileddescription>
+<para>The shift forces in fr are not affected. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.h" line="121" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.cpp" bodystart="601" bodyend="667"/>
+      </memberdef>
+      <memberdef kind="function" id="listed-forces_8h_1ad60970e711bd9a7717fa7ce9d35ee4cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void do_force_listed</definition>
+        <argsstring>(struct gmx_wallcycle *wcycle, matrix box, const t_lambda *fepvals, const t_commrec *cr, const t_idef *idef, const rvec x[], history_t *hist, rvec *forceForUseWithShiftForces, gmx::ForceWithVirial *forceWithVirial, const t_forcerec *fr, const struct t_pbc *pbc, const struct t_graph *graph, gmx_enerdata_t *enerd, t_nrnb *nrnb, const real *lambda, const t_mdatoms *md, struct t_fcdata *fcd, int *global_atom_index, int flags)</argsstring>
+        <name>do_force_listed</name>
+        <param>
+          <type>struct <ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle</ref> *</type>
+          <declname>wcycle</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__lambda" kindref="compound">t_lambda</ref> *</type>
+          <declname>fepvals</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__idef" kindref="compound">t_idef</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="classhistory__t" kindref="compound">history_t</ref> *</type>
+          <declname>hist</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>forceForUseWithShiftForces</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ForceWithVirial" kindref="compound">gmx::ForceWithVirial</ref> *</type>
+          <declname>forceWithVirial</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__graph" kindref="compound">t_graph</ref> *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>global_atom_index</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+<para>Do all aspects of energy and force calculations for mdrun on the set of listed interactions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.h" line="133" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.cpp" bodystart="670" bodyend="740"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains declarations of high-level functions used by mdrun to compute energies and forces for listed interactions. </para>    </briefdescription>
+    <detaileddescription>
+<para>Clients of libgromacs that want to evaluate listed interactions should call functions declared here.</para><para><simplesect kind="author"><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/listed-forces.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="wallcyclereporting_8h" kind="file">
+    <compoundname>wallcyclereporting.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">array</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="wallcycle_8cpp" local="yes">src/gromacs/timing/wallcycle.cpp</includedby>
+    <incdepgraph>
+      <node id="26026">
+        <label>stdint.h</label>
+      </node>
+      <node id="26022">
+        <label>src/gromacs/timing/wallcyclereporting.h</label>
+        <link refid="wallcyclereporting.h"/>
+        <childnode refid="26023" relation="include">
+        </childnode>
+        <childnode refid="26024" relation="include">
+        </childnode>
+        <childnode refid="26025" relation="include">
+        </childnode>
+      </node>
+      <node id="26024">
+        <label>array</label>
+      </node>
+      <node id="26025">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="26026" relation="include">
+        </childnode>
+        <childnode refid="26027" relation="include">
+        </childnode>
+      </node>
+      <node id="26023">
+        <label>stdio.h</label>
+      </node>
+      <node id="26027">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="wallcyclereporting_8h_1adc47bf7d40bee1f733f4c00cf76e85d9" prot="public" static="no">
+        <type>struct <ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle</ref> *</type>
+        <definition>typedef struct gmx_wallcycle* gmx_wallcycle_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_wallcycle_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcyclereporting.h" line="56" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcyclereporting.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="wallcyclereporting_8h_1a89cf0f3a1b0916643b9464924f7370eb" prot="public" static="no">
+        <type>std::array&lt; double, ewcNR+ewcsNR &gt;</type>
+        <definition>typedef std::array&lt;double, ewcNR+ewcsNR&gt; WallcycleCounts</definition>
+        <argsstring></argsstring>
+        <name>WallcycleCounts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcyclereporting.h" line="60" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcyclereporting.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="wallcyclereporting_8h_1acc39103884f95b6ef86fb941e7366783" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>WallcycleCounts</type>
+        <definition>WallcycleCounts wallcycle_sum</definition>
+        <argsstring>(struct t_commrec *cr, gmx_wallcycle_t wc)</argsstring>
+        <name>wallcycle_sum</name>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcyclereporting.h" line="63" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcycle.cpp" bodystart="500" bodyend="624"/>
+      </memberdef>
+      <memberdef kind="function" id="wallcyclereporting_8h_1abb345bdaa252042b2bf65f053d10f1f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void wallcycle_print</definition>
+        <argsstring>(FILE *fplog, const gmx::MDLogger &amp;mdlog, int nnodes, int npme, int nth_pp, int nth_pme, double realtime, gmx_wallcycle_t wc, const WallcycleCounts &amp;cyc_sum, const gmx_wallclock_gpu_nbnxn_t *gpu_nbnxn_t, const gmx_wallclock_gpu_pme_t *gpu_pme_t)</argsstring>
+        <name>wallcycle_print</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1MDLogger" kindref="compound">gmx::MDLogger</ref> &amp;</type>
+          <declname>mdlog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nnodes</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>npme</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nth_pp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nth_pme</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>realtime</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle_t</ref></type>
+          <declname>wc</declname>
+        </param>
+        <param>
+          <type>const WallcycleCounts &amp;</type>
+          <declname>cyc_sum</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__wallclock__gpu__nbnxn__t" kindref="compound">gmx_wallclock_gpu_nbnxn_t</ref> *</type>
+          <declname>gpu_nbnxn_t</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__wallclock__gpu__pme__t" kindref="compound">gmx_wallclock_gpu_pme_t</ref> *</type>
+          <declname>gpu_pme_t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcyclereporting.h" line="67" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcycle.cpp" bodystart="734" bodyend="1077"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/timing/wallcyclereporting.h"/>
+  </compounddef>
+</doxygen>

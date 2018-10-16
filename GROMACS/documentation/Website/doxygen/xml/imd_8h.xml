@@ -1,0 +1,782 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="imd_8h" kind="file">
+    <compoundname>imd.h</compoundname>
+    <includes local="yes">config.h</includes>
+    <includes local="no">cstdio</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="gromacs_2gmxpreprocess_2grompp_8cpp" local="yes">src/gromacs/gmxpreprocess/grompp.cpp</includedby>
+    <includedby refid="imd_8cpp" local="yes">src/gromacs/imd/imd.cpp</includedby>
+    <includedby refid="imdsocket_8cpp" local="yes">src/gromacs/imd/imdsocket.cpp</includedby>
+    <includedby refid="minimize_8cpp" local="yes">src/gromacs/mdlib/minimize.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <incdepgraph>
+      <node id="12764">
+        <label>stdint.h</label>
+      </node>
+      <node id="12762">
+        <label>cstdio</label>
+      </node>
+      <node id="12763">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="12764" relation="include">
+        </childnode>
+        <childnode refid="12765" relation="include">
+        </childnode>
+      </node>
+      <node id="12760">
+        <label>src/gromacs/imd/imd.h</label>
+        <link refid="imd.h"/>
+        <childnode refid="12761" relation="include">
+        </childnode>
+        <childnode refid="12762" relation="include">
+        </childnode>
+        <childnode refid="12763" relation="include">
+        </childnode>
+      </node>
+      <node id="12761">
+        <label>config.h</label>
+      </node>
+      <node id="12765">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="12769">
+        <label>src/gromacs/mdlib/minimize.cpp</label>
+        <link refid="minimize_8cpp"/>
+      </node>
+      <node id="12768">
+        <label>src/gromacs/imd/imdsocket.cpp</label>
+        <link refid="imdsocket_8cpp"/>
+      </node>
+      <node id="12767">
+        <label>src/gromacs/imd/imd.cpp</label>
+        <link refid="imd_8cpp"/>
+      </node>
+      <node id="12766">
+        <label>src/gromacs/imd/imd.h</label>
+        <link refid="imd.h"/>
+        <childnode refid="12767" relation="include">
+        </childnode>
+        <childnode refid="12768" relation="include">
+        </childnode>
+        <childnode refid="12769" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="imd_8h_1aeaf8eaca8ad03ffb4918e434ea491985" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char IMDstr[]</definition>
+        <argsstring>[]</argsstring>
+        <name>IMDstr</name>
+        <initializer>= &quot;IMD:&quot;</initializer>
+        <briefdescription>
+<para>Tag output from the IMD module with this string. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="89" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="imd_8h_1a8ded056a05fd8c2d626848ff1ab9d2c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void write_IMDgroup_to_file</definition>
+        <argsstring>(gmx_bool bIMD, t_inputrec *ir, t_state *state, gmx_mtop_t *sys, int nfile, const t_filenm fnm[])</argsstring>
+        <name>write_IMDgroup_to_file</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMD</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>sys</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfile</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__filenm" kindref="compound">t_filenm</ref></type>
+          <declname>fnm</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+<para>Writes out the group of atoms selected for interactive manipulation. </para>        </briefdescription>
+        <detaileddescription>
+<para>Called by grompp. The resulting file has to be read in by VMD if one wants it to connect to mdrun.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bIMD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Only springs into action if bIMD is TRUE. Otherwise returns directly. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure containing MD input parameters, among those the IMD data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current state of the MD system. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global, complete system topology. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nfile</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of files. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fnm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Filename struct. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="104" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="404" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1a242797cc2d052fad8f9d2d5b6b0443df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void dd_make_local_IMD_atoms</definition>
+        <argsstring>(gmx_bool bIMD, gmx_domdec_t *dd, t_IMD *imd)</argsstring>
+        <name>dd_make_local_IMD_atoms</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMD</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__domdec__t" kindref="compound">gmx_domdec_t</ref> *</type>
+          <declname>dd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__IMD" kindref="compound">t_IMD</ref> *</type>
+          <declname>imd</declname>
+        </param>
+        <briefdescription>
+<para>Make a selection of the home atoms for the IMD group. </para>        </briefdescription>
+        <detaileddescription>
+<para>Should be called at every domain decomposition. Each node checks which of the atoms from &quot;ind&quot; are local and puts its local atom numbers into the &quot;ind_local&quot; array. Furthermore, in &quot;xa_ind&quot; it is stored at which position each local atom belongs in the assembled/collective array, so that on the master node all positions can be merged into the assembled array correctly.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bIMD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Only springs into action if bIMD is TRUE. Otherwise returns directly. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Structure containing domain decomposition data. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD group of atoms. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="121" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="419" bodyend="433"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1ad18d80d7aade3a8253e65a9354843069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_IMD</definition>
+        <argsstring>(t_inputrec *ir, t_commrec *cr, gmx_mtop_t *top_global, FILE *fplog, int defnstimd, rvec x[], int nfile, const t_filenm fnm[], const gmx_output_env_t *oenv, const MdrunOptions &amp;mdrunOptions)</argsstring>
+        <name>init_IMD</name>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top_global</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>defnstimd</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfile</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__filenm" kindref="compound">t_filenm</ref></type>
+          <declname>fnm</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__output__env__t" kindref="compound">gmx_output_env_t</ref> *</type>
+          <declname>oenv</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structMdrunOptions" kindref="compound">MdrunOptions</ref> &amp;</type>
+          <declname>mdrunOptions</declname>
+        </param>
+        <briefdescription>
+<para>Initializes (or disables) IMD. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function is called before the main MD loop over time steps, and it must be called prior to any call to dd_partition_system if in parallel.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The inputrec structure containing the MD input parameters including a pointer to the IMD data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information structure for MPI communication. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>top_global</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The topology of the whole system. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>General output file, normally md.log. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>defnstimd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Default IMD update (=communication) frequency. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The starting positions of the atoms. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nfile</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of files. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fnm</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Struct containing file names etc. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>oenv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output options. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mdrunOptions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Options for mdrun. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="141" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1288" bodyend="1473"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1a0e14923fdb4755f6482e542fcea49da6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool do_IMD</definition>
+        <argsstring>(gmx_bool bIMD, gmx_int64_t step, t_commrec *cr, gmx_bool bNS, matrix box, rvec x[], t_inputrec *ir, double t, gmx_wallcycle *wcycle)</argsstring>
+        <name>do_IMD</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMD</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bNS</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle</ref> *</type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>IMD required in this time step? Also checks for new IMD connection and syncs the nodes. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bIMD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Only springs into action if bIMD is TRUE. Otherwise returns directly. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information structure for MPI communication. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bNS</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Is this a neighbor searching step? </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The simulation box. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The local atomic positions on this node. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The inputrec structure containing the MD input parameters including a pointer to the IMD data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Count wallcycles of IMD routines for diagnostic output.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Whether or not we have to do IMD communication at this step. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="163" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1476" bodyend="1558"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1a0b1a8995da8e5541994f60e8da36cf83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int IMD_get_step</definition>
+        <argsstring>(t_gmx_IMD *IMDsetup)</argsstring>
+        <name>IMD_get_step</name>
+        <param>
+          <type><ref refid="structt__gmx__IMD" kindref="compound">t_gmx_IMD</ref> *</type>
+          <declname>IMDsetup</declname>
+        </param>
+        <briefdescription>
+<para>Get the IMD update frequency. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>IMDsetup</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Opaque pointer to IMD private data.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The current IMD update/communication frequency </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="175" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1655" bodyend="1658"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1ae7e4add33dc345210142a8d0c57779f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void IMD_apply_forces</definition>
+        <argsstring>(gmx_bool bIMD, t_IMD *imd, t_commrec *cr, rvec *f, gmx_wallcycle *wcycle)</argsstring>
+        <name>IMD_apply_forces</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMD</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__IMD" kindref="compound">t_IMD</ref> *</type>
+          <declname>imd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle</ref> *</type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>Add external forces from a running interactive molecular dynamics session. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bIMD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns directly if bIMD is FALSE. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information structure for MPI communication. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The forces. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Count wallcycles of IMD routines for diagnostic output. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="186" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1661" bodyend="1701"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1ac82fa9858abb2431780d17c114773ed5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void IMD_fill_energy_record</definition>
+        <argsstring>(gmx_bool bIMD, t_IMD *imd, gmx_enerdata_t *enerd, gmx_int64_t step, gmx_bool bHaveNewEnergies)</argsstring>
+        <name>IMD_fill_energy_record</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMD</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__IMD" kindref="compound">t_IMD</ref> *</type>
+          <declname>imd</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bHaveNewEnergies</declname>
+        </param>
+        <briefdescription>
+<para>Copy energies and convert to float from enerdata to the IMD energy record. </para>        </briefdescription>
+        <detaileddescription>
+<para>We do no conversion, so units in client are SI!</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bIMD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Only springs into action if bIMD is TRUE. Otherwise returns directly. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>enerd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Contains the GROMACS energies for the different interaction types. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bHaveNewEnergies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Only copy energies if we have done global summing of them before. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="202" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1561" bodyend="1599"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1aa544913d1f33471af56c10f5322c16a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void IMD_send_positions</definition>
+        <argsstring>(t_IMD *imd)</argsstring>
+        <name>IMD_send_positions</name>
+        <param>
+          <type><ref refid="structt__IMD" kindref="compound">t_IMD</ref> *</type>
+          <declname>imd</declname>
+        </param>
+        <briefdescription>
+<para>Send positions and energies to the client. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>imd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD data structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="210" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1602" bodyend="1626"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1a74c08f7aade311825ad4ee58330afd9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void IMD_prep_energies_send_positions</definition>
+        <argsstring>(gmx_bool bIMD, gmx_bool bIMDstep, t_IMD *imd, gmx_enerdata_t *enerd, gmx_int64_t step, gmx_bool bHaveNewEnergies, gmx_wallcycle *wcycle)</argsstring>
+        <name>IMD_prep_energies_send_positions</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMD</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMDstep</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__IMD" kindref="compound">t_IMD</ref> *</type>
+          <declname>imd</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__enerdata__t" kindref="compound">gmx_enerdata_t</ref> *</type>
+          <declname>enerd</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bHaveNewEnergies</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__wallcycle" kindref="compound">gmx_wallcycle</ref> *</type>
+          <declname>wcycle</declname>
+        </param>
+        <briefdescription>
+<para>Calls IMD_prepare_energies() and then <ref refid="imd_8cpp_1aa544913d1f33471af56c10f5322c16a6" kindref="member">IMD_send_positions()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bIMD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns directly if bIMD is FALSE. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bIMDstep</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, transfer the positions. Otherwise just update the time step and potentially the energy record. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD data structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>enerd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Contains the GROMACS energies for the different interaction types. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>step</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bHaveNewEnergies</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Only update the energy record if we have done global summing of the energies. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>wcycle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Count wallcycles of IMD routines for diagnostic output. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="224" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1629" bodyend="1653"/>
+      </memberdef>
+      <memberdef kind="function" id="imd_8h_1a430d90b2f13df735b9476c4b4c3967f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void IMD_finalize</definition>
+        <argsstring>(gmx_bool bIMD, t_IMD *imd)</argsstring>
+        <name>IMD_finalize</name>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bIMD</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__IMD" kindref="compound">t_IMD</ref> *</type>
+          <declname>imd</declname>
+        </param>
+        <briefdescription>
+<para>Finalize IMD and do some cleaning up. </para>        </briefdescription>
+        <detaileddescription>
+<para>Currently, IMD finalize closes the force output file.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bIMD</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns directly if bIMD is FALSE. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>imd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The IMD data structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h" line="236" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.cpp" bodystart="1033" bodyend="1042"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains datatypes and function declarations necessary for mdrun to interface with VMD via the interactive molecular dynamics protocol. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Martin Hoefling, Carsten Kutzner <ulink url="mailto:ckutzne@gwdg.de">ckutzne@gwdg.de</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/imd/imd.h"/>
+  </compounddef>
+</doxygen>

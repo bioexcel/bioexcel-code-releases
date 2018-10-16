@@ -1,0 +1,304 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GROMACS 2016.1 Release Notes &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Highlights" href="major/highlights.html" />
+    <link rel="prev" title="GROMACS 2016.2 Release Notes" href="2016.2.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="major/highlights.html" title="Highlights"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="2016.2.html" title="GROMACS 2016.2 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gromacs-2016-1-release-notes">
+<h1>GROMACS 2016.1 Release Notes<a class="headerlink" href="#gromacs-2016-1-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>This version was released on October 28, 2016. These release notes
+document the changes that have taken place in GROMACS since the
+initial version 2016 to fix known issues. It also incorporates all
+fixes made in version 5.1.4.</p>
+<div class="section" id="made-distance-restraints-work-with-threads-and-dd">
+<h2>Made distance restraints work with threads and DD<a class="headerlink" href="#made-distance-restraints-work-with-threads-and-dd" title="Permalink to this headline">¶</a></h2>
+<p>The NMR distance restraints use several buffers for summing distances
+that were indexed based on the index of the thread+domain local ilist
+force atoms. This gives incorrect results with OpenMP and/or domain
+decomposition. Using the type index for the restraint and a domain-
+local, but not thread-local index for the pair resolves these issues.
+The are now only two limitations left:</p>
+<ul class="simple">
+<li>Time-averaged restraint don’t work with DD.</li>
+<li>Multiple copies of molecules in the same system without ensemble
+averaging does not work with DD.</li>
+</ul>
+<p>Note that these fixes have not been made in any 5.1.x release.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1117">Issue 1117</a>
+<a class="reference external" href="https://redmine.gromacs.org/issues/1989">Issue 1989</a>
+<a class="reference external" href="https://redmine.gromacs.org/issues/2029">Issue 2029</a></p>
+</div>
+<div class="section" id="fixed-ewald-surface-3dc-corrections">
+<h2>Fixed Ewald surface+3DC corrections<a class="headerlink" href="#fixed-ewald-surface-3dc-corrections" title="Permalink to this headline">¶</a></h2>
+<p>Ewald surface and 3DC correction forces were only applied up to,
+but not including, the last atom with exclusions. With water at
+the end of the system only the last H would not be corrected.
+With ions at the end all ions would be missing.
+In addition, with the Verlet scheme and domain decomposition
+no force correction was applied at all.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2040">Issue 2040</a></p>
+</div>
+<div class="section" id="fixed-opening-of-wall-table-files">
+<h2>Fixed opening of wall table files<a class="headerlink" href="#fixed-opening-of-wall-table-files" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2033">Issue 2033</a></p>
+</div>
+<div class="section" id="fixed-bug-in-gmx-insert-molecules">
+<h2>Fixed bug in gmx insert-molecules.<a class="headerlink" href="#fixed-bug-in-gmx-insert-molecules" title="Permalink to this headline">¶</a></h2>
+<p>With option -ip, and if all trials were unsuccessful, a molecule was
+eventually incorrectly placed at 0/0/0 due to a memory error
+when referencing to rpos[XX][mol].</p>
+</div>
+<div class="section" id="made-virial-reproducible">
+<h2>Made virial reproducible<a class="headerlink" href="#made-virial-reproducible" title="Permalink to this headline">¶</a></h2>
+<p>OpenMP reduction was used to reduce virial contributions over threads,
+which does not have a defined order. This leads to different rounding,
+which makes runs non-reproducible (but still fully correct).
+Now thread local buffers are used.
+Also removed OpenMP parallezation for small count (e.g. shift forces).</p>
+</div>
+<div class="section" id="updated-to-support-fftw-3-3-5">
+<h2>Updated to support FFTW 3.3.5<a class="headerlink" href="#updated-to-support-fftw-3-3-5" title="Permalink to this headline">¶</a></h2>
+<p>The auto-download of FFTW now gets FFTW 3.3.5 and builds it properly,
+including with <code class="docutils literal"><span class="pre">--enable-vsx</span></code> when GMX_SIMD is set to VSX, i.e. for
+Power8, and <code class="docutils literal"><span class="pre">--enable-avx512</span></code> when GMX_SIMD is any of the AVX flavours
+(which is safe on non-512 now, works on KNL, and is presumed useful
+for future AVX512 architectures).</p>
+</div>
+<div class="section" id="permitted-automatic-load-balancing-to-disable-itself-when-it-makes-the-run-slower">
+<h2>Permitted automatic load balancing to disable itself when it makes the run slower<a class="headerlink" href="#permitted-automatic-load-balancing-to-disable-itself-when-it-makes-the-run-slower" title="Permalink to this headline">¶</a></h2>
+<p>Under certain conditions, especially with (shared) GPUs, DLB can
+decrease the performance. We now measure the cycles per step before
+turning on DLB. When the running average of cycles per step with DLB
+gets above the average without DLB, we turn off DLB. We then measure
+again without DLB. If without DLB the cycle count is still lower,
+we keep DLB off for the remainder of the run. Otherwise is can turn
+on again as before. This procedure ensures that the performance will
+never deteriorate due to DLB.</p>
+</div>
+<div class="section" id="improved-the-accuracy-of-timing-for-dynamic-load-balancing-with-gpus">
+<h2>Improved the accuracy of timing for dynamic load balancing with GPUs<a class="headerlink" href="#improved-the-accuracy-of-timing-for-dynamic-load-balancing-with-gpus" title="Permalink to this headline">¶</a></h2>
+<p>With OpenCL, the time for the local non-bonded to finish on the GPU
+was ignored in the dynamic load balancing. This change lets OpenCL
+take the same code path as CUDA.</p>
+<p>One internal heuristic parameter was far too small for both CUDA and
+OpenCL, which is now fixed.</p>
+</div>
+<div class="section" id="corrected-kernel-launch-bounds-for-tesla-p100-gpus">
+<h2>Corrected kernel launch bounds for Tesla P100 GPUs<a class="headerlink" href="#corrected-kernel-launch-bounds-for-tesla-p100-gpus" title="Permalink to this headline">¶</a></h2>
+<p>This corrects our initial guess of kernel tuning parameters that resulted
+in reduced occupancy on sm_60 GPU, and thus improves performance.</p>
+</div>
+<div class="section" id="improved-logic-handling-if-when-the-run-is-terminated-for-settle-warnings">
+<h2>Improved logic handling if/when the run is terminated for SETTLE warnings<a class="headerlink" href="#improved-logic-handling-if-when-the-run-is-terminated-for-settle-warnings" title="Permalink to this headline">¶</a></h2>
+<p>The code now honours that when the environment variable
+GMX_MAXCONSTRWARN is set to -1, there is no maximum number of warnings.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2058">Issue 2058</a></p>
+</div>
+<div class="section" id="fixed-bug-in-gmx-wham-for-reading-pullx-files">
+<h2>Fixed bug in gmx wham for reading pullx files.<a class="headerlink" href="#fixed-bug-in-gmx-wham-for-reading-pullx-files" title="Permalink to this headline">¶</a></h2>
+<p>Because the order of columns in the pullx files has changed recently,
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">wham</span></code> did not pick the reaction coordinate from <code class="docutils literal"><span class="pre">pullx.xvg</span></code>
+if the COM of the pull groups were written. <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">wham</span></code> was tested
+with various pull options and geometries.</p>
+</div>
+<div class="section" id="fixed-ouput-bug-in-gmx-wham">
+<h2>Fixed ouput bug in gmx wham<a class="headerlink" href="#fixed-ouput-bug-in-gmx-wham" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="fixed-deadlock-with-thread-mpi">
+<h2>Fixed deadlock with thread-MPI<a class="headerlink" href="#fixed-deadlock-with-thread-mpi" title="Permalink to this headline">¶</a></h2>
+<p>With thread-MPI mdrun could deadlock while pinning threads.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2025">Issue 2025</a></p>
+</div>
+<div class="section" id="made-error-reporting-in-grompp-more-user-friendly">
+<h2>Made error reporting in grompp more user friendly<a class="headerlink" href="#made-error-reporting-in-grompp-more-user-friendly" title="Permalink to this headline">¶</a></h2>
+<p>This tool now always reports the file and line in user input files
+that lead to a condition such that subsequent parsing cannot continue.</p>
+</div>
+<div class="section" id="fixed-simd-suggestion-for-vmx">
+<h2>Fixed SIMD suggestion for VMX<a class="headerlink" href="#fixed-simd-suggestion-for-vmx" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="fixed-script-xplor2gmx-pl-to-work-with-gmxdata">
+<h2>Fixed script xplor2gmx.pl to work with GMXDATA<a class="headerlink" href="#fixed-script-xplor2gmx-pl-to-work-with-gmxdata" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="fixed-default-nice-level-in-mdrun-only-build">
+<h2>Fixed default nice level in mdrun-only build<a class="headerlink" href="#fixed-default-nice-level-in-mdrun-only-build" title="Permalink to this headline">¶</a></h2>
+<p>Now an mdrun-only build should default to zero nice level, the same as
+<code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span></code> in a normal build.</p>
+</div>
+<div class="section" id="fixed-math-test-false-positive">
+<h2>Fixed math-test false positive<a class="headerlink" href="#fixed-math-test-false-positive" title="Permalink to this headline">¶</a></h2>
+<p>Depending on the accuracy of the floating point division, the
+input of the test function could be 1ulp too large or too small.
+If it was too large the result of the test function wasn’t
+within 4ulp and the test failed.</p>
+</div>
+<div class="section" id="improved-documentation">
+<h2>Improved documentation<a class="headerlink" href="#improved-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Approaches for reducing overhead for GPU runs are now documented.</p>
+<p>The available wallcycle counters and subcounters reported in the
+md.log files are now listed and and explained in the user guide, along
+with how to enable reporting of the subcounters.</p>
+<p>Several install-guide sections have been improved, including those for
+OpenCL, mdrun-only, and “make check”. A “quick and dirty” cluster
+installation section was added.</p>
+</div>
+<div class="section" id="opencl-error-string-are-now-written-instead-of-cryptic-error-codes">
+<h2>OpenCL error string are now written, instead of cryptic error codes<a class="headerlink" href="#opencl-error-string-are-now-written-instead-of-cryptic-error-codes" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="fixed-build-with-gmx-use-tng-off">
+<h2>Fixed build with GMX_USE_TNG=off<a class="headerlink" href="#fixed-build-with-gmx-use-tng-off" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="removed-variable-precision-gro-writing">
+<h2>Removed variable-precision .gro writing<a class="headerlink" href="#removed-variable-precision-gro-writing" title="Permalink to this headline">¶</a></h2>
+<p>The precision used when writing .gro files is now fixed to 3, 4 and 5
+decimal places for x, v and box respectively to ensure compatibility with
+other software. Variable-precision reading is still supported.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2037">Issue 2037</a></p>
+</div>
+<div class="section" id="fixed-bg-q-platform-files-and-install-guide">
+<h2>Fixed BG/Q platform files and install guide<a class="headerlink" href="#fixed-bg-q-platform-files-and-install-guide" title="Permalink to this headline">¶</a></h2>
+<p>Renamed the platform file to reflect normal practice
+and the install guide.</p>
+</div>
+<div class="section" id="reduced-the-memory-required-for-free-energy-simulations">
+<h2>Reduced the memory required for free-energy simulations<a class="headerlink" href="#reduced-the-memory-required-for-free-energy-simulations" title="Permalink to this headline">¶</a></h2>
+<p>Pair lists with atoms whose short-ranged parameters are perturbed
+now use less memory.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2014">Issue 2014</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GROMACS 2016.1 Release Notes</a><ul>
+<li><a class="reference internal" href="#made-distance-restraints-work-with-threads-and-dd">Made distance restraints work with threads and DD</a></li>
+<li><a class="reference internal" href="#fixed-ewald-surface-3dc-corrections">Fixed Ewald surface+3DC corrections</a></li>
+<li><a class="reference internal" href="#fixed-opening-of-wall-table-files">Fixed opening of wall table files</a></li>
+<li><a class="reference internal" href="#fixed-bug-in-gmx-insert-molecules">Fixed bug in gmx insert-molecules.</a></li>
+<li><a class="reference internal" href="#made-virial-reproducible">Made virial reproducible</a></li>
+<li><a class="reference internal" href="#updated-to-support-fftw-3-3-5">Updated to support FFTW 3.3.5</a></li>
+<li><a class="reference internal" href="#permitted-automatic-load-balancing-to-disable-itself-when-it-makes-the-run-slower">Permitted automatic load balancing to disable itself when it makes the run slower</a></li>
+<li><a class="reference internal" href="#improved-the-accuracy-of-timing-for-dynamic-load-balancing-with-gpus">Improved the accuracy of timing for dynamic load balancing with GPUs</a></li>
+<li><a class="reference internal" href="#corrected-kernel-launch-bounds-for-tesla-p100-gpus">Corrected kernel launch bounds for Tesla P100 GPUs</a></li>
+<li><a class="reference internal" href="#improved-logic-handling-if-when-the-run-is-terminated-for-settle-warnings">Improved logic handling if/when the run is terminated for SETTLE warnings</a></li>
+<li><a class="reference internal" href="#fixed-bug-in-gmx-wham-for-reading-pullx-files">Fixed bug in gmx wham for reading pullx files.</a></li>
+<li><a class="reference internal" href="#fixed-ouput-bug-in-gmx-wham">Fixed ouput bug in gmx wham</a></li>
+<li><a class="reference internal" href="#fixed-deadlock-with-thread-mpi">Fixed deadlock with thread-MPI</a></li>
+<li><a class="reference internal" href="#made-error-reporting-in-grompp-more-user-friendly">Made error reporting in grompp more user friendly</a></li>
+<li><a class="reference internal" href="#fixed-simd-suggestion-for-vmx">Fixed SIMD suggestion for VMX</a></li>
+<li><a class="reference internal" href="#fixed-script-xplor2gmx-pl-to-work-with-gmxdata">Fixed script xplor2gmx.pl to work with GMXDATA</a></li>
+<li><a class="reference internal" href="#fixed-default-nice-level-in-mdrun-only-build">Fixed default nice level in mdrun-only build</a></li>
+<li><a class="reference internal" href="#fixed-math-test-false-positive">Fixed math-test false positive</a></li>
+<li><a class="reference internal" href="#improved-documentation">Improved documentation</a></li>
+<li><a class="reference internal" href="#opencl-error-string-are-now-written-instead-of-cryptic-error-codes">OpenCL error string are now written, instead of cryptic error codes</a></li>
+<li><a class="reference internal" href="#fixed-build-with-gmx-use-tng-off">Fixed build with GMX_USE_TNG=off</a></li>
+<li><a class="reference internal" href="#removed-variable-precision-gro-writing">Removed variable-precision .gro writing</a></li>
+<li><a class="reference internal" href="#fixed-bg-q-platform-files-and-install-guide">Fixed BG/Q platform files and install guide</a></li>
+<li><a class="reference internal" href="#reduced-the-memory-required-for-free-energy-simulations">Reduced the memory required for free-energy simulations</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="2016.2.html"
+                        title="previous chapter">GROMACS 2016.2 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="major/highlights.html"
+                        title="next chapter">Highlights</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/release-notes/2016/2016.1.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="major/highlights.html" title="Highlights"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="2016.2.html" title="GROMACS 2016.2 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx nmr &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx nmtraj" href="gmx-nmtraj.html" />
+    <link rel="prev" title="gmx nmens" href="gmx-nmens.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-nmtraj.html" title="gmx nmtraj"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-nmens.html" title="gmx nmens"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-nmr">
+<span id="id1"></span><h1>gmx nmr<a class="headerlink" href="#gmx-nmr" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx nmr [<strong>-f</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-f2</strong> <em>[&lt;.edr&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-viol</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-pairs</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ora</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ort</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-oda</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-odr</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-odt</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-oten</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>]
+        [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]dp</strong>] [<strong>-skip</strong> <em>&lt;int&gt;</em>] [<strong>-[no]aver</strong>]
+        [<strong>-[no]orinst</strong>] [<strong>-[no]ovec</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">nmr</span></code> extracts distance or orientation restraint
+data from an energy file. The user is prompted to interactively
+select the desired terms.</p>
+<p>When the <code class="docutils literal"><span class="pre">-viol</span></code> option is set, the time averaged
+violations are plotted and the running time-averaged and
+instantaneous sum of violations are recalculated. Additionally
+running time-averaged and instantaneous distances between
+selected pairs can be plotted with the <code class="docutils literal"><span class="pre">-pairs</span></code> option.</p>
+<p>Options <code class="docutils literal"><span class="pre">-ora</span></code>, <code class="docutils literal"><span class="pre">-ort</span></code>, <code class="docutils literal"><span class="pre">-oda</span></code>, <code class="docutils literal"><span class="pre">-odr</span></code> and
+<code class="docutils literal"><span class="pre">-odt</span></code> are used for analyzing orientation restraint data.
+The first two options plot the orientation, the last three the
+deviations of the orientations from the experimental values.
+The options that end on an ‘a’ plot the average over time
+as a function of restraint. The options that end on a ‘t’
+prompt the user for restraint label numbers and plot the data
+as a function of time. Option <code class="docutils literal"><span class="pre">-odr</span></code> plots the RMS
+deviation as a function of restraint.
+When the run used time or ensemble averaged orientation restraints,
+option <code class="docutils literal"><span class="pre">-orinst</span></code> can be used to analyse the instantaneous,
+not ensemble-averaged orientations and deviations instead of
+the time and ensemble averages.</p>
+<p>Option <code class="docutils literal"><span class="pre">-oten</span></code> plots the eigenvalues of the molecular order
+tensor for each orientation restraint experiment. With option
+<code class="docutils literal"><span class="pre">-ovec</span></code> also the eigenvectors are plotted.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.edr&gt;] (ener.edr)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-f2</span></code> [&lt;.edr&gt;] (ener.edr) (Optional)</dt>
+<dd>Energy file</dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr) (Optional)</dt>
+<dd>Portable xdr run input file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-viol</span></code> [&lt;.xvg&gt;] (violaver.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-pairs</span></code> [&lt;.xvg&gt;] (pairs.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ora</span></code> [&lt;.xvg&gt;] (orienta.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ort</span></code> [&lt;.xvg&gt;] (orientt.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oda</span></code> [&lt;.xvg&gt;] (orideva.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-odr</span></code> [&lt;.xvg&gt;] (oridevr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-odt</span></code> [&lt;.xvg&gt;] (oridevt.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oten</span></code> [&lt;.xvg&gt;] (oriten.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]dp</span></code>  (no)</dt>
+<dd>Print energies in high precision</dd>
+<dt><code class="docutils literal"><span class="pre">-skip</span></code> &lt;int&gt; (0)</dt>
+<dd>Skip number of frames between data points</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]aver</span></code>  (no)</dt>
+<dd>Also print the exact average and rmsd stored in the energy frames (only when 1 term is requested)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]orinst</span></code>  (no)</dt>
+<dd>Analyse instantaneous orientation data</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ovec</span></code>  (no)</dt>
+<dd>Also plot the eigenvectors with <code class="docutils literal"><span class="pre">-oten</span></code></dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx nmr</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-nmens.html"
+                        title="previous chapter">gmx nmens</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-nmtraj.html"
+                        title="next chapter">gmx nmtraj</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-nmr.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-nmtraj.html" title="gmx nmtraj"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-nmens.html" title="gmx nmens"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

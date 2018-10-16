@@ -1,0 +1,1234 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1CubicSplineTable" kind="class" prot="public">
+    <compoundname>gmx::CubicSplineTable</compoundname>
+    <includes local="no">gromacs/tables/cubicsplinetable.h</includes>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classgmx_1_1CubicSplineTable_1a336f1afeaabfe544c6e4a8135b216010" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>const real gmx::CubicSplineTable::defaultTolerance</definition>
+        <argsstring></argsstring>
+        <name>defaultTolerance</name>
+        <initializer>= 10.0 *  1.19209290e-07F</initializer>
+        <briefdescription>
+<para>Default tolerance for cubic spline tables. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is 10*GMX_FLOAT_EPS in single precision, and 1e-10 for double precision. It might not be worth setting this tolerance lower than 1e-10 in double precision, both because you will end up with very large tables, and because functions like r^-12 become so large for small values of r the table generation code will lead to some precision loss even in double precision. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="170" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1CubicSplineTable_1a43580236515cfc72b39b674ab75d7914" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t gmx::CubicSplineTable::numFuncInTable_</definition>
+        <argsstring></argsstring>
+        <name>numFuncInTable_</name>
+        <briefdescription>
+<para>Number of separate tabluated functions. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="621" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="621" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1CubicSplineTable_1a05c7db5f4dab784b74a5d0e298f15bd4" prot="private" static="no" mutable="no">
+        <type>std::pair&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref>, <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+        <definition>std::pair&lt;real, real&gt; gmx::CubicSplineTable::range_</definition>
+        <argsstring></argsstring>
+        <name>range_</name>
+        <briefdescription>
+<para>Range for which table evaluation is allowed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="622" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="622" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1CubicSplineTable_1ae331beab7b316a184c29b5ab3e2d22e9" prot="private" static="no" mutable="no">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real gmx::CubicSplineTable::tableScale_</definition>
+        <argsstring></argsstring>
+        <name>tableScale_</name>
+        <briefdescription>
+<para>Table scale (inverse of spacing between points) </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="623" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="623" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1CubicSplineTable_1ade5611e3ce8fe92b079ae18b0a04f513" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref>, <ref refid="namespacegmx_1ac3ca6adcfda5170180c2140c7b2f9d47" kindref="member">AlignedAllocator</ref>&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;real, AlignedAllocator&lt;real&gt; &gt; gmx::CubicSplineTable::yfghMultiTableData_</definition>
+        <argsstring></argsstring>
+        <name>yfghMultiTableData_</name>
+        <briefdescription>
+<para>Vector with combined table data to save calculations after lookup. </para>        </briefdescription>
+        <detaileddescription>
+<para>For table point i, this vector contains the four coefficients Y,F,G,H that we use to express the function value as V(x) = Y + F e + G e^2 + H e^3, where e is the epsilon offset from the nearest table point.</para><para>To allow aligned SIMD loads we need to use an aligned allocator for this container. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="635" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="635" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1aaf366db91bf18e662497da5ba67cb7bc" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::rangeCheck</definition>
+        <argsstring>(T r) const </argsstring>
+        <name>rangeCheck</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+<para>Change that function value falls inside range when debugging. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lookup argument floating-point type, typically SimdReal or real. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lookup argument to test</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>Debug</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>builds will throw <ref refid="classgmx_1_1RangeError" kindref="compound">gmx::RangeError</ref> for values that are larger than the upper limit of the range, or smaller than 0. We allow the table to be called with arguments between 0 and the lower limit of the range, since this might in theory occur once-in-a-blue-moon with some algorithms. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="147" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="147" bodyend="156"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a5e085fc0b25f72bef439f2031a465132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::CubicSplineTable::CubicSplineTable</definition>
+        <argsstring>(std::initializer_list&lt; AnalyticalSplineTableInput &gt; analyticalInputList, const std::pair&lt; real, real &gt; &amp;range, real tolerance=defaultTolerance)</argsstring>
+        <name>CubicSplineTable</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structgmx_1_1AnalyticalSplineTableInput" kindref="compound">AnalyticalSplineTableInput</ref> &gt;</type>
+          <declname>analyticalInputList</declname>
+        </param>
+        <param>
+          <type>const std::pair&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref>, <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>tolerance</declname>
+          <defval><ref refid="classgmx_1_1CubicSplineTable_1a336f1afeaabfe544c6e4a8135b216010" kindref="member">defaultTolerance</ref></defval>
+        </param>
+        <briefdescription>
+<para>Initialize table data from function. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>analyticalInputList</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initializer list with one or more functions to tabulate, specified as elements with a string description and the function as well as derivative. The function will also be called for values smaller than the lower limit of the range, but we avoid calling it for 0.0 if that value is not included in the range. Constructor will throw <ref refid="classgmx_1_1APIError" kindref="compound">gmx::APIError</ref> for negative values. Due to the way the numerical derivative evaluation depends on machine precision internally, this range must be at least 0.001, or the constructor throws <ref refid="classgmx_1_1APIError" kindref="compound">gmx::APIError</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Range over which the function will be tabulated. Constructor will throw <ref refid="classgmx_1_1APIError" kindref="compound">gmx::APIError</ref> for negative values, or if the value/derivative vector does not cover the range. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested accuracy of the table. This will be used to calculate the required internal spacing. If this cannot be achieved (for instance because the table would require too much memory) the constructor will throw <ref refid="classgmx_1_1ToleranceError" kindref="compound">gmx::ToleranceError</ref>.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The functions are always defined in double precision to avoid losing accuracy when constructing tables.</para><simplesectsep/><para>Since we fill the table for values below range.first, you can achieve a smaller table by using a smaller range where the tolerance has to be met, and accept that a few function calls below range.first do not quite reach the tolerance.</para></simplesect>
+<simplesect kind="warning"><para>For efficiency reasons (since this code is used in some inner (kernels), we always allocate memory and calculate table indices for the complete interval [0,range.second], although the data will not be valid outside the definition range to avoid calling the function there. This means you should <emphasis>not</emphasis> use this class to tabulate functions for small ranges very far away from zero, since you would both waste a huge amount of memory and incur truncation errors when calculating the index.</para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1ToleranceError" kindref="compound">gmx::ToleranceError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the requested tolerance cannot be achieved, and <ref refid="classgmx_1_1APIError" kindref="compound">gmx::APIError</ref> for other incorrect input. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="213" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.cpp" bodystart="313" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a346c3e2e67c3339507c842ca425ee773" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::CubicSplineTable::CubicSplineTable</definition>
+        <argsstring>(std::initializer_list&lt; NumericalSplineTableInput &gt; numericalInputList, const std::pair&lt; real, real &gt; &amp;range, real tolerance=defaultTolerance)</argsstring>
+        <name>CubicSplineTable</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structgmx_1_1NumericalSplineTableInput" kindref="compound">NumericalSplineTableInput</ref> &gt;</type>
+          <declname>numericalInputList</declname>
+        </param>
+        <param>
+          <type>const std::pair&lt; <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref>, <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt; &amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>tolerance</declname>
+          <defval><ref refid="classgmx_1_1CubicSplineTable_1a336f1afeaabfe544c6e4a8135b216010" kindref="member">defaultTolerance</ref></defval>
+        </param>
+        <briefdescription>
+<para>Initialize table data from tabulated values and derivatives. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>numericalInputList</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Initializer list with one or more functions to tabulate, specified as a string description, vectors with function and derivative values, and the input spacing. Data points are separated by the spacing parameter, starting from 0. Values below the lower limit of the range will be used to attempt defining the table, but we avoid using index 0 unless 0.0 is included in the range. Some extra points beyond range.second are required to re-interpolate values, so add some margin. The constructor will throw <ref refid="classgmx_1_1APIError" kindref="compound">gmx::APIError</ref> if the input vectors are too short to cover the requested range (and they must always be at least five points). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Range over which the function will be tabulated. Constructor will throw <ref refid="classgmx_1_1APIError" kindref="compound">gmx::APIError</ref> for negative values, or if the value/derivative vector does not cover the range. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Requested accuracy of the table. This will be used to calculate the required internal spacing and possibly re-interpolate. The constructor will throw <ref refid="classgmx_1_1ToleranceError" kindref="compound">gmx::ToleranceError</ref> if the input spacing is too coarse to achieve this accuracy.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The input data vectors are always double precision to avoid losing accuracy when constructing tables.</para><simplesectsep/><para>Since we fill the table for values below range.first, you can achieve a smaller table by using a smaller range where the tolerance has to be met, and accept that a few function calls below range.first do not quite reach the tolerance.</para></simplesect>
+<simplesect kind="warning"><para>For efficiency reasons (since this code is used in some inner (kernels), we always allocate memory and calculate table indices for the complete interval [0,range.second], although the data will not be valid outside the definition range to avoid calling the function there. This means you should <emphasis>not</emphasis> use this class to tabulate functions for small ranges very far away from zero, since you would both waste a huge amount of memory and incur truncation errors when calculating the index. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="257" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.cpp" bodystart="397" bodyend="492"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a3756dcb30a07e457d957171e62e96f50" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex</declname>
+            <defname>funcIndex</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateFunctionAndDerivative</definition>
+        <argsstring>(T r, T *functionValue, T *derivativeValue) const </argsstring>
+        <name>evaluateFunctionAndDerivative</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate both function and derivative, single table function. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function and derivative </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function value </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function derivative</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="282" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="282" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a5a67367a68cb0a5d59df0e0ce21dc311" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex</declname>
+            <defname>funcIndex</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateFunction</definition>
+        <argsstring>(T r, T *functionValue) const </argsstring>
+        <name>evaluateFunction</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate function value only, single table function. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function value </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function value</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="317" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="317" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a9cbab9ed0cf2f6342e6f98998f29b490" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex</declname>
+            <defname>funcIndex</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateDerivative</definition>
+        <argsstring>(T r, T *derivativeValue) const </argsstring>
+        <name>evaluateDerivative</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate function derivative only, single table function. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function derivative </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function derivative</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="340" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="340" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a257c3269189ffac8955980945ff390fd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>2</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex0</declname>
+            <defname>funcIndex0</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex1</declname>
+            <defname>funcIndex1</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateFunctionAndDerivative</definition>
+        <argsstring>(T r, T *functionValue0, T *derivativeValue0, T *functionValue1, T *derivativeValue1) const </argsstring>
+        <name>evaluateFunctionAndDerivative</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue1</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue1</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate both function and derivative, two table functions. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 1st function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 2nd function to evaluate in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function and derivative </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for second function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for second function</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="381" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="381" bodyend="405"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1ac721186db4029fad25565f59c9492d4b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>2</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex0</declname>
+            <defname>funcIndex0</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex1</declname>
+            <defname>funcIndex1</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateFunction</definition>
+        <argsstring>(T r, T *functionValue0, T *functionValue1) const </argsstring>
+        <name>evaluateFunction</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue1</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate function value only, two table functions. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 1st function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 2nd function to evaluate in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function value </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for second function</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="424" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="424" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a75c6e4d1ba37df0a4552daac05d181ab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>2</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex0</declname>
+            <defname>funcIndex0</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex1</declname>
+            <defname>funcIndex1</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateDerivative</definition>
+        <argsstring>(T r, T *derivativeValue0, T *derivativeValue1) const </argsstring>
+        <name>evaluateDerivative</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue1</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate function derivative only, two table functions. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 1st function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 2nd function to evaluate in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function derivative </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for second function</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="451" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="451" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1ab7a92744d336e2abb9c16fb39ee24244" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>3</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex0</declname>
+            <defname>funcIndex0</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex1</declname>
+            <defname>funcIndex1</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex2</declname>
+            <defname>funcIndex2</defname>
+            <defval>2</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateFunctionAndDerivative</definition>
+        <argsstring>(T r, T *functionValue0, T *derivativeValue0, T *functionValue1, T *derivativeValue1, T *functionValue2, T *derivativeValue2) const </argsstring>
+        <name>evaluateFunctionAndDerivative</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue1</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue1</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue2</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue2</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate both function and derivative, three table functions. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 3 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 1st function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 2nd function to evaluate in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 3rd function to evaluate in table, default is 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function and derivative </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for second function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for second function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for third function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for third function</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="500" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="500" bodyend="530"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a92085d7ebfe6d4e7180064eff2d30313" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>3</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex0</declname>
+            <defname>funcIndex0</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex1</declname>
+            <defname>funcIndex1</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex2</declname>
+            <defname>funcIndex2</defname>
+            <defval>2</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateFunction</definition>
+        <argsstring>(T r, T *functionValue0, T *functionValue1, T *functionValue2) const </argsstring>
+        <name>evaluateFunction</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue1</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>functionValue2</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate function value only, three table functions. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 3 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 1st function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 2nd function to evaluate in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 3rd function to evaluate in table, default is 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function value </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for second function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">functionValue2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated value for third function</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="551" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="551" bodyend="561"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a50b29e8da415722a63c15cf2588c8737" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>numFuncInTable</declname>
+            <defname>numFuncInTable</defname>
+            <defval>3</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex0</declname>
+            <defname>funcIndex0</defname>
+            <defval>0</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex1</declname>
+            <defname>funcIndex1</defname>
+            <defval>1</defval>
+          </param>
+          <param>
+            <type>int</type>
+            <declname>funcIndex2</declname>
+            <defname>funcIndex2</defname>
+            <defval>2</defval>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void gmx::CubicSplineTable::evaluateDerivative</definition>
+        <argsstring>(T r, T *derivativeValue0, T *derivativeValue1, T *derivativeValue2) const </argsstring>
+        <name>evaluateDerivative</name>
+        <param>
+          <type>T</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue0</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue1</declname>
+        </param>
+        <param>
+          <type>T *</type>
+          <declname>derivativeValue2</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate function derivative only, three table functions. </para>        </briefdescription>
+        <detaileddescription>
+<para>This is a templated method where the template can be either real or SimdReal.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>numFuncInTable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of separate functions in table, default is 3 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 1st function to evaluate in table, default is 0 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 2nd function to evaluate in table, default is 1 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>funcIndex2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index of 3rd function to evaluate in table, default is 2 </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type (SimdReal or real) of lookup and result </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Points for which to evaluate function derivative </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for first function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for second function </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">derivativeValue2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolated derivative for third function</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+For debug builds we assert that the input values fall in the range specified when constructing the table. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="582" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="582" bodyend="606"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1CubicSplineTable_1a3b7a2c1163edded0f6d64a830bd33077" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real gmx::CubicSplineTable::tableSpacing</definition>
+        <argsstring>() const </argsstring>
+        <name>tableSpacing</name>
+        <briefdescription>
+<para>Return the table spacing (distance between points) </para>        </briefdescription>
+        <detaileddescription>
+<para>You should never have to use this for normal code, but due to the way tables are constructed internally we need this in the unit tests to check relative tolerances over each interval.</para><para><simplesect kind="return"><para>table spacing. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="617" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="617" bodyend="617"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Cubic spline interpolation table. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> This class interpolates a function specified either as an analytical expression or from user-provided table data.</para><para>At initialization, you provide the reference function of vectors as a list of tuples that contain a brief name, the function, and derivative for each function to tabulate. To create a table with two functions this initializer list can for instance look like <verbatim>{ {&quot;LJ6&quot;, lj6Func, lj6Der}, {&quot;LJ12&quot;, lj12Func, lj12Der} }
+</verbatim></para><para>The names are only used so exceptions during initialization can be traced to a specific table.</para><para>When interpolating, there are methods to interpolate either 1, 2, or 3 functions in one go. By default these interpolation routines will operate on tables with the same number of functions as specified in the interpolation method (debug builds check that this is consistent with the table). However, it is also possible to use optional template parameters that specify the total number of functions in a table, and what function index to interpolate. For instance, to interpolate the derivative of the second function (i.e., index 1) in a multi-function-table with three functions in total, you can write <verbatim>table.evaluateDerivative&lt;3,1&gt;(x,&amp;der);
+</verbatim></para><para>Here too, debug builds will check that the template parameters are consistent with the table.</para><para>This class interpolates a function specified either as an analytical expression or from user-provided table data. The coefficients for each table point are precalculated such that we simply evaluate</para><para><formula id="50">\begin{eqnarray*} V(x) = Y + F \epsilon + G \epsilon^2 + H \epsilon^3 V&apos;(x) = (F + 2 G \epsilon + 3 H \epsilon^2)/h \end{eqnarray*}</formula></para><para>Where h is the spacing and epsilon the fractional offset from table point.</para><para>While it is possible to create tables only from function values (i.e., no derivatives), it is recommended to provide derivatives for higher accuracy and to avoid issues with numerical differentiation. Note that the table input should be smooth, i.e. it should not contain noise e.g. from an (iterative) Boltzmann inversion procedure - you have been warned.</para><para><simplesect kind="note"><para>This class is responsible for fundamental interpolation of any function, which might or might not correspond to a potential. For this reason both input and output derivatives are proper function derivatives, and we do not swap any signs to get forces directly from the table.</para><simplesectsep/><para>There will be a small additional accuracy loss from the internal operation where we calculate the epsilon offset from the nearest table point, since the integer part we subtract can get large in those cases. While this is technically possible to solve with extended precision arithmetics, that would introduce extra instructions in some highly performance-sensitive code parts. For typical GROMACS interaction functions the derivatives will decay faster than the potential, which means it will never play any role. For other functions it will only cause a small increase in the relative error for arguments where the magnitude of the function or derivative is very small. Since we typically sum several results in GROMACS, this should never show up in any real cases, and for this reason we choose not to do the extended precision arithmetics.</para><simplesectsep/><para>These routines are not suitable for table ranges starting far away from zero, since we allocate memory and calculate indices starting from range zero for efficiency reasons. </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" line="132" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/tables/cubicsplinetable.h" bodystart="131" bodyend="639"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1CubicSplineTable_1a5e085fc0b25f72bef439f2031a465132" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>CubicSplineTable</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a346c3e2e67c3339507c842ca425ee773" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>CubicSplineTable</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a336f1afeaabfe544c6e4a8135b216010" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>defaultTolerance</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a9cbab9ed0cf2f6342e6f98998f29b490" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateDerivative</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a75c6e4d1ba37df0a4552daac05d181ab" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateDerivative</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a50b29e8da415722a63c15cf2588c8737" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateDerivative</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a5a67367a68cb0a5d59df0e0ce21dc311" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateFunction</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1ac721186db4029fad25565f59c9492d4b" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateFunction</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a92085d7ebfe6d4e7180064eff2d30313" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateFunction</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a3756dcb30a07e457d957171e62e96f50" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateFunctionAndDerivative</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a257c3269189ffac8955980945ff390fd" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateFunctionAndDerivative</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1ab7a92744d336e2abb9c16fb39ee24244" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>evaluateFunctionAndDerivative</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a43580236515cfc72b39b674ab75d7914" prot="private" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>numFuncInTable_</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a05c7db5f4dab784b74a5d0e298f15bd4" prot="private" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>range_</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1aaf366db91bf18e662497da5ba67cb7bc" prot="private" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>rangeCheck</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1ae331beab7b316a184c29b5ab3e2d22e9" prot="private" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>tableScale_</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1a3b7a2c1163edded0f6d64a830bd33077" prot="public" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>tableSpacing</name></member>
+      <member refid="classgmx_1_1CubicSplineTable_1ade5611e3ce8fe92b079ae18b0a04f513" prot="private" virt="non-virtual"><scope>gmx::CubicSplineTable</scope><name>yfghMultiTableData_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

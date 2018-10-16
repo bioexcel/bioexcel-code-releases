@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx pairdist &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx pdb2gmx" href="gmx-pdb2gmx.html" />
+    <link rel="prev" title="gmx order" href="gmx-order.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-pdb2gmx.html" title="gmx pdb2gmx"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-order.html" title="gmx order"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-pairdist">
+<span id="id1"></span><h1>gmx pairdist<a class="headerlink" href="#gmx-pairdist" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx pairdist [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr/.gro/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+             [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>]
+             [<strong>-tu</strong> <em>&lt;enum&gt;</em>] [<strong>-fgroup</strong> <em>&lt;selection&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+             [<strong>-[no]rmpbc</strong>] [<strong>-[no]pbc</strong>] [<strong>-sf</strong> <em>&lt;file&gt;</em>] [<strong>-selrpos</strong> <em>&lt;enum&gt;</em>]
+             [<strong>-seltype</strong> <em>&lt;enum&gt;</em>] [<strong>-cutoff</strong> <em>&lt;real&gt;</em>] [<strong>-type</strong> <em>&lt;enum&gt;</em>]
+             [<strong>-refgrouping</strong> <em>&lt;enum&gt;</em>] [<strong>-selgrouping</strong> <em>&lt;enum&gt;</em>]
+             [<strong>-ref</strong> <em>&lt;selection&gt;</em>] [<strong>-sel</strong> <em>&lt;selection&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">pairdist</span></code> calculates pairwise distances between one reference
+selection (given with <code class="docutils literal"><span class="pre">-ref</span></code>) and one or more other selections
+(given with <code class="docutils literal"><span class="pre">-sel</span></code>).  It can calculate either the minimum
+distance (the default), or the maximum distance (with
+<code class="docutils literal"><span class="pre">-type</span> <span class="pre">max</span></code>).  Distances to each selection provided with
+<code class="docutils literal"><span class="pre">-sel</span></code> are computed independently.</p>
+<p>By default, the global minimum/maximum distance is computed.
+To compute more distances (e.g., minimum distances to each residue
+in <code class="docutils literal"><span class="pre">-ref</span></code>), use <code class="docutils literal"><span class="pre">-refgrouping</span></code> and/or <code class="docutils literal"><span class="pre">-selgrouping</span></code>
+to specify how the positions within each selection should be
+grouped.</p>
+<p>Computed distances are written to the file specified with <code class="docutils literal"><span class="pre">-o</span></code>.
+If there are N groups in <code class="docutils literal"><span class="pre">-ref</span></code> and M groups in the first
+selection in <code class="docutils literal"><span class="pre">-sel</span></code>, then the output contains N*M columns
+for the first selection. The columns contain distances like this:
+r1-s1, r2-s1, …, r1-s2, r2-s2, …, where rn is the n’th group
+in <code class="docutils literal"><span class="pre">-ref</span></code> and sn is the n’th group in the other selection.
+The distances for the second selection comes as separate columns
+after the first selection, and so on.  If some selections are
+dynamic, only the selected positions are used in the computation
+but the same number of columns is always written out.  If there
+are no positions contributing to some group pair, then the cutoff
+value is written (see below).</p>
+<p><code class="docutils literal"><span class="pre">-cutoff</span></code> sets a cutoff for the computed distances.
+If the result would contain a distance over the cutoff, the cutoff
+value is written to the output file instead. By default, no cutoff
+is used, but if you are not interested in values beyond a cutoff,
+or if you know that the minimum distance is smaller than a cutoff,
+you should set this option to allow the tool to use grid-based
+searching and be significantly faster.</p>
+<p>If you want to compute distances between fixed pairs,
+<a class="reference internal" href="gmx-distance.html"><span class="doc">gmx distance</span></a> may be a more suitable tool.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc) (Optional)</dt>
+<dd>Input trajectory or single configuration: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr/.gro/…&gt;] (topol.tpr) (Optional)</dt>
+<dd>Input structure: <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Extra index groups</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (dist.xvg)</dt>
+<dd>Distances as function of time</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>First frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Last frame (ps) to read from trajectory</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame if t MOD dt == first time (ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-tu</span></code> &lt;enum&gt; (ps)</dt>
+<dd>Unit for time values: fs, ps, ns, us, ms, s</dd>
+<dt><code class="docutils literal"><span class="pre">-fgroup</span></code> &lt;selection&gt;</dt>
+<dd>Atoms stored in the trajectory file (if not set, assume first N atoms)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>Plot formatting: none, xmgrace, xmgr</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rmpbc</span></code>  (yes)</dt>
+<dd>Make molecules whole for each frame</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]pbc</span></code>  (yes)</dt>
+<dd>Use periodic boundary conditions for distance calculation</dd>
+<dt><code class="docutils literal"><span class="pre">-sf</span></code> &lt;file&gt;</dt>
+<dd>Provide selections from files</dd>
+<dt><code class="docutils literal"><span class="pre">-selrpos</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Selection reference positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-seltype</span></code> &lt;enum&gt; (atom)</dt>
+<dd>Default selection output positions: atom, res_com, res_cog, mol_com, mol_cog, whole_res_com, whole_res_cog, whole_mol_com, whole_mol_cog, part_res_com, part_res_cog, part_mol_com, part_mol_cog, dyn_res_com, dyn_res_cog, dyn_mol_com, dyn_mol_cog</dd>
+<dt><code class="docutils literal"><span class="pre">-cutoff</span></code> &lt;real&gt; (0)</dt>
+<dd>Maximum distance to consider</dd>
+<dt><code class="docutils literal"><span class="pre">-type</span></code> &lt;enum&gt; (min)</dt>
+<dd>Type of distances to calculate: min, max</dd>
+<dt><code class="docutils literal"><span class="pre">-refgrouping</span></code> &lt;enum&gt; (all)</dt>
+<dd>Grouping of -ref positions to compute the min/max over: all, res, mol, none</dd>
+<dt><code class="docutils literal"><span class="pre">-selgrouping</span></code> &lt;enum&gt; (all)</dt>
+<dd>Grouping of -sel positions to compute the min/max over: all, res, mol, none</dd>
+<dt><code class="docutils literal"><span class="pre">-ref</span></code> &lt;selection&gt;</dt>
+<dd>Reference positions to calculate distances from</dd>
+<dt><code class="docutils literal"><span class="pre">-sel</span></code> &lt;selection&gt;</dt>
+<dd>Positions to calculate distances for</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx pairdist</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-order.html"
+                        title="previous chapter">gmx order</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-pdb2gmx.html"
+                        title="next chapter">gmx pdb2gmx</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-pairdist.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-pdb2gmx.html" title="gmx pdb2gmx"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-order.html" title="gmx order"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

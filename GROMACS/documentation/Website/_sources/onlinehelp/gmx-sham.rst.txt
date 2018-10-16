@@ -1,0 +1,148 @@
+.. _gmx sham:
+
+gmx sham
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx sham [:strong:`-f` :emphasis:`[<.xvg>]`] [:strong:`-ge` :emphasis:`[<.xvg>]`] [:strong:`-ene` :emphasis:`[<.xvg>]`] [:strong:`-dist` :emphasis:`[<.xvg>]`]
+             [:strong:`-histo` :emphasis:`[<.xvg>]`] [:strong:`-bin` :emphasis:`[<.ndx>]`] [:strong:`-lp` :emphasis:`[<.xpm>]`]
+             [:strong:`-ls` :emphasis:`[<.xpm>]`] [:strong:`-lsh` :emphasis:`[<.xpm>]`] [:strong:`-lss` :emphasis:`[<.xpm>]`]
+             [:strong:`-ls3` :emphasis:`[<.pdb>]`] [:strong:`-g` :emphasis:`[<.log>]`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`]
+             [:strong:`-[no]time`] [:strong:`-b` :emphasis:`<real>`] [:strong:`-e` :emphasis:`<real>`] [:strong:`-ttol` :emphasis:`<real>`]
+             [:strong:`-n` :emphasis:`<int>`] [:strong:`-[no]d`] [:strong:`-[no]sham`] [:strong:`-tsham` :emphasis:`<real>`]
+             [:strong:`-pmin` :emphasis:`<real>`] [:strong:`-dim` :emphasis:`<vector>`] [:strong:`-ngrid` :emphasis:`<vector>`]
+             [:strong:`-xmin` :emphasis:`<vector>`] [:strong:`-xmax` :emphasis:`<vector>`] [:strong:`-pmax` :emphasis:`<real>`]
+             [:strong:`-gmax` :emphasis:`<real>`] [:strong:`-emin` :emphasis:`<real>`] [:strong:`-emax` :emphasis:`<real>`]
+             [:strong:`-nlevels` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx sham`` makes multi-dimensional free-energy, enthalpy and entropy plots.
+``gmx sham`` reads one or more :ref:`.xvg <xvg>` files and analyzes data sets.
+The basic purpose of ``gmx sham`` is to plot Gibbs free energy landscapes
+(option ``-ls``)
+by Bolzmann inverting multi-dimensional histograms (option ``-lp``),
+but it can also
+make enthalpy (option ``-lsh``) and entropy (option ``-lss``)
+plots. The histograms can be made for any quantities the user supplies.
+A line in the input file may start with a time
+(see option ``-time``) and any number of *y*-values may follow.
+Multiple sets can also be
+read when they are separated by & (option ``-n``),
+in this case only one *y*-value is read from each line.
+All lines starting with # and @ are skipped.
+
+Option ``-ge`` can be used to supply a file with free energies
+when the ensemble is not a Boltzmann ensemble, but needs to be biased
+by this free energy. One free energy value is required for each
+(multi-dimensional) data point in the ``-f`` input.
+
+Option ``-ene`` can be used to supply a file with energies.
+These energies are used as a weighting function in the single
+histogram analysis method by Kumar et al. When temperatures
+are supplied (as a second column in the file), an experimental
+weighting scheme is applied. In addition the vales
+are used for making enthalpy and entropy plots.
+
+With option ``-dim``, dimensions can be gives for distances.
+When a distance is 2- or 3-dimensional, the circumference or surface
+sampled by two particles increases with increasing distance.
+Depending on what one would like to show, one can choose to correct
+the histogram and free-energy for this volume effect.
+The probability is normalized by r and r^2 for dimensions of 2 and 3,
+respectively.
+A value of -1 is used to indicate an angle in degrees between two
+vectors: a sin(angle) normalization will be applied.
+**Note** that for angles between vectors the inner-product or cosine
+is the natural quantity to use, as it will produce bins of the same
+volume.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xvg>] (graph.xvg)
+    xvgr/xmgr file
+``-ge`` [<.xvg>] (gibbs.xvg) (Optional)
+    xvgr/xmgr file
+``-ene`` [<.xvg>] (esham.xvg) (Optional)
+    xvgr/xmgr file
+
+Options to specify output files:
+
+``-dist`` [<.xvg>] (ener.xvg) (Optional)
+    xvgr/xmgr file
+``-histo`` [<.xvg>] (edist.xvg) (Optional)
+    xvgr/xmgr file
+``-bin`` [<.ndx>] (bindex.ndx) (Optional)
+    Index file
+``-lp`` [<.xpm>] (prob.xpm) (Optional)
+    X PixMap compatible matrix file
+``-ls`` [<.xpm>] (gibbs.xpm) (Optional)
+    X PixMap compatible matrix file
+``-lsh`` [<.xpm>] (enthalpy.xpm) (Optional)
+    X PixMap compatible matrix file
+``-lss`` [<.xpm>] (entropy.xpm) (Optional)
+    X PixMap compatible matrix file
+``-ls3`` [<.pdb>] (gibbs3.pdb) (Optional)
+    Protein data bank file
+``-g`` [<.log>] (shamlog.log) (Optional)
+    Log file
+
+Other options:
+
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]time``  (yes)
+    Expect a time in the input
+``-b`` <real> (-1)
+    First time to read from set
+``-e`` <real> (-1)
+    Last time to read from set
+``-ttol`` <real> (0)
+    Tolerance on time in appropriate units (usually ps)
+``-n`` <int> (1)
+    Read this number of sets separated by lines containing only an ampersand
+``-[no]d``  (no)
+    Use the derivative
+``-[no]sham``  (yes)
+    Turn off energy weighting even if energies are given
+``-tsham`` <real> (298.15)
+    Temperature for single histogram analysis
+``-pmin`` <real> (0)
+    Minimum probability. Anything lower than this will be set to zero
+``-dim`` <vector> (1 1 1)
+    Dimensions for distances, used for volume correction (max 3 values, dimensions > 3 will get the same value as the last)
+``-ngrid`` <vector> (32 32 32)
+    Number of bins for energy landscapes (max 3 values, dimensions > 3 will get the same value as the last)
+``-xmin`` <vector> (0 0 0)
+    Minimum for the axes in energy landscape (see above for > 3 dimensions)
+``-xmax`` <vector> (1 1 1)
+    Maximum for the axes in energy landscape (see above for > 3 dimensions)
+``-pmax`` <real> (0)
+    Maximum probability in output, default is calculate
+``-gmax`` <real> (0)
+    Maximum free energy in output, default is calculate
+``-emin`` <real> (0)
+    Minimum enthalpy in output, default is calculate
+``-emax`` <real> (0)
+    Maximum enthalpy in output, default is calculate
+``-nlevels`` <int> (25)
+    Number of levels for energy landscape
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

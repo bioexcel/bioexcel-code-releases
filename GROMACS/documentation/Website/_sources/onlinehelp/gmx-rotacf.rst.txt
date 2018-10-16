@@ -1,0 +1,93 @@
+.. _gmx rotacf:
+
+gmx rotacf
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx rotacf [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+               [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`]
+               [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]d`] [:strong:`-[no]aver`]
+               [:strong:`-acflen` :emphasis:`<int>`] [:strong:`-[no]normalize`] [:strong:`-P` :emphasis:`<enum>`]
+               [:strong:`-fitfn` :emphasis:`<enum>`] [:strong:`-beginfit` :emphasis:`<real>`] [:strong:`-endfit` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx rotacf`` calculates the rotational correlation function
+for molecules. Atom triplets (i,j,k) must be given in the index
+file, defining two vectors ij and jk. The rotational ACF
+is calculated as the autocorrelation function of the vector
+n = ij x jk, i.e. the cross product of the two vectors.
+Since three atoms span a plane, the order of the three atoms
+does not matter. Optionally, by invoking the ``-d`` switch, you can
+calculate the rotational correlation function for linear molecules
+by specifying atom pairs (i,j) in the index file.
+
+EXAMPLES
+
+``gmx rotacf -P 1 -nparm 2 -fft -n index -o rotacf-x-P1
+-fa expfit-x-P1 -beginfit 2.5 -endfit 20.0``
+
+This will calculate the rotational correlation function using a first
+order Legendre polynomial of the angle of a vector defined by the index
+file. The correlation function will be fitted from 2.5 ps until 20.0 ps
+to a two-parameter exponential.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-n`` [<.ndx>] (index.ndx)
+    Index file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (rotacf.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]d``  (no)
+    Use index doublets (vectors) for correlation function instead of triplets (planes)
+``-[no]aver``  (yes)
+    Average over molecules
+``-acflen`` <int> (-1)
+    Length of the ACF, default is half the number of frames
+``-[no]normalize``  (yes)
+    Normalize ACF
+``-P`` <enum> (0)
+    Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3
+``-fitfn`` <enum> (none)
+    Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9
+``-beginfit`` <real> (0)
+    Time where to begin the exponential fit of the correlation function
+``-endfit`` <real> (-1)
+    Time where to end the exponential fit of the correlation function, -1 is until the end
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

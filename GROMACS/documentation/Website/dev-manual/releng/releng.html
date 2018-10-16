@@ -1,0 +1,465 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Jenkins scripts (releng Python module) &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Workflow build overview" href="workflow.html" />
+    <link rel="prev" title="releng repository" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="workflow.html" title="Workflow build overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="releng repository"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U">releng repository</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jenkins-scripts-releng-python-module">
+<h1>Jenkins scripts (releng Python module)<a class="headerlink" href="#jenkins-scripts-releng-python-module" title="Permalink to this headline">¶</a></h1>
+<p>The main scripts used for Jenkins build are collected into a <code class="docutils literal"><span class="pre">releng</span></code> Python
+package in the <code class="docutils literal"><span class="pre">releng</span></code> repository.</p>
+<div class="section" id="build-overview">
+<h2>Build overview<a class="headerlink" href="#build-overview" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="python-build-script">
+<h3>Python build script<a class="headerlink" href="#python-build-script" title="Permalink to this headline">¶</a></h3>
+<p>Builds using the releng Python scripts use the following sequence:</p>
+<ol class="arabic simple">
+<li>Jenkins (or the workflow script) does some preparatory steps (see
+<a class="reference internal" href="jenkins-config.html"><span class="doc">Jenkins configuration</span></a>), including checking out the <code class="docutils literal"><span class="pre">releng</span></code> repo.</li>
+<li>Jenkins imports the releng Python package, and calls run_build().</li>
+<li>The releng script checks out the <code class="docutils literal"><span class="pre">gromacs</span></code> repo if not yet done by
+Jenkins.</li>
+<li>The releng script locates a Python build script from the <code class="docutils literal"><span class="pre">gromacs</span></code> repo
+based on the build type given to run_build(), and loads the code.
+The build script provides some configuration settings as global variables, and
+a do_build() function that provides the actual build steps.</li>
+<li>If the build script requires regression tests, the releng script now checks
+out the <code class="docutils literal"><span class="pre">regressiontests</span></code> repo.</li>
+<li>The releng script prepares the build environment, such as initializing
+environment variables and generic CMake options such as the used compilers.
+The build environment can be influenced by build options passed to
+run_build().  Some build options passed to run_build() only set parameters
+that the build script can access to influence how to do the build (not all
+build scripts use these parameters).
+See <a class="reference internal" href="#releng-jenkins-build-opts"><span class="std std-ref">Build options</span></a> for details on the supported build
+options.
+This step also includes setting up a separate build directory for
+out-of-source builds if so requested by the build script.</li>
+<li>The releng script calls do_build() provided by the build script.
+do_build() receives a build context that it can use to access information
+about the build environment, build parameters, and the workspace.
+The context also provides methods to run CMake, to build targets, to copy
+logs to a common location in the workspace, to mark the build unstable, and
+other such helper functions to help interacting with Jenkins in an uniform
+manner.
+See <a class="reference internal" href="releng-api.html"><span class="doc">releng Python API</span></a> for details on the API available to the build script.</li>
+<li>The build script provides the steps to do the actual build, typically
+calling methods in the build context to interact with the CMake build system
+or Jenkins where required.</li>
+<li>When the build script returns, or raises a BuildError exception to indicate
+a build failure, the releng script does some final processing to handle
+reason reporting for unsuccessful (unstable or failed) builds.</li>
+<li>Jenkins does various post-build actions, such as publishing or parsing logs
+from the common log location, and using the unsuccessful reason reported
+from the script as the failure message to report back to Gerrit.</li>
+</ol>
+</div>
+<div class="section" id="workflow-builds">
+<h3>Workflow builds<a class="headerlink" href="#workflow-builds" title="Permalink to this headline">¶</a></h3>
+<p>The subdirectory <code class="file docutils literal"><span class="pre">workflow/</span></code> contains Groovy scripts for use with the
+Jenkins Pipeline plugin.  The general sequence for these builds is as follows:</p>
+<ol class="arabic simple">
+<li>Jenkins allocates a node for loading the Groovy script.</li>
+<li>Jenkins checks out the <code class="docutils literal"><span class="pre">releng</span></code> repo using a shell script.
+We do not use an SCM step here to avoid showing this checkout on the build
+summary page.  The summary page only works reasonably with at most one Git
+checkout within the workflow, and the workflow script should be in control
+of what this checkout is.</li>
+<li>Jenkins loads the desired workflow script.</li>
+<li>Typically, the workflow script further loads <code class="docutils literal"><span class="pre">utils.groovy</span></code> as its first
+statement. Any other statements at the top level of the workflow script are
+also executed in the context of the node/workspace where the script is being
+loaded.
+The workflow script should do a <code class="docutils literal"><span class="pre">return</span> <span class="pre">this</span></code> as its last statement.</li>
+<li>Depending on the workflow script, Jenkins may also call other functions
+defined in the workflow script in this node/workspace context.  This is
+necessary if some values need to be passed from Jenkins configuration to the
+workflow script for code that runs in this context.</li>
+<li>Jenkins calls <code class="docutils literal"><span class="pre">doBuild()</span></code> defined by the workflow script outside of any
+node/workspace context.  Depending on the workflow script, some parameters
+may be passed.</li>
+<li>The workflow script has full control over the build from now on, until the
+end.</li>
+</ol>
+<p>See <a class="reference internal" href="jenkins-config.html"><span class="doc">Jenkins configuration</span></a> for more details on the configuration.</p>
+<p>See <a class="reference internal" href="workflow.html"><span class="doc">Workflow build overview</span></a> for more details on what kinds of builds the workflow
+scripts are currently used for.</p>
+</div>
+<div class="section" id="matrix-builds">
+<h3>Matrix builds<a class="headerlink" href="#matrix-builds" title="Permalink to this headline">¶</a></h3>
+<p>The releng scripts also support creating Jenkins matrix builds that load
+the configuration matrix from the <code class="docutils literal"><span class="pre">gromacs</span></code> repository.  These files are
+located under <code class="file docutils literal"><span class="pre">admin/builds/</span></code>.  The format of such matrix files is one
+configuration per line.  Empty lines are ignored, and comments can be started
+with <code class="docutils literal"><span class="pre">#</span></code>.</p>
+<p>The build host assignment happens through a set of labels: build options that affect
+the possible host for building the configuration map to labels (the mapping is
+defined in <code class="file docutils literal"><span class="pre">options.py</span></code>), and the set of labels supported by each build
+slave is defined in <code class="file docutils literal"><span class="pre">slaves.py</span></code>.</p>
+<p>The building is orchestrated by a workflow build that loads and preprocesses
+the configuration matrix, and then triggers a matrix build that takes the
+configuration axis values as a build parameter.  The matrix build uses the
+standard sequence with releng Python scripts.</p>
+<p>See <a class="reference internal" href="workflow.html"><span class="doc">Workflow build overview</span></a> and <a class="reference internal" href="jenkins-config.html"><span class="doc">Jenkins configuration</span></a> for more details.</p>
+</div>
+</div>
+<div class="section" id="input-environment-variables">
+<span id="releng-input-env-vars"></span><h2>Input environment variables<a class="headerlink" href="#input-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>The following environment variables are used by the releng Python scripts for
+input from the Jenkins job (or from a workflow build script):</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">GROMACS_REFSPEC</span></code> <code class="docutils literal"><span class="pre">REGRESSIONTESTS_REFSPEC</span></code> <code class="docutils literal"><span class="pre">RELENG_REFSPEC</span></code></dt>
+<dd>Refspecs for the repositories used for fetching the change to build.
+Note that they will not always be used for an actual checkout; for example,
+Jenkins always needs to do the checkout for <code class="docutils literal"><span class="pre">releng</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GROMACS_HASH</span></code> <code class="docutils literal"><span class="pre">REGRESSIONTESTS_HASH</span></code> <code class="docutils literal"><span class="pre">RELENG_HASH</span></code></dt>
+<dd>If set, these provide hashes to check out, corresponding to the refspecs.
+Thees can be used to build a fixed commit from a refspec such as
+<code class="docutils literal"><span class="pre">refs/heads/master</span></code>, even if multiple checkouts are done at different
+times.  It is assumed that fetching the corresponding refspec will make the
+commit with the provided hash available.</dd>
+<dt><code class="docutils literal"><span class="pre">CHECKOUT_PROJECT</span></code></dt>
+<dd>Needs to be set to the project (<code class="docutils literal"><span class="pre">gromacs</span></code>, <code class="docutils literal"><span class="pre">regressiontests</span></code>, or
+<code class="docutils literal"><span class="pre">releng</span></code>) that Jenkins has checked out.  Needs to be set, unless
+<code class="docutils literal"><span class="pre">GERRIT_PROJECT</span></code> is set.</dd>
+<dt><code class="docutils literal"><span class="pre">CHECKOUT_REFSPEC</span></code></dt>
+<dd>Refspec used to checkout <code class="docutils literal"><span class="pre">CHECKOUT_PROJECT</span></code>.  This will override the
+project-specific refspec for that project.</dd>
+<dt><code class="docutils literal"><span class="pre">GERRIT_PROJECT</span></code> <code class="docutils literal"><span class="pre">GERRIT_REFSPEC</span></code></dt>
+<dd>These are set by Gerrit Trigger, and can be used for simplicity instead of
+<code class="docutils literal"><span class="pre">CHECKOUT_PROJECT</span></code> and <code class="docutils literal"><span class="pre">CHECKOUT_REFSPEC</span></code>.
+<code class="docutils literal"><span class="pre">GERRIT_PROJECT</span></code> is also used in some cases for interpreting
+<code class="docutils literal"><span class="pre">GERRIT_EVENT_COMMENT_TEXT</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">GERRIT_BRANCH</span></code></dt>
+<dd>This is set by Gerrit Trigger to identify the branch that triggered the build.
+It is used to support the same job triggering from multiple branches, getting
+the refspecs for associated repos right.</dd>
+<dt><code class="docutils literal"><span class="pre">GERRIT_EVENT_COMMENT_TEXT</span></code></dt>
+<dd>This is set by Gerrit Trigger when the build is triggered by a comment added
+in Jenkins.  The text is expected to be base64-encoded (the default in Gerrit
+Trigger).  See <a class="reference internal" href="jenkins-ui.html#releng-triggering-builds"><span class="std std-ref">Triggering builds</span></a> for recognized ways of
+triggering builds through this.</dd>
+<dt><code class="docutils literal"><span class="pre">MANUAL_COMMENT_TEXT</span></code></dt>
+<dd>If <code class="docutils literal"><span class="pre">GERRIT_EVENT_COMMENT_TEXT</span></code> is not set, the value from this variable is
+used instead (without base64-decoding or removing <code class="docutils literal"><span class="pre">[JENKINS]</span></code> tags).
+This allows creating a test Jenkins job that can be manually triggered.</dd>
+<dt><code class="docutils literal"><span class="pre">NODE_NAME</span></code></dt>
+<dd>Name of the host where the build is running.  This is used for some
+host-specific logic in configuring the compilation.
+This is set by Jenkins automatically.</dd>
+<dt><code class="docutils literal"><span class="pre">WORKSPACE</span></code></dt>
+<dd>Path to the root of the Jenkins workspace where the build is running.
+This is set by Jenkins automatically, except for workflow builds.</dd>
+<dt><code class="docutils literal"><span class="pre">STATUS_FILE</span></code></dt>
+<dd>Path to the file to write on completion of the build, containing the build
+status and the reason for failed builds.
+Defaults to <code class="file docutils literal"><span class="pre">logs/unsuccessful-reason.log</span></code>.
+If the extension is <code class="file docutils literal"><span class="pre">.json</span></code>, the file is written as JSON, which is
+useful for further use from a workflow build.</dd>
+<dt><code class="docutils literal"><span class="pre">NO_PROPAGATE_FAILURE</span></code></dt>
+<dd>If set to a non-empty value, the build script will exit with a zero exit code
+even if the build fails because of a BuildError or ConfigurationError.
+Only unexpected exceptions will cause a non-zero exit code.
+The information in <code class="docutils literal"><span class="pre">STATUS_FILE</span></code> can be used to determine whether the build
+failed or not.</dd>
+</dl>
+</div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>To communicate back to the Jenkins job (or the workflow build script), the
+releng scripts use the following mechanisms:</p>
+<dl class="docutils">
+<dt>exit code</dt>
+<dd>The script exits with a non-zero exit code if the build fails, unless
+<code class="docutils literal"><span class="pre">NO_PROPAGATE_FAILURE</span></code> is set.  If the environment variable is set, only an
+unexpected exception will cause a non-zero exit code.</dd>
+<dt>status file</dt>
+<dd><p class="first">In freestyle jobs, <code class="docutils literal"><span class="pre">STATUS_FILE</span></code> is not specified, and
+<code class="file docutils literal"><span class="pre">logs/unsuccessful-reason.log</span></code> is written if the build fails or is
+unstable.  This is intended to be used as the unsuccessful message for Gerrit
+Trigger in non-workflow builds.</p>
+<p>In workflow builds, <code class="docutils literal"><span class="pre">STATUS_FILE</span></code> is specified as a JSON file, and contains
+additional information about the result of the execution.  This is used to
+communicate success/failure back to the workflow script, as well as reason
+for failures and in some cases, additional return values in case of success.</p>
+<p class="last">A reasonable effort is done to try to delete this file at the start of the
+script, so that old versions would not be left if the script fails.
+Even on unexpected errors, a reasonable effort is made to produce the file
+and include the exception information in it.
+If producing this file fails, it is treated as an unexpected error.</p>
+</dd>
+<dt>console outout</dt>
+<dd>If the build is unstable, it also ensures that the word <code class="docutils literal"><span class="pre">FAILED</span></code> appears in
+the console log.  This can be used in non-workflow builds to mark the build
+unstable.</dd>
+<dt>other files (specific to build scripts)</dt>
+<dd>The build script can produce other relevant output in <code class="file docutils literal"><span class="pre">logs/</span></code> folder
+and in the build folder (which is typically <code class="file docutils literal"><span class="pre">gromacs/</span></code> for in-source
+builds and <code class="file docutils literal"><span class="pre">build/</span></code> for out-of-source builds).</dd>
+</dl>
+</div>
+<div class="section" id="build-options">
+<span id="releng-jenkins-build-opts"></span><h2>Build options<a class="headerlink" href="#build-options" title="Permalink to this headline">¶</a></h2>
+<p>Currently, the following build options can be passed from Jenkins to
+run_build() to influence the build environment (and as part of a configuration
+line in a matrix specification).  These are typically used for
+multi-configuration jobs; for jobs that only build a single configuration, the
+configuration is typically hard-coded in the build script.  For boolean options,
+multiple formats are accepted.  E.g., an OpenMP build can be specified as
+<code class="docutils literal"><span class="pre">openmp</span></code> or <code class="docutils literal"><span class="pre">openmp=yes</span></code>, and no-OpenMP as <code class="docutils literal"><span class="pre">no-openmp</span></code> or <code class="docutils literal"><span class="pre">openmp=no</span></code>.
+The defaults that are used if a particular option is not specified are
+determined by the build script.</p>
+<dl class="docutils">
+<dt>build-jobs=N</dt>
+<dd>Use the specified number of parallel jobs for building.</dd>
+<dt>out-of-source</dt>
+<dd>Do the build out-of-source, even if an in-source build would be supported.</dd>
+<dt>cmake-X.Y.Z</dt>
+<dd>Use the specified CMake version to generate the build system.</dd>
+<dt>gcc-X.Y</dt>
+<dd>Use the specified gcc version as the compiler.</dd>
+<dt>armclang-X.Y</dt>
+<dd>Use the specified armclang version as the compiler.</dd>
+<dt>clang-X.Y</dt>
+<dd>Use the specified clang version as the compiler.</dd>
+<dt>clang-static-analyzer-X.Y</dt>
+<dd>Use the specified clang static analyzer as the compiler.</dd>
+<dt>icc-X.Y</dt>
+<dd>Use Intel compiler (version is currently ignored; it is for informational
+purposes only and should match whatever is installed on the build nodes).</dd>
+<dt>msvc-YYYY</dt>
+<dd>Use the specified MSVC version as the compiler.</dd>
+<dt>cuda-X.Y</dt>
+<dd>Use the specified CUDA version.</dd>
+<dt>amdappsdk-X.Y</dt>
+<dd>Use the specified AMD SDK version.</dd>
+<dt>armhpc-X.Y</dt>
+<dd>Use the specified ARM HPC compiler toolchain with the specified version; this
+sets up the environment for either armclang with the same version or the bundled gcc.</dd>
+<dt>phi</dt>
+<dd>Build for Xeon Phi.</dd>
+<dt>tsan</dt>
+<dd>Use thread sanitizer for the build.</dd>
+<dt>atlas</dt>
+<dd>Use ATLAS as an external BLAS/LAPACK library.</dd>
+<dt>x11</dt>
+<dd>Build also <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">view</span></code> (i.e., use <code class="docutils literal"><span class="pre">GMX_X11=ON</span></code>).</dd>
+<dt>simd=SIMD</dt>
+<dd>Use the specified SIMD instruction set.
+If not set, SIMD is not used.</dd>
+<dt>mpi</dt>
+<dd>Do an MPI build.</dd>
+</dl>
+<p>Build scripts can define additional options that only influence the behavior of
+the build scripts.  This is used for matrix builds in <code class="file docutils literal"><span class="pre">gromacs.py</span></code> for
+options that do not influence build the build environment or place requirements
+on the build host.  This allows adding new options when the GROMACS build
+system changes and new combinations need to be tested, without changing releng.</p>
+</div>
+<div class="section" id="build-system-changes">
+<h2>Build system changes<a class="headerlink" href="#build-system-changes" title="Permalink to this headline">¶</a></h2>
+<p>This section collects information on how different types of changes to the
+GROMACS CMake build system, the releng scripts, and/or Jenkins configuration
+are handled to keep the CI builds working.  Critical part in these changes is
+to try to keep builds working for older changes still pending review in Gerrit.
+However, the flipside is that if rebases are not forced, some problems may slip
+past if some older change is not compatible with the new CI builds.</p>
+<p>Different cases for changes are below.  The distinction may not always be
+clear-cut, but the general approach should be well covered.</p>
+<ol class="arabic">
+<li><p class="first"><em>Compatible change in main repo, no change in releng.</em>
+In this case, all changes are absorbed in the build script in the main repo.
+Old changes will build with the old build script, new changes with the new,
+and all builds will pass.
+Old changes do not trigger the new functionality, so if the new build script
+contains new tests or such, they may get silently broken by old changes if
+they are not rebased (in this respect, the case is similar to the third item
+below).</p>
+<p>An example of this type of change is reorganization or renaming of CMake
+cache variables or build targets, while still keeping the same or similar
+functionality.  Some types of tests can also be added with this approach.</p>
+</li>
+<li><p class="first"><em>Compatible change in releng, no change in main repo.</em>
+In this case, all changes are absorbed in the releng script.  As soon as the
+releng change is merged, both old and new changes will build with the
+changed script, and all builds will pass.</p>
+<p>An example of this type of change is software updates or node
+reconfiguration in Jenkins that affects, e.g., paths to certain programs.
+Also many bug fixes to the releng scripts fall here.</p>
+</li>
+<li><p class="first"><em>Breaking change in main repo, backwards-compatible change in releng.</em>
+In this case, changes in the main repo build scripts require changes in
+releng that do not break old builds.  The main repo change will not build
+until releng changes are merged; the releng change can be merged safely
+without breaking old builds.  To verify the releng change with its
+corresponding main repo change, the releng change can be uploaded to Gerrit
+and then the on-demand cross-verification mechanism used (see
+<a class="reference internal" href="jenkins-ui.html"><span class="doc">Interacting with builds in Jenkins</span></a>).
+After the releng change is merged, the main change build can be triggered
+and it will pass.</p>
+<p>Builds for old changes will continue to work throughout this process, but
+they will ignore possible new build parameters or such, potentially breaking
+the new change.</p>
+<p>An example of this type of change would be additional methods or parameters
+required in releng to be able to implement new build tasks.</p>
+</li>
+<li><p class="first"><em>Breaking change in releng, compatible change in main repo.</em>
+In this case, changes or additional build configurations in the releng
+and/or Jenkins cause old builds to break.  As soon as the changes in releng
+are merged, all old changes in Gerrit need to be rebased.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="testing-releng-scripts">
+<h2>Testing releng scripts<a class="headerlink" href="#testing-releng-scripts" title="Permalink to this headline">¶</a></h2>
+<p>Currently, there are limited unit tests for some parts of the Python scripts.
+They require a backport of <code class="docutils literal"><span class="pre">unittest.mock</span></code> to be installed, and can be
+executed with</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">releng</span><span class="o">.</span><span class="n">test</span>
+</pre></div>
+</div>
+<p>The only way to fully test the releng script is to upload a change
+to Gerrit and let Jenkins build it.  In principle, it is possible to run the
+script in an environment that exactly matches a Jenkins node (including paths
+to all required tools and all relevant environment variables that Jenkins
+sets), but that can be tedious to set up.  However, it is possible to execute
+most of the code from the command line using</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">releng</span> <span class="o">&lt;</span><span class="n">options</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This requires that you have your projects checked out in the same layout as in
+Jenkins: the gromacs, regressiontests, and releng repositories should be in
+sibling directories, with directory names matching the repository names.</p>
+<p>Please note that even though the command-line mode does not perform most of the
+actions that the real build script does (unless you run it with <code class="docutils literal"><span class="pre">--run</span></code>), it
+can still write to some files etc.</p>
+<p>Refactoring to better support mock execution is in progress, combined with
+extending the scope of unit tests.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Jenkins scripts (releng Python module)</a><ul>
+<li><a class="reference internal" href="#build-overview">Build overview</a><ul>
+<li><a class="reference internal" href="#python-build-script">Python build script</a></li>
+<li><a class="reference internal" href="#workflow-builds">Workflow builds</a></li>
+<li><a class="reference internal" href="#matrix-builds">Matrix builds</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#input-environment-variables">Input environment variables</a></li>
+<li><a class="reference internal" href="#output">Output</a></li>
+<li><a class="reference internal" href="#build-options">Build options</a></li>
+<li><a class="reference internal" href="#build-system-changes">Build system changes</a></li>
+<li><a class="reference internal" href="#testing-releng-scripts">Testing releng scripts</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">releng repository</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="workflow.html"
+                        title="next chapter">Workflow build overview</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/dev-manual/releng/releng.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="workflow.html" title="Workflow build overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="releng repository"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Developer guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../tools.html" >Development-time tools</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" >releng repository</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,304 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx chi &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx cluster" href="gmx-cluster.html" />
+    <link rel="prev" title="gmx check" href="gmx-check.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-cluster.html" title="gmx cluster"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-check.html" title="gmx check"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-chi">
+<span id="id1"></span><h1>gmx chi<a class="headerlink" href="#gmx-chi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx chi [<strong>-s</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-ss</strong> <em>[&lt;.dat&gt;]</em>]
+        [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-p</strong> <em>[&lt;.pdb&gt;]</em>] [<strong>-jc</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-corr</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-g</strong> <em>[&lt;.log&gt;]</em>] [<strong>-ot</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-oh</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-rt</strong> <em>[&lt;.xvg&gt;]</em>]
+        [<strong>-cp</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>]
+        [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-r0</strong> <em>&lt;int&gt;</em>] [<strong>-[no]phi</strong>] [<strong>-[no]psi</strong>] [<strong>-[no]omega</strong>]
+        [<strong>-[no]rama</strong>] [<strong>-[no]viol</strong>] [<strong>-[no]periodic</strong>] [<strong>-[no]all</strong>] [<strong>-[no]rad</strong>]
+        [<strong>-[no]shift</strong>] [<strong>-binwidth</strong> <em>&lt;int&gt;</em>] [<strong>-core_rotamer</strong> <em>&lt;real&gt;</em>]
+        [<strong>-maxchi</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]normhisto</strong>] [<strong>-[no]ramomega</strong>]
+        [<strong>-bfact</strong> <em>&lt;real&gt;</em>] [<strong>-[no]chi_prod</strong>] [<strong>-[no]HChi</strong>] [<strong>-bmax</strong> <em>&lt;real&gt;</em>]
+        [<strong>-acflen</strong> <em>&lt;int&gt;</em>] [<strong>-[no]normalize</strong>] [<strong>-P</strong> <em>&lt;enum&gt;</em>] [<strong>-fitfn</strong> <em>&lt;enum&gt;</em>]
+        [<strong>-beginfit</strong> <em>&lt;real&gt;</em>] [<strong>-endfit</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">chi</span></code> computes phi, psi, omega,
+and chi dihedrals for all your
+amino acid backbone and sidechains.
+It can compute dihedral angle as a function of time, and as
+histogram distributions.
+The distributions <code class="docutils literal"><span class="pre">(histo-(dihedral)(RESIDUE).xvg</span></code>) are cumulative over all residues of each type.</p>
+<p>If option <code class="docutils literal"><span class="pre">-corr</span></code> is given, the program will
+calculate dihedral autocorrelation functions. The function used
+is C(t) = &lt;cos(chi(tau)) cos(chi(tau+t))&gt;. The use of cosines
+rather than angles themselves, resolves the problem of periodicity.
+(Van der Spoel &amp; Berendsen (1997), Biophys. J. 72, 2032-2041).
+Separate files for each dihedral of each residue
+<code class="docutils literal"><span class="pre">(corr(dihedral)(RESIDUE)(nresnr).xvg</span></code>) are output, as well as a
+file containing the information for all residues (argument of <code class="docutils literal"><span class="pre">-corr</span></code>).</p>
+<p>With option <code class="docutils literal"><span class="pre">-all</span></code>, the angles themselves as a function of time for
+each residue are printed to separate files <code class="docutils literal"><span class="pre">(dihedral)(RESIDUE)(nresnr).xvg</span></code>.
+These can be in radians or degrees.</p>
+<p>A log file (argument <code class="docutils literal"><span class="pre">-g</span></code>) is also written. This contains</p>
+<blockquote>
+<div><ul class="simple">
+<li>information about the number of residues of each type.</li>
+<li>The NMR ^3J coupling constants from the Karplus equation.</li>
+<li>a table for each residue of the number of transitions between
+rotamers per nanosecond,  and the order parameter S^2 of each dihedral.</li>
+<li>a table for each residue of the rotamer occupancy.</li>
+</ul>
+</div></blockquote>
+<p>All rotamers are taken as 3-fold, except for omega and chi dihedrals
+to planar groups (i.e. chi_2 of aromatics, Asp and Asn; chi_3 of Glu
+and Gln; and chi_4 of Arg), which are 2-fold. “rotamer 0” means
+that the dihedral was not in the core region of each rotamer.
+The width of the core region can be set with <code class="docutils literal"><span class="pre">-core_rotamer</span></code></p>
+<p>The S^2 order parameters are also output to an <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> file
+(argument <code class="docutils literal"><span class="pre">-o</span></code> ) and optionally as a <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file with
+the S^2 values as B-factor (argument <code class="docutils literal"><span class="pre">-p</span></code>).
+The total number of rotamer transitions per timestep
+(argument <code class="docutils literal"><span class="pre">-ot</span></code>), the number of transitions per rotamer
+(argument <code class="docutils literal"><span class="pre">-rt</span></code>), and the ^3J couplings (argument <code class="docutils literal"><span class="pre">-jc</span></code>),
+can also be written to <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a> files. Note that the analysis
+of rotamer transitions assumes that the supplied trajectory frames
+are equally spaced in time.</p>
+<p>If <code class="docutils literal"><span class="pre">-chi_prod</span></code> is set (and <code class="docutils literal"><span class="pre">-maxchi</span></code> &gt; 0), cumulative rotamers, e.g.
+1+9(chi_1-1)+3(chi_2-1)+(chi_3-1) (if the residue has three 3-fold
+dihedrals and <code class="docutils literal"><span class="pre">-maxchi</span></code> &gt;= 3)
+are calculated. As before, if any dihedral is not in the core region,
+the rotamer is taken to be 0. The occupancies of these cumulative
+rotamers (starting with rotamer 0) are written to the file
+that is the argument of <code class="docutils literal"><span class="pre">-cp</span></code>, and if the <code class="docutils literal"><span class="pre">-all</span></code> flag
+is given, the rotamers as functions of time
+are written to <code class="docutils literal"><span class="pre">chiproduct(RESIDUE)(nresnr).xvg</span></code>
+and their occupancies to <code class="docutils literal"><span class="pre">histo-chiproduct(RESIDUE)(nresnr).xvg</span></code>.</p>
+<p>The option <code class="docutils literal"><span class="pre">-r</span></code> generates a contour plot of the average omega angle
+as a function of the phi and psi angles, that is, in a Ramachandran plot
+the average omega angle is plotted using color coding.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.gro/.g96/…&gt;] (conf.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">tpr</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-ss</span></code> [&lt;.dat&gt;] (ssdump.dat) (Optional)</dt>
+<dd>Generic data file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (order.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-p</span></code> [&lt;.pdb&gt;] (order.pdb) (Optional)</dt>
+<dd>Protein data bank file</dd>
+<dt><code class="docutils literal"><span class="pre">-jc</span></code> [&lt;.xvg&gt;] (Jcoupling.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-corr</span></code> [&lt;.xvg&gt;] (dihcorr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.log&gt;] (chi.log)</dt>
+<dd>Log file</dd>
+<dt><code class="docutils literal"><span class="pre">-ot</span></code> [&lt;.xvg&gt;] (dihtrans.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oh</span></code> [&lt;.xvg&gt;] (trhisto.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-rt</span></code> [&lt;.xvg&gt;] (restrans.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-cp</span></code> [&lt;.xvg&gt;] (chiprodhisto.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-r0</span></code> &lt;int&gt; (1)</dt>
+<dd>starting residue</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]phi</span></code>  (no)</dt>
+<dd>Output for phi dihedral angles</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]psi</span></code>  (no)</dt>
+<dd>Output for psi dihedral angles</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]omega</span></code>  (no)</dt>
+<dd>Output for omega dihedrals (peptide bonds)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rama</span></code>  (no)</dt>
+<dd>Generate phi/psi and chi_1/chi_2 Ramachandran plots</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]viol</span></code>  (no)</dt>
+<dd>Write a file that gives 0 or 1 for violated Ramachandran angles</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]periodic</span></code>  (yes)</dt>
+<dd>Print dihedral angles modulo 360 degrees</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]all</span></code>  (no)</dt>
+<dd>Output separate files for every dihedral.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]rad</span></code>  (no)</dt>
+<dd>in angle vs time files, use radians rather than degrees.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]shift</span></code>  (no)</dt>
+<dd>Compute chemical shifts from phi/psi angles</dd>
+<dt><code class="docutils literal"><span class="pre">-binwidth</span></code> &lt;int&gt; (1)</dt>
+<dd>bin width for histograms (degrees)</dd>
+<dt><code class="docutils literal"><span class="pre">-core_rotamer</span></code> &lt;real&gt; (0.5)</dt>
+<dd>only the central <code class="docutils literal"><span class="pre">-core_rotamer</span></code>*(360/multiplicity) belongs to each rotamer (the rest is assigned to rotamer 0)</dd>
+<dt><code class="docutils literal"><span class="pre">-maxchi</span></code> &lt;enum&gt; (0)</dt>
+<dd>calculate first ndih chi dihedrals: 0, 1, 2, 3, 4, 5, 6</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]normhisto</span></code>  (yes)</dt>
+<dd>Normalize histograms</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]ramomega</span></code>  (no)</dt>
+<dd>compute average omega as a function of phi/psi and plot it in an <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a> plot</dd>
+<dt><code class="docutils literal"><span class="pre">-bfact</span></code> &lt;real&gt; (-1)</dt>
+<dd>B-factor value for <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> file for atoms with no calculated dihedral order parameter</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]chi_prod</span></code>  (no)</dt>
+<dd>compute a single cumulative rotamer for each residue</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]HChi</span></code>  (no)</dt>
+<dd>Include dihedrals to sidechain hydrogens</dd>
+<dt><code class="docutils literal"><span class="pre">-bmax</span></code> &lt;real&gt; (0)</dt>
+<dd>Maximum B-factor on any of the atoms that make up a dihedral, for the dihedral angle to be considere in the statistics. Applies to database work where a number of X-Ray structures is analyzed. <code class="docutils literal"><span class="pre">-bmax</span></code> &lt;= 0 means no limit.</dd>
+<dt><code class="docutils literal"><span class="pre">-acflen</span></code> &lt;int&gt; (-1)</dt>
+<dd>Length of the ACF, default is half the number of frames</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]normalize</span></code>  (yes)</dt>
+<dd>Normalize ACF</dd>
+<dt><code class="docutils literal"><span class="pre">-P</span></code> &lt;enum&gt; (0)</dt>
+<dd>Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3</dd>
+<dt><code class="docutils literal"><span class="pre">-fitfn</span></code> &lt;enum&gt; (none)</dt>
+<dd>Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9</dd>
+<dt><code class="docutils literal"><span class="pre">-beginfit</span></code> &lt;real&gt; (0)</dt>
+<dd>Time where to begin the exponential fit of the correlation function</dd>
+<dt><code class="docutils literal"><span class="pre">-endfit</span></code> &lt;real&gt; (-1)</dt>
+<dd>Time where to end the exponential fit of the correlation function, -1 is until the end</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Produces MANY output files (up to about 4 times the number of residues in the protein, twice that if autocorrelation functions are calculated). Typically several hundred files are output.</li>
+<li>phi and psi dihedrals are calculated in a non-standard way, using H-N-CA-C for phi instead of C(-)-N-CA-C, and N-CA-C-O for psi instead of N-CA-C-N(+). This causes (usually small) discrepancies with the output of other tools like <a class="reference internal" href="gmx-rama.html"><span class="doc">gmx rama</span></a>.</li>
+<li><code class="docutils literal"><span class="pre">-r0</span></code> option does not work properly</li>
+<li>Rotamers with multiplicity 2 are printed in <code class="docutils literal"><span class="pre">chi.log</span></code> as if they had multiplicity 3, with the 3rd (g(+)) always having probability 0</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx chi</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-check.html"
+                        title="previous chapter">gmx check</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-cluster.html"
+                        title="next chapter">gmx cluster</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-chi.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-cluster.html" title="gmx cluster"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-check.html" title="gmx check"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

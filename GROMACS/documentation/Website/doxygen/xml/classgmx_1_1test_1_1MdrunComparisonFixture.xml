@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1test_1_1MdrunComparisonFixture" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::test::MdrunComparisonFixture</compoundname>
+    <basecompoundref refid="classgmx_1_1test_1_1MdrunTestFixture" prot="public" virt="non-virtual">gmx::test::MdrunTestFixture</basecompoundref>
+    <includes local="no">programs/mdrun/tests/mdruncomparisonfixture.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgmx_1_1test_1_1MdrunComparisonFixture_1a81add39dbbc37c9f89e9958d3bd3b44c" prot="public" static="no">
+        <type>std::map&lt; std::string, std::string &gt;</type>
+        <definition>typedef std::map&lt;std::string, std::string&gt; gmx::test::MdrunComparisonFixture::MdpFieldValues</definition>
+        <argsstring></argsstring>
+        <name>MdpFieldValues</name>
+        <briefdescription>
+<para>Helper typedef. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" line="82" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1test_1_1MdrunComparisonFixture_1a3f4347a1ed8c897d1e3f9e61da8bd4d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::test::MdrunComparisonFixture::~MdrunComparisonFixture</definition>
+        <argsstring>()</argsstring>
+        <name>~MdrunComparisonFixture</name>
+        <briefdescription>
+<para>Destructor. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" line="80" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.cpp" bodystart="60" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1MdrunComparisonFixture_1a2fa0e74e54c522b07d0ca3c1d281d741" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a81add39dbbc37c9f89e9958d3bd3b44c" kindref="member">MdpFieldValues</ref></type>
+        <definition>MdrunComparisonFixture::MdpFieldValues gmx::test::MdrunComparisonFixture::prepareMdpFieldValues</definition>
+        <argsstring>(const char *simulationName)</argsstring>
+        <name>prepareMdpFieldValues</name>
+        <param>
+          <type>const char *</type>
+          <declname>simulationName</declname>
+        </param>
+        <briefdescription>
+<para>Prepare .mdp values to do a simulation. </para>        </briefdescription>
+        <detaileddescription>
+<para>A database of several kinds of simulation useful for different kinds of tests is available.<itemizedlist>
+<listitem><para>argon12</para></listitem><listitem><para>argon5832</para></listitem><listitem><para>spc5</para></listitem><listitem><para>spc216</para></listitem><listitem><para>alanine_vsite_vacuo</para></listitem><listitem><para>alanine_vsite_solvated</para></listitem><listitem><para>nonanol</para></listitem></itemizedlist>
+</para><para>Some of these systems are pretty minimal, because having few atoms means few interactions, highly reproducible forces, and allows tests to focus on the correctness of the implementation of high-level mdrun features. The boxes are of a reasonable size so that domain decomposition is possible. The pressure-coupling parameters are isotropic, and set up so that there will not be dramatic collapse of volume over the handful of MD steps that will be run. A single temperature-coupling group is used.</para><para>This is separate from prepareMdpFile, so that derived classes can react to the .mdp settings, e.g. by stopping a run after half the steps.</para><para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory std::out_of_range if <computeroutput>simulationName</computeroutput> is not in the database </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" line="111" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.cpp" bodystart="155" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1MdrunComparisonFixture_1a6d42f8eedbbcbea81ef2846dc583edfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::test::MdrunComparisonFixture::prepareMdpFile</definition>
+        <argsstring>(const MdpFieldValues &amp;mdpFieldValues, const char *integrator, const char *tcoupl, const char *pcoupl)</argsstring>
+        <name>prepareMdpFile</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a81add39dbbc37c9f89e9958d3bd3b44c" kindref="member">MdpFieldValues</ref> &amp;</type>
+          <declname>mdpFieldValues</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>integrator</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tcoupl</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>pcoupl</declname>
+        </param>
+        <briefdescription>
+<para>Set up an .mdp file that permits a highly reproducible simulation. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" line="116" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.cpp" bodystart="179" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1MdrunComparisonFixture_1a8fbd13d737f22b70f506c0704c4a43b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::test::MdrunComparisonFixture::runTest</definition>
+        <argsstring>(const CommandLine &amp;gromppCallerRef, const char *simulationName, const char *integrator, const char *tcoupl, const char *pcoupl, FloatingPointTolerance tolerance)=0</argsstring>
+        <name>runTest</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1test_1_1CommandLine" kindref="compound">CommandLine</ref> &amp;</type>
+          <declname>gromppCallerRef</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>simulationName</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>integrator</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tcoupl</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>pcoupl</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1test_1_1FloatingPointTolerance" kindref="compound">FloatingPointTolerance</ref></type>
+          <declname>tolerance</declname>
+        </param>
+        <briefdescription>
+<para>Run mdrun two ways in a test. Subclasses must override this method. </para>        </briefdescription>
+        <detaileddescription>
+<para>It is expected that this method calls <ref refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a2fa0e74e54c522b07d0ca3c1d281d741" kindref="member">prepareMdpFieldValues()</ref> and <ref refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a6d42f8eedbbcbea81ef2846dc583edfc" kindref="member">prepareMdpFile()</ref> to help set up a call to grompp with gromppCallerRef. Then mdrun will be called and perhaps energies and forces compared. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" line="126" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1test_1_1MdrunComparisonFixture_1a1b9caf8ce85ef7c602f482012f178e4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void gmx::test::MdrunComparisonFixture::runTest</definition>
+        <argsstring>(const char *simulationName, const char *integrator, const char *tcoupl, const char *pcoupl, FloatingPointTolerance tolerance)</argsstring>
+        <name>runTest</name>
+        <param>
+          <type>const char *</type>
+          <declname>simulationName</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>integrator</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>tcoupl</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>pcoupl</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1test_1_1FloatingPointTolerance" kindref="compound">FloatingPointTolerance</ref></type>
+          <declname>tolerance</declname>
+        </param>
+        <briefdescription>
+<para>Convenience overload of <ref refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a8fbd13d737f22b70f506c0704c4a43b4" kindref="member">runTest()</ref> for cases that don&apos;t need to customize the command line for grompp. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" line="133" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.cpp" bodystart="240" bodyend="249"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares abstract base text fixture class for integration tests of mdrun functionality that will compare multiple calls to mdrun. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  An internal database of several kinds of simulation useful for such comparisons is available.</para><para>Any method in this class may throw std::bad_alloc if out of memory. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="3108">
+        <label>gmx::test::MdrunComparisonFixture</label>
+        <link refid="classgmx_1_1test_1_1MdrunComparisonFixture"/>
+        <childnode refid="3109" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3109">
+        <label>gmx::test::MdrunTestFixture</label>
+        <link refid="classgmx_1_1test_1_1MdrunTestFixture"/>
+        <childnode refid="3110" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3110">
+        <label>Test</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3114">
+        <label>gmx::test::SimulationRunner</label>
+        <link refid="classgmx_1_1test_1_1SimulationRunner"/>
+      </node>
+      <node id="3111">
+        <label>gmx::test::MdrunComparisonFixture</label>
+        <link refid="classgmx_1_1test_1_1MdrunComparisonFixture"/>
+        <childnode refid="3112" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3112">
+        <label>gmx::test::MdrunTestFixture</label>
+        <link refid="classgmx_1_1test_1_1MdrunTestFixture"/>
+        <childnode refid="3113" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3114" relation="usage">
+          <edgelabel>runner_</edgelabel>
+        </childnode>
+        <childnode refid="3115" relation="usage">
+          <edgelabel>fileManager_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3113">
+        <label>Test</label>
+      </node>
+      <node id="3115">
+        <label>gmx::test::TestFileManager</label>
+        <link refid="classgmx_1_1test_1_1TestFileManager"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" line="77" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/programs/mdrun/tests/mdruncomparisonfixture.h" bodystart="76" bodyend="138"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1test_1_1MdrunTestFixture_1a2141d1eeae99b891fdd4aabc9de3dccb" prot="public" virt="non-virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>fileManager_</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a81add39dbbc37c9f89e9958d3bd3b44c" prot="public" virt="non-virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>MdpFieldValues</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunTestFixture_1a73f90a8025926020d566a4edca3ceb18" prot="public" virt="non-virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>MdrunTestFixture</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a2fa0e74e54c522b07d0ca3c1d281d741" prot="public" virt="non-virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>prepareMdpFieldValues</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a6d42f8eedbbcbea81ef2846dc583edfc" prot="public" virt="non-virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>prepareMdpFile</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunTestFixture_1ad991b5840e9fac12fe92db2b7344242d" prot="public" virt="non-virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>runner_</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a8fbd13d737f22b70f506c0704c4a43b4" prot="public" virt="pure-virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>runTest</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a1b9caf8ce85ef7c602f482012f178e4c" prot="public" virt="virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>runTest</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunComparisonFixture_1a3f4347a1ed8c897d1e3f9e61da8bd4d2" prot="public" virt="virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>~MdrunComparisonFixture</name></member>
+      <member refid="classgmx_1_1test_1_1MdrunTestFixture_1a232d84df7a24160a00684a9bc88ca48e" prot="public" virt="virtual"><scope>gmx::test::MdrunComparisonFixture</scope><name>~MdrunTestFixture</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

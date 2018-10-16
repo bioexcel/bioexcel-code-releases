@@ -1,0 +1,286 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GROMACS 2016.5 Release Notes &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GROMACS 2016.4 Release Notes" href="2016.4.html" />
+    <link rel="prev" title="Miscellaneous" href="../2018/major/miscellaneous.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="2016.4.html" title="GROMACS 2016.4 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../2018/major/miscellaneous.html" title="Miscellaneous"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gromacs-2016-5-release-notes">
+<h1>GROMACS 2016.5 Release Notes<a class="headerlink" href="#gromacs-2016-5-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>This version was released on February 16, 2018. These release notes
+document the changes that have taken place in GROMACS since version
+2016.4 to fix known issues. It also incorporates all fixes made in
+version 5.1.5 (which was the last planned release in that series).</p>
+<div class="section" id="fixes-where-mdrun-could-behave-incorrectly">
+<h2>Fixes where mdrun could behave incorrectly<a class="headerlink" href="#fixes-where-mdrun-could-behave-incorrectly" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fixed-triclinic-domain-decomposition-bug">
+<h3>Fixed triclinic domain decomposition bug<a class="headerlink" href="#fixed-triclinic-domain-decomposition-bug" title="Permalink to this headline">¶</a></h3>
+<p>With triclinic unit-cells with vectors a,b,c, the domain decomposition
+would communicate an incorrect halo along dimension x when b[x]!=0
+and vector c not parallel to the z-axis. The halo cut-off bound plane
+was tilted incorrect along x/z with an error approximately
+proportional to b[x]*(c[x] - b[x]*c[y]/b[y]).
+When c[x] &gt; b[x]*c[y]/b[y], the communicated halo was too small, which
+could cause instabilities or silent errors.
+When c[x] &lt; b[x]*c[y]/b[y], the communicated halo was too large, which
+could cause some communication overhead.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2125">Issue 2125</a></p>
+</div>
+<div class="section" id="required-ntmpi-with-setting-ntomp-with-gpus">
+<h3>Required -ntmpi with setting -ntomp with GPUs<a class="headerlink" href="#required-ntmpi-with-setting-ntomp-with-gpus" title="Permalink to this headline">¶</a></h3>
+<p>With GPUs and thread-MPI, setting only <code class="docutils literal"><span class="pre">-ntomp</span></code> could lead to
+oversubscription of the hardware threads.
+Now with GPUs and thread-MPI the user is required to set <code class="docutils literal"><span class="pre">-ntmpi</span></code> when
+using <code class="docutils literal"><span class="pre">-ntomp</span></code>. Here we chose that to also require <code class="docutils literal"><span class="pre">-ntmpi</span></code> when the user
+specified both <code class="docutils literal"><span class="pre">-nt</span></code> and <code class="docutils literal"><span class="pre">-ntomp</span></code>; here we could infer the number of
+ranks, but it’s safer to ask the user to explicity set <code class="docutils literal"><span class="pre">-ntmpi</span></code>.
+Note that specifying both <code class="docutils literal"><span class="pre">-ntmpi</span></code> and <code class="docutils literal"><span class="pre">-nt</span></code> has always worked correctly.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2348">Issue 2348</a></p>
+</div>
+<div class="section" id="prevented-dynamic-load-balancing-activating-immediately-after-exchange">
+<h3>Prevented dynamic load balancing activating immediately after exchange<a class="headerlink" href="#prevented-dynamic-load-balancing-activating-immediately-after-exchange" title="Permalink to this headline">¶</a></h3>
+<p>Turning on DLB right after exchanging replicas caused an assertion
+failure and is also useless.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2298">Issue 2298</a></p>
+</div>
+<div class="section" id="avoided-confusing-message-at-end-of-non-dynamical-runs">
+<h3>Avoided confusing message at end of non-dynamical runs<a class="headerlink" href="#avoided-confusing-message-at-end-of-non-dynamical-runs" title="Permalink to this headline">¶</a></h3>
+<p>EM, TPI, NM, etc. are not targets for performance optimization
+so we will not write performance reports. This commit fixes
+and oversight whereby we would warn a user when the lack of
+performance report is normal and expected.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2172">Issue 2172</a></p>
+</div>
+<div class="section" id="changed-to-issue-fewer-messages-when-cpi-checkpoint-file-is-not-present">
+<h3>Changed to issue fewer messages when <code class="docutils literal"><span class="pre">-cpi</span></code> checkpoint file is not present<a class="headerlink" href="#changed-to-issue-fewer-messages-when-cpi-checkpoint-file-is-not-present" title="Permalink to this headline">¶</a></h3>
+<p>Removed duplicated message.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2173">Issue 2173</a></p>
+</div>
+<div class="section" id="disallowed-combination-of-pme-user-and-verlet-cutoff">
+<h3>Disallowed combination of PME-user and Verlet cutoff<a class="headerlink" href="#disallowed-combination-of-pme-user-and-verlet-cutoff" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2332">Issue 2332</a></p>
+</div>
+<div class="section" id="added-missing-ewald-correction-for-pme-user">
+<h3>Added missing Ewald correction for pme-user<a class="headerlink" href="#added-missing-ewald-correction-for-pme-user" title="Permalink to this headline">¶</a></h3>
+<p>With <code class="docutils literal"><span class="pre">coulomb-type</span> <span class="pre">=</span> <span class="pre">pme-user</span></code>, the Ewald mesh energy was not subtracted
+leading to (very) incorrect Coulomb energies and forces.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2286">Issue 2286</a></p>
+</div>
+<div class="section" id="fixed-thread-mpi-rank-choice-for-orientation-restraints">
+<h3>Fixed thread-MPI rank choice for orientation restraints<a class="headerlink" href="#fixed-thread-mpi-rank-choice-for-orientation-restraints" title="Permalink to this headline">¶</a></h3>
+<p>Only a single rank is supported, so that must be what the thread-MPI
+code will choose. There’s another check later on that catches the
+multi-rank MPI case.</p>
+</div>
+<div class="section" id="fixed-nstlist-increase-warning-print">
+<h3>Fixed nstlist increase warning print<a class="headerlink" href="#fixed-nstlist-increase-warning-print" title="Permalink to this headline">¶</a></h3>
+<p>The log file warning message had a buggy conditional which this commit
+fixes.</p>
+</div>
+<div class="section" id="removed-incorrect-comment-for-charmm-tips3p">
+<h3>Removed incorrect comment for CHARMM tips3p<a class="headerlink" href="#removed-incorrect-comment-for-charmm-tips3p" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="fixed-incorrect-dv-dlambda-for-walls">
+<h3>Fixed incorrect dV/dlambda for walls<a class="headerlink" href="#fixed-incorrect-dv-dlambda-for-walls" title="Permalink to this headline">¶</a></h3>
+<p>The free-energy derivative dV/dlambda for walls, which can
+be perturbed by changing atom types of non-wall atoms, only
+contained the B-state contribution.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2267">Issue 2267</a></p>
+</div>
+<div class="section" id="fixed-warning-for-confout-with-periodic-molecules">
+<h3>Fixed warning for confout with periodic molecules<a class="headerlink" href="#fixed-warning-for-confout-with-periodic-molecules" title="Permalink to this headline">¶</a></h3>
+<p>With periodic molecules, <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span></code> would incorrectly attempt to make
+molecules whole for writing the final state to confout.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2275">Issue 2275</a></p>
+</div>
+<div class="section" id="fixed-wrong-megaflop-accounting">
+<h3>Fixed wrong megaflop accounting<a class="headerlink" href="#fixed-wrong-megaflop-accounting" title="Permalink to this headline">¶</a></h3>
+<p>Some nrnb index entries were missing in the interaction_function
+array, leading to that wrong megaflops accounting printed.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2274">Issue 2274</a></p>
+</div>
+</div>
+<div class="section" id="fixes-for-gmx-tools">
+<h2>Fixes for <code class="docutils literal"><span class="pre">gmx</span></code> tools<a class="headerlink" href="#fixes-for-gmx-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fixed-gmx-grompp-net-charge-check">
+<h3>Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> net charge check<a class="headerlink" href="#fixed-gmx-grompp-net-charge-check" title="Permalink to this headline">¶</a></h3>
+<p>The grompp check for the net charge would ignore molecule blocks
+at the end when molecule types are used in multiple, non consecutive
+molecule blocks.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2407">Issue 2407</a></p>
+</div>
+<div class="section" id="extended-gmx-grompp-missing-energy-term-message">
+<h3>Extended <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> missing energy term message<a class="headerlink" href="#extended-gmx-grompp-missing-energy-term-message" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2301">Issue 2301</a></p>
+</div>
+<div class="section" id="fixed-gmx-genion-charge-summation-accuracy">
+<h3>Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genion</span></code> charge summation accuracy<a class="headerlink" href="#fixed-gmx-genion-charge-summation-accuracy" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genion</span></code> accumulated the charge is a float, which could cause
+underestimation of the net charge for highly charged systems.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2290">Issue 2290</a></p>
+</div>
+<div class="section" id="fixed-gmx-check-for-tprs-with-different-atoms">
+<h3>Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">check</span></code> for tprs with different #atoms<a class="headerlink" href="#fixed-gmx-check-for-tprs-with-different-atoms" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2279">Issue 2279</a></p>
+</div>
+<div class="section" id="fixed-gmx-grompp-with-andersen-massive-and-no-com-removal">
+<h3>Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> with Andersen massive and no COM removal<a class="headerlink" href="#fixed-gmx-grompp-with-andersen-massive-and-no-com-removal" title="Permalink to this headline">¶</a></h3>
+<p>Fixed a floating point exception leading to a crash.
+Also fixed possible different rounding for the interval for
+Andersen massive in <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> from <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">mdrun</span></code> for
+the common case where <code class="docutils literal"><span class="pre">tau_t</span></code> is a multiple of <code class="docutils literal"><span class="pre">delta_t</span></code>.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2256">Issue 2256</a></p>
+</div>
+</div>
+<div class="section" id="improved-documentation">
+<h2>Improved documentation<a class="headerlink" href="#improved-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="updated-documention-of-nose-hoover-output">
+<h3>Updated documention of Nose-Hoover output<a class="headerlink" href="#updated-documention-of-nose-hoover-output" title="Permalink to this headline">¶</a></h3>
+<p>The documentation of Nose-Hoover chain variable printing was
+(long) outdated.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2301">Issue 2301</a></p>
+</div>
+<div class="section" id="clarified-docs-for-fmax-in-em">
+<h3>Clarified docs for Fmax in EM<a class="headerlink" href="#clarified-docs-for-fmax-in-em" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GROMACS 2016.5 Release Notes</a><ul>
+<li><a class="reference internal" href="#fixes-where-mdrun-could-behave-incorrectly">Fixes where mdrun could behave incorrectly</a><ul>
+<li><a class="reference internal" href="#fixed-triclinic-domain-decomposition-bug">Fixed triclinic domain decomposition bug</a></li>
+<li><a class="reference internal" href="#required-ntmpi-with-setting-ntomp-with-gpus">Required -ntmpi with setting -ntomp with GPUs</a></li>
+<li><a class="reference internal" href="#prevented-dynamic-load-balancing-activating-immediately-after-exchange">Prevented dynamic load balancing activating immediately after exchange</a></li>
+<li><a class="reference internal" href="#avoided-confusing-message-at-end-of-non-dynamical-runs">Avoided confusing message at end of non-dynamical runs</a></li>
+<li><a class="reference internal" href="#changed-to-issue-fewer-messages-when-cpi-checkpoint-file-is-not-present">Changed to issue fewer messages when <code class="docutils literal"><span class="pre">-cpi</span></code> checkpoint file is not present</a></li>
+<li><a class="reference internal" href="#disallowed-combination-of-pme-user-and-verlet-cutoff">Disallowed combination of PME-user and Verlet cutoff</a></li>
+<li><a class="reference internal" href="#added-missing-ewald-correction-for-pme-user">Added missing Ewald correction for pme-user</a></li>
+<li><a class="reference internal" href="#fixed-thread-mpi-rank-choice-for-orientation-restraints">Fixed thread-MPI rank choice for orientation restraints</a></li>
+<li><a class="reference internal" href="#fixed-nstlist-increase-warning-print">Fixed nstlist increase warning print</a></li>
+<li><a class="reference internal" href="#removed-incorrect-comment-for-charmm-tips3p">Removed incorrect comment for CHARMM tips3p</a></li>
+<li><a class="reference internal" href="#fixed-incorrect-dv-dlambda-for-walls">Fixed incorrect dV/dlambda for walls</a></li>
+<li><a class="reference internal" href="#fixed-warning-for-confout-with-periodic-molecules">Fixed warning for confout with periodic molecules</a></li>
+<li><a class="reference internal" href="#fixed-wrong-megaflop-accounting">Fixed wrong megaflop accounting</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fixes-for-gmx-tools">Fixes for <code class="docutils literal"><span class="pre">gmx</span></code> tools</a><ul>
+<li><a class="reference internal" href="#fixed-gmx-grompp-net-charge-check">Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> net charge check</a></li>
+<li><a class="reference internal" href="#extended-gmx-grompp-missing-energy-term-message">Extended <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> missing energy term message</a></li>
+<li><a class="reference internal" href="#fixed-gmx-genion-charge-summation-accuracy">Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genion</span></code> charge summation accuracy</a></li>
+<li><a class="reference internal" href="#fixed-gmx-check-for-tprs-with-different-atoms">Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">check</span></code> for tprs with different #atoms</a></li>
+<li><a class="reference internal" href="#fixed-gmx-grompp-with-andersen-massive-and-no-com-removal">Fixed <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">grompp</span></code> with Andersen massive and no COM removal</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#improved-documentation">Improved documentation</a><ul>
+<li><a class="reference internal" href="#updated-documention-of-nose-hoover-output">Updated documention of Nose-Hoover output</a></li>
+<li><a class="reference internal" href="#clarified-docs-for-fmax-in-em">Clarified docs for Fmax in EM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../2018/major/miscellaneous.html"
+                        title="previous chapter">Miscellaneous</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="2016.4.html"
+                        title="next chapter">GROMACS 2016.4 Release Notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/release-notes/2016/2016.5.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="2016.4.html" title="GROMACS 2016.4 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../2018/major/miscellaneous.html" title="Miscellaneous"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

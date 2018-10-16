@@ -1,0 +1,149 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Removed features &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Portability" href="portability.html" />
+    <link rel="prev" title="Bugs fixed" href="bugs-fixed.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="portability.html" title="Portability"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bugs-fixed.html" title="Bugs fixed"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="removed-features">
+<h1>Removed features<a class="headerlink" href="#removed-features" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="removed-hybrid-gpu-cpu-nonbonded-mode">
+<h2>Removed hybrid GPU+CPU nonbonded mode<a class="headerlink" href="#removed-hybrid-gpu-cpu-nonbonded-mode" title="Permalink to this headline">¶</a></h2>
+<p>This mode was not very useful, since it ran the non-local non-bonded
+interactions on the CPU. The fraction of non-local interaction is set
+by the domain decomposition, so this is not flexible.
+Also this mode was not being tested.</p>
+</div>
+<div class="section" id="qm-mm-removed-optimization-and-transition-state-search">
+<h2>QM/MM: removed optimization and transition-state search<a class="headerlink" href="#qm-mm-removed-optimization-and-transition-state-search" title="Permalink to this headline">¶</a></h2>
+<p>These functionalities used to only work with old versions of Orca,
+had very limited use and will possibly not work any longer now.</p>
+</div>
+<div class="section" id="updated-application-clock-handling-on-pascal-gpus">
+<h2>Updated application clock handling on Pascal+ GPUs<a class="headerlink" href="#updated-application-clock-handling-on-pascal-gpus" title="Permalink to this headline">¶</a></h2>
+<p>Starting with Pascal (CC &gt;= 6.0) it is no longer possible to change
+application clocks without root privileges. Application
+clocks are still reported for Pascal+, but there is no longer
+suggestions about changing them.</p>
+</div>
+<div class="section" id="removed-continuation-from-gmx-convert-tpr">
+<h2>Removed continuation from <a class="reference internal" href="../../../onlinehelp/gmx-convert-tpr.html#gmx-convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a><a class="headerlink" href="#removed-continuation-from-gmx-convert-tpr" title="Permalink to this headline">¶</a></h2>
+<p>Removed the obsolete option of <a class="reference internal" href="../../../onlinehelp/gmx-convert-tpr.html#gmx-convert-tpr"><span class="std std-ref">gmx convert-tpr</span></a> to write a tpr
+file for continuation using a trajectory and energy file. This is
+superseded by checkpointing.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Removed features</a><ul>
+<li><a class="reference internal" href="#removed-hybrid-gpu-cpu-nonbonded-mode">Removed hybrid GPU+CPU nonbonded mode</a></li>
+<li><a class="reference internal" href="#qm-mm-removed-optimization-and-transition-state-search">QM/MM: removed optimization and transition-state search</a></li>
+<li><a class="reference internal" href="#updated-application-clock-handling-on-pascal-gpus">Updated application clock handling on Pascal+ GPUs</a></li>
+<li><a class="reference internal" href="#removed-continuation-from-gmx-convert-tpr">Removed continuation from <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">convert-tpr</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bugs-fixed.html"
+                        title="previous chapter">Bugs fixed</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="portability.html"
+                        title="next chapter">Portability</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/release-notes/2018/major/removed-features.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="portability.html" title="Portability"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bugs-fixed.html" title="Bugs fixed"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,710 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1Selection" kind="class" prot="public">
+    <compoundname>gmx::Selection</compoundname>
+    <includes local="no">gromacs/selection/selection.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1Selection_1a20829a74489496482e105e9513b9c6da" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1internal_1_1SelectionData" kindref="compound">internal::SelectionData</ref> *</type>
+        <definition>internal::SelectionData* gmx::Selection::sel_</definition>
+        <argsstring></argsstring>
+        <name>sel_</name>
+        <briefdescription>
+<para>Pointer to internal data for the selection. </para>        </briefdescription>
+        <detaileddescription>
+<para>The memory for this object is managed by a <ref refid="classgmx_1_1SelectionCollection" kindref="compound">SelectionCollection</ref> object, and the <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> class simply provides a public interface for accessing the data. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="575" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="575" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classgmx_1_1Selection_1a3dd781afa3dc217f65462ce050a61552" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class SelectionOptionStorage</definition>
+        <argsstring></argsstring>
+        <name>SelectionOptionStorage</name>
+        <briefdescription>
+<para>Needed to access the data to adjust flags. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="580" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="580" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1Selection_1a90281107c79a4fecec8480a4436fb375" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::Selection::Selection</definition>
+        <argsstring>()</argsstring>
+        <name>Selection</name>
+        <briefdescription>
+<para>Creates a selection wrapper that has no associated selection. </para>        </briefdescription>
+        <detaileddescription>
+<para>Any attempt to call methods in the object before a selection is assigned results in undefined behavior. <ref refid="classgmx_1_1Selection_1a59bc4234189055d89f48d3375fce161b" kindref="member">isValid()</ref> returns <computeroutput>false</computeroutput> for the selection until it is initialized. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="297" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="297" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a1cd65e98ffd6227ea5716ff890e43d71" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>gmx::Selection::Selection</definition>
+        <argsstring>(internal::SelectionData *sel)</argsstring>
+        <name>Selection</name>
+        <param>
+          <type><ref refid="classgmx_1_1internal_1_1SelectionData" kindref="compound">internal::SelectionData</ref> *</type>
+          <declname>sel</declname>
+        </param>
+        <briefdescription>
+<para>Creates a new selection object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> data to wrap.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Only for internal use by the selection module. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="305" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="305" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a59bc4234189055d89f48d3375fce161b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::isValid</definition>
+        <argsstring>() const </argsstring>
+        <name>isValid</name>
+        <briefdescription>
+<para>Returns whether the selection object is initialized. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="308" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="308" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1aa9b9e55359ac63918a7e84f31f89e807" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::operator==</definition>
+        <argsstring>(const Selection &amp;other) const </argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Returns whether two selection objects wrap the same selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="311" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="311" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1af2b4e643008bdbb6794d2c63736e462f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::operator!=</definition>
+        <argsstring>(const Selection &amp;other) const </argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Returns whether two selection objects wrap different selections. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="316" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="316" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1af382d4296393c1cfed6b1579bee92d8d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* gmx::Selection::name</definition>
+        <argsstring>() const </argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Returns the name of the selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="322" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="322" bodyend="322"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a79833e35df365e88d69ae3121a370400" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* gmx::Selection::selectionText</definition>
+        <argsstring>() const </argsstring>
+        <name>selectionText</name>
+        <briefdescription>
+<para>Returns the string that was parsed to produce this selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="324" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="324" bodyend="324"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1af35f42d7309abb963ad00e94f50a9907" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::isDynamic</definition>
+        <argsstring>() const </argsstring>
+        <name>isDynamic</name>
+        <briefdescription>
+<para>Returns true if the size of the selection (<ref refid="classgmx_1_1Selection_1a85afa66d42b9e51c3f70a9b3624ab4b8" kindref="member">posCount()</ref>) is dynamic. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="326" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="326" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a8d401706469e646124b954998397ea74" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="indexutil_8h_1ad7330829cb93245b9de7ed268cf6ba67" kindref="member">e_index_t</ref></type>
+        <definition>e_index_t gmx::Selection::type</definition>
+        <argsstring>() const </argsstring>
+        <name>type</name>
+        <briefdescription>
+<para>Returns the type of positions in the selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="328" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="328" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a79c4611aaa3ca89d4d24782a4f472c39" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::hasOnlyAtoms</definition>
+        <argsstring>() const </argsstring>
+        <name>hasOnlyAtoms</name>
+        <briefdescription>
+<para>Returns true if the selection only contains positions with a single atom each. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="330" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="330" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1aa2190044626506e4315cc878cd3e0ddd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::hasSortedAtomIndices</definition>
+        <argsstring>() const </argsstring>
+        <name>hasSortedAtomIndices</name>
+        <briefdescription>
+<para>Returns <computeroutput>true</computeroutput> if the atom indices in the selection are in ascending order. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="332" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="332" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a888c3fa99e2519a350c3cbce51443054" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::Selection::atomCount</definition>
+        <argsstring>() const </argsstring>
+        <name>atomCount</name>
+        <briefdescription>
+<para>Total number of atoms in the selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="335" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="335" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a47874ad86a022b98845ea0b16f83a611" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const int &gt;</type>
+        <definition>ArrayRef&lt;const int&gt; gmx::Selection::atomIndices</definition>
+        <argsstring>() const </argsstring>
+        <name>atomIndices</name>
+        <briefdescription>
+<para>Returns atom indices of all atoms in the selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="340" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="340" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a85afa66d42b9e51c3f70a9b3624ab4b8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::Selection::posCount</definition>
+        <argsstring>() const </argsstring>
+        <name>posCount</name>
+        <briefdescription>
+<para>Number of positions in the selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="346" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="346" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1af8ac5009e0832a9b55e56960d9b7779c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1SelectionPosition" kindref="compound">SelectionPosition</ref></type>
+        <definition>SelectionPosition gmx::Selection::position</definition>
+        <argsstring>(int i) const </argsstring>
+        <name>position</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+<para>Access a single position. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="348" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="779" bodyend="782"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a668ddcd9343152ae919ff3b06a536c5a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const rvec &gt;</type>
+        <definition>ArrayRef&lt;const rvec&gt; gmx::Selection::coordinates</definition>
+        <argsstring>() const </argsstring>
+        <name>coordinates</name>
+        <briefdescription>
+<para>Returns coordinates for this selection as a continuous array. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="350" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="350" bodyend="353"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a01384b1af7b3786dd320765e423d8027" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::hasVelocities</definition>
+        <argsstring>() const </argsstring>
+        <name>hasVelocities</name>
+        <briefdescription>
+<para>Returns whether velocities are available for this selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="355" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="355" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a632c9a2f5a3f60b88d4c998903a1e775" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const rvec &gt;</type>
+        <definition>ArrayRef&lt;const rvec&gt; gmx::Selection::velocities</definition>
+        <argsstring>() const </argsstring>
+        <name>velocities</name>
+        <briefdescription>
+<para>Returns velocities for this selection as a continuous array. </para>        </briefdescription>
+        <detaileddescription>
+<para>Must not be called if <ref refid="classgmx_1_1Selection_1a01384b1af7b3786dd320765e423d8027" kindref="member">hasVelocities()</ref> returns false. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="361" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="361" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a2e32d8ce8e7daa158319a4220589b771" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::hasForces</definition>
+        <argsstring>() const </argsstring>
+        <name>hasForces</name>
+        <briefdescription>
+<para>Returns whether forces are available for this selection. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="367" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="367" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a0b5f0205173939946585d0d1afda7111" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const rvec &gt;</type>
+        <definition>ArrayRef&lt;const rvec&gt; gmx::Selection::forces</definition>
+        <argsstring>() const </argsstring>
+        <name>forces</name>
+        <briefdescription>
+<para>Returns forces for this selection as a continuous array. </para>        </briefdescription>
+        <detaileddescription>
+<para>Must not be called if <ref refid="classgmx_1_1Selection_1a2e32d8ce8e7daa158319a4220589b771" kindref="member">hasForces()</ref> returns false. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="373" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="373" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a5bdd75643f950ca4e8141e4c66877dc0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+        <definition>ArrayRef&lt;const real&gt; gmx::Selection::masses</definition>
+        <argsstring>() const </argsstring>
+        <name>masses</name>
+        <briefdescription>
+<para>Returns masses for this selection as a continuous array. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="379" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="379" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a38f8cd8d43a4aea438eef61f4f504897" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> &gt;</type>
+        <definition>ArrayRef&lt;const real&gt; gmx::Selection::charges</definition>
+        <argsstring>() const </argsstring>
+        <name>charges</name>
+        <briefdescription>
+<para>Returns charges for this selection as a continuous array. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="389" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="389" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1abf1d920ee2d3214b90577ef2f3cf5094" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const int &gt;</type>
+        <definition>ArrayRef&lt;const int&gt; gmx::Selection::refIds</definition>
+        <argsstring>() const </argsstring>
+        <name>refIds</name>
+        <briefdescription>
+<para>Returns reference IDs for this selection as a continuous array. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classgmx_1_1SelectionPosition_1ab79a65003b4ee968f404bd08d3568e49" kindref="member">SelectionPosition::refId()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="403" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="403" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a9cab67838fc58f8c8093e863480d0772" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">ArrayRef</ref>&lt; const int &gt;</type>
+        <definition>ArrayRef&lt;const int&gt; gmx::Selection::mappedIds</definition>
+        <argsstring>() const </argsstring>
+        <name>mappedIds</name>
+        <briefdescription>
+<para>Returns mapped IDs for this selection as a continuous array. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classgmx_1_1SelectionPosition_1a0808fabb87609200a8b509ab0b52b79d" kindref="member">SelectionPosition::mappedId()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="412" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="412" bodyend="415"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1afe1aa45b1e722149a81d3f277cbc264c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::isCoveredFractionDynamic</definition>
+        <argsstring>() const </argsstring>
+        <name>isCoveredFractionDynamic</name>
+        <briefdescription>
+<para>Returns whether the covered fraction can change between frames. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="418" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="418" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a3695c62320a833c66a550aaca3dfceb2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real gmx::Selection::coveredFraction</definition>
+        <argsstring>() const </argsstring>
+        <name>coveredFraction</name>
+        <briefdescription>
+<para>Returns the covered fraction for the current frame. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="420" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="420" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a7f8199c8e578c155d4fc3ae6b64f64ac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::Selection::operator AnalysisNeighborhoodPositions</definition>
+        <argsstring>() const </argsstring>
+        <name>operator AnalysisNeighborhoodPositions</name>
+        <briefdescription>
+<para>Allows passing a selection directly to neighborhood searching. </para>        </briefdescription>
+        <detaileddescription>
+<para>When initialized this way, <ref refid="classgmx_1_1AnalysisNeighborhoodPair" kindref="compound">AnalysisNeighborhoodPair</ref> objects return indices that can be used to index the selection positions with <ref refid="classgmx_1_1Selection_1af8ac5009e0832a9b55e56960d9b7779c" kindref="member">position()</ref>.</para><para>Works exactly like if <ref refid="classgmx_1_1AnalysisNeighborhoodPositions" kindref="compound">AnalysisNeighborhoodPositions</ref> had a constructor taking a <ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref> object as a parameter. See <ref refid="classgmx_1_1AnalysisNeighborhoodPositions" kindref="compound">AnalysisNeighborhoodPositions</ref> for rationale and additional discussion. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="434" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.cpp" bodystart="274" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a1b68d88d23646f541f552c21077506ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::Selection::initCoveredFraction</definition>
+        <argsstring>(e_coverfrac_t type)</argsstring>
+        <name>initCoveredFraction</name>
+        <param>
+          <type><ref refid="group__group__publicapi_1ga3586467b9eaf1c08160c5fef7377e622" kindref="member">e_coverfrac_t</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Initializes information about covered fractions. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of covered fraction required. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the covered fraction can be calculated for the selection. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="443" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="443" bodyend="446"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1aa7007210627e2b003a1ee0d54c02908a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::Selection::setEvaluateVelocities</definition>
+        <argsstring>(bool bEnabled)</argsstring>
+        <name>setEvaluateVelocities</name>
+        <param>
+          <type>bool</type>
+          <declname>bEnabled</declname>
+        </param>
+        <briefdescription>
+<para>Sets whether this selection evaluates velocities for positions. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bEnabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, velocities are evaluated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If you request the evaluation, but then evaluate the selection for a frame that does not contain velocity information, results are undefined.</para><para><xrefsect id="todo_1_todo000081"><xreftitle>Todo</xreftitle><xrefdescription><para>Implement it such that in the above case, <ref refid="classgmx_1_1Selection_1a01384b1af7b3786dd320765e423d8027" kindref="member">hasVelocities()</ref> will return false for such frames.</para></xrefdescription></xrefsect></para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="462" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="462" bodyend="465"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1aa7d0959bd76bc01a5269fc01c9f0dab1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::Selection::setEvaluateForces</definition>
+        <argsstring>(bool bEnabled)</argsstring>
+        <name>setEvaluateForces</name>
+        <param>
+          <type>bool</type>
+          <declname>bEnabled</declname>
+        </param>
+        <briefdescription>
+<para>Sets whether this selection evaluates forces for positions. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bEnabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, forces are evaluated.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If you request the evaluation, but then evaluate the selection for a frame that does not contain force information, results are undefined.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="477" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="477" bodyend="480"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1aff4b2fbd0cbd04e1368fd80c4f45dddc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::Selection::setOriginalId</definition>
+        <argsstring>(int i, int id)</argsstring>
+        <name>setOriginalId</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Sets the ID for the <computeroutput>i&apos;th</computeroutput> position for use with <ref refid="classgmx_1_1SelectionPosition_1a0808fabb87609200a8b509ab0b52b79d" kindref="member">SelectionPosition::mappedId()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">i</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zero-based index </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Identifier to set.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method is not part of <ref refid="classgmx_1_1SelectionPosition" kindref="compound">SelectionPosition</ref> because that interface only provides access to const data by design.</para><para>This method can only be called after compilation, before the selection has been evaluated for any frame.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1SelectionPosition_1a0808fabb87609200a8b509ab0b52b79d" kindref="member">SelectionPosition::mappedId()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="497" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.cpp" bodystart="287" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a1f0f58e357142bf866339860c4735179" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::Selection::initOriginalIdsToGroup</definition>
+        <argsstring>(const gmx_mtop_t *top, e_index_t type)</argsstring>
+        <name>initOriginalIdsToGroup</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type><ref refid="indexutil_8h_1ad7330829cb93245b9de7ed268cf6ba67" kindref="member">e_index_t</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Inits the IDs for use with <ref refid="classgmx_1_1SelectionPosition_1a0808fabb87609200a8b509ab0b52b79d" kindref="member">SelectionPosition::mappedId()</ref> for grouping. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">top</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Topology information (can be NULL if not required for <computeroutput>type</computeroutput>). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Type of groups to generate. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Number of groups that were present in the selection. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1InconsistentInputError" kindref="compound">InconsistentInputError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the selection positions cannot be assigned to groups of the given type.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If <computeroutput>type == INDEX_ATOM</computeroutput>, the IDs are initialized to 0, 1, 2, ..., and the return value is the number of positions. If <computeroutput>type == INDEX_ALL</computeroutput>, all the IDs are initialized to 0, and the return value is one. If <computeroutput>type == INDEX_RES</computeroutput> or <computeroutput>type == INDEX_MOL</computeroutput>, the first position will get ID 0, and all following positions that belong to the same residue/molecule will get the same ID. The first position that belongs to a different residue/molecule will get ID 1, and so on. If some position contains atoms from multiple residues/molecules, i.e., the mapping is ambiguous, an exception is thrown. The return value is the number of residues/molecules that are present in the selection positions.</para><para>This method is useful if the calling code needs to group the selection, e.g., for computing aggregate properties for each residue or molecule. It can then use this method to initialize the appropriate grouping, use the return value to allocate a sufficiently sized buffer to store the aggregated values, and then use <ref refid="classgmx_1_1SelectionPosition_1a0808fabb87609200a8b509ab0b52b79d" kindref="member">SelectionPosition::mappedId()</ref> to identify the location where to aggregate to.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1Selection_1aff4b2fbd0cbd04e1368fd80c4f45dddc" kindref="member">setOriginalId()</ref> </para><simplesectsep/><para><ref refid="classgmx_1_1SelectionPosition_1a0808fabb87609200a8b509ab0b52b79d" kindref="member">SelectionPosition::mappedId()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="533" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.cpp" bodystart="295" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1aab679d690d5b759a6e95f2b43d7e7895" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::Selection::printInfo</definition>
+        <argsstring>(FILE *fp) const </argsstring>
+        <name>printInfo</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+<para>Prints out one-line description of the selection. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Where to print the information.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+The output contains the name of the selection, the number of atoms and the number of positions, and indication of whether the selection is dynamic. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="544" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.cpp" bodystart="315" bodyend="322"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a2e9c1f766eb392261bce4119dd7e1dfc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::Selection::printDebugInfo</definition>
+        <argsstring>(FILE *fp, int nmaxind) const </argsstring>
+        <name>printDebugInfo</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nmaxind</declname>
+        </param>
+        <briefdescription>
+<para>Prints out extended information about the selection for debugging. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Where to print the information. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nmaxind</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of values to print in lists (-1 = print all). </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="552" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.cpp" bodystart="326" bodyend="401"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgmx_1_1Selection_1a9e209008aff278e7fed712adb2ce6db4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classgmx_1_1internal_1_1SelectionData" kindref="compound">internal::SelectionData</ref> &amp;</type>
+        <definition>internal::SelectionData&amp; gmx::Selection::data</definition>
+        <argsstring>()</argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="555" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="555" bodyend="560"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1Selection_1a8635eb2ffe9535ef5f7b7da0d641b004" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classgmx_1_1internal_1_1SelectionData" kindref="compound">internal::SelectionData</ref> &amp;</type>
+        <definition>const internal::SelectionData&amp; gmx::Selection::data</definition>
+        <argsstring>() const </argsstring>
+        <name>data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="561" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="561" bodyend="566"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides access to a single selection. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class provides a public interface for accessing selection information. General information about the selection can be accessed with methods <ref refid="classgmx_1_1Selection_1af382d4296393c1cfed6b1579bee92d8d" kindref="member">name()</ref>, <ref refid="classgmx_1_1Selection_1a79833e35df365e88d69ae3121a370400" kindref="member">selectionText()</ref>, <ref refid="classgmx_1_1Selection_1af35f42d7309abb963ad00e94f50a9907" kindref="member">isDynamic()</ref>, and <ref refid="classgmx_1_1Selection_1a8d401706469e646124b954998397ea74" kindref="member">type()</ref>. The first three can be accessed any time after the selection has been parsed, and <ref refid="classgmx_1_1Selection_1a8d401706469e646124b954998397ea74" kindref="member">type()</ref> can be accessed after the selection has been compiled.</para><para>There are a few methods that can be used to change the behavior of the selection. <ref refid="classgmx_1_1Selection_1aa7007210627e2b003a1ee0d54c02908a" kindref="member">setEvaluateVelocities()</ref> and <ref refid="classgmx_1_1Selection_1aa7d0959bd76bc01a5269fc01c9f0dab1" kindref="member">setEvaluateForces()</ref> can be called before the selection is compiled to request evaluation of velocities and/or forces in addition to coordinates.</para><para>Each selection is made of a set of positions. Each position has associated coordinates, and possibly velocities and forces if they have been requested and are available. It also has a set of atoms associated with it; typically the coordinates are the center-of-mass or center-of-geometry coordinates for that set of atoms. To access the number of positions in the selection, use <ref refid="classgmx_1_1Selection_1a85afa66d42b9e51c3f70a9b3624ab4b8" kindref="member">posCount()</ref>. To access individual positions, use <ref refid="classgmx_1_1Selection_1af8ac5009e0832a9b55e56960d9b7779c" kindref="member">position()</ref>. See <ref refid="classgmx_1_1SelectionPosition" kindref="compound">SelectionPosition</ref> for details of how to use individual positions. <ref refid="classgmx_1_1Selection_1aff4b2fbd0cbd04e1368fd80c4f45dddc" kindref="member">setOriginalId()</ref> can be used to adjust the return value of <ref refid="classgmx_1_1SelectionPosition_1a0808fabb87609200a8b509ab0b52b79d" kindref="member">SelectionPosition::mappedId()</ref>; see that method for details.</para><para>It is also possible to access the list of atoms that make up all the positions directly: <ref refid="classgmx_1_1Selection_1a888c3fa99e2519a350c3cbce51443054" kindref="member">atomCount()</ref> returns the total number of atoms in the selection and <ref refid="classgmx_1_1Selection_1a47874ad86a022b98845ea0b16f83a611" kindref="member">atomIndices()</ref> an array of their indices. Similarly, it is possible to access the coordinates and other properties of the positions as continuous arrays through <ref refid="classgmx_1_1Selection_1a668ddcd9343152ae919ff3b06a536c5a" kindref="member">coordinates()</ref>, <ref refid="classgmx_1_1Selection_1a632c9a2f5a3f60b88d4c998903a1e775" kindref="member">velocities()</ref>, <ref refid="classgmx_1_1Selection_1a0b5f0205173939946585d0d1afda7111" kindref="member">forces()</ref>, <ref refid="classgmx_1_1Selection_1a5bdd75643f950ca4e8141e4c66877dc0" kindref="member">masses()</ref>, <ref refid="classgmx_1_1Selection_1a38f8cd8d43a4aea438eef61f4f504897" kindref="member">charges()</ref>, <ref refid="classgmx_1_1Selection_1abf1d920ee2d3214b90577ef2f3cf5094" kindref="member">refIds()</ref>, and <ref refid="classgmx_1_1Selection_1a9cab67838fc58f8c8093e863480d0772" kindref="member">mappedIds()</ref>.</para><para>Both positions and atoms can be accessed after the selection has been compiled. For dynamic selections, the return values of these methods change after each evaluation to reflect the situation for the current frame. Before any frame has been evaluated, these methods return the maximal set to which the selection can evaluate.</para><para>There are two possible modes for how positions for dynamic selections are handled. In the default mode, <ref refid="classgmx_1_1Selection_1a85afa66d42b9e51c3f70a9b3624ab4b8" kindref="member">posCount()</ref> can change, and for each frame, only the positions that are selected in that frame can be accessed. In a masked mode, <ref refid="classgmx_1_1Selection_1a85afa66d42b9e51c3f70a9b3624ab4b8" kindref="member">posCount()</ref> remains constant, i.e., the positions are always evaluated for the maximal set, and <ref refid="classgmx_1_1SelectionPosition_1a4cd2dfe1464df1cc335cb99e4265e766" kindref="member">SelectionPosition::selected()</ref> is used to determine whether a position is selected for a frame. The masked mode can be requested with <ref refid="classgmx_1_1SelectionOption_1a4ec91fb3f672976063ff7d4babbf7516" kindref="member">SelectionOption::dynamicMask()</ref>.</para><para>The class also provides methods for printing out information: <ref refid="classgmx_1_1Selection_1aab679d690d5b759a6e95f2b43d7e7895" kindref="member">printInfo()</ref> and <ref refid="classgmx_1_1Selection_1a2e9c1f766eb392261bce4119dd7e1dfc" kindref="member">printDebugInfo()</ref>. These are mainly for internal use by Gromacs.</para><para>This class works like a pointer type: copying and assignment is lightweight, and all copies work interchangeably, accessing the same internal data.</para><para>Methods in this class do not throw.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1SelectionPosition" kindref="compound">SelectionPosition</ref> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" line="288" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selection.h" bodystart="287" bodyend="581"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1Selection_1a888c3fa99e2519a350c3cbce51443054" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>atomCount</name></member>
+      <member refid="classgmx_1_1Selection_1a47874ad86a022b98845ea0b16f83a611" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>atomIndices</name></member>
+      <member refid="classgmx_1_1Selection_1a38f8cd8d43a4aea438eef61f4f504897" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>charges</name></member>
+      <member refid="classgmx_1_1Selection_1a668ddcd9343152ae919ff3b06a536c5a" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>coordinates</name></member>
+      <member refid="classgmx_1_1Selection_1a3695c62320a833c66a550aaca3dfceb2" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>coveredFraction</name></member>
+      <member refid="classgmx_1_1Selection_1a9e209008aff278e7fed712adb2ce6db4" prot="private" virt="non-virtual"><scope>gmx::Selection</scope><name>data</name></member>
+      <member refid="classgmx_1_1Selection_1a8635eb2ffe9535ef5f7b7da0d641b004" prot="private" virt="non-virtual"><scope>gmx::Selection</scope><name>data</name></member>
+      <member refid="classgmx_1_1Selection_1a0b5f0205173939946585d0d1afda7111" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>forces</name></member>
+      <member refid="classgmx_1_1Selection_1a2e32d8ce8e7daa158319a4220589b771" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>hasForces</name></member>
+      <member refid="classgmx_1_1Selection_1a79c4611aaa3ca89d4d24782a4f472c39" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>hasOnlyAtoms</name></member>
+      <member refid="classgmx_1_1Selection_1aa2190044626506e4315cc878cd3e0ddd" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>hasSortedAtomIndices</name></member>
+      <member refid="classgmx_1_1Selection_1a01384b1af7b3786dd320765e423d8027" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>hasVelocities</name></member>
+      <member refid="classgmx_1_1Selection_1a1b68d88d23646f541f552c21077506ab" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>initCoveredFraction</name></member>
+      <member refid="classgmx_1_1Selection_1a1f0f58e357142bf866339860c4735179" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>initOriginalIdsToGroup</name></member>
+      <member refid="classgmx_1_1Selection_1afe1aa45b1e722149a81d3f277cbc264c" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>isCoveredFractionDynamic</name></member>
+      <member refid="classgmx_1_1Selection_1af35f42d7309abb963ad00e94f50a9907" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>isDynamic</name></member>
+      <member refid="classgmx_1_1Selection_1a59bc4234189055d89f48d3375fce161b" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>isValid</name></member>
+      <member refid="classgmx_1_1Selection_1a9cab67838fc58f8c8093e863480d0772" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>mappedIds</name></member>
+      <member refid="classgmx_1_1Selection_1a5bdd75643f950ca4e8141e4c66877dc0" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>masses</name></member>
+      <member refid="classgmx_1_1Selection_1af382d4296393c1cfed6b1579bee92d8d" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>name</name></member>
+      <member refid="classgmx_1_1Selection_1a7f8199c8e578c155d4fc3ae6b64f64ac" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>operator AnalysisNeighborhoodPositions</name></member>
+      <member refid="classgmx_1_1Selection_1af2b4e643008bdbb6794d2c63736e462f" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>operator!=</name></member>
+      <member refid="classgmx_1_1Selection_1aa9b9e55359ac63918a7e84f31f89e807" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>operator==</name></member>
+      <member refid="classgmx_1_1Selection_1a85afa66d42b9e51c3f70a9b3624ab4b8" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>posCount</name></member>
+      <member refid="classgmx_1_1Selection_1af8ac5009e0832a9b55e56960d9b7779c" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>position</name></member>
+      <member refid="classgmx_1_1Selection_1a2e9c1f766eb392261bce4119dd7e1dfc" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>printDebugInfo</name></member>
+      <member refid="classgmx_1_1Selection_1aab679d690d5b759a6e95f2b43d7e7895" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>printInfo</name></member>
+      <member refid="classgmx_1_1Selection_1abf1d920ee2d3214b90577ef2f3cf5094" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>refIds</name></member>
+      <member refid="classgmx_1_1Selection_1a20829a74489496482e105e9513b9c6da" prot="private" virt="non-virtual"><scope>gmx::Selection</scope><name>sel_</name></member>
+      <member refid="classgmx_1_1Selection_1a90281107c79a4fecec8480a4436fb375" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>Selection</name></member>
+      <member refid="classgmx_1_1Selection_1a1cd65e98ffd6227ea5716ff890e43d71" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>Selection</name></member>
+      <member refid="classgmx_1_1Selection_1a3dd781afa3dc217f65462ce050a61552" prot="private" virt="non-virtual"><scope>gmx::Selection</scope><name>SelectionOptionStorage</name></member>
+      <member refid="classgmx_1_1Selection_1a79833e35df365e88d69ae3121a370400" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>selectionText</name></member>
+      <member refid="classgmx_1_1Selection_1aa7d0959bd76bc01a5269fc01c9f0dab1" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>setEvaluateForces</name></member>
+      <member refid="classgmx_1_1Selection_1aa7007210627e2b003a1ee0d54c02908a" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>setEvaluateVelocities</name></member>
+      <member refid="classgmx_1_1Selection_1aff4b2fbd0cbd04e1368fd80c4f45dddc" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>setOriginalId</name></member>
+      <member refid="classgmx_1_1Selection_1a8d401706469e646124b954998397ea74" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>type</name></member>
+      <member refid="classgmx_1_1Selection_1a632c9a2f5a3f60b88d4c998903a1e775" prot="public" virt="non-virtual"><scope>gmx::Selection</scope><name>velocities</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

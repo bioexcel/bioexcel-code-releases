@@ -1,0 +1,112 @@
+.. _gmx vanhove:
+
+gmx vanhove
+===========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx vanhove [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+                [:strong:`-om` :emphasis:`[<.xpm>]`] [:strong:`-or` :emphasis:`[<.xvg>]`] [:strong:`-ot` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`]
+                [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`]
+                [:strong:`-sqrt` :emphasis:`<real>`] [:strong:`-fm` :emphasis:`<int>`] [:strong:`-rmax` :emphasis:`<real>`] [:strong:`-rbin` :emphasis:`<real>`]
+                [:strong:`-mmax` :emphasis:`<real>`] [:strong:`-nlevels` :emphasis:`<int>`] [:strong:`-nr` :emphasis:`<int>`] [:strong:`-fr` :emphasis:`<int>`]
+                [:strong:`-rt` :emphasis:`<real>`] [:strong:`-ft` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx vanhove`` computes the Van Hove correlation function.
+The Van Hove G(r,t) is the probability that a particle that is at r_0
+at time zero can be found at position r_0+r at time t.
+``gmx vanhove`` determines G not for a vector r, but for the length of r.
+Thus it gives the probability that a particle moves a distance of r
+in time t.
+Jumps across the periodic boundaries are removed.
+Corrections are made for scaling due to isotropic
+or anisotropic pressure coupling.
+
+With option ``-om`` the whole matrix can be written as a function
+of t and r or as a function of sqrt(t) and r (option ``-sqrt``).
+
+With option ``-or`` the Van Hove function is plotted for one
+or more values of t. Option ``-nr`` sets the number of times,
+option ``-fr`` the number spacing between the times.
+The binwidth is set with option ``-rbin``. The number of bins
+is determined automatically.
+
+With option ``-ot`` the integral up to a certain distance
+(option ``-rt``) is plotted as a function of time.
+
+For all frames that are read the coordinates of the selected particles
+are stored in memory. Therefore the program may use a lot of memory.
+For options ``-om`` and ``-ot`` the program may be slow.
+This is because the calculation scales as the number of frames times
+``-fm`` or ``-ft``.
+Note that with the ``-dt`` option the memory usage and calculation
+time can be reduced.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-om`` [<.xpm>] (vanhove.xpm) (Optional)
+    X PixMap compatible matrix file
+``-or`` [<.xvg>] (vanhove_r.xvg) (Optional)
+    xvgr/xmgr file
+``-ot`` [<.xvg>] (vanhove_t.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-sqrt`` <real> (0)
+    Use sqrt(t) on the matrix axis which binspacing # in sqrt(ps)
+``-fm`` <int> (0)
+    Number of frames in the matrix, 0 is plot all
+``-rmax`` <real> (2)
+    Maximum r in the matrix (nm)
+``-rbin`` <real> (0.01)
+    Binwidth in the matrix and for ``-or`` (nm)
+``-mmax`` <real> (0)
+    Maximum density in the matrix, 0 is calculate (1/nm)
+``-nlevels`` <int> (81)
+    Number of levels in the matrix
+``-nr`` <int> (1)
+    Number of curves for the ``-or`` output
+``-fr`` <int> (0)
+    Frame spacing for the ``-or`` output
+``-rt`` <real> (0)
+    Integration limit for the ``-ot`` output (nm)
+``-ft`` <int> (0)
+    Number of frames in the ``-ot`` output, 0 is plot all
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

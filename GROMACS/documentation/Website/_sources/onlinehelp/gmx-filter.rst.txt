@@ -1,0 +1,86 @@
+.. _gmx filter:
+
+gmx filter
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx filter [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+               [:strong:`-ol` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-oh` :emphasis:`[<.xtc/.trr/...>]`]
+               [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-nf` :emphasis:`<int>`]
+               [:strong:`-[no]all`] [:strong:`-[no]nojump`] [:strong:`-[no]fit`]
+
+Description
+-----------
+
+``gmx filter`` performs frequency filtering on a trajectory.
+The filter shape is cos(pi t/A) + 1 from -A to +A, where A is given
+by the option ``-nf`` times the time step in the input trajectory.
+This filter reduces fluctuations with period A by 85%, with period
+2*A by 50% and with period 3*A by 17% for low-pass filtering.
+Both a low-pass and high-pass filtered trajectory can be written.
+
+Option ``-ol`` writes a low-pass filtered trajectory.
+A frame is written every ``-nf`` input frames.
+This ratio of filter length and output interval ensures a good
+suppression of aliasing of high-frequency motion, which is useful for
+making smooth movies. Also averages of properties which are linear
+in the coordinates are preserved, since all input frames are weighted
+equally in the output.
+When all frames are needed, use the ``-all`` option.
+
+Option ``-oh`` writes a high-pass filtered trajectory.
+The high-pass filtered coordinates are added to the coordinates
+from the structure file. When using high-pass filtering use ``-fit``
+or make sure you use a trajectory that has been fitted on
+the coordinates in the structure file.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr) (Optional)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-ol`` [<.xtc/.trr/...>] (lowpass.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-oh`` [<.xtc/.trr/...>] (highpass.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-nf`` <int> (10)
+    Sets the filter length as well as the output interval for low-pass filtering
+``-[no]all``  (no)
+    Write all low-pass filtered frames
+``-[no]nojump``  (yes)
+    Remove jumps of atoms across the box
+``-[no]fit``  (no)
+    Fit all frames to a reference structure
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

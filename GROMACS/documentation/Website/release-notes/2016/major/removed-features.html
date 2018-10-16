@@ -1,0 +1,176 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Removed mdrun features &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Miscellaneous" href="miscellaneous.html" />
+    <link rel="prev" title="Bugs fixed" href="bugs-fixed.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="miscellaneous.html" title="Miscellaneous"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bugs-fixed.html" title="Bugs fixed"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="removed-mdrun-features">
+<h1>Removed mdrun features<a class="headerlink" href="#removed-mdrun-features" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="removed-sd2-integrator">
+<h2>Removed SD2 integrator<a class="headerlink" href="#removed-sd2-integrator" title="Permalink to this headline">¶</a></h2>
+<p>This integrator has known problems, and is in all ways inferior to
+sd. It has no tests, and was deprecated in GROMACS 5.0. There are no
+plans to replace it.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1137">Issue 1137</a></p>
+</div>
+<div class="section" id="removed-the-twin-range-scheme">
+<h2>Removed the twin-range scheme<a class="headerlink" href="#removed-the-twin-range-scheme" title="Permalink to this headline">¶</a></h2>
+<p>Only the (deprecated) group scheme supports this, and the Verlet scheme will not
+support it in the foreseeable future.  There is now the explicit
+requirement that rlist &gt;= max(rcoulomb,rvdw).</p>
+</div>
+<div class="section" id="removed-support-for-twin-range-with-vv-integrators">
+<h2>Removed support for twin-range with VV integrators<a class="headerlink" href="#removed-support-for-twin-range-with-vv-integrators" title="Permalink to this headline">¶</a></h2>
+<p>Group-scheme twin-ranged non-bonded interactions never worked with
+velocity-Verlet integrators and constraints. There are no plans to
+make that combination work.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1137">Issue 1137</a>, <a class="reference external" href="https://redmine.gromacs.org/issues/1793">Issue 1793</a></p>
+</div>
+<div class="section" id="removed-reaction-field-nec">
+<h2>Removed Reaction-Field-nec<a class="headerlink" href="#removed-reaction-field-nec" title="Permalink to this headline">¶</a></h2>
+<p>The reaction-field no-exclusion correction option was only introduced for
+backward compatibility and a performance advantage for systems
+with only rigid molecules (e.g. water). For all other systems
+the forces are incorrect. The Verlet scheme does not support this
+option and even if it would, it wouldn’t even improve performance.</p>
+</div>
+<div class="section" id="removed-adress-module">
+<h2>Removed AdResS module<a class="headerlink" href="#removed-adress-module" title="Permalink to this headline">¶</a></h2>
+<p>This feature requires the (deprecated) group scheme, and there are no
+plans to port it to the Verlet scheme.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1852">Issue 1852</a></p>
+</div>
+<div class="section" id="removed-mdrun-compact">
+<h2>Removed mdrun -compact<a class="headerlink" href="#removed-mdrun-compact" title="Permalink to this headline">¶</a></h2>
+<p>It is too complicated to support multiple ways of analysing per-step
+data.</p>
+</div>
+<div class="section" id="removed-lambda-printing-from-mdrun-log-file">
+<h2>Removed lambda printing from mdrun log file<a class="headerlink" href="#removed-lambda-printing-from-mdrun-log-file" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1773">Issue 1773</a></p>
+</div>
+<div class="section" id="removed-gmx-nochargegroups">
+<h2>Removed GMX_NOCHARGEGROUPS<a class="headerlink" href="#removed-gmx-nochargegroups" title="Permalink to this headline">¶</a></h2>
+<p>This undocumented feature was only useful with the (deprecated) group
+scheme.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Removed mdrun features</a><ul>
+<li><a class="reference internal" href="#removed-sd2-integrator">Removed SD2 integrator</a></li>
+<li><a class="reference internal" href="#removed-the-twin-range-scheme">Removed the twin-range scheme</a></li>
+<li><a class="reference internal" href="#removed-support-for-twin-range-with-vv-integrators">Removed support for twin-range with VV integrators</a></li>
+<li><a class="reference internal" href="#removed-reaction-field-nec">Removed Reaction-Field-nec</a></li>
+<li><a class="reference internal" href="#removed-adress-module">Removed AdResS module</a></li>
+<li><a class="reference internal" href="#removed-mdrun-compact">Removed mdrun -compact</a></li>
+<li><a class="reference internal" href="#removed-lambda-printing-from-mdrun-log-file">Removed lambda printing from mdrun log file</a></li>
+<li><a class="reference internal" href="#removed-gmx-nochargegroups">Removed GMX_NOCHARGEGROUPS</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bugs-fixed.html"
+                        title="previous chapter">Bugs fixed</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="miscellaneous.html"
+                        title="next chapter">Miscellaneous</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/release-notes/2016/major/removed-features.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="miscellaneous.html" title="Miscellaneous"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bugs-fixed.html" title="Bugs fixed"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

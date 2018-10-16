@@ -1,0 +1,187 @@
+.. _gmx hbond:
+
+gmx hbond
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx hbond [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+              [:strong:`-num` :emphasis:`[<.xvg>]`] [:strong:`-g` :emphasis:`[<.log>]`] [:strong:`-ac` :emphasis:`[<.xvg>]`]
+              [:strong:`-dist` :emphasis:`[<.xvg>]`] [:strong:`-ang` :emphasis:`[<.xvg>]`] [:strong:`-hx` :emphasis:`[<.xvg>]`]
+              [:strong:`-hbn` :emphasis:`[<.ndx>]`] [:strong:`-hbm` :emphasis:`[<.xpm>]`] [:strong:`-don` :emphasis:`[<.xvg>]`]
+              [:strong:`-dan` :emphasis:`[<.xvg>]`] [:strong:`-life` :emphasis:`[<.xvg>]`] [:strong:`-nhbdist` :emphasis:`[<.xvg>]`]
+              [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`]
+              [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-a` :emphasis:`<real>`] [:strong:`-r` :emphasis:`<real>`] [:strong:`-[no]da`]
+              [:strong:`-r2` :emphasis:`<real>`] [:strong:`-abin` :emphasis:`<real>`] [:strong:`-rbin` :emphasis:`<real>`] [:strong:`-[no]nitacc`]
+              [:strong:`-[no]contact`] [:strong:`-shell` :emphasis:`<real>`] [:strong:`-fitstart` :emphasis:`<real>`]
+              [:strong:`-fitend` :emphasis:`<real>`] [:strong:`-temp` :emphasis:`<real>`] [:strong:`-dump` :emphasis:`<int>`]
+              [:strong:`-max_hb` :emphasis:`<real>`] [:strong:`-[no]merge`] [:strong:`-acflen` :emphasis:`<int>`]
+              [:strong:`-[no]normalize`] [:strong:`-P` :emphasis:`<enum>`] [:strong:`-fitfn` :emphasis:`<enum>`]
+              [:strong:`-beginfit` :emphasis:`<real>`] [:strong:`-endfit` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx hbond`` computes and analyzes hydrogen bonds. Hydrogen bonds are
+determined based on cutoffs for the angle Hydrogen - Donor - Acceptor
+(zero is extended) and the distance Donor - Acceptor
+(or Hydrogen - Acceptor using ``-noda``).
+OH and NH groups are regarded as donors, O is an acceptor always,
+N is an acceptor by default, but this can be switched using
+``-nitacc``. Dummy hydrogen atoms are assumed to be connected
+to the first preceding non-hydrogen atom.
+
+You need to specify two groups for analysis, which must be either
+identical or non-overlapping. All hydrogen bonds between the two
+groups are analyzed.
+
+If you set ``-shell``, you will be asked for an additional index group
+which should contain exactly one atom. In this case, only hydrogen
+bonds between atoms within the shell distance from the one atom are
+considered.
+
+With option -ac, rate constants for hydrogen bonding can be derived with the
+model of Luzar and Chandler (Nature 379:55, 1996; J. Chem. Phys. 113:23, 2000).
+If contact kinetics are analyzed by using the -contact option, then
+n(t) can be defined as either all pairs that are not within contact distance r at time t
+(corresponding to leaving the -r2 option at the default value 0) or all pairs that
+are within distance r2 (corresponding to setting a second cut-off value with option -r2).
+See mentioned literature for more details and definitions.
+
+**Output:**
+
+ * ``-num``:  number of hydrogen bonds as a function of time.
+ * ``-ac``:   average over all autocorrelations of the existence
+   functions (either 0 or 1) of all hydrogen bonds.
+ * ``-dist``: distance distribution of all hydrogen bonds.
+ * ``-ang``:  angle distribution of all hydrogen bonds.
+ * ``-hx``:   the number of n-n+i hydrogen bonds as a function of time
+   where n and n+i stand for residue numbers and i ranges from 0 to 6.
+   This includes the n-n+3, n-n+4 and n-n+5 hydrogen bonds associated
+   with helices in proteins.
+ * ``-hbn``:  all selected groups, donors, hydrogens and acceptors
+   for selected groups, all hydrogen bonded atoms from all groups and
+   all solvent atoms involved in insertion.
+ * ``-hbm``:  existence matrix for all hydrogen bonds over all
+   frames, this also contains information on solvent insertion
+   into hydrogen bonds. Ordering is identical to that in ``-hbn``
+   index file.
+ * ``-dan``: write out the number of donors and acceptors analyzed for
+   each timeframe. This is especially useful when using ``-shell``.
+ * ``-nhbdist``: compute the number of HBonds per hydrogen in order to
+   compare results to Raman Spectroscopy.
+
+Note: options ``-ac``, ``-life``, ``-hbn`` and ``-hbm``
+require an amount of memory proportional to the total numbers of donors
+times the total number of acceptors in the selected group(s).
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-num`` [<.xvg>] (hbnum.xvg)
+    xvgr/xmgr file
+``-g`` [<.log>] (hbond.log) (Optional)
+    Log file
+``-ac`` [<.xvg>] (hbac.xvg) (Optional)
+    xvgr/xmgr file
+``-dist`` [<.xvg>] (hbdist.xvg) (Optional)
+    xvgr/xmgr file
+``-ang`` [<.xvg>] (hbang.xvg) (Optional)
+    xvgr/xmgr file
+``-hx`` [<.xvg>] (hbhelix.xvg) (Optional)
+    xvgr/xmgr file
+``-hbn`` [<.ndx>] (hbond.ndx) (Optional)
+    Index file
+``-hbm`` [<.xpm>] (hbmap.xpm) (Optional)
+    X PixMap compatible matrix file
+``-don`` [<.xvg>] (donor.xvg) (Optional)
+    xvgr/xmgr file
+``-dan`` [<.xvg>] (danum.xvg) (Optional)
+    xvgr/xmgr file
+``-life`` [<.xvg>] (hblife.xvg) (Optional)
+    xvgr/xmgr file
+``-nhbdist`` [<.xvg>] (nhbdist.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-a`` <real> (30)
+    Cutoff angle (degrees, Hydrogen - Donor - Acceptor)
+``-r`` <real> (0.35)
+    Cutoff radius (nm, X - Acceptor, see next option)
+``-[no]da``  (yes)
+    Use distance Donor-Acceptor (if TRUE) or Hydrogen-Acceptor (FALSE)
+``-r2`` <real> (0)
+    Second cutoff radius. Mainly useful with ``-contact`` and ``-ac``
+``-abin`` <real> (1)
+    Binwidth angle distribution (degrees)
+``-rbin`` <real> (0.005)
+    Binwidth distance distribution (nm)
+``-[no]nitacc``  (yes)
+    Regard nitrogen atoms as acceptors
+``-[no]contact``  (no)
+    Do not look for hydrogen bonds, but merely for contacts within the cut-off distance
+``-shell`` <real> (-1)
+    when > 0, only calculate hydrogen bonds within # nm shell around one particle
+``-fitstart`` <real> (1)
+    Time (ps) from which to start fitting the correlation functions in order to obtain the forward and backward rate constants for HB breaking and formation. With ``-gemfit`` we suggest ``-fitstart 0``
+``-fitend`` <real> (60)
+    Time (ps) to which to stop fitting the correlation functions in order to obtain the forward and backward rate constants for HB breaking and formation (only with ``-gemfit``)
+``-temp`` <real> (298.15)
+    Temperature (K) for computing the Gibbs energy corresponding to HB breaking and reforming
+``-dump`` <int> (0)
+    Dump the first N hydrogen bond ACFs in a single :ref:`.xvg <xvg>` file for debugging
+``-max_hb`` <real> (0)
+    Theoretical maximum number of hydrogen bonds used for normalizing HB autocorrelation function. Can be useful in case the program estimates it wrongly
+``-[no]merge``  (yes)
+    H-bonds between the same donor and acceptor, but with different hydrogen are treated as a single H-bond. Mainly important for the ACF.
+``-acflen`` <int> (-1)
+    Length of the ACF, default is half the number of frames
+``-[no]normalize``  (yes)
+    Normalize ACF
+``-P`` <enum> (0)
+    Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3
+``-fitfn`` <enum> (none)
+    Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9
+``-beginfit`` <real> (0)
+    Time where to begin the exponential fit of the correlation function
+``-endfit`` <real> (-1)
+    Time where to end the exponential fit of the correlation function, -1 is until the end
+
+Known Issues
+------------
+
+* The option ``-sel`` that used to work on selected hbonds is out of order, and therefore not available for the time being.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

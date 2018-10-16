@@ -1,0 +1,191 @@
+.. _gmx energy:
+
+gmx energy
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx energy [:strong:`-f` :emphasis:`[<.edr>]`] [:strong:`-f2` :emphasis:`[<.edr>]`] [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-o` :emphasis:`[<.xvg>]`]
+               [:strong:`-viol` :emphasis:`[<.xvg>]`] [:strong:`-pairs` :emphasis:`[<.xvg>]`] [:strong:`-corr` :emphasis:`[<.xvg>]`]
+               [:strong:`-vis` :emphasis:`[<.xvg>]`] [:strong:`-evisco` :emphasis:`[<.xvg>]`] [:strong:`-eviscoi` :emphasis:`[<.xvg>]`]
+               [:strong:`-ravg` :emphasis:`[<.xvg>]`] [:strong:`-odh` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+               [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]fee`] [:strong:`-fetemp` :emphasis:`<real>`]
+               [:strong:`-zero` :emphasis:`<real>`] [:strong:`-[no]sum`] [:strong:`-[no]dp`] [:strong:`-nbmin` :emphasis:`<int>`]
+               [:strong:`-nbmax` :emphasis:`<int>`] [:strong:`-[no]mutot`] [:strong:`-skip` :emphasis:`<int>`] [:strong:`-[no]aver`]
+               [:strong:`-nmol` :emphasis:`<int>`] [:strong:`-[no]fluct_props`] [:strong:`-[no]driftcorr`]
+               [:strong:`-[no]fluc`] [:strong:`-[no]orinst`] [:strong:`-[no]ovec`] [:strong:`-acflen` :emphasis:`<int>`]
+               [:strong:`-[no]normalize`] [:strong:`-P` :emphasis:`<enum>`] [:strong:`-fitfn` :emphasis:`<enum>`]
+               [:strong:`-beginfit` :emphasis:`<real>`] [:strong:`-endfit` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx energy`` extracts energy components
+from an energy file. The user is prompted to interactively
+select the desired energy terms.
+
+Average, RMSD, and drift are calculated with full precision from the
+simulation (see printed manual). Drift is calculated by performing
+a least-squares fit of the data to a straight line. The reported total drift
+is the difference of the fit at the first and last point.
+An error estimate of the average is given based on a block averages
+over 5 blocks using the full-precision averages. The error estimate
+can be performed over multiple block lengths with the options
+``-nbmin`` and ``-nbmax``.
+**Note** that in most cases the energy files contains averages over all
+MD steps, or over many more points than the number of frames in
+energy file. This makes the ``gmx energy`` statistics output more accurate
+than the :ref:`.xvg <xvg>` output. When exact averages are not present in the energy
+file, the statistics mentioned above are simply over the single, per-frame
+energy values.
+
+The term fluctuation gives the RMSD around the least-squares fit.
+
+Some fluctuation-dependent properties can be calculated provided
+the correct energy terms are selected, and that the command line option
+``-fluct_props`` is given. The following properties
+will be computed:
+
+===============================  ===================
+Property                         Energy terms needed
+===============================  ===================
+Heat capacity C_p (NPT sims):    Enthalpy, Temp
+Heat capacity C_v (NVT sims):    Etot, Temp
+Thermal expansion coeff. (NPT):  Enthalpy, Vol, Temp
+Isothermal compressibility:      Vol, Temp
+Adiabatic bulk modulus:          Vol, Temp
+===============================  ===================
+
+You always need to set the number of molecules ``-nmol``.
+The C_p/C_v computations do **not** include any corrections
+for quantum effects. Use the :doc:`gmx dos <gmx-dos>` program if you need that (and you do).
+
+Option ``-odh`` extracts and plots the free energy data
+(Hamiltoian differences and/or the Hamiltonian derivative dhdl)
+from the ``ener.edr`` file.
+
+With ``-fee`` an estimate is calculated for the free-energy
+difference with an ideal gas state::
+
+  Delta A = A(N,V,T) - A_idealgas(N,V,T) = kT ln(<exp(U_pot/kT)>)
+  Delta G = G(N,p,T) - G_idealgas(N,p,T) = kT ln(<exp(U_pot/kT)>)
+
+where k is Boltzmann's constant, T is set by ``-fetemp`` and
+the average is over the ensemble (or time in a trajectory).
+Note that this is in principle
+only correct when averaging over the whole (Boltzmann) ensemble
+and using the potential energy. This also allows for an entropy
+estimate using::
+
+  Delta S(N,V,T) = S(N,V,T) - S_idealgas(N,V,T) = (<U_pot> - Delta A)/T
+  Delta S(N,p,T) = S(N,p,T) - S_idealgas(N,p,T) = (<U_pot> + pV - Delta G)/T
+
+When a second energy file is specified (``-f2``), a free energy
+difference is calculated::
+
+  dF = -kT ln(<exp(-(E_B-E_A)/kT)>_A) ,
+
+where E_A and E_B are the energies from the first and second energy
+files, and the average is over the ensemble A. The running average
+of the free energy difference is printed to a file specified by ``-ravg``.
+**Note** that the energies must both be calculated from the same trajectory.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.edr>] (ener.edr)
+    Energy file
+``-f2`` [<.edr>] (ener.edr) (Optional)
+    Energy file
+``-s`` [<.tpr>] (topol.tpr) (Optional)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (energy.xvg)
+    xvgr/xmgr file
+``-viol`` [<.xvg>] (violaver.xvg) (Optional)
+    xvgr/xmgr file
+``-pairs`` [<.xvg>] (pairs.xvg) (Optional)
+    xvgr/xmgr file
+``-corr`` [<.xvg>] (enecorr.xvg) (Optional)
+    xvgr/xmgr file
+``-vis`` [<.xvg>] (visco.xvg) (Optional)
+    xvgr/xmgr file
+``-evisco`` [<.xvg>] (evisco.xvg) (Optional)
+    xvgr/xmgr file
+``-eviscoi`` [<.xvg>] (eviscoi.xvg) (Optional)
+    xvgr/xmgr file
+``-ravg`` [<.xvg>] (runavgdf.xvg) (Optional)
+    xvgr/xmgr file
+``-odh`` [<.xvg>] (dhdl.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]fee``  (no)
+    Do a free energy estimate
+``-fetemp`` <real> (300)
+    Reference temperature for free energy calculation
+``-zero`` <real> (0)
+    Subtract a zero-point energy
+``-[no]sum``  (no)
+    Sum the energy terms selected rather than display them all
+``-[no]dp``  (no)
+    Print energies in high precision
+``-nbmin`` <int> (5)
+    Minimum number of blocks for error estimate
+``-nbmax`` <int> (5)
+    Maximum number of blocks for error estimate
+``-[no]mutot``  (no)
+    Compute the total dipole moment from the components
+``-skip`` <int> (0)
+    Skip number of frames between data points
+``-[no]aver``  (no)
+    Also print the exact average and rmsd stored in the energy frames (only when 1 term is requested)
+``-nmol`` <int> (1)
+    Number of molecules in your sample: the energies are divided by this number
+``-[no]fluct_props``  (no)
+    Compute properties based on energy fluctuations, like heat capacity
+``-[no]driftcorr``  (no)
+    Useful only for calculations of fluctuation properties. The drift in the observables will be subtracted before computing the fluctuation properties.
+``-[no]fluc``  (no)
+    Calculate autocorrelation of energy fluctuations rather than energy itself
+``-[no]orinst``  (no)
+    Analyse instantaneous orientation data
+``-[no]ovec``  (no)
+    Also plot the eigenvectors with ``-oten``
+``-acflen`` <int> (-1)
+    Length of the ACF, default is half the number of frames
+``-[no]normalize``  (yes)
+    Normalize ACF
+``-P`` <enum> (0)
+    Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3
+``-fitfn`` <enum> (none)
+    Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9
+``-beginfit`` <real> (0)
+    Time where to begin the exponential fit of the correlation function
+``-endfit`` <real> (-1)
+    Time where to end the exponential fit of the correlation function, -1 is until the end
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

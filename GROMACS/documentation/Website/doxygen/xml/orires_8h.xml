@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="orires_8h" kind="file">
+    <compoundname>orires.h</compoundname>
+    <includes local="no">cstdio</includes>
+    <includes refid="ifunc_8h" local="yes">gromacs/topology/ifunc.h</includes>
+    <includedby refid="listed-forces_8cpp" local="yes">src/gromacs/listed-forces/listed-forces.cpp</includedby>
+    <includedby refid="orires_8cpp" local="yes">src/gromacs/listed-forces/orires.cpp</includedby>
+    <includedby refid="expanded_8cpp" local="yes">src/gromacs/mdlib/expanded.cpp</includedby>
+    <includedby refid="mdebin_8cpp" local="yes">src/gromacs/mdlib/mdebin.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="update_8cpp" local="yes">src/gromacs/mdlib/update.cpp</includedby>
+    <includedby refid="ifunc_8cpp" local="yes">src/gromacs/topology/ifunc.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <incdepgraph>
+      <node id="13210">
+        <label>src/gromacs/listed-forces/orires.h</label>
+        <link refid="orires.h"/>
+        <childnode refid="13211" relation="include">
+        </childnode>
+      </node>
+      <node id="13211">
+        <label>cstdio</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="13212">
+        <label>src/gromacs/listed-forces/orires.h</label>
+        <link refid="orires.h"/>
+        <childnode refid="13213" relation="include">
+        </childnode>
+        <childnode refid="13214" relation="include">
+        </childnode>
+      </node>
+      <node id="13213">
+        <label>src/gromacs/listed-forces/listed-forces.cpp</label>
+        <link refid="listed-forces_8cpp"/>
+      </node>
+      <node id="13214">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="orires_8h_1aedb2ea00a2a5b867308eef5e4bc9ae36" prot="public" static="no" mutable="no">
+        <type>t_ifunc</type>
+        <definition>t_ifunc orires</definition>
+        <argsstring></argsstring>
+        <name>orires</name>
+        <briefdescription>
+<para>Calculates the orientation restraint forces. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h" line="98" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="orires_8h_1a636fe4da2c18eea9cf255c9d7b421db6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_orires</definition>
+        <argsstring>(FILE *fplog, const gmx_mtop_t *mtop, const t_inputrec *ir, const t_commrec *cr, t_state *globalState, t_oriresdata *od)</argsstring>
+        <name>init_orires</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>globalState</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__oriresdata" kindref="compound">t_oriresdata</ref> *</type>
+          <declname>od</declname>
+        </param>
+        <briefdescription>
+<para>Decides whether orientation restraints can work, and initializes all the orientation restraint stuff in *od (and assumes *od is already allocated. If orientation restraint are used, globalState is read and modified on the master rank (which is the only rank, since orientation restraints can not run in parallel). </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h" line="69" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.cpp" bodystart="68" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="orires_8h_1a6741f4d85daccda26b0851b156a49ea9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real calc_orires_dev</definition>
+        <argsstring>(const gmx_multisim_t *ms, int nfa, const t_iatom fa[], const t_iparams ip[], const t_mdatoms *md, const rvec x[], const t_pbc *pbc, t_fcdata *fcd, history_t *hist)</argsstring>
+        <name>calc_orires_dev</name>
+        <param>
+          <type>const <ref refid="structgmx__multisim__t" kindref="compound">gmx_multisim_t</ref> *</type>
+          <declname>ms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nfa</declname>
+        </param>
+        <param>
+          <type>const t_iatom</type>
+          <declname>fa</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="uniont__iparams" kindref="compound">t_iparams</ref></type>
+          <declname>ip</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>const rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type><ref refid="classhistory__t" kindref="compound">history_t</ref> *</type>
+          <declname>hist</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the time averaged D matrices, the S matrix for each experiment. </para>        </briefdescription>
+        <detaileddescription>
+<para>Returns the weighted RMS deviation of the orientation restraints. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h" line="81" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.cpp" bodystart="374" bodyend="631"/>
+      </memberdef>
+      <memberdef kind="function" id="orires_8h_1abc65ee6ebe3564f33fe99c2fdad0e2e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void diagonalize_orires_tensors</definition>
+        <argsstring>(t_oriresdata *od)</argsstring>
+        <name>diagonalize_orires_tensors</name>
+        <param>
+          <type><ref refid="structt__oriresdata" kindref="compound">t_oriresdata</ref> *</type>
+          <declname>od</declname>
+        </param>
+        <briefdescription>
+<para>Diagonalizes the order tensor(s) of the orienation restraints. </para>        </briefdescription>
+        <detaileddescription>
+<para>For each experiment eig containts first 3 eigenvalues and then the 3 eigenvectors. The eigenvalues are ordered on magnitude. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h" line="92" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.cpp" bodystart="285" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="orires_8h_1a558c2a0b81d1976025f8f0efd51af375" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print_orires_log</definition>
+        <argsstring>(FILE *log, t_oriresdata *od)</argsstring>
+        <name>print_orires_log</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__oriresdata" kindref="compound">t_oriresdata</ref> *</type>
+          <declname>od</declname>
+        </param>
+        <briefdescription>
+<para>Prints order parameter, eigenvalues and eigenvectors to the log file. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h" line="95" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.cpp" bodystart="351" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="orires_8h_1a6011edc09742f99f9f6b872367da923e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void update_orires_history</definition>
+        <argsstring>(t_fcdata *fcd, history_t *hist)</argsstring>
+        <name>update_orires_history</name>
+        <param>
+          <type><ref refid="structt__fcdata" kindref="compound">t_fcdata</ref> *</type>
+          <declname>fcd</declname>
+        </param>
+        <param>
+          <type><ref refid="classhistory__t" kindref="compound">history_t</ref> *</type>
+          <declname>hist</declname>
+        </param>
+        <briefdescription>
+<para>Copies the new time averages that have been calculated in calc_orires_dev. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h" line="101" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.cpp" bodystart="740" bodyend="758"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares functions for handling orientation restraints. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/listed-forces/orires.h"/>
+  </compounddef>
+</doxygen>

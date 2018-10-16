@@ -1,0 +1,791 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="state_8h" kind="file">
+    <compoundname>state.h</compoundname>
+    <includes local="no">array</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">vector</includes>
+    <includes refid="hostallocator_8h" local="yes">gromacs/gpu_utils/hostallocator.h</includes>
+    <includes refid="paddedvector_8h" local="yes">gromacs/math/paddedvector.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="arrayref_8h" local="yes">gromacs/utility/arrayref.h</includes>
+    <includes refid="basedefinitions_8h" local="yes">gromacs/utility/basedefinitions.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="awh_8cpp" local="yes">src/gromacs/awh/awh.cpp</includedby>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="domdec__topology_8cpp" local="yes">src/gromacs/domdec/domdec_topology.cpp</includedby>
+    <includedby refid="edsam_8cpp" local="yes">src/gromacs/essentialdynamics/edsam.cpp</includedby>
+    <includedby refid="pme-load-balancing_8cpp" local="yes">src/gromacs/ewald/pme-load-balancing.cpp</includedby>
+    <includedby refid="checkpoint_8cpp" local="yes">src/gromacs/fileio/checkpoint.cpp</includedby>
+    <includedby refid="enxio_8cpp" local="yes">src/gromacs/fileio/enxio.cpp</includedby>
+    <includedby refid="tpxio_8cpp" local="yes">src/gromacs/fileio/tpxio.cpp</includedby>
+    <includedby refid="gmx__pme__error_8cpp" local="yes">src/gromacs/gmxana/gmx_pme_error.cpp</includedby>
+    <includedby refid="gmx__tune__pme_8cpp" local="yes">src/gromacs/gmxana/gmx_tune_pme.cpp</includedby>
+    <includedby refid="gmx__wham_8cpp" local="yes">src/gromacs/gmxana/gmx_wham.cpp</includedby>
+    <includedby refid="gromacs_2gmxpreprocess_2grompp_8cpp" local="yes">src/gromacs/gmxpreprocess/grompp.cpp</includedby>
+    <includedby refid="imd_8cpp" local="yes">src/gromacs/imd/imd.cpp</includedby>
+    <includedby refid="disre_8cpp" local="yes">src/gromacs/listed-forces/disre.cpp</includedby>
+    <includedby refid="orires_8cpp" local="yes">src/gromacs/listed-forces/orires.cpp</includedby>
+    <includedby refid="broadcaststructs_8cpp" local="yes">src/gromacs/mdlib/broadcaststructs.cpp</includedby>
+    <includedby refid="constr_8cpp" local="yes">src/gromacs/mdlib/constr.cpp</includedby>
+    <includedby refid="coupling_8cpp" local="yes">src/gromacs/mdlib/coupling.cpp</includedby>
+    <includedby refid="expanded_8cpp" local="yes">src/gromacs/mdlib/expanded.cpp</includedby>
+    <includedby refid="md__support_8cpp" local="yes">src/gromacs/mdlib/md_support.cpp</includedby>
+    <includedby refid="mdebin_8cpp" local="yes">src/gromacs/mdlib/mdebin.cpp</includedby>
+    <includedby refid="mdoutf_8cpp" local="yes">src/gromacs/mdlib/mdoutf.cpp</includedby>
+    <includedby refid="minimize_8cpp" local="yes">src/gromacs/mdlib/minimize.cpp</includedby>
+    <includedby refid="nbnxn__tuning_8cpp" local="yes">src/gromacs/mdlib/nbnxn_tuning.cpp</includedby>
+    <includedby refid="shellfc_8cpp" local="yes">src/gromacs/mdlib/shellfc.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="tpi_8cpp" local="yes">src/gromacs/mdlib/tpi.cpp</includedby>
+    <includedby refid="gromacs_2mdlib_2trajectory__writing_8cpp" local="yes">src/gromacs/mdlib/trajectory_writing.cpp</includedby>
+    <includedby refid="update_8cpp" local="yes">src/gromacs/mdlib/update.cpp</includedby>
+    <includedby refid="df__history_8cpp" local="yes">src/gromacs/mdtypes/df_history.cpp</includedby>
+    <includedby refid="state_8cpp" local="yes">src/gromacs/mdtypes/state.cpp</includedby>
+    <includedby refid="pull__rotation_8cpp" local="yes">src/gromacs/pulling/pull_rotation.cpp</includedby>
+    <includedby refid="gromacs_2swap_2swapcoords_8cpp" local="yes">src/gromacs/swap/swapcoords.cpp</includedby>
+    <includedby refid="check_8cpp" local="yes">src/gromacs/tools/check.cpp</includedby>
+    <includedby refid="convert__tpr_8cpp" local="yes">src/gromacs/tools/convert_tpr.cpp</includedby>
+    <includedby refid="dump_8cpp" local="yes">src/gromacs/tools/dump.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <includedby refid="membed_8cpp" local="yes">src/programs/mdrun/membed.cpp</includedby>
+    <includedby refid="repl__ex_8cpp" local="yes">src/programs/mdrun/repl_ex.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <incdepgraph>
+      <node id="18441">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="18446">
+        <label>iterator</label>
+      </node>
+      <node id="18431">
+        <label>stdint.h</label>
+      </node>
+      <node id="18425">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="18426" relation="include">
+        </childnode>
+        <childnode refid="18423" relation="include">
+        </childnode>
+        <childnode refid="18424" relation="include">
+        </childnode>
+        <childnode refid="18427" relation="include">
+        </childnode>
+        <childnode refid="18433" relation="include">
+        </childnode>
+      </node>
+      <node id="18447">
+        <label>stdexcept</label>
+      </node>
+      <node id="18437">
+        <label>string</label>
+      </node>
+      <node id="18427">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="18426" relation="include">
+        </childnode>
+        <childnode refid="18428" relation="include">
+        </childnode>
+      </node>
+      <node id="18440">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="18423" relation="include">
+        </childnode>
+      </node>
+      <node id="18436">
+        <label>exception</label>
+      </node>
+      <node id="18442">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="18430" relation="include">
+        </childnode>
+        <childnode refid="18441" relation="include">
+        </childnode>
+      </node>
+      <node id="18443">
+        <label>gromacs/math/paddedvector.h</label>
+        <link refid="paddedvector_8h"/>
+        <childnode refid="18444" relation="include">
+        </childnode>
+        <childnode refid="18424" relation="include">
+        </childnode>
+        <childnode refid="18427" relation="include">
+        </childnode>
+        <childnode refid="18445" relation="include">
+        </childnode>
+      </node>
+      <node id="18434">
+        <label>cstdio</label>
+      </node>
+      <node id="18450">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="18424">
+        <label>vector</label>
+      </node>
+      <node id="18429">
+        <label>new</label>
+      </node>
+      <node id="18449">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="18430" relation="include">
+        </childnode>
+      </node>
+      <node id="18448">
+        <label>utility</label>
+      </node>
+      <node id="18422">
+        <label>array</label>
+      </node>
+      <node id="18421">
+        <label>src/gromacs/mdtypes/state.h</label>
+        <link refid="state.h"/>
+        <childnode refid="18422" relation="include">
+        </childnode>
+        <childnode refid="18423" relation="include">
+        </childnode>
+        <childnode refid="18424" relation="include">
+        </childnode>
+        <childnode refid="18425" relation="include">
+        </childnode>
+        <childnode refid="18443" relation="include">
+        </childnode>
+        <childnode refid="18449" relation="include">
+        </childnode>
+        <childnode refid="18445" relation="include">
+        </childnode>
+        <childnode refid="18430" relation="include">
+        </childnode>
+        <childnode refid="18450" relation="include">
+        </childnode>
+      </node>
+      <node id="18430">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="18431" relation="include">
+        </childnode>
+        <childnode refid="18432" relation="include">
+        </childnode>
+      </node>
+      <node id="18435">
+        <label>cstdlib</label>
+      </node>
+      <node id="18433">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="18434" relation="include">
+        </childnode>
+        <childnode refid="18435" relation="include">
+        </childnode>
+        <childnode refid="18436" relation="include">
+        </childnode>
+        <childnode refid="18423" relation="include">
+        </childnode>
+        <childnode refid="18437" relation="include">
+        </childnode>
+        <childnode refid="18438" relation="include">
+        </childnode>
+        <childnode refid="18439" relation="include">
+        </childnode>
+        <childnode refid="18424" relation="include">
+        </childnode>
+        <childnode refid="18430" relation="include">
+        </childnode>
+        <childnode refid="18440" relation="include">
+        </childnode>
+        <childnode refid="18441" relation="include">
+        </childnode>
+        <childnode refid="18442" relation="include">
+        </childnode>
+      </node>
+      <node id="18445">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="18426" relation="include">
+        </childnode>
+        <childnode refid="18422" relation="include">
+        </childnode>
+        <childnode refid="18446" relation="include">
+        </childnode>
+        <childnode refid="18447" relation="include">
+        </childnode>
+        <childnode refid="18448" relation="include">
+        </childnode>
+        <childnode refid="18424" relation="include">
+        </childnode>
+        <childnode refid="18442" relation="include">
+        </childnode>
+      </node>
+      <node id="18426">
+        <label>cstddef</label>
+      </node>
+      <node id="18428">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="18426" relation="include">
+        </childnode>
+        <childnode refid="18423" relation="include">
+        </childnode>
+        <childnode refid="18429" relation="include">
+        </childnode>
+        <childnode refid="18430" relation="include">
+        </childnode>
+      </node>
+      <node id="18438">
+        <label>type_traits</label>
+      </node>
+      <node id="18444">
+        <label>algorithm</label>
+      </node>
+      <node id="18423">
+        <label>memory</label>
+      </node>
+      <node id="18432">
+        <label>inttypes.h</label>
+      </node>
+      <node id="18439">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="18460">
+        <label>src/gromacs/swap/swapcoords.cpp</label>
+        <link refid="gromacs_2swap_2swapcoords_8cpp"/>
+      </node>
+      <node id="18455">
+        <label>src/gromacs/gmxana/gmx_wham.cpp</label>
+        <link refid="gmx__wham_8cpp"/>
+      </node>
+      <node id="18457">
+        <label>src/gromacs/mdlib/minimize.cpp</label>
+        <link refid="minimize_8cpp"/>
+      </node>
+      <node id="18456">
+        <label>src/gromacs/imd/imd.cpp</label>
+        <link refid="imd_8cpp"/>
+      </node>
+      <node id="18454">
+        <label>src/gromacs/ewald/pme-load-balancing.cpp</label>
+        <link refid="pme-load-balancing_8cpp"/>
+      </node>
+      <node id="18451">
+        <label>src/gromacs/mdtypes/state.h</label>
+        <link refid="state.h"/>
+        <childnode refid="18452" relation="include">
+        </childnode>
+        <childnode refid="18453" relation="include">
+        </childnode>
+        <childnode refid="18454" relation="include">
+        </childnode>
+        <childnode refid="18455" relation="include">
+        </childnode>
+        <childnode refid="18456" relation="include">
+        </childnode>
+        <childnode refid="18457" relation="include">
+        </childnode>
+        <childnode refid="18458" relation="include">
+        </childnode>
+        <childnode refid="18459" relation="include">
+        </childnode>
+        <childnode refid="18460" relation="include">
+        </childnode>
+        <childnode refid="18461" relation="include">
+        </childnode>
+      </node>
+      <node id="18453">
+        <label>src/gromacs/domdec/domdec_topology.cpp</label>
+        <link refid="domdec__topology_8cpp"/>
+      </node>
+      <node id="18461">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="18459">
+        <label>src/gromacs/mdlib/tpi.cpp</label>
+        <link refid="tpi_8cpp"/>
+      </node>
+      <node id="18452">
+        <label>src/gromacs/awh/awh.cpp</label>
+        <link refid="awh_8cpp"/>
+      </node>
+      <node id="18458">
+        <label>src/gromacs/mdlib/nbnxn_tuning.cpp</label>
+        <link refid="nbnxn__tuning_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classhistory__t" prot="public">history_t</innerclass>
+    <innerclass refid="classekinstate__t" prot="public">ekinstate_t</innerclass>
+    <innerclass refid="structdf__history__t" prot="public">df_history_t</innerclass>
+    <innerclass refid="classt__state" prot="public">t_state</innerclass>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8" prot="public" static="no">
+        <name>@127</name>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a7e5ab556a2ad04c024c12eda870ac057" prot="public">
+          <name>estLAMBDA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8aaa6b91450eb09c6f9b3620033c203bf4" prot="public">
+          <name>estBOX</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a545f7e6dfe6fea4176ced2bcaacf54d0" prot="public">
+          <name>estBOX_REL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a009595dd99cbe9bd1654b34bb3eeda99" prot="public">
+          <name>estBOXV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a0baaddfcf2e4b634e6cd6ff8e1ca005e" prot="public">
+          <name>estPRES_PREV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a5bd2fb0c03bf34ea0854beb0a7d4d91b" prot="public">
+          <name>estNH_XI</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8aed096f00a943bed67a9fae2ada094b77" prot="public">
+          <name>estTHERM_INT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8aaf1b2c24d2bb3029c2871d326e56e4d7" prot="public">
+          <name>estX</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a4d2f0c18400ae999c9ad0ceafaa8ea3f" prot="public">
+          <name>estV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8ac6fe6b064189c3efdd323138d69746c8" prot="public">
+          <name>estSDX_NOTSUPPORTED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a55b8744a0d43746ab64d544b5ee267d3" prot="public">
+          <name>estCGP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a7565a1e47a6b5a827dcc31aa52cb820d" prot="public">
+          <name>estLD_RNG_NOTSUPPORTED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a8b67562a53b8715e3aa7ffb9f6062e8f" prot="public">
+          <name>estLD_RNGI_NOTSUPPORTED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a2b2e9cedf1cddb761638d8598d8da0b5" prot="public">
+          <name>estDISRE_INITF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8ad5fade6b4107315dd99c37b60510a71c" prot="public">
+          <name>estDISRE_RM3TAV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a84cb2e5d1ec8300b80ff05fdcb17395f" prot="public">
+          <name>estORIRE_INITF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8af22dbadf1cb21c268b8fc3309ea9c073" prot="public">
+          <name>estORIRE_DTAV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a379d34a701c99138e1a7f9ee6a529619" prot="public">
+          <name>estSVIR_PREV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8acbecc5b059929490a0145cc4067af159" prot="public">
+          <name>estNH_VXI</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a6cc7e809d4ba49b8fb7505d96d7b37d5" prot="public">
+          <name>estVETA</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8ada3b99a0dfa0863ad2688b4fe92061c3" prot="public">
+          <name>estVOL0</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a78b660503d371773cff7842dd3cb818e" prot="public">
+          <name>estNHPRES_XI</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a2769e2b132f9457b6b632de25c89a0f1" prot="public">
+          <name>estNHPRES_VXI</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8ac4cf4c8f03ee637b42fd5bd338425398" prot="public">
+          <name>estFVIR_PREV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8acf177c08a20da710214abc50655643bb" prot="public">
+          <name>estFEPSTATE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a5c0d94abe0c40f6c114009096789620a" prot="public">
+          <name>estMC_RNG_NOTSUPPORTED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8ad630d0e53dba6decb7abc236e6d4b770" prot="public">
+          <name>estMC_RNGI_NOTSUPPORTED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a1c440b87055a6cb5747df3498e1d3948" prot="public">
+          <name>estBAROS_INT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="state_8h_1a39b4e25c4e8f5fed29720be17a532fa8a87a8fc3d302d05dbc2c665db8cdd94b2" prot="public">
+          <name>estNR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="88" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" bodystart="88" bodyend="99"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="state_8h_1ae0050de065f8435f3a7f90c4a36dd4dd" prot="public" static="no">
+        <type>struct <ref refid="structdf__history__t" kindref="compound">df_history_t</ref></type>
+        <definition>typedef struct df_history_t  df_history_t</definition>
+        <argsstring></argsstring>
+        <name>df_history_t</name>
+        <briefdescription>
+<para>Free-energy sampling history struct. </para>        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000059"><xreftitle>Todo</xreftitle><xrefdescription><para>Split out into microstate and observables history. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="176" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="state_8h_1ad7d196da7b74dc6301712eed8c877dc8" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* est_names[estNR]</definition>
+        <argsstring>[estNR]</argsstring>
+        <name>est_names</name>
+        <briefdescription>
+<para>The names of the state entries, defined in src/gmxlib/checkpoint.c. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="102" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/fileio/checkpoint.cpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="state_8h_1a4af3e3b751df3e19c947b22db4ee3448" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_gtc_state</definition>
+        <argsstring>(t_state *state, int ngtc, int nnhpres, int nhchainlength)</argsstring>
+        <name>init_gtc_state</name>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ngtc</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nnhpres</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nhchainlength</declname>
+        </param>
+        <briefdescription>
+<para>Resizes the T- and P-coupling state variables. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="258" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.cpp" bodystart="87" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="state_8h_1ac649a4ab765fec34f41b000a658a3ea1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void state_change_natoms</definition>
+        <argsstring>(t_state *state, int natoms)</argsstring>
+        <name>state_change_natoms</name>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <briefdescription>
+<para>Change the number of atoms represented by this state, allocating memory as needed. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="261" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.cpp" bodystart="103" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="state_8h_1adae65c8798971118f76fcc9b4237aeb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_dfhist_state</definition>
+        <argsstring>(t_state *state, int dfhistNumLambda)</argsstring>
+        <name>init_dfhist_state</name>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dfhistNumLambda</declname>
+        </param>
+        <briefdescription>
+<para>Allocates memory for free-energy history. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="264" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.cpp" bodystart="124" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="state_8h_1afff7fc51939d46c2f832765b6cdd7254" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void comp_state</definition>
+        <argsstring>(const t_state *st1, const t_state *st2, gmx_bool bRMSD, real ftol, real abstol)</argsstring>
+        <name>comp_state</name>
+        <param>
+          <type>const <ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>st1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>st2</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bRMSD</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>ftol</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>abstol</declname>
+        </param>
+        <briefdescription>
+<para>Compares two states, write the differences to stdout. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="267" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.cpp" bodystart="137" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="state_8h_1a7270f32310ead9ef5f92690e17f837d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>rvec *</type>
+        <definition>rvec* makeRvecArray</definition>
+        <argsstring>(gmx::ArrayRef&lt; const gmx::RVec &gt; v, unsigned int n)</argsstring>
+        <name>makeRvecArray</name>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; const <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Allocates an rvec pointer and copy the contents of v to it. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="270" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.cpp" bodystart="209" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="state_8h_1a6f96a8a73bc80a569e68d84bdea39eeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_box_rel</definition>
+        <argsstring>(const t_inputrec *ir, t_state *state)</argsstring>
+        <name>set_box_rel</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type><ref refid="classt__state" kindref="compound">t_state</ref> *</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Determine the relative box components. </para>        </briefdescription>
+        <detaileddescription>
+<para>Set box_rel e.g. used in mdrun state, used to preserve the box shape <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="279" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.cpp" bodystart="267" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="state_8h_1a9e3100153a01b555aafd288518c85e1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void preserve_box_shape</definition>
+        <argsstring>(const t_inputrec *ir, matrix box_rel, matrix box)</argsstring>
+        <name>preserve_box_shape</name>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box_rel</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Make sure the relative box shape remains the same. </para>        </briefdescription>
+        <detaileddescription>
+<para>This function ensures that the relative box dimensions are preserved, which otherwise might diffuse away due to rounding errors in pressure coupling or the deform option.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Input record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box_rel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Relative box dimensions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The corrected actual box dimensions </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h" line="291" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.cpp" bodystart="281" bodyend="288"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains the definition of the microstate of the simulated system. </para>    </briefdescription>
+    <detaileddescription>
+<para>History of observables that needs to be checkpointed should be stored in <ref refid="structObservablesHistory" kindref="compound">ObservablesHistory</ref>. The state of the mdrun machinery that needs to be checkpointed is also stored elsewhere.</para><para><simplesect kind="author"><para>Berk Hess </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdtypes/state.h"/>
+  </compounddef>
+</doxygen>

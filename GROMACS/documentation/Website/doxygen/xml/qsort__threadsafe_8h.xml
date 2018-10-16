@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="qsort__threadsafe_8h" kind="file">
+    <compoundname>qsort_threadsafe.h</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="yes">config.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="readinp_8cpp" local="yes">src/gromacs/fileio/readinp.cpp</includedby>
+    <includedby refid="pull__rotation_8cpp" local="yes">src/gromacs/pulling/pull_rotation.cpp</includedby>
+    <includedby refid="qsort__threadsafe_8cpp" local="yes">src/gromacs/utility/qsort_threadsafe.cpp</includedby>
+    <incdepgraph>
+      <node id="32413">
+        <label>stdlib.h</label>
+      </node>
+      <node id="32412">
+        <label>src/gromacs/utility/qsort_threadsafe.h</label>
+        <link refid="qsort_threadsafe.h"/>
+        <childnode refid="32413" relation="include">
+        </childnode>
+        <childnode refid="32414" relation="include">
+        </childnode>
+      </node>
+      <node id="32414">
+        <label>config.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__module__utility_1gaaf82b25c57ecd30a306f027b0696ca94" prot="public" static="no">
+        <name>gmx_qsort_threadsafe</name>
+        <initializer>qsort</initializer>
+        <briefdescription>
+<para>Threadsafe qsort(). </para>        </briefdescription>
+        <detaileddescription>
+<para>Expands to <ref refid="group__module__utility_1gae5b3474512462e1c7b27d8a8a096568f" kindref="member">gmx_qsort()</ref> if Gromacs is built with threading, or system qsort() otherwise. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/qsort_threadsafe.h" line="100" column="10" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/qsort_threadsafe.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__module__utility_1gae5b3474512462e1c7b27d8a8a096568f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx_qsort</definition>
+        <argsstring>(void *base, size_t nmemb, size_t size, int(*compar)(const void *, const void *))</argsstring>
+        <name>gmx_qsort</name>
+        <param>
+          <type>void *</type>
+          <declname>base</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>nmemb</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>int(*)(const void *, const void *)</type>
+          <declname>compar</declname>
+        </param>
+        <briefdescription>
+<para>Portable threadsafe sort routine. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to first element in list to sort </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nmemb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of elements in list </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Size in bytes of each element </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>compar</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Comparison function that takes two pointers to elements being compared as arguments. The function should return an integer less than, equal to, or greater than zero if the first argument is considered to be respectively less than, equal to, or greater than the second. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/qsort_threadsafe.h" line="84" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/qsort_threadsafe.cpp" bodystart="120" bodyend="258"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Portable implementation of threadsafe quicksort. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal />  This module provides a GROMACS version of the qsort() routine defined. It is not highly optimized, but it is threadsafe, i.e. multiple threads can simultaneously call <ref refid="group__module__utility_1gae5b3474512462e1c7b27d8a8a096568f" kindref="member">gmx_qsort()</ref> with different data.</para><para>The rational is that some implementations of qsort() are not threadsafe. For instance qsort() in glibc contains a bug which makes it not threadsafe: <ulink url="http://sources.redhat.com/bugzilla/show_bug.cgi?id=11655">http://sources.redhat.com/bugzilla/show_bug.cgi?id=11655</ulink> On the other hand, system qsort() might be faster than our own. </para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/utility/qsort_threadsafe.h"/>
+  </compounddef>
+</doxygen>

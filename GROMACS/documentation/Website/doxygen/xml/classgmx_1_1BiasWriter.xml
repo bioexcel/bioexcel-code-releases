@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1BiasWriter" kind="class" prot="public">
+    <compoundname>gmx::BiasWriter</compoundname>
+    <includes local="no">gromacs/awh/biaswriter.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1BiasWriter_1a93717445fa4eb1243c0b22b249f3555b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classgmx_1_1AwhEnergyBlock" kindref="compound">AwhEnergyBlock</ref> &gt;</type>
+        <definition>std::vector&lt;AwhEnergyBlock&gt; gmx::BiasWriter::block_</definition>
+        <argsstring></argsstring>
+        <name>block_</name>
+        <briefdescription>
+<para>The data blocks. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="207" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classgmx_1_1BiasWriter_1aaaa8ea76075a7aecd3aabcc03415003b" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="namespacegmx_1aed0429233bc357e419dafee7b8bd1344" kindref="member">AwhOutputEntryType</ref>, int &gt;</type>
+        <definition>std::map&lt;AwhOutputEntryType, int&gt; gmx::BiasWriter::outputTypeToBlock_</definition>
+        <argsstring></argsstring>
+        <name>outputTypeToBlock_</name>
+        <briefdescription>
+<para>Start block index for each variable, -1 when variable should not be written. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="208" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1a4bb9304155a81113722a4c27e8c9e403" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::BiasWriter::BiasWriter</definition>
+        <argsstring>(const Bias &amp;bias)</argsstring>
+        <name>BiasWriter</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> &amp;</type>
+          <declname>bias</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The AWH bias. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="138" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.cpp" bodystart="141" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1a68c72e3bf95e2d5b8452fe8cb191b4a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::BiasWriter::numBlocks</definition>
+        <argsstring>() const </argsstring>
+        <name>numBlocks</name>
+        <briefdescription>
+<para>Returns the number of data blocks. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the number of data blocks. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="144" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1a75746e5310c50bb752b0a0d82c94c689" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::BiasWriter::writeToEnergySubblocks</definition>
+        <argsstring>(const Bias &amp;bias, t_enxsubblock *subblock)</argsstring>
+        <name>writeToEnergySubblocks</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> &amp;</type>
+          <declname>bias</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__enxsubblock" kindref="compound">t_enxsubblock</ref> *</type>
+          <declname>subblock</declname>
+        </param>
+        <briefdescription>
+<para>Collect AWH bias data in blocks and write to energy subblocks. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The AWH <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">subblock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Energy subblocks to write to. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the number of blocks written. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="155" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.cpp" bodystart="395" bodyend="408"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1a356745268e8d1a23ec323fef84d3340a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::BiasWriter::hasVarBlock</definition>
+        <argsstring>(AwhOutputEntryType outputType) const </argsstring>
+        <name>hasVarBlock</name>
+        <param>
+          <type><ref refid="namespacegmx_1aed0429233bc357e419dafee7b8bd1344" kindref="member">AwhOutputEntryType</ref></type>
+          <declname>outputType</declname>
+        </param>
+        <briefdescription>
+<para>Query if the writer has a block for the given variable. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">outputType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output entry type. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="162" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" bodystart="162" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1ad99c5274022247a8b15c1e3fe0fc28c0" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::BiasWriter::getVarStartBlock</definition>
+        <argsstring>(AwhOutputEntryType outputType) const </argsstring>
+        <name>getVarStartBlock</name>
+        <param>
+          <type><ref refid="namespacegmx_1aed0429233bc357e419dafee7b8bd1344" kindref="member">AwhOutputEntryType</ref></type>
+          <declname>outputType</declname>
+        </param>
+        <briefdescription>
+<para><itemizedlist>
+<listitem><para>Find the first block containing the given variable. </para></listitem></itemizedlist>
+</para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">outputType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output entry type. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the first block index for the variable, or -1 there is no block. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="172" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" bodystart="172" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1a818ec1efebf23442b3ce17f28e83ca02" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::BiasWriter::transferMetaDataToWriter</definition>
+        <argsstring>(size_t metaDataIndex, AwhOutputMetaData metaDataType, const Bias &amp;bias)</argsstring>
+        <name>transferMetaDataToWriter</name>
+        <param>
+          <type>size_t</type>
+          <declname>metaDataIndex</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1aa78c6481d10a93316c155ffdf021e581" kindref="member">AwhOutputMetaData</ref></type>
+          <declname>metaDataType</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> &amp;</type>
+          <declname>bias</declname>
+        </param>
+        <briefdescription>
+<para>Transfer AWH point data to writer data blocks. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">metaDataIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Meta data block index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">metaDataType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of meta data to write. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The AWH <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref>. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="183" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.cpp" bodystart="262" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1a3e98f34381e6496b20048c23ec0e9260" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::BiasWriter::transferPointDataToWriter</definition>
+        <argsstring>(AwhOutputEntryType outputType, int pointIndex, const Bias &amp;bias, gmx::ArrayRef&lt; const float &gt; pmf)</argsstring>
+        <name>transferPointDataToWriter</name>
+        <param>
+          <type><ref refid="namespacegmx_1aed0429233bc357e419dafee7b8bd1344" kindref="member">AwhOutputEntryType</ref></type>
+          <declname>outputType</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pointIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> &amp;</type>
+          <declname>bias</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; const float &gt;</type>
+          <declname>pmf</declname>
+        </param>
+        <briefdescription>
+<para>Transfer AWH point data to writer data blocks. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">outputType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output entry type. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pointIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The point index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">bias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The AWH <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">pmf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PMF values. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="194" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.cpp" bodystart="292" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1BiasWriter_1a303a74ad3108acde6ebf1ff8713f8d38" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::BiasWriter::prepareBiasOutput</definition>
+        <argsstring>(const Bias &amp;bias)</argsstring>
+        <name>prepareBiasOutput</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref> &amp;</type>
+          <declname>bias</declname>
+        </param>
+        <briefdescription>
+<para>Prepare the bias output data. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The AWH <ref refid="classgmx_1_1Bias" kindref="compound">Bias</ref>. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="204" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.cpp" bodystart="358" bodyend="393"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class organizing the output data storing and writing of an AWH bias. </para>    </briefdescription>
+    <detaileddescription>
+<internal></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" line="132" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/awh/biaswriter.h" bodystart="131" bodyend="209"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1BiasWriter_1a4bb9304155a81113722a4c27e8c9e403" prot="public" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>BiasWriter</name></member>
+      <member refid="classgmx_1_1BiasWriter_1a93717445fa4eb1243c0b22b249f3555b" prot="private" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>block_</name></member>
+      <member refid="classgmx_1_1BiasWriter_1ad99c5274022247a8b15c1e3fe0fc28c0" prot="private" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>getVarStartBlock</name></member>
+      <member refid="classgmx_1_1BiasWriter_1a356745268e8d1a23ec323fef84d3340a" prot="private" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>hasVarBlock</name></member>
+      <member refid="classgmx_1_1BiasWriter_1a68c72e3bf95e2d5b8452fe8cb191b4a0" prot="public" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>numBlocks</name></member>
+      <member refid="classgmx_1_1BiasWriter_1aaaa8ea76075a7aecd3aabcc03415003b" prot="private" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>outputTypeToBlock_</name></member>
+      <member refid="classgmx_1_1BiasWriter_1a303a74ad3108acde6ebf1ff8713f8d38" prot="private" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>prepareBiasOutput</name></member>
+      <member refid="classgmx_1_1BiasWriter_1a818ec1efebf23442b3ce17f28e83ca02" prot="private" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>transferMetaDataToWriter</name></member>
+      <member refid="classgmx_1_1BiasWriter_1a3e98f34381e6496b20048c23ec0e9260" prot="private" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>transferPointDataToWriter</name></member>
+      <member refid="classgmx_1_1BiasWriter_1a75746e5310c50bb752b0a0d82c94c689" prot="public" virt="non-virtual"><scope>gmx::BiasWriter</scope><name>writeToEnergySubblocks</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

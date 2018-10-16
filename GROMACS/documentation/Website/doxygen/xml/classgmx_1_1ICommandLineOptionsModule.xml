@@ -1,0 +1,457 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1ICommandLineOptionsModule" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::ICommandLineOptionsModule</compoundname>
+    <derivedcompoundref refid="classgmx_1_1anonymous__namespace_02cmdlinerunner_8cpp_03_1_1RunnerModule" prot="public" virt="non-virtual">gmx::anonymous_namespace{cmdlinerunner.cpp}::RunnerModule</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules" prot="public" virt="non-virtual">gmx::anonymous_namespace{insert-molecules.cpp}::InsertMolecules</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1test_1_1MockOptionsModule" prot="public" virt="non-virtual">gmx::test::MockOptionsModule</derivedcompoundref>
+    <includes local="no">gromacs/commandline/cmdlineoptionsmodule.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgmx_1_1ICommandLineOptionsModule_1a600f22ce0fca3bca1aaf672395e4778e" prot="public" static="no">
+        <type>std::function&lt; <ref refid="namespacegmx_1a682ce4a779fde44ee633b8648eeafe87" kindref="member">ICommandLineOptionsModulePointer</ref>()&gt;</type>
+        <definition>typedef std::function&lt;ICommandLineOptionsModulePointer()&gt; gmx::ICommandLineOptionsModule::FactoryMethod</definition>
+        <argsstring></argsstring>
+        <name>FactoryMethod</name>
+        <briefdescription>
+<para>Function pointer to a factory method that returns an interface of this type. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Module to run. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="154" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1afda90519afc76589fc724ce37bcc8746" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; ICommandLineModule &gt; gmx::ICommandLineOptionsModule::createModule</definition>
+        <argsstring>(const char *name, const char *description, ICommandLineOptionsModulePointer module)</argsstring>
+        <name>createModule</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a682ce4a779fde44ee633b8648eeafe87" kindref="member">ICommandLineOptionsModulePointer</ref></type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Creates a <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref> to run the specified module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Short description for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to run. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref> object that runs <computeroutput>module</computeroutput> module. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="166" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.cpp" bodystart="206" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1a12df4840d77852b63615d8a960864eae" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::ICommandLineOptionsModule::runAsMain</definition>
+        <argsstring>(int argc, char *argv[], const char *name, const char *description, FactoryMethod factory)</argsstring>
+        <name>runAsMain</name>
+        <param>
+          <type>int</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>argv</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ICommandLineOptionsModule_1a600f22ce0fca3bca1aaf672395e4778e" kindref="member">FactoryMethod</ref></type>
+          <declname>factory</declname>
+        </param>
+        <briefdescription>
+<para>Implements a <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref> method that runs a single module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argc</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><computeroutput>argv</computeroutput> passed to <ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Short description for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factory that returns the module to run.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method allows for uniform behavior for binaries that only contain a single module without duplicating any of the implementation from <ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">CommandLineModuleManager</ref> (startup headers, common options etc.).</para><para><simplesect kind="see"><para><ref refid="namespacegmx_1a5a3bc0e66dda7e48091ad129bede7eff" kindref="member">runCommandLineModule()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="185" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.cpp" bodystart="215" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1ad041aee2d5501403c6c1f4f29d09b057" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::ICommandLineOptionsModule::registerModuleFactory</definition>
+        <argsstring>(CommandLineModuleManager *manager, const char *name, const char *description, FactoryMethod factory)</argsstring>
+        <name>registerModuleFactory</name>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">CommandLineModuleManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ICommandLineOptionsModule_1a600f22ce0fca3bca1aaf672395e4778e" kindref="member">FactoryMethod</ref></type>
+          <declname>factory</declname>
+        </param>
+        <briefdescription>
+<para>Registers a module of a certain type to this manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Manager to register to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Short description for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Factory that returns the module to register. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method internally creates a <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref> module with the given <computeroutput>name</computeroutput> and <computeroutput>description</computeroutput>, and adds that to <computeroutput>manager</computeroutput>. When run or asked to write the help, the module calls <computeroutput>factory</computeroutput> to get the actual module, and forwards the necessary calls. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="203" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.cpp" bodystart="224" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1aa44977fef1043dde0527e3a840a2e7a0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::ICommandLineOptionsModule::registerModuleDirect</definition>
+        <argsstring>(CommandLineModuleManager *manager, const char *name, const char *description, ICommandLineOptionsModulePointer module)</argsstring>
+        <name>registerModuleDirect</name>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleManager" kindref="compound">CommandLineModuleManager</ref> *</type>
+          <declname>manager</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>description</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a682ce4a779fde44ee633b8648eeafe87" kindref="member">ICommandLineOptionsModulePointer</ref></type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Registers a module to this manager. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Manager to register to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">description</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Short description for the module. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to register. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method internally creates a <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">ICommandLineModule</ref> module with the given <computeroutput>name</computeroutput> and <computeroutput>description</computeroutput>, and adds that to <computeroutput>manager</computeroutput>.</para><para>This method is mainly used by tests that need to have a reference to the <ref refid="classgmx_1_1ICommandLineOptionsModule" kindref="compound">ICommandLineOptionsModule</ref> instance (e.g., for mocking). </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="223" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.cpp" bodystart="234" bodyend="241"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1acd52e952db587a84fc2c905c90d13f7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::ICommandLineOptionsModule::~ICommandLineOptionsModule</definition>
+        <argsstring>()</argsstring>
+        <name>~ICommandLineOptionsModule</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="227" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.cpp" bodystart="200" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1ab0e0aeb40f7e1c6bbe84c884f70e8194" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::ICommandLineOptionsModule::init</definition>
+        <argsstring>(CommandLineModuleSettings *settings)=0</argsstring>
+        <name>init</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02cmdlinerunner_8cpp_03_1_1RunnerModule_1a8341f1e56c59842a67b8f47abd04a594">init</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules_1aa9e11d7be2c62065922a553a6bfac29c">init</reimplementedby>
+        <param>
+          <type><ref refid="classgmx_1_1CommandLineModuleSettings" kindref="compound">CommandLineModuleSettings</ref> *</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the module and provides settings for the runner. </para>        </briefdescription>
+        <detaileddescription>
+<para>This will be called before <ref refid="classgmx_1_1ICommandLineOptionsModule_1a338fccd494f73b5ac1e971c95047c292" kindref="member">run()</ref>, and can be used to adjust initialization that the runner does.</para><para>This method is currently not called when writing the help. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="230" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1af8fb627c7a80524d8c56798faaef25b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::ICommandLineOptionsModule::initOptions</definition>
+        <argsstring>(IOptionsContainer *options, ICommandLineOptionsModuleSettings *settings)=0</argsstring>
+        <name>initOptions</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02cmdlinerunner_8cpp_03_1_1RunnerModule_1af434e9a77990b7d54b9a61e6b1f97b0c">initOptions</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules_1ae6dcc077c5071c55b84527d2203dd023">initOptions</reimplementedby>
+        <param>
+          <type><ref refid="classgmx_1_1IOptionsContainer" kindref="compound">IOptionsContainer</ref> *</type>
+          <declname>options</declname>
+        </param>
+        <param>
+          <type><ref refid="classgmx_1_1ICommandLineOptionsModuleSettings" kindref="compound">ICommandLineOptionsModuleSettings</ref> *</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+<para>Initializes command-line arguments understood by the module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classgmx_1_1Options" kindref="compound">Options</ref> object to add the options to. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">settings</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Settings to communicate information to/from generic code running the module.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+When running the module, this method is called after <ref refid="classgmx_1_1ICommandLineOptionsModule_1ab0e0aeb40f7e1c6bbe84c884f70e8194" kindref="member">init()</ref>. When printing help, there is no call to <ref refid="classgmx_1_1ICommandLineOptionsModule_1ab0e0aeb40f7e1c6bbe84c884f70e8194" kindref="member">init()</ref>, and this is the only method called. In both cases, the implementation should add options understood by the module to <computeroutput>options</computeroutput>. Output values from options should be stored in member variables. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="245" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1ace80320e3379cc01c79e52c2a51e4e56" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void gmx::ICommandLineOptionsModule::optionsFinished</definition>
+        <argsstring>()=0</argsstring>
+        <name>optionsFinished</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02cmdlinerunner_8cpp_03_1_1RunnerModule_1a590f1e4e67d3913ec616f345db87b0ed">optionsFinished</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules_1a780fd3b460b8d08295ef888043dc09ea">optionsFinished</reimplementedby>
+        <briefdescription>
+<para>Called after all option values have been set. </para>        </briefdescription>
+        <detaileddescription>
+<para>When running the module, this method is called after all command-line arguments have been parsed. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="253" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ICommandLineOptionsModule_1a338fccd494f73b5ac1e971c95047c292" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>int</type>
+        <definition>virtual int gmx::ICommandLineOptionsModule::run</definition>
+        <argsstring>()=0</argsstring>
+        <name>run</name>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02cmdlinerunner_8cpp_03_1_1RunnerModule_1a55671174dbcf3e670d0cd2804c15d322">run</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules_1a2855db258e939b5c8305626638378adb">run</reimplementedby>
+        <briefdescription>
+<para>Runs the module. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>unspecified</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>May throw exceptions to indicate errors. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Exit code for the program. </para></simplesect>
+<parameterlist kind="retval"><parameteritem>
+<parameternamelist>
+<parametername>0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>on successful termination.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This method is called after <ref refid="classgmx_1_1ICommandLineOptionsModule_1ace80320e3379cc01c79e52c2a51e4e56" kindref="member">optionsFinished()</ref> when running the module, and should do all the processing for the module. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="265" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Module that can be run from a command line and uses <ref refid="classgmx_1_1Options" kindref="compound">gmx::Options</ref> for argument processing. </para>    </briefdescription>
+    <detaileddescription>
+<para>This class provides a higher-level interface on top of <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">gmx::ICommandLineModule</ref> for cases where <ref refid="classgmx_1_1Options" kindref="compound">gmx::Options</ref> will be used for declaring the command-line arguments. The module only needs to declare the options it uses, and the framework takes care of command-line parsing and help output. The module typically consists of the following parts:<itemizedlist>
+<listitem><para><ref refid="classgmx_1_1ICommandLineOptionsModule_1ab0e0aeb40f7e1c6bbe84c884f70e8194" kindref="member">init()</ref> allows for some interaction between the module and the framework when running the module; see <ref refid="classgmx_1_1ICommandLineModule_1ac14aa7a701ad69ef53a6219b4d08cad5" kindref="member">ICommandLineModule::init()</ref>. If no such customization is necessary, an empty implementation is sufficient.</para></listitem><listitem><para><ref refid="classgmx_1_1ICommandLineOptionsModule_1af8fb627c7a80524d8c56798faaef25b9" kindref="member">initOptions()</ref> is called both for running the module and for printing help for the module, and it should add the options that the module understands. Values provided for the options are typically stored in member variables.</para></listitem><listitem><para><ref refid="classgmx_1_1ICommandLineOptionsModule_1ace80320e3379cc01c79e52c2a51e4e56" kindref="member">optionsFinished()</ref> can be implemented in case additional processing is needed (e.g., checking whether an option was set by the user).</para></listitem><listitem><para><ref refid="classgmx_1_1ICommandLineOptionsModule_1a338fccd494f73b5ac1e971c95047c292" kindref="member">run()</ref> is called when running the module, after command-line options have been parsed and their values stored in the corresponding member variables.</para></listitem></itemizedlist>
+</para><para><ref refid="group__module__trajectoryanalysis_1ga05cb6818f484e7853b6ec70cdc967c06" kindref="member">registerModule()</ref>, <ref refid="classgmx_1_1ICommandLineOptionsModule_1a12df4840d77852b63615d8a960864eae" kindref="member">runAsMain()</ref>, or <ref refid="classgmx_1_1ICommandLineOptionsModule_1afda90519afc76589fc724ce37bcc8746" kindref="member">createModule()</ref> can be used to use modules of this type in all contexts where a <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">gmx::ICommandLineModule</ref> is expected. These methods create a <ref refid="classgmx_1_1ICommandLineModule" kindref="compound">gmx::ICommandLineModule</ref> implementation that contains the common code needed to parse command-line options and write help, based on the information provided from the methods in this class. </para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="1794">
+        <label>gmx::anonymous_namespace{insert-molecules.cpp}::InsertMolecules</label>
+        <link refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules"/>
+        <childnode refid="1792" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1792">
+        <label>gmx::ICommandLineOptionsModule</label>
+        <link refid="classgmx_1_1ICommandLineOptionsModule"/>
+      </node>
+      <node id="1795">
+        <label>gmx::test::MockOptionsModule</label>
+        <link refid="classgmx_1_1test_1_1MockOptionsModule"/>
+        <childnode refid="1792" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1793">
+        <label>gmx::anonymous_namespace{cmdlinerunner.cpp}::RunnerModule</label>
+        <link refid="classgmx_1_1anonymous__namespace_02cmdlinerunner_8cpp_03_1_1RunnerModule"/>
+        <childnode refid="1792" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" line="145" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/commandline/cmdlineoptionsmodule.h" bodystart="144" bodyend="266"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1afda90519afc76589fc724ce37bcc8746" prot="public" virt="non-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>createModule</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1a600f22ce0fca3bca1aaf672395e4778e" prot="public" virt="non-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>FactoryMethod</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1ab0e0aeb40f7e1c6bbe84c884f70e8194" prot="public" virt="pure-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>init</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1af8fb627c7a80524d8c56798faaef25b9" prot="public" virt="pure-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>initOptions</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1ace80320e3379cc01c79e52c2a51e4e56" prot="public" virt="pure-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>optionsFinished</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1aa44977fef1043dde0527e3a840a2e7a0" prot="public" virt="non-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>registerModuleDirect</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1ad041aee2d5501403c6c1f4f29d09b057" prot="public" virt="non-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>registerModuleFactory</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1a338fccd494f73b5ac1e971c95047c292" prot="public" virt="pure-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>run</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1a12df4840d77852b63615d8a960864eae" prot="public" virt="non-virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>runAsMain</name></member>
+      <member refid="classgmx_1_1ICommandLineOptionsModule_1acd52e952db587a84fc2c905c90d13f7d" prot="public" virt="virtual"><scope>gmx::ICommandLineOptionsModule</scope><name>~ICommandLineOptionsModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

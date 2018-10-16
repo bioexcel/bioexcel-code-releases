@@ -1,0 +1,201 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx helixorient &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx help" href="gmx-help.html" />
+    <link rel="prev" title="gmx helix" href="gmx-helix.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-help.html" title="gmx help"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-helix.html" title="gmx helix"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-helixorient">
+<span id="id1"></span><h1>gmx helixorient<a class="headerlink" href="#gmx-helixorient" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx helixorient [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>]
+             [<strong>-oaxis</strong> <em>[&lt;.dat&gt;]</em>] [<strong>-ocenter</strong> <em>[&lt;.dat&gt;]</em>] [<strong>-orise</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-oradius</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-otwist</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-obending</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-otilt</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-orot</strong> <em>[&lt;.xvg&gt;]</em>]
+             [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>] [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+             [<strong>-[no]sidechain</strong>] [<strong>-[no]incremental</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">helixorient</span></code> calculates the coordinates and direction of the average
+axis inside an alpha helix, and the direction/vectors of both the
+Calpha and (optionally) a sidechain atom relative to the axis.</p>
+<p>As input, you need to specify an index group with Calpha atoms
+corresponding to an alpha-helix of continuous residues. Sidechain
+directions require a second index group of the same size, containing
+the heavy atom in each residue that should represent the sidechain.</p>
+<p><strong>Note</strong> that this program does not do any fitting of structures.</p>
+<p>We need four Calpha coordinates to define the local direction of the helix
+axis.</p>
+<p>The tilt/rotation is calculated from Euler rotations, where we define
+the helix axis as the local <em>x</em>-axis, the residues/Calpha vector as <em>y</em>, and the
+<em>z</em>-axis from their cross product. We use the Euler Y-Z-X rotation, meaning
+we first tilt the helix axis (1) around and (2) orthogonal to the residues
+vector, and finally apply the (3) rotation around it. For debugging or other
+purposes, we also write out the actual Euler rotation angles as <code class="docutils literal"><span class="pre">theta[1-3].xvg</span></code></p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-oaxis</span></code> [&lt;.dat&gt;] (helixaxis.dat)</dt>
+<dd>Generic data file</dd>
+<dt><code class="docutils literal"><span class="pre">-ocenter</span></code> [&lt;.dat&gt;] (center.dat)</dt>
+<dd>Generic data file</dd>
+<dt><code class="docutils literal"><span class="pre">-orise</span></code> [&lt;.xvg&gt;] (rise.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-oradius</span></code> [&lt;.xvg&gt;] (radius.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-otwist</span></code> [&lt;.xvg&gt;] (twist.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-obending</span></code> [&lt;.xvg&gt;] (bending.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-otilt</span></code> [&lt;.xvg&gt;] (tilt.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-orot</span></code> [&lt;.xvg&gt;] (rotation.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]sidechain</span></code>  (no)</dt>
+<dd>Calculate sidechain directions relative to helix axis too.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]incremental</span></code>  (no)</dt>
+<dd>Calculate incremental rather than total rotation/tilt.</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx helixorient</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-helix.html"
+                        title="previous chapter">gmx helix</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-help.html"
+                        title="next chapter">gmx help</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-helixorient.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-help.html" title="gmx help"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-helix.html" title="gmx helix"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

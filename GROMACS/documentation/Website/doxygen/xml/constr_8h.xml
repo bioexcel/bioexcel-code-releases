@@ -1,0 +1,1410 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="constr_8h" kind="file">
+    <compoundname>constr.h</compoundname>
+    <includes refid="nrnb_8h" local="yes">gromacs/gmxlib/nrnb.h</includes>
+    <includes refid="idef_8h" local="yes">gromacs/topology/idef.h</includes>
+    <includes refid="ifunc_8h" local="yes">gromacs/topology/ifunc.h</includes>
+    <includes refid="topology_8h" local="yes">gromacs/topology/topology.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="domdec_8cpp" local="yes">src/gromacs/domdec/domdec.cpp</includedby>
+    <includedby refid="domdec__constraints_8h" local="yes">src/gromacs/domdec/domdec_constraints.h</includedby>
+    <includedby refid="domdec__constraints_8cpp" local="yes">src/gromacs/domdec/domdec_constraints.cpp</includedby>
+    <includedby refid="edsam_8cpp" local="yes">src/gromacs/essentialdynamics/edsam.cpp</includedby>
+    <includedby refid="gromacs_2gmxpreprocess_2grompp_8cpp" local="yes">src/gromacs/gmxpreprocess/grompp.cpp</includedby>
+    <includedby refid="clincs_8cpp" local="yes">src/gromacs/mdlib/clincs.cpp</includedby>
+    <includedby refid="constr_8cpp" local="yes">src/gromacs/mdlib/constr.cpp</includedby>
+    <includedby refid="csettle_8cpp" local="yes">src/gromacs/mdlib/csettle.cpp</includedby>
+    <includedby refid="expanded_8cpp" local="yes">src/gromacs/mdlib/expanded.cpp</includedby>
+    <includedby refid="integrator_8h" local="yes">src/gromacs/mdlib/integrator.h</includedby>
+    <includedby refid="mdebin_8cpp" local="yes">src/gromacs/mdlib/mdebin.cpp</includedby>
+    <includedby refid="minimize_8cpp" local="yes">src/gromacs/mdlib/minimize.cpp</includedby>
+    <includedby refid="shakef_8cpp" local="yes">src/gromacs/mdlib/shakef.cpp</includedby>
+    <includedby refid="shellfc_8cpp" local="yes">src/gromacs/mdlib/shellfc.cpp</includedby>
+    <includedby refid="sim__util_8cpp" local="yes">src/gromacs/mdlib/sim_util.cpp</includedby>
+    <includedby refid="stat_8cpp" local="yes">src/gromacs/mdlib/stat.cpp</includedby>
+    <includedby refid="settle_8cpp" local="yes">src/gromacs/mdlib/tests/settle.cpp</includedby>
+    <includedby refid="shake_8cpp" local="yes">src/gromacs/mdlib/tests/shake.cpp</includedby>
+    <includedby refid="tpi_8cpp" local="yes">src/gromacs/mdlib/tpi.cpp</includedby>
+    <includedby refid="update_8cpp" local="yes">src/gromacs/mdlib/update.cpp</includedby>
+    <includedby refid="md_8cpp" local="yes">src/programs/mdrun/md.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <incdepgraph>
+      <node id="14272">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="14271">
+        <label>src/gromacs/mdlib/constr.h</label>
+        <link refid="constr.h"/>
+        <childnode refid="14272" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="14275">
+        <label>src/gromacs/domdec/domdec_constraints.cpp</label>
+        <link refid="domdec__constraints_8cpp"/>
+      </node>
+      <node id="14277">
+        <label>src/gromacs/mdlib/minimize.cpp</label>
+        <link refid="minimize_8cpp"/>
+      </node>
+      <node id="14274">
+        <label>src/gromacs/domdec/domdec_constraints.h</label>
+        <link refid="domdec__constraints_8h"/>
+        <childnode refid="14275" relation="include">
+        </childnode>
+        <childnode refid="14276" relation="include">
+        </childnode>
+      </node>
+      <node id="14276">
+        <label>src/gromacs/domdec/domdec_topology.cpp</label>
+        <link refid="domdec__topology_8cpp"/>
+      </node>
+      <node id="14279">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="14278">
+        <label>src/gromacs/mdlib/tpi.cpp</label>
+        <link refid="tpi_8cpp"/>
+      </node>
+      <node id="14273">
+        <label>src/gromacs/mdlib/constr.h</label>
+        <link refid="constr.h"/>
+        <childnode refid="14274" relation="include">
+        </childnode>
+        <childnode refid="14275" relation="include">
+        </childnode>
+        <childnode refid="14277" relation="include">
+        </childnode>
+        <childnode refid="14278" relation="include">
+        </childnode>
+        <childnode refid="14279" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="constr_8h_1afa959119a4e266d439598347f45e8492" prot="public" static="no">
+        <name>constr_iatomptr</name>
+        <param><defname>nconstr</defname></param>
+        <param><defname>iatom_constr</defname></param>
+        <param><defname>iatom_constrnc</defname></param>
+        <param><defname>con</defname></param>
+        <initializer>((con) &lt; (nconstr) ? (iatom_constr)+(con)*3 : (iatom_constrnc)+(con-nconstr)*3)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="240" column="9" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="constr_8h_1aa156d1cebb38c8a65846c4d9c006012a" prot="public" static="no">
+        <name>@60</name>
+        <enumvalue id="constr_8h_1aa156d1cebb38c8a65846c4d9c006012aa0aa05697d4a00a14dc65b600eb463ef7" prot="public">
+          <name>econqCoord</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="constr_8h_1aa156d1cebb38c8a65846c4d9c006012aa8585ae32d49ae924126c850951d44452" prot="public">
+          <name>econqVeloc</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="constr_8h_1aa156d1cebb38c8a65846c4d9c006012aa8b4a8e893258ce0bbe5abccecf4f090e" prot="public">
+          <name>econqDeriv</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="constr_8h_1aa156d1cebb38c8a65846c4d9c006012aaeb10b9c542e1c729acbb75c6c8236f13" prot="public">
+          <name>econqDeriv_FlexCon</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="constr_8h_1aa156d1cebb38c8a65846c4d9c006012aaf9ad58f718dac42f1beb7653042ad737" prot="public">
+          <name>econqForce</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="constr_8h_1aa156d1cebb38c8a65846c4d9c006012aab4a995ff3441d0d02f758d108e89bf46" prot="public">
+          <name>econqForceDispl</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="69" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" bodystart="68" bodyend="78"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="constr_8h_1a0884037cdae56885954083814a99d970" prot="public" static="no">
+        <type>struct <ref refid="structgmx__lincsdata" kindref="compound">gmx_lincsdata</ref> *</type>
+        <definition>typedef struct gmx_lincsdata* gmx_lincsdata_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_lincsdata_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="50" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="constr_8h_1ad08049a9cf109e28e0a82b708fa44257" prot="public" static="no">
+        <type>struct <ref refid="structgmx__shakedata" kindref="compound">gmx_shakedata</ref> *</type>
+        <definition>typedef struct gmx_shakedata* gmx_shakedata_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_shakedata_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="53" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="constr_8h_1a4a1ed00dd48cf2bdee86a5d069f2eea4" prot="public" static="no">
+        <type>struct <ref refid="structgmx__settledata" kindref="compound">gmx_settledata</ref> *</type>
+        <definition>typedef struct gmx_settledata* gmx_settledata_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_settledata_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="56" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="constr_8h_1a9a1b11c17f111aab2d5d34a80d6cfcae" prot="public" static="no">
+        <type>struct <ref refid="structgmx__constr" kindref="compound">gmx_constr</ref> *</type>
+        <definition>typedef struct gmx_constr* gmx_constr_t</definition>
+        <argsstring></argsstring>
+        <name>gmx_constr_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="59" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="constr_8h_1acdf770e31e1ce928c042b57a399bf1d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int n_flexible_constraints</definition>
+        <argsstring>(struct gmx_constr *constr)</argsstring>
+        <name>n_flexible_constraints</name>
+        <param>
+          <type>struct <ref refid="structgmx__constr" kindref="compound">gmx_constr</ref> *</type>
+          <declname>constr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="80" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="139" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a7d4af7291041fcafb70e95a98b821e96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void too_many_constraint_warnings</definition>
+        <argsstring>(int eConstrAlg, int warncount)</argsstring>
+        <name>too_many_constraint_warnings</name>
+        <param>
+          <type>int</type>
+          <declname>eConstrAlg</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>warncount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="83" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="167" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1af89d84da95e69af7c5430ab86a9600c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structgmx__shakedata" kindref="compound">gmx_shakedata_t</ref></type>
+        <definition>gmx_shakedata_t shake_init</definition>
+        <argsstring>()</argsstring>
+        <name>shake_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="86" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/shakef.cpp" bodystart="62" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1ae7dbace4c30ac942598e7dacc98b687b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool bshakef</definition>
+        <argsstring>(FILE *log, gmx_shakedata_t shaked, real invmass[], int nblocks, int sblock[], t_idef *idef, t_inputrec *ir, rvec x_s[], rvec prime[], t_nrnb *nrnb, real *const lagr, real lambda, real *dvdlambda, real invdt, rvec *v, gmx_bool bCalcVir, tensor vir_r_m_dr, gmx_bool bDumpOnError, int econq)</argsstring>
+        <name>bshakef</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__shakedata" kindref="compound">gmx_shakedata_t</ref></type>
+          <declname>shaked</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invmass</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nblocks</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sblock</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structt__idef" kindref="compound">t_idef</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x_s</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>prime</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *const</type>
+          <declname>lagr</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlambda</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invdt</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bCalcVir</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_r_m_dr</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDumpOnError</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>econq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="89" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/shakef.cpp" bodystart="393" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a1de78d2d6740774a26d710dca3b54ff9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structgmx__settledata" kindref="compound">gmx_settledata_t</ref></type>
+        <definition>gmx_settledata_t settle_init</definition>
+        <argsstring>(const gmx_mtop_t *mtop)</argsstring>
+        <name>settle_init</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="117" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/csettle.cpp" bodystart="168" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1ab5590d705e49d75883f93791fb54d6ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void settle_free</definition>
+        <argsstring>(gmx_settledata_t settled)</argsstring>
+        <name>settle_free</name>
+        <param>
+          <type><ref refid="structgmx__settledata" kindref="compound">gmx_settledata_t</ref></type>
+          <declname>settled</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="120" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/csettle.cpp" bodystart="224" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a85fb144a19ae6ba9874a2bca78238a74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void settle_set_constraints</definition>
+        <argsstring>(gmx_settledata_t settled, const t_ilist *il_settle, const t_mdatoms *mdatoms)</argsstring>
+        <name>settle_set_constraints</name>
+        <param>
+          <type><ref refid="structgmx__settledata" kindref="compound">gmx_settledata_t</ref></type>
+          <declname>settled</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__ilist" kindref="compound">t_ilist</ref> *</type>
+          <declname>il_settle</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>mdatoms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="122" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/csettle.cpp" bodystart="233" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1ab5d8db55162dbf7745ff4730bd0d55ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void csettle</definition>
+        <argsstring>(gmx_settledata_t settled, int nthread, int thread, const struct t_pbc *pbc, const real x[], real xprime[], real invdt, real *v, bool bCalcVirial, tensor vir_r_m_dr, bool *bErrorHasOccurred)</argsstring>
+        <name>csettle</name>
+        <param>
+          <type><ref refid="structgmx__settledata" kindref="compound">gmx_settledata_t</ref></type>
+          <declname>settled</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nthread</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>thread</declname>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>xprime</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invdt</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>bCalcVirial</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_r_m_dr</declname>
+        </param>
+        <param>
+          <type>bool *</type>
+          <declname>bErrorHasOccurred</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="127" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a2d5c670c50c467dc4af237ea2d657c41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void settle_proj</definition>
+        <argsstring>(gmx_settledata_t settled, int econq, int nsettle, t_iatom iatoms[], const struct t_pbc *pbc, rvec x[], rvec *der, rvec *derp, int CalcVirAtomEnd, tensor vir_r_m_dder)</argsstring>
+        <name>settle_proj</name>
+        <param>
+          <type><ref refid="structgmx__settledata" kindref="compound">gmx_settledata_t</ref></type>
+          <declname>settled</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>econq</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nsettle</declname>
+        </param>
+        <param>
+          <type>t_iatom</type>
+          <declname>iatoms</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>der</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>derp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>CalcVirAtomEnd</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_r_m_dder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="143" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1aa444fc5e758592f3936bd05eff485194" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cshake</definition>
+        <argsstring>(const int iatom[], int ncon, int *nnit, int maxnit, const real dist2[], real xp[], const real rij[], const real m2[], real omega, const real invmass[], const real tt[], real lagr[], int *nerror)</argsstring>
+        <name>cshake</name>
+        <param>
+          <type>const int</type>
+          <declname>iatom</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncon</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nnit</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxnit</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>dist2</declname>
+          <defname>constraint_distance_squared</defname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>xp</declname>
+          <defname>positions</defname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rij</declname>
+          <defname>initial_displacements</defname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>m2</declname>
+          <defname>half_of_reduced_mass</defname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>omega</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invmass</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>tt</declname>
+          <defname>distance_squared_tolerance</defname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lagr</declname>
+          <defname>scaled_lagrange_multiplier</defname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nerror</declname>
+        </param>
+        <briefdescription>
+<para>Inner kernel for SHAKE constraints. </para>        </briefdescription>
+        <detaileddescription>
+<para>Original implementation from R.C. van Schaik and W.F. van Gunsteren (ETH Zuerich, June 1992), adapted for GROMACS by David van der Spoel November 1992.</para><para>The algorithm here is based section five of Ryckaert, Ciccotti and Berendsen, J Comp Phys, 23, 327, 1977.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">iatom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Mini-topology of triples of constraint type (unused in this function) and indices of the two atoms involved </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ncon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of constraints </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">nnit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of iterations performed </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">maxnit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum number of iterations permitted </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">constraint_distance_squared</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The objective value for each constraint </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">positions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial (and final) values of the positions of all atoms </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">initial_displacements</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial displacements of each constraint </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">half_of_reduced_mass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Half of the reduced mass for each constraint </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">omega</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SHAKE over-relaxation factor (set non-1.0 by using shake-sor=yes in the .mdp, but there is no documentation anywhere) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">invmass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Inverse mass of each atom </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">distance_squared_tolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Multiplicative tolerance on the difference in the square of the constrained distance (see code) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">scaled_lagrange_multiplier</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scaled Lagrange multiplier for each constraint (-2 * eta from p. 336 of the paper, divided by the constraint distance) </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">nerror</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zero upon success, returns one more than the index of the problematic constraint if the input was malformed</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<xrefsect id="todo_1_todo000047"><xreftitle>Todo</xreftitle><xrefdescription><para>Make SHAKE use better data structures, in particular for iatom. </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="153" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/shakef.cpp" bodystart="111" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a895fc1e1a27a16ef7e499c33ca9c0688" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void crattle</definition>
+        <argsstring>(int iatom[], int ncon, int *nnit, int maxnit, real dist2[], real vp[], real rij[], real m2[], real omega, real invmass[], real tt[], real lagr[], int *nerror, real invdt)</argsstring>
+        <name>crattle</name>
+        <param>
+          <type>int</type>
+          <declname>iatom</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>ncon</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nnit</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxnit</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>dist2</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>vp</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rij</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>m2</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>omega</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invmass</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>tt</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lagr</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nerror</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invdt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="158" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/shakef.cpp" bodystart="500" bodyend="579"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a40cdb7e271f583fb6de526b10c5dcd1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool constrain</definition>
+        <argsstring>(FILE *log, gmx_bool bLog, gmx_bool bEner, gmx_constr_t constr, t_idef *idef, t_inputrec *ir, struct t_commrec *cr, gmx_int64_t step, int delta_step, real step_scaling, t_mdatoms *md, rvec *x, rvec *xprime, rvec *min_proj, gmx_bool bMolPBC, matrix box, real lambda, real *dvdlambda, rvec *v, tensor *vir, t_nrnb *nrnb, int econq)</argsstring>
+        <name>constrain</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bLog</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bEner</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__idef" kindref="compound">t_idef</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>delta_step</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>step_scaling</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>xprime</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>min_proj</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bMolPBC</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlambda</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>tensor *</type>
+          <declname>vir</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>econq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="162" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1aa081ca6ab00355022738fe2d15a1de14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+        <definition>gmx_constr_t init_constraints</definition>
+        <argsstring>(FILE *log, const gmx_mtop_t *mtop, const t_inputrec *ir, bool doEssentialDynamics, struct t_commrec *cr)</argsstring>
+        <name>init_constraints</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>doEssentialDynamics</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="206" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1171" bodyend="1328"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a4717d515cf8323c2e5df8a08b37f509c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void saveEdsamPointer</definition>
+        <argsstring>(gmx_constr_t constr, struct gmx_edsam *ed)</argsstring>
+        <name>saveEdsamPointer</name>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structgmx__edsam" kindref="compound">gmx_edsam</ref> *</type>
+          <declname>ed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="212" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a50265ae2e845f3df72501dd655875282" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_constraints</definition>
+        <argsstring>(gmx_constr_t constr, gmx_localtop_t *top, const t_inputrec *ir, const t_mdatoms *md, struct t_commrec *cr)</argsstring>
+        <name>set_constraints</name>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__localtop__t" kindref="compound">gmx_localtop_t</ref> *</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="216" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1afc39d8f5d50d0f2d3e5faea8854348c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structt__blocka" kindref="compound">t_blocka</ref></type>
+        <definition>t_blocka make_at2con</definition>
+        <argsstring>(int start, int natoms, const t_ilist *ilist, const t_iparams *iparams, gmx_bool bDynamics, int *nflexiblecons)</argsstring>
+        <name>make_at2con</name>
+        <param>
+          <type>int</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__ilist" kindref="compound">t_ilist</ref> *</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="uniont__iparams" kindref="compound">t_iparams</ref> *</type>
+          <declname>iparams</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDynamics</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>nflexiblecons</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="229" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="831" bodyend="908"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1af4ca53399a958cb8733bf0ce8bb6199f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="structt__blocka" kindref="compound">t_blocka</ref> *</type>
+        <definition>const t_blocka* atom2constraints_moltype</definition>
+        <argsstring>(gmx_constr_t constr)</argsstring>
+        <name>atom2constraints_moltype</name>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="234" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1336" bodyend="1339"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a97a8ba6993a04f9ec9a083250a1b1a03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const int **</type>
+        <definition>const int** atom2settle_moltype</definition>
+        <argsstring>(gmx_constr_t constr)</argsstring>
+        <name>atom2settle_moltype</name>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="237" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1341" bodyend="1344"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a4d5284c16e7502d6fe474451d99d3ae6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool inter_charge_group_constraints</definition>
+        <argsstring>(const gmx_mtop_t *mtop)</argsstring>
+        <name>inter_charge_group_constraints</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="246" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1347" bodyend="1392"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a5a87ffb649af0e6db1733a78491ee8f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool inter_charge_group_settles</definition>
+        <argsstring>(const gmx_mtop_t *mtop)</argsstring>
+        <name>inter_charge_group_settles</name>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="249" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1394" bodyend="1438"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a6f941e5ffd32e0ac807f9068872321bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+        <definition>real* constr_rmsd_data</definition>
+        <argsstring>(gmx_constr_t constr)</argsstring>
+        <name>constr_rmsd_data</name>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="252" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a545a53fae7e0525f8be25447c06918b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real constr_rmsd</definition>
+        <argsstring>(gmx_constr_t constr)</argsstring>
+        <name>constr_rmsd</name>
+        <param>
+          <type><ref refid="structgmx__constr" kindref="compound">gmx_constr_t</ref></type>
+          <declname>constr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="257" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1ace70d683cc554b5b5b74af8ce2af83fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+        <definition>real* lincs_rmsd_data</definition>
+        <argsstring>(gmx_lincsdata_t lincsd)</argsstring>
+        <name>lincs_rmsd_data</name>
+        <param>
+          <type><ref refid="structgmx__lincsdata" kindref="compound">gmx_lincsdata_t</ref></type>
+          <declname>lincsd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="260" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1afae59f38452f1d41d87b64fa3bfb5907" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real lincs_rmsd</definition>
+        <argsstring>(gmx_lincsdata_t lincsd)</argsstring>
+        <name>lincs_rmsd</name>
+        <param>
+          <type><ref refid="structgmx__lincsdata" kindref="compound">gmx_lincsdata_t</ref></type>
+          <declname>lincsd</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="263" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a239756fb775aa9128a8b51873dfe5776" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structgmx__lincsdata" kindref="compound">gmx_lincsdata_t</ref></type>
+        <definition>gmx_lincsdata_t init_lincs</definition>
+        <argsstring>(FILE *fplog, const gmx_mtop_t *mtop, int nflexcon_global, const t_blocka *at2con, gmx_bool bPLINCS, int nIter, int nProjOrder)</argsstring>
+        <name>init_lincs</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nflexcon_global</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__blocka" kindref="compound">t_blocka</ref> *</type>
+          <declname>at2con</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bPLINCS</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nIter</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nProjOrder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="266" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/clincs.cpp" bodystart="1407" bodyend="1529"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a4232eaeba45edeae8235d41332cbc2aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_lincs</definition>
+        <argsstring>(const t_idef *idef, const t_mdatoms *md, gmx_bool bDynamics, struct t_commrec *cr, gmx_lincsdata_t li)</argsstring>
+        <name>set_lincs</name>
+        <param>
+          <type>const <ref refid="structt__idef" kindref="compound">t_idef</ref> *</type>
+          <declname>idef</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bDynamics</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__lincsdata" kindref="compound">gmx_lincsdata_t</ref></type>
+          <declname>li</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="271" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a750be742674da03b0713c6651d666d65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_lincs_matrix</definition>
+        <argsstring>(gmx_lincsdata_t li, const real *invmass, real lambda)</argsstring>
+        <name>set_lincs_matrix</name>
+        <param>
+          <type><ref refid="structgmx__lincsdata" kindref="compound">gmx_lincsdata_t</ref></type>
+          <declname>li</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>invmass</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="276" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1ad9292035f10dbd9d762cc10716a70554" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real constr_r_max</definition>
+        <argsstring>(FILE *fplog, const gmx_mtop_t *mtop, const t_inputrec *ir)</argsstring>
+        <name>constr_r_max</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="279" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1150" bodyend="1169"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a8a9bbc10c8088d07f911deb70047448e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+        <definition>gmx_bool constrain_lincs</definition>
+        <argsstring>(FILE *log, gmx_bool bLog, gmx_bool bEner, t_inputrec *ir, gmx_int64_t step, gmx_lincsdata_t lincsd, t_mdatoms *md, struct t_commrec *cr, rvec *x, rvec *xprime, rvec *min_proj, matrix box, struct t_pbc *pbc, real lambda, real *dvdlambda, real invdt, rvec *v, gmx_bool bCalcVir, tensor vir_r_m_dr, int econ, t_nrnb *nrnb, int maxwarn, int *warncount)</argsstring>
+        <name>constrain_lincs</name>
+        <param>
+          <type>FILE *</type>
+          <declname>log</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bLog</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bEner</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>gmx_int64_t</type>
+          <declname>step</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__lincsdata" kindref="compound">gmx_lincsdata_t</ref></type>
+          <declname>lincsd</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__mdatoms" kindref="compound">t_mdatoms</ref> *</type>
+          <declname>md</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>xprime</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>min_proj</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structt__pbc" kindref="compound">t_pbc</ref> *</type>
+          <declname>pbc</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlambda</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>invdt</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type><ref refid="basedefinitions_8h_1a8fddad319f226e856400d190198d5151" kindref="member">gmx_bool</ref></type>
+          <declname>bCalcVir</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir_r_m_dr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>econ</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__nrnb" kindref="compound">t_nrnb</ref> *</type>
+          <declname>nrnb</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>maxwarn</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>warncount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="285" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1aa070f9bb4d74919e3ca05b1529084b61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int *</type>
+        <definition>int* get_sblock</definition>
+        <argsstring>(struct gmx_constr *constr)</argsstring>
+        <name>get_sblock</name>
+        <param>
+          <type>struct <ref refid="structgmx__constr" kindref="compound">gmx_constr</ref> *</type>
+          <declname>constr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="305" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1444" bodyend="1447"/>
+      </memberdef>
+      <memberdef kind="function" id="constr_8h_1a76da5cfbdfb77d4baec7fc491c5623dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int get_nblocks</definition>
+        <argsstring>(struct gmx_constr *constr)</argsstring>
+        <name>get_nblocks</name>
+        <param>
+          <type>struct <ref refid="structgmx__constr" kindref="compound">gmx_constr</ref> *</type>
+          <declname>constr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h" line="307" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.cpp" bodystart="1449" bodyend="1452"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/constr.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="ewald_8h" kind="file">
+    <compoundname>ewald.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="mdtypes_2forcerec_8h" local="yes">gromacs/mdtypes/forcerec.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includedby refid="ewald_8cpp" local="yes">src/gromacs/ewald/ewald.cpp</includedby>
+    <includedby refid="force_8cpp" local="yes">src/gromacs/mdlib/force.cpp</includedby>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <incdepgraph>
+      <node id="4575">
+        <label>src/gromacs/ewald/ewald.h</label>
+        <link refid="ewald.h"/>
+        <childnode refid="4576" relation="include">
+        </childnode>
+        <childnode refid="4577" relation="include">
+        </childnode>
+      </node>
+      <node id="4577">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="4576">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="4578">
+        <label>src/gromacs/ewald/ewald.h</label>
+        <link refid="ewald.h"/>
+        <childnode refid="4579" relation="include">
+        </childnode>
+      </node>
+      <node id="4579">
+        <label>src/gromacs/ewald/ewald.cpp</label>
+        <link refid="ewald_8cpp"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ewald_8h_1a283c4dbc814257d0e7c9343dca23bf80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init_ewald_tab</definition>
+        <argsstring>(struct gmx_ewald_tab_t **et, const t_inputrec *ir, FILE *fp)</argsstring>
+        <name>init_ewald_tab</name>
+        <param>
+          <type>struct <ref refid="structgmx__ewald__tab__t" kindref="compound">gmx_ewald_tab_t</ref> **</type>
+          <declname>et</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>FILE *</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the tables used in the Ewald long-ranged part. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald.h" line="82" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald.cpp" bodystart="79" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="ewald_8h_1a97f58f1c8029e0e98ee0bbe26ead0284" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real do_ewald</definition>
+        <argsstring>(t_inputrec *ir, rvec x[], rvec f[], real chargeA[], real chargeB[], matrix box, t_commrec *cr, int natoms, matrix lrvir, real ewaldcoeff, real lambda, real *dvdlambda, struct gmx_ewald_tab_t *et)</argsstring>
+        <name>do_ewald</name>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>x</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>rvec</type>
+          <declname>f</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>chargeA</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>chargeB</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>natoms</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>lrvir</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>ewaldcoeff</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlambda</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structgmx__ewald__tab__t" kindref="compound">gmx_ewald_tab_t</ref> *</type>
+          <declname>et</declname>
+        </param>
+        <briefdescription>
+<para>Do the long-ranged part of an Ewald calculation. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald.h" line="87" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald.cpp" bodystart="138" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="ewald_8h_1a6b997c29a857b159af729a6f49358b08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+        <definition>real ewald_charge_correction</definition>
+        <argsstring>(t_commrec *cr, t_forcerec *fr, real lambda, matrix box, real *dvdlambda, tensor vir)</argsstring>
+        <name>ewald_charge_correction</name>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__forcerec" kindref="compound">t_forcerec</ref> *</type>
+          <declname>fr</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>dvdlambda</declname>
+        </param>
+        <param>
+          <type>tensor</type>
+          <declname>vir</declname>
+        </param>
+        <briefdescription>
+<para>Calculate the correction to the Ewald sum, due to a net system charge. </para>        </briefdescription>
+        <detaileddescription>
+<para>Should only be called on one thread. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald.h" line="101" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald.cpp" bodystart="317" bodyend="357"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains function declarations necessary for computing energies and forces for the plain-Ewald long-ranged part, and the correction for overall system charge for all Ewald-family methods. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>David van der Spoel <ulink url="mailto:david.vanderspoel@icm.uu.se">david.vanderspoel@icm.uu.se</ulink> </para><simplesectsep/><para>Mark Abraham <ulink url="mailto:mark.j.abraham@gmail.com">mark.j.abraham@gmail.com</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/ewald.h"/>
+  </compounddef>
+</doxygen>

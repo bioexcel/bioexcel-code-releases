@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx density &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx densmap" href="gmx-densmap.html" />
+    <link rel="prev" title="gmx current" href="gmx-current.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-densmap.html" title="gmx densmap"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-current.html" title="gmx current"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-density">
+<span id="id1"></span><h1>gmx density<a class="headerlink" href="#gmx-density" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx density [<strong>-f</strong> <em>[&lt;.xtc/.trr/...&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>]
+            [<strong>-ei</strong> <em>[&lt;.dat&gt;]</em>] [<strong>-o</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-b</strong> <em>&lt;time&gt;</em>] [<strong>-e</strong> <em>&lt;time&gt;</em>]
+            [<strong>-dt</strong> <em>&lt;time&gt;</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>] [<strong>-d</strong> <em>&lt;string&gt;</em>]
+            [<strong>-sl</strong> <em>&lt;int&gt;</em>] [<strong>-dens</strong> <em>&lt;enum&gt;</em>] [<strong>-ng</strong> <em>&lt;int&gt;</em>] [<strong>-[no]center</strong>]
+            [<strong>-[no]symm</strong>] [<strong>-[no]relative</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">density</span></code> computes partial densities across the box, using an index file.</p>
+<p>For the total density of NPT simulations, use <a class="reference internal" href="gmx-energy.html"><span class="doc">gmx energy</span></a> instead.</p>
+<p>Option <code class="docutils literal"><span class="pre">-center</span></code> performs the histogram binning relative to the center
+of an arbitrary group, in absolute box coordinates. If you are calculating
+profiles along the Z axis box dimension bZ, output would be from -bZ/2 to
+bZ/2 if you center based on the entire system.
+Note that this behaviour has changed in GROMACS 5.0; earlier versions
+merely performed a static binning in (0,bZ) and shifted the output. Now
+we compute the center for each frame and bin in (-bZ/2,bZ/2).</p>
+<p>Option <code class="docutils literal"><span class="pre">-symm</span></code> symmetrizes the output around the center. This will
+automatically turn on <code class="docutils literal"><span class="pre">-center</span></code> too.
+Option <code class="docutils literal"><span class="pre">-relative</span></code> performs the binning in relative instead of absolute
+box coordinates, and scales the final output with the average box dimension
+along the output axis. This can be used in combination with <code class="docutils literal"><span class="pre">-center</span></code>.</p>
+<p>Densities are in kg/m^3, and number densities or electron densities can also be
+calculated. For electron densities, a file describing the number of
+electrons for each type of atom should be provided using <code class="docutils literal"><span class="pre">-ei</span></code>.
+It should look like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">2</span>
+<span class="n">atomname</span> <span class="o">=</span> <span class="n">nrelectrons</span>
+<span class="n">atomname</span> <span class="o">=</span> <span class="n">nrelectrons</span>
+</pre></div>
+</div>
+<p>The first line contains the number of lines to read from the file.
+There should be one line for each unique atom name in your system.
+The number of electrons for each atom is modified by its atomic
+partial charge.</p>
+<p>IMPORTANT CONSIDERATIONS FOR BILAYERS</p>
+<p>One of the most common usage scenarios is to calculate the density of various
+groups across a lipid bilayer, typically with the z axis being the normal
+direction. For short simulations, small systems, and fixed box sizes this
+will work fine, but for the more general case lipid bilayers can be complicated.
+The first problem that while both proteins and lipids have low volume
+compressibility, lipids have quite high area compressiblity. This means the
+shape of the box (thickness and area/lipid) will fluctuate substantially even
+for a fully relaxed system. Since GROMACS places the box between the origin
+and positive coordinates, this in turn means that a bilayer centered in the
+box will move a bit up/down due to these fluctuations, and smear out your
+profile. The easiest way to fix this (if you want pressure coupling) is
+to use the <code class="docutils literal"><span class="pre">-center</span></code> option that calculates the density profile with
+respect to the center of the box. Note that you can still center on the
+bilayer part even if you have a complex non-symmetric system with a bilayer
+and, say, membrane proteins - then our output will simply have more values
+on one side of the (center) origin reference.</p>
+<p>Even the centered calculation will lead to some smearing out the output
+profiles, as lipids themselves are compressed and expanded. In most cases
+you probably want this (since it corresponds to macroscopic experiments),
+but if you want to look at molecular details you can use the <code class="docutils literal"><span class="pre">-relative</span></code>
+option to attempt to remove even more of the effects of volume fluctuations.</p>
+<p>Finally, large bilayers that are not subject to a surface tension will exhibit
+undulatory fluctuations, where there are ‘waves’ forming in the system.
+This is a fundamental property of the biological system, and if you are
+comparing against experiments you likely want to include the undulation
+smearing effect.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xtc/.trr/…&gt;] (traj.xtc)</dt>
+<dd>Trajectory: <a class="reference internal" href="../user-guide/file-formats.html#xtc"><span class="std std-ref">xtc</span></a> <a class="reference internal" href="../user-guide/file-formats.html#trr"><span class="std std-ref">trr</span></a> <a class="reference internal" href="../user-guide/file-formats.html#cpt"><span class="std std-ref">cpt</span></a> <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> <a class="reference internal" href="../user-guide/file-formats.html#tng"><span class="std std-ref">tng</span></a></dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-ei</span></code> [&lt;.dat&gt;] (electrons.dat) (Optional)</dt>
+<dd>Generic data file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.xvg&gt;] (density.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of first frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;time&gt; (0)</dt>
+<dd>Time of last frame to read from trajectory (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-dt</span></code> &lt;time&gt; (0)</dt>
+<dd>Only use frame when t MOD dt = first time (default unit ps)</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-d</span></code> &lt;string&gt; (Z)</dt>
+<dd>Take the normal on the membrane in direction X, Y or Z.</dd>
+<dt><code class="docutils literal"><span class="pre">-sl</span></code> &lt;int&gt; (50)</dt>
+<dd>Divide the box in this number of slices.</dd>
+<dt><code class="docutils literal"><span class="pre">-dens</span></code> &lt;enum&gt; (mass)</dt>
+<dd>Density: mass, number, charge, electron</dd>
+<dt><code class="docutils literal"><span class="pre">-ng</span></code> &lt;int&gt; (1)</dt>
+<dd>Number of groups of which to compute densities.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]center</span></code>  (no)</dt>
+<dd>Perform the binning relative to the center of the (changing) box. Useful for bilayers.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]symm</span></code>  (no)</dt>
+<dd>Symmetrize the density along the axis, with respect to the center. Useful for bilayers.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]relative</span></code>  (no)</dt>
+<dd>Use relative coordinates for changing boxes and scale output by average dimensions.</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>When calculating electron densities, atomnames are used instead of types. This is bad.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx density</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-current.html"
+                        title="previous chapter">gmx current</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-densmap.html"
+                        title="next chapter">gmx densmap</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-density.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-densmap.html" title="gmx densmap"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-current.html" title="gmx current"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

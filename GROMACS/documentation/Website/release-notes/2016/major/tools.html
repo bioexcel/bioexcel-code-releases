@@ -1,0 +1,215 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Improvements to GROMACS tools &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bugs fixed" href="bugs-fixed.html" />
+    <link rel="prev" title="Performance improvements" href="performance.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="bugs-fixed.html" title="Bugs fixed"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="performance.html" title="Performance improvements"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="improvements-to-gromacs-tools">
+<h1>Improvements to GROMACS tools<a class="headerlink" href="#improvements-to-gromacs-tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="supported-replacing-solvent-in-gmx-insert-molecules">
+<h2>Supported replacing solvent in <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">insert-molecules</span></code><a class="headerlink" href="#supported-replacing-solvent-in-gmx-insert-molecules" title="Permalink to this headline">¶</a></h2>
+<p>Make it possible to specify the solvent (or other set of atoms) with
+<code class="docutils literal"><span class="pre">-replace</span></code> (as a selection) for <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">insert-molecules</span></code>, and make the tool
+replace residues from this set with the inserted molecules, instead of
+not inserting there. It is assumed that the solvent consists of
+single-residue molecules, since molecule information would require a tpr
+input, which might not be commonly available when preparing the system.</p>
+</div>
+<div class="section" id="default-random-seeds-have-changed-for-some-analysis-tools">
+<h2>Default random seeds have changed for some analysis tools<a class="headerlink" href="#default-random-seeds-have-changed-for-some-analysis-tools" title="Permalink to this headline">¶</a></h2>
+<p>See individual tools documentation for their functionality. In some
+cases, the magic value to obtain a generated seed has changed (or is
+now documented.)</p>
+</div>
+<div class="section" id="made-gmx-solvate-and-gmx-insert-molecules-work-better-with-pdb-inputs">
+<h2>Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">solvate</span></code> and <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">insert-molecules</span></code> work better with PDB inputs<a class="headerlink" href="#made-gmx-solvate-and-gmx-insert-molecules-work-better-with-pdb-inputs" title="Permalink to this headline">¶</a></h2>
+<p>When both <code class="docutils literal"><span class="pre">-f</span></code> and <code class="docutils literal"><span class="pre">-o</span></code> were .pdb files, the pdbinfo struct got
+out-of-sync when the atoms were added/removed.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1887">Issue 1887</a></p>
+</div>
+<div class="section" id="tools-in-the-new-analysis-framework-can-read-trajectory-files-with-subsets">
+<h2>Tools in the new analysis framework can read trajectory files with subsets<a class="headerlink" href="#tools-in-the-new-analysis-framework-can-read-trajectory-files-with-subsets" title="Permalink to this headline">¶</a></h2>
+<p>Make tools written for the new C++ analysis framework support analyzing
+trajectories that contain an arbitrary subset of atoms.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1861">Issue 1861</a></p>
+</div>
+<div class="section" id="made-moleculetype-name-case-sensitive">
+<h2>Made moleculetype name case sensitive<a class="headerlink" href="#made-moleculetype-name-case-sensitive" title="Permalink to this headline">¶</a></h2>
+<p>This is useful in case you have more than 36 chains in your system
+with chain IDs set. PDB allows using both uppercase letters, lowercase
+letters and numbers for chain identifiers. Now we can use the maximum
+of 62 chains.</p>
+</div>
+<div class="section" id="added-number-density-normalization-option-for-gmx-rdf">
+<h2>Added number density normalization option for <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">rdf</span></code><a class="headerlink" href="#added-number-density-normalization-option-for-gmx-rdf" title="Permalink to this headline">¶</a></h2>
+<p>Add an option to <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">rdf</span></code> that allows selecting a radial number density
+as the normalization for the output (in addition to current raw
+neighbor counts and the actual RDF).</p>
+</div>
+<div class="section" id="simplified-gmx-genconf-by-removing-block-sort-and-shuffle">
+<h2>Simplified <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genconf</span></code> by removing <code class="docutils literal"><span class="pre">-block</span></code>, <code class="docutils literal"><span class="pre">-sort</span></code> and <code class="docutils literal"><span class="pre">-shuffle</span></code><a class="headerlink" href="#simplified-gmx-genconf-by-removing-block-sort-and-shuffle" title="Permalink to this headline">¶</a></h2>
+<p>Option <code class="docutils literal"><span class="pre">-block</span></code> isn’t useful since particle decomposition was removed.
+Options <code class="docutils literal"><span class="pre">-sort</span></code> and <code class="docutils literal"><span class="pre">-shuffle</span></code> were undocumented and don’t seem very
+useful - these days they would be somebody’s simple python script.</p>
+</div>
+<div class="section" id="used-macros-for-units-and-conversions-in-gmx-wham">
+<h2>Used macros for units and conversions in <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">wham</span></code><a class="headerlink" href="#used-macros-for-units-and-conversions-in-gmx-wham" title="Permalink to this headline">¶</a></h2>
+<p>Also <a class="reference external" href="https://redmine.gromacs.org/issues/1841">Issue 1841</a></p>
+</div>
+<div class="section" id="improved-gmx-sasa-error-message">
+<h2>Improved <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sasa</span></code> error message<a class="headerlink" href="#improved-gmx-sasa-error-message" title="Permalink to this headline">¶</a></h2>
+<p>Print more information when an output group is not part of the group
+selected for calculation, which should help the user diagnosing the issue.</p>
+</div>
+<div class="section" id="made-gmx-vanhove-work-without-pbc">
+<h2>Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">vanhove</span></code> work without PBC<a class="headerlink" href="#made-gmx-vanhove-work-without-pbc" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="fix-gmx-hbond-group-overlap-check">
+<h2>Fix <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">hbond</span></code> group overlap check<a class="headerlink" href="#fix-gmx-hbond-group-overlap-check" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">hbond</span></code> does not support partially overlapping analysis groups.
+The check in the code was broken and never caught this, resulting
+incorrect output that might OK at first sight.
+Also corrected bitmasks = enums that (intentionally?) seemed to give
+correct results by not using non power of 2 enum index entries.</p>
+</div>
+<div class="section" id="made-gmx-dos-work-again">
+<h2>Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">dos</span></code> work again.<a class="headerlink" href="#made-gmx-dos-work-again" title="Permalink to this headline">¶</a></h2>
+<p>Due to an error in the index handling <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">dos</span></code> always stopped with a fatal
+error.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1996">Issue 1996</a></p>
+</div>
+<div class="section" id="add-checks-for-too-much-memory-in-gmx-nmeig">
+<h2>Add checks for too much memory in <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">nmeig</span></code><a class="headerlink" href="#add-checks-for-too-much-memory-in-gmx-nmeig" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">nmeig</span></code> could request storage for eigenvector output and matrices
+for more than <code class="docutils literal"><span class="pre">INT_MAX</span></code> elements, but nearly all loop variables are int.
+Now a fatal error is produced in this case. This also avoids the
+confusing error message when too much memory is requested; the allocation
+routine will get the correct size, but gmx_fatal prints it as a smaller
+integer.
+Added support for <code class="docutils literal"><span class="pre">-first</span></code> &gt; 1 with sparse matrices.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Improvements to GROMACS tools</a><ul>
+<li><a class="reference internal" href="#supported-replacing-solvent-in-gmx-insert-molecules">Supported replacing solvent in <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">insert-molecules</span></code></a></li>
+<li><a class="reference internal" href="#default-random-seeds-have-changed-for-some-analysis-tools">Default random seeds have changed for some analysis tools</a></li>
+<li><a class="reference internal" href="#made-gmx-solvate-and-gmx-insert-molecules-work-better-with-pdb-inputs">Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">solvate</span></code> and <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">insert-molecules</span></code> work better with PDB inputs</a></li>
+<li><a class="reference internal" href="#tools-in-the-new-analysis-framework-can-read-trajectory-files-with-subsets">Tools in the new analysis framework can read trajectory files with subsets</a></li>
+<li><a class="reference internal" href="#made-moleculetype-name-case-sensitive">Made moleculetype name case sensitive</a></li>
+<li><a class="reference internal" href="#added-number-density-normalization-option-for-gmx-rdf">Added number density normalization option for <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">rdf</span></code></a></li>
+<li><a class="reference internal" href="#simplified-gmx-genconf-by-removing-block-sort-and-shuffle">Simplified <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genconf</span></code> by removing <code class="docutils literal"><span class="pre">-block</span></code>, <code class="docutils literal"><span class="pre">-sort</span></code> and <code class="docutils literal"><span class="pre">-shuffle</span></code></a></li>
+<li><a class="reference internal" href="#used-macros-for-units-and-conversions-in-gmx-wham">Used macros for units and conversions in <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">wham</span></code></a></li>
+<li><a class="reference internal" href="#improved-gmx-sasa-error-message">Improved <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">sasa</span></code> error message</a></li>
+<li><a class="reference internal" href="#made-gmx-vanhove-work-without-pbc">Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">vanhove</span></code> work without PBC</a></li>
+<li><a class="reference internal" href="#fix-gmx-hbond-group-overlap-check">Fix <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">hbond</span></code> group overlap check</a></li>
+<li><a class="reference internal" href="#made-gmx-dos-work-again">Made <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">dos</span></code> work again.</a></li>
+<li><a class="reference internal" href="#add-checks-for-too-much-memory-in-gmx-nmeig">Add checks for too much memory in <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">nmeig</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="performance.html"
+                        title="previous chapter">Performance improvements</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bugs-fixed.html"
+                        title="next chapter">Bugs fixed</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/release-notes/2016/major/tools.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="bugs-fixed.html" title="Bugs fixed"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="performance.html" title="Performance improvements"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

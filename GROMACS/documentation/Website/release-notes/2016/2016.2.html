@@ -1,0 +1,382 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GROMACS 2016.2 Release Notes &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GROMACS 2016.1 Release Notes" href="2016.1.html" />
+    <link rel="prev" title="GROMACS 2016.3 Release Notes" href="2016.3.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="2016.1.html" title="GROMACS 2016.1 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="2016.3.html" title="GROMACS 2016.3 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gromacs-2016-2-release-notes">
+<h1>GROMACS 2016.2 Release Notes<a class="headerlink" href="#gromacs-2016-2-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>This version was released on February 7, 2016. These release notes
+document the changes that have taken place in GROMACS since version
+2016.1 to fix known issues. It also incorporates all fixes made in
+version 5.1.4 and several since.</p>
+<div class="section" id="fixes-where-mdrun-could-behave-incorrectly">
+<h2>Fixes where mdrun could behave incorrectly<a class="headerlink" href="#fixes-where-mdrun-could-behave-incorrectly" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="add-grompp-check-for-equipartition-violation-risk-for-decoupled-modes">
+<h3>Add grompp check for equipartition violation risk for decoupled modes<a class="headerlink" href="#add-grompp-check-for-equipartition-violation-risk-for-decoupled-modes" title="Permalink to this headline">¶</a></h3>
+<p>When atoms involved in an angle with constrained bonds have very
+different masses, there can be very weakly coupled dynamics modes.
+Default mdp settings are often not sufficiently accurate to obtain
+equipartitioning. This change adds a grompp check for this issue.</p>
+<p>Part of <a class="reference external" href="https://redmine.gromacs.org/issues/2071">Issue 2071</a></p>
+</div>
+<div class="section" id="disallow-overwriting-of-dihedral-type-9">
+<h3>Disallow overwriting of dihedral type 9<a class="headerlink" href="#disallow-overwriting-of-dihedral-type-9" title="Permalink to this headline">¶</a></h3>
+<p>It is no longer allowed to repeat blocks of parameter of multiple
+lines for dihedrals of type 9. It is also no longer allowed to
+override parameters or dihedrals of type 9. Both are too complex
+to properly check. It is still allowed to repeat parameters blocks
+consisting of a single line.
+Repeating a block with the same parameters would lead to incorrect
+dihedral potentials and forces.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2077">Issue 2077</a></p>
+</div>
+<div class="section" id="fixed-flat-bottom-position-restraints-dd-openmp">
+<h3>Fixed flat-bottom position restraints + DD + OpenMP<a class="headerlink" href="#fixed-flat-bottom-position-restraints-dd-openmp" title="Permalink to this headline">¶</a></h3>
+<p>A (re)allocation was missing, causing a crash.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2095">Issue 2095</a></p>
+</div>
+<div class="section" id="fixed-multi-domain-reruns">
+<h3>Fixed multi-domain reruns<a class="headerlink" href="#fixed-multi-domain-reruns" title="Permalink to this headline">¶</a></h3>
+<p>Old code cleanup led multi-domain rerun to crash because it failed to
+consider logic separated over two places.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2105">Issue 2105</a></p>
+</div>
+</div>
+<div class="section" id="fixes-for-mdrun-performance-issues">
+<h2>Fixes for mdrun performance issues<a class="headerlink" href="#fixes-for-mdrun-performance-issues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="corrected-cuda-sm-60-performance">
+<h3>Corrected CUDA sm_60 performance<a class="headerlink" href="#corrected-cuda-sm-60-performance" title="Permalink to this headline">¶</a></h3>
+<p>The kernel launch now suits the SM size of the GP100 architecture.</p>
+</div>
+</div>
+<div class="section" id="fixes-for-gmx-tools">
+<h2>Fixes for <code class="docutils literal"><span class="pre">gmx</span></code> tools<a class="headerlink" href="#fixes-for-gmx-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fixed-some-fft-handling-in-cross-corrrelation-calculations">
+<h3>Fixed some FFT handling in cross-corrrelation calculations<a class="headerlink" href="#fixed-some-fft-handling-in-cross-corrrelation-calculations" title="Permalink to this headline">¶</a></h3>
+<p>An array of complex number was created as an array of pointers and
+then passed to gmx_fft_1d. This does not work.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2109">Issue 2109</a></p>
+</div>
+<div class="section" id="fixed-gmx-rmsf-q-oq">
+<h3>Fixed gmx rmsf -q -oq<a class="headerlink" href="#fixed-gmx-rmsf-q-oq" title="Permalink to this headline">¶</a></h3>
+<p>This led to the PDB file containing B-factors using coordinates based
+on those from the -s file, rather than -q file. gmx rmsf -oq was
+otherwise fine.</p>
+</div>
+<div class="section" id="fixed-crash-in-gmx-order">
+<h3>Fixed crash in gmx order<a class="headerlink" href="#fixed-crash-in-gmx-order" title="Permalink to this headline">¶</a></h3>
+<p>gmx order used a cumbersome floating point method to compute
+a histogram, leading to an index value that could be negative.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2104">Issue 2104</a></p>
+</div>
+<div class="section" id="fixed-minor-trjconv-bug">
+<h3>Fixed minor trjconv bug<a class="headerlink" href="#fixed-minor-trjconv-bug" title="Permalink to this headline">¶</a></h3>
+<p>gmx trjconv -novel -f in.pdb -o out.pdb probably works better now.</p>
+</div>
+<div class="section" id="fixed-time-label-print-in-gmx-vanhove">
+<h3>Fixed time label print in gmx vanhove<a class="headerlink" href="#fixed-time-label-print-in-gmx-vanhove" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="handled-issuing-warnings-correctly-in-xpm2ps-and-membed">
+<h3>Handled issuing warnings correctly in xpm2ps and membed<a class="headerlink" href="#handled-issuing-warnings-correctly-in-xpm2ps-and-membed" title="Permalink to this headline">¶</a></h3>
+<p>The code should not (over)write the output file before checking for
+errors. For membed, it is useful to require the user to fix issues in
+their input file before we unilaterally over-write it.</p>
+</div>
+<div class="section" id="corrected-documentation-about-eigenvalue-handling">
+<h3>Corrected documentation about eigenvalue handling<a class="headerlink" href="#corrected-documentation-about-eigenvalue-handling" title="Permalink to this headline">¶</a></h3>
+<p>Some file format docs were out of step with the implementation in
+eigio.cpp.</p>
+<p>The behaviour of gmx anaeig -eig -eig2 was not properly documented.</p>
+</div>
+<div class="section" id="made-editconf-b-factor-attachment-more-useful-in-practice">
+<h3>Made editconf B-factor attachment more useful in practice<a class="headerlink" href="#made-editconf-b-factor-attachment-more-useful-in-practice" title="Permalink to this headline">¶</a></h3>
+<p>B-factor values will be added to residues unless an index is larger
+than the number of residues or an option is specified. Protein residue
+indices can start from any number and, in case they start from a large
+number, there is no way to add B-factor values to residues.</p>
+<p>This patch changes it to add B-factor values to residues unless the
+number of B-factor values is larger than the number of residues.</p>
+</div>
+<div class="section" id="fixed-possible-memory-error-with-long-selections">
+<h3>Fixed possible memory error with long selections<a class="headerlink" href="#fixed-possible-memory-error-with-long-selections" title="Permalink to this headline">¶</a></h3>
+<p>If a selection was more than 1000 characters long and there was a
+whitespace exactly at the 1000 point, a buffer overflow could occur.
+Replaced the buffer with std::string, simplifying the code
+significantly.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2086">Issue 2086</a></p>
+</div>
+<div class="section" id="fixed-use-of-position-variables-with-plus-merge">
+<h3>Fixed use of position variables with plus/merge<a class="headerlink" href="#fixed-use-of-position-variables-with-plus-merge" title="Permalink to this headline">¶</a></h3>
+<p>If a selection contained a position variable (e.g., ‘com of …’) that
+was used more than once, and at least one of those uses was with
+plus/merge, there were out-of-bounds memory writes.  This was caused by
+the internal position structure not getting fully initialized.
+Incomplete initialization happens in all contexts with such variables,
+but only plus/merge (and possibly permute) actually use the values that
+remained uninitialized, which caused them to incorrectly compute the
+amount of memory required to store the result.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2086">Issue 2086</a></p>
+</div>
+</div>
+<div class="section" id="improved-documentation">
+<h2>Improved documentation<a class="headerlink" href="#improved-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="made-several-minor-improvements-to-documentation-and-messages-to-users">
+<h3>Made several minor improvements to documentation and messages to users<a class="headerlink" href="#made-several-minor-improvements-to-documentation-and-messages-to-users" title="Permalink to this headline">¶</a></h3>
+<p>In particular, for selections:</p>
+<ul class="simple">
+<li>Explained resindex and resnr keywords in selection help.</li>
+<li>Explained how selection-enabled tools treat -s and -f input files.</li>
+</ul>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2083">Issue 2083</a></p>
+</div>
+<div class="section" id="clarified-use-of-tau-p-and-pcoupltype">
+<h3>Clarified use of tau-p and pcoupltype<a class="headerlink" href="#clarified-use-of-tau-p-and-pcoupltype" title="Permalink to this headline">¶</a></h3>
+<p>grompp used to permit the erroneous “tau-p = 5 5”. This does not
+reflect that only one time constant is permitted for pressure coupling
+(unlike group-based temperature coupling). The recent fix for
+<a class="reference external" href="https://redmine.gromacs.org/issues/1893">Issue 1893</a> leads to the user receiving a grompp warning, so this
+improves the docs to make clear that pressure coupling is different.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1893">Issue 1893</a></p>
+</div>
+</div>
+<div class="section" id="portability-enhancements">
+<h2>Portability enhancements<a class="headerlink" href="#portability-enhancements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fixed-x86-conditional-on-ibm-s390x">
+<h3>Fixed x86 conditional on IBM s390x<a class="headerlink" href="#fixed-x86-conditional-on-ibm-s390x" title="Permalink to this headline">¶</a></h3>
+<p>The CpuInfoTest.SupportLevel test fails on IBM s390x because wrong
+condition was used.</p>
+<p>Fixes: <a class="reference external" href="https://bugzilla.redhat.com/show_bug.cgi?id=1390149">https://bugzilla.redhat.com/show_bug.cgi?id=1390149</a></p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2072">Issue 2072</a></p>
+</div>
+</div>
+<div class="section" id="build-system-enhancements">
+<h2>Build system enhancements<a class="headerlink" href="#build-system-enhancements" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fixed-compilation-with-cmake-cxx-flags-wall-werror">
+<h3>Fixed compilation with CMAKE_CXX_FLAGS=”-Wall -Werror”<a class="headerlink" href="#fixed-compilation-with-cmake-cxx-flags-wall-werror" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2073">Issue 2073</a></p>
+</div>
+<div class="section" id="stopped-trying-to-use-objdump-reloc-in-the-build-system-on-mac">
+<h3>Stopped trying to use objdump –reloc in the build system on Mac<a class="headerlink" href="#stopped-trying-to-use-objdump-reloc-in-the-build-system-on-mac" title="Permalink to this headline">¶</a></h3>
+<p>Recent Xcode objdump does not support –reloc.</p>
+<p>The warning that is based on the output of running objdump was only
+implemented to work on Linux-like things, so should not spam the cmake
+output on other platforms.</p>
+</div>
+<div class="section" id="improved-the-support-for-plugin-loading-in-the-build-system">
+<h3>Improved the support for plugin loading in the build system<a class="headerlink" href="#improved-the-support-for-plugin-loading-in-the-build-system" title="Permalink to this headline">¶</a></h3>
+<p>The mdrun-only and prefer-static-libs builds set the default for
+BUILD_SHARED_LIBS to off, which silently disabled plugin support
+for things like VMD-based I/O handling.</p>
+<p>Converted GMX_LOAD_PLUGINS to tri-state ON/OFF/AUTO so that if the
+preconditions for support are not met we can have suitable behaviour
+in each case.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2082">Issue 2082</a></p>
+</div>
+<div class="section" id="turn-off-hwloc-support-when-static-lib-found">
+<h3>Turn off hwloc support when static lib found<a class="headerlink" href="#turn-off-hwloc-support-when-static-lib-found" title="Permalink to this headline">¶</a></h3>
+<p>Hwloc dependencies are not resolved at CMake time when static
+libwloc.a is detected and in most of these cases link-time
+errors will prevent building GROMACS. As it is hard for a user to know
+how to solve such cryptic errors and hwloc is not a required dependency,
+we turn off hwloc support when a static lib is detected. The user can
+override this on the cmake command line.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1919">Issue 1919</a></p>
+</div>
+<div class="section" id="fixed-build-with-gmx-external-tng-on">
+<h3>Fixed build with GMX_EXTERNAL_TNG=ON<a class="headerlink" href="#fixed-build-with-gmx-external-tng-on" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="house-keeping-that-reduces-users-problems">
+<h2>House-keeping that reduces users’ problems<a class="headerlink" href="#house-keeping-that-reduces-users-problems" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mdrun-prints-invalid-performance-data-less-often">
+<h3>Mdrun prints invalid performance data less often<a class="headerlink" href="#mdrun-prints-invalid-performance-data-less-often" title="Permalink to this headline">¶</a></h3>
+<p>If mdrun finished before a scheduled reset of the timing information
+(e.g. from mdrun -resetstep or mdrun -resethway), then misleading
+timing information should not be reported.</p>
+<p>Related, the default reset step for gmx tune_pme was increased to 1500.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2041">Issue 2041</a></p>
+</div>
+<div class="section" id="added-a-runtime-check-for-number-of-threads-in-bonded-code">
+<h3>Added a runtime check for number of threads in bonded code<a class="headerlink" href="#added-a-runtime-check-for-number-of-threads-in-bonded-code" title="Permalink to this headline">¶</a></h3>
+<p>Replaced a debug assertion on the number of OpenMP threads not being
+larger than GMX_OPENMP_MAX_THREADS by fatal error.
+But since the listed-forces reduction is actually not required with
+listed forces, these are now conditional and mdrun can run with more
+than GMX_OPENMP_MAX_THREADS threads.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2085">Issue 2085</a></p>
+</div>
+<div class="section" id="fixed-integer-narrowing-in-tng-reading-for-long-trajectories">
+<h3>Fixed integer narrowing in TNG reading for long trajectories<a class="headerlink" href="#fixed-integer-narrowing-in-tng-reading-for-long-trajectories" title="Permalink to this headline">¶</a></h3>
+<p>Reading of TNG trajectories with sufficiently large numbers of frames
+could truncate integers used for frame numbers. Fixed to use 64-bit
+integers as originally intended.</p>
+</div>
+<div class="section" id="fixed-logic-of-trr-reading">
+<h3>Fixed logic of TRR reading<a class="headerlink" href="#fixed-logic-of-trr-reading" title="Permalink to this headline">¶</a></h3>
+<p>When reading a trr file, reaching the end of the file was
+indistinguishable from a reading error or a magic-number error. This
+is now fixed, restoring the intended behaviour in each case.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1926">Issue 1926</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GROMACS 2016.2 Release Notes</a><ul>
+<li><a class="reference internal" href="#fixes-where-mdrun-could-behave-incorrectly">Fixes where mdrun could behave incorrectly</a><ul>
+<li><a class="reference internal" href="#add-grompp-check-for-equipartition-violation-risk-for-decoupled-modes">Add grompp check for equipartition violation risk for decoupled modes</a></li>
+<li><a class="reference internal" href="#disallow-overwriting-of-dihedral-type-9">Disallow overwriting of dihedral type 9</a></li>
+<li><a class="reference internal" href="#fixed-flat-bottom-position-restraints-dd-openmp">Fixed flat-bottom position restraints + DD + OpenMP</a></li>
+<li><a class="reference internal" href="#fixed-multi-domain-reruns">Fixed multi-domain reruns</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fixes-for-mdrun-performance-issues">Fixes for mdrun performance issues</a><ul>
+<li><a class="reference internal" href="#corrected-cuda-sm-60-performance">Corrected CUDA sm_60 performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fixes-for-gmx-tools">Fixes for <code class="docutils literal"><span class="pre">gmx</span></code> tools</a><ul>
+<li><a class="reference internal" href="#fixed-some-fft-handling-in-cross-corrrelation-calculations">Fixed some FFT handling in cross-corrrelation calculations</a></li>
+<li><a class="reference internal" href="#fixed-gmx-rmsf-q-oq">Fixed gmx rmsf -q -oq</a></li>
+<li><a class="reference internal" href="#fixed-crash-in-gmx-order">Fixed crash in gmx order</a></li>
+<li><a class="reference internal" href="#fixed-minor-trjconv-bug">Fixed minor trjconv bug</a></li>
+<li><a class="reference internal" href="#fixed-time-label-print-in-gmx-vanhove">Fixed time label print in gmx vanhove</a></li>
+<li><a class="reference internal" href="#handled-issuing-warnings-correctly-in-xpm2ps-and-membed">Handled issuing warnings correctly in xpm2ps and membed</a></li>
+<li><a class="reference internal" href="#corrected-documentation-about-eigenvalue-handling">Corrected documentation about eigenvalue handling</a></li>
+<li><a class="reference internal" href="#made-editconf-b-factor-attachment-more-useful-in-practice">Made editconf B-factor attachment more useful in practice</a></li>
+<li><a class="reference internal" href="#fixed-possible-memory-error-with-long-selections">Fixed possible memory error with long selections</a></li>
+<li><a class="reference internal" href="#fixed-use-of-position-variables-with-plus-merge">Fixed use of position variables with plus/merge</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#improved-documentation">Improved documentation</a><ul>
+<li><a class="reference internal" href="#made-several-minor-improvements-to-documentation-and-messages-to-users">Made several minor improvements to documentation and messages to users</a></li>
+<li><a class="reference internal" href="#clarified-use-of-tau-p-and-pcoupltype">Clarified use of tau-p and pcoupltype</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#portability-enhancements">Portability enhancements</a><ul>
+<li><a class="reference internal" href="#fixed-x86-conditional-on-ibm-s390x">Fixed x86 conditional on IBM s390x</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-system-enhancements">Build system enhancements</a><ul>
+<li><a class="reference internal" href="#fixed-compilation-with-cmake-cxx-flags-wall-werror">Fixed compilation with CMAKE_CXX_FLAGS=”-Wall -Werror”</a></li>
+<li><a class="reference internal" href="#stopped-trying-to-use-objdump-reloc-in-the-build-system-on-mac">Stopped trying to use objdump –reloc in the build system on Mac</a></li>
+<li><a class="reference internal" href="#improved-the-support-for-plugin-loading-in-the-build-system">Improved the support for plugin loading in the build system</a></li>
+<li><a class="reference internal" href="#turn-off-hwloc-support-when-static-lib-found">Turn off hwloc support when static lib found</a></li>
+<li><a class="reference internal" href="#fixed-build-with-gmx-external-tng-on">Fixed build with GMX_EXTERNAL_TNG=ON</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#house-keeping-that-reduces-users-problems">House-keeping that reduces users’ problems</a><ul>
+<li><a class="reference internal" href="#mdrun-prints-invalid-performance-data-less-often">Mdrun prints invalid performance data less often</a></li>
+<li><a class="reference internal" href="#added-a-runtime-check-for-number-of-threads-in-bonded-code">Added a runtime check for number of threads in bonded code</a></li>
+<li><a class="reference internal" href="#fixed-integer-narrowing-in-tng-reading-for-long-trajectories">Fixed integer narrowing in TNG reading for long trajectories</a></li>
+<li><a class="reference internal" href="#fixed-logic-of-trr-reading">Fixed logic of TRR reading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="2016.3.html"
+                        title="previous chapter">GROMACS 2016.3 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="2016.1.html"
+                        title="next chapter">GROMACS 2016.1 Release Notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/release-notes/2016/2016.2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="2016.1.html" title="GROMACS 2016.1 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="2016.3.html" title="GROMACS 2016.3 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

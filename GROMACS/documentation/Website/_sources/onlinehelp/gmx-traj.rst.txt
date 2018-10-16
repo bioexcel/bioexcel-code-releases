@@ -1,0 +1,149 @@
+.. _gmx traj:
+
+gmx traj
+========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx traj [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+             [:strong:`-ox` :emphasis:`[<.xvg>]`] [:strong:`-oxt` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-ov` :emphasis:`[<.xvg>]`]
+             [:strong:`-of` :emphasis:`[<.xvg>]`] [:strong:`-ob` :emphasis:`[<.xvg>]`] [:strong:`-ot` :emphasis:`[<.xvg>]`] [:strong:`-ekt` :emphasis:`[<.xvg>]`]
+             [:strong:`-ekr` :emphasis:`[<.xvg>]`] [:strong:`-vd` :emphasis:`[<.xvg>]`] [:strong:`-cv` :emphasis:`[<.pdb>]`] [:strong:`-cf` :emphasis:`[<.pdb>]`]
+             [:strong:`-av` :emphasis:`[<.xvg>]`] [:strong:`-af` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+             [:strong:`-dt` :emphasis:`<time>`] [:strong:`-tu` :emphasis:`<enum>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-[no]com`]
+             [:strong:`-[no]pbc`] [:strong:`-[no]mol`] [:strong:`-[no]nojump`] [:strong:`-[no]x`] [:strong:`-[no]y`]
+             [:strong:`-[no]z`] [:strong:`-ng` :emphasis:`<int>`] [:strong:`-[no]len`] [:strong:`-[no]fp`] [:strong:`-bin` :emphasis:`<real>`]
+             [:strong:`-ctime` :emphasis:`<real>`] [:strong:`-scale` :emphasis:`<real>`]
+
+Description
+-----------
+
+``gmx traj`` plots coordinates, velocities, forces and/or the box.
+With ``-com`` the coordinates, velocities and forces are
+calculated for the center of mass of each group.
+When ``-mol`` is set, the numbers in the index file are
+interpreted as molecule numbers and the same procedure as with
+``-com`` is used for each molecule.
+
+Option ``-ot`` plots the temperature of each group,
+provided velocities are present in the trajectory file.
+No corrections are made for constrained degrees of freedom!
+This implies ``-com``.
+
+Options ``-ekt`` and ``-ekr`` plot the translational and
+rotational kinetic energy of each group,
+provided velocities are present in the trajectory file.
+This implies ``-com``.
+
+Options ``-cv`` and ``-cf`` write the average velocities
+and average forces as temperature factors to a :ref:`.pdb <pdb>` file with
+the average coordinates or the coordinates at ``-ctime``.
+The temperature factors are scaled such that the maximum is 10.
+The scaling can be changed with the option ``-scale``.
+To get the velocities or forces of one
+frame set both ``-b`` and ``-e`` to the time of
+desired frame. When averaging over frames you might need to use
+the ``-nojump`` option to obtain the correct average coordinates.
+If you select either of these option the average force and velocity
+for each atom are written to an :ref:`.xvg <xvg>` file as well
+(specified with ``-av`` or ``-af``).
+
+Option ``-vd`` computes a velocity distribution, i.e. the
+norm of the vector is plotted. In addition in the same graph
+the kinetic energy distribution is given.
+
+See :doc:`gmx trajectory <gmx-trajectory>` for plotting similar data for selections.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-ox`` [<.xvg>] (coord.xvg) (Optional)
+    xvgr/xmgr file
+``-oxt`` [<.xtc/.trr/...>] (coord.xtc) (Optional)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-ov`` [<.xvg>] (veloc.xvg) (Optional)
+    xvgr/xmgr file
+``-of`` [<.xvg>] (force.xvg) (Optional)
+    xvgr/xmgr file
+``-ob`` [<.xvg>] (box.xvg) (Optional)
+    xvgr/xmgr file
+``-ot`` [<.xvg>] (temp.xvg) (Optional)
+    xvgr/xmgr file
+``-ekt`` [<.xvg>] (ektrans.xvg) (Optional)
+    xvgr/xmgr file
+``-ekr`` [<.xvg>] (ekrot.xvg) (Optional)
+    xvgr/xmgr file
+``-vd`` [<.xvg>] (veldist.xvg) (Optional)
+    xvgr/xmgr file
+``-cv`` [<.pdb>] (veloc.pdb) (Optional)
+    Protein data bank file
+``-cf`` [<.pdb>] (force.pdb) (Optional)
+    Protein data bank file
+``-av`` [<.xvg>] (all_veloc.xvg) (Optional)
+    xvgr/xmgr file
+``-af`` [<.xvg>] (all_force.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-tu`` <enum> (ps)
+    Unit for time values: fs, ps, ns, us, ms, s
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-[no]com``  (no)
+    Plot data for the com of each group
+``-[no]pbc``  (yes)
+    Make molecules whole for COM
+``-[no]mol``  (no)
+    Index contains molecule numbers instead of atom numbers
+``-[no]nojump``  (no)
+    Remove jumps of atoms across the box
+``-[no]x``  (yes)
+    Plot X-component
+``-[no]y``  (yes)
+    Plot Y-component
+``-[no]z``  (yes)
+    Plot Z-component
+``-ng`` <int> (1)
+    Number of groups to consider
+``-[no]len``  (no)
+    Plot vector length
+``-[no]fp``  (no)
+    Full precision output
+``-bin`` <real> (1)
+    Binwidth for velocity histogram (nm/ps)
+``-ctime`` <real> (-1)
+    Use frame at this time for x in ``-cv`` and ``-cf`` instead of the average x
+``-scale`` <real> (0)
+    Scale factor for :ref:`.pdb <pdb>` output, 0 is autoscale
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

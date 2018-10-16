@@ -1,0 +1,655 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__kernel__cpu_8cpp" kind="file">
+    <compoundname>nbnxn_kernel_cpu.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="nbnxn__kernel__cpu_8h" local="yes">nbnxn_kernel_cpu.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includes refid="force__flags_8h" local="yes">gromacs/mdlib/force_flags.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__consts_8h" local="yes">gromacs/mdlib/nbnxn_consts.h</includes>
+    <includes refid="nbnxn__simd_8h" local="yes">gromacs/mdlib/nbnxn_simd.h</includes>
+    <includes refid="interaction__const_8h" local="yes">gromacs/mdtypes/interaction_const.h</includes>
+    <includes refid="md__enums_8h" local="yes">gromacs/mdtypes/md_enums.h</includes>
+    <includes refid="simd_8h" local="yes">gromacs/simd/simd.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="real_8h" local="yes">gromacs/utility/real.h</includes>
+    <includes refid="nbnxn__kernel__common_8h" local="yes">nbnxn_kernel_common.h</includes>
+    <includes refid="nbnxn__kernel__ref_8h" local="yes">gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_ref.h</includes>
+    <includes refid="nbnxn__kernel__simd__4xn_8h" local="yes">gromacs/mdlib/nbnxn_kernels/simd_4xn/nbnxn_kernel_simd_4xn.h</includes>
+    <incdepgraph>
+      <node id="15620">
+        <label>impl_reference_util_double.h</label>
+        <link refid="impl__reference__util__double_8h"/>
+        <childnode refid="15602" relation="include">
+        </childnode>
+        <childnode refid="15611" relation="include">
+        </childnode>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15613" relation="include">
+        </childnode>
+        <childnode refid="15608" relation="include">
+        </childnode>
+        <childnode refid="15615" relation="include">
+        </childnode>
+      </node>
+      <node id="15617">
+        <label>stdarg.h</label>
+      </node>
+      <node id="15634">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="15622">
+        <label>gromacs/simd/scalar/scalar.h</label>
+        <link refid="scalar_8h"/>
+        <childnode refid="15612" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15623" relation="include">
+        </childnode>
+        <childnode refid="15613" relation="include">
+        </childnode>
+      </node>
+      <node id="15629">
+        <label>iterator</label>
+      </node>
+      <node id="15604">
+        <label>cstdint</label>
+      </node>
+      <node id="15601">
+        <label>gromacs/simd/simd.h</label>
+        <link refid="simd_8h"/>
+        <childnode refid="15602" relation="include">
+        </childnode>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15605" relation="include">
+        </childnode>
+        <childnode refid="15606" relation="include">
+        </childnode>
+        <childnode refid="15594" relation="include">
+        </childnode>
+        <childnode refid="15607" relation="include">
+        </childnode>
+        <childnode refid="15622" relation="include">
+        </childnode>
+        <childnode refid="15624" relation="include">
+        </childnode>
+        <childnode refid="15626" relation="include">
+        </childnode>
+        <childnode refid="15627" relation="include">
+        </childnode>
+      </node>
+      <node id="15599">
+        <label>stdint.h</label>
+      </node>
+      <node id="15595">
+        <label>gromacs/mdlib/nb_verlet.h</label>
+        <link refid="nb__verlet_8h"/>
+        <childnode refid="15596" relation="include">
+        </childnode>
+      </node>
+      <node id="15621">
+        <label>impl_reference_util_float.h</label>
+        <link refid="impl__reference__util__float_8h"/>
+        <childnode refid="15602" relation="include">
+        </childnode>
+        <childnode refid="15611" relation="include">
+        </childnode>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15613" relation="include">
+        </childnode>
+        <childnode refid="15608" relation="include">
+        </childnode>
+        <childnode refid="15619" relation="include">
+        </childnode>
+      </node>
+      <node id="15612">
+        <label>cmath</label>
+      </node>
+      <node id="15611">
+        <label>cassert</label>
+      </node>
+      <node id="15630">
+        <label>stdexcept</label>
+      </node>
+      <node id="15626">
+        <label>gromacs/simd/scalar/scalar_util.h</label>
+        <link refid="scalar__util_8h"/>
+        <childnode refid="15612" relation="include">
+        </childnode>
+      </node>
+      <node id="15606">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="15596" relation="include">
+        </childnode>
+      </node>
+      <node id="15607">
+        <label>impl_reference/impl_reference.h</label>
+        <link refid="impl__reference_8h"/>
+        <childnode refid="15608" relation="include">
+        </childnode>
+        <childnode refid="15609" relation="include">
+        </childnode>
+        <childnode refid="15610" relation="include">
+        </childnode>
+        <childnode refid="15614" relation="include">
+        </childnode>
+        <childnode refid="15615" relation="include">
+        </childnode>
+        <childnode refid="15619" relation="include">
+        </childnode>
+        <childnode refid="15620" relation="include">
+        </childnode>
+        <childnode refid="15621" relation="include">
+        </childnode>
+      </node>
+      <node id="15609">
+        <label>impl_reference_general.h</label>
+        <link refid="impl__reference__general_8h"/>
+        <childnode refid="15598" relation="include">
+        </childnode>
+      </node>
+      <node id="15593">
+        <label>nbnxn_kernel_cpu.h</label>
+        <link refid="nbnxn__kernel__cpu_8h"/>
+        <childnode refid="15594" relation="include">
+        </childnode>
+      </node>
+      <node id="15619">
+        <label>impl_reference_simd_float.h</label>
+        <link refid="impl__reference__simd__float_8h"/>
+        <childnode refid="15602" relation="include">
+        </childnode>
+        <childnode refid="15611" relation="include">
+        </childnode>
+        <childnode refid="15612" relation="include">
+        </childnode>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15613" relation="include">
+        </childnode>
+        <childnode refid="15605" relation="include">
+        </childnode>
+        <childnode refid="15608" relation="include">
+        </childnode>
+      </node>
+      <node id="15633">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="15598" relation="include">
+        </childnode>
+        <childnode refid="15634" relation="include">
+        </childnode>
+      </node>
+      <node id="15594">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="15632">
+        <label>vector</label>
+      </node>
+      <node id="15608">
+        <label>impl_reference_definitions.h</label>
+        <link refid="impl__reference__definitions_8h"/>
+      </node>
+      <node id="15597">
+        <label>gromacs/mdtypes/md_enums.h</label>
+        <link refid="md__enums_8h"/>
+        <childnode refid="15598" relation="include">
+        </childnode>
+      </node>
+      <node id="15592">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="15631">
+        <label>utility</label>
+      </node>
+      <node id="15605">
+        <label>array</label>
+      </node>
+      <node id="15615">
+        <label>impl_reference_simd_double.h</label>
+        <link refid="impl__reference__simd__double_8h"/>
+        <childnode refid="15602" relation="include">
+        </childnode>
+        <childnode refid="15611" relation="include">
+        </childnode>
+        <childnode refid="15612" relation="include">
+        </childnode>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15613" relation="include">
+        </childnode>
+        <childnode refid="15605" relation="include">
+        </childnode>
+        <childnode refid="15616" relation="include">
+        </childnode>
+        <childnode refid="15608" relation="include">
+        </childnode>
+        <childnode refid="15619" relation="include">
+        </childnode>
+      </node>
+      <node id="15598">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="15599" relation="include">
+        </childnode>
+        <childnode refid="15600" relation="include">
+        </childnode>
+      </node>
+      <node id="15623">
+        <label>cstdlib</label>
+      </node>
+      <node id="15614">
+        <label>impl_reference_simd4_float.h</label>
+        <link refid="impl__reference__simd4__float_8h"/>
+        <childnode refid="15602" relation="include">
+        </childnode>
+        <childnode refid="15611" relation="include">
+        </childnode>
+        <childnode refid="15612" relation="include">
+        </childnode>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15613" relation="include">
+        </childnode>
+        <childnode refid="15605" relation="include">
+        </childnode>
+        <childnode refid="15608" relation="include">
+        </childnode>
+      </node>
+      <node id="15628">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15605" relation="include">
+        </childnode>
+        <childnode refid="15629" relation="include">
+        </childnode>
+        <childnode refid="15630" relation="include">
+        </childnode>
+        <childnode refid="15631" relation="include">
+        </childnode>
+        <childnode refid="15632" relation="include">
+        </childnode>
+        <childnode refid="15633" relation="include">
+        </childnode>
+      </node>
+      <node id="15603">
+        <label>cstddef</label>
+      </node>
+      <node id="15624">
+        <label>gromacs/simd/scalar/scalar_math.h</label>
+        <link refid="scalar__math_8h"/>
+        <childnode refid="15612" relation="include">
+        </childnode>
+        <childnode refid="15625" relation="include">
+        </childnode>
+        <childnode refid="15622" relation="include">
+        </childnode>
+      </node>
+      <node id="15635">
+        <label>nbnxn_kernel_common.h</label>
+        <link refid="nbnxn__kernel__common_8h"/>
+        <childnode refid="15594" relation="include">
+        </childnode>
+      </node>
+      <node id="15625">
+        <label>gromacs/math/functions.h</label>
+        <link refid="functions_8h"/>
+        <childnode refid="15612" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15594" relation="include">
+        </childnode>
+      </node>
+      <node id="15602">
+        <label>config.h</label>
+      </node>
+      <node id="15616">
+        <label>gromacs/utility/fatalerror.h</label>
+        <link refid="fatalerror_8h"/>
+        <childnode refid="15617" relation="include">
+        </childnode>
+        <childnode refid="15618" relation="include">
+        </childnode>
+        <childnode refid="15598" relation="include">
+        </childnode>
+      </node>
+      <node id="15613">
+        <label>algorithm</label>
+      </node>
+      <node id="15591">
+        <label>src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp</label>
+        <link refid="nbnxn_kernel_cpu.cpp"/>
+        <childnode refid="15592" relation="include">
+        </childnode>
+        <childnode refid="15593" relation="include">
+        </childnode>
+        <childnode refid="15595" relation="include">
+        </childnode>
+        <childnode refid="15597" relation="include">
+        </childnode>
+        <childnode refid="15601" relation="include">
+        </childnode>
+        <childnode refid="15633" relation="include">
+        </childnode>
+        <childnode refid="15594" relation="include">
+        </childnode>
+        <childnode refid="15635" relation="include">
+        </childnode>
+      </node>
+      <node id="15610">
+        <label>impl_reference_simd4_double.h</label>
+        <link refid="impl__reference__simd4__double_8h"/>
+        <childnode refid="15602" relation="include">
+        </childnode>
+        <childnode refid="15611" relation="include">
+        </childnode>
+        <childnode refid="15612" relation="include">
+        </childnode>
+        <childnode refid="15603" relation="include">
+        </childnode>
+        <childnode refid="15604" relation="include">
+        </childnode>
+        <childnode refid="15613" relation="include">
+        </childnode>
+        <childnode refid="15605" relation="include">
+        </childnode>
+        <childnode refid="15608" relation="include">
+        </childnode>
+      </node>
+      <node id="15618">
+        <label>stdio.h</label>
+      </node>
+      <node id="15596">
+        <label>memory</label>
+      </node>
+      <node id="15600">
+        <label>inttypes.h</label>
+      </node>
+      <node id="15627">
+        <label>gromacs/simd/simd_memory.h</label>
+        <link refid="simd__memory_8h"/>
+        <childnode refid="15628" relation="include">
+        </childnode>
+        <childnode refid="15633" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="nbnxn__kernel__cpu_8cpp_1ab8609fd3398a42d3c8ce9b597bba82cf" prot="public" static="no">
+        <name>INCLUDE_KERNELFUNCTION_TABLES</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" line="53" column="10" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__kernel__cpu_8cpp_1abaca94c107ec0c43568c27c532a669c1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void clearGroupEnergies</definition>
+        <argsstring>(nbnxn_atomdata_output_t *out)</argsstring>
+        <name>clearGroupEnergies</name>
+        <param>
+          <type><ref refid="structnbnxn__atomdata__output__t" kindref="compound">nbnxn_atomdata_output_t</ref> *</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>Clears the energy group output buffers. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">out</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>nbnxn kernel output struct </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" line="67" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" bodystart="67" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__kernel__cpu_8cpp_1ab50e9af3412f0782a4f0b4379eb4abaf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>int</type>
+            <declname>unrollj</declname>
+            <defname>unrollj</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void reduceGroupEnergySimdBuffers</definition>
+        <argsstring>(int numGroups, int numGroups_2log, const real *__restrict vVdwSimd, const real *__restrict vCoulombSimd, real *__restrict vVdw, real *__restrict vCoulomb)</argsstring>
+        <name>reduceGroupEnergySimdBuffers</name>
+        <param>
+          <type>int</type>
+          <declname>numGroups</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>numGroups_2log</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *__restrict</type>
+          <declname>vVdwSimd</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *__restrict</type>
+          <declname>vCoulombSimd</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *__restrict</type>
+          <declname>vVdw</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *__restrict</type>
+          <declname>vCoulomb</declname>
+        </param>
+        <briefdescription>
+<para>Reduce the group-pair energy buffers produced by a SIMD kernel to single terms in the output buffers. </para>        </briefdescription>
+        <detaileddescription>
+<para>The SIMD kernels produce a large number of energy buffer in SIMD registers to avoid scattered reads and writes.</para><para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>unrollj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unroll size for j-particles in the SIMD kernel </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">numGroups</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of energy groups </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">numGroups_2log</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Log2 of numGroups, rounded up </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">vVdwSimd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SIMD Van der Waals energy buffers </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">vCoulombSimd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SIMD Coulomb energy buffers </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">vVdw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Van der Waals energy output buffer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">vCoulomb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coulomb energy output buffer </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" line="100" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" bodystart="100" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__kernel__cpu_8cpp_1a5fb28c7e416c8b806870fe200a082279" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_kernel_cpu</definition>
+        <argsstring>(nonbonded_verlet_group_t *nbvg, const nbnxn_atomdata_t *nbat, const interaction_const_t *ic, rvec *shiftVectors, int forceFlags, int clearF, real *fshift, real *vCoulomb, real *vVdw)</argsstring>
+        <name>nbnxn_kernel_cpu</name>
+        <param>
+          <type><ref refid="structnonbonded__verlet__group__t" kindref="compound">nonbonded_verlet_group_t</ref> *</type>
+          <declname>nbvg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>rvec *</type>
+          <declname>shiftVectors</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>forceFlags</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>clearF</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>fshift</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>vCoulomb</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>vVdw</declname>
+        </param>
+        <briefdescription>
+<para>Dispatches the non-bonded N versus M atom cluster CPU kernels. </para>        </briefdescription>
+        <detaileddescription>
+<para>OpenMP parallelization is performed within this function. Energy reduction, but not force and shift force reduction, is performed within this function.</para><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">nbvg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The group (local/non-local) to compute interaction for </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nbat</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The atomdata for the interactions </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Non-bonded interaction constants </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">shiftVectors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PBC shift vectors </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">forceFlags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Flags that tell what to compute </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">clearF</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Enum that tells if to clear the force output buffer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fshift</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shift force output buffer </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">vCoulomb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer for Coulomb energies </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">vVdw</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Output buffer for Van der Waals energies </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" line="136" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp" bodystart="136" bodyend="413"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_cpu.cpp"/>
+  </compounddef>
+</doxygen>

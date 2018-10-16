@@ -1,0 +1,72 @@
+.. _gmx mdmat:
+
+gmx mdmat
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx mdmat [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`]
+              [:strong:`-mean` :emphasis:`[<.xpm>]`] [:strong:`-frames` :emphasis:`[<.xpm>]`] [:strong:`-no` :emphasis:`[<.xvg>]`]
+              [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-xvg` :emphasis:`<enum>`]
+              [:strong:`-t` :emphasis:`<real>`] [:strong:`-nlevels` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx mdmat`` makes distance matrices consisting of the smallest distance
+between residue pairs. With ``-frames``, these distance matrices can be
+stored in order to see differences in tertiary structure as a
+function of time. If you choose your options unwisely, this may generate
+a large output file. By default, only an averaged matrix over the whole
+trajectory is output.
+Also a count of the number of different atomic contacts between
+residues over the whole trajectory can be made.
+The output can be processed with :doc:`gmx xpm2ps <gmx-xpm2ps>` to make a PostScript (tm) plot.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-n`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+
+Options to specify output files:
+
+``-mean`` [<.xpm>] (dm.xpm)
+    X PixMap compatible matrix file
+``-frames`` [<.xpm>] (dmf.xpm) (Optional)
+    X PixMap compatible matrix file
+``-no`` [<.xvg>] (num.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-t`` <real> (1.5)
+    trunc distance
+``-nlevels`` <int> (40)
+    Discretize distance in this number of levels
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

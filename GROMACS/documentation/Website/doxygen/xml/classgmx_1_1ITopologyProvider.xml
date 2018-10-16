@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1ITopologyProvider" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::ITopologyProvider</compoundname>
+    <derivedcompoundref refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules" prot="public" virt="non-virtual">gmx::anonymous_namespace{insert-molecules.cpp}::InsertMolecules</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1TrajectoryAnalysisRunnerCommon_1_1Impl" prot="public" virt="non-virtual">gmx::TrajectoryAnalysisRunnerCommon::Impl</derivedcompoundref>
+    <includes local="no">gromacs/selection/selectionoptionbehavior.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1ITopologyProvider_1ac86776d6932d1f659a19ede5fc141cc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+        <definition>virtual gmx_mtop_t* gmx::ITopologyProvider::getTopology</definition>
+        <argsstring>(bool required)=0</argsstring>
+        <name>getTopology</name>
+        <reimplementedby refid="classgmx_1_1TrajectoryAnalysisRunnerCommon_1_1Impl_1a52a674ff855f03f7a97183b860d818dc">getTopology</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules_1a1ae59c0d6d66fc29f0878c791c6e63ab">getTopology</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>required</declname>
+        </param>
+        <briefdescription>
+<para>Returns the topology to use. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">required</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the topology is required by the caller.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Can return NULL if <computeroutput>required</computeroutput> is <computeroutput>false</computeroutput> and the topology is not provided by the user. If <computeroutput>required</computeroutput> is <computeroutput>true</computeroutput>, should throw an error if the topology cannot be loaded.</para><para>This method may get called multiple times, potentially with different values of <computeroutput>required</computeroutput>. Subsequent calls should just return the same topology that was loaded in the first call. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selectionoptionbehavior.h" line="96" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1ITopologyProvider_1a81d60993ea70526c014ff8d2ba99e197" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>int</type>
+        <definition>virtual int gmx::ITopologyProvider::getAtomCount</definition>
+        <argsstring>()=0</argsstring>
+        <name>getAtomCount</name>
+        <reimplementedby refid="classgmx_1_1TrajectoryAnalysisRunnerCommon_1_1Impl_1af05f584913019fba6cf41d216f6df922">getAtomCount</reimplementedby>
+        <reimplementedby refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules_1a9dcc20b8203c0b1e9fa11f0cbec4c4c0">getAtomCount</reimplementedby>
+        <briefdescription>
+<para>Returns the number of atoms. </para>        </briefdescription>
+        <detaileddescription>
+<para>This method is only called if <ref refid="classgmx_1_1ITopologyProvider_1ac86776d6932d1f659a19ede5fc141cc6" kindref="member">getTopology()</ref> returns NULL. It should return the number of atoms that at most need to be selected by the selections. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selectionoptionbehavior.h" line="104" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgmx_1_1ITopologyProvider_1ab5f854c669b610bbfa7c1d96bbc946e5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::ITopologyProvider::~ITopologyProvider</definition>
+        <argsstring>()</argsstring>
+        <name>~ITopologyProvider</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selectionoptionbehavior.h" line="107" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selectionoptionbehavior.cpp" bodystart="69" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Provides topology information to <ref refid="classgmx_1_1SelectionOptionBehavior" kindref="compound">SelectionOptionBehavior</ref>. </para>    </briefdescription>
+    <detaileddescription>
+<para>Modules that use <ref refid="classgmx_1_1SelectionOptionBehavior" kindref="compound">SelectionOptionBehavior</ref> need to implement this interface to provide functionality to load topology information for use with the selections.</para><para>If future need arises to use similar information elsewhere, this can be moved to, e.g., the topology module, but for now it is here for simplicity. Also, if/when there will be more modules that use this, we can identify common code from those users and possibly provide a shared implementation (e.g., in the form of another <ref refid="classgmx_1_1IOptionsBehavior" kindref="compound">IOptionsBehavior</ref>), but currently there are too few users to identify any useful reusable functionality from the callers.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1SelectionCollection_1a4f81eebe438296ee5b4c301b5cc882f6" kindref="member">SelectionCollection::setTopology()</ref>. </para></simplesect>
+</para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="2101">
+        <label>gmx::anonymous_namespace{insert-molecules.cpp}::InsertMolecules</label>
+        <link refid="classgmx_1_1anonymous__namespace_02insert-molecules_8cpp_03_1_1InsertMolecules"/>
+        <childnode refid="2100" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2100">
+        <label>gmx::ITopologyProvider</label>
+        <link refid="classgmx_1_1ITopologyProvider"/>
+      </node>
+      <node id="2102">
+        <label>gmx::TrajectoryAnalysisRunnerCommon::Impl</label>
+        <link refid="classgmx_1_1TrajectoryAnalysisRunnerCommon_1_1Impl"/>
+        <childnode refid="2100" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selectionoptionbehavior.h" line="80" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/selection/selectionoptionbehavior.h" bodystart="79" bodyend="108"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1ITopologyProvider_1a81d60993ea70526c014ff8d2ba99e197" prot="public" virt="pure-virtual"><scope>gmx::ITopologyProvider</scope><name>getAtomCount</name></member>
+      <member refid="classgmx_1_1ITopologyProvider_1ac86776d6932d1f659a19ede5fc141cc6" prot="public" virt="pure-virtual"><scope>gmx::ITopologyProvider</scope><name>getTopology</name></member>
+      <member refid="classgmx_1_1ITopologyProvider_1ab5f854c669b610bbfa7c1d96bbc946e5" prot="protected" virt="virtual"><scope>gmx::ITopologyProvider</scope><name>~ITopologyProvider</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

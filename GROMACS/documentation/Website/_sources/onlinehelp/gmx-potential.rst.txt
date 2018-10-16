@@ -1,0 +1,91 @@
+.. _gmx potential:
+
+gmx potential
+=============
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx potential [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-s` :emphasis:`[<.tpr>]`]
+                 [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-oc` :emphasis:`[<.xvg>]`] [:strong:`-of` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`]
+                 [:strong:`-e` :emphasis:`<time>`] [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`]
+                 [:strong:`-d` :emphasis:`<string>`] [:strong:`-sl` :emphasis:`<int>`] [:strong:`-cb` :emphasis:`<int>`] [:strong:`-ce` :emphasis:`<int>`]
+                 [:strong:`-tz` :emphasis:`<real>`] [:strong:`-[no]spherical`] [:strong:`-ng` :emphasis:`<int>`] [:strong:`-[no]correct`]
+
+Description
+-----------
+
+``gmx potential`` computes the electrostatical potential across the box. The potential is
+calculated by first summing the charges per slice and then integrating
+twice of this charge distribution. Periodic boundaries are not taken
+into account. Reference of potential is taken to be the left side of
+the box. It is also possible to calculate the potential in spherical
+coordinates as function of r by calculating a charge distribution in
+spherical slices and twice integrating them. epsilon_r is taken as 1,
+but 2 is more appropriate in many cases.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx)
+    Index file
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (potential.xvg)
+    xvgr/xmgr file
+``-oc`` [<.xvg>] (charge.xvg)
+    xvgr/xmgr file
+``-of`` [<.xvg>] (field.xvg)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-d`` <string> (Z)
+    Take the normal on the membrane in direction X, Y or Z.
+``-sl`` <int> (10)
+    Calculate potential as function of boxlength, dividing the box in this number of slices.
+``-cb`` <int> (0)
+    Discard this number of  first slices of box for integration
+``-ce`` <int> (0)
+    Discard this number of last slices of box for integration
+``-tz`` <real> (0)
+    Translate all coordinates by this distance in the direction of the box
+``-[no]spherical``  (no)
+    Calculate spherical thingie
+``-ng`` <int> (1)
+    Number of groups to consider
+``-[no]correct``  (no)
+    Assume net zero charge of groups to improve accuracy
+
+Known Issues
+------------
+
+* Discarding slices for integration should not be necessary.
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

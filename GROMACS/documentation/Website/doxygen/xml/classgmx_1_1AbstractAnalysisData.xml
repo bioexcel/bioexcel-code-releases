@@ -1,0 +1,721 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="classgmx_1_1AbstractAnalysisData" kind="class" prot="public" abstract="yes">
+    <compoundname>gmx::AbstractAnalysisData</compoundname>
+    <derivedcompoundref refid="classgmx_1_1AbstractAnalysisArrayData" prot="public" virt="non-virtual">gmx::AbstractAnalysisArrayData</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1AnalysisData" prot="public" virt="non-virtual">gmx::AnalysisData</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1AnalysisDataDisplacementModule" prot="public" virt="non-virtual">gmx::AnalysisDataDisplacementModule</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1AnalysisDataFrameAverageModule" prot="public" virt="non-virtual">gmx::AnalysisDataFrameAverageModule</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1AnalysisDataProxy" prot="public" virt="non-virtual">gmx::AnalysisDataProxy</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1AnalysisDataSimpleHistogramModule" prot="public" virt="non-virtual">gmx::AnalysisDataSimpleHistogramModule</derivedcompoundref>
+    <derivedcompoundref refid="classgmx_1_1AnalysisDataWeightedHistogramModule" prot="public" virt="non-virtual">gmx::AnalysisDataWeightedHistogramModule</derivedcompoundref>
+    <includes local="no">gromacs/analysisdata/abstractdata.h</includes>
+    <innerclass refid="classgmx_1_1AbstractAnalysisData_1_1Impl" prot="public">gmx::AbstractAnalysisData::Impl</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgmx_1_1AbstractAnalysisData_1a1587eb55b3237773f2cd957e7899dca9" prot="private" static="no" mutable="no">
+        <type><ref refid="classgmx_1_1PrivateImplPointer" kindref="compound">PrivateImplPointer</ref>&lt; <ref refid="classgmx_1_1AbstractAnalysisData_1_1Impl" kindref="compound">Impl</ref> &gt;</type>
+        <definition>PrivateImplPointer&lt;Impl&gt; gmx::AbstractAnalysisData::impl_</definition>
+        <argsstring></argsstring>
+        <name>impl_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="439" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" bodystart="437" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a13d8d87f507077f7867dcc8326255074" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>gmx::AbstractAnalysisData::~AbstractAnalysisData</definition>
+        <argsstring>()</argsstring>
+        <name>~AbstractAnalysisData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="114" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="98" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a3c84cd94769c773907605c53ba417a47" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::AbstractAnalysisData::isMultipoint</definition>
+        <argsstring>() const </argsstring>
+        <name>isMultipoint</name>
+        <briefdescription>
+<para>Whether the data can have multiple points in the same column in the same frame. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para><computeroutput>true</computeroutput> if multiple points in the same column are allowed within a single frame.</para></simplesect>
+This kind of data can appear in many histogramming applications (e.g., RDFs), where each trajectory frame has several data points (possibly a different number for each frame). The current interface doesn&apos;t support storing such data, but this should rarely be necessary.</para><para>The returned value does not change after modules have been notified of data start. Derived classes can change the type by calling <ref refid="classgmx_1_1AbstractAnalysisData_1a596af1c5304c9b90f1a21f5f20c34d69" kindref="member">setMultipoint()</ref> subject to the above restriction. If this is not done, the function always returns false.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="139" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="103" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1aa5e15c4c54a953a2d13855286ca1391e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::AbstractAnalysisData::dataSetCount</definition>
+        <argsstring>() const </argsstring>
+        <name>dataSetCount</name>
+        <briefdescription>
+<para>Returns the number of data sets in the data object. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of data sets in the data.</para></simplesect>
+If the number is not yet known, returns 0. The returned value does not change after modules have been notified of data start, but may change multiple times before that, depending on the actual data class. Derived classes should set the number of columns with <ref refid="classgmx_1_1AbstractAnalysisData_1a60c13f7908f1c8af7d0f3f1a23200683" kindref="member">setDataSetCount()</ref>, within the above limitations.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="156" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="109" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1ad0c3d329b51830be42ad0b447ac56d31" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::AbstractAnalysisData::columnCount</definition>
+        <argsstring>(int dataSet) const </argsstring>
+        <name>columnCount</name>
+        <param>
+          <type>int</type>
+          <declname>dataSet</declname>
+        </param>
+        <briefdescription>
+<para>Returns the number of columns in a data set. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dataSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zero-based index of the data set to query. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The number of columns in the data.</para></simplesect>
+If the number of columns is not yet known, returns 0. The returned value does not change after modules have been notified of data start, but may change multiple times before that, depending on the actual data class. Derived classes should set the number of columns with <ref refid="classgmx_1_1AbstractAnalysisData_1a5a01b9c651688c24abd48377eb704d4f" kindref="member">setColumnCount()</ref>, within the above limitations.</para><para>Does not throw. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="174" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="115" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1ac5c4dbc7b71874e137e8af955fa09624" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gmx::AbstractAnalysisData::columnCount</definition>
+        <argsstring>() const </argsstring>
+        <name>columnCount</name>
+        <briefdescription>
+<para>Returns the number of columns in the data. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of columns in the data.</para></simplesect>
+This is a convenience method for data objects with a single data set. Can only be called if <ref refid="classgmx_1_1AbstractAnalysisData_1aa5e15c4c54a953a2d13855286ca1391e" kindref="member">dataSetCount()</ref> == 1.</para><para>Does not throw.</para><para><simplesect kind="see"><para>columnCount(int) </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="187" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="123" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a49ff8cb5c6087a8081f72b436b9824e7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>int</type>
+        <definition>virtual int gmx::AbstractAnalysisData::frameCount</definition>
+        <argsstring>() const =0</argsstring>
+        <name>frameCount</name>
+        <reimplementedby refid="classgmx_1_1AbstractAnalysisArrayData_1ad660b3080b126ae76699080da652831e">frameCount</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataProxy_1ab68e3a3caaea9260a42cd29b9dea1312">frameCount</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisData_1aa01a654b47dfccafb81daaa1895fcd79">frameCount</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataFrameAverageModule_1a32c726dea81e3895c386fa398c6d66db">frameCount</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataSimpleHistogramModule_1ab4527d768d6d03de1dae5a469d835825">frameCount</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataWeightedHistogramModule_1a8a5ebdd0407a95e7dbb904f4ae5f4324">frameCount</reimplementedby>
+        <briefdescription>
+<para>Returns the total number of frames in the data. </para>        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The total number of frames in the data.</para></simplesect>
+This function returns the number of frames that the object has produced. If <ref refid="classgmx_1_1AbstractAnalysisData_1a99ba2f4072c75c8e56d1e377cb6b5f8c" kindref="member">requestStorage()</ref> has been successfully called, tryGetDataframe() or <ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref> can be used to access some or all of these frames.</para><para>Does not throw.</para><para>Derived classes should implement this to return the number of frames. The frame count should not be incremented before <ref refid="classgmx_1_1AbstractAnalysisData_1af919927886d1ac547b1841b09af8bd59" kindref="member">tryGetDataFrameInternal()</ref> can return the new frame. The frame count must be incremented before <ref refid="classgmx_1_1AnalysisDataModuleManager_1a5b29d7c4017b27a705d492019f63b9ae" kindref="member">AnalysisDataModuleManager::notifyFrameFinish()</ref> is called. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="208" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1ac7f670bd3e772d5055f485e9f0e51658" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1AnalysisDataFrameRef" kindref="compound">AnalysisDataFrameRef</ref></type>
+        <definition>AnalysisDataFrameRef gmx::AbstractAnalysisData::tryGetDataFrame</definition>
+        <argsstring>(int index) const </argsstring>
+        <name>tryGetDataFrame</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Access stored data. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zero-based frame index to access. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Frame reference to frame <computeroutput>index</computeroutput>, or an invalid reference if no such frame is available.</para></simplesect>
+Does not throw. Failure to access a frame with the given index is indicated through the return value. Negative <computeroutput>index</computeroutput> is allowed, and will always result in an invalid reference being returned.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AbstractAnalysisData_1a99ba2f4072c75c8e56d1e377cb6b5f8c" kindref="member">requestStorage()</ref> </para><simplesectsep/><para><ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="223" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="132" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1AnalysisDataFrameRef" kindref="compound">AnalysisDataFrameRef</ref></type>
+        <definition>AnalysisDataFrameRef gmx::AbstractAnalysisData::getDataFrame</definition>
+        <argsstring>(int index) const </argsstring>
+        <name>getDataFrame</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Access stored data. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zero-based frame index to access. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Frame reference to frame <computeroutput>index</computeroutput>. </para></simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the requested frame is not accessible.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If the data is not certainly available, use <ref refid="classgmx_1_1AbstractAnalysisData_1ac7f670bd3e772d5055f485e9f0e51658" kindref="member">tryGetDataFrame()</ref>.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AbstractAnalysisData_1a99ba2f4072c75c8e56d1e377cb6b5f8c" kindref="member">requestStorage()</ref> </para><simplesectsep/><para><ref refid="classgmx_1_1AbstractAnalysisData_1ac7f670bd3e772d5055f485e9f0e51658" kindref="member">tryGetDataFrame()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="236" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="143" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a99ba2f4072c75c8e56d1e377cb6b5f8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool gmx::AbstractAnalysisData::requestStorage</definition>
+        <argsstring>(int nframes)</argsstring>
+        <name>requestStorage</name>
+        <param>
+          <type>int</type>
+          <declname>nframes</declname>
+        </param>
+        <briefdescription>
+<para>Request storage of frames. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nframes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Request storing at least <computeroutput>nframes</computeroutput> previous frames (-1 = request storing all). Must be &gt;= -1. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the request could be satisfied.</para></simplesect>
+If called multiple times, the largest request is honored.</para><para>Does not throw. Failure to honor the request is indicated through the return value.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref> </para><simplesectsep/><para><ref refid="classgmx_1_1AbstractAnalysisData_1ac7f670bd3e772d5055f485e9f0e51658" kindref="member">tryGetDataFrame()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="252" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="155" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::AbstractAnalysisData::addModule</definition>
+        <argsstring>(AnalysisDataModulePointer module)</argsstring>
+        <name>addModule</name>
+        <param>
+          <type><ref refid="namespacegmx_1aea400e67c2f38e5bacdf8677f38a61cc" kindref="member">AnalysisDataModulePointer</ref></type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Adds a module to process the data. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to add. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if<itemizedlist>
+<listitem><para><computeroutput>module</computeroutput> is not compatible with the data object</para></listitem><listitem><para>data has already been added to the data object and everything is not available through <ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref>. </para></listitem></itemizedlist>
+</para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>unspecified</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any exception thrown by <computeroutput>module</computeroutput> in its notification methods (if data has been added).</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If data has already been added to the data, the new module immediately processes all existing data. <ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref> is thrown if all data is not available through <ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref>.</para><para>The caller can keep a copy of the module pointer if it requires later access to the module.</para><para>If the method throws, the state of the data object is not changed. The state of the data module is indeterminate. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="276" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="167" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a8e6f762df563d577f8a1d34a35273952" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::AbstractAnalysisData::addColumnModule</definition>
+        <argsstring>(int col, int span, AnalysisDataModulePointer module)</argsstring>
+        <name>addColumnModule</name>
+        <param>
+          <type>int</type>
+          <declname>col</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>span</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1aea400e67c2f38e5bacdf8677f38a61cc" kindref="member">AnalysisDataModulePointer</ref></type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Adds a module that processes only a subset of the columns. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>First column. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">span</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of columns. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to add.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Throws in the same situations as <ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule()</ref>.</para><para>Currently, all data sets are filtered using the same column mask.</para><para><xrefsect id="todo_1_todo000002"><xreftitle>Todo</xreftitle><xrefdescription><para>This method doesn&apos;t currently work in all cases with multipoint data or with multiple data sets. In particular, if the added module requests storage and uses <ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref>, it will behave unpredictably (most likely asserts).</para></xrefdescription></xrefsect></para><para><xrefsect id="todo_1_todo000003"><xreftitle>Todo</xreftitle><xrefdescription><para>Generalize this method to multiple data sets (e.g., for adding modules that only process a single data set).</para></xrefdescription></xrefsect></para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="300" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="174" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1ae095550bd347b42db3c49e064bc44228" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::AbstractAnalysisData::applyModule</definition>
+        <argsstring>(IAnalysisDataModule *module)</argsstring>
+        <name>applyModule</name>
+        <param>
+          <type><ref refid="classgmx_1_1IAnalysisDataModule" kindref="compound">IAnalysisDataModule</ref> *</type>
+          <declname>module</declname>
+        </param>
+        <briefdescription>
+<para>Applies a module to process data that is ready. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>module</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Module to apply. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>in same situations as <ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule()</ref>. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>unspecified</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Any exception thrown by <computeroutput>module</computeroutput> in its notification methods.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This function works as <ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule()</ref>, except that it does not keep a reference to <computeroutput>module</computeroutput> within the data object after it returns. Also, it can only be called after the data is ready, and only if <ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref> gives access to all of the data. It is provided for additional flexibility in postprocessing in-memory data.</para><para><xrefsect id="todo_1_todo000004"><xreftitle>Todo</xreftitle><xrefdescription><para>Currently, this method may not work correctly if <computeroutput>module</computeroutput> requests storage (<ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule()</ref> has the same problem if called after data is started). </para></xrefdescription></xrefsect></para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="321" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="187" bodyend="190"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1add6e07c5937629d51e525b38786c0243" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gmx::AbstractAnalysisData::AbstractAnalysisData</definition>
+        <argsstring>()</argsstring>
+        <name>AbstractAnalysisData</name>
+        <briefdescription>
+<para>Initializes a new analysis data object. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="330" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="92" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a60c13f7908f1c8af7d0f3f1a23200683" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::AbstractAnalysisData::setDataSetCount</definition>
+        <argsstring>(int dataSetCount)</argsstring>
+        <name>setDataSetCount</name>
+        <param>
+          <type>int</type>
+          <declname>dataSetCount</declname>
+        </param>
+        <briefdescription>
+<para>Sets the number of data sets. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dataSetCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of data sets (must be &gt; 0). </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>std::bad_alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if out of memory. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if modules have been added that are not compatible with the new data set count.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+It not called, the data object has a single data set. Can be called only before <ref refid="classgmx_1_1AnalysisDataModuleManager_1a7348344412f0078fbebbb985dac1e7ce" kindref="member">AnalysisDataModuleManager::notifyDataStart()</ref>. Multiple calls are allowed before that point; the last call takes effect.</para><para>Strong exception safety.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AbstractAnalysisData_1aa5e15c4c54a953a2d13855286ca1391e" kindref="member">dataSetCount()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="349" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="194" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a5a01b9c651688c24abd48377eb704d4f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::AbstractAnalysisData::setColumnCount</definition>
+        <argsstring>(int dataSet, int columnCount)</argsstring>
+        <name>setColumnCount</name>
+        <param>
+          <type>int</type>
+          <declname>dataSet</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>columnCount</declname>
+        </param>
+        <briefdescription>
+<para>Sets the number of columns for a data set. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dataSet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zero-based index of the data set. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">columnCount</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of columns in <computeroutput>dataSet</computeroutput> (must be &gt; 0). </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if modules have been added that are not compatible with the new column count.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+Must be called at least once for each data set before <ref refid="classgmx_1_1AnalysisDataModuleManager_1a7348344412f0078fbebbb985dac1e7ce" kindref="member">AnalysisDataModuleManager::notifyDataStart()</ref>. Can be called only before <ref refid="classgmx_1_1AnalysisDataModuleManager_1a7348344412f0078fbebbb985dac1e7ce" kindref="member">AnalysisDataModuleManager::notifyDataStart()</ref>. Multiple calls are allowed before that point; the last call takes effect.</para><para>Strong exception safety.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AbstractAnalysisData_1ad0c3d329b51830be42ad0b447ac56d31" kindref="member">columnCount()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="368" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="203" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a596af1c5304c9b90f1a21f5f20c34d69" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void gmx::AbstractAnalysisData::setMultipoint</definition>
+        <argsstring>(bool bMultipoint)</argsstring>
+        <name>setMultipoint</name>
+        <param>
+          <type>bool</type>
+          <declname>bMultipoint</declname>
+        </param>
+        <briefdescription>
+<para>Sets whether the data has multiple points per column in a frame. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bMultipoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether multiple points per column are possible. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1APIError" kindref="compound">APIError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if modules have been added that are not compatible with the new setting.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+If not called, only a single point per column is allowed. Can be called only before <ref refid="classgmx_1_1AnalysisDataModuleManager_1a7348344412f0078fbebbb985dac1e7ce" kindref="member">AnalysisDataModuleManager::notifyDataStart()</ref>. Multiple calls are allowed before that point; the last call takes effect.</para><para>Strong exception safety.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AbstractAnalysisData_1a3c84cd94769c773907605c53ba417a47" kindref="member">isMultipoint()</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="386" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="223" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1af919927886d1ac547b1841b09af8bd59" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classgmx_1_1AnalysisDataFrameRef" kindref="compound">AnalysisDataFrameRef</ref></type>
+        <definition>virtual AnalysisDataFrameRef gmx::AbstractAnalysisData::tryGetDataFrameInternal</definition>
+        <argsstring>(int index) const =0</argsstring>
+        <name>tryGetDataFrameInternal</name>
+        <reimplementedby refid="classgmx_1_1AnalysisDataDisplacementModule_1af6b8408d80b7ee7325fb894607071717">tryGetDataFrameInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataProxy_1a1c3da81d5317118d836619235aeb3c55">tryGetDataFrameInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataFrameAverageModule_1af0aa63a7f441372fe75994e226aad9aa">tryGetDataFrameInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisData_1a05deeaddb6550a04b412d3c0d681bc80">tryGetDataFrameInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AbstractAnalysisArrayData_1ac0741a5d236ff1513f10db8fe9e09e65">tryGetDataFrameInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataSimpleHistogramModule_1a3a7f5fb7bd5b73fab491f24500128282">tryGetDataFrameInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataWeightedHistogramModule_1a3b218483f13b2884c0a668ba2ebd2cc6">tryGetDataFrameInternal</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Implements access to data frames. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Zero-based frame index to access. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Frame reference to frame <computeroutput>index</computeroutput>, or an invalid reference if no such frame is available.</para></simplesect>
+Must not throw. Failure to access a frame with the given index is indicated through the return value.</para><para>Code in derived classes can assume that <computeroutput>index</computeroutput> is non-negative and less than <ref refid="classgmx_1_1AbstractAnalysisData_1a49ff8cb5c6087a8081f72b436b9824e7" kindref="member">frameCount()</ref>.</para><para>Derived classes can choose to return an invalid reference if <ref refid="classgmx_1_1AbstractAnalysisData_1a7b0f26e6b9b4c981ca611ca782570aa6" kindref="member">requestStorageInternal()</ref> has not been called at all, or if the frame is too old (compared to the value given to <ref refid="classgmx_1_1AbstractAnalysisData_1a7b0f26e6b9b4c981ca611ca782570aa6" kindref="member">requestStorageInternal()</ref>).</para><para>This method is called internally by <ref refid="classgmx_1_1AbstractAnalysisData_1ac7f670bd3e772d5055f485e9f0e51658" kindref="member">tryGetDataFrame()</ref> and <ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref>.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AnalysisDataStorage" kindref="compound">AnalysisDataStorage</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="410" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a7b0f26e6b9b4c981ca611ca782570aa6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool gmx::AbstractAnalysisData::requestStorageInternal</definition>
+        <argsstring>(int nframes)=0</argsstring>
+        <name>requestStorageInternal</name>
+        <reimplementedby refid="classgmx_1_1AnalysisDataDisplacementModule_1a3d0ce0127aa09956a35e4293eb7fc6f5">requestStorageInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataProxy_1af11b6374d480ecf887410cc2ae694e21">requestStorageInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataFrameAverageModule_1a8db4783d9bb9360e73685d13f9893f30">requestStorageInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisData_1aa90f7d683789717700fe0b5cd403d1dd">requestStorageInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AbstractAnalysisArrayData_1af46f10bdd7e1eb137cef94dd14460b93">requestStorageInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataSimpleHistogramModule_1a46d12bae2d5fefc08353c471cdef45ca">requestStorageInternal</reimplementedby>
+        <reimplementedby refid="classgmx_1_1AnalysisDataWeightedHistogramModule_1a3de1e0c4da72ec91f7ed77acb4018778">requestStorageInternal</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>nframes</declname>
+        </param>
+        <briefdescription>
+<para>Implements storage requests. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nframes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Request storing at least <computeroutput>nframes</computeroutput> previous frames (-1 = request storing all). Will be either -1 or &gt;0. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the request could be satisfied.</para></simplesect>
+Must not throw. Failure to access a frame with the given index is indicated through the return value.</para><para>Derived classes should be prepared for any number of calls to this method before notifyDataStart() is called (and during that call).</para><para>This method is called internally by <ref refid="classgmx_1_1AbstractAnalysisData_1a99ba2f4072c75c8e56d1e377cb6b5f8c" kindref="member">requestStorage()</ref>.</para><para><simplesect kind="see"><para><ref refid="classgmx_1_1AnalysisDataStorage" kindref="compound">AnalysisDataStorage</ref> </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="428" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a4e906c510c615f77574d4a5b769db892" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1AnalysisDataModuleManager" kindref="compound">AnalysisDataModuleManager</ref> &amp;</type>
+        <definition>AnalysisDataModuleManager &amp; gmx::AbstractAnalysisData::moduleManager</definition>
+        <argsstring>()</argsstring>
+        <name>moduleManager</name>
+        <briefdescription>
+<para>Returns the module manager to use for calling notification methods. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="431" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="230" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classgmx_1_1AbstractAnalysisData_1a7510c88948101d44334714f2c5d9fbf3" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classgmx_1_1AnalysisDataModuleManager" kindref="compound">AnalysisDataModuleManager</ref> &amp;</type>
+        <definition>const AnalysisDataModuleManager &amp; gmx::AbstractAnalysisData::moduleManager</definition>
+        <argsstring>() const </argsstring>
+        <name>moduleManager</name>
+        <briefdescription>
+<para>Returns the module manager to use for calling notification methods. </para>        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="433" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.cpp" bodystart="235" bodyend="238"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Abstract base class for all objects that provide data. </para>    </briefdescription>
+    <detaileddescription>
+<para>The public interface includes methods for querying the data (<ref refid="classgmx_1_1AbstractAnalysisData_1a3c84cd94769c773907605c53ba417a47" kindref="member">isMultipoint()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1aa5e15c4c54a953a2d13855286ca1391e" kindref="member">dataSetCount()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1ad0c3d329b51830be42ad0b447ac56d31" kindref="member">columnCount()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1a49ff8cb5c6087a8081f72b436b9824e7" kindref="member">frameCount()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1ac7f670bd3e772d5055f485e9f0e51658" kindref="member">tryGetDataFrame()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" kindref="member">getDataFrame()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1a99ba2f4072c75c8e56d1e377cb6b5f8c" kindref="member">requestStorage()</ref>) and methods for using modules for processing the data (<ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1a8e6f762df563d577f8a1d34a35273952" kindref="member">addColumnModule()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1ae095550bd347b42db3c49e064bc44228" kindref="member">applyModule()</ref>).</para><para>Notice that even for non-const objects, the interface does not provide any means of altering the data. It is only possible to add modules, making it relatively safe to return a non-const pointer of this type pointing to an internal data structure without worrying about possible modifications of the data.</para><para>This class also provides protected methods for use in derived classes. The properties returned by <ref refid="classgmx_1_1AbstractAnalysisData_1a3c84cd94769c773907605c53ba417a47" kindref="member">isMultipoint()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1aa5e15c4c54a953a2d13855286ca1391e" kindref="member">dataSetCount()</ref>, and <ref refid="classgmx_1_1AbstractAnalysisData_1ad0c3d329b51830be42ad0b447ac56d31" kindref="member">columnCount()</ref> must be set using <ref refid="classgmx_1_1AbstractAnalysisData_1a596af1c5304c9b90f1a21f5f20c34d69" kindref="member">setMultipoint()</ref>, <ref refid="classgmx_1_1AbstractAnalysisData_1a60c13f7908f1c8af7d0f3f1a23200683" kindref="member">setDataSetCount()</ref>, and <ref refid="classgmx_1_1AbstractAnalysisData_1a5a01b9c651688c24abd48377eb704d4f" kindref="member">setColumnCount()</ref>. notify*() methods in the <ref refid="classgmx_1_1AnalysisDataModuleManager" kindref="compound">AnalysisDataModuleManager</ref> returned by <ref refid="classgmx_1_1AbstractAnalysisData_1a4e906c510c615f77574d4a5b769db892" kindref="member">moduleManager()</ref> must be used to report when data becomes available for modules to process it. There are also three pure virtual methods that need to be implemented to provide access to stored data: one public (<ref refid="classgmx_1_1AbstractAnalysisData_1a49ff8cb5c6087a8081f72b436b9824e7" kindref="member">frameCount()</ref>) and two protected ones (<ref refid="classgmx_1_1AbstractAnalysisData_1a7b0f26e6b9b4c981ca611ca782570aa6" kindref="member">requestStorageInternal()</ref> and <ref refid="classgmx_1_1AbstractAnalysisData_1af919927886d1ac547b1841b09af8bd59" kindref="member">tryGetDataFrameInternal()</ref>).</para><para>It is up to subclasses to ensure that the virtual methods and the notifications in <ref refid="classgmx_1_1AnalysisDataModuleManager" kindref="compound">AnalysisDataModuleManager</ref> are called in a correct sequence (the methods will assert in most incorrect use cases), and that the data provided through the public interface matches that passed to the modules with the notify methods. Helper class <ref refid="classgmx_1_1AnalysisDataStorage" kindref="compound">AnalysisDataStorage</ref> provides a default implementation for storing data (calls to the pure virtual methods can simply be forwarded to appropriate methods in the helper class), and takes care of correctly calling the notification methods when new data is added to the storage. In most cases, it should be used to implement the derived classes.</para><para>Currently, it is not possible to continue using the data object if an attached module throws an exception during data processing; it is only safe to destroy such data object.</para><para><xrefsect id="todo_1_todo000001"><xreftitle>Todo</xreftitle><xrefdescription><para>Improve the exception-handling semantics. In most cases, it doesn&apos;t make much sense to continue data processing after one module fails, but having the alternative would not hurt.</para></xrefdescription></xrefsect></para>    </detaileddescription>
+    <inheritancegraph>
+      <node id="718">
+        <label>gmx::AnalysisDataBinAverageModule</label>
+        <link refid="classgmx_1_1AnalysisDataBinAverageModule"/>
+        <childnode refid="711" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="711">
+        <label>gmx::AbstractAnalysisArrayData</label>
+        <link refid="classgmx_1_1AbstractAnalysisArrayData"/>
+        <childnode refid="710" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="714">
+        <label>gmx::anonymous_namespace{histogram.cpp}::StaticAverageHistogram</label>
+        <link refid="classgmx_1_1anonymous__namespace_02histogram_8cpp_03_1_1StaticAverageHistogram"/>
+        <childnode refid="712" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="713">
+        <label>anonymous_namespace{histogram.cpp}::MockAverageHistogram</label>
+        <link refid="classanonymous__namespace_02histogram_8cpp_03_1_1MockAverageHistogram"/>
+        <childnode refid="712" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="721">
+        <label>gmx::AnalysisDataDisplacementModule</label>
+        <link refid="classgmx_1_1AnalysisDataDisplacementModule"/>
+        <childnode refid="710" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="710">
+        <label>gmx::AbstractAnalysisData</label>
+        <link refid="classgmx_1_1AbstractAnalysisData"/>
+      </node>
+      <node id="722">
+        <label>gmx::AnalysisDataFrameAverageModule</label>
+        <link refid="classgmx_1_1AnalysisDataFrameAverageModule"/>
+        <childnode refid="710" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="723">
+        <label>gmx::AnalysisDataProxy</label>
+        <link refid="classgmx_1_1AnalysisDataProxy"/>
+        <childnode refid="710" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="712">
+        <label>gmx::AbstractAverageHistogram</label>
+        <link refid="classgmx_1_1AbstractAverageHistogram"/>
+        <childnode refid="711" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="720">
+        <label>gmx::AnalysisData</label>
+        <link refid="classgmx_1_1AnalysisData"/>
+        <childnode refid="710" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="716">
+        <label>gmx::AnalysisArrayData</label>
+        <link refid="classgmx_1_1AnalysisArrayData"/>
+        <childnode refid="711" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="715">
+        <label>gmx::internal::BasicAverageHistogramModule</label>
+        <link refid="classgmx_1_1internal_1_1BasicAverageHistogramModule"/>
+        <childnode refid="712" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="719">
+        <label>gmx::AnalysisDataLifetimeModule</label>
+        <link refid="classgmx_1_1AnalysisDataLifetimeModule"/>
+        <childnode refid="711" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="717">
+        <label>gmx::AnalysisDataAverageModule</label>
+        <link refid="classgmx_1_1AnalysisDataAverageModule"/>
+        <childnode refid="711" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="725">
+        <label>gmx::AnalysisDataWeightedHistogramModule</label>
+        <link refid="classgmx_1_1AnalysisDataWeightedHistogramModule"/>
+        <childnode refid="710" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="724">
+        <label>gmx::AnalysisDataSimpleHistogramModule</label>
+        <link refid="classgmx_1_1AnalysisDataSimpleHistogramModule"/>
+        <childnode refid="710" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" line="112" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/analysisdata/abstractdata.h" bodystart="111" bodyend="440"/>
+    <listofallmembers>
+      <member refid="classgmx_1_1AbstractAnalysisData_1add6e07c5937629d51e525b38786c0243" prot="protected" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>AbstractAnalysisData</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a8e6f762df563d577f8a1d34a35273952" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>addColumnModule</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>addModule</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1ae095550bd347b42db3c49e064bc44228" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>applyModule</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1ad0c3d329b51830be42ad0b447ac56d31" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>columnCount</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1ac5c4dbc7b71874e137e8af955fa09624" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>columnCount</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1aa5e15c4c54a953a2d13855286ca1391e" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>dataSetCount</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a49ff8cb5c6087a8081f72b436b9824e7" prot="public" virt="pure-virtual"><scope>gmx::AbstractAnalysisData</scope><name>frameCount</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1ac97ab78a57e02aad95c9e679ef8b2798" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>getDataFrame</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a1587eb55b3237773f2cd957e7899dca9" prot="private" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>impl_</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a3c84cd94769c773907605c53ba417a47" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>isMultipoint</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a4e906c510c615f77574d4a5b769db892" prot="protected" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>moduleManager</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a7510c88948101d44334714f2c5d9fbf3" prot="protected" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>moduleManager</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a99ba2f4072c75c8e56d1e377cb6b5f8c" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>requestStorage</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a7b0f26e6b9b4c981ca611ca782570aa6" prot="protected" virt="pure-virtual"><scope>gmx::AbstractAnalysisData</scope><name>requestStorageInternal</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a5a01b9c651688c24abd48377eb704d4f" prot="protected" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>setColumnCount</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a60c13f7908f1c8af7d0f3f1a23200683" prot="protected" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>setDataSetCount</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a596af1c5304c9b90f1a21f5f20c34d69" prot="protected" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>setMultipoint</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1ac7f670bd3e772d5055f485e9f0e51658" prot="public" virt="non-virtual"><scope>gmx::AbstractAnalysisData</scope><name>tryGetDataFrame</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1af919927886d1ac547b1841b09af8bd59" prot="protected" virt="pure-virtual"><scope>gmx::AbstractAnalysisData</scope><name>tryGetDataFrameInternal</name></member>
+      <member refid="classgmx_1_1AbstractAnalysisData_1a13d8d87f507077f7867dcc8326255074" prot="public" virt="virtual"><scope>gmx::AbstractAnalysisData</scope><name>~AbstractAnalysisData</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

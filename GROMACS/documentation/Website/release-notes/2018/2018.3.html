@@ -1,0 +1,296 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GROMACS 2018.3 release notes &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GROMACS 2018.2 release notes" href="2018.2.html" />
+    <link rel="prev" title="Release notes" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="2018.2.html" title="GROMACS 2018.2 release notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Release notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gromacs-2018-3-release-notes">
+<h1>GROMACS 2018.3 release notes<a class="headerlink" href="#gromacs-2018-3-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>This version was released on August 23, 2018. These release notes document
+the changes that have taken place in GROMACS since version 2018.2, to fix known
+issues. It also incorporates all fixes made in version 2016.5 and
+earlier, which you can find described in the <a class="reference internal" href="../index.html#release-notes"><span class="std std-ref">Release notes</span></a>.</p>
+<div class="section" id="fixes-where-mdrun-could-behave-incorrectly">
+<h2>Fixes where mdrun could behave incorrectly<a class="headerlink" href="#fixes-where-mdrun-could-behave-incorrectly" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="multi-domain-gpu-runs-can-no-longer-miss-pair-interactions">
+<h3>Multi-domain GPU runs can no longer miss pair interactions<a class="headerlink" href="#multi-domain-gpu-runs-can-no-longer-miss-pair-interactions" title="Permalink to this headline">¶</a></h3>
+<p>With systems with empty space in the unit cell, GPU runs with domain
+decomposition would not compute LJ and Coulomb interactions between
+domains when there we no interactions between domains on a rank at some
+point in time.</p>
+<blockquote>
+<div><ul class="simple">
+<li>This bug only affects simulations running on GPUs with domain decomposition
+and containing empty regions of space that can lead to domains being empty.</li>
+<li>Possible observations of this bug may have been seemingly random failures
+of calculations that where not reproducible when restarting a simulation
+from a checkpoint file, as the domain would then again be filled properly
+if interactions are present at the beginning.</li>
+<li>It is unlikely that this bug will have unnoticed effects on all but
+very short simulations, as the missing interactions will inevitable lead
+to simulation instability and crashes.</li>
+<li>If a simulation that crashed due to this bug is restarted it can contain
+a small region around the crash that will be unphysical due to some
+interactions not being calculated just before the crash itself.</li>
+</ul>
+</div></blockquote>
+<p><strong>This is a critical fix and users of 2018.x series that run on GPUs should
+update to this point release</strong></p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2502">Issue 2502</a></p>
+</div>
+<div class="section" id="fix-conjugate-gradient-assertion-failure-at-end-of-minimization">
+<h3>Fix Conjugate Gradient assertion failure at end of minimization<a class="headerlink" href="#fix-conjugate-gradient-assertion-failure-at-end-of-minimization" title="Permalink to this headline">¶</a></h3>
+<p>When the final step coincided with a coordinate output step,
+conjugate gradient minimization would exit with an assertion failure
+instead of writing confout.gro.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2554">Issue 2554</a></p>
+</div>
+<div class="section" id="multi-domain-conjugate-gradient-minimimization-no-longer-segfaults">
+<h3>Multi-domain Conjugate Gradient minimimization no longer segfaults.<a class="headerlink" href="#multi-domain-conjugate-gradient-minimimization-no-longer-segfaults" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2554">Issue 2554</a></p>
+</div>
+<div class="section" id="fix-pairlist-buffer-with-brownian-dynamics">
+<h3>Fix pairlist buffer with Brownian Dynamics<a class="headerlink" href="#fix-pairlist-buffer-with-brownian-dynamics" title="Permalink to this headline">¶</a></h3>
+<p>With Brownian Dynamics and bd-fric &gt; 0, the Verlet pairlist buffer would
+be determined with incorrect masses for constrained atoms and virtual
+sites. This would lead to a too small buffer for typical atomistic
+systems with constraints.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2613">Issue 2613</a></p>
+</div>
+<div class="section" id="avoid-atom-moved-to-far-errors">
+<h3>Avoid “atom moved to far” errors<a class="headerlink" href="#avoid-atom-moved-to-far-errors" title="Permalink to this headline">¶</a></h3>
+<p>The introduction of the dual pair list has led to larger nstlist values,
+which leads to larger atom displacements between domain decomposition
+steps. This has made it more likely that the errors
+“An atom moved too far between two domain decomposition steps” and
+“N particles communicated to PME rank M are more than 2/3 times the cut-off
+out of the domain decomposition cell …” appear for stable systems.
+Now atom displacements are correctly taken into account when determining
+the minimum cell size, so these errors should only appear for unstable systems.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2614">Issue 2614</a></p>
+</div>
+<div class="section" id="grompp-now-checks-that-pull-groups-are-not-close-to-half-the-box-size">
+<h3>grompp now checks that pull groups are not close to half the box size<a class="headerlink" href="#grompp-now-checks-that-pull-groups-are-not-close-to-half-the-box-size" title="Permalink to this headline">¶</a></h3>
+<p>Pull groups that use a reference atom for periodic boundary treatment
+should have all their atoms well within half the box size of this reference.
+When this is not the case, grompp will issue a warning.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2397">Issue 2397</a></p>
+</div>
+<div class="section" id="fixed-segmentation-fault-in-mdrun-with-qm-mm-oniom-scheme">
+<h3>Fixed segmentation fault in mdrun with QM/MM ONIOM scheme<a class="headerlink" href="#fixed-segmentation-fault-in-mdrun-with-qm-mm-oniom-scheme" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2617">Issue 2617</a></p>
+</div>
+<div class="section" id="correctly-specified-that-pme-on-gpus-is-only-supported-for-dynamical-integrators">
+<h3>Correctly specified that PME on GPUs is only supported for dynamical integrators<a class="headerlink" href="#correctly-specified-that-pme-on-gpus-is-only-supported-for-dynamical-integrators" title="Permalink to this headline">¶</a></h3>
+<p>Previously PME on GPU support could run (but fail) for energy
+minimization and normal-mode analysis runs.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2578">Issue 2578</a></p>
+</div>
+</div>
+<div class="section" id="fixes-for-gmx-tools">
+<h2>Fixes for <code class="docutils literal"><span class="pre">gmx</span></code> tools<a class="headerlink" href="#fixes-for-gmx-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fixed-syntax-error-in-make-gromos-rtp-py">
+<h3>Fixed syntax error in make_gromos_rtp.py<a class="headerlink" href="#fixed-syntax-error-in-make-gromos-rtp-py" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2557">Issue 2557</a></p>
+</div>
+<div class="section" id="fix-gmx-solvate-topology-updating">
+<h3>Fix gmx solvate topology updating<a class="headerlink" href="#fix-gmx-solvate-topology-updating" title="Permalink to this headline">¶</a></h3>
+<p>Removed hard coded solvent names to allow updates to topology based on
+solvent molecule information. Also allows updating with multiple solvent
+types.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/1929">Issue 1929</a></p>
+</div>
+<div class="section" id="fix-bfactor-output-error-caused-by-fix-for-issue-2511">
+<h3>Fix bfactor output error caused by fix for <a class="reference external" href="https://redmine.gromacs.org/issues/2511">Issue 2511</a><a class="headerlink" href="#fix-bfactor-output-error-caused-by-fix-for-issue-2511" title="Permalink to this headline">¶</a></h3>
+<p>The fix for the PQR file output broke the output of bfactors from other tools.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2575">Issue 2575</a></p>
+</div>
+<div class="section" id="made-sure-that-gmx-rms-can-skip-values">
+<h3>Made sure that gmx rms can skip values<a class="headerlink" href="#made-sure-that-gmx-rms-can-skip-values" title="Permalink to this headline">¶</a></h3>
+<p>When requested to skip values, gmx rms would still output all values despite
+the option. Now it only outputs values that are requested to be processed.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2565">Issue 2565</a></p>
+</div>
+<div class="section" id="fix-trjconv-when-not-providing-structure-file">
+<h3>Fix trjconv when not providing structure file<a class="headerlink" href="#fix-trjconv-when-not-providing-structure-file" title="Permalink to this headline">¶</a></h3>
+<p>trjconv would fail with a segmentation violation when running without any structure
+file due to incomplete initialization of the topology data structure. This fix adds
+the missing checks that prevents the failure.</p>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2619">Issue 2619</a></p>
+</div>
+<div class="section" id="fix-enforced-rotation-energy-output">
+<h3>Fix enforced rotation energy output<a class="headerlink" href="#fix-enforced-rotation-energy-output" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="fixes-to-improve-portability">
+<h2>Fixes to improve portability<a class="headerlink" href="#fixes-to-improve-portability" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="fix-nvcc-host-compiler-check-triggering">
+<h3>Fix nvcc host compiler check triggering<a class="headerlink" href="#fix-nvcc-host-compiler-check-triggering" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2583">Issue 2583</a></p>
+</div>
+<div class="section" id="report-up-to-date-hwloc-version-information">
+<h3>Report up to date hwloc version information<a class="headerlink" href="#report-up-to-date-hwloc-version-information" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2591">Issue 2591</a></p>
+</div>
+<div class="section" id="disable-single-compilation-unit-with-cuda-9-0">
+<h3>Disable single compilation unit with CUDA 9.0<a class="headerlink" href="#disable-single-compilation-unit-with-cuda-9-0" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2561">Issue 2561</a></p>
+</div>
+</div>
+<div class="section" id="miscellaneous">
+<h2>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="avoid-aborting-mdrun-when-gpu-sanity-check-detects-errors">
+<h3>Avoid aborting mdrun when GPU sanity check detects errors<a class="headerlink" href="#avoid-aborting-mdrun-when-gpu-sanity-check-detects-errors" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://redmine.gromacs.org/issues/2415">Issue 2415</a></p>
+</div>
+<div class="section" id="improve-opencl-kernel-performance-on-amd-vega-gpus">
+<h3>Improve OpenCL kernel performance on AMD Vega GPUs<a class="headerlink" href="#improve-opencl-kernel-performance-on-amd-vega-gpus" title="Permalink to this headline">¶</a></h3>
+<p>The OpenCL kernel optimization flags did not explicitly turn off denorm handling
+which could lead to performance loss. The optimization is now explicitly turned
+on both for consistency with CUDA and performance reasons.
+On AMD Vega GPUs (with ROCm) kernel performance improves by up to 30%.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">GROMACS 2018.3 release notes</a><ul>
+<li><a class="reference internal" href="#fixes-where-mdrun-could-behave-incorrectly">Fixes where mdrun could behave incorrectly</a><ul>
+<li><a class="reference internal" href="#multi-domain-gpu-runs-can-no-longer-miss-pair-interactions">Multi-domain GPU runs can no longer miss pair interactions</a></li>
+<li><a class="reference internal" href="#fix-conjugate-gradient-assertion-failure-at-end-of-minimization">Fix Conjugate Gradient assertion failure at end of minimization</a></li>
+<li><a class="reference internal" href="#multi-domain-conjugate-gradient-minimimization-no-longer-segfaults">Multi-domain Conjugate Gradient minimimization no longer segfaults.</a></li>
+<li><a class="reference internal" href="#fix-pairlist-buffer-with-brownian-dynamics">Fix pairlist buffer with Brownian Dynamics</a></li>
+<li><a class="reference internal" href="#avoid-atom-moved-to-far-errors">Avoid “atom moved to far” errors</a></li>
+<li><a class="reference internal" href="#grompp-now-checks-that-pull-groups-are-not-close-to-half-the-box-size">grompp now checks that pull groups are not close to half the box size</a></li>
+<li><a class="reference internal" href="#fixed-segmentation-fault-in-mdrun-with-qm-mm-oniom-scheme">Fixed segmentation fault in mdrun with QM/MM ONIOM scheme</a></li>
+<li><a class="reference internal" href="#correctly-specified-that-pme-on-gpus-is-only-supported-for-dynamical-integrators">Correctly specified that PME on GPUs is only supported for dynamical integrators</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fixes-for-gmx-tools">Fixes for <code class="docutils literal"><span class="pre">gmx</span></code> tools</a><ul>
+<li><a class="reference internal" href="#fixed-syntax-error-in-make-gromos-rtp-py">Fixed syntax error in make_gromos_rtp.py</a></li>
+<li><a class="reference internal" href="#fix-gmx-solvate-topology-updating">Fix gmx solvate topology updating</a></li>
+<li><a class="reference internal" href="#fix-bfactor-output-error-caused-by-fix-for-issue-2511">Fix bfactor output error caused by fix for Issue 2511</a></li>
+<li><a class="reference internal" href="#made-sure-that-gmx-rms-can-skip-values">Made sure that gmx rms can skip values</a></li>
+<li><a class="reference internal" href="#fix-trjconv-when-not-providing-structure-file">Fix trjconv when not providing structure file</a></li>
+<li><a class="reference internal" href="#fix-enforced-rotation-energy-output">Fix enforced rotation energy output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#fixes-to-improve-portability">Fixes to improve portability</a><ul>
+<li><a class="reference internal" href="#fix-nvcc-host-compiler-check-triggering">Fix nvcc host compiler check triggering</a></li>
+<li><a class="reference internal" href="#report-up-to-date-hwloc-version-information">Report up to date hwloc version information</a></li>
+<li><a class="reference internal" href="#disable-single-compilation-unit-with-cuda-9-0">Disable single compilation unit with CUDA 9.0</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a><ul>
+<li><a class="reference internal" href="#avoid-aborting-mdrun-when-gpu-sanity-check-detects-errors">Avoid aborting mdrun when GPU sanity check detects errors</a></li>
+<li><a class="reference internal" href="#improve-opencl-kernel-performance-on-amd-vega-gpus">Improve OpenCL kernel performance on AMD Vega GPUs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Release notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="2018.2.html"
+                        title="next chapter">GROMACS 2018.2 release notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/release-notes/2018/2018.3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="2018.2.html" title="GROMACS 2018.2 release notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Release notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Performance improvements &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Improvements to GROMACS tools" href="tools.html" />
+    <link rel="prev" title="New and improved features" href="features.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tools.html" title="Improvements to GROMACS tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="New and improved features"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Release notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="performance-improvements">
+<h1>Performance improvements<a class="headerlink" href="#performance-improvements" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="implemented-support-for-pme-long-ranged-interactions-on-gpus">
+<h2>Implemented support for PME long-ranged interactions on GPUs<a class="headerlink" href="#implemented-support-for-pme-long-ranged-interactions-on-gpus" title="Permalink to this headline">¶</a></h2>
+<p>A single GPU can now be used to accelerate the computation of the
+long-ranged PME interactions. This feature provides excellent
+performance improvements, in particular that only 2-4 CPU cores per
+GPU will be about as fast as the 2016 version that needed many more
+CPU cores to balance the GPU. Performance on hardware that had good
+balance of GPU and CPU also shows minor improvements, and the capacity
+for hardware with strong GPUs to run effective simulations is now
+greatly improved.</p>
+<p>Currently, the GPU used for PME must be either the same GPU as used
+for the short-ranged interactions and in the same single rank of the
+simulation, or any GPU used from a PME-only rank. mdrun -pme gpu now
+requires that PME runs on a GPU, if supported. All CUDA versions and
+hardware generations supported by GROMACS can run this code path,
+including CUDA 9.0 and Volta GPUs. However, not all combinations
+of features are supported with PME on GPUs - notably FEP calculations
+are not yet available.</p>
+<p>The user guide is updated to reflect the new capabilities, and more
+documentation will be forthcoming.</p>
+</div>
+<div class="section" id="added-more-simd-intrinsics-support-for-pme-spread-and-gather">
+<h2>Added more SIMD intrinsics support for PME spread and gather<a class="headerlink" href="#added-more-simd-intrinsics-support-for-pme-spread-and-gather" title="Permalink to this headline">¶</a></h2>
+<p>Achieved speedup on Intel KNL processors of around 11% for PME
+spread/gather on typical simulation systems.</p>
+</div>
+<div class="section" id="added-simd-intrinsics-version-of-simple-update">
+<h2>Added SIMD intrinsics version of simple update<a class="headerlink" href="#added-simd-intrinsics-version-of-simple-update" title="Permalink to this headline">¶</a></h2>
+<p>In the simple case of leap-frog without pressure coupling and with at
+most one temperature-coupling group, the update of velocities and
+coordinates is now implemented with SIMD intrinsics for improved
+simulation rate.</p>
+</div>
+<div class="section" id="add-simd-intrinsics-version-of-urey-bradley-angle-kernel">
+<h2>Add SIMD intrinsics version of Urey-Bradley angle kernel<a class="headerlink" href="#add-simd-intrinsics-version-of-urey-bradley-angle-kernel" title="Permalink to this headline">¶</a></h2>
+<p>For steps where energies and shift forces are not required, this kernel
+improves performance, which can otherwise be rate limiting in GPU-accelerated
+runs, particularly with CHARMM force fields.</p>
+</div>
+<div class="section" id="use-openmp-up-to-16-threads-with-amd-ryzen-when-automating-run-setup">
+<h2>Use OpenMP up to 16 threads with AMD Ryzen when automating run setup<a class="headerlink" href="#use-openmp-up-to-16-threads-with-amd-ryzen-when-automating-run-setup" title="Permalink to this headline">¶</a></h2>
+<p>AMD Ryzen appears to always perform slightly better with OpenMP
+than MPI, up to using all 16 threads on the 8-core die.</p>
+</div>
+<div class="section" id="bit-avx2-simd-for-amd-ryzen">
+<h2>128-bit AVX2 SIMD for AMD Ryzen<a class="headerlink" href="#bit-avx2-simd-for-amd-ryzen" title="Permalink to this headline">¶</a></h2>
+<p>While Ryzen supports 256-bit AVX2, the internal units are organized
+to execute either a single 256-bit instruction or two 128-bit SIMD
+instruction per cycle. Since most of our kernels are slightly
+less efficient for wider SIMD, this improves performance by roughly
+10%.</p>
+</div>
+<div class="section" id="choose-faster-nbnxn-simd-kernels-on-amd-zen">
+<h2>Choose faster nbnxn SIMD kernels on AMD Zen<a class="headerlink" href="#choose-faster-nbnxn-simd-kernels-on-amd-zen" title="Permalink to this headline">¶</a></h2>
+<p>On AMD Zen, tabulated Ewald kernels are always faster than analytical.
+And with AVX2_256 2xNN kernels are faster than 4xN.
+These faster choices are now made based on CpuInfo at run time.</p>
+<p>Refs <a class="reference external" href="https://redmine.gromacs.org/issues/2328">Issue 2328</a></p>
+</div>
+<div class="section" id="enabled-group-scheme-simd-with-gmx-simd-avx2-128">
+<h2>Enabled group-scheme SIMD with GMX_SIMD=AVX2_128<a class="headerlink" href="#enabled-group-scheme-simd-with-gmx-simd-avx2-128" title="Permalink to this headline">¶</a></h2>
+<p>The group-scheme kernels can use AVX instructions from either the
+AVX_128_FMA and AVX_256 extensions. But hardware that supports the new
+AVX2_128 extensions also supports AVX_256, so we enable such support
+for the group-scheme kernels.</p>
+</div>
+<div class="section" id="detect-avx-512-fma-units-to-choose-best-simd">
+<h2>Detect AVX-512 FMA units to choose best SIMD<a class="headerlink" href="#detect-avx-512-fma-units-to-choose-best-simd" title="Permalink to this headline">¶</a></h2>
+<p>Recent Intel x86 hardware can have multiple AVX-512 FMA units, and the
+number of those units and the way their use interacts with the way the
+CPU chooses its clock speed mean that it can be advantageous to avoid
+using AVX-512 SIMD support in GROMACS if there is only one such
+unit.  Because there is no way to query the hardware to count the
+number of such units, we run code at CMake and mdrun time to compare
+the performance from using such units, and recommend the version that
+is best. This may mean that building GROMACS on the front-end node
+of the cluster might not suit the compute nodes, even when they are
+all from the same generation of Intel’s hardware.</p>
+</div>
+<div class="section" id="speed-up-nbnxn-buffer-clearing">
+<h2>Speed up nbnxn buffer clearing<a class="headerlink" href="#speed-up-nbnxn-buffer-clearing" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="tweaked-conditional-in-the-nonbonded-gpu-kernels">
+<h2>Tweaked conditional in the nonbonded GPU kernels<a class="headerlink" href="#tweaked-conditional-in-the-nonbonded-gpu-kernels" title="Permalink to this headline">¶</a></h2>
+<p>GPU compilers miss an easy optimization of a loop invariant in the
+inner-lop conditional. Precomputing part of the conditional together
+with using bitwise instead of logical and/or improves performance with
+most compilers by up to 5%.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Performance improvements</a><ul>
+<li><a class="reference internal" href="#implemented-support-for-pme-long-ranged-interactions-on-gpus">Implemented support for PME long-ranged interactions on GPUs</a></li>
+<li><a class="reference internal" href="#added-more-simd-intrinsics-support-for-pme-spread-and-gather">Added more SIMD intrinsics support for PME spread and gather</a></li>
+<li><a class="reference internal" href="#added-simd-intrinsics-version-of-simple-update">Added SIMD intrinsics version of simple update</a></li>
+<li><a class="reference internal" href="#add-simd-intrinsics-version-of-urey-bradley-angle-kernel">Add SIMD intrinsics version of Urey-Bradley angle kernel</a></li>
+<li><a class="reference internal" href="#use-openmp-up-to-16-threads-with-amd-ryzen-when-automating-run-setup">Use OpenMP up to 16 threads with AMD Ryzen when automating run setup</a></li>
+<li><a class="reference internal" href="#bit-avx2-simd-for-amd-ryzen">128-bit AVX2 SIMD for AMD Ryzen</a></li>
+<li><a class="reference internal" href="#choose-faster-nbnxn-simd-kernels-on-amd-zen">Choose faster nbnxn SIMD kernels on AMD Zen</a></li>
+<li><a class="reference internal" href="#enabled-group-scheme-simd-with-gmx-simd-avx2-128">Enabled group-scheme SIMD with GMX_SIMD=AVX2_128</a></li>
+<li><a class="reference internal" href="#detect-avx-512-fma-units-to-choose-best-simd">Detect AVX-512 FMA units to choose best SIMD</a></li>
+<li><a class="reference internal" href="#speed-up-nbnxn-buffer-clearing">Speed up nbnxn buffer clearing</a></li>
+<li><a class="reference internal" href="#tweaked-conditional-in-the-nonbonded-gpu-kernels">Tweaked conditional in the nonbonded GPU kernels</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="features.html"
+                        title="previous chapter">New and improved features</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.html"
+                        title="next chapter">Improvements to GROMACS tools</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/release-notes/2018/major/performance.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tools.html" title="Improvements to GROMACS tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="features.html" title="New and improved features"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Release notes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

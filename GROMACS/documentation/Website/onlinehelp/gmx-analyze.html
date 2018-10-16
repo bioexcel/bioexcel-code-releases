@@ -1,0 +1,301 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx analyze &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx angle" href="gmx-angle.html" />
+    <link rel="prev" title="gmx anaeig" href="gmx-anaeig.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-angle.html" title="gmx angle"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-anaeig.html" title="gmx anaeig"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-analyze">
+<span id="id1"></span><h1>gmx analyze<a class="headerlink" href="#gmx-analyze" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx analyze [<strong>-f</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ac</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-msd</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-cc</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-dist</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-av</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-ee</strong> <em>[&lt;.xvg&gt;]</em>]
+            [<strong>-fitted</strong> <em>[&lt;.xvg&gt;]</em>] [<strong>-g</strong> <em>[&lt;.log&gt;]</em>] [<strong>-[no]w</strong>] [<strong>-xvg</strong> <em>&lt;enum&gt;</em>]
+            [<strong>-[no]time</strong>] [<strong>-b</strong> <em>&lt;real&gt;</em>] [<strong>-e</strong> <em>&lt;real&gt;</em>] [<strong>-n</strong> <em>&lt;int&gt;</em>] [<strong>-[no]d</strong>]
+            [<strong>-bw</strong> <em>&lt;real&gt;</em>] [<strong>-errbar</strong> <em>&lt;enum&gt;</em>] [<strong>-[no]integrate</strong>]
+            [<strong>-aver_start</strong> <em>&lt;real&gt;</em>] [<strong>-[no]xydy</strong>] [<strong>-[no]regression</strong>]
+            [<strong>-[no]luzar</strong>] [<strong>-temp</strong> <em>&lt;real&gt;</em>] [<strong>-fitstart</strong> <em>&lt;real&gt;</em>]
+            [<strong>-fitend</strong> <em>&lt;real&gt;</em>] [<strong>-filter</strong> <em>&lt;real&gt;</em>] [<strong>-[no]power</strong>]
+            [<strong>-[no]subav</strong>] [<strong>-[no]oneacf</strong>] [<strong>-acflen</strong> <em>&lt;int&gt;</em>]
+            [<strong>-[no]normalize</strong>] [<strong>-P</strong> <em>&lt;enum&gt;</em>] [<strong>-fitfn</strong> <em>&lt;enum&gt;</em>]
+            [<strong>-beginfit</strong> <em>&lt;real&gt;</em>] [<strong>-endfit</strong> <em>&lt;real&gt;</em>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">analyze</span></code> reads an ASCII file and analyzes data sets.
+A line in the input file may start with a time
+(see option <code class="docutils literal"><span class="pre">-time</span></code>) and any number of <em>y</em>-values may follow.
+Multiple sets can also be
+read when they are separated by &amp; (option <code class="docutils literal"><span class="pre">-n</span></code>);
+in this case only one <em>y</em>-value is read from each line.
+All lines starting with # and &#64; are skipped.
+All analyses can also be done for the derivative of a set
+(option <code class="docutils literal"><span class="pre">-d</span></code>).</p>
+<p>All options, except for <code class="docutils literal"><span class="pre">-av</span></code> and <code class="docutils literal"><span class="pre">-power</span></code>, assume that the
+points are equidistant in time.</p>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">analyze</span></code> always shows the average and standard deviation of each
+set, as well as the relative deviation of the third
+and fourth cumulant from those of a Gaussian distribution with the same
+standard deviation.</p>
+<p>Option <code class="docutils literal"><span class="pre">-ac</span></code> produces the autocorrelation function(s).
+Be sure that the time interval between data points is
+much shorter than the time scale of the autocorrelation.</p>
+<p>Option <code class="docutils literal"><span class="pre">-cc</span></code> plots the resemblance of set i with a cosine of
+i/2 periods. The formula is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="p">(</span><span class="n">integral</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">T</span> <span class="n">of</span> <span class="n">y</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="n">cos</span><span class="p">(</span><span class="n">i</span> <span class="n">pi</span> <span class="n">t</span><span class="p">)</span> <span class="n">dt</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">/</span> <span class="n">integral</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="n">T</span> <span class="n">of</span> <span class="n">y</span><span class="o">^</span><span class="mi">2</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="n">dt</span>
+</pre></div>
+</div>
+<p>This is useful for principal components obtained from covariance
+analysis, since the principal components of random diffusion are
+pure cosines.</p>
+<p>Option <code class="docutils literal"><span class="pre">-msd</span></code> produces the mean square displacement(s).</p>
+<p>Option <code class="docutils literal"><span class="pre">-dist</span></code> produces distribution plot(s).</p>
+<p>Option <code class="docutils literal"><span class="pre">-av</span></code> produces the average over the sets.
+Error bars can be added with the option <code class="docutils literal"><span class="pre">-errbar</span></code>.
+The errorbars can represent the standard deviation, the error
+(assuming the points are independent) or the interval containing
+90% of the points, by discarding 5% of the points at the top and
+the bottom.</p>
+<p>Option <code class="docutils literal"><span class="pre">-ee</span></code> produces error estimates using block averaging.
+A set is divided in a number of blocks and averages are calculated for
+each block. The error for the total average is calculated from
+the variance between averages of the m blocks B_i as follows:
+error^2 = sum (B_i - &lt;B&gt;)^2 / (m*(m-1)).
+These errors are plotted as a function of the block size.
+Also an analytical block average curve is plotted, assuming
+that the autocorrelation is a sum of two exponentials.
+The analytical curve for the block average is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>f(t) = sigma``*``sqrt(2/T (  alpha   (tau_1 ((exp(-t/tau_1) - 1) tau_1/t + 1)) +
+                       (1-alpha) (tau_2 ((exp(-t/tau_2) - 1) tau_2/t + 1)))),
+</pre></div>
+</div>
+<p>where T is the total time.
+alpha, tau_1 and tau_2 are obtained by fitting f^2(t) to error^2.
+When the actual block average is very close to the analytical curve,
+the error is sigma``*``sqrt(2/T (a tau_1 + (1-a) tau_2)).
+The complete derivation is given in
+B. Hess, J. Chem. Phys. 116:209-217, 2002.</p>
+<p>Option <code class="docutils literal"><span class="pre">-filter</span></code> prints the RMS high-frequency fluctuation
+of each set and over all sets with respect to a filtered average.
+The filter is proportional to cos(pi t/len) where t goes from -len/2
+to len/2. len is supplied with the option <code class="docutils literal"><span class="pre">-filter</span></code>.
+This filter reduces oscillations with period len/2 and len by a factor
+of 0.79 and 0.33 respectively.</p>
+<p>Option <code class="docutils literal"><span class="pre">-g</span></code> fits the data to the function given with option
+<code class="docutils literal"><span class="pre">-fitfn</span></code>.</p>
+<p>Option <code class="docutils literal"><span class="pre">-power</span></code> fits the data to b t^a, which is accomplished
+by fitting to a t + b on log-log scale. All points after the first
+zero or with a negative value are ignored.</p>
+<p>Option <code class="docutils literal"><span class="pre">-luzar</span></code> performs a Luzar &amp; Chandler kinetics analysis
+on output from <a class="reference internal" href="gmx-hbond.html"><span class="doc">gmx hbond</span></a>. The input file can be taken directly
+from <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">hbond</span> <span class="pre">-ac</span></code>, and then the same result should be produced.</p>
+<p>Option <code class="docutils literal"><span class="pre">-fitfn</span></code> performs curve fitting to a number of different
+curves that make sense in the context of molecular dynamics, mainly
+exponential curves. More information is in the manual. To check the output
+of the fitting procedure the option <code class="docutils literal"><span class="pre">-fitted</span></code> will print both the
+original data and the fitted function to a new data file. The fitting
+parameters are stored as comment in the output file.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-f</span></code> [&lt;.xvg&gt;] (graph.xvg)</dt>
+<dd>xvgr/xmgr file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-ac</span></code> [&lt;.xvg&gt;] (autocorr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-msd</span></code> [&lt;.xvg&gt;] (msd.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-cc</span></code> [&lt;.xvg&gt;] (coscont.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-dist</span></code> [&lt;.xvg&gt;] (distr.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-av</span></code> [&lt;.xvg&gt;] (average.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-ee</span></code> [&lt;.xvg&gt;] (errest.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-fitted</span></code> [&lt;.xvg&gt;] (fitted.xvg) (Optional)</dt>
+<dd>xvgr/xmgr file</dd>
+<dt><code class="docutils literal"><span class="pre">-g</span></code> [&lt;.log&gt;] (fitlog.log) (Optional)</dt>
+<dd>Log file</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-[no]w</span></code>  (no)</dt>
+<dd>View output <a class="reference internal" href="../user-guide/file-formats.html#xvg"><span class="std std-ref">.xvg</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#xpm"><span class="std std-ref">.xpm</span></a>, <a class="reference internal" href="../user-guide/file-formats.html#eps"><span class="std std-ref">.eps</span></a> and <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">.pdb</span></a> files</dd>
+<dt><code class="docutils literal"><span class="pre">-xvg</span></code> &lt;enum&gt; (xmgrace)</dt>
+<dd>xvg plot formatting: xmgrace, xmgr, none</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]time</span></code>  (yes)</dt>
+<dd>Expect a time in the input</dd>
+<dt><code class="docutils literal"><span class="pre">-b</span></code> &lt;real&gt; (-1)</dt>
+<dd>First time to read from set</dd>
+<dt><code class="docutils literal"><span class="pre">-e</span></code> &lt;real&gt; (-1)</dt>
+<dd>Last time to read from set</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> &lt;int&gt; (1)</dt>
+<dd>Read this number of sets separated by &amp;</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]d</span></code>  (no)</dt>
+<dd>Use the derivative</dd>
+<dt><code class="docutils literal"><span class="pre">-bw</span></code> &lt;real&gt; (0.1)</dt>
+<dd>Binwidth for the distribution</dd>
+<dt><code class="docutils literal"><span class="pre">-errbar</span></code> &lt;enum&gt; (none)</dt>
+<dd>Error bars for <code class="docutils literal"><span class="pre">-av</span></code>: none, stddev, error, 90</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]integrate</span></code>  (no)</dt>
+<dd>Integrate data function(s) numerically using trapezium rule</dd>
+<dt><code class="docutils literal"><span class="pre">-aver_start</span></code> &lt;real&gt; (0)</dt>
+<dd>Start averaging the integral from here</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]xydy</span></code>  (no)</dt>
+<dd>Interpret second data set as error in the y values for integrating</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]regression</span></code>  (no)</dt>
+<dd>Perform a linear regression analysis on the data. If <code class="docutils literal"><span class="pre">-xydy</span></code> is set a second set will be interpreted as the error bar in the Y value. Otherwise, if multiple data sets are present a multilinear regression will be performed yielding the constant A that minimize chi^2 = (y - A_0 x_0 - A_1 x_1 - … - A_N x_N)^2 where now Y is the first data set in the input file and x_i the others. Do read the information at the option <code class="docutils literal"><span class="pre">-time</span></code>.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]luzar</span></code>  (no)</dt>
+<dd>Do a Luzar and Chandler analysis on a correlation function and related as produced by <a class="reference internal" href="gmx-hbond.html"><span class="doc">gmx hbond</span></a>. When in addition the <code class="docutils literal"><span class="pre">-xydy</span></code> flag is given the second and fourth column will be interpreted as errors in c(t) and n(t).</dd>
+<dt><code class="docutils literal"><span class="pre">-temp</span></code> &lt;real&gt; (298.15)</dt>
+<dd>Temperature for the Luzar hydrogen bonding kinetics analysis (K)</dd>
+<dt><code class="docutils literal"><span class="pre">-fitstart</span></code> &lt;real&gt; (1)</dt>
+<dd>Time (ps) from which to start fitting the correlation functions in order to obtain the forward and backward rate constants for HB breaking and formation</dd>
+<dt><code class="docutils literal"><span class="pre">-fitend</span></code> &lt;real&gt; (60)</dt>
+<dd>Time (ps) where to stop fitting the correlation functions in order to obtain the forward and backward rate constants for HB breaking and formation. Only with <code class="docutils literal"><span class="pre">-gem</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">-filter</span></code> &lt;real&gt; (0)</dt>
+<dd>Print the high-frequency fluctuation after filtering with a cosine filter of this length</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]power</span></code>  (no)</dt>
+<dd>Fit data to: b t^a</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]subav</span></code>  (yes)</dt>
+<dd>Subtract the average before autocorrelating</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]oneacf</span></code>  (no)</dt>
+<dd>Calculate one ACF over all sets</dd>
+<dt><code class="docutils literal"><span class="pre">-acflen</span></code> &lt;int&gt; (-1)</dt>
+<dd>Length of the ACF, default is half the number of frames</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]normalize</span></code>  (yes)</dt>
+<dd>Normalize ACF</dd>
+<dt><code class="docutils literal"><span class="pre">-P</span></code> &lt;enum&gt; (0)</dt>
+<dd>Order of Legendre polynomial for ACF (0 indicates none): 0, 1, 2, 3</dd>
+<dt><code class="docutils literal"><span class="pre">-fitfn</span></code> &lt;enum&gt; (none)</dt>
+<dd>Fit function: none, exp, aexp, exp_exp, exp5, exp7, exp9</dd>
+<dt><code class="docutils literal"><span class="pre">-beginfit</span></code> &lt;real&gt; (0)</dt>
+<dd>Time where to begin the exponential fit of the correlation function</dd>
+<dt><code class="docutils literal"><span class="pre">-endfit</span></code> &lt;real&gt; (-1)</dt>
+<dd>Time where to end the exponential fit of the correlation function, -1 is until the end</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx analyze</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-anaeig.html"
+                        title="previous chapter">gmx anaeig</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-angle.html"
+                        title="next chapter">gmx angle</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-analyze.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-angle.html" title="gmx angle"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-anaeig.html" title="gmx anaeig"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

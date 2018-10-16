@@ -1,0 +1,69 @@
+.. _gmx nmtraj:
+
+gmx nmtraj
+==========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx nmtraj [:strong:`-s` :emphasis:`[<.tpr/.gro/...>]`] [:strong:`-v` :emphasis:`[<.trr/.cpt/...>]`]
+               [:strong:`-o` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-eignr` :emphasis:`<string>`]
+               [:strong:`-phases` :emphasis:`<string>`] [:strong:`-temp` :emphasis:`<real>`] [:strong:`-amplitude` :emphasis:`<real>`]
+               [:strong:`-nframes` :emphasis:`<int>`]
+
+Description
+-----------
+
+``gmx nmtraj`` generates an virtual trajectory from an eigenvector,
+corresponding to a harmonic Cartesian oscillation around the average
+structure. The eigenvectors should normally be mass-weighted, but you can
+use non-weighted eigenvectors to generate orthogonal motions.
+The output frames are written as a trajectory file covering an entire period, and
+the first frame is the average structure. If you write the trajectory in (or convert to)
+PDB format you can view it directly in PyMol and also render a photorealistic movie.
+Motion amplitudes are calculated from the eigenvalues and a preset temperature,
+assuming equipartition of the energy over all modes. To make the motion clearly visible
+in PyMol you might want to amplify it by setting an unrealistically high temperature.
+However, be aware that both the linear Cartesian displacements and mass weighting will
+lead to serious structure deformation for high amplitudes - this is is simply a limitation
+of the Cartesian normal mode model. By default the selected eigenvector is set to 7, since
+the first six normal modes are the translational and rotational degrees of freedom.
+
+Options
+-------
+
+Options to specify input files:
+
+``-s`` [<.tpr/.gro/...>] (topol.tpr)
+    Structure+mass(db): :ref:`tpr` :ref:`gro` :ref:`g96` :ref:`pdb` brk ent
+``-v`` [<.trr/.cpt/...>] (eigenvec.trr)
+    Full precision trajectory: :ref:`trr` :ref:`cpt` :ref:`tng`
+
+Options to specify output files:
+
+``-o`` [<.xtc/.trr/...>] (nmtraj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+
+Other options:
+
+``-eignr`` <string> (7)
+    String of eigenvectors to use (first is 1)
+``-phases`` <string> (0.0)
+    String of phases (default is 0.0)
+``-temp`` <real> (300)
+    Temperature (K)
+``-amplitude`` <real> (0.25)
+    Amplitude for modes with eigenvalue<=0
+``-nframes`` <int> (30)
+    Number of frames to generate
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

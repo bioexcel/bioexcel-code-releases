@@ -1,0 +1,370 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Non-bonded cut-off schemes &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Command-line reference" href="cmdline.html" />
+    <link rel="prev" title="Force fields in GROMACS" href="force-fields.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cmdline.html" title="Command-line reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="force-fields.html" title="Force fields in GROMACS"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User guide</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="non-bonded-cut-off-schemes">
+<h1>Non-bonded cut-off schemes<a class="headerlink" href="#non-bonded-cut-off-schemes" title="Permalink to this headline">¶</a></h1>
+<p>The default cut-off scheme in GROMACS 2018.3 is based on classical
+buffered Verlet lists. These are implemented extremely efficiently
+on modern CPUs and accelerators, and support nearly all of the
+algorithms used in GROMACS.</p>
+<p>Before version 4.6, GROMACS always used pair-lists based on groups of
+particles. These groups of particles were originally charge-groups, which were
+necessary with plain cut-off electrostatics. With the use of PME (or
+reaction-field with a buffer), charge groups are no longer necessary
+(and are ignored in the Verlet scheme). In GROMACS 4.6 and later, the
+group-based cut-off scheme is still available, but is <strong>deprecated since
+5.0</strong>. It is still available mainly for backwards
+compatibility, to support the algorithms that have not yet been
+converted, and for the few cases where it may allow faster simulations
+with bio-molecular systems dominated by water.</p>
+<p>Without PME, the group cut-off scheme should generally be combined
+with a buffered pair-list to help avoid artifacts. However, the
+group-scheme kernels that can implement this are much slower than
+either the unbuffered group-scheme kernels, or the buffered
+Verlet-scheme kernels. Use of the Verlet scheme is strongly encouraged
+for all kinds of simulations, because it is easier and faster to run
+correctly. In particular, GPU acceleration is available only with the
+Verlet scheme.</p>
+<p>The Verlet scheme uses properly buffered lists with exact cut-offs.
+The size of the buffer is chosen with <a class="reference internal" href="mdp-options.html#mdp-verlet-buffer-tolerance"><code class="xref std std-mdp docutils literal"><span class="pre">verlet-buffer-tolerance</span></code></a>
+to permit a certain level of drift.  Both the LJ and Coulomb potential
+are shifted to zero by subtracting the value at the cut-off. This
+ensures that the energy is the integral of the force. Still it is
+advisable to have small forces at the cut-off, hence to use PME or
+reaction-field with infinite epsilon.</p>
+<div class="section" id="non-bonded-scheme-feature-comparison">
+<h2>Non-bonded scheme feature comparison<a class="headerlink" href="#non-bonded-scheme-feature-comparison" title="Permalink to this headline">¶</a></h2>
+<p>All GROMACS 2018.3 features not directly related to non-bonded
+interactions are supported in both schemes. Eventually, all non-bonded
+features will be supported in the Verlet scheme. A table describing
+the compatibility of just non-bonded features with the two schemes is
+given below.</p>
+<p>Table: Support levels within the group and Verlet cut-off schemes
+for features related to non-bonded interactions</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="58%" />
+<col width="19%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Feature</th>
+<th class="head">group</th>
+<th class="head">Verlet</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>unbuffered cut-off scheme</td>
+<td>default</td>
+<td>not by default</td>
+</tr>
+<tr class="row-odd"><td>exact cut-off</td>
+<td>shift/switch</td>
+<td>always</td>
+</tr>
+<tr class="row-even"><td>potential-shift interactions</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>potential-switch interactions</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>force-switch interactions</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>switched potential</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>switched forces</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>non-periodic systems</td>
+<td>yes</td>
+<td>Z + walls</td>
+</tr>
+<tr class="row-even"><td>implicit solvent</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td>free energy perturbed non-bondeds</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>energy group contributions</td>
+<td>yes</td>
+<td>only on CPU</td>
+</tr>
+<tr class="row-odd"><td>energy group exclusions</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-even"><td>OpenMP multi-threading</td>
+<td>only PME</td>
+<td>all</td>
+</tr>
+<tr class="row-odd"><td>native GPU support</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>Coulomb PME</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>Lennard-Jones PME</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>virtual sites</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-odd"><td>User-supplied tabulated interactions</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-even"><td>Buckingham VdW interactions</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="row-odd"><td>rcoulomb != rvdw</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="row-even"><td>twin-range</td>
+<td>no</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
+<p>The performance of the group cut-off scheme depends very much on the
+composition of the system and the use of buffering. There are
+optimized kernels for interactions with water, so anything with a lot
+of water runs very fast. But if you want properly buffered
+interactions, you need to add a buffer that takes into account both
+charge-group size and diffusion, and check each interaction against
+the cut-off length each time step. This makes simulations much
+slower. The performance of the Verlet scheme with the new non-bonded
+kernels is independent of system composition and is intended to always
+run with a buffered pair-list. Typically, buffer size is 0 to 10% of
+the cut-off, so you could win a bit of performance by reducing or
+removing the buffer, but this might not be a good trade-off of
+simulation quality.</p>
+<p>The table below shows a performance comparison of most of the relevant
+setups. Any atomistic model will have performance comparable to tips3p
+(which has LJ on the hydrogens), unless a united-atom force field is
+used. The performance of a protein in water will be between the tip3p
+and tips3p performance. The group scheme is optimized for water
+interactions, which means a single charge group containing one particle
+with LJ, and 2 or 3 particles without LJ. Such kernels for water are
+roughly twice as fast as a comparable system with LJ and/or without
+charge groups. The implementation of the Verlet cut-off scheme has no
+interaction-specific optimizations, except for only calculating half
+of the LJ interactions if less than half of the particles have LJ. For
+molecules solvated in water the scaling of the Verlet scheme to higher
+numbers of cores is better than that of the group scheme, because the
+load is more balanced. On the most recent Intel CPUs, the absolute
+performance of the Verlet scheme exceeds that of the group scheme,
+even for water-only systems.</p>
+<p>Table: Performance in ns/day of various water systems under different
+non-bonded setups in GROMACS using either 8 thread-MPI ranks (group
+scheme), or 8 OpenMP threads (Verlet scheme). 3000 particles, 1.0 nm
+cut-off, PME with 0.11 nm grid, dt=2 fs, Intel Core i7 2600 (AVX), 3.4
+GHz + Nvidia GTX660Ti</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="18%" />
+<col width="16%" />
+<col width="17%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">system</th>
+<th class="head">group, unbuffered</th>
+<th class="head">group, buffered</th>
+<th class="head">Verlet, buffered</th>
+<th class="head">Verlet, buffered, GPU</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>tip3p, charge groups</td>
+<td>208</td>
+<td>116</td>
+<td>170</td>
+<td>450</td>
+</tr>
+<tr class="row-odd"><td>tips3p, charge groups</td>
+<td>129</td>
+<td>63</td>
+<td>162</td>
+<td>450</td>
+</tr>
+<tr class="row-even"><td>tips3p, no charge groups</td>
+<td>104</td>
+<td>75</td>
+<td>162</td>
+<td>450</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-to-use-the-verlet-scheme">
+<h2>How to use the Verlet scheme<a class="headerlink" href="#how-to-use-the-verlet-scheme" title="Permalink to this headline">¶</a></h2>
+<p>The Verlet scheme is enabled by default with option <a class="reference internal" href="mdp-options.html#mdp-cutoff-scheme"><code class="xref std std-mdp docutils literal"><span class="pre">cutoff-scheme</span></code></a>.
+The value of [.mdp] option <a class="reference internal" href="mdp-options.html#mdp-verlet-buffer-tolerance"><code class="xref std std-mdp docutils literal"><span class="pre">verlet-buffer-tolerance</span></code></a> will add a
+pair-list buffer whose size is tuned for the given energy drift (in
+kJ/mol/ns per particle). The effective drift is usually much lower, as
+<a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> assumes constant particle velocities. (Note that in single
+precision for normal atomistic simulations constraints cause a drift
+somewhere around 0.0001 kJ/mol/ns per particle, so it doesn’t make sense
+to go much lower.) Details on how the buffer size is chosen can be
+found in the reference below and in the <a class="reference external" href="../manual-2018.3.pdf">reference manual</a>.</p>
+<p>For constant-energy (NVE) simulations, the buffer size will be
+inferred from the temperature that corresponds to the velocities
+(either those generated, if applicable, or those found in the input
+configuration). Alternatively, <a class="reference internal" href="mdp-options.html#mdp-verlet-buffer-tolerance"><code class="xref std std-mdp docutils literal"><span class="pre">verlet-buffer-tolerance</span></code></a> can be set
+to -1 and a buffer set manually by specifying <a class="reference internal" href="mdp-options.html#mdp-rlist"><code class="xref std std-mdp docutils literal"><span class="pre">rlist</span></code></a> greater than
+the larger of <a class="reference internal" href="mdp-options.html#mdp-rcoulomb"><code class="xref std std-mdp docutils literal"><span class="pre">rcoulomb</span></code></a> and <a class="reference internal" href="mdp-options.html#mdp-rvdw"><code class="xref std std-mdp docutils literal"><span class="pre">rvdw</span></code></a>. The simplest way to get a
+reasonable buffer size is to use an NVT mdp file with the target
+temperature set to what you expect in your NVE simulation, and
+transfer the buffer size printed by <a class="reference internal" href="../onlinehelp/gmx-grompp.html#gmx-grompp"><span class="std std-ref">gmx grompp</span></a> to your NVE [.mdp] file.</p>
+<p>When a GPU is used, nstlist is automatically increased by <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a>,
+usually to 20 or more; rlist is increased along to stay below the
+target energy drift. Further information on running <a class="reference internal" href="../onlinehelp/gmx-mdrun.html#gmx-mdrun"><span class="std std-ref">gmx mdrun</span></a> with
+GPUs <a class="reference internal" href="mdrun-performance.html#gmx-mdrun-on-gpu"><span class="std std-ref">is available</span></a>.</p>
+</div>
+<div class="section" id="further-information">
+<h2>Further information<a class="headerlink" href="#further-information" title="Permalink to this headline">¶</a></h2>
+<p>For further information on algorithmic and implementation details of
+the Verlet cut-off scheme and the MxN kernels, as well as detailed
+performance analysis, please consult the following article:</p>
+<p><a class="reference external" href="http://dx.doi.org/10.1016/j.cpc.2013.06.003">Páll, S. and Hess, B. A flexible algorithm for calculating pair
+interactions on SIMD architectures. Comput. Phys. Commun. 184,
+2641–2650 (2013).</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Non-bonded cut-off schemes</a><ul>
+<li><a class="reference internal" href="#non-bonded-scheme-feature-comparison">Non-bonded scheme feature comparison</a></li>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+<li><a class="reference internal" href="#how-to-use-the-verlet-scheme">How to use the Verlet scheme</a></li>
+<li><a class="reference internal" href="#further-information">Further information</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="force-fields.html"
+                        title="previous chapter">Force fields in GROMACS</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cmdline.html"
+                        title="next chapter">Command-line reference</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user-guide/cutoff-schemes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cmdline.html" title="Command-line reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="force-fields.html" title="Force fields in GROMACS"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User guide</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

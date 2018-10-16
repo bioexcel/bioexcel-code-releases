@@ -1,0 +1,110 @@
+.. _gmx order:
+
+gmx order
+=========
+
+Synopsis
+--------
+
+.. parsed-literal::
+
+    gmx order [:strong:`-f` :emphasis:`[<.xtc/.trr/...>]`] [:strong:`-n` :emphasis:`[<.ndx>]`] [:strong:`-nr` :emphasis:`[<.ndx>]`]
+              [:strong:`-s` :emphasis:`[<.tpr>]`] [:strong:`-o` :emphasis:`[<.xvg>]`] [:strong:`-od` :emphasis:`[<.xvg>]`] [:strong:`-ob` :emphasis:`[<.pdb>]`]
+              [:strong:`-os` :emphasis:`[<.xvg>]`] [:strong:`-Sg` :emphasis:`[<.xvg>]`] [:strong:`-Sk` :emphasis:`[<.xvg>]`]
+              [:strong:`-Sgsl` :emphasis:`[<.xvg>]`] [:strong:`-Sksl` :emphasis:`[<.xvg>]`] [:strong:`-b` :emphasis:`<time>`] [:strong:`-e` :emphasis:`<time>`]
+              [:strong:`-dt` :emphasis:`<time>`] [:strong:`-[no]w`] [:strong:`-xvg` :emphasis:`<enum>`] [:strong:`-d` :emphasis:`<enum>`] [:strong:`-sl` :emphasis:`<int>`]
+              [:strong:`-[no]szonly`] [:strong:`-[no]unsat`] [:strong:`-[no]permolecule`] [:strong:`-[no]radial`]
+              [:strong:`-[no]calcdist`]
+
+Description
+-----------
+
+``gmx order`` computes the order parameter per atom for carbon tails. For atom i the
+vector i-1, i+1 is used together with an axis.
+The index file should contain only the groups to be used for calculations,
+with each group of equivalent carbons along the relevant acyl chain in its own
+group. There should not be any generic groups (like System, Protein) in the index
+file to avoid confusing the program (this is not relevant to tetrahedral order
+parameters however, which only work for water anyway).
+
+``gmx order`` can also give all
+diagonal elements of the order tensor and even calculate the deuterium
+order parameter Scd (default). If the option ``-szonly`` is given, only one
+order tensor component (specified by the ``-d`` option) is given and the
+order parameter per slice is calculated as well. If ``-szonly`` is not
+selected, all diagonal elements and the deuterium order parameter is
+given.
+
+The tetrahedrality order parameters can be determined
+around an atom. Both angle an distance order parameters are calculated. See
+P.-L. Chau and A.J. Hardwick, Mol. Phys., 93, (1998), 511-518.
+for more details.
+
+Options
+-------
+
+Options to specify input files:
+
+``-f`` [<.xtc/.trr/...>] (traj.xtc)
+    Trajectory: :ref:`xtc` :ref:`trr` :ref:`cpt` :ref:`gro` :ref:`g96` :ref:`pdb` :ref:`tng`
+``-n`` [<.ndx>] (index.ndx)
+    Index file
+``-nr`` [<.ndx>] (index.ndx) (Optional)
+    Index file
+``-s`` [<.tpr>] (topol.tpr)
+    Portable xdr run input file
+
+Options to specify output files:
+
+``-o`` [<.xvg>] (order.xvg)
+    xvgr/xmgr file
+``-od`` [<.xvg>] (deuter.xvg)
+    xvgr/xmgr file
+``-ob`` [<.pdb>] (eiwit.pdb) (Optional)
+    Protein data bank file
+``-os`` [<.xvg>] (sliced.xvg)
+    xvgr/xmgr file
+``-Sg`` [<.xvg>] (sg-ang.xvg) (Optional)
+    xvgr/xmgr file
+``-Sk`` [<.xvg>] (sk-dist.xvg) (Optional)
+    xvgr/xmgr file
+``-Sgsl`` [<.xvg>] (sg-ang-slice.xvg) (Optional)
+    xvgr/xmgr file
+``-Sksl`` [<.xvg>] (sk-dist-slice.xvg) (Optional)
+    xvgr/xmgr file
+
+Other options:
+
+``-b`` <time> (0)
+    Time of first frame to read from trajectory (default unit ps)
+``-e`` <time> (0)
+    Time of last frame to read from trajectory (default unit ps)
+``-dt`` <time> (0)
+    Only use frame when t MOD dt = first time (default unit ps)
+``-[no]w``  (no)
+    View output :ref:`.xvg <xvg>`, :ref:`.xpm <xpm>`, :ref:`.eps <eps>` and :ref:`.pdb <pdb>` files
+``-xvg`` <enum> (xmgrace)
+    xvg plot formatting: xmgrace, xmgr, none
+``-d`` <enum> (z)
+    Direction of the normal on the membrane: z, x, y
+``-sl`` <int> (1)
+    Calculate order parameter as function of box length, dividing the box into this number of slices.
+``-[no]szonly``  (no)
+    Only give Sz element of order tensor. (axis can be specified with ``-d``)
+``-[no]unsat``  (no)
+    Calculate order parameters for unsaturated carbons. Note that this cannot be mixed with normal order parameters.
+``-[no]permolecule``  (no)
+    Compute per-molecule Scd order parameters
+``-[no]radial``  (no)
+    Compute a radial membrane normal
+``-[no]calcdist``  (no)
+    Compute distance from a reference
+
+.. only:: man
+
+   See also
+   --------
+
+   :manpage:`gmx(1)`
+
+   More information about |Gromacs| is available at <http://www.gromacs.org/>.

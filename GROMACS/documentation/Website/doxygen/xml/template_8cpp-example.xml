@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="template_8cpp-example" kind="example">
+    <compoundname>template.cpp</compoundname>
+    <detaileddescription>
+<para>Template code for writing analysis programs.See <ref refid="page_analysistemplate" kindref="compound">Example code for writing trajectory analysis tools</ref> for more information. <programlisting><codeline><highlight class="comment">/*</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>This<sp/>file<sp/>is<sp/>part<sp/>of<sp/>the<sp/>GROMACS<sp/>molecular<sp/>simulation<sp/>package.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>Copyright<sp/>(c)<sp/>2011,2012,2013,2014,2015,<sp/>by<sp/>the<sp/>GROMACS<sp/>development<sp/>team,<sp/>led<sp/>by</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>Mark<sp/>Abraham,<sp/>David<sp/>van<sp/>der<sp/>Spoel,<sp/>Berk<sp/>Hess,<sp/>and<sp/>Erik<sp/>Lindahl,</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>and<sp/>including<sp/>many<sp/>others,<sp/>as<sp/>listed<sp/>in<sp/>the<sp/>AUTHORS<sp/>file<sp/>in<sp/>the</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>top-level<sp/>source<sp/>directory<sp/>and<sp/>at<sp/>http://www.gromacs.org.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>GROMACS<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public<sp/>License</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either<sp/>version<sp/>2.1</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>GROMACS<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the<sp/>GNU</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>Lesser<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>License<sp/>along<sp/>with<sp/>GROMACS;<sp/>if<sp/>not,<sp/>see</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>http://www.gnu.org/licenses,<sp/>or<sp/>write<sp/>to<sp/>the<sp/>Free<sp/>Software<sp/>Foundation,</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>Street,<sp/>Fifth<sp/>Floor,<sp/>Boston,<sp/>MA<sp/><sp/>02110-1301<sp/><sp/>USA.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>If<sp/>you<sp/>want<sp/>to<sp/>redistribute<sp/>modifications<sp/>to<sp/>GROMACS,<sp/>please</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>consider<sp/>that<sp/>scientific<sp/>software<sp/>is<sp/>very<sp/>special.<sp/>Version</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>control<sp/>is<sp/>crucial<sp/>-<sp/>bugs<sp/>must<sp/>be<sp/>traceable.<sp/>We<sp/>will<sp/>be<sp/>happy<sp/>to</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>consider<sp/>code<sp/>for<sp/>inclusion<sp/>in<sp/>the<sp/>official<sp/>distribution,<sp/>but</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>derived<sp/>work<sp/>must<sp/>not<sp/>be<sp/>called<sp/>official<sp/>GROMACS.<sp/>Details<sp/>are<sp/>found</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>in<sp/>the<sp/>README<sp/>&amp;<sp/>COPYING<sp/>files<sp/>-<sp/>if<sp/>they<sp/>are<sp/>missing,<sp/>get<sp/>the</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>official<sp/>version<sp/>at<sp/>http://www.gromacs.org.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>To<sp/>help<sp/>us<sp/>fund<sp/>GROMACS<sp/>development,<sp/>we<sp/>humbly<sp/>ask<sp/>that<sp/>you<sp/>cite</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>the<sp/>research<sp/>papers<sp/>on<sp/>the<sp/>package.<sp/>Check<sp/>out<sp/>http://www.gromacs.org.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="trajectoryanalysis_8h" kindref="compound">gromacs/trajectoryanalysis.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">gmx;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment">/*!<sp/>\brief</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>Template<sp/>class<sp/>to<sp/>serve<sp/>as<sp/>a<sp/>basis<sp/>for<sp/>user<sp/>analysis<sp/>tools.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classAnalysisTemplate" kindref="compound">AnalysisTemplate</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1TrajectoryAnalysisModule" kindref="compound">TrajectoryAnalysisModule</ref></highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAnalysisTemplate" kindref="compound">AnalysisTemplate</ref>();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespaceanonymous__namespace_02cmdlinerunner_8cpp_03_1a60534e7c72d5738ccd2a45dec4d87882" kindref="member">initOptions</ref>(<ref refid="classgmx_1_1IOptionsContainer" kindref="compound">IOptionsContainer</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*options,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1TrajectoryAnalysisSettings" kindref="compound">TrajectoryAnalysisSettings</ref><sp/>*settings);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>initAnalysis(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1TrajectoryAnalysisSettings" kindref="compound">TrajectoryAnalysisSettings</ref><sp/>&amp;settings,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1TopologyInformation" kindref="compound">TopologyInformation</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;top);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>analyzeFrame(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frnr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structt__trxframe" kindref="compound">t_trxframe</ref><sp/>&amp;fr,<sp/><ref refid="structt__pbc" kindref="compound">t_pbc</ref><sp/>*pbc,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1TrajectoryAnalysisModuleData" kindref="compound">TrajectoryAnalysisModuleData</ref><sp/>*pdata);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>finishAnalysis(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>nframes);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>writeOutput();</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ModuleData;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fnDist_;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cutoff_;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>refsel_;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacegmx_1ac852a0801cf49723903e23bc77a32163" kindref="member">SelectionList</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sel_;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1AnalysisNeighborhood" kindref="compound">AnalysisNeighborhood</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nb_;</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1AnalysisData" kindref="compound">AnalysisData</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacegmx_1a87e4f5152c736da50dd59275f423a7a3" kindref="member">AnalysisDataAverageModulePointer</ref><sp/>avem_;</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">AnalysisTemplate::AnalysisTemplate()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>cutoff_(0.0)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>registerAnalysisDataset(&amp;data_,<sp/></highlight><highlight class="stringliteral">&quot;avedist&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classAnalysisTemplate_1ac1e17717634942620122ef3a42438765" kindref="member">AnalysisTemplate::initOptions</ref>(<ref refid="classgmx_1_1IOptionsContainer" kindref="compound">IOptionsContainer</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*options,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1TrajectoryAnalysisSettings" kindref="compound">TrajectoryAnalysisSettings</ref><sp/>*settings)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>desc[]<sp/>=<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;This<sp/>is<sp/>a<sp/>template<sp/>for<sp/>writing<sp/>your<sp/>own<sp/>analysis<sp/>tools<sp/>for&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;GROMACS.<sp/>The<sp/>advantage<sp/>of<sp/>using<sp/>GROMACS<sp/>for<sp/>this<sp/>is<sp/>that<sp/>you&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;have<sp/>access<sp/>to<sp/>all<sp/>information<sp/>in<sp/>the<sp/>topology,<sp/>and<sp/>your&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;program<sp/>will<sp/>be<sp/>able<sp/>to<sp/>handle<sp/>all<sp/>types<sp/>of<sp/>coordinates<sp/>and&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;trajectory<sp/>files<sp/>supported<sp/>by<sp/>GROMACS.<sp/>In<sp/>addition,&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;you<sp/>get<sp/>a<sp/>lot<sp/>of<sp/>functionality<sp/>for<sp/>free<sp/>from<sp/>the<sp/>trajectory&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;analysis<sp/>library,<sp/>including<sp/>support<sp/>for<sp/>flexible<sp/>dynamic&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;selections.<sp/>Go<sp/>ahead<sp/>an<sp/>try<sp/>it![PAR]&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;To<sp/>get<sp/>started<sp/>with<sp/>implementing<sp/>your<sp/>own<sp/>analysis<sp/>program,&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;follow<sp/>the<sp/>instructions<sp/>in<sp/>the<sp/>README<sp/>file<sp/>provided.&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;This<sp/>template<sp/>implements<sp/>a<sp/>simple<sp/>analysis<sp/>programs<sp/>that<sp/>calculates&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;average<sp/>distances<sp/>from<sp/>a<sp/>reference<sp/>group<sp/>to<sp/>one<sp/>or<sp/>more&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;analysis<sp/>groups.&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>settings-&gt;<ref refid="classgmx_1_1TrajectoryAnalysisSettings_1a2c422fe2efacea08e6f4829d40d81d60" kindref="member">setHelpText</ref>(desc);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption</ref>(<ref refid="classgmx_1_1FileNameOption" kindref="compound">FileNameOption</ref>(</highlight><highlight class="stringliteral">&quot;o&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.filetype(eftPlot).outputFile()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="namespacegmx_1a9c1227e97a6084a280a611c2934c8ee1" kindref="member">store</ref>(&amp;fnDist_).defaultBasename(</highlight><highlight class="stringliteral">&quot;avedist&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.description(</highlight><highlight class="stringliteral">&quot;Average<sp/>distances<sp/>from<sp/>reference<sp/>group&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption</ref>(<ref refid="classgmx_1_1SelectionOption" kindref="compound">SelectionOption</ref>(</highlight><highlight class="stringliteral">&quot;reference&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="namespacegmx_1a9c1227e97a6084a280a611c2934c8ee1" kindref="member">store</ref>(&amp;refsel_).required()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.description(</highlight><highlight class="stringliteral">&quot;Reference<sp/>group<sp/>to<sp/>calculate<sp/>distances<sp/>from&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption</ref>(<ref refid="classgmx_1_1SelectionOption" kindref="compound">SelectionOption</ref>(</highlight><highlight class="stringliteral">&quot;select&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.storeVector(&amp;sel_).required().multiValue()</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.description(</highlight><highlight class="stringliteral">&quot;Groups<sp/>to<sp/>calculate<sp/>distances<sp/>to&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>options-&gt;<ref refid="classgmx_1_1IOptionsContainer_1a24e2aea4956eadf7dc78dc4a75fb5a63" kindref="member">addOption</ref>(<ref refid="classgmx_1_1DoubleOption" kindref="compound">DoubleOption</ref>(</highlight><highlight class="stringliteral">&quot;cutoff&quot;</highlight><highlight class="normal">).<ref refid="namespacegmx_1a9c1227e97a6084a280a611c2934c8ee1" kindref="member">store</ref>(&amp;cutoff_)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.description(</highlight><highlight class="stringliteral">&quot;Cutoff<sp/>for<sp/>distance<sp/>calculation<sp/>(0<sp/>=<sp/>no<sp/>cutoff)&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>settings-&gt;<ref refid="classgmx_1_1TrajectoryAnalysisSettings_1a98ef506bbb11e854e561d578a180a3f3" kindref="member">setFlag</ref>(TrajectoryAnalysisSettings::efRequireTop);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classAnalysisTemplate_1a9e02b7a948032879e4d172533fca27f4" kindref="member">AnalysisTemplate::initAnalysis</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1TrajectoryAnalysisSettings" kindref="compound">TrajectoryAnalysisSettings</ref><sp/>&amp;settings,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1TopologyInformation" kindref="compound">TopologyInformation</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;<sp/></highlight><highlight class="comment">/*top*/</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>nb_.<ref refid="classgmx_1_1AnalysisNeighborhood_1ac7efef66604d09e0c4e127dbed2533ea" kindref="member">setCutoff</ref>(cutoff_);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>data_.<ref refid="classgmx_1_1AnalysisData_1a2ed328beb6480f608cc3cb902a52b61f" kindref="member">setColumnCount</ref>(0,<sp/>sel_.size());</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>avem_.reset(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1AnalysisDataAverageModule" kindref="compound">AnalysisDataAverageModule</ref>());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>data_.<ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule</ref>(avem_);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!fnDist_.empty())</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacegmx_1a38eb9496e0b6e783869001733014b6d0" kindref="member">AnalysisDataPlotModulePointer</ref><sp/>plotm(</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1AnalysisDataPlotModule" kindref="compound">AnalysisDataPlotModule</ref>(settings.<ref refid="classgmx_1_1TrajectoryAnalysisSettings_1ae527a2bedb4ae1a113e10d48342f7503" kindref="member">plotSettings</ref>()));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plotm-&gt;setFileName(fnDist_);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plotm-&gt;setTitle(</highlight><highlight class="stringliteral">&quot;Average<sp/>distance&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plotm-&gt;setXAxisIsTime();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>plotm-&gt;setYLabel(</highlight><highlight class="stringliteral">&quot;Distance<sp/>(nm)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.<ref refid="classgmx_1_1AbstractAnalysisData_1ada778191d76b2826b57e7b30ecd7a296" kindref="member">addModule</ref>(plotm);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classAnalysisTemplate_1a113ec08275e9efd12c97e2387cf72115" kindref="member">AnalysisTemplate::analyzeFrame</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>frnr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structt__trxframe" kindref="compound">t_trxframe</ref><sp/>&amp;fr,<sp/><ref refid="structt__pbc" kindref="compound">t_pbc</ref><sp/>*pbc,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1TrajectoryAnalysisModuleData" kindref="compound">TrajectoryAnalysisModuleData</ref><sp/>*pdata)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1AnalysisDataHandle" kindref="compound">AnalysisDataHandle</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dh<sp/><sp/><sp/><sp/><sp/>=<sp/>pdata-&gt;<ref refid="classgmx_1_1TrajectoryAnalysisModuleData_1ae600024eaa634d84157bc7c75c020e97" kindref="member">dataHandle</ref>(data_);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;refsel<sp/>=<sp/>pdata-&gt;<ref refid="classgmx_1_1TrajectoryAnalysisModuleData_1a4e23dbf4cfd2554ac011664b49c1c7e0" kindref="member">parallelSelection</ref>(refsel_);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1AnalysisNeighborhoodSearch" kindref="compound">AnalysisNeighborhoodSearch</ref><sp/>nbsearch<sp/>=<sp/>nb_.<ref refid="classgmx_1_1AnalysisNeighborhood_1ac11ba1b44a1c777677276f6ec664a82d" kindref="member">initSearch</ref>(pbc,<sp/>refsel);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>dh.<ref refid="classgmx_1_1AnalysisDataHandle_1a2bf06c693af3bc389c28d65520caf514" kindref="member">startFrame</ref>(frnr,<sp/>fr.time);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>g<sp/>=<sp/>0;<sp/>g<sp/>&lt;<sp/>sel_.size();<sp/>++g)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classgmx_1_1Selection" kindref="compound">Selection</ref><sp/>&amp;sel<sp/><sp/><sp/>=<sp/>pdata-&gt;<ref refid="classgmx_1_1TrajectoryAnalysisModuleData_1a4e23dbf4cfd2554ac011664b49c1c7e0" kindref="member">parallelSelection</ref>(sel_[g]);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nr<sp/><sp/><sp/><sp/>=<sp/>sel.<ref refid="classgmx_1_1Selection_1a85afa66d42b9e51c3f70a9b3624ab4b8" kindref="member">posCount</ref>();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>frave<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="domdec_8h_1afbaeb09824aab3269073f92000ab0df5a0ab3e5d0801aea3f3758bcbd812e8f10" kindref="member">nr</ref>;<sp/>++i)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classgmx_1_1SelectionPosition" kindref="compound">SelectionPosition</ref><sp/>p<sp/>=<sp/>sel.<ref refid="classgmx_1_1Selection_1af8ac5009e0832a9b55e56960d9b7779c" kindref="member">position</ref>(i);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>frave<sp/>+=<sp/>nbsearch.<ref refid="classgmx_1_1AnalysisNeighborhoodSearch_1adbf80af8e5193cf2cb73694234b77157" kindref="member">minimumDistance</ref>(p.<ref refid="classgmx_1_1SelectionPosition_1a961d69866f96e7e822f27c9ec33aee4d" kindref="member">x</ref>());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>frave<sp/>/=<sp/><ref refid="domdec_8h_1afbaeb09824aab3269073f92000ab0df5a0ab3e5d0801aea3f3758bcbd812e8f10" kindref="member">nr</ref>;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dh.<ref refid="classgmx_1_1AnalysisDataHandle_1a3109274379e1188fee93156456c7593c" kindref="member">setPoint</ref>(g,<sp/>frave);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>dh.<ref refid="classgmx_1_1AnalysisDataHandle_1a8120b1806873a1d0c8a175c5fd46cc97" kindref="member">finishFrame</ref>();</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classAnalysisTemplate_1ae041eaddc628f03387dab1c217442606" kindref="member">AnalysisTemplate::finishAnalysis</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">/*nframes*/</highlight><highlight class="normal">)</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classAnalysisTemplate_1a517aacaffbe2754d8700e05d96639edf" kindref="member">AnalysisTemplate::writeOutput</ref>()</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>We<sp/>print<sp/>out<sp/>the<sp/>average<sp/>of<sp/>the<sp/>mean<sp/>distances<sp/>for<sp/>each<sp/>group.</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>g<sp/>=<sp/>0;<sp/>g<sp/>&lt;<sp/>sel_.size();<sp/>++g)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fprintf(stderr,<sp/></highlight><highlight class="stringliteral">&quot;Average<sp/>mean<sp/>distance<sp/>for<sp/>&apos;%s&apos;:<sp/>%.3f<sp/>nm\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sel_[g].name(),<sp/>avem_-&gt;average(0,<sp/>g));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment">/*!<sp/>\brief</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*<sp/>The<sp/>main<sp/>function<sp/>for<sp/>the<sp/>analysis<sp/>template.</highlight></codeline>
+<codeline><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="test__selection_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[])</highlight></codeline>
+<codeline><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>gmx::TrajectoryAnalysisCommandLineRunner::runAsMain&lt;AnalysisTemplate&gt;(argc,<sp/>argv);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>    </detaileddescription>
+  </compounddef>
+</doxygen>

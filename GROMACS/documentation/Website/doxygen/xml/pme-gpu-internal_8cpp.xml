@@ -1,0 +1,866 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="pme-gpu-internal_8cpp" kind="file">
+    <compoundname>pme-gpu-internal.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="pme-gpu-internal_8h" local="yes">pme-gpu-internal.h</includes>
+    <includes local="yes">config.h</includes>
+    <includes local="no">list</includes>
+    <includes local="no">string</includes>
+    <includes refid="ewald-utils_8h" local="yes">gromacs/ewald/ewald-utils.h</includes>
+    <includes refid="gpu__utils_8h" local="yes">gromacs/gpu_utils/gpu_utils.h</includes>
+    <includes refid="invertmatrix_8h" local="yes">gromacs/math/invertmatrix.h</includes>
+    <includes refid="units_8h" local="yes">gromacs/math/units.h</includes>
+    <includes refid="commrec_8h" local="yes">gromacs/mdtypes/commrec.h</includes>
+    <includes refid="exceptions_8h" local="yes">gromacs/utility/exceptions.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="logger_8h" local="yes">gromacs/utility/logger.h</includes>
+    <includes refid="stringutil_8h" local="yes">gromacs/utility/stringutil.h</includes>
+    <includes refid="pme-grid_8h" local="yes">pme-grid.h</includes>
+    <includes refid="pme-internal_8h" local="yes">pme-internal.h</includes>
+    <incdepgraph>
+      <node id="4761">
+        <label>list</label>
+      </node>
+      <node id="4743">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="4735">
+        <label>iterator</label>
+      </node>
+      <node id="4741">
+        <label>stdint.h</label>
+      </node>
+      <node id="4751">
+        <label>gromacs/gpu_utils/hostallocator.h</label>
+        <link refid="hostallocator_8h"/>
+        <childnode refid="4733" relation="include">
+        </childnode>
+        <childnode refid="4746" relation="include">
+        </childnode>
+        <childnode refid="4738" relation="include">
+        </childnode>
+        <childnode refid="4752" relation="include">
+        </childnode>
+        <childnode refid="4755" relation="include">
+        </childnode>
+      </node>
+      <node id="4726">
+        <label>src/gromacs/ewald/pme-gpu-internal.cpp</label>
+        <link refid="pme-gpu-internal.cpp"/>
+        <childnode refid="4727" relation="include">
+        </childnode>
+        <childnode refid="4728" relation="include">
+        </childnode>
+        <childnode refid="4745" relation="include">
+        </childnode>
+        <childnode refid="4761" relation="include">
+        </childnode>
+        <childnode refid="4748" relation="include">
+        </childnode>
+        <childnode refid="4762" relation="include">
+        </childnode>
+        <childnode refid="4749" relation="include">
+        </childnode>
+        <childnode refid="4763" relation="include">
+        </childnode>
+        <childnode refid="4755" relation="include">
+        </childnode>
+        <childnode refid="4739" relation="include">
+        </childnode>
+        <childnode refid="4764" relation="include">
+        </childnode>
+        <childnode refid="4765" relation="include">
+        </childnode>
+        <childnode refid="4768" relation="include">
+        </childnode>
+      </node>
+      <node id="4763">
+        <label>gromacs/math/invertmatrix.h</label>
+        <link refid="invertmatrix_8h"/>
+        <childnode refid="4740" relation="include">
+        </childnode>
+      </node>
+      <node id="4747">
+        <label>gromacs/ewald/pme.h</label>
+        <link refid="pme_8h"/>
+        <childnode refid="4748" relation="include">
+        </childnode>
+        <childnode refid="4732" relation="include">
+        </childnode>
+        <childnode refid="4740" relation="include">
+        </childnode>
+        <childnode refid="4731" relation="include">
+        </childnode>
+      </node>
+      <node id="4749">
+        <label>gromacs/gpu_utils/gpu_utils.h</label>
+        <link refid="gpu__utils_8h"/>
+        <childnode refid="4750" relation="include">
+        </childnode>
+        <childnode refid="4748" relation="include">
+        </childnode>
+        <childnode refid="4738" relation="include">
+        </childnode>
+        <childnode refid="4740" relation="include">
+        </childnode>
+      </node>
+      <node id="4736">
+        <label>stdexcept</label>
+      </node>
+      <node id="4766">
+        <label>cstdarg</label>
+      </node>
+      <node id="4748">
+        <label>string</label>
+      </node>
+      <node id="4752">
+        <label>gromacs/utility/alignedallocator.h</label>
+        <link refid="alignedallocator_8h"/>
+        <childnode refid="4733" relation="include">
+        </childnode>
+        <childnode refid="4753" relation="include">
+        </childnode>
+      </node>
+      <node id="4768">
+        <label>pme-internal.h</label>
+        <link refid="pme-internal_8h"/>
+        <childnode refid="4745" relation="include">
+        </childnode>
+        <childnode refid="4740" relation="include">
+        </childnode>
+        <childnode refid="4769" relation="include">
+        </childnode>
+        <childnode refid="4744" relation="include">
+        </childnode>
+      </node>
+      <node id="4769">
+        <label>gromacs/utility/gmxmpi.h</label>
+        <link refid="gmxmpi_8h"/>
+        <childnode refid="4745" relation="include">
+        </childnode>
+      </node>
+      <node id="4760">
+        <label>gromacs/utility/classhelpers.h</label>
+        <link refid="classhelpers_8h"/>
+        <childnode refid="4746" relation="include">
+        </childnode>
+      </node>
+      <node id="4757">
+        <label>exception</label>
+      </node>
+      <node id="4739">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="4740" relation="include">
+        </childnode>
+        <childnode refid="4743" relation="include">
+        </childnode>
+      </node>
+      <node id="4762">
+        <label>gromacs/ewald/ewald-utils.h</label>
+        <link refid="ewald-utils_8h"/>
+        <childnode refid="4739" relation="include">
+        </childnode>
+        <childnode refid="4731" relation="include">
+        </childnode>
+      </node>
+      <node id="4750">
+        <label>cstdio</label>
+      </node>
+      <node id="4731">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="4728">
+        <label>pme-gpu-internal.h</label>
+        <link refid="pme-gpu-internal_8h"/>
+        <childnode refid="4729" relation="include">
+        </childnode>
+        <childnode refid="4732" relation="include">
+        </childnode>
+        <childnode refid="4744" relation="include">
+        </childnode>
+      </node>
+      <node id="4738">
+        <label>vector</label>
+      </node>
+      <node id="4754">
+        <label>new</label>
+      </node>
+      <node id="4727">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="4737">
+        <label>utility</label>
+      </node>
+      <node id="4734">
+        <label>array</label>
+      </node>
+      <node id="4765">
+        <label>gromacs/utility/stringutil.h</label>
+        <link refid="stringutil_8h"/>
+        <childnode refid="4766" relation="include">
+        </childnode>
+        <childnode refid="4767" relation="include">
+        </childnode>
+        <childnode refid="4748" relation="include">
+        </childnode>
+        <childnode refid="4738" relation="include">
+        </childnode>
+      </node>
+      <node id="4740">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="4741" relation="include">
+        </childnode>
+        <childnode refid="4742" relation="include">
+        </childnode>
+      </node>
+      <node id="4756">
+        <label>cstdlib</label>
+      </node>
+      <node id="4755">
+        <label>gromacs/utility/exceptions.h</label>
+        <link refid="exceptions_8h"/>
+        <childnode refid="4750" relation="include">
+        </childnode>
+        <childnode refid="4756" relation="include">
+        </childnode>
+        <childnode refid="4757" relation="include">
+        </childnode>
+        <childnode refid="4746" relation="include">
+        </childnode>
+        <childnode refid="4748" relation="include">
+        </childnode>
+        <childnode refid="4758" relation="include">
+        </childnode>
+        <childnode refid="4759" relation="include">
+        </childnode>
+        <childnode refid="4738" relation="include">
+        </childnode>
+        <childnode refid="4740" relation="include">
+        </childnode>
+        <childnode refid="4760" relation="include">
+        </childnode>
+        <childnode refid="4743" relation="include">
+        </childnode>
+        <childnode refid="4739" relation="include">
+        </childnode>
+      </node>
+      <node id="4732">
+        <label>gromacs/utility/arrayref.h</label>
+        <link refid="arrayref_8h"/>
+        <childnode refid="4733" relation="include">
+        </childnode>
+        <childnode refid="4734" relation="include">
+        </childnode>
+        <childnode refid="4735" relation="include">
+        </childnode>
+        <childnode refid="4736" relation="include">
+        </childnode>
+        <childnode refid="4737" relation="include">
+        </childnode>
+        <childnode refid="4738" relation="include">
+        </childnode>
+        <childnode refid="4739" relation="include">
+        </childnode>
+      </node>
+      <node id="4733">
+        <label>cstddef</label>
+      </node>
+      <node id="4764">
+        <label>gromacs/utility/logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="4748" relation="include">
+        </childnode>
+      </node>
+      <node id="4729">
+        <label>gromacs/fft/fft.h</label>
+        <link refid="fft_8h"/>
+        <childnode refid="4730" relation="include">
+        </childnode>
+        <childnode refid="4731" relation="include">
+        </childnode>
+      </node>
+      <node id="4753">
+        <label>gromacs/utility/allocator.h</label>
+        <link refid="allocator_8h"/>
+        <childnode refid="4733" relation="include">
+        </childnode>
+        <childnode refid="4746" relation="include">
+        </childnode>
+        <childnode refid="4754" relation="include">
+        </childnode>
+        <childnode refid="4740" relation="include">
+        </childnode>
+      </node>
+      <node id="4744">
+        <label>pme-gpu-types.h</label>
+        <link refid="pme-gpu-types_8h"/>
+        <childnode refid="4745" relation="include">
+        </childnode>
+        <childnode refid="4746" relation="include">
+        </childnode>
+        <childnode refid="4738" relation="include">
+        </childnode>
+        <childnode refid="4747" relation="include">
+        </childnode>
+        <childnode refid="4749" relation="include">
+        </childnode>
+        <childnode refid="4751" relation="include">
+        </childnode>
+        <childnode refid="4740" relation="include">
+        </childnode>
+      </node>
+      <node id="4758">
+        <label>type_traits</label>
+      </node>
+      <node id="4745">
+        <label>config.h</label>
+      </node>
+      <node id="4730">
+        <label>stdio.h</label>
+      </node>
+      <node id="4767">
+        <label>cstring</label>
+      </node>
+      <node id="4746">
+        <label>memory</label>
+      </node>
+      <node id="4742">
+        <label>inttypes.h</label>
+      </node>
+      <node id="4759">
+        <label>typeindex</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1aaa741a73522d57e9c7af2c1fda0ccde0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structPmeGpuKernelParamsBase" kindref="compound">PmeGpuKernelParamsBase</ref> *</type>
+        <definition>static PmeGpuKernelParamsBase* pme_gpu_get_kernel_params_base_ptr</definition>
+        <argsstring>(const PmeGpu *pmeGpu)</argsstring>
+        <name>pme_gpu_get_kernel_params_base_ptr</name>
+        <param>
+          <type>const <ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <briefdescription>
+<para>Wrapper for getting a pointer to the plain C++ part of the GPU kernel parameters structure. </para>        </briefdescription>
+        <detaileddescription>
+<internal><para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The pointer to the kernel parameters. </para></simplesect>
+</para></internal>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="73" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="73" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a88c3c7cfd40227a0314f6e997521afed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classgmx_1_1ArrayRef" kindref="compound">gmx::ArrayRef</ref>&lt; <ref refid="namespacegmx_1a139c1919a9680de4ad1450f42e37d33b" kindref="member">gmx::RVec</ref> &gt;</type>
+        <definition>gmx::ArrayRef&lt;gmx::RVec&gt; pme_gpu_get_forces</definition>
+        <argsstring>(PmeGpu *pmeGpu)</argsstring>
+        <name>pme_gpu_get_forces</name>
+        <param>
+          <type><ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <briefdescription>
+<para>Returns the GPU gathering staging forces buffer. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The input/output forces. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="80" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="80" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a1bea55789e0572d1ff0c4f78cdb6e8ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_get_energy_virial</definition>
+        <argsstring>(const PmeGpu *pmeGpu, real *energy, matrix virial)</argsstring>
+        <name>pme_gpu_get_energy_virial</name>
+        <param>
+          <type>const <ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>energy</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>virial</declname>
+        </param>
+        <briefdescription>
+<para>Returns the output virial and energy of the PME solving. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">energy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output energy. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">virial</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output virial matrix. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="85" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="85" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a79575e51e673f2d13315370dba0e7191" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_update_input_box</definition>
+        <argsstring>(PmeGpu *pmeGpu, const matrix box)</argsstring>
+        <name>pme_gpu_update_input_box</name>
+        <param>
+          <type><ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Updates the unit cell parameters. Does not check if update is necessary - that is done in <ref refid="pme-gpu_8cpp_1a2db9507955e1908ed647984a9c62f641" kindref="member">pme_gpu_prepare_computation()</ref>. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell box. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="103" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="103" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a69066d5a6d2bd3cfd48c22a7da4fd88b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_reinit_computation</definition>
+        <argsstring>(const PmeGpu *pmeGpu)</argsstring>
+        <name>pme_gpu_reinit_computation</name>
+        <param>
+          <type>const <ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <briefdescription>
+<para> <libinternal />  The PME GPU reinitialization function that is called both at the end of any PME computation and on any load balancing. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="136" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="136" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a0f87f8ca2058ea113ad2bc7287682576" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pme_gpu_reinit_grids</definition>
+        <argsstring>(PmeGpu *pmeGpu)</argsstring>
+        <name>pme_gpu_reinit_grids</name>
+        <param>
+          <type><ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <briefdescription>
+<para> <libinternal />  (Re-)initializes all the PME GPU data related to the grid size and cut-off. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="147" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="147" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a96a23ba273d3788baab82d8c71854663" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pme_gpu_copy_common_data_from</definition>
+        <argsstring>(const gmx_pme_t *pme)</argsstring>
+        <name>pme_gpu_copy_common_data_from</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <briefdescription>
+<para> <libinternal />  Copies everything useful from the PME CPU to the PME GPU structure. The goal is to minimize interaction with the PME CPU structure in the GPU code. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="193" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="193" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a30f29ab01f4617cea28a55ee8552ee6a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool pme_gpu_check_restrictions</definition>
+        <argsstring>(const gmx_pme_t *pme, std::string *error)</argsstring>
+        <name>pme_gpu_check_restrictions</name>
+        <param>
+          <type>const gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type>std::string *</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para> <libinternal />  Finds out if PME with given inputs is possible to run on GPU. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The error message if the input is not supported on GPU. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if this PME input is possible to run on GPU, false otherwise. </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="232" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="232" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1adf72d90341055cd222ad34c061236cb9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void pme_gpu_init</definition>
+        <argsstring>(gmx_pme_t *pme, gmx_device_info_t *gpuInfo)</argsstring>
+        <name>pme_gpu_init</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__device__info__t" kindref="compound">gmx_device_info_t</ref> *</type>
+          <declname>gpuInfo</declname>
+        </param>
+        <briefdescription>
+<para>Initializes the PME GPU data at the beginning of the run. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">gpuInfo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GPU information structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="278" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="278" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a55174cd4bc39d7f14fe375a38ee811ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_transform_spline_atom_data</definition>
+        <argsstring>(const PmeGpu *pmeGpu, const pme_atomcomm_t *atc, PmeSplineDataType type, int dimIndex, PmeLayoutTransform transform)</argsstring>
+        <name>pme_gpu_transform_spline_atom_data</name>
+        <param>
+          <type>const <ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <param>
+          <type>const pme_atomcomm_t *</type>
+          <declname>atc</declname>
+        </param>
+        <param>
+          <type><ref refid="pme-gpu-internal_8h_1a0f754eebaa9461af5829e9d32c8156cb" kindref="member">PmeSplineDataType</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dimIndex</declname>
+        </param>
+        <param>
+          <type><ref refid="pme-gpu-internal_8h_1a8e828a9e22c6ef7676e82bbf2fbd2dec" kindref="member">PmeLayoutTransform</ref></type>
+          <declname>transform</declname>
+        </param>
+        <briefdescription>
+<para>Rearranges the atom spline data between the GPU and host layouts. Only used for test purposes so far, likely to be horribly slow. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">atc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME CPU atom data structure (with a single-threaded layout). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline data type (values or derivatives). </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dimIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Dimension index. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">transform</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Layout transform type </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="314" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="314" bodyend="370"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a7ba882d2de50fa957af00828162dd06e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_get_real_grid_sizes</definition>
+        <argsstring>(const PmeGpu *pmeGpu, gmx::IVec *gridSize, gmx::IVec *paddedGridSize)</argsstring>
+        <name>pme_gpu_get_real_grid_sizes</name>
+        <param>
+          <type>const <ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a9699d31c62e2a4cc2c730793a1224411" kindref="member">gmx::IVec</ref> *</type>
+          <declname>gridSize</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacegmx_1a9699d31c62e2a4cc2c730793a1224411" kindref="member">gmx::IVec</ref> *</type>
+          <declname>paddedGridSize</declname>
+        </param>
+        <briefdescription>
+<para>Get the normal/padded grid dimensions of the real-space PME grid on GPU. Only used in tests. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">gridSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the grid dimensions to fill in. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">paddedGridSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the padded grid dimensions to fill in. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="372" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="372" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1ae81445001fbc385bc2868fcbb4eb226b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_reinit</definition>
+        <argsstring>(gmx_pme_t *pme, gmx_device_info_t *gpuInfo)</argsstring>
+        <name>pme_gpu_reinit</name>
+        <param>
+          <type>gmx_pme_t *</type>
+          <declname>pme</declname>
+        </param>
+        <param>
+          <type><ref refid="structgmx__device__info__t" kindref="compound">gmx_device_info_t</ref> *</type>
+          <declname>gpuInfo</declname>
+        </param>
+        <briefdescription>
+<para>(Re-)initializes the PME GPU data at the beginning of the run or on DLB. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">pme</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">gpuInfo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The GPU information structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="classgmx_1_1NotImplementedError" kindref="compound">gmx::NotImplementedError</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if this generally valid PME structure is not valid for GPU runs. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="385" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="385" bodyend="415"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a7e5ef8957b2366acbb1eb097aa06d755" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_destroy</definition>
+        <argsstring>(PmeGpu *pmeGpu)</argsstring>
+        <name>pme_gpu_destroy</name>
+        <param>
+          <type><ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <briefdescription>
+<para>Destroys the PME GPU data at the end of the run. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="417" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="417" bodyend="437"/>
+      </memberdef>
+      <memberdef kind="function" id="pme-gpu-internal_8cpp_1a4e377588a4bede4919cdcf5ef29ae9b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pme_gpu_reinit_atoms</definition>
+        <argsstring>(PmeGpu *pmeGpu, const int nAtoms, const real *charges)</argsstring>
+        <name>pme_gpu_reinit_atoms</name>
+        <param>
+          <type><ref refid="structPmeGpu" kindref="compound">PmeGpu</ref> *</type>
+          <declname>pmeGpu</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>nAtoms</declname>
+        </param>
+        <param>
+          <type>const <ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref> *</type>
+          <declname>charges</declname>
+        </param>
+        <briefdescription>
+<para>Reallocates the local atoms data (charges, coordinates, etc.). Copies the charges to the GPU. </para>        </briefdescription>
+        <detaileddescription>
+<para> <libinternal /> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pmeGpu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The PME GPU structure. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nAtoms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of particles. </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">charges</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pointer to the host-side array of particle charges.</para></parameterdescription>
+</parameteritem>
+</parameterlist>
+This is a function that should only be called in the beginning of the run and on domain decomposition. Should be called before the pme_gpu_set_io_ranges. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" line="439" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp" bodystart="439" bodyend="464"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This file contains internal function implementations for performing the PME calculations on GPU. </para>    </briefdescription>
+    <detaileddescription>
+<internal><para><simplesect kind="author"><para>Aleksei Iupinov <ulink url="mailto:a.yupinov@gmail.com">a.yupinov@gmail.com</ulink> </para></simplesect>
+</para></internal>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/ewald/pme-gpu-internal.cpp"/>
+  </compounddef>
+</doxygen>

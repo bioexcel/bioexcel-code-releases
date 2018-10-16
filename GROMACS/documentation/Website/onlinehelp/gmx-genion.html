@@ -1,0 +1,200 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>gmx genion &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gmx genrestr" href="gmx-genrestr.html" />
+    <link rel="prev" title="gmx genconf" href="gmx-genconf.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="gmx-genrestr.html" title="gmx genrestr"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-genconf.html" title="gmx genconf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gmx-genion">
+<span id="id1"></span><h1>gmx genion<a class="headerlink" href="#gmx-genion" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<pre class="literal-block">
+gmx genion [<strong>-s</strong> <em>[&lt;.tpr&gt;]</em>] [<strong>-n</strong> <em>[&lt;.ndx&gt;]</em>] [<strong>-p</strong> <em>[&lt;.top&gt;]</em>]
+           [<strong>-o</strong> <em>[&lt;.gro/.g96/...&gt;]</em>] [<strong>-np</strong> <em>&lt;int&gt;</em>] [<strong>-pname</strong> <em>&lt;string&gt;</em>]
+           [<strong>-pq</strong> <em>&lt;int&gt;</em>] [<strong>-nn</strong> <em>&lt;int&gt;</em>] [<strong>-nname</strong> <em>&lt;string&gt;</em>] [<strong>-nq</strong> <em>&lt;int&gt;</em>]
+           [<strong>-rmin</strong> <em>&lt;real&gt;</em>] [<strong>-seed</strong> <em>&lt;int&gt;</em>] [<strong>-conc</strong> <em>&lt;real&gt;</em>] [<strong>-[no]neutral</strong>]
+</pre>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">gmx</span> <span class="pre">genion</span></code> randomly replaces solvent molecules with monoatomic ions.
+The group of solvent molecules should be continuous and all molecules
+should have the same number of atoms.
+The user should add the ion molecules to the topology file or use
+the <code class="docutils literal"><span class="pre">-p</span></code> option to automatically modify the topology.</p>
+<p>The ion molecule type, residue and atom names in all force fields
+are the capitalized element names without sign. This molecule name
+should be given with <code class="docutils literal"><span class="pre">-pname</span></code> or <code class="docutils literal"><span class="pre">-nname</span></code>, and the
+<code class="docutils literal"><span class="pre">[molecules]</span></code> section of your topology updated accordingly,
+either by hand or with <code class="docutils literal"><span class="pre">-p</span></code>. Do not use an atom name instead!</p>
+<p>Ions which can have multiple charge states get the multiplicity
+added, without sign, for the uncommon states only.</p>
+<p>For larger ions, e.g. sulfate we recommended using <a class="reference internal" href="gmx-insert-molecules.html"><span class="doc">gmx insert-molecules</span></a>.</p>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>Options to specify input files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-s</span></code> [&lt;.tpr&gt;] (topol.tpr)</dt>
+<dd>Portable xdr run input file</dd>
+<dt><code class="docutils literal"><span class="pre">-n</span></code> [&lt;.ndx&gt;] (index.ndx) (Optional)</dt>
+<dd>Index file</dd>
+</dl>
+<p>Options to specify input/output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-p</span></code> [&lt;.top&gt;] (topol.top) (Optional)</dt>
+<dd>Topology file</dd>
+</dl>
+<p>Options to specify output files:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-o</span></code> [&lt;.gro/.g96/…&gt;] (out.gro)</dt>
+<dd>Structure file: <a class="reference internal" href="../user-guide/file-formats.html#gro"><span class="std std-ref">gro</span></a> <a class="reference internal" href="../user-guide/file-formats.html#g96"><span class="std std-ref">g96</span></a> <a class="reference internal" href="../user-guide/file-formats.html#pdb"><span class="std std-ref">pdb</span></a> brk ent esp</dd>
+</dl>
+<p>Other options:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">-np</span></code> &lt;int&gt; (0)</dt>
+<dd>Number of positive ions</dd>
+<dt><code class="docutils literal"><span class="pre">-pname</span></code> &lt;string&gt; (NA)</dt>
+<dd>Name of the positive ion</dd>
+<dt><code class="docutils literal"><span class="pre">-pq</span></code> &lt;int&gt; (1)</dt>
+<dd>Charge of the positive ion</dd>
+<dt><code class="docutils literal"><span class="pre">-nn</span></code> &lt;int&gt; (0)</dt>
+<dd>Number of negative ions</dd>
+<dt><code class="docutils literal"><span class="pre">-nname</span></code> &lt;string&gt; (CL)</dt>
+<dd>Name of the negative ion</dd>
+<dt><code class="docutils literal"><span class="pre">-nq</span></code> &lt;int&gt; (-1)</dt>
+<dd>Charge of the negative ion</dd>
+<dt><code class="docutils literal"><span class="pre">-rmin</span></code> &lt;real&gt; (0.6)</dt>
+<dd>Minimum distance between ions</dd>
+<dt><code class="docutils literal"><span class="pre">-seed</span></code> &lt;int&gt; (0)</dt>
+<dd>Seed for random number generator (0 means generate)</dd>
+<dt><code class="docutils literal"><span class="pre">-conc</span></code> &lt;real&gt; (0)</dt>
+<dd>Specify salt concentration (mol/liter). This will add sufficient ions to reach up to the specified concentration as computed from the volume of the cell in the input <a class="reference internal" href="../user-guide/file-formats.html#tpr"><span class="std std-ref">.tpr</span></a> file. Overrides the <code class="docutils literal"><span class="pre">-np</span></code> and <code class="docutils literal"><span class="pre">-nn</span></code> options.</dd>
+<dt><code class="docutils literal"><span class="pre">-[no]neutral</span></code>  (no)</dt>
+<dd>This option will add enough ions to neutralize the system. These ions are added on top of those specified with <code class="docutils literal"><span class="pre">-np</span></code>/<code class="docutils literal"><span class="pre">-nn</span></code> or <code class="docutils literal"><span class="pre">-conc</span></code>.</dd>
+</dl>
+</div>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>If you specify a salt concentration existing ions are not taken into account. In effect you therefore specify the amount of salt to be added.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gmx genion</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-genconf.html"
+                        title="previous chapter">gmx genconf</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gmx-genrestr.html"
+                        title="next chapter">gmx genrestr</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/gmx-genion.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="gmx-genrestr.html" title="gmx genrestr"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-genconf.html" title="gmx genconf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>

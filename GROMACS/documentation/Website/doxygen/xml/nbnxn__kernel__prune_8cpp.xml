@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__kernel__prune_8cpp" kind="file">
+    <compoundname>nbnxn_kernel_prune.cpp</compoundname>
+    <includes refid="gmxpre_8h" local="yes">gmxpre.h</includes>
+    <includes refid="nbnxn__kernel__prune_8h" local="yes">nbnxn_kernel_prune.h</includes>
+    <includes refid="gmx__omp__nthreads_8h" local="yes">gromacs/mdlib/gmx_omp_nthreads.h</includes>
+    <includes refid="nb__verlet_8h" local="yes">gromacs/mdlib/nb_verlet.h</includes>
+    <includes refid="nbnxn__pairlist_8h" local="yes">gromacs/mdlib/nbnxn_pairlist.h</includes>
+    <includes refid="gmxassert_8h" local="yes">gromacs/utility/gmxassert.h</includes>
+    <includes refid="nbnxn__kernel__ref__prune_8h" local="yes">nbnxn_kernel_ref_prune.h</includes>
+    <includes refid="nbnxn__kernel__simd__2xnn__prune_8h" local="yes">simd_2xnn/nbnxn_kernel_simd_2xnn_prune.h</includes>
+    <includes refid="nbnxn__kernel__simd__4xn__prune_8h" local="yes">simd_4xn/nbnxn_kernel_simd_4xn_prune.h</includes>
+    <incdepgraph>
+      <node id="15672">
+        <label>gromacs/utility/current_function.h</label>
+        <link refid="current__function_8h"/>
+      </node>
+      <node id="15670">
+        <label>stdint.h</label>
+      </node>
+      <node id="15666">
+        <label>gromacs/mdlib/nb_verlet.h</label>
+        <link refid="nb__verlet_8h"/>
+        <childnode refid="15667" relation="include">
+        </childnode>
+      </node>
+      <node id="15675">
+        <label>simd_4xn/nbnxn_kernel_simd_4xn_prune.h</label>
+        <link refid="nbnxn__kernel__simd__4xn__prune_8h"/>
+        <childnode refid="15669" relation="include">
+        </childnode>
+        <childnode refid="15665" relation="include">
+        </childnode>
+      </node>
+      <node id="15664">
+        <label>nbnxn_kernel_prune.h</label>
+        <link refid="nbnxn__kernel__prune_8h"/>
+        <childnode refid="15665" relation="include">
+        </childnode>
+      </node>
+      <node id="15668">
+        <label>gromacs/utility/gmxassert.h</label>
+        <link refid="gmxassert_8h"/>
+        <childnode refid="15669" relation="include">
+        </childnode>
+        <childnode refid="15672" relation="include">
+        </childnode>
+      </node>
+      <node id="15662">
+        <label>src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_prune.cpp</label>
+        <link refid="nbnxn_kernel_prune.cpp"/>
+        <childnode refid="15663" relation="include">
+        </childnode>
+        <childnode refid="15664" relation="include">
+        </childnode>
+        <childnode refid="15666" relation="include">
+        </childnode>
+        <childnode refid="15668" relation="include">
+        </childnode>
+        <childnode refid="15673" relation="include">
+        </childnode>
+        <childnode refid="15674" relation="include">
+        </childnode>
+        <childnode refid="15675" relation="include">
+        </childnode>
+      </node>
+      <node id="15665">
+        <label>gromacs/utility/real.h</label>
+        <link refid="real_8h"/>
+      </node>
+      <node id="15663">
+        <label>gmxpre.h</label>
+        <link refid="gmxpre_8h"/>
+      </node>
+      <node id="15669">
+        <label>gromacs/utility/basedefinitions.h</label>
+        <link refid="basedefinitions_8h"/>
+        <childnode refid="15670" relation="include">
+        </childnode>
+        <childnode refid="15671" relation="include">
+        </childnode>
+      </node>
+      <node id="15674">
+        <label>simd_2xnn/nbnxn_kernel_simd_2xnn_prune.h</label>
+        <link refid="nbnxn__kernel__simd__2xnn__prune_8h"/>
+        <childnode refid="15669" relation="include">
+        </childnode>
+        <childnode refid="15665" relation="include">
+        </childnode>
+      </node>
+      <node id="15673">
+        <label>nbnxn_kernel_ref_prune.h</label>
+        <link refid="nbnxn__kernel__ref__prune_8h"/>
+        <childnode refid="15669" relation="include">
+        </childnode>
+        <childnode refid="15665" relation="include">
+        </childnode>
+      </node>
+      <node id="15667">
+        <label>memory</label>
+      </node>
+      <node id="15671">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__kernel__prune_8cpp_1a9e23d8ac39463b906549962c697a4013" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nbnxn_kernel_cpu_prune</definition>
+        <argsstring>(nonbonded_verlet_group_t *nbvg, const nbnxn_atomdata_t *nbat, const rvec *shift_vec, real rlistInner)</argsstring>
+        <name>nbnxn_kernel_cpu_prune</name>
+        <param>
+          <type><ref refid="structnonbonded__verlet__group__t" kindref="compound">nonbonded_verlet_group_t</ref> *</type>
+          <declname>nbvg</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structnbnxn__atomdata__t" kindref="compound">nbnxn_atomdata_t</ref> *</type>
+          <declname>nbat</declname>
+        </param>
+        <param>
+          <type>const rvec *</type>
+          <declname>shift_vec</declname>
+        </param>
+        <param>
+          <type><ref refid="real_8h_1a58a0c7cf2501f4492da833421be92547" kindref="member">real</ref></type>
+          <declname>rlistInner</declname>
+        </param>
+        <briefdescription>
+<para>Prune all pair-lists in the set with distance <computeroutput>rlistInner</computeroutput>. </para>        </briefdescription>
+        <detaileddescription>
+<para>For all pair-lists in the set takes the outer list and prunes out pairs beyond <computeroutput>rlistInner</computeroutput> and writes the result to a list that is to be consumed by the non-bonded kernel. </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_prune.cpp" line="50" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_prune.cpp" bodystart="50" bodyend="81"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_kernels/nbnxn_kernel_prune.cpp"/>
+  </compounddef>
+</doxygen>

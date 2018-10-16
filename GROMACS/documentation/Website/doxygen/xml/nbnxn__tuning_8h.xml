@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.5">
+  <compounddef id="nbnxn__tuning_8h" kind="file">
+    <compoundname>nbnxn_tuning.h</compoundname>
+    <includes local="no">stdio.h</includes>
+    <includes refid="vectypes_8h" local="yes">gromacs/math/vectypes.h</includes>
+    <includedby refid="forcerec_8cpp" local="yes">src/gromacs/mdlib/forcerec.cpp</includedby>
+    <includedby refid="nbnxn__tuning_8cpp" local="yes">src/gromacs/mdlib/nbnxn_tuning.cpp</includedby>
+    <includedby refid="runner_8cpp" local="yes">src/programs/mdrun/runner.cpp</includedby>
+    <incdepgraph>
+      <node id="16759">
+        <label>src/gromacs/mdlib/nbnxn_tuning.h</label>
+        <link refid="nbnxn_tuning.h"/>
+        <childnode refid="16760" relation="include">
+        </childnode>
+      </node>
+      <node id="16760">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="16761">
+        <label>src/gromacs/mdlib/nbnxn_tuning.h</label>
+        <link refid="nbnxn_tuning.h"/>
+        <childnode refid="16762" relation="include">
+        </childnode>
+        <childnode refid="16763" relation="include">
+        </childnode>
+      </node>
+      <node id="16763">
+        <label>src/programs/mdrun/runner.cpp</label>
+        <link refid="runner_8cpp"/>
+      </node>
+      <node id="16762">
+        <label>src/gromacs/mdlib/nbnxn_tuning.cpp</label>
+        <link refid="nbnxn__tuning_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacegmx">gmx</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="nbnxn__tuning_8h_1af8edfd8b7c76df03e8172d62e82eef5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void increaseNstlist</definition>
+        <argsstring>(FILE *fplog, t_commrec *cr, t_inputrec *ir, int nstlistOnCmdline, const gmx_mtop_t *mtop, const matrix box, bool useOrEmulateGpuForNonbondeds, const gmx::CpuInfo &amp;cpuinfo)</argsstring>
+        <name>increaseNstlist</name>
+        <param>
+          <type>FILE *</type>
+          <declname>fplog</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__commrec" kindref="compound">t_commrec</ref> *</type>
+          <declname>cr</declname>
+        </param>
+        <param>
+          <type><ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nstlistOnCmdline</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>const matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>useOrEmulateGpuForNonbondeds</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classgmx_1_1CpuInfo" kindref="compound">gmx::CpuInfo</ref> &amp;</type>
+          <declname>cpuinfo</declname>
+        </param>
+        <briefdescription>
+<para>Try to increase nstlist when using the Verlet cut-off scheme. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">fplog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Log file </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The communication record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input parameter record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nstlistOnCmdline</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of nstlist provided on the command line </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">useOrEmulateGpuForNonbondeds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tells if we are using a GPU for non-bondeds </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">cpuinfo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Information about the CPU(s) </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.h" line="76" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="125" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="nbnxn__tuning_8h_1aa0c0b3e79133dfaaa2e81d168bbaa5a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setupDynamicPairlistPruning</definition>
+        <argsstring>(const gmx::MDLogger &amp;mdlog, const t_inputrec *ir, const gmx_mtop_t *mtop, matrix box, int nbnxnKernelType, const interaction_const_t *ic, NbnxnListParameters *listParams)</argsstring>
+        <name>setupDynamicPairlistPruning</name>
+        <param>
+          <type>const <ref refid="classgmx_1_1MDLogger" kindref="compound">gmx::MDLogger</ref> &amp;</type>
+          <declname>mdlog</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structt__inputrec" kindref="compound">t_inputrec</ref> *</type>
+          <declname>ir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structgmx__mtop__t" kindref="compound">gmx_mtop_t</ref> *</type>
+          <declname>mtop</declname>
+        </param>
+        <param>
+          <type>matrix</type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbnxnKernelType</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structinteraction__const__t" kindref="compound">interaction_const_t</ref> *</type>
+          <declname>ic</declname>
+        </param>
+        <param>
+          <type>NbnxnListParameters *</type>
+          <declname>listParams</declname>
+        </param>
+        <briefdescription>
+<para>Set up the dynamic pairlist pruning. </para>        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">mdlog</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MD logger </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input parameter record </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mtop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The global topology </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unit cell </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nbnxnKernelType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of nbnxn kernel used </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The nonbonded interactions constants </para></parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">listParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The list setup parameters </para></parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.h" line="93" column="1" bodyfile="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.cpp" bodystart="482" bodyend="596"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Declares functions for tuning adjustable parameters for the nbnxn non-bonded search and interaction kernels. </para>    </briefdescription>
+    <detaileddescription>
+<para> <libinternal /> </para><para><simplesect kind="author"><para>Berk Hess <ulink url="mailto:hess@kth.se">hess@kth.se</ulink> </para></simplesect>
+</para>    </detaileddescription>
+    <location file="/home/jenkins/workspace/Release_workflow_master/gromacs-2018.3/src/gromacs/mdlib/nbnxn_tuning.h"/>
+  </compounddef>
+</doxygen>

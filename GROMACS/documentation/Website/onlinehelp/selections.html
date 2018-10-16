@@ -1,0 +1,699 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Selection syntax and usage &#8212; GROMACS 2018.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2018.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Molecular dynamics parameters (.mdp options)" href="../user-guide/mdp-options.html" />
+    <link rel="prev" title="gmx xpm2ps" href="gmx-xpm2ps.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../user-guide/mdp-options.html" title="Molecular dynamics parameters (.mdp options)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gmx-xpm2ps.html" title="gmx xpm2ps"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" accesskey="U">Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="selection-syntax-and-usage">
+<h1>Selection syntax and usage<a class="headerlink" href="#selection-syntax-and-usage" title="Permalink to this headline">¶</a></h1>
+<p>Selections are used to select atoms/molecules/residues for analysis.
+In contrast to traditional index files, selections can be dynamic, i.e.,
+select different atoms for different trajectory frames. The GROMACS
+manual contains a short introductory section to selections in the
+Analysis chapter, including suggestions on how to get familiar with
+selections if you are new to the concept. The subtopics listed below
+provide more details on the technical and syntactic aspects of
+selections.</p>
+<p>Each analysis tool requires a different number of selections and the
+selections are interpreted differently. The general idea is still the
+same: each selection evaluates to a set of positions, where a position
+can be an atom position or center-of-mass or center-of-geometry of
+a set of atoms. The tool then uses these positions for its analysis to
+allow very flexible processing. Some analysis tools may have limitations
+on the types of selections allowed.</p>
+<div class="section" id="specifying-selections-from-command-line">
+<h2>Specifying selections from command line<a class="headerlink" href="#specifying-selections-from-command-line" title="Permalink to this headline">¶</a></h2>
+<p>If no selections are provided on the command line, you are prompted to
+type the selections interactively (a pipe can also be used to provide
+the selections in this case for most tools). While this works well for
+testing, it is easier to provide the selections from the command line
+if they are complex or for scripting.</p>
+<p>Each tool has different command-line arguments for specifying selections
+(see the help for the individual tools).
+You can either pass a single string containing all selections (separated
+by semicolons), or multiple strings, each containing one selection.
+Note that you need to quote the selections to protect them from the
+shell.</p>
+<p>If you set a selection command-line argument, but do not provide any
+selections, you are prompted to type the selections for that argument
+interactively. This is useful if that selection argument is optional,
+in which case it is not normally prompted for.</p>
+<p>To provide selections from a file, use <code class="docutils literal"><span class="pre">-sf</span> <span class="pre">file.dat</span></code> in the place
+of the selection for a selection argument (e.g.,
+<code class="docutils literal"><span class="pre">-select</span> <span class="pre">-sf</span> <span class="pre">file.dat</span></code>). In general, the <code class="docutils literal"><span class="pre">-sf</span></code> argument reads
+selections from the provided file and assigns them to selection arguments
+that have been specified up to that point, but for which no selections
+have been provided.
+As a special case, <code class="docutils literal"><span class="pre">-sf</span></code> provided on its own, without preceding
+selection arguments, assigns the selections to all (yet unset) required
+selections (i.e., those that would be promted interactively if no
+selections are provided on the command line).</p>
+<p>To use groups from a traditional index file, use argument <code class="docutils literal"><span class="pre">-n</span></code>
+to provide a file. See the “syntax” subtopic for how to use them.
+If this option is not provided, default groups are generated.
+The default groups are generated with the same logic as for
+non-selection tools.</p>
+<p>Depending on the tool, two additional command-line arguments may be
+available to control the behavior:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-seltype</span></code> can be used to specify the default type of
+positions to calculate for each selection.</li>
+<li><code class="docutils literal"><span class="pre">-selrpos</span></code> can be used to specify the default type of
+positions used in selecting atoms by coordinates.</li>
+</ul>
+<p>See the “positions” subtopic for more information on these options.</p>
+<p>Tools that take selections apply them to a structure/topology and/or
+a trajectory file. If the tool takes both (typically as <code class="docutils literal"><span class="pre">-s</span></code>
+for structure/topology and <code class="docutils literal"><span class="pre">-f</span></code> for trajectory), then the
+trajectory file is only used for coordinate information, and all other
+information, such as atom names and residue information, is read from
+the structure/topology file. If the tool only takes a structure file,
+or if only that input parameter is provided, then also the coordinates
+are taken from that file.
+For example, to select atoms from a <code class="docutils literal"><span class="pre">.pdb</span></code>/<code class="docutils literal"><span class="pre">.gro</span></code> file in
+a tool that provides both options, pass it as <code class="docutils literal"><span class="pre">-s</span></code> (only).
+There is no warning if the trajectory file specifies, e.g., different
+atom names than the structure file. Only the number of atoms is checked.
+Many selection-enabled tools also provide an <code class="docutils literal"><span class="pre">-fgroup</span></code> option
+to specify the atom indices that are present in the trajectory for cases
+where the trajectory only has a subset of atoms from the
+topology/structure file.</p>
+</div>
+<div class="section" id="selection-syntax">
+<h2>Selection syntax<a class="headerlink" href="#selection-syntax" title="Permalink to this headline">¶</a></h2>
+<p>A set of selections consists of one or more selections, separated by
+semicolons. Each selection defines a set of positions for the analysis.
+Each selection can also be preceded by a string that gives a name for
+the selection for use in, e.g., graph legends.
+If no name is provided, the string used for the selection is used
+automatically as the name.</p>
+<p>For interactive input, the syntax is slightly altered: line breaks can
+also be used to separate selections. followed by a line break can
+be used to continue a line if necessary.
+Notice that the above only applies to real interactive input,
+not if you provide the selections, e.g., from a pipe.</p>
+<p>It is possible to use variables to store selection expressions.
+A variable is defined with the following syntax:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">VARNAME</span> <span class="o">=</span> <span class="n">EXPR</span> <span class="p">;</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">EXPR</span></code> is any valid selection expression.
+After this, <code class="docutils literal"><span class="pre">VARNAME</span></code> can be used anywhere where <code class="docutils literal"><span class="pre">EXPR</span></code>
+would be valid.</p>
+<p>Selections are composed of three main types of expressions, those that
+define atoms (<code class="docutils literal"><span class="pre">ATOM_EXPR</span></code>), those that define positions
+(<code class="docutils literal"><span class="pre">POS_EXPR</span></code>), and those that evaluate to numeric values
+(<code class="docutils literal"><span class="pre">NUM_EXPR</span></code>). Each selection should be a <code class="docutils literal"><span class="pre">POS_EXPR</span></code>
+or a <code class="docutils literal"><span class="pre">ATOM_EXPR</span></code> (the latter is automatically converted to
+positions). The basic rules are as follows:</p>
+<ul class="simple">
+<li>An expression like <code class="docutils literal"><span class="pre">NUM_EXPR1</span> <span class="pre">&lt;</span> <span class="pre">NUM_EXPR2</span></code> evaluates to an
+<code class="docutils literal"><span class="pre">ATOM_EXPR</span></code> that selects all the atoms for which the comparison
+is true.</li>
+<li>Atom expressions can be combined with boolean operations such as
+<code class="docutils literal"><span class="pre">not</span> <span class="pre">ATOM_EXPR</span></code>, <code class="docutils literal"><span class="pre">ATOM_EXPR</span> <span class="pre">and</span> <span class="pre">ATOM_EXPR</span></code>, or
+<code class="docutils literal"><span class="pre">ATOM_EXPR</span> <span class="pre">or</span> <span class="pre">ATOM_EXPR</span></code>. Parentheses can be used to alter the
+evaluation order.</li>
+<li><code class="docutils literal"><span class="pre">ATOM_EXPR</span></code> expressions can be converted into <code class="docutils literal"><span class="pre">POS_EXPR</span></code>
+expressions in various ways, see the “positions” subtopic for more
+details.</li>
+<li><code class="docutils literal"><span class="pre">POS_EXPR</span></code> can be converted into <code class="docutils literal"><span class="pre">NUM_EXPR</span></code> using syntax
+like “<code class="docutils literal"><span class="pre">x</span> <span class="pre">of</span> <span class="pre">POS_EXPR</span></code>”. Currently, this is only supported for single
+positions like in expression “<code class="docutils literal"><span class="pre">x</span> <span class="pre">of</span> <span class="pre">cog</span> <span class="pre">of</span> <span class="pre">ATOM_EXPR</span></code>”.</li>
+</ul>
+<p>Some keywords select atoms based on string values such as the atom name.
+For these keywords, it is possible to use wildcards (<code class="docutils literal"><span class="pre">name</span> <span class="pre">&quot;C*&quot;</span></code>)
+or regular expressions (e.g., <code class="docutils literal"><span class="pre">resname</span> <span class="pre">&quot;R[AB]&quot;</span></code>).
+The match type is automatically guessed from the string: if it contains
+other characters than letters, numbers, ‘*’, or ‘?’, it is interpreted
+as a regular expression.
+To force the matching to use literal string matching, use
+<code class="docutils literal"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">&quot;C*&quot;</span></code> to match a literal C*.
+To force other type of matching, use ‘?’ or ‘~’ in place of ‘=’ to force
+wildcard or regular expression matching, respectively.</p>
+<p>Strings that contain non-alphanumeric characters should be enclosed in
+double quotes as in the examples. For other strings, the quotes are
+optional, but if the value conflicts with a reserved keyword, a syntax
+error will occur. If your strings contain uppercase letters, this should
+not happen.</p>
+<p>Index groups provided with the <code class="docutils literal"><span class="pre">-n</span></code> command-line option or
+generated by default can be accessed with <code class="docutils literal"><span class="pre">group</span> <span class="pre">NR</span></code> or
+<code class="docutils literal"><span class="pre">group</span> <span class="pre">NAME</span></code>, where <code class="docutils literal"><span class="pre">NR</span></code> is a zero-based index of the group
+and <code class="docutils literal"><span class="pre">NAME</span></code> is part of the name of the desired group.
+The keyword <code class="docutils literal"><span class="pre">group</span></code> is optional if the whole selection is
+provided from an index group.
+To see a list of available groups in the interactive mode, press enter
+in the beginning of a line.</p>
+</div>
+<div class="section" id="specifying-positions-in-selections">
+<h2>Specifying positions in selections<a class="headerlink" href="#specifying-positions-in-selections" title="Permalink to this headline">¶</a></h2>
+<p>Possible ways of specifying positions in selections are:</p>
+<ol class="arabic simple">
+<li>A constant position can be defined as <code class="docutils literal"><span class="pre">[XX,</span> <span class="pre">YY,</span> <span class="pre">ZZ]</span></code>, where
+<code class="docutils literal"><span class="pre">XX</span></code>, <code class="docutils literal"><span class="pre">YY</span></code> and <code class="docutils literal"><span class="pre">ZZ</span></code> are real numbers.</li>
+<li><code class="docutils literal"><span class="pre">com</span> <span class="pre">of</span> <span class="pre">ATOM_EXPR</span> <span class="pre">[pbc]</span></code> or <code class="docutils literal"><span class="pre">cog</span> <span class="pre">of</span> <span class="pre">ATOM_EXPR</span> <span class="pre">[pbc]</span></code>
+calculate the center of mass/geometry of <code class="docutils literal"><span class="pre">ATOM_EXPR</span></code>. If
+<code class="docutils literal"><span class="pre">pbc</span></code> is specified, the center is calculated iteratively to try
+to deal with cases where <code class="docutils literal"><span class="pre">ATOM_EXPR</span></code> wraps around periodic
+boundary conditions.</li>
+<li><code class="docutils literal"><span class="pre">POSTYPE</span> <span class="pre">of</span> <span class="pre">ATOM_EXPR</span></code> calculates the specified positions for
+the atoms in <code class="docutils literal"><span class="pre">ATOM_EXPR</span></code>.
+<code class="docutils literal"><span class="pre">POSTYPE</span></code> can be <code class="docutils literal"><span class="pre">atom</span></code>, <code class="docutils literal"><span class="pre">res_com</span></code>, <code class="docutils literal"><span class="pre">res_cog</span></code>,
+<code class="docutils literal"><span class="pre">mol_com</span></code> or <code class="docutils literal"><span class="pre">mol_cog</span></code>, with an optional prefix <code class="docutils literal"><span class="pre">whole_</span></code>
+<code class="docutils literal"><span class="pre">part_</span></code> or <code class="docutils literal"><span class="pre">dyn_</span></code>.
+<code class="docutils literal"><span class="pre">whole_</span></code> calculates the centers for the whole residue/molecule,
+even if only part of it is selected.
+<code class="docutils literal"><span class="pre">part_</span></code> prefix calculates the centers for the selected atoms, but
+uses always the same atoms for the same residue/molecule. The used atoms
+are determined from the the largest group allowed by the selection.
+<code class="docutils literal"><span class="pre">dyn_</span></code> calculates the centers strictly only for the selected atoms.
+If no prefix is specified, whole selections default to <code class="docutils literal"><span class="pre">part_</span></code> and
+other places default to <code class="docutils literal"><span class="pre">whole_</span></code>.
+The latter is often desirable to select the same molecules in different
+tools, while the first is a compromise between speed (<code class="docutils literal"><span class="pre">dyn_</span></code>
+positions can be slower to evaluate than <code class="docutils literal"><span class="pre">part_</span></code>) and intuitive
+behavior.</li>
+<li><code class="docutils literal"><span class="pre">ATOM_EXPR</span></code>, when given for whole selections, is handled as 3.
+above, using the position type from the command-line argument
+<code class="docutils literal"><span class="pre">-seltype</span></code>.</li>
+</ol>
+<p>Selection keywords that select atoms based on their positions, such as
+<code class="docutils literal"><span class="pre">dist</span> <span class="pre">from</span></code>, use by default the positions defined by the
+<code class="docutils literal"><span class="pre">-selrpos</span></code> command-line option.
+This can be overridden by prepending a <code class="docutils literal"><span class="pre">POSTYPE</span></code> specifier to the
+keyword. For example, <code class="docutils literal"><span class="pre">res_com</span> <span class="pre">dist</span> <span class="pre">from</span> <span class="pre">POS</span></code> evaluates the
+residue center of mass distances. In the example, all atoms of a residue
+are either selected or not, based on the single distance calculated.</p>
+</div>
+<div class="section" id="arithmetic-expressions-in-selections">
+<h2>Arithmetic expressions in selections<a class="headerlink" href="#arithmetic-expressions-in-selections" title="Permalink to this headline">¶</a></h2>
+<p>Basic arithmetic evaluation is supported for numeric expressions.
+Supported operations are addition, subtraction, negation, multiplication,
+division, and exponentiation (using ^).
+Result of a division by zero or other illegal operations is undefined.</p>
+</div>
+<div class="section" id="selection-keywords">
+<h2>Selection keywords<a class="headerlink" href="#selection-keywords" title="Permalink to this headline">¶</a></h2>
+<p>The following selection keywords are currently available.
+For keywords marked with a plus, additional help is available through
+a subtopic KEYWORD, where KEYWORD is the name of the keyword.</p>
+<ul>
+<li><p class="first">Keywords that select atoms by an integer property:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">atomnr</span>
+<span class="n">mol</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">molindex</span><span class="p">)</span>
+<span class="n">molecule</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">molindex</span><span class="p">)</span>
+<span class="n">molindex</span>
+<span class="n">resid</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">resnr</span><span class="p">)</span>
+<span class="n">residue</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">resindex</span><span class="p">)</span>
+<span class="n">resindex</span>
+<span class="n">resnr</span>
+</pre></div>
+</div>
+<p>(use in expressions or like “atomnr 1 to 5 7 9”)</p>
+</li>
+<li><p class="first">Keywords that select atoms by a numeric property:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">betafactor</span><span class="p">)</span>
+<span class="n">betafactor</span>
+<span class="n">charge</span>
+<span class="n">distance</span> <span class="kn">from</span> <span class="nn">POS</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+<span class="n">distance</span> <span class="kn">from</span> <span class="nn">POS</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+<span class="n">mass</span>
+<span class="n">mindistance</span> <span class="kn">from</span> <span class="nn">POS_EXPR</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+<span class="n">mindistance</span> <span class="kn">from</span> <span class="nn">POS_EXPR</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+<span class="n">occupancy</span>
+<span class="n">x</span>
+<span class="n">y</span>
+<span class="n">z</span>
+</pre></div>
+</div>
+<p>(use in expressions or like “occupancy 0.5 to 1”)</p>
+</li>
+<li><p class="first">Keywords that select atoms by a string property:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">altloc</span>
+<span class="n">atomname</span>
+<span class="n">atomtype</span>
+<span class="n">chain</span>
+<span class="n">insertcode</span>
+<span class="n">name</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">atomname</span><span class="p">)</span>
+<span class="n">pdbatomname</span>
+<span class="n">pdbname</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">pdbatomname</span><span class="p">)</span>
+<span class="n">resname</span>
+<span class="nb">type</span> <span class="p">(</span><span class="n">synonym</span> <span class="k">for</span> <span class="n">atomtype</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(use like “name PATTERN [PATTERN] …”)</p>
+</li>
+<li><p class="first">Additional keywords that directly select atoms:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">all</span>
+<span class="n">insolidangle</span> <span class="n">center</span> <span class="n">POS</span> <span class="n">span</span> <span class="n">POS_EXPR</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+<span class="n">none</span>
+<span class="n">same</span> <span class="n">KEYWORD</span> <span class="k">as</span> <span class="n">ATOM_EXPR</span>
+<span class="n">within</span> <span class="n">REAL</span> <span class="n">of</span> <span class="n">POS_EXPR</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Keywords that directly evaluate to positions:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cog</span> <span class="n">of</span> <span class="n">ATOM_EXPR</span> <span class="p">[</span><span class="n">pbc</span><span class="p">]</span>
+<span class="n">com</span> <span class="n">of</span> <span class="n">ATOM_EXPR</span> <span class="p">[</span><span class="n">pbc</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>(see also “positions” subtopic)</p>
+</li>
+<li><p class="first">Additional keywords:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">merge</span> <span class="n">POSEXPR</span>
+<span class="n">POSEXPR</span> <span class="n">permute</span> <span class="n">P1</span> <span class="o">...</span> <span class="n">PN</span>
+<span class="n">plus</span> <span class="n">POSEXPR</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="section" id="selecting-atoms-by-name-atomname-name-pdbatomname-pdbname">
+<h3>Selecting atoms by name - atomname, name, pdbatomname, pdbname<a class="headerlink" href="#selecting-atoms-by-name-atomname-name-pdbatomname-pdbname" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">name</span>
+<span class="n">pdbname</span>
+<span class="n">atomname</span>
+<span class="n">pdbatomname</span>
+</pre></div>
+</div>
+<p>These keywords select atoms by name. <code class="docutils literal"><span class="pre">name</span></code> selects atoms using
+the GROMACS atom naming convention.
+For input formats other than PDB, the atom names are matched exactly
+as they appear in the input file. For PDB files, 4 character atom names
+that start with a digit are matched after moving the digit to the end
+(e.g., to match 3HG2 from a PDB file, use <code class="docutils literal"><span class="pre">name</span> <span class="pre">HG23</span></code>).
+<code class="docutils literal"><span class="pre">pdbname</span></code> can only be used with a PDB input file, and selects
+atoms based on the exact name given in the input file, without the
+transformation described above.</p>
+<p><code class="docutils literal"><span class="pre">atomname</span></code> and <code class="docutils literal"><span class="pre">pdbatomname</span></code> are synonyms for the above two
+keywords.</p>
+</div>
+<div class="section" id="selecting-based-on-distance-dist-distance-mindist-mindistance-within">
+<h3>Selecting based on distance - dist, distance, mindist, mindistance, within<a class="headerlink" href="#selecting-based-on-distance-dist-distance-mindist-mindistance-within" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">distance</span> <span class="kn">from</span> <span class="nn">POS</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+<span class="n">mindistance</span> <span class="kn">from</span> <span class="nn">POS_EXPR</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+<span class="n">within</span> <span class="n">REAL</span> <span class="n">of</span> <span class="n">POS_EXPR</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">distance</span></code> and <code class="docutils literal"><span class="pre">mindistance</span></code> calculate the distance from the
+given position(s), the only difference being in that <code class="docutils literal"><span class="pre">distance</span></code>
+only accepts a single position, while any number of positions can be
+given for <code class="docutils literal"><span class="pre">mindistance</span></code>, which then calculates the distance to the
+closest position.
+<code class="docutils literal"><span class="pre">within</span></code> directly selects atoms that are within <code class="docutils literal"><span class="pre">REAL</span></code> of
+<code class="docutils literal"><span class="pre">POS_EXPR</span></code>.</p>
+<p>For the first two keywords, it is possible to specify a cutoff to speed
+up the evaluation: all distances above the specified cutoff are
+returned as equal to the cutoff.</p>
+</div>
+<div class="section" id="selecting-atoms-in-a-solid-angle-insolidangle">
+<h3>Selecting atoms in a solid angle - insolidangle<a class="headerlink" href="#selecting-atoms-in-a-solid-angle-insolidangle" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">insolidangle</span> <span class="n">center</span> <span class="n">POS</span> <span class="n">span</span> <span class="n">POS_EXPR</span> <span class="p">[</span><span class="n">cutoff</span> <span class="n">REAL</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This keyword selects atoms that are within <code class="docutils literal"><span class="pre">REAL</span></code> degrees
+(default=5) of any position in <code class="docutils literal"><span class="pre">POS_EXPR</span></code> as seen from <code class="docutils literal"><span class="pre">POS</span></code>
+a position expression that evaluates to a single position), i.e., atoms
+in the solid angle spanned by the positions in <code class="docutils literal"><span class="pre">POS_EXPR</span></code> and
+centered at <code class="docutils literal"><span class="pre">POS</span></code>.</p>
+<p>Technically, the solid angle is constructed as a union of small cones
+whose tip is at <code class="docutils literal"><span class="pre">POS</span></code> and the axis goes through a point in
+<code class="docutils literal"><span class="pre">POS_EXPR</span></code>. There is such a cone for each position in
+<code class="docutils literal"><span class="pre">POS_EXPR</span></code>, and point is in the solid angle if it lies within any
+of these cones. The cutoff determines the width of the cones.</p>
+</div>
+<div class="section" id="merging-selections-merge-plus">
+<h3>Merging selections - merge, plus<a class="headerlink" href="#merging-selections-merge-plus" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">POSEXPR</span> <span class="n">merge</span> <span class="n">POSEXPR</span> <span class="p">[</span><span class="n">stride</span> <span class="n">INT</span><span class="p">]</span>
+<span class="n">POSEXPR</span> <span class="n">merge</span> <span class="n">POSEXPR</span> <span class="p">[</span><span class="n">merge</span> <span class="n">POSEXPR</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">POSEXPR</span> <span class="n">plus</span> <span class="n">POSEXPR</span> <span class="p">[</span><span class="n">plus</span> <span class="n">POSEXPR</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Basic selection keywords can only create selections where each atom
+occurs at most once. The <code class="docutils literal"><span class="pre">merge</span></code> and <code class="docutils literal"><span class="pre">plus</span></code> selection
+keywords can be used to work around this limitation. Both create
+a selection that contains the positions from all the given position
+expressions, even if they contain duplicates.
+The difference between the two is that <code class="docutils literal"><span class="pre">merge</span></code> expects two or more
+selections with the same number of positions, and the output contains
+the input positions selected from each expression in turn, i.e.,
+the output is like A1 B1 A2 B2 and so on. It is also possible to merge
+selections of unequal size as long as the size of the first is a
+multiple of the second one. The <code class="docutils literal"><span class="pre">stride</span></code> parameter can be used
+to explicitly provide this multiplicity.
+<code class="docutils literal"><span class="pre">plus</span></code> simply concatenates the positions after each other, and
+can work also with selections of different sizes.
+These keywords are valid only at the selection level, not in any
+subexpressions.</p>
+</div>
+<div class="section" id="permuting-selections-permute">
+<h3>Permuting selections - permute<a class="headerlink" href="#permuting-selections-permute" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">permute</span> <span class="n">P1</span> <span class="o">...</span> <span class="n">PN</span>
+</pre></div>
+</div>
+<p>By default, all selections are evaluated such that the atom indices are
+returned in ascending order. This can be changed by appending
+<code class="docutils literal"><span class="pre">permute</span> <span class="pre">P1</span> <span class="pre">P2</span> <span class="pre">...</span> <span class="pre">PN</span></code> to an expression.
+The <code class="docutils literal"><span class="pre">Pi</span></code> should form a permutation of the numbers 1 to N.
+This keyword permutes each N-position block in the selection such that
+the i’th position in the block becomes Pi’th.
+Note that it is the positions that are permuted, not individual atoms.
+A fatal error occurs if the size of the selection is not a multiple of n.
+It is only possible to permute the whole selection expression, not any
+subexpressions, i.e., the <code class="docutils literal"><span class="pre">permute</span></code> keyword should appear last in
+a selection.</p>
+</div>
+<div class="section" id="selecting-atoms-by-residue-number-resid-residue-resindex-resnr">
+<h3>Selecting atoms by residue number - resid, residue, resindex, resnr<a class="headerlink" href="#selecting-atoms-by-residue-number-resid-residue-resindex-resnr" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">resnr</span>
+<span class="n">resid</span>
+<span class="n">resindex</span>
+<span class="n">residue</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">resnr</span></code> selects atoms using the residue numbering in the input
+file. <code class="docutils literal"><span class="pre">resid</span></code> is synonym for this keyword for VMD compatibility.</p>
+<p><code class="docutils literal"><span class="pre">resindex</span> <span class="pre">N</span></code> selects the <code class="docutils literal"><span class="pre">N``th</span> <span class="pre">residue</span> <span class="pre">starting</span> <span class="pre">from</span> <span class="pre">the</span>
+<span class="pre">beginning</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">input</span> <span class="pre">file.</span> <span class="pre">This</span> <span class="pre">is</span> <span class="pre">useful</span> <span class="pre">for</span> <span class="pre">uniquely</span> <span class="pre">identifying</span>
+<span class="pre">residues</span> <span class="pre">if</span> <span class="pre">there</span> <span class="pre">are</span> <span class="pre">duplicate</span> <span class="pre">numbers</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">input</span> <span class="pre">file</span> <span class="pre">(e.g.,</span> <span class="pre">in</span>
+<span class="pre">multiple</span> <span class="pre">chains).</span>
+<span class="pre">``residue</span></code> is a synonym for <code class="docutils literal"><span class="pre">resindex</span></code>. This allows
+<code class="docutils literal"><span class="pre">same</span> <span class="pre">residue</span> <span class="pre">as</span></code> to work as expected.</p>
+</div>
+<div class="section" id="extending-selections-same">
+<h3>Extending selections - same<a class="headerlink" href="#extending-selections-same" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">same</span> <span class="n">KEYWORD</span> <span class="k">as</span> <span class="n">ATOM_EXPR</span>
+</pre></div>
+</div>
+<p>The keyword <code class="docutils literal"><span class="pre">same</span></code> can be used to select all atoms for which
+the given <code class="docutils literal"><span class="pre">KEYWORD</span></code> matches any of the atoms in <code class="docutils literal"><span class="pre">ATOM_EXPR</span></code>.
+Keywords that evaluate to integer or string values are supported.</p>
+</div>
+</div>
+<div class="section" id="selection-evaluation-and-optimization">
+<h2>Selection evaluation and optimization<a class="headerlink" href="#selection-evaluation-and-optimization" title="Permalink to this headline">¶</a></h2>
+<p>Boolean evaluation proceeds from left to right and is short-circuiting
+i.e., as soon as it is known whether an atom will be selected, the
+remaining expressions are not evaluated at all.
+This can be used to optimize the selections: you should write the
+most restrictive and/or the most inexpensive expressions first in
+boolean expressions.
+The relative ordering between dynamic and static expressions does not
+matter: all static expressions are evaluated only once, before the first
+frame, and the result becomes the leftmost expression.</p>
+<p>Another point for optimization is in common subexpressions: they are not
+automatically recognized, but can be manually optimized by the use of
+variables. This can have a big impact on the performance of complex
+selections, in particular if you define several index groups like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rdist</span> <span class="o">=</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">com</span> <span class="n">of</span> <span class="n">resnr</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">5</span><span class="p">;</span>
+<span class="n">resname</span> <span class="n">RES</span> <span class="ow">and</span> <span class="n">rdist</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">resname</span> <span class="n">RES</span> <span class="ow">and</span> <span class="n">rdist</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span>
+<span class="n">resname</span> <span class="n">RES</span> <span class="ow">and</span> <span class="n">rdist</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Without the variable assignment, the distances would be evaluated three
+times, although they are exactly the same within each selection.
+Anything assigned into a variable becomes a common subexpression that
+is evaluated only once during a frame.
+Currently, in some cases the use of variables can actually lead to a small
+performance loss because of the checks necessary to determine for which
+atoms the expression has already been evaluated, but this should not be
+a major problem.</p>
+</div>
+<div class="section" id="selection-limitations">
+<h2>Selection limitations<a class="headerlink" href="#selection-limitations" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Some analysis programs may require a special structure for the input
+selections (e.g., some options of <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">gangle</span></code> require the index
+group to be made of groups of three or four atoms).
+For such programs, it is up to the user to provide a proper selection
+expression that always returns such positions.</p>
+</li>
+<li><p class="first">All selection keywords select atoms in increasing order, i.e., you can
+consider them as set operations that in the end return the atoms in
+sorted numerical order.  For example, the following selections select
+the same atoms in the same order:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">resname</span> <span class="n">RA</span> <span class="n">RB</span> <span class="n">RC</span>
+<span class="n">resname</span> <span class="n">RB</span> <span class="n">RC</span> <span class="n">RA</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">atomnr</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">12</span> <span class="mi">13</span>
+<span class="n">atomnr</span> <span class="mi">12</span> <span class="mi">13</span> <span class="mi">10</span> <span class="mi">11</span>
+<span class="n">atomnr</span> <span class="mi">10</span> <span class="n">to</span> <span class="mi">13</span>
+<span class="n">atomnr</span> <span class="mi">13</span> <span class="n">to</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>If you need atoms/positions in a different order, you can:</p>
+<ul class="simple">
+<li>use external index groups (for some static selections),</li>
+<li>use the <code class="docutils literal"><span class="pre">permute</span></code> keyword to change the final order, or</li>
+<li>use the <code class="docutils literal"><span class="pre">merge</span></code> or <code class="docutils literal"><span class="pre">plus</span></code> keywords to compose the
+final selection from multiple distinct selections.</li>
+</ul>
+</li>
+<li><p class="first">Due to technical reasons, having a negative value as the first value in
+expressions like</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">charge</span> <span class="o">-</span><span class="mi">1</span> <span class="n">to</span> <span class="o">-</span><span class="mf">0.7</span>
+</pre></div>
+</div>
+<p>result in a syntax error. A workaround is to write</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">charge</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span> <span class="n">to</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>instead.</p>
+</li>
+<li><p class="first">When <code class="docutils literal"><span class="pre">name</span></code> selection keyword is used together with PDB input
+files, the behavior may be unintuitive. When GROMACS reads in a PDB
+file, 4 character atom names that start with a digit are transformed
+such that, e.g., 1HG2 becomes HG21, and the latter is what is matched
+by the <code class="docutils literal"><span class="pre">name</span></code> keyword. Use <code class="docutils literal"><span class="pre">pdbname</span></code> to match the atom name
+as it appears in the input PDB file.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="selection-examples">
+<h2>Selection examples<a class="headerlink" href="#selection-examples" title="Permalink to this headline">¶</a></h2>
+<p>Below, examples of different types of selections are given.</p>
+<ul>
+<li><p class="first">Selection of all water oxygens:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">resname</span> <span class="n">SOL</span> <span class="ow">and</span> <span class="n">name</span> <span class="n">OW</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Centers of mass of residues 1 to 5 and 10:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">res_com</span> <span class="n">of</span> <span class="n">resnr</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">5</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">All atoms farther than 1 nm of a fixed position:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="ow">not</span> <span class="n">within</span> <span class="mi">1</span> <span class="n">of</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">All atoms of a residue LIG within 0.5 nm of a protein (with a custom name):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;Close to protein&quot;</span> <span class="n">resname</span> <span class="n">LIG</span> <span class="ow">and</span> <span class="n">within</span> <span class="mf">0.5</span> <span class="n">of</span> <span class="n">group</span> <span class="s2">&quot;Protein&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">All protein residues that have at least one atom within 0.5 nm of a residue LIG:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">group</span> <span class="s2">&quot;Protein&quot;</span> <span class="ow">and</span> <span class="n">same</span> <span class="n">residue</span> <span class="k">as</span> <span class="n">within</span> <span class="mf">0.5</span> <span class="n">of</span> <span class="n">resname</span> <span class="n">LIG</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">All RES residues whose COM is between 2 and 4 nm from the COM of all of them:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">rdist</span> <span class="o">=</span> <span class="n">res_com</span> <span class="n">distance</span> <span class="kn">from</span> <span class="nn">com</span> <span class="n">of</span> <span class="n">resname</span> <span class="n">RES</span>
+<span class="n">resname</span> <span class="n">RES</span> <span class="ow">and</span> <span class="n">rdist</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">rdist</span> <span class="o">&lt;=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Selection like with duplicate atoms like C1 C2 C2 C3 C3 C4 … C8 C9:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="s2">&quot;C[1-8]&quot;</span> <span class="n">merge</span> <span class="n">name</span> <span class="s2">&quot;C[2-9]&quot;</span>
+</pre></div>
+</div>
+<p>This can be used with <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">distance</span></code> to compute C1-C2, C2-C3 etc.
+distances.</p>
+</li>
+<li><p class="first">Selection with atoms in order C2 C1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="n">C1</span> <span class="n">C2</span> <span class="n">permute</span> <span class="mi">2</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>This can be used with <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">gangle</span></code> to get C2-&gt;C1 vectors instead of
+C1-&gt;C2.</p>
+</li>
+<li><p class="first">Selection with COMs of two index groups:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">com</span> <span class="n">of</span> <span class="n">group</span> <span class="mi">1</span> <span class="n">plus</span> <span class="n">com</span> <span class="n">of</span> <span class="n">group</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>This can be used with <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">distance</span></code> to compute the distance between
+these two COMs.</p>
+</li>
+<li><p class="first">Fixed vector along x (can be used as a reference with <code class="docutils literal"><span class="pre">gmx</span> <span class="pre">gangle</span></code>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="n">plus</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The following examples explain the difference between the various
+position types.  This selection selects a position for each residue
+where any of the three atoms C[123] has <code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">2</span></code>.  The positions
+are computed as the COM of all three atoms.
+This is the default behavior if you just write <code class="docutils literal"><span class="pre">res_com</span> <span class="pre">of</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">part_res_com</span> <span class="n">of</span> <span class="n">name</span> <span class="n">C1</span> <span class="n">C2</span> <span class="n">C3</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>This selection does the same, but the positions are computed as COM
+positions of whole residues:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">whole_res_com</span> <span class="n">of</span> <span class="n">name</span> <span class="n">C1</span> <span class="n">C2</span> <span class="n">C3</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Finally, this selection selects the same residues, but the positions
+are computed as COM of exactly those atoms atoms that match the
+<code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">2</span></code> criterion:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dyn_res_com</span> <span class="n">of</span> <span class="n">name</span> <span class="n">C1</span> <span class="n">C2</span> <span class="n">C3</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Without the <code class="docutils literal"><span class="pre">of</span></code> keyword, the default behavior is different from
+above, but otherwise the rules are the same:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="n">C1</span> <span class="n">C2</span> <span class="n">C3</span> <span class="ow">and</span> <span class="n">res_com</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>works as if <code class="docutils literal"><span class="pre">whole_res_com</span></code> was specified, and selects the three
+atoms from residues whose COM satisfiex <code class="docutils literal"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">2</span></code>.
+Using</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="n">C1</span> <span class="n">C2</span> <span class="n">C3</span> <span class="ow">and</span> <span class="n">part_res_com</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>instead selects residues based on the COM computed from the C[123] atoms.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Selection syntax and usage</a><ul>
+<li><a class="reference internal" href="#specifying-selections-from-command-line">Specifying selections from command line</a></li>
+<li><a class="reference internal" href="#selection-syntax">Selection syntax</a></li>
+<li><a class="reference internal" href="#specifying-positions-in-selections">Specifying positions in selections</a></li>
+<li><a class="reference internal" href="#arithmetic-expressions-in-selections">Arithmetic expressions in selections</a></li>
+<li><a class="reference internal" href="#selection-keywords">Selection keywords</a><ul>
+<li><a class="reference internal" href="#selecting-atoms-by-name-atomname-name-pdbatomname-pdbname">Selecting atoms by name - atomname, name, pdbatomname, pdbname</a></li>
+<li><a class="reference internal" href="#selecting-based-on-distance-dist-distance-mindist-mindistance-within">Selecting based on distance - dist, distance, mindist, mindistance, within</a></li>
+<li><a class="reference internal" href="#selecting-atoms-in-a-solid-angle-insolidangle">Selecting atoms in a solid angle - insolidangle</a></li>
+<li><a class="reference internal" href="#merging-selections-merge-plus">Merging selections - merge, plus</a></li>
+<li><a class="reference internal" href="#permuting-selections-permute">Permuting selections - permute</a></li>
+<li><a class="reference internal" href="#selecting-atoms-by-residue-number-resid-residue-resindex-resnr">Selecting atoms by residue number - resid, residue, resindex, resnr</a></li>
+<li><a class="reference internal" href="#extending-selections-same">Extending selections - same</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#selection-evaluation-and-optimization">Selection evaluation and optimization</a></li>
+<li><a class="reference internal" href="#selection-limitations">Selection limitations</a></li>
+<li><a class="reference internal" href="#selection-examples">Selection examples</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gmx-xpm2ps.html"
+                        title="previous chapter">gmx xpm2ps</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../user-guide/mdp-options.html"
+                        title="next chapter">Molecular dynamics parameters (.mdp options)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/onlinehelp/selections.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../user-guide/mdp-options.html" title="Molecular dynamics parameters (.mdp options)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gmx-xpm2ps.html" title="gmx xpm2ps"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">GROMACS 2018.3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../user-guide/index.html" >User guide</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../user-guide/cmdline.html" >Command-line reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, GROMACS development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.1.
+    </div>
+  </body>
+</html>
