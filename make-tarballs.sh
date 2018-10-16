@@ -13,7 +13,7 @@
 
 # Make tarballs for each component
 tar cfz BioExcel-GROMACS-2019-beta1-1.tar.gz GROMACS
-tar cfz BioExcel-HADDOCK-20170426-1.tar.gz HADDOCK
+tar cfz BioExcel-HADDOCK-20181016-1.tar.gz HADDOCK
 tar cfz BioExcel-CPMD-MiMiC-0.1.0-1.tar.gz CPMD/MiMiC
 # TODO if there are further CPMD components, they might go in a new
 # tarball here.

@@ -1,4 +1,4 @@
-================================================
+
  haddock-tools 
 ================================================
 
@@ -33,12 +33,44 @@ Scripts
 
 ## Restraints-related
 
-#### active-passive_to_ambig.py
-A python script to create ambiguous interaction restraints for use in HADDOCK based on list of active and passive residues (refer to the [HADDOCK software page](http://www.bonvinlab.org/software/haddock2.2/haddock.html) for more infmation)
+#### passive_from_active.py
+A python script to obtain a list of passive residues providing a PDB file and a list of active residues.
+This will automatically calculate a list of surface residues from the PDB to filter out buried residues except if
+a surface list is provided.
+By default, neighbors of the active residues are searched within 6.5 Angstroms and surface residues are residues whose
+relative side chain accessibility or main chain accessibility is above 15%.
+
+Requirements:
+* [FreeSASA](https://freesasa.github.io/)
+
+`pip install freesasa`
+* [BioPython](http://biopython.org/)
+
+`pip install biopython`
 
 Usage:
 ```bash
-     python active-passive_to_ambig.py <active-passive-file1> <active-passive-file2>
+./passive_from_active.py [-h] [-c CHAIN_ID] [-s SURFACE_LIST]
+                              pdb_file active_list
+
+positional arguments:
+  pdb_file              PDB file
+  active_list           List of active residues IDs (int) separated by commas
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CHAIN_ID, --chain-id CHAIN_ID
+                        Chain id to be used in the PDB file (default: All)
+  -s SURFACE_LIST, --surface-list SURFACE_LIST
+                        List of surface residues IDs (int) separated by commas
+```
+
+#### active-passive_to_ambig.py
+A python script to create ambiguous interaction restraints for use in HADDOCK based on list of active and passive residues (refer to the [HADDOCK software page](http://www.bonvinlab.org/software/haddock2.2/haddock.html) for more information)
+
+Usage:
+```bash
+     ./active-passive_to_ambig.py <active-passive-file1> <active-passive-file2>
 ```
 
 where <active-passive-file> is a file consisting of two space-delimited lines with
@@ -61,6 +93,25 @@ Usage:
     -h, --help            show this help message and exit
     --exclude EXCLUDE [EXCLUDE ...], -e EXCLUDE [EXCLUDE ...] Chains to exclude from the calculation
     --verbose, -v
+```
+
+#### restrain_ligand.py
+Calculates distances between neighboring residues of a ligand molecule and produces a set of
+unambiguous distance restraints for HADDOCK to keep it in place during semi-flexible refinement.
+Produces, at most, one restraint per ligand atom.
+
+Usage:
+```bash
+./restrain_ligand.py [-h] -l LIGAND [-p] pdbf
+
+positional arguments:
+  pdbf                  PDB file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -l LIGAND, --ligand LIGAND
+                        Ligand residue name
+  -p, --pml             Write Pymol file with restraints
 ```
 
 #### haddock_tbl_validation
@@ -101,16 +152,16 @@ Usage:
 ```
 
 #### molprobity.py
-A python script to predict the protonation state of Histidine residues for HADDOCK. It uses molprobity for this, calling the reduce software which should in the path.
+A python script to predict the protonation state of Histidine residues for HADDOCK. It uses molprobity for this, calling the [Reduce](http://kinemage.biochem.duke.edu/software/reduce.php) software which should in the path.
 
 Usage:
 ```bash
-    molprobity.py <PDBfile>
+    ./molprobity.py <PDBfile>
 ```
 
 Example:
 ```bash
-molprobity.py 1F3G.pdb
+./molprobity.py 1F3G.pdb
 ## Executing Reduce to assign histidine protonation states
 ## Input PDB: 1F3G.pdb
 HIS ( 90 )	-->	HISD
@@ -184,23 +235,23 @@ Usage:
     where inputfiles are a list of PDB files to be concatenated
 ```
 
-#### mutate.py
-A python script to mutate residues for HADDOCK. A PDB file and a mutation list file are used as input, and the output is/are corresponding PDB file(s) of mutant(s). The format of mutation in the mutation list file is "ResidueID ResidueName ChainID", The ResidueName is the residue mutated to.
+#### pdb_mutate.py
+A python script to mutate residues for HADDOCK. A mutation list file is used as input, and the output is/are corresponding PDB file(s) of mutant(s). The format of mutation in the mutation list file is "PDBid ChainID ResidueID ResidueNameWT ResidueNameMut".
 
 
 Usage:
 ```bash
-    mutate.py <PDBfile> <mutation list file>
+    ./pdb_mutate.py <mutation list file>
 ```
 
 Example:
 ```bash
-molprobity.py 1A22.pdb mut_1A22.list
+./pdb_mutate.py mut_1A22.list
 
 ## In  mut_1A22.list, the residue 14, 18 and 21 in chain A will be mutated to ALA:
-## 14 ALA A
-## 18 ALA A
-## 21 ALA A
+## 1A22.pdb A 14 MET ALA
+## 1A22.pdb A 18 HIS ALA
+## 1A22.pdb A 21 HIS ALA
 ```
 
 #### pdb_strict_format.py
@@ -209,7 +260,7 @@ A python script to check format of PDB files with respect to HADDOCK format rule
 
 Usage:
 ```bash
-pdb_strict_format.py [-h] [-nc] pdb
+./pdb_strict_format.py [-h] [-nc] pdb
 
 This script validates a PDB file (*.pdb).
 
@@ -219,6 +270,29 @@ positional arguments:
 optional arguments:
   -h, --help         show this help message and exit
   -nc, --no_chainid  Ignore empty chain ids
+```
+
+#### param_to_json.py
+A python script to transform a haddockparam.web file into a JSON structure. It is possible to use it as a class and then access
+extra functions like: `change_value(key, value)` ; `update(subdict_to_replace)` ; `dump_keys()` ; `get_value(key)` ; `write_json()`
+
+Usage:
+```bash
+./param_to_json.py [-h] [-o OUTPUT] [-g GET] [-e [EXAMPLE]] web
+
+This script parses a HADDOCK parameter file (*.web) and transforms it to JSON
+format. It also allows to change a parameter of the haddockparam.web
+
+positional arguments:
+  web                   HADDOCK parameter file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT, --output OUTPUT
+                        Path of JSON output file
+  -g GET, --get GET     Get value of a particular parameter
+  -e [EXAMPLE], --example [EXAMPLE]
+                        Print an example
 ```
 
 License
