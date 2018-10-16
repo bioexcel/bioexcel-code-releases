@@ -1,0 +1,78 @@
+; 
+; Flexible TIP4P by Lawrence and Skimmer, 
+; Chem. Phys. Lett. 372 (2003) 842-847
+; Includes Morse terms for O-H bonds, a harmonic H-H bond, and
+; coupling term between bonds, and between bond and angles.
+; The coupling terms are treated as angles, because they are three
+; particle interactions
+;
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               2               yes             0.5     0.5
+
+[ atomtypes ]
+;name        mass      charge   ptype            c6           c12
+   OW    15.99940       0.000       A   3.15365e-01   6.4852e-01
+   HW     1.00800       0.000       A   0.00000E+00   0.00000E+00
+   MW     0.000         0.000       D   0.00000E+00   0.00000E+00
+
+[ moleculetype ]
+; molname       nrexcl
+SOL             1
+
+; We use a strange order of the atoms, this makes it considerably
+; faster in GROMACS.
+[ atoms ]
+; id    at type res nr  residu name     at name         cg nr   charge
+1       MW        1       SOL             DW              1       -1.04
+2       HW        1       SOL             HW2             1       0.52
+3       HW        1       SOL             HW3             1       0.52
+4       OW        1       SOL             OW1             1       0
+
+[ bonds ]
+; Parameter for dissociation beta = 2.567/A, D = 7.08e-19 J
+; i     j	funct   distance D		alpha
+2       4       3	0.09347	 426.367	25.67
+3       4       3	0.09347  426.367	25.67
+;
+; 1 N/m = J/m^2 = 0.001 kJ/m^2 = 1e-3 kJ/(1e18 nm^2) = 
+; 602.21367 kJ/mol nm^2
+; Original ktheta = 171.2 N/m
+; i	j	funct	dist		force const
+2	3	1	0.1526		103098.98
+
+[ angles ]
+; Not really an angle, but a cross-term
+; Original force constant krr = 88 N/m
+; i 	j	k	funct	r1e	r2e	krr
+2	4	3	3	0.09347	0.09347	52995.1
+
+; i 	j	k	funct	r1e	r2e	r3e	krtheta
+; Original force constant krtheta = -136 N/m
+2	4	3	4	0.09347	0.09347	0.1526	-81901.5
+
+;
+; The position of the dummy is computed as follows:
+;
+;               O
+;
+;               D
+;
+;       H               H
+;
+; const = distance (OD) / [ cos (angle(DOH))    * distance (OH) ]
+;         0.015 nm      / [ cos (52.26 deg)     * 0.09572 nm    ]
+;
+; Dummy pos x4 = x1 + a*(x2-x1) + b*(x3-x1)
+;
+
+[ dummies3 ]
+; Dummy from                    funct   a               b
+1       4       2       3       1       0.128012065     0.128012065
+
+[ exclusions ]
+1       2       3       4
+2       1       3       4
+3       1       2       4
+4       1       2       3

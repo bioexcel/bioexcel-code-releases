@@ -1,0 +1,492 @@
+;
+;	File 'topol.top' was generated
+;	By user: degroot (23522)
+;	On host: taco
+;	At date: Wed Feb  9 11:16:46 2005
+;
+;	This is your topology file
+;	Great Red Oystrich Makes All Chemists Sane
+;
+; Include forcefield parameters
+********************************************************************
+* The original ffamber ports were written by Eric J. Sorin,        *
+* CSU Long Beach, Dept. of Chem & Biochem, and have now been       *
+* integrated with the standard gromacs distribution.               *
+* (Please don't blame Eric for errors we might have introduced.)   *
+* For the implementation/validation, please read/cite:             * 
+* Sorin & Pande (2005). Biophys. J. 88(4), 2472-2493.              *
+* For related material and updates, please consult                 *
+* http://chemistry.csulb.edu/ffamber/                              *
+********************************************************************
+
+
+[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1               2               yes             0.5     0.8333
+
+[ atomtypes ]
+; spc water - use only with spc.itp & settles
+; name      at.num  mass     charge ptype  sigma      epsilon
+OW           8      16.00    0.0000  A   3.15061e-01  6.36386e-01
+HW           1       1.008   0.0000  A   0.00000e+00  0.00000e+00
+H            1       1.008   0.0000  A   1.06908e-01  6.56888e-02
+H3           1       1.008   0.0000  A   2.11499e-01  6.56888e-02
+OW_spc       8      15.9994  0.0000  A   3.16557e-01  6.50629e-01
+HW_spc       1       1.0080  0.0000  A   0.00000e+00  0.00000e+00
+
+; lipid particles from Berger force field
+; name      at.num  mass     charge ptype  sigma      epsilon
+LNL           7    14.0067  0.000   A   0.325        0.711
+LO2           8    15.9994  0.000   A   0.296        0.878
+LOS           8    15.9994  0.000   A   0.300        0.711
+LP            15   30.9738  0.000   A   0.374        0.836
+LC            12   12.0110  0.000   A   0.375        0.438
+LCH1          12   13.0190  0.000   A   0.380        0.334
+LCH2          12   14.0270  0.000   A   0.396        0.380
+LCH3          12   15.0350  0.000   A   0.396        0.570
+LCM1          12   13.0190  0.000   A   0.380        0.385
+LCM           12   13.0190  0.000   A   0.380        0.385 
+LC3N          12   15.0350  0.000   A   0.396        0.606
+LC2           12   14.0270  0.000   A   0.3905       0.494
+LC2O          12   14.0270  0.000   A   0.380        0.494
+LOH           8    15.9994  0.000   A   0.312        0.711
+LHO           1    1.0080  0.000   A   2.50000e-01  1.25520e-01
+
+[ bondtypes ]
+; lipid particles from Berger force field
+; i    j  func       b0          kb
+  OW HW         1    0.09572   462750.4 
+  LNL   LC3N    1    0.147      376560.
+  LNL   LC2     1    0.147      376560.
+  LNL   LC      1    0.147      376560.
+  LNL   LCH1    1    0.147      376560.
+  LC2   LC2O    1    0.153      334720.
+  LOS   LC2O    1    0.143      251040.
+  LOS   LP      1    0.161      251040.
+  LO2   LP      1    0.148      376560.
+  LO2   LC      1    0.123      502080.
+  LCH1  LC2O    1    0.153      334720.
+  LCH1  LC2     1    0.153      334720.
+  LCH1  LC      1    0.153      334720.
+  LC2   LC2O    1    0.153      334720.
+  LOS   LCH1    1    0.143      251040.
+  LOS   LC      1    0.136      251040.
+  LC    LCH2    1    0.153      334720.
+  LCH2  LCH3    1    0.153      334720.
+  LCH2  LCH2    1    0.153      334720.
+  LCH1  LCH2    1    0.153      334720.
+  LCM1  LCM1    1    0.139      418400.
+  LCH2  LCM1    1    0.153      334720.
+  LCM   LCM     1    0.139      418400.
+  LCH2  LCM     1    0.153      334720.
+  LHO   LOH     1    0.100      313800.
+  LOH   LCH1    1    0.143      334720.
+  LOH   LCH2    1    0.143      334720.
+  LNL   H3      1    0.101      363171.2
+
+[ angletypes ]
+; lipid particle types from Berger
+;  i    j    k  func       th0       cth
+  HW  OW  HW           1   104.520    836.800 ; TIP3P water
+  LNL   LC  LO2    1   109.5       460.24
+  LNL   LC LCH2    1   109.5       460.24
+ LC3N  LNL   LC    1   109.5       460.24
+  LC2  LNL   LC    1   109.5       460.24
+ LC3N  LNL LC3N    1   109.5       460.24
+ LC3N  LNL  LC2    1   109.5       460.24
+ LC3N  LNL LCH1    1   109.5       460.24
+  LNL  LC2 LC2O    1   109.5       460.24
+  LNL LCH1 LC2O    1   109.5       460.24
+  LNL LCH1   LC    1   109.5       460.24
+   LC LCH1 LC2O    1   109.5       460.24
+  LC2 LC2O  LOS    1   109.5       460.24
+ LC2O  LOS   LP    1   120.0       397.48
+  LOS   LP  LO2    1   109.6       397.48
+  LOS   LP  LOS    1   103.0       397.48
+  LO2   LP  LO2    1   120.0       585.76
+  LOS LC2O LCH1    1   111.0       460.24
+ LC2O LCH1  LOS    1   109.5       460.24
+ LC2O LCH1 LC2O    1   109.5       460.24
+ LCH1  LOS   LC    1   120.0       418.40
+ LC2O  LOS   LC    1   120.0       418.40
+  LOS   LC  LO2    1   124.0       502.08
+  LO2   LC  LO2    1   124.0       502.08
+  LOS   LC LCH2    1   115.0       502.08
+  LO2   LC LCH2    1   121.0       502.08
+  LO2   LC LCH1    1   121.0       502.08
+   LC LCH2 LCH2    1   111.0       460.24
+ LCH2 LCH2 LCH2    1   111.0       460.24
+ LCH2 LCH2 LCH3    1   111.0       460.24
+ LCH2 LCH2 LCM     1   111.0       460.24
+ LCH2 LCM  LCM     1   120.0       502.08
+ LCH2 LCH2 LCM1    1   111.0       460.24
+ LCH2 LCM1 LCM1    1   120.0       502.08
+ H    LNL  H       1   109.5       292.88
+ LC2  LNL  H       1   109.5       292.88
+ H    LNL  LCH1    1   109.5       292.88
+ H3   LNL  H3      1   109.5       292.88
+ LC2  LNL  H3      1   109.5       292.88
+ LNL  LC2  LCH1    1   109.5       460.24
+ LC2 LCH1  LC2O    1   109.5       460.24
+ LC2 LCH1  LOS     1   109.5       460.24
+ LCH1 LNL  H       1   109.5       292.88
+
+ LHO  LOH  LCH1    1   109.5       397.48
+ LHO  LOH  LCH2    1   109.5       397.48
+ LOH  LCH1 LCH2    1   109.5       460.24
+ LOH  LCH2 LCH1    1   109.5       460.24
+ LCH2 LCH1 LC2O    1   106.0       397.48
+ LOH  LCH1 LC2O    1   109.5       460.24
+
+; Berger dihedral types
+[ dihedraltypes ]
+  LNL  LC2    1     0.0        3.7656      3
+  LNL LCH1    1     0.0        3.7656      3
+  LC2 LC2O    1     0.0        5.8576      3
+  LOS LC2O    1     0.0        3.7656      3
+  LOS   LP    1     0.0        1.046       3
+ LCH1 LC2O    1     0.0        2.092       2
+ LCH1  LC2    1     0.0        2.092       2
+  LOS LCH1    1     0.0        3.7656      3
+  LOS   LC    1   180.0       16.736       2
+   LC LCH2    1     0.0        0.4184      6
+ LCH2 LCH2    1     0.0        5.8576      3
+ LCH2 LCM1    1     0.0        5.8576      3
+ LCH2  LCM    1     0.0        5.8576      3
+ LCH2  LOH    1     0.0        1.255       3
+ LCH1  LOH    1     0.0        1.255       3
+ LCH1 LCH2    1     0.0        5.8576      3
+ LCH2 LC2O    1     0.0        5.8576      3
+ LCH1   LC    1     0.0        5.8576      3
+
+[ dihedraltypes ]
+; berger dihedraltype for lipid chains (remember to exclude 1,4 interactions for this one!)
+  X      LCH2   LCH2   X       3      9.2789   12.156   -13.120   -3.0597  26.240  -31.495
+
+[ moleculetype ]
+; Name            nrexcl
+POPC              3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+     1       LC3N      1   POPC    CN1      1        0.4     15.035
+     2       LC3N      1   POPC    CN2      1        0.4     15.035
+     3       LC3N      1   POPC    CN3      1        0.4     15.035
+     4        LNL      1   POPC      N      1       -0.5     14.0067
+     5        LC2      1   POPC     CA      2        0.3     14.027 
+     6       LC2O      1   POPC     CB      2        0.4     14.027   ; qtot 1.4
+     7        LOS      1   POPC     OA      2       -0.8    15.9994   ; qtot 0.6
+     8         LP      1   POPC      P      3        1.7    30.9738   ; qtot 2.3
+     9        LO2      1   POPC     OB      3       -0.8    15.9994   ; qtot 1.5
+    10        LO2      1   POPC     OC      3       -0.8    15.9994   ; qtot 0.7
+    11        LOS      1   POPC     OD      3       -0.7    15.9994   ; qtot 0
+    12       LC2O      1   POPC     CC      4        0.4     14.027   ; qtot 0.4
+    13       LCH1      1   POPC     CD      4        0.3     13.019   ; qtot 0.7
+    14        LOS      1   POPC     OG     21       -0.7    15.9994   ; qtot 0
+    15         LC      1   POPC    C2A     21        0.7     12.011   ; qtot 0.7
+    16        LO2      1   POPC     OH     21       -0.7    15.9994   ; qtot 0
+    17       LCH2      1   POPC    C2B     22          0     14.027   ; qtot 0
+    18       LCH2      1   POPC    C2C     23          0     14.027   ; qtot 0
+    19       LCH2      1   POPC    C2D     24          0     14.027   ; qtot 0
+    20       LCH2      1   POPC    C2E     25          0     14.027   ; qtot 0
+    21       LCH2      1   POPC    C2F     26          0     14.027   ; qtot 0
+    22       LCH2      1   POPC    C2G     27          0     14.027   ; qtot 0
+    23       LCH2      1   POPC    C2H     28          0     14.027   ; qtot 0
+    24        LCM      1   POPC    C2I     29          0     13.019   ; qtot 0
+    25        LCM      1   POPC    C2J     30          0     13.019   ; qtot 0
+    26       LCH2      1   POPC    C2K     31          0     14.027   ; qtot 0
+    27       LCH2      1   POPC    C2L     32          0     14.027   ; qtot 0
+    28       LCH2      1   POPC    C2M     33          0     14.027   ; qtot 0
+    29       LCH2      1   POPC    C2N     34          0     14.027   ; qtot 0
+    30       LCH2      1   POPC    C2O     35          0     14.027   ; qtot 0
+    31       LCH2      1   POPC    C2P     36          0     15.035   ; qtot 0
+    32       LC2O      1   POPC     CE      5        0.5     14.027   ; qtot 1.2
+    33        LOS      1   POPC     OE      5       -0.7    15.9994   ; qtot 0.5
+    34         LC      1   POPC    C1A      5        0.8     12.011   ; qtot 1.3
+    35        LO2      1   POPC     OF      5       -0.6    15.9994   ; qtot 0.7
+    36       LCH2      1   POPC    C1B      6          0     14.027   ; qtot 0.7
+    37       LCH2      1   POPC    C1C      7          0     14.027   ; qtot 0.7
+    38       LCH2      1   POPC    C1D      8          0     14.027   ; qtot 0.7
+    39       LCH2      1   POPC    C1E      9          0     14.027   ; qtot 0.7
+    40       LCH2      1   POPC    C1F     10          0     14.027   ; qtot 0.7
+    41       LCH2      1   POPC    C1G     11          0     14.027   ; qtot 0.7
+    42       LCH2      1   POPC    C1H     12          0     14.027   ; qtot 0.7
+    43       LCH2      1   POPC    C1I     13          0     14.027   ; qtot 0.7
+    44       LCH2      1   POPC    C1J     14          0     14.027   ; qtot 0.7
+    45       LCH2      1   POPC    C1K     15          0     14.027   ; qtot 0.7
+    46       LCH2      1   POPC    C1L     16          0     14.027   ; qtot 0.7
+    47       LCH2      1   POPC    C1M     17          0     14.027   ; qtot 0.7
+    48       LCH2      1   POPC    C1N     18          0     14.027   ; qtot 0.7
+    49       LCH2      1   POPC    C1O     19          0     14.027   ; qtot 0.7
+    50       LCH3      1   POPC    C1P     20          0     15.035   ; qtot 0.7
+    51       LCH2      1   POPC    C2Q     37          0     14.027   ; qtot 0
+    52       LCH3      1   POPC    C2R     38          0     15.035   ; qtot 0
+
+[ bonds ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     4     1 
+    2     4     1 
+    3     4     1 
+    4     5     1 
+    5     6     1 
+    6     7     1 
+    7     8     1 
+    8     9     1 
+    8    10     1 
+    8    11     1 
+   11    12     1 
+   12    13     1 
+   13    14     1 
+   13    32     1 
+   14    15     1 
+   15    16     1 
+   15    17     1 
+   17    18     1 
+   18    19     1 
+   19    20     1 
+   20	 21	1
+   21    22     1 
+   22    23     1 
+   23    24     1 
+   24    25     1 
+   25    26     1 
+   26    27     1 
+   27    28     1 
+   28    29     1 
+   29    30     1 
+   30    31     1 
+   31	 51	1
+   51	 52	1
+   32    33     1
+   33    34     1 
+   34    35     1 
+   34    36     1 
+   36    37     1 
+   37    38     1 
+   38    39     1 
+   39    40     1 
+   40    41     1 
+   41    42     1 
+   42    43     1 
+   43    44     1 
+   44    45     1 
+   45    46     1 
+   46    47     1 
+   47    48     1 
+   48    49     1 
+   49    50     1 
+
+
+[ pairs ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     6     1     0.3880   0.034196
+    1     6     1     0.3880   0.034196
+    2     6     1     0.3880   0.034196
+    2     6     1     0.3880   0.034196
+    3     6     1     0.3880   0.034196
+    3     6     1     0.3880   0.034196
+    4     7     1     0.3125   0.044437
+    4     7     1     0.3125   0.044437
+    5     8     1     0.3822   0.040165
+    5     8     1     0.3822   0.040165
+    6     9     1     0.3380   0.041161
+    6     9     1     0.3380   0.041161
+    6    10     1     0.3380   0.041161
+    6    10     1     0.3380   0.041161
+    6    11     1     0.3380   0.041161
+    6    11     1     0.3380   0.041161
+    7    12     1     0.3400   0.037041
+    7    12     1     0.3400   0.037041
+    8    13     1     0.3770   0.033026
+    8    13     1     0.3770   0.033026
+    9    12     1     0.3380   0.041161
+    9    12     1     0.3380   0.041161
+   10    12     1     0.3380   0.041161
+   10    12     1     0.3380   0.041161
+   11	 32	1     0.3400   0.037041
+   11    32     1     0.3400   0.037041
+   11    14     1     0.3000   0.044437
+   11    14     1     0.3000   0.044437
+   12    33     1     0.3400   0.037041
+   12    33     1     0.3400   0.037041
+   12    15     1     0.3775   0.029072
+   12    15     1     0.3775   0.029072
+   13    34     1     0.3775   0.023905
+   13    34     1     0.3775   0.023905
+   13    16     1     0.3367   0.009055 
+   13    16     1     0.3367   0.009055
+   13    17     1     0.3880   0.022266
+   13    17     1     0.3880   0.022266
+   32    35     1     0.3380   0.041161
+   32    35     1     0.3380   0.041161
+   32    36     1     0.3880   0.027079
+   32    36     1     0.3880   0.027079
+   32    15     1     0.3775   0.029072
+   32    15     1     0.3775   0.029072
+   33    37     1     0.3480   0.032487
+   33    37     1     0.3480   0.032487
+   33    14     1     0.3000   0.044437
+   33    14     1     0.3000   0.044437
+   34    38     1     0.3855   0.025498
+   34    38     1     0.3855   0.025498
+   35    37     1     0.3460   0.036101
+   35    37     1     0.3460   0.036101
+   14    18     1     0.3480   0.032487
+   14    18     1     0.3480   0.032487
+   16    18     1     0.3855   0.025498
+   16    18     1     0.3855   0.025498
+   15    19     1     0.3460   0.036101
+   15    19     1     0.3460   0.036101
+   22    25     1     0.3880   0.023906 
+   22    25     1     0.3880   0.023906
+   24    27     1     0.3880   0.023906
+   24    27     1     0.3880   0.023906
+
+[ angles ]
+;  ai    aj    ak funct            c0            c1            c2            c3
+    1     4     2     1 
+    1     4     3     1 
+    1     4     5     1 
+    2     4     3     1 
+    2     4     5     1 
+    3     4     5     1 
+    4     5     6     1 
+    5     6     7     1 
+    6     7     8     1 
+    7     8     9     1 
+    7     8    10     1 
+    7     8    11     1 
+    9     8    10     1 
+    9     8    11     1 
+   10     8    11     1 
+    8    11    12     1 
+   11    12    13     1 
+   12    13    32     1 
+   12    13    14     1
+   32    13    14     1
+   13    32    33     1 
+   13    14    15     1
+   32    33    34     1 
+   33    34    35     1 
+   33    34    36     1 
+   35    34    36     1 
+   34    36    37     1 
+   36    37    38     1 
+   37    38    39     1 
+   38    39    40     1
+   39    40    41     1
+   40    41    42     1
+   41    42    43     1
+   42    43    44     1
+   43    44    45     1
+   44    45    46     1
+   45    46    47     1
+   46    47    48     1
+   47    48    49     1
+   48    49    50     1
+   14    15    16     1 
+   14    15    17     1 
+   16    15    17     1 
+   15    17    18     1 
+   17    18    19     1 
+   18    19    20     1
+   19    20    21     1
+   20    21    22     1
+   21    22    23     1
+   22    23    24     1
+   23    24    25     1
+   24    25    26     1
+   25    26    27     1
+   26    27    28     1
+   27    28    29     1
+   28    29    30     1
+   29    30    31     1
+   30    31    51     1
+   31    51    52     1
+
+[ dihedrals ]
+;  ai    aj    ak    al funct            c0            c1            c2            c3            c4            c5
+    1     4     5     6     1 
+    4     5     6     7     1 
+    5     6     7     8     1 
+    6     7     8    11     1    0.0     1.05   3
+    6     7     8    11     1    0.0     3.14   2
+    7     8    11    12     1    0.0     1.05   3
+    7     8    11    12     1    0.0     3.14   2
+    8    11    12    13     1    
+   11    12    13    32     1
+   11    12    13    14     1    0.0     5.85   3
+   11    12    13    14     1    0.0     0.42   2
+   12    13    14    15     1    0.0     5.85   3
+   12    13    14    15     1    0.0     0.42   2
+   12    13    32    33     1
+   13    14    15    17     1
+   13    32    33    34     1
+   32    33    34    36     1
+   32    13    14    15     1
+   33    34    36    37     1
+   34    36    37    38     1
+   14    15    17    18     1
+   15    17    18    19     1
+   36    37    38    39     3
+   37    38    39    40     3
+   38    39    40    41     3
+   39    40    41    42     3
+   40    41    42    43     3
+   41    42    43    44     3
+   42    43    44    45     3
+   43    44    45    46     3
+   44    45    46    47     3
+   45    46    47    48     3
+   46    47    48    49     3
+   47    48    49    50     3
+   17    18    19    20     3 
+   18    19    20    21     3
+   19    20    21    22     3
+   20    21    22    23     3
+   21    22    23    24     3
+   22    23    24    25     1
+; no torsion over double  bond 23-24=25-26
+   24    25    26    27     1
+   25    26    27    28     3
+   26    27    28    29     3
+   27    28    29    30     3
+   28    29    30    31     3
+   29    30    31    51     3
+   30    31    51    52     3
+
+[ dihedrals ]
+;  ai    aj    ak    al funct            c0            c1            c2            c3
+   12    32    14    13   2   35.264   334.72 
+   34    33    36    35   2    0.0     167.36
+   15    14    17    16   2    0.0     167.36
+   23    24    25    26   2    0.0     167.36 
+
+[ moleculetype ]
+; molname	nrexcl
+SOL		2
+
+[ atoms ]
+; id  at type     res nr  res name  at name  cg nr  charge    mass
+  1   OW_spc      1       SOL       OW       1      -0.82     15.99940
+  2   HW_spc      1       SOL       HW1      1       0.41      1.00800
+  3   HW_spc      1       SOL       HW2      1       0.41      1.00800
+
+
+[ settles ]
+; OW	funct	doh	dhh
+1       1       0.1     0.16330
+
+[ exclusions ]
+1	2	3
+2	1	3
+3	1	2
+
+[ system ]
+; Name
+POPC+water
+
+[ molecules ]
+; Compound        #mols
+POPC              1
+SOL               1

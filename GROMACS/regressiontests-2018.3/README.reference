@@ -1,0 +1,19 @@
+IMPORTANT:
+
+Make sure you set the Gromacs build type to "Reference" when generating
+or updating the reference values for any tests.
+
+This is a shortcut to turn off GPU support, OpenMP support, MPI and
+ThreadMPI, all CPU acceleration, we disable software invsqrt, fftpack
+is used as the FFT library, and we set the compiler flags to "-O0 -g".
+
+Currently we also prefer that you use gcc-4.7 as your compiler.
+
+This does not imply that other compilers or optimized/parallel versions
+of Gromacs are less accurate (in fact, in some cases the opposite can be true),
+but it is meant to provide a specification that is easier to go back and
+compare with if we have bugs that are difficult to trace. 
+
+Each regression test directory should contain reference log files where
+the exact build options, compiler, and hardware used is specified.
+
