@@ -1,0 +1,33 @@
+In order to compile CPMD with MiMiC interface:
+
+- Install GROMACS 2019 or later with MiMiC enabled features as documented in the GROMACS manual
+
+- Compile the MiMiC Communication Library MiMiC_CommLib.tar.gz in this archive following the following strategy:
+
+tar -xvzf MiMiC_CommLib.tar.gz
+cd MiMiCCommLib-master
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=<install_location> ..
+make && make install
+export CMAKE_PREFIX_PATH=<install_location>:$CMAKE_PREFIX_PATH
+cd ../.. 
+
+- Download and expand the file cpmd-v4.1.tar.gz that you can download from the CPMD.org website:
+
+tar -xvzf cpmd-v4.1.tar.gz
+
+- Copy the patch MiMiC_Patch_for_CPMD-4.1.txt in this archive to the folder CPMD:
+
+cd CPMD
+cp ../MiMiC_Patch_for_CPMD-4.1.txt .
+patch -p1 < MiMiC_Patch_for_CPMD-4.1.txt
+
+- In the folder “configure” open the file MIMIC (if compiling with GCC compiler) or MIMIC_INTEL (if compiling with INTEL compiler) and adjust the paths for LIBS and FFLAGS in order to point to MimicCommLib and MiMiC build folders
+
+- Compile CPMD by following the detailed instructions in the CPMD manual, or for a default compilation by executing the command:
+
+./configure.sh MIMIC<_INTEL> -omp (if you want to use also OPENMP threads)
+make
+
+- After the compilation the executable will be named cpmd.x
