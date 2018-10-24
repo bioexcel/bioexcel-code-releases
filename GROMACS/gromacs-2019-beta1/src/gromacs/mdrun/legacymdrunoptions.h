@@ -46,6 +46,9 @@
  * \ingroup module_mdrun
  * \inlibraryapi
  */
+#ifndef GMX_MDRUN_LEGACYMDRUNOPTIONS_H
+#define GMX_MDRUN_LEGACYMDRUNOPTIONS_H
+
 #include "gromacs/commandline/filenm.h"
 #include "gromacs/commandline/pargs.h"
 #include "gromacs/domdec/domdec.h"
@@ -152,13 +155,15 @@ class LegacyMdrunOptions
         { nullptr, "auto", "cpu", "gpu", nullptr };
         const char       *pme_fft_opt_choices[5] =
         { nullptr, "auto", "cpu", "gpu", nullptr };
+        const char       *bonded_opt_choices[5] =
+        { nullptr, "auto", "cpu", "gpu", nullptr };
         gmx_bool          bTryToAppendFiles     = TRUE;
         const char       *gpuIdsAvailable       = "";
         const char       *userGpuTaskAssignment = "";
 
         ImdOptions       &imdOptions = mdrunOptions.imdOptions;
 
-        t_pargs           pa[47] = {
+        t_pargs           pa[48] = {
 
             { "-dd",      FALSE, etRVEC, {&realddxyz},
               "Domain decomposition grid, 0 is optimize" },
@@ -221,6 +226,8 @@ class LegacyMdrunOptions
               "Perform PME calculations on" },
             { "-pmefft", FALSE, etENUM, {pme_fft_opt_choices},
               "Perform PME FFT calculations on" },
+            { "-bonded",     FALSE, etENUM, {bonded_opt_choices},
+              "Perform bonded calculations on" },
             { "-v",       FALSE, etBOOL, {&mdrunOptions.verbose},
               "Be loud and noisy" },
             { "-pforce",  FALSE, etREAL, {&pforce},
@@ -276,3 +283,5 @@ class LegacyMdrunOptions
 };
 
 } // end namespace gmx
+
+#endif

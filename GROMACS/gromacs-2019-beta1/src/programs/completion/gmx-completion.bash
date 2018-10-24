@@ -859,7 +859,7 @@ local n
 for ((n=1;n<COMP_CWORD;++n)) ; do [[ "${COMP_WORDS[COMP_CWORD-n]}" == -* ]] && break ; done
 local p=${COMP_WORDS[COMP_CWORD-n]}
 COMPREPLY=()
-if (( $COMP_CWORD <= 1 )) || [[ $c == -* ]]; then COMPREPLY=( $(compgen -S ' '  -W $'-deffnm\n-xvg\n-s\n-o\n-x\n-cpi\n-cpo\n-c\n-e\n-g\n-dhdl\n-field\n-table\n-tablep\n-tableb\n-rerun\n-tpi\n-tpid\n-ei\n-eo\n-devout\n-runav\n-px\n-pf\n-ro\n-ra\n-rs\n-rt\n-mtx\n-multidir\n-awh\n-membed\n-mp\n-mn\n-if\n-swap\n-dd\n-ddorder\n-npme\n-nt\n-ntmpi\n-ntomp\n-ntomp_pme\n-pin\n-pinoffset\n-pinstride\n-gpu_id\n-gputasks\n-noddcheck\n-rdd\n-rcon\n-dlb\n-dds\n-gcom\n-nb\n-nstlist\n-notunepme\n-pme\n-pmefft\n-v\n-pforce\n-reprod\n-cpt\n-cpnum\n-noappend\n-nsteps\n-maxh\n-replex\n-nex\n-reseed' -- $c)); return 0; fi
+if (( $COMP_CWORD <= 1 )) || [[ $c == -* ]]; then COMPREPLY=( $(compgen -S ' '  -W $'-deffnm\n-xvg\n-s\n-o\n-x\n-cpi\n-cpo\n-c\n-e\n-g\n-dhdl\n-field\n-table\n-tablep\n-tableb\n-rerun\n-tpi\n-tpid\n-ei\n-eo\n-devout\n-runav\n-px\n-pf\n-ro\n-ra\n-rs\n-rt\n-mtx\n-multidir\n-awh\n-membed\n-mp\n-mn\n-if\n-swap\n-dd\n-ddorder\n-npme\n-nt\n-ntmpi\n-ntomp\n-ntomp_pme\n-pin\n-pinoffset\n-pinstride\n-gpu_id\n-gputasks\n-noddcheck\n-rdd\n-rcon\n-dlb\n-dds\n-gcom\n-nb\n-nstlist\n-notunepme\n-pme\n-pmefft\n-bonded\n-v\n-pforce\n-reprod\n-cpt\n-cpnum\n-noappend\n-nsteps\n-maxh\n-replex\n-nex\n-reseed' -- $c)); return 0; fi
 case "$p" in
 -s) (( $n <= 1 )) && COMPREPLY=( $(compgen -S ' ' -X '!*.tpr?(.gz|.Z)' -f -- $c ; compgen -S '/' -d $c));;
 -o) (( $n <= 1 )) && COMPREPLY=( $(compgen -S ' ' -X '!*@(.trr|.cpt|.tng)?(.gz|.Z)' -f -- $c ; compgen -S '/' -d $c));;

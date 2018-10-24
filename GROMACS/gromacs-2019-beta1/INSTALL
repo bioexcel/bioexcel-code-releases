@@ -233,17 +233,15 @@ GROMACS has excellent support for NVIDIA GPUs supported via CUDA. On
 Linux, NVIDIA CUDA toolkit with minimum version 7.0 is required, and
 the latest version is strongly encouraged. Using Microsoft MSVC
 compiler requires version 9.0. NVIDIA GPUs with at least NVIDIA
-compute capability 2.0 are required. You are strongly recommended to
+compute capability 3.0 are required. You are strongly recommended to
 get the latest CUDA version and driver that supports your hardware,
 but beware of possible performance regressions in newer CUDA versions
-on older hardware. Note that compute capability 2.0 (Fermi) devices
-are no longer supported from CUDA 9.0 and later. While some CUDA
-compilers (nvcc) might not officially support recent versions of gcc
-as the back-end compiler, we still recommend that you at least use a
-gcc version recent enough to get the best SIMD support for your CPU,
-since GROMACS always runs some code on the CPU. It is most reliable to
-use the same C++ compiler version for GROMACS code as used as the host
-compiler for nvcc.
+on older hardware. While some CUDA compilers (nvcc) might not
+officially support recent versions of gcc as the back-end compiler, we
+still recommend that you at least use a gcc version recent enough to
+get the best SIMD support for your CPU, since GROMACS always runs some
+code on the CPU. It is most reliable to use the same C++ compiler
+version for GROMACS code as used as the host compiler for nvcc.
 
 To make it possible to use other accelerators, GROMACS also includes
 OpenCL support. The minimum OpenCL version required is 1.2. The
@@ -787,6 +785,21 @@ parallel simulation using MPI libraries (e.g. Cray).
   default, but the above caveats apply. For compilers which don’t
   default to static linking, the required flags have to be specified.
   On Linux, this is usually "CFLAGS=-static CXXFLAGS=-static".
+
+
+gmxapi external API
+~~~~~~~~~~~~~~~~~~~
+
+For dynamic linking builds and on non-Windows platforms, an extra
+library and headers are installed by setting "-DGMXAPI=ON" (default).
+Build targets "gmxapi_cppdocs" and "gmxapi_cppdocs_dev" produce
+documentation in "docs/api-user" and "docs/api-dev", respectively. For
+more project information and use cases, refer to the tracked Issue
+2585, associated GitHub gmxapi projects, or DOI
+10.1093/bioinformatics/bty484.
+
+gmxapi is not yet tested on Windows or with static linking, but these
+use cases are targeted for future versions.
 
 
 Portability aspects

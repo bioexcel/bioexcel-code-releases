@@ -2,7 +2,7 @@ Miscellaneous
 ^^^^^^^^^^^^^
 
 grompp discourages use of constraints=all-bonds
---------------------------------------------------------------------------
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Common force fields, including AMBER, CHARMM and OPLS/aa, are parametrized
 with bonds involving hydrogen constrained. Constraining all bonds should
@@ -11,8 +11,8 @@ constraints=all-bonds is used with these force fields when time steps
 are smaller than 2.6 fs and hydrogens are not replaced by virtual sites.
 Using constraints=h-bonds will also improve performance.
 
-Documentation changed to Markup
---------------------------------------------------------------------------
+Documentation changed to reStructuredText
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-The complete documentation has been moved to markup format to allow building
-it together for display as html or as pdf.
+The complete documentation has been moved to the reStructuredText 
+markup format to allow building it together for display as html or as pdf.

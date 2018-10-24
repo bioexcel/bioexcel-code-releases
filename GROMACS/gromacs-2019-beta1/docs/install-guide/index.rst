@@ -203,8 +203,7 @@ least NVIDIA compute capability |REQUIRED_CUDA_COMPUTE_CAPABILITY| are
 required. You are strongly recommended to
 get the latest CUDA version and driver that supports your hardware, but
 beware of possible performance regressions in newer CUDA versions on
-older hardware. Note that compute capability 2.0 (Fermi)
-devices are no longer supported from CUDA 9.0 and later.
+older hardware.
 While some CUDA compilers (nvcc) might not
 officially support recent versions of gcc as the back-end compiler, we
 still recommend that you at least use a gcc version recent enough to
@@ -751,6 +750,21 @@ simulation using MPI libraries (e.g. Cray).
   default, but the above caveats apply. For compilers which don't
   default to static linking, the required flags have to be specified. On
   Linux, this is usually ``CFLAGS=-static CXXFLAGS=-static``.
+
+gmxapi external API
+~~~~~~~~~~~~~~~~~~~
+
+For dynamic linking builds and on non-Windows platforms, an extra library and
+headers are installed by setting ``-DGMXAPI=ON`` (default).
+Build targets ``gmxapi_cppdocs`` and ``gmxapi_cppdocs_dev`` produce documentation in
+``docs/api-user`` and ``docs/api-dev``, respectively.
+For more project information and use cases,
+refer to the tracked :issue:`2585`,
+associated GitHub `gmxapi <https://github.com/kassonlab/gmxapi>`_ projects,
+or DOI `10.1093/bioinformatics/bty484 <https://doi.org/10.1093/bioinformatics/bty484>`_.
+
+gmxapi is not yet tested on Windows or with static linking, but these use cases
+are targeted for future versions.
 
 Portability aspects
 ~~~~~~~~~~~~~~~~~~~

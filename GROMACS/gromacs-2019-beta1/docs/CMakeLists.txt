@@ -356,14 +356,12 @@ if (SPHINX_FOUND)
         # as it will be included conditionally further down depending on
         # if the documentation will be build with the full reference
         # manual or without.
-        user-guide/deprecation-policy.rst
         user-guide/cmdline.rst
         user-guide/cutoff-schemes.rst
         user-guide/deprecation-policy.rst
         user-guide/environment-variables.rst
         user-guide/faq.rst
         user-guide/floating-point.rst
-        user-guide/system-preparation.rst
         user-guide/force-fields.rst
         user-guide/getting-started.rst
         user-guide/managing-simulations.rst
