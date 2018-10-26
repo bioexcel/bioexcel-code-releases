@@ -1,0 +1,351 @@
+stages:
+  - test
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - rm -rf public
+    - mkdir public
+    - doxygen commlib.conf
+    - cp -r doc/html/* public
+  artifacts:
+    paths:
+    - public
+  only:
+    - master  
+  tags:
+    - juelich,centos
+
+library:
+  stage: deploy
+  script:
+    - module load gcc/6.3.0 ompi/2.1.0/gcc-6.3.0 cmake/3.7.2 gtest/gcc-6.3.0
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../commlib_gcc ..
+    - make -j 4 && make install
+    - module purge
+    - rm -rf *
+    - module load cmake/3.7.2 intel/2017 mpich/3.2/intel_17 gtest/intel-17
+    - cmake -DCMAKE_C_COMPILER=icc -DCMAKE_CXX_COMPILER=icpc -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../commlib_intel ..
+    - make -j 4 && make install
+  artifacts:
+    paths:
+    - commlib_gcc
+    - commlib_intel
+  tags:
+    - juelich, centos
+
+centos_coverage:
+  stage: test
+  script:
+    - module load gcc/6.3.0 ompi/2.1.0/gcc-6.3.0 cmake/3.7.2 gtest/gcc-6.3.0
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+    - ctest -D ExperimentalCoverage
+  tags:
+    - juelich,centos
+
+centos_intel:
+  stage: test
+  script:
+    - module load cmake/3.7.2 intel/2017 mpich/3.2/intel_17 gtest/intel-17
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=icc -DCMAKE_CXX_COMPILER=icpc -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - juelich,centos
+
+#ubuntu-gcc-7.1.0-mpich:
+#  stage: test
+#  image: bolnykh/images:ubuntu-gcc-7.1.0-mpich
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#ubuntu-gcc-7.1.0-ompi:
+#  stage: test
+#  image: bolnykh/images:ubuntu-gcc-7.1.0-ompi
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#ubuntu-gcc-6.3.0-mpich:
+#  stage: test
+#  image: bolnykh/images:ubuntu-gcc-6.3.0-mpich
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#ubuntu-gcc-6.3.0-ompi:
+#  stage: test
+#  image: bolnykh/images:ubuntu-gcc-6.3.0-ompi
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#ubuntu-gcc-5.4.0-mpich:
+#  stage: test
+#  image: bolnykh/images:ubuntu-gcc-5.4.0-mpich
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#ubuntu-gcc-5.4.0-ompi:
+#  stage: test
+#  image: bolnykh/images:ubuntu-gcc-5.4.0-ompi
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#debian-gcc-7.1.0-mpich:
+#  stage: test
+#  image: bolnykh/images:debian-gcc-7.1.0-mpich
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#debian-gcc-7.1.0-ompi:
+#  stage: test
+#  image: bolnykh/images:debian-gcc-7.1.0-ompi
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#debian-gcc-6.3.0-mpich:
+#  stage: test
+#  image: bolnykh/images:debian-gcc-6.3.0-mpich
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#debian-gcc-6.3.0-ompi:
+#  stage: test
+#  image: bolnykh/images:debian-gcc-6.3.0-ompi
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#debian-gcc-5.4.0-mpich:
+#  stage: test
+#  image: bolnykh/images:debian-gcc-5.4.0-mpich
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+#
+#debian-gcc-5.4.0-ompi:
+#  stage: test
+#  image: bolnykh/images:debian-gcc-5.4.0-ompi
+#  script:
+#    - mkdir build
+#    - cd build
+#    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+#    - make -j 4
+#    - ctest --output-on-failure
+#  tags:
+#    - docker
+
+centos-gcc-7.1.0-mpich:
+  stage: test
+  image: bolnykh/images:centos-gcc-7.1.0-mpich
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+centos-gcc-7.1.0-ompi:
+  stage: test
+  image: bolnykh/images:centos-gcc-7.1.0-ompi
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+centos-gcc-6.3.0-mpich:
+  stage: test
+  image: bolnykh/images:centos-gcc-6.3.0-mpich
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+centos-gcc-6.3.0-ompi:
+  stage: test
+  image: bolnykh/images:centos-gcc-6.3.0-ompi
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+centos-gcc-5.4.0-mpich:
+  stage: test
+  image: bolnykh/images:centos-gcc-5.4.0-mpich
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+centos-gcc-5.4.0-ompi:
+  stage: test
+  image: bolnykh/images:centos-gcc-5.4.0-ompi
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+fedora-gcc-7.1.0-mpich:
+  stage: test
+  image: bolnykh/images:fedora-gcc-7.1.0-mpich
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+fedora-gcc-7.1.0-ompi:
+  stage: test
+  image: bolnykh/images:fedora-gcc-7.1.0-ompi
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+fedora-gcc-6.3.0-mpich:
+  stage: test
+  image: bolnykh/images:fedora-gcc-6.3.0-mpich
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+fedora-gcc-6.3.0-ompi:
+  stage: test
+  image: bolnykh/images:fedora-gcc-6.3.0-ompi
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+fedora-gcc-5.4.0-mpich:
+  stage: test
+  image: bolnykh/images:fedora-gcc-5.4.0-mpich
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
+
+fedora-gcc-5.4.0-ompi:
+  stage: test
+  image: bolnykh/images:fedora-gcc-5.4.0-ompi
+  script:
+    - mkdir build
+    - cd build
+    - cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DINCLUDE_TESTS=YES -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_GTEST=NO -DMPIEXEC_PREFLAGS="--allow-run-as-root" ..
+    - make -j 4
+    - ctest --output-on-failure
+  tags:
+    - docker
